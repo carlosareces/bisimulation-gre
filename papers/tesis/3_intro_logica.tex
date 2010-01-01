@@ -22,7 +22,7 @@ explicaremos el algoritmo base de nuestra propuesta, y para finalizar en la Secc
 
 Recordemos que en la Secci\'on \ref{sec:gre-teoria-modelos} definimos el output del problema GER con el lenguaje $\+L$ (i.e $\+L$-GRE) como una f\'ormula $\phi$ en $\+L$ cuya interpretaci\'on en el modelo de entrada  $\+M$ es el conjunto target T, si esa f\'ormula existe. Formalmente
 
-$\+L$-GRE($\+M$, T)=\{$\phi$ en $\+L$ | $\interp{\phi}$ = T $\or$ $\botom$ \}
+$\+L$-GRE($\+M$, T)=\{$\phi$ en $\+L$ | $\interp{\phi}$ = T $\star$ $\perp$ \}
 
 Considere la Figura \ref{target_mapa_3ball}, asumamos que el lenguaje en el que podemos generar ERs, es decir, nuestro $\+L$, es $\+C$. $\+C$ es el lenguaje l\'ogico. 
 que s\'olo puede tener conjunciones de propiedades proposicionales, 
@@ -76,10 +76,10 @@ la Figura \ref{target_mapa_3ball} s\'olo $e_4$ ({\it El cubo grande}) y $e_6$ ({
 %(vamos a considerar s\'olo modelos relacionales con relaciones unarias y binarias, ---es decir grafos etiquetados---, usaremos $p$ para 
 %s\'imbolos unarios ---proposicionales---, y $r$ para s\'imbolos de relaciones binarias):
 %(cf.~Convention~\ref{conv:signature}):
-En nuestro ejemplo tenemos que $e_5 \simil{\+C} e_1$ y $e_5 \simil{\+C} e_2$. Por lo que $\+C$-GER no tiene soluci\'on, para este ejemplo es \botom. Si permitimos usar un lenguaje m\'as expresivo como $\+EL$ que permite usar relaciones binarias la f\'ormula $\nSmall} \land \exists rightof. \nCube$ es una ER para el target del ejemplo. 
+En nuestro ejemplo tenemos que $e_5 \simil{\+C} e_1$ y $e_5 \simil{\+C} e_2$. Por lo que $\+C$-GER no tiene soluci\'on, para este ejemplo es $\perp$. Si permitimos usar un lenguaje m\'as expresivo como $\+EL$ que permite usar relaciones binarias la f\'ormula $\nSmall} \land \exists rightof. \nCube$ es una ER para el target del ejemplo. 
 
 Sin embargo, no es posible computar $\+EL$-GER para nuestro ejemplo dado que como est\'a planteada, la noci\'on de $\+L$-similaridad requer\'ia computar infinitas f\'ormulas. Las f\'ormulas en $\+EL$ que describen al target $e_5$ son infinitas porque hay un ciclo en el modelo.
-
+Rightarrow
 La soluci\'on para no tener que considerar infinitas f\'ormulas es reformular la noci\'on de $\+L$-similaridad de una manera estructural usando la noci\'on de teor\'ia de modelos conocidas como {\bf $\+L$-simulaci\'on}. A diferencia de la $\+L$-similaridad que se define sobre infinitas f\'ormulas, las $\+L$-simulaciones se definen sobre el modelo, el cual para la GER, es finito.
 
 \subsection{Los objetos indistinguibles son \emph{$\+L$-simulables}}
@@ -1340,7 +1340,7 @@ y $(u,v)\in\interp{r}_{H}$ si y s\'olo si $(f(u),f(v))\in\interp{r}_{G'}$.
     n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
     aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
   ]
- \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\\ \end{array}$}] (a) {};
+ \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nFlower\\\ \end{array}$}] (a) {};
  \end{tikzpicture}}
  \end{picture}
 &
@@ -1348,44 +1348,39 @@ y $(u,v)\in\interp{r}_{H}$ si y s\'olo si $(f(u),f(v))\in\interp{r}_{G'}$.
 \put(0,0){\begin{tikzpicture}
   [
     n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
-    aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
+    aIn/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
   ]
- \node[n,label=above:,label=below:{\relsize{-1}$\begin{array}{c}\ \end{array}$}] (a) {};
-
- \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\\ \end{array}$}, right of=a] (b) {};
-
- \draw [aSniffing,bend right=40] (b) to node[auto,swap]{\relsize{-1}$\aSniffing$} (a);
-
+ \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nHat\\\ \end{array}$}] (a) {};
  \end{tikzpicture}}
  \end{picture}
 &
 \begin{picture}(70,50) \put(0,0){\begin{tikzpicture}
   [
     n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
-    aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
+    aIn/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
   ]
- \node[n,label=above:,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}] (a) {};
+ \node[n,label=above:,label=below:{\relsize{-1}$\begin{array}{c}\nFlower\\\ \end{array}$}] (a) {};
 
- \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \aSmall \end{array}$}, right of=a] (b) {};
+ \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nHat\\\ \end{array}$}, right of=a] (b) {};
 
- \draw [aSniffing,bend right=40] (b) to node[auto,swap]{\relsize{-1}$\aSniffing$} (a);
+ \draw [aIn,bend right=40] (b) to node[auto,swap]{\relsize{-1}$\aIn$} (a);
 
  \end{tikzpicture}}
  \end{picture}
-&
-\begin{picture}(77,50)
-\put(0,0){\begin{tikzpicture}
-  [
-    n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
-    aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
-  ]
- \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}, right of=a] (b) {};
-%
- \node[n,label=above:,label=below:{\relsize{-1}$\begin{array}{c}\nCat\\ \aSmall\end{array}$}, right of=b] (c) {};
-%
- \draw [aSniffing,bend right=40] (c) to node[auto,swap]{\relsize{-1}$\aSniffing$} (b);
- \end{tikzpicture}}
- \end{picture}
+%&
+%\begin{picture}(77,50)
+%\put(0,0){\begin{tikzpicture}
+%  [
+%    n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
+%    aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
+%  ]
+% \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}, right of=a] (b) {};
+%%
+% \node[n,label=above:,label=below:{\relsize{-1}$\begin{array}{c}\nCat\\ \aSmall\end{array}$}, right of=b] (c) {};
+%%
+% \draw [aSniffing,bend right=40] (c) to node[auto,swap]{\relsize{-1}$\aSniffing$} (b);
+% \end{tikzpicture}}
+% \end{picture}
 % %
 % \begin{picture}(77,50)
 % \put(0,0){\begin{tikzpicture}
@@ -1409,14 +1404,12 @@ y $(u,v)\in\interp{r}_{H}$ si y s\'olo si $(f(u),f(v))\in\interp{r}_{G'}$.
  \end{figure}
 
 Como ejemplo, consideremos el modelo relacional que se representa en la
-La Figura~\ref{fig:cat-dog-1} como un grafo etiquetado $G$, y consideremos los pares de nodos conectados y subgrafos $(V, H)$ que se muestran en 
+La Figura~\ref{} como un grafo etiquetado $G$, y consideremos los pares de nodos conectados y subgrafos $(V, H)$ que se muestran en 
 La Figura~\ref{fig:subgraphs}. Est\'a claro que (i) se refiere a la pareja $(w, G)$
-para cualquier nodo $w\in\{a,b,d\}$; (ii) se refiere a $(w, G)$ para
-$w\in\{b,d\}$; y ambos (iii) y (iv) se refieren \'unicamente a $(b, G)$. Notar
-que (i) -- (iv) pueden realizarse, como  ``{\em a dog}'',
-``{\em a dog that sniffs something}'', ``{\em a small dog that
-sniffs a dog}'' respectivamente ($\gamma_1$ en la Tabla~\ref{tab:gammas}) y ``{\em the dog that is sniffed by a small cat}'' ($\gamma_4$ en
-Table~\ref{tab:gammas}).
+para cualquier nodo $w\in\{f_1,f_2\}$; (ii) se refiere a $(w, G)$ para nodo $w\in\{h_1,h_2,h_3,h_4\}$
+y (iii) refiere unicamente a $h_4$; Notar
+que (i) -- (iii) pueden realizarse, como  ``{\em una flor}'',
+``{\em un sombrero}'', ``{\em Una flor en un sombrero}'' respectivamente.
 
 El algoritmo propuesto en~\cite{Krahmer2003} es una
 implementaci\'on directa del algoritmo de \emph{branch \& bound} guiado por costo que trata sistem\'aticamente todos los
