@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+
+<project name="dl-gre" default="jar">
+  <property name="packages" location="packages" />
+  <property name="build" location="build" />
+  <property name="source" location="src" />
+
+  <property name="build.classes" location="${build}/classes" />
+  <property name="build.lib" location="${build}/lib" />
+  
+  <property name="dl-gre.jar" location="${build.lib}/DlGre.jar" />
+
+  
+  <property name="scala.jar" value="${packages}/scala-library.jar" />
+  <property name="scala-compiler.jar" value="${packages}/scala-compiler.jar" />
+  
+  <property name="scala.unpacked.classes" value="scala/**"/>
+
+
+  <property name="jgrapht.jar" value="${packages}/jgrapht-jdk1.5.jar" />
+  <property name="jgrapht.unpacked.classes" value="org/jgrapht/**" />
+  
+  
+  <target name="jar" depends="build">
+    <jar jarfile="${dl-gre.jar}">
+      <fileset dir="${build.classes}" includes="util/**,dlgre/**,grapht/**,${scala.unpacked.classes},${jgrapht.unpacked.classes}" />
+      <manifest>
+	<attribute name="Main-Class" value="dlgre.Main" />
+      </manifest>
+    </jar>
+    
+  </target>
+
+  
+  <target name="build" depends="init,scala.unpacked,jgrapht.unpacked">
+    <scalac srcdir="${source}"
+	    destdir="${build.classes}"
+	    force="changed">
+      <include name="**/*.scala"/>
+      <classpath>
+	<pathelement location="${scala.jar}" />
+	<pathelement location="${build.classes}" />
+      </classpath>
+    </scalac>
+  </target>
+
+  <target name="clean">
+    <delete dir="build" />
+  </target>
+  
+  
+  <target name="init">
+    <mkdir dir="${build.classes}"/>
+    <mkdir dir="${build.classes}/timestamps-unpackjar"/>
+    <mkdir dir="${build.lib}"/>
+    
+    <taskdef resource="scala/tools/ant/antlib.xml">
+      <classpath>
+	<pathelement location="${scala-compiler.jar}"/>
+	<pathelement location="${scala.jar}"/>
+      </classpath>
+    </taskdef>
+  </target>
+  
+  
+  <!-- JAR Unpacking -->
+
+  <!-- Unpack the Jar file at the path "unpack.jar", unless the
+       unpacked version is already up to date. Up-to-dateness is
+       recorded with a timestamp. "unpack.jar.id" is a unique id for
+       this Jar. -->
+  <target name="unpack" depends="check.unpack" unless="nobuild.unpack">
+    <unjar src="${unpack.jar}" dest="${build.classes}" />
+    <touch file="${build.classes}/timestamps-unpackjar/${unpack.jar.id}" />
+  </target>
+  
+  <target name="check.unpack">
+    <uptodate property="nobuild.unpack"
+	      targetfile="${build.classes}/timestamps-unpackjar/${unpack.jar.id}">
+      <srcfiles dir="." includes="${unpack.jar}" />
+    </uptodate>
+  </target>
+  
+  <target name="scala.unpacked" depends="init">
+    <antcall target="unpack" >
+      <param name="unpack.jar" value="${scala.jar}" />
+      <param name="unpack.jar.id" value="scala" />
+    </antcall>
+  </target>
+
+  <target name="jgrapht.unpacked" depends="init">
+    <antcall target="unpack" >
+      <param name="unpack.jar" value="${jgrapht.jar}" />
+      <param name="unpack.jar.id" value="jgrapht" />
+    </antcall>
+  </target>
+
+</project>
