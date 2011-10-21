@@ -1,6 +1,7 @@
 package dlgre.formula;
 
 import grapht._;
+import dlgre.BitSetSet;
 
 case class Top extends Formula {
 	override def isSatisfied(u:String, graph:GraphT[String,String]) = {

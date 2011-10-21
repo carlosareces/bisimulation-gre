@@ -2,6 +2,8 @@ package dlgre.formula;
 
 import grapht._;
 
+import dlgre.BitSetSet;
+
 case class Existential(role:String, sub:Formula) extends Formula {
   	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
 		graph.getAllNodes.exists { v => graph.hasEdge(u,role,v) && sub.isSatisfied(v,graph) };            

@@ -4,6 +4,8 @@ import org.jgrapht.graph._;
 import scala.collection.mutable._;
 import util.StringUtils.join;
 
+import collection.JavaConversions._;
+
 class GraphT[V,E]() {
   	private val dummyEdge = new DefaultEdge();
 	private val graph = new DefaultDirectedGraph[V,DefaultEdge](dummyEdge.getClass.asInstanceOf[Class[_ <: DefaultEdge]] );
@@ -27,9 +29,14 @@ class GraphT[V,E]() {
         def containsNode(u:V) = graph.containsVertex(u);
         def removeNode(u:V) = graph.removeVertex(u);
         
-        def getAllNodes  = new JavaSetAdaptor[V](graph.vertexSet()).toList;
-
+        //def getAllNodes  = new JavaSetAdaptor[V](graph.vertexSet()).toList;
         
+        def getAllNodes = {
+          val buf: scala.collection.mutable.Set[V] = graph.vertexSet();
+          buf;
+          
+        }
+
         def addPredicate(u : V, p : String) = {
           addNode(u);
           
@@ -79,7 +86,12 @@ class GraphT[V,E]() {
         def getSrc(e:DefaultEdge) = graph.getEdgeSource(e);
         def getTgt(e:DefaultEdge) = graph.getEdgeTarget(e);
         
-        def getAllEdges = graph.edgeSet();
+        // def getAllEdges = graph.edgeSet();
+        
+        def getAllEdges = {
+          val buf: scala.collection.mutable.Set[org.jgrapht.graph.DefaultEdge] = graph.edgeSet();
+          buf;
+        }
         
         def hasEdge(src:V, role:String, tgt:V) = {
           val edge = graph.getEdge(src,tgt);
@@ -124,6 +136,9 @@ class GraphT[V,E]() {
           }
           
           ret.toList
+          
+          val buf: scala.collection.mutable.Buffer[T] = ret;
+          buf;
         }
         
         def mapInEdges[T](u:V, fun:(DefaultEdge => T)) = {
@@ -263,7 +278,7 @@ class GraphT[V,E]() {
             "Nodes:\n" + 
               join( (for( val u <- getAllNodes ) yield (u + ": " + join(getPredicates(u), " "))), "\n") +
             "\n\nEdges:\n" +
-              join( for (val e <- new JavaSetAdaptor(getAllEdges)) 
+              join( for (val e <- getAllEdges) 
                       yield graph.getEdgeSource(e) + " --[" + getRole(e) + "]--> " + graph.getEdgeTarget(e),
                     "\n")
           }

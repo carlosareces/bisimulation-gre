@@ -7,7 +7,7 @@ import grapht._;
 
 class ClassContainer(graph:GraphT[String,String]) {
   case class Entry(extension:BitSetSet[String], formula:Formula) {
-    override def equals(that: Any): boolean =
+    override def equals(that: Any): Boolean =
       that.isInstanceOf[Entry] &&  that.asInstanceOf[Entry].extension == extension;
     
     override def hashCode = extension.hashCode;
@@ -175,7 +175,9 @@ class ClassContainer(graph:GraphT[String,String]) {
             //println("Checking RUS " + pu);
             if( !checked.contains(pu)
                 && !uninformativeClasses.contains(pu.extension)
-                && ! isInformative( pu, classesGraph.mapOutEdges(pu, { edge => classesGraph.getTgt(edge) }) ) ) {
+                && ! isInformative(pu, 
+                                   classesGraph.mapOutEdges(pu, 
+                                                            {edge => classesGraph.getTgt(edge)}) ) ) {
               //println(" -> uninformative, removing");
               
               classesGraph.foreachInEdge(pu, { src =>
