@@ -11,7 +11,7 @@ object RandomGenerator {
 
         def generate(numNodes:Int, numPreds:Int, numRoles:Int, predDensity:Double, edgeDensity:Double) = {
    		val ret = new GraphT[String,String]();
-                val rand = new Random();
+                val rand = new scala.util.Random();
                 
                 Iterator.range(1, numNodes) foreach { i =>
                   ret.addNode("u" + i);

@@ -2,6 +2,8 @@ package dlgre.formula;
 
 import grapht._;
 
+import dlgre.BitSetSet;
+
 case class Literal(p:String, polarity:Boolean) extends Formula {
   	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
 		graph.hasPredicate(u,p) == polarity;            

@@ -4,6 +4,8 @@ import util.StringUtils.join;
 
 import grapht._;
 
+import dlgre.BitSetSet;
+
 case class Conjunction(sub:List[Formula]) extends Formula {
   	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
           sub.forall { f => f.isSatisfied(u,graph) }  

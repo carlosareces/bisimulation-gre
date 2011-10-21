@@ -1,5 +1,8 @@
 package dlgre;
 
+import scala.collection.JavaConversions._;
+
+
 class BitSetSet[E](domainsize:Int, mapper:E => Int, reverse:Int => E) extends java.util.AbstractSet[E] {
   	private val b = new java.util.BitSet(domainsize);
         private val tmp = new java.util.BitSet(domainsize);
@@ -131,12 +134,13 @@ class BitSetSet[E](domainsize:Int, mapper:E => Int, reverse:Int => E) extends ja
         }
         
         def asScalaCollection = {
-          new scala.collection.mutable.JavaSetAdaptor[E](this)
+          val buf: scala.collection.mutable.Set[E] = this;
+          buf;
         }
         
         override def clear() = b.clear();
             
-        override def equals(that: Any): boolean =
+        override def equals(that: Any): Boolean =
           that.isInstanceOf[BitSetSet[E]] && {
             val other = that.asInstanceOf[BitSetSet[E]];
             
