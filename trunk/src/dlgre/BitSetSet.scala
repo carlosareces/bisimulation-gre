@@ -132,11 +132,16 @@ class BitSetSet[E](domainsize:Int, mapper:E => Int, reverse:Int => E) extends ja
         def intersects(other:BitSetSet[E]) = {
           b.intersects(other.b)
         }
-        
         def asScalaCollection = {
+          new scala.collection.JavaConversions.MutableSetWrapper[E](this)
+        }
+
+        /*MOD Luciana-Carlos
+        def asScalaCollection = {
+          val f: new BitSetSet(this);
           val buf: scala.collection.mutable.Set[E] = this;
           buf;
-        }
+        }*/
         
         override def clear() = b.clear();
             
