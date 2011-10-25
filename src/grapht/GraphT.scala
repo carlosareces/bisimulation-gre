@@ -32,9 +32,9 @@ class GraphT[V,E]() {
         //def getAllNodes  = new JavaSetAdaptor[V](graph.vertexSet()).toList;
         
         def getAllNodes = {
-          val buf: scala.collection.mutable.Set[V] = graph.vertexSet();
-          buf;
-          
+          //val buf: scala.collection.mutable.Set[V] = graph.vertexSet();
+          //buf;
+          new scala.collection.JavaConversions.MutableSetWrapper[V](graph.vertexSet()).toList;
         }
 
         def addPredicate(u : V, p : String) = {
