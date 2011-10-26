@@ -12,7 +12,9 @@ object Main {
     
 
     // * warmup for runtime measurements
-    Iterator.range(0,20).foreach { x =>
+    
+    // LB: I changed (0,20 to 0,0) these line in order to remove the runtime error in RandomGenerator
+    Iterator.range(0,0).foreach { x =>
       val graph = dlgre.generate.RandomGenerator.generate(20, 10, 4, 0.1, 0.1);
       if( positiveMode ) {
         val result = new PositiveClassComputer(graph).compute;

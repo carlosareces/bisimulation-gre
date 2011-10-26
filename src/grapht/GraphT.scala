@@ -6,6 +6,8 @@ import util.StringUtils.join;
 
 import collection.JavaConversions._;
 
+import dlgre.BitSetSet;
+
 class GraphT[V,E]() {
   	private val dummyEdge = new DefaultEdge();
 	private val graph = new DefaultDirectedGraph[V,DefaultEdge](dummyEdge.getClass.asInstanceOf[Class[_ <: DefaultEdge]] );
@@ -20,7 +22,7 @@ class GraphT[V,E]() {
         private val roles = new HashSet[E]
         
         private val nodesToPredicates = new HashMap[V,Set[String]]
-        private val edgesToRoles = new HashMap[DefaultEdge,E];
+        private val edgesToRoles = new HashMap[DefaultEdge,Set[E]];
         
         
         
@@ -69,12 +71,24 @@ class GraphT[V,E]() {
           if( !containsNode(u) ) addNode(u);
           if( !containsNode(v) ) addNode(v);
           
-          val edge = graph.addEdge(u,v);
-
-          if( edge != null ) {
-            edgesToRoles += edge -> r;
-            roles += r;
+          // We add the edge (u,v). Returns null if already there
+          graph.addEdge(u,v);
+          
+          val edge = graph.getEdge(u,v);
+          
+          // We get the roles associated to the edge(u,v)          
+          // Initially we initialize to the empty set
+          val oldRoles = new HashSet[E];
+          if (edgesToRoles.contains(edge)) { 
+            // If already initialized we get the actual roles
+            val oldRoles = getRole(edge)
           }
+          
+          // Edge roles set to oldRoles plus r
+	      edgesToRoles += edge -> (oldRoles += r) ;
+          // All roles set to all roles plus r 
+	      roles += r;
+       
         }
         
         def getAllRoles : Set[E] = roles;
@@ -123,7 +137,8 @@ class GraphT[V,E]() {
           
           while( it.hasNext() ) {
             val edge = it.next();
-            proc(graph.getEdgeSource(edge), edgesToRoles(edge));
+            for (r <- edgesToRoles(edge))
+              proc(graph.getEdgeSource(edge), r);
           }
         }
 
