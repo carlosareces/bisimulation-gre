@@ -14,14 +14,15 @@ object Main {
     // * warmup for runtime measurements
     
     // LB: I changed (0,20 to 0,0) these line in order to remove the runtime error in RandomGenerator
-    Iterator.range(0,0).foreach { x =>
+  /*  Iterator.range(0,0).foreach { x =>
       val graph = dlgre.generate.RandomGenerator.generate(20, 10, 4, 0.1, 0.1);
+      println("El graph:",graph);
       if( positiveMode ) {
         val result = new PositiveClassComputer(graph).compute;
       } else {
         val result = new BisimulationClassesComputer(graph).compute;
       }
-    }
+    }*/
     
     
     val graph = if( args(1) == "random" ) {
@@ -30,7 +31,7 @@ object Main {
       readGraph(args(1))
     }
     
-    println("Loaded graph: " + graph.getAllNodes.size + " nodes, " + graph.getAllEdges.size + " edges.");
+    //println("Loaded graph: " + graph.getAllNodes.size + " nodes, " + graph.getAllEdges.size + " edges.");
     
     print("\nComputing bisimulation classes ");
     
@@ -39,6 +40,7 @@ object Main {
     
     
     if( positiveMode ) {
+      println("\nPositive mode");
       val result = new PositiveClassComputer(graph).compute;
       
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
@@ -47,6 +49,7 @@ object Main {
       result.foreach { entry => println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")) };
       // result.foreach { entry => println(entry.extension.asScalaCollection.toString + ": " + dlgre.realize.Realizer.realize(entry.formula.removeConjunctionsWithTop, "noun", "drawer")) }; 
     } else {
+      println("\nBisim mode");
       print("..[max=0]");
 
       val result = new BisimulationClassesComputer(graph).compute;

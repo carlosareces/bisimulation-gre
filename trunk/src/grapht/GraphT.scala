@@ -23,7 +23,8 @@ class GraphT[V,E]() {
         
         private val nodesToPredicates = new HashMap[V,Set[String]]
         private val edgesToRoles = new HashMap[DefaultEdge,Set[E]];
-        
+        // Declare oldRoles like a set, but initialize like a hashSet because it can't to initialize to abstract class 
+        private var oldRoles:Set[E] = new HashSet[E];
         
         
         /*** nodes ***/
@@ -72,23 +73,24 @@ class GraphT[V,E]() {
           if( !containsNode(v) ) addNode(v);
           
           // We add the edge (u,v). Returns null if already there
-          graph.addEdge(u,v);
+          graph.addEdge(u,v);//esto la esta agregando mal!!
           
           val edge = graph.getEdge(u,v);
-          
           // We get the roles associated to the edge(u,v)          
           // Initially we initialize to the empty set
-          val oldRoles = new HashSet[E];
           if (edgesToRoles.contains(edge)) { 
             // If already initialized we get the actual roles
-            val oldRoles = getRole(edge)
+            //RA it need to be without var because it need to live more time, plus it need to clone because there are pointers
+            oldRoles = getRole(edge).clone;
           }
-          
+          else {
+            oldRoles = new HashSet[E];
+          }
           // Edge roles set to oldRoles plus r
-	      edgesToRoles += edge -> (oldRoles += r) ;
+          oldRoles += r;
+	      edgesToRoles += edge -> oldRoles;
           // All roles set to all roles plus r 
 	      roles += r;
-       
         }
         
         def getAllRoles : Set[E] = roles;
