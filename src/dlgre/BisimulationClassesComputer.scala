@@ -6,10 +6,11 @@ import dlgre.formula._;
 import grapht._;
 
 class BisimulationClassesComputer(graph:GraphT[String,String]) {
+   
    private val extensions = new HashMap[Formula, BitSetSet[String]];
    
    private def getExtension(fmla:Formula) = fmla.extension(graph);
-   
+
    /*
    private def getExtension(fmla:Formula) = {
      if( !extensions.contains(fmla) ) {
@@ -25,16 +26,13 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
    // representing the classes.
    def compute = {
      val roles = graph.getAllRoles;
-     
      // the current classes
      val queue = new Queue[Option[Formula]]
      
      // initialize with a single class that contains everything
      queue += Some(new Top());
-     
      // split over all (positive) literals up to saturation
      splitOverLiterals(queue, graph.getAllPredicates);
-     
      
      // now repeatedly split over roles to distinguished subsets
      var oldQueue : List[Formula] = Nil;
@@ -46,7 +44,6 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
        oldQueue = newQueue;
        splitOverRoles(queue, roles);
        newQueue = extractQueue(queue);
-
        madeChanges = (oldQueue != newQueue);
      }
 
@@ -81,7 +78,6 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
    
    private def splitOverLiteral(f:Formula, pred:String, polarity:Boolean) = {
      val ext = getExtension(f);
-     
      if( ext.size <= 1 ) {
        None
      } else {
@@ -129,7 +125,7 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
 
    private def splitOverRole1(formula:Formula, role:String, roleTo:Formula) = {
      val ext = getExtension(formula)
-     
+     //println("In splitOverRole1 -formula, role y rolTo-:", formula, role, roleTo);
      if( ext.size > 1 &&
        ext.exists { x => getExtension(roleTo).exists { y => graph.hasEdge(x,role,y)} } &&
        ext.exists { x => getExtension(roleTo).forall { y => !graph.hasEdge(x,role,y)} } 
