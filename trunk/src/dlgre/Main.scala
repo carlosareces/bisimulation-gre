@@ -16,7 +16,7 @@ object Main {
     // LB: I changed (0,20 to 0,0) these line in order to remove the runtime error in RandomGenerator
   /*  Iterator.range(0,0).foreach { x =>
       val graph = dlgre.generate.RandomGenerator.generate(20, 10, 4, 0.1, 0.1);
-      println("El graph:",graph);
+      //println("El graph:",graph);
       if( positiveMode ) {
         val result = new PositiveClassComputer(graph).compute;
       } else {
@@ -45,7 +45,6 @@ object Main {
       
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
       println("\nBisimulation classes with their concepts:");
-      
       result.foreach { entry => println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")) };
       // result.foreach { entry => println(entry.extension.asScalaCollection.toString + ": " + dlgre.realize.Realizer.realize(entry.formula.removeConjunctionsWithTop, "noun", "drawer")) }; 
     } else {
@@ -56,7 +55,6 @@ object Main {
 
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
       println("\nBisimulation classes with their concepts:");
-      
       result.foreach { fmla => println(simplifier.simplify(fmla).prettyprint + ": " + util.StringUtils.join(fmla.extension(graph).asScalaCollection,",")) };
     }
     

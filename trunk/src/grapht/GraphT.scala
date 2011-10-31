@@ -23,8 +23,6 @@ class GraphT[V,E]() {
         
         private val nodesToPredicates = new HashMap[V,Set[String]]
         private val edgesToRoles = new HashMap[DefaultEdge,Set[E]];
-        // Declare oldRoles like a set, but initialize like a hashSet because it can't to initialize to abstract class 
-        private var oldRoles:Set[E] = new HashSet[E];
         
         
         /*** nodes ***/
@@ -73,15 +71,17 @@ class GraphT[V,E]() {
           if( !containsNode(v) ) addNode(v);
           
           // We add the edge (u,v). Returns null if already there
-          graph.addEdge(u,v);//esto la esta agregando mal!!
-          
+          graph.addEdge(u,v);
           val edge = graph.getEdge(u,v);
           // We get the roles associated to the edge(u,v)          
           // Initially we initialize to the empty set
+          
+          // Declare oldRoles like a set, but initialize like a hashSet because it can't to initialize to abstract class 
+          var oldRoles:Set[E] = null;
           if (edgesToRoles.contains(edge)) { 
             // If already initialized we get the actual roles
-            //RA it need to be without var because it need to live more time, plus it need to clone because there are pointers
-            oldRoles = getRole(edge).clone;
+            //RA it need to be without var because is not a new var
+            oldRoles = getRole(edge);
           }
           else {
             oldRoles = new HashSet[E];
@@ -89,7 +89,8 @@ class GraphT[V,E]() {
           // Edge roles set to oldRoles plus r
           oldRoles += r;
 	      edgesToRoles += edge -> oldRoles;
-          // All roles set to all roles plus r 
+          // All roles set to all roles plus r
+	      println("EdgesToRoles: ",edgesToRoles);
 	      roles += r;
         }
         
@@ -108,11 +109,11 @@ class GraphT[V,E]() {
           val buf: scala.collection.mutable.Set[org.jgrapht.graph.DefaultEdge] = graph.edgeSet();
           buf;
         }
-        
-        def hasEdge(src:V, role:String, tgt:V) = {
+        //E is like a string
+        def hasEdge(src:V, role:E, tgt:V) = {
           val edge = graph.getEdge(src,tgt);
-          
-          (edge != null) && (getRole(edge) == role)
+          //RA: Here asked if getRole==role, but right now getRole(edge) is a set
+          (edge != null) && (getRole(edge).contains(role))
         }
         
         def getRole(edge:DefaultEdge) = edgesToRoles.get(edge).get;
