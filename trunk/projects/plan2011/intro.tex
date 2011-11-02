@@ -1,11 +1,19 @@
-\section{Introducci\'on}
+\section{Estado del arte en el \'area}
 \label{intro}
 
-Introduccion a la generacion de lenguaje natural aqui como parte de la inteligencia artificial (citar libro)
+La Generaci\'on de expresiones referenciales es una tarea que puede ser definida informalmente como sigue: dado un contexto y un elemento a identificar en ese contexto, generar una descripci\'on gramaticalmente correcta del objeto de forma tal que una persona lo pueda identificar. En general, esto implica producir una frase nominal que describa el objeto un\'ivocamente---por ejemplo, ``el florero que est\'a sobre la mesa''. Para que estas expresiones sean entendibles por una persona, deben ser similares a aquellas producidas por otra persona en una situaci\'on similar---por ejemplo, no ser\'ia aceptable generar ``el florero que no est\'a sobre la silla ni bajo la mesa''. 
 
-Introduccion a la generacion de expresiones referenciales aqui (citar paper)
+Las expresiones referenciales juegan un rol central en la comunicaci\'on, y han sido estudiadas extensamente en muchas ramas de la ling\"u\'istica computacional. En particular, la Generaci\'on de Expresiones Referenciales (GER) es una de las \'areas m\'as activas dentro de la Generaci\'on de Lenguaje Natural~\cite{KrahmerEmielandVanDeemter2011}. La Generaci\'on de Lenguaje Natural (GLN) estudia los procesos automatizados a trav\'es de los cuales convertir informaci\'on no lin\"u\'istica (por ejemplo, informaci\'on almacenada en una base de datos) en texto en lenguaje natural. La GLN tiene aplicaciones en diversas \'areas como, por ejemplo, generaci\'on de pron\'osticos del tiempo y resumen de historias cl\'inicas~\cite{Reiter2000}. 
 
-Introduccion a mundos virtuales, tutores virtuales (citar GIVE, otros)
+Mellish et al~\cite{Mellish2006} realizaron un an\'alisis de los sistemas de GLN actualmente implementados y concluyeron que practicamente todos estos sistemas tienen un componente de GER. Esto no es sorprendente dado el rol crucial que las expresiones referenciales juegan en la comunicaci\'on. Un sistema que describa animaciones que est\'an ocurriendo en videos documentales~\cite{Callaway2005} usando lenguaje natural necesita construir descripciones de los objetos que aparecen en los videos para poder hablar de ellos---``los soldados bucan los pedazos de las armas que est\'an desparramados en el suelo''. Un sistema que genera autom\'aticamente descripciones de las obras de arte exhibidas en un museo~\cite{Cox1999} debe poder referirse a la ubicaci\'on y a las caracter\'isticas de las mismas---``el cuadro de Picasso de mayores dimensiones exhibido en este museo''. 
+
+Dado que la tarea de GER no es una tarea precisamente definida---de hecho existen muchas formas de referirse exitosamente a un objeto---existen diversos algoritmos que implementan la tarea de GER de distintas formas. El algoritmo m\'as influencial en el \'area es el de Dale y Haddock~\cite{DaleRobertandHaddock1991}. Sin embargo, recientemente se ha mostrado que, en la pr\'actica no genera expresiones referenciales \'utiles~\cite{Dale2009}. Adem\'as, este algoritmo, y sus sucesores, son vulnerables al problema de ``iteraci\'on infinita'', en el cual el algoritmo itera infinitamente entre dos individuos relacionados--- por ejemplo, ``el libro que est\'a sobre la mesa que tiene el libro ...''.  La forma cl\'asica de resolver este problema de iteraci\'on es hacer un control de ciclos ad-hoc. En los \'ultimos a\~nos se han introducido dos algoritmos diferentes algoritmos intr\'insecamente libres de este problema. El primero de ellos~\cite{Krahmer2003} usa isomorfismos de subgrafos para generar las expresiones referenciales, lo cual lo hace computacionalmente muy complejo. El segundo algoritmo~\cite{Areces2008} se basa en la idea de que la tarea de GER puede reducirse a computar el conjunto de similaridad de cada objeto del dominio. Como efecto colateral, el algoritmo genera la descripci\'on de todos los objetos del dominio al mismo tiempo, y como resultado es muy eficiente. Dada su baja complejidad computacional, este segundo algoritmo es prometedor. Sin embargo, su utilidad pr\'actica a\'un no ha sido evaluada.  
 
 
+   
+
+
+
+
+ 
 

@@ -1,18 +1,12 @@
-\section{Objetivos}
+\section{Objetivos espec\'ificos}
 \label{objetivos}
 
-En esta secci\'on detallaremos los objetivos para el primer a\~no de trabajo, cuyo calendario de actividades se describe en la Secci\'on \ref{plandetrabajo}. 
+Si bien GER es la tarea m\'as estudiada de GLN, la evaluaci\'on de los sistemas de GRE es a\'un un problema abierto. El objetivo final de un sistema de GER es generar una expresi\'on referencial que pueda ser utilizado con \'exito por un usuario humano a fin de identificar el referente previsto. Y por lo tanto, los sistemas de GER deben ser evaluados por personas, o por m\'etodos de evaluaci\'on automatizados correlacionados con las evaluaciones humanas. El problema es que la evaluaci\'on humana es costosa, mientras que las evaluaciones autom\'aticas propuestas hasta al momento no han mostrado correlaci\'on con las evaluaciones humanas~\cite{reiter09}.
 
+Proponemos evaluar el algoritmo de generaci\'on de expresiones referenciales implementado en~\cite{Areces2008} utilizando dos metodolog\'ias. 
 
-
-\begin{enumerate}
-\item Lectura de la bibliograf\'ia citada en (intro? y motivacion?) sobre aplicaci\'on de l\'ogica a la generaci\'on de expresiones referenciales.
-%\item Explorar las posibilidades de la aplicaci\'on de l\'ogica para resoluci\'on de expresiones referenciales. 
-\item Aprendizaje y modificaci\'on del software disponible actualmente.
-\item Generaci\'on de modelos correspondientes a corpus disponible (cite Jette...)
-\item Aplicaci\'on a corpus citados en el punto anterior. Evaluaci\'on de los resultados.
-\item Proponer modificaciones tanto para el modelo, como para el algoritmo, que mejoren la GRE.
-\item Publicaci\'on de resultados.
-%\item 
-\end{enumerate}
+\begin{description}
+\item[An\'alisis de covertura con respecto a corpora:] 
+\item[Integraci\'on en un sistema de generaci\'on de instrucciones:] El GIVE Challenge~\cite{} es una competencia propuesta para evaluar sistemas de GLN situados en entornos virtuales. Su objetivo es disminuir el costo de la evaluaci\'on humana requerida para sistemas de GLN obteniendo testers en Internet. Con este objetivo en mente, la tarea que los testers tienen que realizar es seguir las instrucciones del sistema de GLN para as\'i alcanzar el objetivo de un juego en un entorno virtual en tres dimensiones. Esta tarea es desafiante para los algoritmos de generaci\'on de expresiones referenciales por dos razones. La primera es que el contexto de referencia cambia constantemente a medida que el jugador se mueve en el mundo virtual y lo modifica. Se investigar\'a la posibilidad de adaptar el algoritmo para considerar un modelo din\'amico. La segunda es que, dado que las instrucciones son ef\'imeras (no quedan registradas en un log) el sistema debe decidir como fragmentar la informaci\'on de las expresiones referenciales de forma tal de que sean m\'as efectivas. Por ejemplo, un sistema que se refiere a un objeto como ``tenemos que presionar un bot\'on azul'' y espera que el jugador enfoque dos posibles referentes en el dominio para luego decir ``el de la izquierda'' probablemente ser\'a m\'as efectivo que un sistema que diga ``tenemos que presionar el bot\'on azul que est\'a atr\'as tuyo a la izquierda'' (dado que al girar, la persona puede haber olvidado si era el de la izquierda o el de la derecha). Se investigar\'a la posibilidad de que el algoritmo no retorne referencias un\'ivocas para cada elemento del contexto sino que retorne referencias parciales y luego refine esas referencias agregando propiedades incrementalmente. 
+\end{description}
 
