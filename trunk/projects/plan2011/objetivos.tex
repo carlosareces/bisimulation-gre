@@ -1,12 +1,23 @@
 \section{Objetivos espec\'ificos}
 \label{objetivos}
 
-Si bien GER es la tarea m\'as estudiada de GLN, la evaluaci\'on de los sistemas de GRE es a\'un un problema abierto. El objetivo final de un sistema de GER es generar una expresi\'on referencial que pueda ser utilizado con \'exito por un usuario humano a fin de identificar el referente previsto. Y por lo tanto, los sistemas de GER deben ser evaluados por personas, o por m\'etodos de evaluaci\'on automatizados correlacionados con las evaluaciones humanas. El problema es que la evaluaci\'on humana es costosa, mientras que las evaluaciones autom\'aticas propuestas hasta al momento no han mostrado correlaci\'on con las evaluaciones humanas~\cite{reiter09}.
+Si bien GER es la tarea m\'as estudiada de GLN, la evaluaci\'on de los sistemas de GRE es a\'un un problema abierto. El objetivo final de un sistema de GER es generar una expresi\'on referencial que pueda ser utilizada con \'exito por un usuario humano a fin de identificar el referente previsto. Y por lo tanto, los sistemas de GER deben ser evaluados por personas, o por m\'etodos de evaluaci\'on automatizados correlacionados con las evaluaciones humanas. El problema es que la evaluaci\'on humana es costosa, mientras que las evaluaciones autom\'aticas propuestas hasta al momento no han mostrado correlaci\'on con las evaluaciones humanas~\cite{reiter09}.
 
 Proponemos evaluar el algoritmo de generaci\'on de expresiones referenciales implementado en~\cite{Areces2008} utilizando dos metodolog\'ias. 
 
 \begin{description}
-\item[An\'alisis de covertura con respecto a corpora:] 
+\item[An\'alisis de cobertura con respecto a corpora:] En esta parte se propone usar corpus disponible~\cite{viethen-dale:2011:UCNLG+Eval} para crear modelos en el formato que asume como input el algoritmo de generaci\'on de expresiones referenciales nombrado y luego procesar el corpus, se realizar\'a una post-edici\'on ya que el algoritmo devuelve f\'ormulas y queremos comparar con las expresiones referenciales hechas por humanos en lenguaje natural.
+Luego de analizar las diferencias se analizaran 3 cosas:
+\begin{enumerate}
+\item Las posibilidades de modificar el modelo para que las expresiones generadas por el algoritmo sean m\'as cercanas a las generadas por humanos.
+\item La posibilidad de modificar el algoritmo para tener en cuenta los siguientes:
+  \begin{itemize}
+   \item Dar m\'as de una expresi\'on referencial para cada objeto si es posible.
+   \item Permitir que el algoritmo de como resultado no solo la m\'inima expresi\'on referencial para cada objeto sino expresiones con un poco m\'as de informaci\'on.
+   \item Agregar orden a los atributos a considerar de los objetos.
+  \end{itemize}
+\item Las posibilidades de modificar el post-editor de la f\'ormula, para que de lenguaje natural de las partes de la f\'ormula, es decir que de la expresi\'on referencial en varias oraciones.
+\end{enumerate}
 \item[Integraci\'on en un sistema de generaci\'on de instrucciones:] El GIVE Challenge~\cite{} es una competencia propuesta para evaluar sistemas de GLN situados en entornos virtuales. Su objetivo es disminuir el costo de la evaluaci\'on humana requerida para sistemas de GLN obteniendo testers en Internet. Con este objetivo en mente, la tarea que los testers tienen que realizar es seguir las instrucciones del sistema de GLN para as\'i alcanzar el objetivo de un juego en un entorno virtual en tres dimensiones. Esta tarea es desafiante para los algoritmos de generaci\'on de expresiones referenciales por dos razones. La primera es que el contexto de referencia cambia constantemente a medida que el jugador se mueve en el mundo virtual y lo modifica. Se investigar\'a la posibilidad de adaptar el algoritmo para considerar un modelo din\'amico. La segunda es que, dado que las instrucciones son ef\'imeras (no quedan registradas en un log) el sistema debe decidir como fragmentar la informaci\'on de las expresiones referenciales de forma tal de que sean m\'as efectivas. Por ejemplo, un sistema que se refiere a un objeto como ``tenemos que presionar un bot\'on azul'' y espera que el jugador enfoque dos posibles referentes en el dominio para luego decir ``el de la izquierda'' probablemente ser\'a m\'as efectivo que un sistema que diga ``tenemos que presionar el bot\'on azul que est\'a atr\'as tuyo a la izquierda'' (dado que al girar, la persona puede haber olvidado si era el de la izquierda o el de la derecha). Se investigar\'a la posibilidad de que el algoritmo no retorne referencias un\'ivocas para cada elemento del contexto sino que retorne referencias parciales y luego refine esas referencias agregando propiedades incrementalmente. 
 \end{description}
 
