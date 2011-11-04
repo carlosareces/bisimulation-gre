@@ -9,8 +9,11 @@ import collection.JavaConversions._;
 import dlgre.BitSetSet;
 
 class GraphT[V,E]() {
-  	private val dummyEdge = new DefaultEdge();
-	private val graph = new DefaultDirectedGraph[V,DefaultEdge](dummyEdge.getClass.asInstanceOf[Class[_ <: DefaultEdge]] );
+  
+    //RA: Adding weight to Edge
+  	private val dummyEdge = new DefaultWeightedEdge();
+  	//RA: Adding Weight to Graph
+	private val graph = new DefaultDirectedWeightedGraph[V,DefaultEdge](dummyEdge.getClass.asInstanceOf[Class[_ <: DefaultEdge]] );
         
         private val nodesToIndices = new HashMap[V,Int]
         private val nodeList = new java.util.ArrayList[V]
@@ -66,13 +69,16 @@ class GraphT[V,E]() {
         
 	/*** edges ***/
         
-        def addEdge(u : V, v : V, r : E) = {
+        def addEdge(u : V, v : V, r : E, p : Double) = {
           if( !containsNode(u) ) addNode(u);
           if( !containsNode(v) ) addNode(v);
           
           // We add the edge (u,v). Returns null if already there
           graph.addEdge(u,v);
           val edge = graph.getEdge(u,v);
+          //RA: Setting the weight of the edge
+          graph.setEdgeWeight(edge, p);
+          print("Adding-Edge-with: ", edge, p);
           // We get the roles associated to the edge(u,v)          
           // Initially we initialize to the empty set
           

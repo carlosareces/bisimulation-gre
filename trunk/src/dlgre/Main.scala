@@ -2,9 +2,10 @@ package dlgre;
 
 
 import java.io._
-
+import Double._
 import scala.xml.parsing.ConstructingParser
 import grapht._;
+import scala.collection.JavaConversions;
 
 object Main {
   def main(args : Array[String]) : Unit = {
@@ -80,7 +81,11 @@ object Main {
       (indiv \ "related").foreach { element =>
               val rel = mygetattr(element, "rel");
               val to = mygetattr(element, "to");
-              ret.addEdge(node, to, rel);
+              //RA: parsing the "prob" attribute of the xml file for probability
+              val prob = mygetattr(element, "prob");
+              //RA: Giving the probability like a double
+              ret.addEdge(node, to, rel, (prob.toDouble));
+            
       }
   }
     

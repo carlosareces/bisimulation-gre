@@ -44,7 +44,9 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
        oldQueue = newQueue;
        splitOverRoles(queue, roles);
        newQueue = extractQueue(queue);
+  
        madeChanges = (oldQueue != newQueue);
+       
      }
 
      /*
@@ -98,12 +100,17 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
      val elements = extractQueue(queue);
      val localQueue = new Queue[Option[Formula]];
      
+     //print ("ELEMENTOS: ",elements);
+     //print ("LOCALQUEUE: ", localQueue);
      queue.clear;
      
      elements.foreach { el =>
         localQueue.clear;
         localQueue += Some(el);
-        
+        print ("ROLES::::",roles, elements);
+        //roles = Set
+        //RA: a roles se le puede poner toList
+        //puedo ponerlo como input
         for( val role <- roles; val sub <- elements ) {
           	//println("[" + role + "/" + sub + "] ");
                forallQueue(localQueue, { (formula, q) =>
