@@ -101,10 +101,11 @@ class ClassContainer(graph:GraphT[String,String]) {
           if( isInformative(entry, children) ) {
             val parents = findMinimalSupersets(entry);
             classesGraph.addNode(entry);
-           
-            children.foreach { ch => classesGraph.addEdge(entry, ch, "") }
+           //RA: fixme!! 0.5 because I don't know right now
+            children.foreach { ch => classesGraph.addEdge(entry, ch, "", 0.5) }
             parents.foreach { par => 
-                classesGraph.addEdge(par, entry, "");
+                //RA: fixme!! 0.5
+                classesGraph.addEdge(par, entry, "", 0.5);
                 potentiallyUninformative += par;
             }
             
@@ -178,13 +179,16 @@ class ClassContainer(graph:GraphT[String,String]) {
                 && ! isInformative(pu, 
                                    classesGraph.mapOutEdges(pu, 
                                                             {edge => classesGraph.getTgt(edge)}) ) ) {
-              //println(" -> uninformative, removing");
+              println(" -> uninformative, removing",pu);
               
               classesGraph.foreachInEdge(pu, { src =>
                 potentiallyUninformative += src;
                 
                 classesGraph.foreachOutEdge(pu, { tgt =>
-                  classesGraph.addEdge(src, tgt, "");
+                  //RA: this old
+                  //classesGraph.addEdge(src, tgt, "");
+                  //RA: fixme 0.5
+                  classesGraph.addEdge(src, tgt, "", 0.5);
                 });
               });
               

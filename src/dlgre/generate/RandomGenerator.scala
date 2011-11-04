@@ -27,7 +27,8 @@ object RandomGenerator {
                   Iterator.range(1, numNodes) foreach { j =>
                     Iterator.range(1, numRoles) foreach { k =>
                       if( rand.nextDouble <= edgeDensity ) {
-                        ret.addEdge("u" + i, "u" + j, "e" + k);
+                        //RA: fixme 0.5
+                        ret.addEdge("u" + i, "u" + j, "e" + k, 0.5);
                       }
                     }
                   }
