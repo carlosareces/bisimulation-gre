@@ -5,7 +5,7 @@ import scala.collection.mutable._;
 import dlgre.formula._;
 import grapht._;
 
-class BisimulationClassesComputer(graph:GraphT[String,String]) {
+class BisimulationClassesComputer(graph:GraphT[String,ProbRelation]) {
    
    private val extensions = new HashMap[Formula, BitSetSet[String]];
    

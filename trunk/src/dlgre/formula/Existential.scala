@@ -5,7 +5,7 @@ import grapht._;
 import dlgre.BitSetSet;
 
 case class Existential(role:String, sub:Formula) extends Formula {
-  	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
+  	override def isSatisfied(u:String, graph:GraphT[String,ProbRelation]) = {
 		graph.getAllNodes.exists { v => graph.hasEdge(u,role,v) && sub.isSatisfied(v,graph) };            
         }
           
@@ -18,7 +18,7 @@ case class Existential(role:String, sub:Formula) extends Formula {
           Existential(role, sub.flatten)
         }
         
-        override def setToExtension(set:BitSetSet[String], graph:GraphT[String,String]) : Unit = {
+        override def setToExtension(set:BitSetSet[String], graph:GraphT[String,ProbRelation]) : Unit = {
           val subExtension = sub.extension(graph).asScalaCollection;
           
           set.clear();

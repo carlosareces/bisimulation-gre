@@ -9,14 +9,14 @@ abstract class Formula {
           
   	def prettyprint : String;
 
-        def isSatisfied(u:String, graph:GraphT[String,String]) : Boolean;
+        def isSatisfied(u:String, graph:GraphT[String,ProbRelation]) : Boolean;
 
         def flatten : Formula;
         
-        def setToExtension(set:BitSetSet[String], graph:GraphT[String,String]) : Unit;
+        def setToExtension(set:BitSetSet[String], graph:GraphT[String,ProbRelation]) : Unit;
         
         
-        def extension(graph:GraphT[String,String]) = {
+        def extension(graph:GraphT[String,ProbRelation]) = {
           if( memoizedExtension == null ) {
             memoizedExtension = graph.getNodeSet;
             setToExtension(memoizedExtension,graph)  

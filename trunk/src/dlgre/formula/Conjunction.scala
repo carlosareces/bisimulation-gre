@@ -7,7 +7,7 @@ import grapht._;
 import dlgre.BitSetSet;
 
 case class Conjunction(sub:List[Formula]) extends Formula {
-  	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
+  	override def isSatisfied(u:String, graph:GraphT[String,ProbRelation]) = {
           sub.forall { f => f.isSatisfied(u,graph) }  
         }
           
@@ -29,7 +29,7 @@ case class Conjunction(sub:List[Formula]) extends Formula {
           conjoin(results.flatten { x => x })
         }
         
-        override def setToExtension(set:BitSetSet[String], graph:GraphT[String,String]) : Unit = {
+        override def setToExtension(set:BitSetSet[String], graph:GraphT[String,ProbRelation]) : Unit = {
           sub match {
             case Nil => set.addAll(graph.getAllNodes);
             case h::t => {
