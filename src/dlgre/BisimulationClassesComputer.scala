@@ -42,6 +42,7 @@ class BisimulationClassesComputer(graph:GraphT[String,ProbRelation]) {
      while( madeChanges && !allSingleton(newQueue) ) {
        print(".");
        oldQueue = newQueue;
+       
        splitOverRoles(queue, roles);
        newQueue = extractQueue(queue);
   

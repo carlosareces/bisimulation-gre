@@ -1,10 +1,10 @@
 package dlgre;
 
-import scala.collection.mutable.Queue;
-import scala.collection.mutable.Set;
-
-import dlgre.formula._;
+import scala.collection.mutable.Queue
+import scala.collection.mutable.Set
+import dlgre.formula._
 import grapht._;
+import java.util.ArrayList
 
 class PositiveClassComputer(graph:GraphT[String,ProbRelation]) {
   val classes = new ClassContainer(graph);
@@ -20,7 +20,8 @@ class PositiveClassComputer(graph:GraphT[String,ProbRelation]) {
     
     // iterate over roles
     var madeChanges = true;
-
+    
+    //RA: here need to add-rename the condition of stop
     while( madeChanges && !classes.isAllSingletons ) {
       madeChanges = false;
       
@@ -31,9 +32,18 @@ class PositiveClassComputer(graph:GraphT[String,ProbRelation]) {
       print(".");
       //println("-----------------------------");
       //println(classes.classesGraph);
-      
-      graph.getAllRoles.foreach{ r =>
+
+      //RA: Parse order from a file, the file need to be rol enter rol enter ...
+      var li = List[String]()
+      val s = scala.io.Source.fromFile("modelos/order.txt")
+      s.getLines.foreach( (line) => {
+    	  println(line.trim.toUpperCase)
+    	  li ::= line;
+      })
+      //RA: Here I put reverse, because the last element that I added was the firt one in the list
+      li.reverse.foreach{ r =>
 	classes.getClasses.foreach { cl =>
+	  		print ("CLASE: ",cl);
         	if( classes.add(new Existential(r,cl.formula)) ) {
            		madeChanges = true;       
                 }
