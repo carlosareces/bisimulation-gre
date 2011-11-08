@@ -27,7 +27,6 @@ class GraphT[V,E]() {
         private val nodesToPredicates = new HashMap[V,Set[String]]
         private val edgesToRoles = new HashMap[DefaultEdge,Set[E]];
         
-        
         /*** nodes ***/
         def addNode(u : V) = graph.addVertex(u);
         def containsNode(u:V) = graph.containsVertex(u);
@@ -98,9 +97,14 @@ class GraphT[V,E]() {
 	      println("EdgesToRoles: ",edgesToRoles);
 	      roles += r;
         }
-        
+        //RA: here I am going to order the roles
+        def order(s:Set[E]) ={
+          
+          s.toList
+        }
+        //RA: now I am going to give a List not a Set, because I need to consider the order
+        //def getAllRoles : List[E] = order(roles);
         def getAllRoles : Set[E] = roles;
-        
         
         private def getInEdges(u : V) = graph.incomingEdgesOf(u);
         private def getOutEdges(u:V) = graph.outgoingEdgesOf(u);
