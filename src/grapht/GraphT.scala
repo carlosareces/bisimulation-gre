@@ -13,7 +13,7 @@ class GraphT[V,E]() {
     //RA: Adding weight to Edge
   	private val dummyEdge = new DefaultWeightedEdge();
   	//RA: Adding Weight to Graph
-	private val graph = new DefaultDirectedWeightedGraph[V,DefaultEdge](dummyEdge.getClass.asInstanceOf[Class[_ <: DefaultEdge]] );
+	private val graph = new DefaultDirectedGraph[V,DefaultEdge](dummyEdge.getClass.asInstanceOf[Class[_ <: DefaultEdge]] );
         
         private val nodesToIndices = new HashMap[V,Int]
         private val nodeList = new java.util.ArrayList[V]
@@ -69,7 +69,7 @@ class GraphT[V,E]() {
         
 	/*** edges ***/
         
-        def addEdge(u : V, v : V, r : E, p : Double) = {
+        def addEdge(u : V, v : V, r : E) = {
           if( !containsNode(u) ) addNode(u);
           if( !containsNode(v) ) addNode(v);
           
@@ -77,8 +77,7 @@ class GraphT[V,E]() {
           graph.addEdge(u,v);
           val edge = graph.getEdge(u,v);
           //RA: Setting the weight of the edge
-          graph.setEdgeWeight(edge, p);
-          print("Adding-Edge-with: ", edge, p);
+          print("Adding-Edge-with: ", edge, r);
           // We get the roles associated to the edge(u,v)          
           // Initially we initialize to the empty set
           

@@ -6,7 +6,7 @@ import scala.collection.mutable.Set;
 import dlgre.formula._;
 import grapht._;
 
-class PositiveClassComputer(graph:GraphT[String,String]) {
+class PositiveClassComputer(graph:GraphT[String,ProbRelation]) {
   val classes = new ClassContainer(graph);
   
   

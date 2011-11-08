@@ -5,7 +5,7 @@ import scala.collection.mutable._;
 import dlgre.formula._;
 import grapht._;
 
-class ClassContainer(graph:GraphT[String,String]) {
+class ClassContainer(graph:GraphT[String,ProbRelation]) {
   case class Entry(extension:BitSetSet[String], formula:Formula) {
     override def equals(that: Any): Boolean =
       that.isInstanceOf[Entry] &&  that.asInstanceOf[Entry].extension == extension;
@@ -173,7 +173,7 @@ class ClassContainer(graph:GraphT[String,String]) {
           var ret = false;
           
           potentiallyUninformative.foreach { pu =>
-            //println("Checking RUS " + pu);
+            println("Checking RUS " + pu);
             if( !checked.contains(pu)
                 && !uninformativeClasses.contains(pu.extension)
                 && ! isInformative(pu, 

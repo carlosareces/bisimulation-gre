@@ -63,8 +63,12 @@ object Main {
     
   }
   
+  
+ 
+  
+  
   private def readGraph(filename:String) = {
-    val ret =  new GraphT[String,String]
+    val ret =  new GraphT[String, ProbRelation]
     val p = ConstructingParser.fromFile(new File(filename), true)
     val doc: xml.Document = p.document
 
@@ -84,7 +88,7 @@ object Main {
               //RA: parsing the "prob" attribute of the xml file for probability
               val prob = mygetattr(element, "prob");
               //RA: Giving the probability like a double
-              ret.addEdge(node, to, rel, (prob.toDouble));
+              ret.addEdge(node, to, new ProbRelation(rel, (prob.toDouble)));
             
       }
   }
