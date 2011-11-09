@@ -6,7 +6,7 @@ import dlgre.formula._
 import grapht._;
 import java.util.ArrayList
 
-class PositiveClassComputer(graph:GraphT[String,ProbRelation]) {
+class PositiveClassComputer(graph:GraphT[String,String]) {
   val classes = new ClassContainer(graph);
   
   
@@ -40,7 +40,7 @@ class PositiveClassComputer(graph:GraphT[String,ProbRelation]) {
     	  println(line.trim.toUpperCase)
     	  li ::= line;
       })
-      //RA: Here I put reverse, because the last element that I added was the firt one in the list
+      //RA: Here I put reverse, because the last element that I added was the first one in the list
       li.reverse.foreach{ r =>
 	classes.getClasses.foreach { cl =>
 	  		print ("CLASE: ",cl);
