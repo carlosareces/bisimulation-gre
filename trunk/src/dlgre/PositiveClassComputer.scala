@@ -18,21 +18,23 @@ class PositiveClassComputer(graph:GraphT[String,String]) {
   
   def compute = {
     val simplifier = new dlgre.formula.Simplifier(graph);
-    println("ENTRA");
     // initialize predicates
     graph.getAllPredicates.foreach { p =>
       classes.add(new Literal(p,true));
     }
-    //Probabilities for roles
+    //RA: Probabilities for roles from modelos/order.txt
     
-     val s = scala.io.Source.fromFile("modelos/order.txt")
-      s.getLines.foreach( line => {
-    	  var sp = line.split("->");
-    	  println("spliteado: ", sp);
-      })
-    // iterate over roles
+
+   
     var madeChanges = true;
-    
+    val s = scala.io.Source.fromFile("modelos/order.txt")
+    s.getLines.foreach( line => {
+        var sp = line.split(" -> ");
+    	//RA: adding line specting first element string "->" second element(double)
+    	rolesToProb(sp.apply(0)) = sp.apply(1).toDouble;
+    })
+    print ("ROLES _TO _PROB: ", rolesToProb);   
+    // iterate over roles
     //RA: here need to add-rename the condition of stop
     while( madeChanges && !classes.isAllSingletons ) {
       madeChanges = false;
@@ -51,7 +53,7 @@ class PositiveClassComputer(graph:GraphT[String,String]) {
       //RA: Here I put reverse, because the last element that I added was the first one in the list
       graph.getAllRoles.foreach{ r =>
 	classes.getClasses.foreach { cl =>
-	  		print ("CLASE: ",cl);
+	  		//print ("CLASE: ",cl);
         	if( classes.add(new Existential(r,cl.formula)) ) {
            		madeChanges = true;       
                 }
