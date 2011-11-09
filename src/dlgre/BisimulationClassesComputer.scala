@@ -5,7 +5,7 @@ import scala.collection.mutable._;
 import dlgre.formula._;
 import grapht._;
 
-class BisimulationClassesComputer(graph:GraphT[String,ProbRelation]) {
+class BisimulationClassesComputer(graph:GraphT[String,String]) {
    
    private val extensions = new HashMap[Formula, BitSetSet[String]];
    
@@ -101,7 +101,7 @@ class BisimulationClassesComputer(graph:GraphT[String,ProbRelation]) {
      val elements = extractQueue(queue);
      val localQueue = new Queue[Option[Formula]];
      
-     //print ("ELEMENTOS: ",elements);
+     print ("LLAMA ASPLITOVERROLES: ",roles);
      //print ("LOCALQUEUE: ", localQueue);
      queue.clear;
      
@@ -112,7 +112,13 @@ class BisimulationClassesComputer(graph:GraphT[String,ProbRelation]) {
         //roles = Set
         //RA: a roles se le puede poner toList
         //puedo ponerlo como input
-        for( val role <- roles; val sub <- elements ) {
+        var li = List[String]()
+        val s = scala.io.Source.fromFile("modelos/order.txt")
+        s.getLines.foreach( line => {
+    	    li ::= line;
+        })
+        //for( val role <- roles; val sub <- elements ) {
+        for( val role <- li.reverse; val sub <- elements ) {
           	//println("[" + role + "/" + sub + "] ");
                forallQueue(localQueue, { (formula, q) =>
                splitOverRole1(formula, role, sub) match {

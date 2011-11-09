@@ -5,7 +5,7 @@ import scala.collection.mutable._;
 import dlgre.formula._;
 import grapht._;
 
-class ClassContainer(graph:GraphT[String,ProbRelation]) {
+class ClassContainer(graph:GraphT[String,String]) {
   case class Entry(extension:BitSetSet[String], formula:Formula) {
     override def equals(that: Any): Boolean =
       that.isInstanceOf[Entry] &&  that.asInstanceOf[Entry].extension == extension;
@@ -102,10 +102,10 @@ class ClassContainer(graph:GraphT[String,ProbRelation]) {
             val parents = findMinimalSupersets(entry);
             classesGraph.addNode(entry);
            //RA: fixme!! 0.5 because I don't know right now
-            children.foreach { ch => classesGraph.addEdge(entry, ch, "", 0.5) }
+            children.foreach { ch => classesGraph.addEdge(entry, ch, "")}//, 0.5) }
             parents.foreach { par => 
                 //RA: fixme!! 0.5
-                classesGraph.addEdge(par, entry, "", 0.5);
+                classesGraph.addEdge(par, entry, "");//, 0.5);
                 potentiallyUninformative += par;
             }
             
@@ -188,7 +188,7 @@ class ClassContainer(graph:GraphT[String,ProbRelation]) {
                   //RA: this old
                   //classesGraph.addEdge(src, tgt, "");
                   //RA: fixme 0.5
-                  classesGraph.addEdge(src, tgt, "", 0.5);
+                  classesGraph.addEdge(src, tgt, "");//, 0.5);
                 });
               });
               

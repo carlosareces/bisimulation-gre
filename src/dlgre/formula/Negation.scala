@@ -5,7 +5,7 @@ import grapht._;
 import dlgre.BitSetSet;
 
 case class Negation(sub:Formula) extends Formula {
-  	override def isSatisfied(u:String, graph:GraphT[String,ProbRelation]) = {
+  	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
           ! sub.isSatisfied(u,graph)  
         }
           
@@ -17,7 +17,7 @@ case class Negation(sub:Formula) extends Formula {
           Negation(sub.flatten)
         }
         
-        override def setToExtension(set:BitSetSet[String], graph:GraphT[String,ProbRelation]) : Unit = {
+        override def setToExtension(set:BitSetSet[String], graph:GraphT[String,String]) : Unit = {
           sub.setToExtension(set, graph);
           set.complement();
         }

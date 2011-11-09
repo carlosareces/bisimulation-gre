@@ -4,13 +4,13 @@ import dlgre._;
 import grapht._;
 
 object RandomGenerator {
-        def generate(numNodes:String, numPreds:String, numRoles:String, predDensity:String, edgeDensity:String) : GraphT[String,ProbRelation] = {
+        def generate(numNodes:String, numPreds:String, numRoles:String, predDensity:String, edgeDensity:String) : GraphT[String,String] = {
           generate(Integer.parseInt(numNodes), Integer.parseInt(numPreds), Integer.parseInt(numRoles),
               java.lang.Double.parseDouble(predDensity), java.lang.Double.parseDouble(edgeDensity))
         }
 
         def generate(numNodes:Int, numPreds:Int, numRoles:Int, predDensity:Double, edgeDensity:Double) = {
-   		val ret = new GraphT[String,ProbRelation]();
+   		val ret = new GraphT[String,String]();
                 val rand = new scala.util.Random();
                 
                 Iterator.range(1, numNodes) foreach { i =>
@@ -28,7 +28,7 @@ object RandomGenerator {
                     Iterator.range(1, numRoles) foreach { k =>
                       if( rand.nextDouble <= edgeDensity ) {
                         //RA: fixme 0.5
-                        ret.addEdge("u" + i, "u" + j, "e" + k, 0.5);
+                        ret.addEdge("u" + i, "u" + j, "e" + k);//, 0.5);
                       }
                     }
                   }

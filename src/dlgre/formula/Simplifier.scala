@@ -4,7 +4,7 @@ import grapht._;
 
 import scala.collection.mutable._;
 
-class Simplifier(graph:GraphT[String,ProbRelation]) {
+class Simplifier(graph:GraphT[String,String]) {
 	private val _extension = new HashMap[Formula,Set[String]];
         
         
