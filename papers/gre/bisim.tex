@@ -1,0 +1,133 @@
+\section{Description logics and similarity}
+\label{sec:bisim}
+
+In this paper, we will represent referring expressions as formulas of
+description logic~\cite{baad:desc03}.  In order to make this point, we
+will now define the two description logics we will be working with:
+\alc\ and \el.
+
+\emph{Formulas} (or \emph{concepts}) $\varphi$ of $\alc$ are generated
+by the following grammar:
+$$
+\varphi,\varphi' ::= \top \mid p \mid \neg \varphi \mid \varphi \sqcap \varphi'
+\mid \exists R. \varphi
+$$
+where $p$ is in the set of propositional symbols \prop, and $R$ is in
+the set of relational symbols \rel. $\el$ is the negation-free
+fragment of $\alc$.
+
+Formulas of both $\alc$ and $\el$ are interpreted in ordinary
+relational first-order models $\gM = (\Delta,\interp{\cdot})$ where
+$\Delta$ is a non-empty set and $\interp{\cdot}$ is an
+interpretation function such that:
+$$
+\begin{array}{ccl}
+\interp{p} & \subseteq & \Delta  \mbox{ for $p \in \prop$}\\
+\interp{R} & \subseteq & \Delta \times \Delta  \mbox{ for $R \in \rel$}\\
+\interp{\neg \varphi} & = & \Delta - \interp{\varphi}\\
+\interp{\varphi \sqcap \varphi'} & = & \interp{\varphi} \cap \interp{\varphi'}\\
+\interp{\exists R.\varphi} & = & \{i \mid \mbox{for some } i', (i,i') \in \interp{R}\\
+& & \mbox{ and } i' \in \interp{\varphi} \}.\\
+\end{array}
+$$
+
+
+Every formula of a description logic denotes a set of individuals in
+the domain; thus we can use such formulas to describe sets.  For
+instance, in the model in Fig.~\ref{fig:dale-haddock}b, the formula
+$\mathsf{flower}$ denotes the set $\{f_1,f_2\}$; the formula
+$\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$ denotes
+$\{f_2\}$; and the formula $\mathsf{flower} \sqcap \neg
+\exists \mathsf{in}.\mathsf{hat}$ denotes $\{f_1\}$.
+
+Different description logics differ in the inventory of logical
+connectives they allow: While \alc\ permits negation, \el\
+doesn't. There are many other description logics in the literature;
+some that we will get back to in Section~\ref{sec:related} are
+$\mathcal{CL}$ (\el\ without existential quantification, i.e., only
+conjunctions of atoms); $\mathcal{PL}$ (\alc\ without existential
+quantification, i.e., propositional logic); and
+$\mathcal{ELU}_{(\neg)}$ (\el\ plus disjunction and atomic negation).
+
+Below, we will use a key notion of formula preservation that we call
+\emph{similarity}.  For any DL $\gL$, we will say that
+an individual $i$ is \emph{\gL-similar} to $i'$ in a given model $\gM$
+if for any formula $\varphi \in \gL$ such that $i \in
+\interp{\varphi}$, we also have $i' \in \interp{\varphi}$.
+Equivalently, there is no $\gL$-formula that holds of $i$ but not of
+$i'$.  We say that the \emph{\gL-similarity set} of some individual
+$i$ is the set of all individuals to which $i$ is \gL-similar.
+
+Notice that similarity is not necessarily a symmetrical relation: For
+instance, $f_1$ is \el-similar to $f_2$ in
+Fig.~\ref{fig:dale-haddock}b, but $f_2$ is not \el-similar to $f_1$
+(it satisfies the formula $\exists \mathsf{in}.\mathsf{hat}$ and $f_1$
+doesn't).  However, \alc-similarity is a symmetrical relation because
+the language contains negation; and indeed, $f_1$ is not \alc-similar
+to $f_2$ either because it satisfies $\neg \exists
+\mathsf{in}.\mathsf{hat}$.  Because \alc\ is more expressive than \el,
+it is  possible for some individual $a$ to be \el-similar but
+not \alc-similar to some individual $b$, but not vice versa.
+
+
+\ignore{
+
+Notice
+that, given that the language includes negation, the notion of
+$\alc$-similarity is symmetric: if $i$ is \alc-similar to $i'$ then
+$i'$ is \alc-similar to $i$.  This is not the case for all description
+logic.  In particular, the notion of $\el$-similarity is not
+symmetric.  Given a model $\gM$ and an individual $i$ in $\gM$, we
+will write \simm$_\alc(i)$, the similarity set, to all the elements of
+$\gM$ which are \alc-similar to $i$.x
+
+A key notion in studying description logics is \emph{simulation}.
+We will discuss in detail the case for $\alc$; further details can be
+found in~\cite{blac:moda01,kurt:expr99}.
+
+\begin{definition}
+Given a model $\gM = (\Delta,\interp{\cdot})$, and two individuals $i$ and $i'$ in $\gM$, an \emph{$\alc$-simulation} linking $i$ to $i'$  is a relation $Z
+\subseteq \Delta \times \Delta$ such that 
+\begin{itemize}
+\item[i)] $(i,i') \in Z$.\\[-1.5em]
+\item[ii)] if $(e_1, e_2) \in Z$ then $\propm(e_1) = \propm(e_2)$.\\[-1.5em]
+\item[iii)] if $(e_1,e_2) \in Z$ and for some $R \in \rel$ there is $e_1'$ such that
+$(e_1,e_1') \in \interp{R}$ then there is $e_2'$ such that $(e_2,e_2') \in \interp{R}$ and
+$(e_1',e_2') \in Z$.\\[-1.5em]
+\item[iv)] if $(e_1,e_2) \in Z$ and for some $R \in \rel$ there is $e_2'$ such that
+$(e_2,e_2') \in \interp{R}$ then there is $e_1'$ such that $(e_1,e_1') \in \interp{R}$ and
+$(e_1',e_2') \in Z$.
+\end{itemize}
+%A maximal subset of $\Delta$ all of whose elements are pairwise
+%bisimilar is called an \emph{\alc-bisimulation class} of $\gM$.
+\end{definition}
+
+
+
+The crucial property that makes simulation relevant for GRE is the
+following theorem \cite{blac:moda01}.
+
+\begin{theorem}\label{bisim}
+  Given a finite model $\gM$ and two individuals $i$ and $i'$ in $\gM$, there is an $\alc$-simulation linking $i$ to $i'$ if and only if $i$ is $\alc$-similar to $i'$.
+\end{theorem}
+
+Notice that, because for $\alc$ the notion of similarity si symmetric, $\alc$-similar individuals are indistinguishable in the $\alc$ language.  In the example in Fig.~\ref{fig:dale-haddock}a,
+the two individuals $t_1$ and $t_2$ are \alc-similar; and indeed,
+they satisfy exactly the same \alc-formulas.
+
+Although we can't go
+into details here, it is possible to define a suitable notion of
+$\el$-simulation for which the analogous theorem holds
+\cite{kurt:expr99}.  In general, \el-simulation is a weaker notion
+than \alc-simulation; for instance, in Fig.~\ref{fig:dale-haddock},
+$f_1$ is \el-similar to $f_2$, but not vice-versa.
+
+}
+
+
+
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "dl-gre-08"
+%%% End: 

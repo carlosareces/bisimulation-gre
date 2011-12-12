@@ -1,0 +1,62 @@
+\section{Conclusion} \label{sec:conclusion}
+
+In this paper, we have explored the idea of viewing the generation of
+singular REs as the problem of computing a DL formula with a given
+extension.  We have shown how such formulas can be computed
+efficiently (for \alc\ and \el) by adapting existing algorithms from
+the literature.  The \el\ algorithm is able to generate 95\% of the
+non-relational and 67\% of the relational REs from
+\newcite{viethen06:_algor_for_gener_refer_expres}.  Both algorithms
+are extremely efficient (350 ms and 140 ms respectively to generate
+relational REs for all individuals in a random model with 100
+individuals); to our knowledge, these are by far the fastest runtimes
+for relational GRE reported in the literature.  We have made our
+implementation available online at
+\url{http://code.google.com/p/crisp-nlg/wiki/DlGre}.
+
+Because they compute referring expressions for all individuals in the
+domain at once, our algorithms will perform especially strongly in
+static settings, such as the generation of descriptions for museum
+exhibits, in which the individuals and their properties don't change
+much.  However, even in more dynamic settings, our algorithms have a
+chance to outperform search algorithms like Dale and Haddock's in the
+average case because they can't get stuck in unproductive branches of
+the search space. Nevertheless, one interesting question for future
+research is how to incrementally update simulation classes when the
+model changes. Similarly, it would be interesting to explore how
+different linguistic constraints and attribute orderings can be taken
+into account efficiently, how our algorithms
+could be integrated with more standard DL T-Box inferences, and how they
+ can be adapted to use inverse relations or to compute REs
+for sets. In exploring these extensions we will be able to draw on a
+rich body of literature that has already considered many variants of simulation
+algorithms addressing similar issues.
+
+In experimenting with the Viethen and Dale data, we found that there
+is no single ordering that covers all human-produced descriptions,
+which seems to be in contrast to Dale and Reiter's
+\shortcite{Dale1995} assumption that there is only one ordering for
+each given domain.  In fact, it is not even the case that each speaker
+consistently uses just one ordering.  An interesting open research
+question is thus what factors determine which ordering is used.
+Unfortunately, both in the Viethen and Dale dataset and in the TUNA
+corpus \cite{deemter06:_build_seman_trans_corpus_for}, only a minority
+of referring expressions is relational, maybe because these domains
+lend themselves very well to row/column style propositional REs.  We
+are currently collecting REs in a domain in which propositional REs
+are less preferred.
+
+\begin{small}
+\paragraph{Acknowledgments.} We are grateful to Hector Geffner (who
+independently suggested to view GRE as computation of DL formulas),
+Kees van Deemter, and Emiel Krahmer for interesting discussions.  We
+also thank Jette Viethen and Robert Dale for making their corpus
+available, and the reviewers for their comments.
+\end{small}
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "dl-gre-08"
+%%% End: 

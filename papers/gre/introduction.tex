@@ -1,0 +1,74 @@
+\section{Introduction} \label{sec:introduction}
+
+The generation of referring expressions (GRE) is one of the most
+active and successful research areas in natural language generation.
+Building upon Dale and Reiter's work \cite{dale89cooking,Dale1995},
+various researchers have added extensions such as reference to sets
+\cite{Stone2000}, more expressive logical connectives
+\cite{deemter02:_gener_refer_expres}, and relational expressions
+\cite{dale91:_gener_refer_expres_invol_relat}.
+
+Referring expressions (REs) involving relations, in particular, have
+received increasing attention recently; especially in the context of
+spatial referring expressions in situated generation (e.g.\
+\cite{kelleher06:_increm_gener_of_spatial_refer}), where it seems
+particularly natural to use expressions such as ``the book on the
+table''.  However, the classical algorithm by
+\newcite{dale91:_gener_refer_expres_invol_relat} was recently shown to
+be unable to generate satisfying REs in practice
+\cite{viethen06:_algor_for_gener_refer_expres}.  Furthermore, the Dale
+and Haddock algorithm and most of its successors (such as
+\cite{kelleher06:_increm_gener_of_spatial_refer}) are vulnerable to
+the problem of ``infinite regress'', where the algorithm jumps back
+and forth between generating descriptions for two related individuals
+infinitely, as in ``the book on the table which supports a book on the
+table \ldots''.
+
+
+In this paper, we propose to view GRE as the problem of computing a
+formula of description logic (DL) that denotes exactly the set of
+individuals that we want to refer to.  This very natural idea has been
+mentioned in passing before
+\cite{Krahmer2003,gardent07:_gener_bridg_defin_descr}; however, we
+take it one step further by proposing DL as an interlingua for
+comparing the REs produced by different approaches to GRE.  In this
+way, we can organize existing GRE approaches in an expressiveness
+hierarchy.  For instance, the classical Dale and Reiter algorithms
+compute purely conjunctive formulas;
+\newcite{deemter02:_gener_refer_expres} extends this language by
+adding the other propositional connectives, whereas
+\newcite{dale91:_gener_refer_expres_invol_relat} extends it by
+allowing existential quantification.
+
+Furthermore, the view of GRE as a problem of computing DL formulas
+with a given extension allows us to apply existing algorithms for the
+latter problem to obtain efficient algorithms for GRE.  We present
+algorithms that compute such formulas for the description logics \el\
+(which allows only conjunction and existential quantification) and
+\alc\ (which also allows negation).  These algorithms effectively
+compute REs for all individuals in the domain at the same time, which
+allows them to systematically avoid the infinite regress problem.  The
+\el\ algorithm is capable of generating 67\% of the relational REs in
+the \newcite{viethen06:_algor_for_gener_refer_expres} dataset, in about
+15 milliseconds.  The \alc\ algorithm is even faster; it computes
+relational REs for all 100 individuals in a random model in 140
+milliseconds.
+
+The paper is structured as follows.  In Section~\ref{sec:bisim}, we
+will first define description logics.  We will then show how to
+generate REs by computing DL similarity sets for \alc\ and \el\ in
+Section~\ref{sec:gre}.  In Section~\ref{sec:discussion}, we evaluate
+our algorithms and discuss our results.  Section~\ref{sec:related}
+compares our approach to related research; in particular, it shows how
+various prominent GRE algorithms fit into the DL framework.
+Section~\ref{sec:conclusion} concludes and points to future work.
+
+
+
+
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "dl-gre-08"
+%%% End: 
