@@ -1,0 +1,73 @@
+
+\newcommand{\REL}{\textsf{REL}\xspace}
+\newcommand{\IR}{\textrm{I}\!\textrm{R}}
+\newcommand{\puse}{\textit{p}\_\textit{use}}
+\newcommand{\pdisc}{\textit{p}\_\textit{disc}}
+
+\REL is the set of relation symbols in the signature. 
+
+For each $R \in \REL$ we asume defined two values $R.\puse \in \IR$, the 
+probability of using relation $R$ in a RE; and $R.\pdisc \in \IR$, the 
+probability that the hearer recognizes relation $R$. 
+
+\begin{algorithm}[h]
+\dontprintsemicolon
+\caption{Computing the $\mathcal{L}$-similarity sets}
+\label{algo:bisim-l}
+\KwIn{A model $\gM = (\Delta, \interp{\cdot})$ and a list $Rs \in \REL^*$ ordered by $R.\puse$}
+\KwOut{A set \RE of pairs of formulas such that
+$\{\interp{\varphi_R} \mid (\varphi_O,\varphi_R) \in \RE\}$ is the set of
+$\mathcal{L}$-similarity 
+sets of $\gM$.}
+
+$\RE \leftarrow \{(\top,\top)\}$
+
+\While{$\exists (\varphi_O,\varphi_R) \in \RE. |\interp{\varphi_O}|>1$}{
+    \For{$R \in Rs$}{
+        \If{random() $\le R.\puse$}{
+            \For{$P \in \RE$}{
+                add$_\mathcal{L}(R, P, \RE)$}
+                }
+                }
+   \If{\RE unchanged}{
+      exit}
+}
+\end{algorithm}
+
+
+
+
+\begin{algorithm}[h]
+\caption{add$_\alc(R, (\varphi_O, \varphi_R), \RE)$}
+\label{algo:bisim-add-alc}
+\If{random() $\le R.\pdisc$}{
+\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
+         remove $(\psi_O,\psi_R)$ from \RE \;
+         add $(\psi_O \sqcap \exists R.\varphi_O,\psi_R \sqcap \exists R.\varphi_R)$ 
+         and $(\psi_O \sqcap \neg \exists R.\varphi_O,\psi_R \sqcap \neg \exists R.\varphi_R)$ to \RE
+   }
+}
+\Else{
+\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
+         remove $(\psi_O,\psi_R)$ from \RE \;
+         add $(\psi_O,\psi_R \sqcap \exists R.\varphi_R)$ 
+         and $(\psi_O,\psi_R \sqcap \neg \exists R.\varphi_R)$ to \RE
+   }
+
+}
+\end{algorithm}
+
+\begin{algorithm}[h]
+\dontprintsemicolon
+\caption{add$_\el$($\varphi$, $\RE$)}
+\label{algo:bisim-add-el}
+\For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}{
+  \If{$\psi \sqcap \varphi$ is not subsumed in $\RE$ {\bf and}
+    $\interp{\psi \sqcap \varphi} \neq \emptyset$ {\bf and}
+    $\interp{\psi \sqcap \varphi} \neq \interp{\psi}$}{
+    add $\psi \sqcap \varphi$ to $\RE$ \;
+    remove subsumed formulas from $\RE$\;
+  }
+}
+\end{algorithm}
+

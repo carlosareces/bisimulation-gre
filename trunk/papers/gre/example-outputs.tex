@@ -1,0 +1,66 @@
+
+
+\begin{figure*}[thb]
+
+\begin{footnotesize}
+\begin{tabular}{|@{\ }c@{\ }|p{0.95\textwidth}@{\ }|}\hline
+\multirow{2}{*}{id} & \textit{human-produced description} \\
+& $\mathsf{output\ of\ the\ \el\ algorithm}$\\\hline
+\multirow{2}{*}{2} & \textit{the orange drawer above the blue drawer} \\
+&  $\bm{\mathsf{orange} \sqcap \exists \mathsf{above}.\mathsf{blue}}$ / $\mathsf{orange} \sqcap \exists \mathsf{above}.(\exists \mathsf{below}.(\mathsf{orange}) \sqcap \mathsf{blue})$ / $ \mathsf{orange} \sqcap \exists \mathsf{next}.(\mathsf{blue}) \sqcap \exists \mathsf{next}.(\mathsf{pink})$\\\hline
+\multirow{2}{*}{4} & \textit{the yellow drawer on the top of the pink one} \\ 
+&  $\bm{\mathsf{yellow} \sqcap \exists \mathsf{above}.\mathsf{pink}}$  / $\mathsf{yellow}  \sqcap \mathsf{corner} \sqcap \exists \mathsf{above}.\mathsf{pink}$  / $\mathsf{yellow} \sqcap \mathsf{corner} \sqcap \exists \mathsf{above}.(\exists \mathsf{next}.(\mathsf{yellow}) \sqcap \mathsf{pink})$\\\hline
+\multirow{2}{*}{5} & $\ast$ \textit{the pink drawer in the fourth column below the yellow one}\\
+&  $\mathsf{pink} \sqcap \exists \mathsf{above}.\mathsf{orange}$  / $\mathsf{pink} \sqcap \exists \mathsf{below}.\mathsf{yellow}$  / $ \mathsf{pink} \sqcap \exists \mathsf{next}.(\mathsf{yellow}) \sqcap \exists \mathsf{above}.(\exists \mathsf{next}.(\mathsf{yellow}) \sqcap \mathsf{orange})$\\\hline
+%6 & \textit{the yellow drawer on top of the yellow drawer} / \textit{the yellow drawer that's above another yellow drawer} / $\ast$ \textit{the drawer after the two blue ones in horizontal sequence}\\
+\multirow{2}{*}{6} & \textit{the yellow drawer on top of the yellow drawer} (2$\times$) / $\ast$ \textit{the drawer after the two blue ones in horizontal sequence}\\
+&  $\bm{\mathsf{yellow} \sqcap \exists \mathsf{above}.\mathsf{yellow}}$  / $\mathsf{yellow} \sqcap \exists \mathsf{below}.\mathsf{pink}$  / $\mathsf{yellow} \sqcap \exists \mathsf{next}.(\mathsf{blue}) \sqcap \exists \mathsf{next}.(\mathsf{pink})$\\\hline
+\multirow{2}{*}{7} & \textit{the blue drawer below the orange one} / $\ast$ \textit{the blue drawer below the orange drawer in the second column}\\ 
+& $\mathsf{blue} \sqcap \exists \mathsf{above}.(\mathsf{blue}) \sqcap \exists \mathsf{next}.(\exists \mathsf{above}.(\mathsf{orange}) \sqcap \mathsf{blue})$ / $\bm{\mathsf{blue} \sqcap \exists \mathsf{below}.(\mathsf{orange})}$ \textbf{/} $\mathsf{blue} \sqcap \exists \mathsf{next}.(\mathsf{blue}) \sqcap \exists \mathsf{next}.(\mathsf{yellow})$\\\hline
+\multirow{2}{*}{10} & \textit{the blue drawer above the pink drawer} (2$\times$)\\
+&  $\bm{\mathsf{blue} \sqcap \exists \mathsf{above}.(\mathsf{pink})}$  / $\mathsf{blue} \sqcap \exists \mathsf{above}.(\mathsf{pink}) \sqcap \exists \mathsf{below}.(\mathsf{blue})$  / $\mathsf{blue} \sqcap \exists \mathsf{next}.(\mathsf{orange}) \sqcap \exists \mathsf{next}.(\mathsf{yellow})$\\\hline
+%11 & \textit{the yellow drawer next to the orange drawer} / \textit{the yellow one next to the orange one}\\
+\multirow{2}{*}{11} & \textit{the yellow drawer next to the orange drawer} (2$\times$)\\
+&  $\mathsf{yellow} \sqcap \exists \mathsf{above}.\mathsf{orange}$  / $\mathsf{yellow} \sqcap \exists \mathsf{below}.\mathsf{yellow}$  / $\bm{\mathsf{yellow} \sqcap \exists \mathsf{next}.\mathsf{orange}}$\\\hline
+\multirow{2}{*}{12} & \textit{the orange drawer below the pink drawer}\\ 
+&  $\mathsf{orange} \sqcap \exists \mathsf{above}.(\mathsf{pink} \sqcap \mathsf{corner})$  / $\bm{\mathsf{orange} \sqcap \exists \mathsf{below}.\mathsf{pink}}$  / $\mathsf{orange} \sqcap \exists \mathsf{next}.\mathsf{yellow}$\\\hline
+\multirow{2}{*}{14} & $\ast$ \textit{the orange drawer below the two yellow drawers} (2$\times$)\\
+&  $ \mathsf{orange} \sqcap \exists \mathsf{next}.(\mathsf{pink} \sqcap \mathsf{corner}) \sqcap \exists \mathsf{next}.(\mathsf{pink})$  / $\mathsf{orange} \sqcap \exists \mathsf{below}.\mathsf{yellow}$  / $\mathsf{orange} \sqcap \exists \mathsf{next}.(\mathsf{pink} \sqcap \mathsf{corner})$\\\hline
+\end{tabular}
+\end{footnotesize}\vspace*{-1ex}
+
+\caption{The relational descriptions from
+  \newcite{viethen06:_algor_for_gener_refer_expres}, annotated with
+  the drawer id and the outputs of the \el\ algorithm using three
+  different orderings. Notice that four descriptions occurred twice in the corpus. Descriptions that the \el\ algorithm cannot
+  generate with any ordering are marked by $\ast$.  Generated
+  descriptions that match one produced by humans are in boldface.}
+
+\label{fig:example_outputs}\vspace*{-1ex}
+\end{figure*}
+
+
+%(a) $\mathsf{corner,}$ $\mathsf{color, above,
+%next, below, right, left}$, (b) $\mathsf{color, corner, below, above,
+%left, right, next}$ and (c) $\mathsf{corner, color, below}$
+%$\mathsf{above, left, right, next}$. Descriptions that the \el\
+%algorithm cannot generate with any ordering are marked by $\ast$.}
+
+
+% ordering no. 235
+%List(corner, green, pink, orange, blue)
+%List(above, next, below, right, left)
+
+% ordering no. 19
+%List(green, pink, orange, blue, corner)
+%List(below, above, left, right, next)
+
+% ordering no. 174
+% List(corner, green, pink, orange, blue)
+% List(next, above, below, left, right)
+
+
+%%% Local Variables: 
+%%% mode: latex
+%%% TeX-master: "dl-gre-08"
+%%% End: 
