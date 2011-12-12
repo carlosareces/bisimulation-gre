@@ -38,25 +38,25 @@ $\RE \leftarrow \{(\top,\top)\}$
 
 
 
-\begin{algorithm}[h]
-\caption{add$_\alc(R, (\varphi_O, \varphi_R), \RE)$}
-\label{algo:bisim-add-alc}
-\If{random() $\le R.\pdisc$}{
-\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
-         remove $(\psi_O,\psi_R)$ from \RE \;
-         add $(\psi_O \sqcap \exists R.\varphi_O,\psi_R \sqcap \exists R.\varphi_R)$ 
-         and $(\psi_O \sqcap \neg \exists R.\varphi_O,\psi_R \sqcap \neg \exists R.\varphi_R)$ to \RE
-   }
-}
-\Else{
-\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
-         remove $(\psi_O,\psi_R)$ from \RE \;
-         add $(\psi_O,\psi_R \sqcap \exists R.\varphi_R)$ 
-         and $(\psi_O,\psi_R \sqcap \neg \exists R.\varphi_R)$ to \RE
-   }
+%\begin{algorithm}[h]
+%\caption{add$_\alc(R, (\varphi_O, \varphi_R), \RE)$}
+%\label{algo:bisim-add-alc}
+%\If{random() $\le R.\pdisc$}{
+%\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
+%         remove $(\psi_O,\psi_R)$ from \RE \;
+%         add $(\psi_O \sqcap \exists R.\varphi_O,\psi_R \sqcap \exists R.\varphi_R)$ 
+%         and $(\psi_O \sqcap \neg \exists R.\varphi_O,\psi_R \sqcap \neg \exists R.\varphi_R)$ to \RE
+%   }
+%}
+%\Else{
+%\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
+%         remove $(\psi_O,\psi_R)$ from \RE \;
+%         add $(\psi_O,\psi_R \sqcap \exists R.\varphi_R)$ 
+%         and $(\psi_O,\psi_R \sqcap \neg \exists R.\varphi_R)$ to \RE
+%   }
 
-}
-\end{algorithm}
+%}
+%\end{algorithm}
 
 \begin{algorithm}[h]
 \dontprintsemicolon
@@ -67,12 +67,19 @@ $\RE \leftarrow \{(\top,\top)\}$
   \If{$\psi_O \sqcap \exists R.\varphi_O$ is not subsumed in $\RE$ {\bf and}
     $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \emptyset$ {\bf and}
     $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \interp{\psi_O}$}{
-    add $\psi \sqcap \varphi$ to $\RE$ \;
+    add $(\psi_O \sqcap \exists R.\varphi_O, \psi_R \sqcap \exists R.\varphi_R)$ to $\RE$ \;
     remove subsumed formulas from $\RE$\;
   }
 }
 }
 \Else{
+\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
+  \If{$\psi_O \sqcap \exists R.\varphi_O$ is not subsumed in $\RE$ {\bf and}
+    $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \emptyset$ {\bf and}
+    $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \interp{\psi_O}$}{
+    add $(\psi_O, \psi_R \sqcap \exists R.\varphi_R)$ to $\RE$ \;
+    remove subsumed formulas from $\RE$\;}
+  }
 }
 \end{algorithm}
 
