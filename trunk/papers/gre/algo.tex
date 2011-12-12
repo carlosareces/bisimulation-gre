@@ -23,14 +23,15 @@ sets of $\gM$.}
 $\RE \leftarrow \{(\top,\top)\}$
 
 \While{$\exists (\varphi_O,\varphi_R) \in \RE. |\interp{\varphi_O}|>1$}{
+    \RE'.\emph{Obs} $\leftarrow$ \RE.\emph{Obs} \;
     \For{$R \in Rs$}{
         \If{random() $\le R.\puse$}{
             \For{$P \in \RE$}{
                 add$_\mathcal{L}(R, P, \RE)$}
-                }
-                }
-   \If{\RE unchanged}{
-      exit}
+                }\;
+            \If{\RE.Obs $\not =$ \RE'.Obs}{exit}
+            }
+   \If{\RE.Obs $=$ \RE'.Obs}{exit}
 }
 \end{algorithm}
 
@@ -59,15 +60,19 @@ $\RE \leftarrow \{(\top,\top)\}$
 
 \begin{algorithm}[h]
 \dontprintsemicolon
-\caption{add$_\el$($\varphi$, $\RE$)}
+\caption{add$_\el(R, (\varphi_O, \varphi_R), \RE)$}
 \label{algo:bisim-add-el}
-\For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}{
-  \If{$\psi \sqcap \varphi$ is not subsumed in $\RE$ {\bf and}
-    $\interp{\psi \sqcap \varphi} \neq \emptyset$ {\bf and}
-    $\interp{\psi \sqcap \varphi} \neq \interp{\psi}$}{
+\If{random() $\le R.\pdisc$}{
+\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
+  \If{$\psi_O \sqcap \exists R.\varphi_O$ is not subsumed in $\RE$ {\bf and}
+    $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \emptyset$ {\bf and}
+    $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \interp{\psi_O}$}{
     add $\psi \sqcap \varphi$ to $\RE$ \;
     remove subsumed formulas from $\RE$\;
   }
+}
+}
+\Else{
 }
 \end{algorithm}
 
