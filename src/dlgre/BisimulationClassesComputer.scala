@@ -5,7 +5,7 @@ import scala.collection.mutable._;
 import dlgre.formula._;
 import grapht._;
 
-class BisimulationClassesComputer(graph:GraphT[String,String]) {
+class BisimulationClassesComputer(graph:GraphT[String,String],listaRoles:List[String], rolesToProb:HashMap[String,Double]) {
    
    private val extensions = new HashMap[Formula, BitSetSet[String]];
    
@@ -26,6 +26,9 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
    // representing the classes.
    def compute = {
      val roles = graph.getAllRoles;
+     //RA_adding lista y prob
+     //val listaRoles = graph.ListaRoles;
+     //val rolesToProb = graph.RolesToProb;
      // the current classes
      val queue = new Queue[Option[Formula]]
      
@@ -43,7 +46,7 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
        print(".");
        oldQueue = newQueue;
        
-       splitOverRoles(queue, roles);
+       splitOverRoles(queue, roles, listaRoles, rolesToProb);
        newQueue = extractQueue(queue);
   
        madeChanges = (oldQueue != newQueue);
@@ -97,28 +100,22 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
    
    // Splits classes that have the same role pointing into different previously
    // existing classes (1 step). 
-   def splitOverRoles(queue : Queue[Option[Formula]], roles : Set[String]) = {
+   //de aca tengo que sacar roles, porque es un conjunto ahora le voy a dar listaRoles que es lista ordenada
+   def splitOverRoles(queue : Queue[Option[Formula]], roles : Set[String], listaRoles:List[String], rolesToProb:HashMap[String,Double]) = {
      val elements = extractQueue(queue);
      val localQueue = new Queue[Option[Formula]];
+     //esto va al main
+     // val rolesToProb = new HashMap[String,Double]
      
-     print ("LLAMA ASPLITOVERROLES: ",roles);
+     //print ("LLAMA ASPLITOVERROLES: ",roles);
      //print ("LOCALQUEUE: ", localQueue);
      queue.clear;
      
      elements.foreach { el =>
         localQueue.clear;
         localQueue += Some(el);
-        print ("ROLES::::",roles, elements);
-        //roles = Set
-        //RA: a roles se le puede poner toList
-        //puedo ponerlo como input
-        var li = List[String]()
-        val s = scala.io.Source.fromFile("modelos/order.txt")
-        s.getLines.foreach( line => {
-    	    li ::= line;
-        })
         //for( val role <- roles; val sub <- elements ) {
-        for( val role <- li.reverse; val sub <- elements ) {
+        for( val role <- listaRoles; val sub <- elements ) {
           	//println("[" + role + "/" + sub + "] ");
                forallQueue(localQueue, { (formula, q) =>
                splitOverRole1(formula, role, sub) match {
@@ -131,8 +128,6 @@ class BisimulationClassesComputer(graph:GraphT[String,String]) {
                  case None => q += Some(formula);
                }});
              }
-        
-        
         queue ++= localQueue;
      }
    }

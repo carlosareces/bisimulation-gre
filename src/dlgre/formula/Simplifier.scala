@@ -7,15 +7,11 @@ import scala.collection.mutable._;
 class Simplifier(graph:GraphT[String,String]) {
 	private val _extension = new HashMap[Formula,Set[String]];
         
-        
-        
-        
-        
         private def extension(fmla:Formula) : Set[String] = {
           if( ! _extension.contains(fmla) ) {
             val e = new HashSet[String];
             
-            // println("[recompute " + fmla + "]");
+            //println("[recompute " + fmla + "]");
             
             graph.getAllNodes.foreach { u =>
               if( fmla.isSatisfied(u,graph) ) {
@@ -24,6 +20,7 @@ class Simplifier(graph:GraphT[String,String]) {
             }
             
             _extension += fmla -> e;
+            //print("_extension: " + _extension);
           }
           
           _extension.get(fmla).get;

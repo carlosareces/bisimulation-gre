@@ -6,6 +6,15 @@ import Double._
 import scala.xml.parsing.ConstructingParser
 import grapht._;
 import scala.collection.JavaConversions;
+import scala.collection.mutable.Queue
+import scala.collection.mutable.Set
+import dlgre.formula._
+import grapht._;
+import java.util.ArrayList
+import org.jgrapht.graph._;
+import scala.collection.mutable._;
+import util.StringUtils.join;
+
 
 object Main {
   def main(args : Array[String]) : Unit = {
@@ -26,11 +35,12 @@ object Main {
     }*/
     
     
-    val graph = if( args(1) == "random" ) {
+    val graph = readGraph(args(1))
+    /*if( args(1) == "random" ) {
       dlgre.generate.RandomGenerator.generate(args(2), args(3), args(4), args(5), args(6))
     } else {
       readGraph(args(1))
-    }
+    }*/
     
     //println("Loaded graph: " + graph.getAllNodes.size + " nodes, " + graph.getAllEdges.size + " edges.");
     
@@ -39,10 +49,22 @@ object Main {
     val start = System.currentTimeMillis;
     val simplifier = new dlgre.formula.Simplifier(graph);
     
+    val rolesToProb = new HashMap[String,Double]
+    var li = List[String]()
+    val so = scala.io.Source.fromFile("modelos/order.txt")
+    so.getLines.foreach( line => {
+    var sp = line.split(" -> ");
+    //RA: adding line specting first element string "->" second element(double)
+    rolesToProb(sp.apply(0)) = sp.apply(1).toDouble;
+    li ::= sp.apply(0);
+    })
+    print ("ROLES _TO _PROB: ", rolesToProb,li);   
+
+    
     
     if( positiveMode ) {
       println("\nPositive mode");
-      val result = new PositiveClassComputer(graph).compute;
+      val result = new PositiveClassComputer(graph, li, rolesToProb).compute;
       
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
       println("\nBisimulation classes with their concepts:");
@@ -52,7 +74,7 @@ object Main {
       println("\nBisim mode");
       print("..[max=0]");
 
-      val result = new BisimulationClassesComputer(graph).compute;
+      val result = new BisimulationClassesComputer(graph, li, rolesToProb).compute;
 
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
       println("\nBisimulation classes with their concepts:");
@@ -88,7 +110,7 @@ object Main {
               //RA: parsing the "prob" attribute of the xml file for probability
               //val prob = mygetattr(element, "prob");
               //RA: Giving the probability like a double
-              //ret.addEdge(node, to, new ProbRelation(rel, (prob.toDouble)));
+              ret.addEdge(node, to, rel);
             
       }
   }
