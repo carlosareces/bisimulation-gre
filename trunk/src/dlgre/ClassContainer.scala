@@ -25,7 +25,7 @@ class ClassContainer(graph:GraphT[String,String]) {
         var maxSize = 0;
         val nodes = graph.getAllNodes;
         
-        
+        //RA: When I add Top it add with probability 1
         classesGraph.addNode(Entry(graph.getNodeSet(nodes), new Top()));
 
         
@@ -33,6 +33,7 @@ class ClassContainer(graph:GraphT[String,String]) {
         def getClasses =  classesGraph.getAllNodes
         
         private def getExtension(fmla:Formula) : BitSetSet[String] = {
+          print ("FORMULA: ", fmla);
           if( !memoizedExtensions.contains(fmla) ) {
             val ext = fmla match {
               case Existential(r,sub) => if( memoizedExtensions.contains(sub) ) {
@@ -57,8 +58,12 @@ class ClassContainer(graph:GraphT[String,String]) {
         
         def add(subset:Formula) = {
           val extension = getExtension(subset);
-          val entry = Entry(extension,subset);
           
+          //RA: agregue 0, pero aca deberia ver...
+          
+          val entry = Entry(extension,subset);
+          //println("\nENTRY: ", extension);
+          //println("\nSUBSET: ", subset);
           if( classesGraph.containsNode(entry) || uninformativeClasses.contains(extension) || !isNontrivial(extension) ) {
             false
           } else {
@@ -71,7 +76,8 @@ class ClassContainer(graph:GraphT[String,String]) {
                 if( other.extension.size > 1 ) {
                   val newExtension = other.extension.intersect(extension);
                   val conjunction = new Conjunction(List(subset,other.formula));
-            	  val inter = Entry(newExtension,  conjunction);
+
+                  val inter = Entry(newExtension,  conjunction);
                   
                   memoizedExtensions += conjunction -> newExtension
                     

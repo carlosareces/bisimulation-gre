@@ -76,7 +76,7 @@ class GraphT[V,E]() {
           graph.addEdge(u,v);
           val edge = graph.getEdge(u,v);
           //RA: Setting the weight of the edge
-          print("Adding-Edge-with: ", edge, r);
+          //print("Adding-Edge-with: ", edge, r);
           // We get the roles associated to the edge(u,v)          
           // Initially we initialize to the empty set
           

@@ -12,9 +12,9 @@ import util.StringUtils.join;
 
 import collection.JavaConversions._;
 
-class PositiveClassComputer(graph:GraphT[String,String]) {
+class PositiveClassComputer(graph:GraphT[String,String], listaRoles:List[String], rolesToProb:HashMap[String,Double]) {
   val classes = new ClassContainer(graph);
-  val rolesToProb = new HashMap[String,Double]
+  //val rolesToProb = new HashMap[String,Double]
   
   def compute = {
     val simplifier = new dlgre.formula.Simplifier(graph);
@@ -27,13 +27,13 @@ class PositiveClassComputer(graph:GraphT[String,String]) {
 
    
     var madeChanges = true;
-    val s = scala.io.Source.fromFile("modelos/order.txt")
+    /*val s = scala.io.Source.fromFile("modelos/order.txt")
     s.getLines.foreach( line => {
         var sp = line.split(" -> ");
     	//RA: adding line specting first element string "->" second element(double)
     	rolesToProb(sp.apply(0)) = sp.apply(1).toDouble;
     })
-    print ("ROLES _TO _PROB: ", rolesToProb);   
+    print ("ROLES _TO _PROB: ", rolesToProb);*/   
     // iterate over roles
     //RA: here need to add-rename the condition of stop
     while( madeChanges && !classes.isAllSingletons ) {
@@ -76,7 +76,7 @@ class PositiveClassComputer(graph:GraphT[String,String]) {
         	ret.put(x, entry.formula);    
         }
     }
-    
+    print ("RET: ",ret);
     ret
   }
 }
