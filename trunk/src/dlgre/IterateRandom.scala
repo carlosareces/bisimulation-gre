@@ -34,7 +34,7 @@ object IterateRandom {
     Iterator.range(0,warmupIterations).foreach { x =>
       val graph : GraphT[String,String] = dlgre.generate.RandomGenerator.generate(20, 10, 4, 0.1, 0.1);
       if( positiveMode ) {
-        val result = new PositiveClassComputer(graph, listaRoles, rolesToProb).compute;
+        val result = new PositiveClassComputer(graph, listaRoles).compute;
       } else {
         val result = new BisimulationClassesComputer(graph, listaRoles, rolesToProb).compute;
       }
@@ -46,7 +46,7 @@ object IterateRandom {
       
       val start = System.currentTimeMillis;
       if( positiveMode ) {
-        val result = new PositiveClassComputer(graph, listaRoles, rolesToProb).compute;
+        val result = new PositiveClassComputer(graph, listaRoles).compute;
       } else {
         val result = new BisimulationClassesComputer(graph, listaRoles, rolesToProb).compute;
       }
