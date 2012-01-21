@@ -64,7 +64,7 @@ object Main {
     
     if( positiveMode ) {
       println("\nPositive mode");
-      val result = new PositiveClassComputer(graph, li, rolesToProb).compute;
+      val result = new PositiveClassComputer(graph, li).compute;
       
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
       println("\nBisimulation classes with their concepts:");

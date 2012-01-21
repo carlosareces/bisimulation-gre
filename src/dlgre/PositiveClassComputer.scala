@@ -12,11 +12,11 @@ import util.StringUtils.join;
 
 import collection.JavaConversions._;
 
-class PositiveClassComputer(graph:GraphT[String,String], listaRoles:List[String], rolesToProb:HashMap[String,Double]) {
+class PositiveClassComputer(graph:GraphT[String,String], listaRoles:List[String]) {
   val classes = new ClassContainer(graph);
   //val rolesToProb = new HashMap[String,Double]
   
-  def compute = {
+  def compute = {//esta parte no se ejecuta ya que son todas relaciones
     val simplifier = new dlgre.formula.Simplifier(graph);
     // initialize predicates
     graph.getAllPredicates.foreach { p =>
@@ -52,11 +52,11 @@ class PositiveClassComputer(graph:GraphT[String,String], listaRoles:List[String]
      
       //RA: Here I put reverse, because the last element that I added was the first one in the list
       graph.getAllRoles.foreach{ r =>
-	classes.getClasses.foreach { cl =>
-	  		//print ("CLASE: ",cl);
-        	if( classes.add(new Existential(r,cl.formula)) ) {
-           		madeChanges = true;       
-                }
+      	classes.getClasses.foreach { cl =>
+      	  //print ("CLASE: ",cl);
+          if( classes.add(new Existential(r,cl.formula)) ) {
+          	madeChanges = true;       
+          }
         }
       }
     }

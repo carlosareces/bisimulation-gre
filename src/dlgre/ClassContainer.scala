@@ -32,48 +32,58 @@ class ClassContainer(graph:GraphT[String,String]) {
         
         def getClasses =  classesGraph.getAllNodes
         
+        // Da la extension (conjunto de elementos o nombres propios) de una formula. 
         private def getExtension(fmla:Formula) : BitSetSet[String] = {
-          print ("FORMULA: ", fmla);
           if( !memoizedExtensions.contains(fmla) ) {
             val ext = fmla match {
-              case Existential(r,sub) => if( memoizedExtensions.contains(sub) ) {
-		val subext = memoizedExtensions.get(sub).get.asScalaCollection;
-
-                graph.getNodeSet(nodes.filter { u => subext.exists { v => graph.hasEdge(u,r,v) }}) 
-              } else fmla.extension(graph)
+              case Existential(r,sub) => {
+                if( memoizedExtensions.contains(sub) ) {
+                	val subext = memoizedExtensions.get(sub).get.asScalaCollection; // { b1, b2 }
+                	graph.getNodeSet(nodes.filter { u => subext.exists { v => graph.hasEdge(u,r,v) }}) 
+                }
+                else { fmla.extension(graph) }
+              }
               case _ => fmla.extension(graph)
             }
-            
-            
             memoizedExtensions += fmla -> ext;
-          }
-          
+          }        
           memoizedExtensions.get(fmla).get
         }
          
         
+        // Devuelve true si cada clase representa un solo elemento (nombre propio).
         def isAllSingletons = {
           getClasses.forall { cl => cl.extension.size  == 1 }
         }
         
+
+        // Devuelve true, si se agrega nueva formula. Para esto se fija si la formula
+        // representa un subconjunto mas chico de elementos (pero no vacio).
         def add(subset:Formula) = {
           val extension = getExtension(subset);
-          
-          //RA: agregue 0, pero aca deberia ver...
-          
           val entry = Entry(extension,subset);
-          //println("\nENTRY: ", extension);
-          //println("\nSUBSET: ", subset);
-          if( classesGraph.containsNode(entry) || uninformativeClasses.contains(extension) || !isNontrivial(extension) ) {
-            false
+          println("Formula: ", subset);
+          println("Extension: ", extension);
+          if( classesGraph.containsNode(entry) ) {
+        	  println("La formula ya existe");
+        	  false;
+          }
+          else if( uninformativeClasses.contains(extension) )
+          {
+        	  println("Hay otra formula que representa la misma extension");
+        	  false;
+          }
+          else if ( !isNontrivial(extension) ) {
+           	  println("La formula representa conjunto vacio (no representa ningun elemento).");
+        	  false;
           } else {
-              val knownClasses = getClasses;
+              val knownClasses = getClasses; // Lista de (Extension, Formula).
               var ret = false;
               
               potentiallyUninformative.clear();
               
               knownClasses.foreach { other =>
-                if( other.extension.size > 1 ) {
+                if( other.extension.size > 1 ) { // No es singleton.
                   val newExtension = other.extension.intersect(extension);
                   val conjunction = new Conjunction(List(subset,other.formula));
 
@@ -167,13 +177,14 @@ class ClassContainer(graph:GraphT[String,String]) {
         
         def getMaxSize = maxSize;
         
+        
+        // Se fija si la extension de una formula tiene uno o mas elementos.
         private def isNontrivial(set:BitSetSet[String]) = {
           set.size > 0
         }
         
        
-        
-        
+        // Saca las formulas "subsumed".
         private def removeUninformativeSubsets() = {
           val checked = new HashSet[Entry];
           var ret = false;
@@ -191,9 +202,6 @@ class ClassContainer(graph:GraphT[String,String]) {
                 potentiallyUninformative += src;
                 
                 classesGraph.foreachOutEdge(pu, { tgt =>
-                  //RA: this old
-                  //classesGraph.addEdge(src, tgt, "");
-                  //RA: fixme 0.5
                   classesGraph.addEdge(src, tgt, "");//, 0.5);
                 });
               });
@@ -213,6 +221,7 @@ class ClassContainer(graph:GraphT[String,String]) {
         }
         
         
+        // Devuelve true si la extension no existe en las clases y no es "subsumed" sobre las mismas.
         // _should_ be deprecated, but right now this is faster than
         // computing the children and then checking informativity only over those.
           private def isInformative(set:BitSetSet[String]) = {
@@ -246,8 +255,6 @@ class ClassContainer(graph:GraphT[String,String]) {
             }
           }
           
-        }
-        
-         
-*/        
+        } */
+          
 }
