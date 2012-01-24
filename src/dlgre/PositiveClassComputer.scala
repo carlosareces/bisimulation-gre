@@ -8,19 +8,21 @@ import java.util.ArrayList
 
 import org.jgrapht.graph._;
 import scala.collection.mutable._;
+import scala.util.Random;
 import util.StringUtils.join;
 
 import collection.JavaConversions._;
 
-class PositiveClassComputer(graph:GraphT[String,String], listaRoles:List[String]) {
+class PositiveClassComputer(graph:GraphT[String,String],
+                            rolesToProbUse: Map[String,Float],
+                            rolesToProbDisc: Map[String,Float]) {
   val classes = new ClassContainer(graph);
-  //val rolesToProb = new HashMap[String,Double]
   
   def compute = {//esta parte no se ejecuta ya que son todas relaciones
     val simplifier = new dlgre.formula.Simplifier(graph);
     // initialize predicates
     graph.getAllPredicates.foreach { p =>
-      classes.add(new Literal(p,true));
+      classes.add(new Literal(p,true), new Literal(p,true));
     }
     //RA: Probabilities for roles from modelos/order.txt
     
@@ -43,7 +45,6 @@ class PositiveClassComputer(graph:GraphT[String,String], listaRoles:List[String]
       //classes.getClasses.foreach { fmla => println(simplifier.removeConjunctionsWithTop(fmla).prettyprint + ": " + util.StringUtils.join(fmla.extension(graph),",")) }
       
       
-      print(".");
       //println("-----------------------------");
       //println(classes.classesGraph);
 
@@ -52,12 +53,34 @@ class PositiveClassComputer(graph:GraphT[String,String], listaRoles:List[String]
      
       //RA: Here I put reverse, because the last element that I added was the first one in the list
       graph.getAllRoles.foreach{ r =>
-      	classes.getClasses.foreach { cl =>
-      	  //print ("CLASE: ",cl);
-          if( classes.add(new Existential(r,cl.formula)) ) {
-          	madeChanges = true;       
-          }
-        }
+        
+        val rand1: Float = Math.abs(new Random().nextFloat()) / Float.MaxValue;
+        val rand2: Float = Math.abs(new Random().nextFloat()) / Float.MaxValue;
+        
+        var p_use: Float = 1;
+        var p_disc: Float = 1;
+        
+        try { p_use = rolesToProbUse(r) }
+        catch { case e: Exception => println(r + " no tiene p_use: usando 1"); }
+        
+        try { p_disc = rolesToProbDisc(r) }
+        catch { case e: Exception => println(r + " no tiene p_disc: usando 1"); }
+        
+      	if (rand1 <= p_use) {
+      		classes.getClasses.foreach { cl =>
+   				//print ("CLASE: ",cl);
+      			if (rand2 <= p_disc) {
+      				if( classes.add(new Existential(r, cl.e1.formula), new Existential(r, cl.e2.formula)) ) {
+      					madeChanges = true;       
+     	  			}
+      			}
+      			else {
+      				if( classes.add(new Top(), new Existential(r, cl.e2.formula)) ) {
+      					madeChanges = true;       
+     	  			}
+      			}
+      		}
+      	}
       }
     }
     
@@ -72,8 +95,8 @@ class PositiveClassComputer(graph:GraphT[String,String], listaRoles:List[String]
     val classes = compute;
     
     classes.foreach { entry =>
-    	entry.extension.scalaIterator.foreach { x =>
-        	ret.put(x, entry.formula);    
+    	entry.e1.extension.scalaIterator.foreach { x =>
+        	ret.put(x, entry.e2.formula);    
         }
     }
     print ("RET: ",ret);

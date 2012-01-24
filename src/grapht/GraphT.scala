@@ -94,7 +94,7 @@ class GraphT[V,E]() {
           oldRoles += r;
 	      edgesToRoles += edge -> oldRoles;
           // All roles set to all roles plus r
-	      println("EdgesToRoles: ",edgesToRoles);
+	      //println("EdgesToRoles: ",edgesToRoles);
 	      roles += r;
         }
         //RA: here I am going to order the roles

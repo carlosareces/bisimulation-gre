@@ -49,32 +49,37 @@ object Main {
     val start = System.currentTimeMillis;
     val simplifier = new dlgre.formula.Simplifier(graph);
     
-    val rolesToProb = new HashMap[String,Double]
-    var li = List[String]()
-    val so = scala.io.Source.fromFile("modelos/order.txt")
+    val rolesToProbUse = new HashMap[String,Float]
+    val rolesToProbDisc = new HashMap[String,Float]
+    
+    val so = scala.io.Source.fromFile("modelos/prob_uso_ord/P_uso_ord-1.txt")
     so.getLines.foreach( line => {
-    var sp = line.split(" -> ");
-    //RA: adding line specting first element string "->" second element(double)
-    rolesToProb(sp.apply(0)) = sp.apply(1).toDouble;
-    li ::= sp.apply(0);
+    	var sp = line.split("->");
+    	//RA: adding line specting first element string "->" second element(double)
+    	//Aca lo puse asi... pero deberia sacar la probabilidad del corpus, y ponderarla de 0 a 1 para que no sea tan chiquita
+    	rolesToProbUse(sp.apply(0)) = (sp.apply(1).toFloat)/(10000.toFloat);
     })
-    print ("ROLES _TO _PROB: ", rolesToProb,li);   
-
-    
-    
+    println ("ROLES _TO _PROB-USO: "+ rolesToProbUse);   
+    val so2 = scala.io.Source.fromFile("modelos/prob_disc/prob_disc-1.txt")
+    so2.getLines.foreach( line => {
+    	var sp2 = line.split("->");
+    	//RA: adding line specting first element string "->" second element(double)
+    	rolesToProbDisc(sp2.apply(0)) = sp2.apply(1).toFloat;
+    })
+    println ("ROLES _TO _PROB-DISC: "+ rolesToProbDisc);
     if( positiveMode ) {
-      println("\nPositive mode");
-      val result = new PositiveClassComputer(graph, li).compute;
+      println("Positive mode");
+      val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc).compute;
       
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
       println("\nBisimulation classes with their concepts:");
-      result.foreach { entry => println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")) };
+      result.foreach { entry => println(entry.e2.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,",")) };
       // result.foreach { entry => println(entry.extension.asScalaCollection.toString + ": " + dlgre.realize.Realizer.realize(entry.formula.removeConjunctionsWithTop, "noun", "drawer")) }; 
     } else {
       println("\nBisim mode");
       print("..[max=0]");
 
-      val result = new BisimulationClassesComputer(graph, li, rolesToProb).compute;
+      val result = new BisimulationClassesComputer(graph, List[String](), rolesToProbUse).compute;
 
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
       println("\nBisimulation classes with their concepts:");

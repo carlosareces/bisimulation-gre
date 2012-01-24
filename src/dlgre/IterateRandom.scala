@@ -21,22 +21,24 @@ object IterateRandom {
     var sumTime : Double = 0;
     
     //RA: I add this part because I don't know how to pass like parameters
-    val rolesToProb = new HashMap[String,Double]
+    val rolesToProbUse = new HashMap[String,Float]
+    val rolesToProbDisc = new HashMap[String,Float]
+    
     var listaRoles = List[String]()
     val so = scala.io.Source.fromFile("modelos/order.txt")
     so.getLines.foreach( line => {
     var sp = line.split(" -> ");
     //RA: adding line specting first element string "->" second element(double)
-    rolesToProb(sp.apply(0)) = sp.apply(1).toDouble;
+    rolesToProbUse(sp.apply(0)) = sp.apply(1).toFloat;
     listaRoles ::= sp.apply(0);
     })
     
     Iterator.range(0,warmupIterations).foreach { x =>
       val graph : GraphT[String,String] = dlgre.generate.RandomGenerator.generate(20, 10, 4, 0.1, 0.1);
       if( positiveMode ) {
-        val result = new PositiveClassComputer(graph, listaRoles).compute;
+        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc).compute;
       } else {
-        val result = new BisimulationClassesComputer(graph, listaRoles, rolesToProb).compute;
+        val result = new BisimulationClassesComputer(graph, listaRoles, rolesToProbUse).compute;
       }
     }
     
@@ -46,9 +48,9 @@ object IterateRandom {
       
       val start = System.currentTimeMillis;
       if( positiveMode ) {
-        val result = new PositiveClassComputer(graph, listaRoles).compute;
+        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc).compute;
       } else {
-        val result = new BisimulationClassesComputer(graph, listaRoles, rolesToProb).compute;
+        val result = new BisimulationClassesComputer(graph, listaRoles, rolesToProbUse).compute;
       }
       val end = System.currentTimeMillis;
 

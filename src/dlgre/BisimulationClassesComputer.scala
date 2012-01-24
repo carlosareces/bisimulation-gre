@@ -5,7 +5,7 @@ import scala.collection.mutable._;
 import dlgre.formula._;
 import grapht._;
 
-class BisimulationClassesComputer(graph:GraphT[String,String],listaRoles:List[String], rolesToProb:HashMap[String,Double]) {
+class BisimulationClassesComputer(graph:GraphT[String,String],listaRoles:List[String], rolesToProb:HashMap[String,Float]) {
    
    private val extensions = new HashMap[Formula, BitSetSet[String]];
    
@@ -101,11 +101,11 @@ class BisimulationClassesComputer(graph:GraphT[String,String],listaRoles:List[St
    // Splits classes that have the same role pointing into different previously
    // existing classes (1 step). 
    //de aca tengo que sacar roles, porque es un conjunto ahora le voy a dar listaRoles que es lista ordenada
-   def splitOverRoles(queue : Queue[Option[Formula]], roles : Set[String], listaRoles:List[String], rolesToProb:HashMap[String,Double]) = {
+   def splitOverRoles(queue : Queue[Option[Formula]], roles : Set[String], listaRoles:List[String], rolesToProb:HashMap[String,Float]) = {
      val elements = extractQueue(queue);
      val localQueue = new Queue[Option[Formula]];
      //esto va al main
-     // val rolesToProb = new HashMap[String,Double]
+     // val rolesToProb = new HashMap[String,Float]
      
      //print ("LLAMA ASPLITOVERROLES: ",roles);
      //print ("LOCALQUEUE: ", localQueue);
