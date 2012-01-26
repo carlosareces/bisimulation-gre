@@ -51,16 +51,19 @@ object Main {
     
     val rolesToProbUse = new HashMap[String,Float]
     val rolesToProbDisc = new HashMap[String,Float]
-    
-    val so = scala.io.Source.fromFile("modelos/prob_uso_ord/P_uso_ord-1.txt")
+    var rolesOrdenados = List[String]()
+    val so = scala.io.Source.fromFile(args(2))//"modelos/prob_uso_ord/P_uso_ord-1.txt")
     so.getLines.foreach( line => {
     	var sp = line.split("->");
     	//RA: adding line specting first element string "->" second element(double)
     	//Aca lo puse asi... pero deberia sacar la probabilidad del corpus, y ponderarla de 0 a 1 para que no sea tan chiquita
-    	rolesToProbUse(sp.apply(0)) = (sp.apply(1).toFloat)/(10000.toFloat);
+    	var rol = sp.apply(0)
+    	rolesToProbUse(rol) = (sp.apply(1).toFloat)/(10000.toFloat);
+    	rolesOrdenados ::= rol;
     })
-    println ("ROLES _TO _PROB-USO: "+ rolesToProbUse);   
-    val so2 = scala.io.Source.fromFile("modelos/prob_disc/prob_disc-1.txt")
+    println ("\nROLES_TO_PROB-USO: "+ rolesToProbUse);  
+    println ("\nROLES_ORDENADOS: "+rolesOrdenados);
+    val so2 = scala.io.Source.fromFile(args(3))//"modelos/prob_disc/prob_disc-1.txt")
     so2.getLines.foreach( line => {
     	var sp2 = line.split("->");
     	//RA: adding line specting first element string "->" second element(double)
@@ -69,11 +72,14 @@ object Main {
     println ("ROLES _TO _PROB-DISC: "+ rolesToProbDisc);
     if( positiveMode ) {
       println("Positive mode");
-      val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc).compute;
+      val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados).compute;
       
       println(" done, " + (System.currentTimeMillis - start) + " ms.");
-      println("\nBisimulation classes with their concepts:");
+      println("\nBisimulation classes with their concepts (positive mode):");
       result.foreach { entry => println(entry.e2.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,",")) };
+      println("\nOld form (positive mode):");
+      result.foreach { entry => println(entry.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,",")) };
+      
       // result.foreach { entry => println(entry.extension.asScalaCollection.toString + ": " + dlgre.realize.Realizer.realize(entry.formula.removeConjunctionsWithTop, "noun", "drawer")) }; 
     } else {
       println("\nBisim mode");
@@ -104,10 +110,10 @@ object Main {
   (doc \ "individual").foreach { indiv =>
           val node = mygetattr(indiv, "id");
 
-      (indiv \ "predicate" ).foreach { element =>
-              val pred = mygetattr(element, "pred");
-              ret.addPredicate(node, pred); 
-      }
+      //(indiv \ "predicate" ).foreach { element =>
+       //       val pred = mygetattr(element, "pred");
+       //       ret.addPredicate(node, pred); 
+      //}
       
       (indiv \ "related").foreach { element =>
               val rel = mygetattr(element, "rel");
