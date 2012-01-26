@@ -15,7 +15,8 @@ import collection.JavaConversions._;
 
 class PositiveClassComputer(graph:GraphT[String,String],
                             rolesToProbUse: Map[String,Float],
-                            rolesToProbDisc: Map[String,Float]) {
+                            rolesToProbDisc: Map[String,Float],
+							rolesOrdenados: List[String]) {
   val classes = new ClassContainer(graph);
   
   def compute = {//esta parte no se ejecuta ya que son todas relaciones
@@ -25,9 +26,7 @@ class PositiveClassComputer(graph:GraphT[String,String],
       classes.add(new Literal(p,true), new Literal(p,true));
     }
     //RA: Probabilities for roles from modelos/order.txt
-    
-
-   
+      
     var madeChanges = true;
     /*val s = scala.io.Source.fromFile("modelos/order.txt")
     s.getLines.foreach( line => {
@@ -38,50 +37,63 @@ class PositiveClassComputer(graph:GraphT[String,String],
     print ("ROLES _TO _PROB: ", rolesToProb);*/   
     // iterate over roles
     //RA: here need to add-rename the condition of stop
-    while( madeChanges && !classes.isAllSingletons ) {
+    var iteration: Int = 0;
+    val maxIteration: Int = 100;
+    while( madeChanges && !classes.isAllSingletons && iteration < maxIteration ) {
+      
+      iteration += 1;
+      
       madeChanges = false;
       
-      //println("\n\n\n\n\nClasses:");
-      //classes.getClasses.foreach { fmla => println(simplifier.removeConjunctionsWithTop(fmla).prettyprint + ": " + util.StringUtils.join(fmla.extension(graph),",")) }
-      
-      
-      //println("-----------------------------");
-      //println(classes.classesGraph);
+      println("-----------------------------");
 
-      //RA: Parse order from a file, the file need to be rol enter rol enter ...
-      //var li = new HashMap[V,Double]()
+      //RA: Para cada relacion le asignamos un booleano diciendo si esta relacion ya se uso.
+      var rel_used = new HashMap[String,Boolean]()
+      rolesOrdenados.foreach{ r => rel_used += r -> false; }
      
-      //RA: Here I put reverse, because the last element that I added was the first one in the list
-      graph.getAllRoles.foreach{ r =>
-        
-        val rand1: Float = Math.abs(new Random().nextFloat()) / Float.MaxValue;
-        val rand2: Float = Math.abs(new Random().nextFloat()) / Float.MaxValue;
-        
-        var p_use: Float = 1;
-        var p_disc: Float = 1;
-        
-        try { p_use = rolesToProbUse(r) }
-        catch { case e: Exception => println(r + " no tiene p_use: usando 1"); }
-        
-        try { p_disc = rolesToProbDisc(r) }
-        catch { case e: Exception => println(r + " no tiene p_disc: usando 1"); }
-        
-      	if (rand1 <= p_use) {
-      		classes.getClasses.foreach { cl =>
-   				//print ("CLASE: ",cl);
-      			if (rand2 <= p_disc) {
-      				if( classes.add(new Existential(r, cl.e1.formula), new Existential(r, cl.e2.formula)) ) {
-      					madeChanges = true;       
-     	  			}
-      			}
-      			else {
-      				if( classes.add(new Top(), new Existential(r, cl.e2.formula)) ) {
-      					madeChanges = true;       
-     	  			}
-      			}
-      		}
-      	}
+      try {
+    	  rolesOrdenados.foreach{ r =>
+    	    if (!rel_used(r)) {
+    	        println(r + ", nueva.");
+	        	val rand1: Float = Math.abs(new Random().nextFloat()); 
+	        	val rand2: Float = Math.abs(new Random().nextFloat()); 
+	        
+	        	var p_use: Float = 1;
+	        	var p_disc: Float = 1;
+	        
+	        	try { p_use = rolesToProbUse(r); }
+	        	catch { case e: Exception => println(r + " no tiene p_use: usando 1"); }
+	        
+	        	try { p_disc = rolesToProbDisc(r); }
+	        	catch { case e: Exception => println(r + " no tiene p_disc: usando 1"); }
+	        
+	      		if (rand1 <= p_use) {
+	      			classes.getClasses.foreach { cl =>
+	      				println ("RANDOM " + rand1 + " " + rand2 );
+	   					if (rand2 <= p_disc) {
+	      					if( classes.add(new Existential(r, cl.e1.formula), new Existential(r, cl.e2.formula)) ) {
+	      						madeChanges = true;       
+	      						rel_used += r -> true;
+	      						throw new Exception("break");
+	     	  				}
+	      				}
+	      				else {
+	      					if( classes.add(new Top(), new Existential(r, cl.e2.formula)) ) {
+	      						madeChanges = true;       
+	      						rel_used += r -> true;
+	      						throw new Exception("break");
+	     	  				}
+	      				}      			
+	      			}
+	      		}
+	      		else {
+	      		  println(r + ", no dio la probabilidad de uso.");
+	      		  madeChanges = true;
+	      		}
+    	    }
+    	  }
       }
+      catch { case e: Exception =>  }
     }
     
     //print("[max=" + classes.getMaxSize + "]");
