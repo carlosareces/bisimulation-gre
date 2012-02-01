@@ -12,7 +12,7 @@ import java.util.ArrayList
 import org.jgrapht.graph._;
 import scala.collection.mutable._;
 import util.StringUtils.join;
-
+/*
 object IterateRandom {
   def main(args : Array[String]) : Unit = {
     val positiveMode = (args(0) == "positive");
@@ -74,3 +74,4 @@ object IterateRandom {
     
   }
 }
+*/
