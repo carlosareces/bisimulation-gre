@@ -77,18 +77,18 @@ class ClassContainer(graph:GraphT[String,String]) {
           val entry1 = Entry(extension1,f1);
           val entry2 = Entry(extension2,f2);
           val entry = Entry2(entry1,entry2);
-          println("Entry: " + entry);
+          //println("Entry: " + entry);
           if( classesGraph.containsNode(entry) ) {
-        	  println("La formula ya existe");
+        	  //println("La formula ya existe");
         	  false;
           }
           else if( uninformativeClasses.contains(extension1) )
           {
-        	  println("Hay otra formula que representa la misma extension");
+        	  //println("Hay otra formula que representa la misma extension");
         	  false;
           }
           else if ( !isNontrivial(extension1) ) {
-           	  println("La formula representa conjunto vacio (no representa ningun elemento).");
+           	  //println("La formula representa conjunto vacio (no representa ningun elemento).");
         	  false;
           } else {
               val knownClasses = getClasses; // Lista de (Entry, Entry).
@@ -208,13 +208,13 @@ class ClassContainer(graph:GraphT[String,String]) {
           var ret = false;
           
           potentiallyUninformative.foreach { pu =>
-            println("Checking RUS " + pu);
+            //println("Checking RUS " + pu);
             if( !checked.contains(pu)
                 && !uninformativeClasses.contains(pu.e1.extension)
                 && ! isInformative(pu, 
                                    classesGraph.mapOutEdges(pu, 
                                                             {edge => classesGraph.getTgt(edge)}) ) ) {
-              println(" -> uninformative, removing",pu);
+              //println(" -> uninformative, removing",pu);
               
               classesGraph.foreachInEdge(pu, { src =>
                 potentiallyUninformative += src;

@@ -16,7 +16,8 @@ import collection.JavaConversions._;
 class PositiveClassComputer(graph:GraphT[String,String],
                             rolesToProbUse: Map[String,Float],
                             rolesToProbDisc: Map[String,Float],
-							rolesOrdenados: List[String]) {
+							rolesOrdenados: List[String],
+							informative: Boolean) {
   val classes = new ClassContainer(graph);
   
   def compute = {//esta parte no se ejecuta ya que son todas relaciones
@@ -38,14 +39,14 @@ class PositiveClassComputer(graph:GraphT[String,String],
     // iterate over roles
     //RA: here need to add-rename the condition of stop
     var iteration: Int = 0;
-    val maxIteration: Int = 100;
-    while( madeChanges && !classes.isAllSingletons && iteration < maxIteration ) {
+    val maxIteration: Int = 500;
+    while( madeChanges && !classes.isAllSingletons ){//&& (iteration < maxIteration) ) {
       
       iteration += 1;
       
       madeChanges = false;
       
-      println("-----------------------------");
+      //println("----------------------------- " + iteration);
 
       //RA: Para cada relacion le asignamos un booleano diciendo si esta relacion ya se uso.
       var rel_used = new HashMap[String,Boolean]()
@@ -54,7 +55,7 @@ class PositiveClassComputer(graph:GraphT[String,String],
       try {
     	  rolesOrdenados.foreach{ r =>
     	    if (!rel_used(r)) {
-    	        println(r + ", nueva.");
+    	        
 	        	val rand1: Float = Math.abs(new Random().nextFloat()); 
 	        	val rand2: Float = Math.abs(new Random().nextFloat()); 
 	        
@@ -62,15 +63,23 @@ class PositiveClassComputer(graph:GraphT[String,String],
 	        	var p_disc: Float = 1;
 	        
 	        	try { p_use = rolesToProbUse(r); }
-	        	catch { case e: Exception => println(r + " no tiene p_use: usando 1"); }
-	        
+	        	catch { case e: Exception => 
+	        	  
+	        	  if (informative == true) {
+	          	    println(r + " no tiene p_use: usando 1"); }
+	        	  }
 	        	try { p_disc = rolesToProbDisc(r); }
-	        	catch { case e: Exception => println(r + " no tiene p_disc: usando 1"); }
-	        
+	        	catch { case e: Exception => 
+	        	  if (informative == true) {
+	        	    println(r + " no tiene p_disc: usando 1"); }
+	        	  }
 	      		if (rand1 <= p_use) {
 	      			classes.getClasses.foreach { cl =>
-	      				println ("RANDOM " + rand1 + " " + rand2 );
+	      				//println ("RANDOM " + rand1 + " " + rand2 );
 	   					if (rand2 <= p_disc) {
+	   					    //if (informative == true) {
+	   					    //  println("relacion: "+r + " P_disc: "+p_disc+" rand2:"+rand2 );
+	   					    //}  
 	      					if( classes.add(new Existential(r, cl.e1.formula), new Existential(r, cl.e2.formula)) ) {
 	      						madeChanges = true;       
 	      						rel_used += r -> true;
@@ -87,7 +96,9 @@ class PositiveClassComputer(graph:GraphT[String,String],
 	      			}
 	      		}
 	      		else {
-	      		  println(r + ", no dio la probabilidad de uso.");
+	      		  if (informative == true) {
+	      		    println(r + ", no dio la probabilidad de uso, rand: "+ rand1+" Prob_uso: "+ p_use);
+	      		  }  
 	      		  madeChanges = true;
 	      		}
     	    }
@@ -95,7 +106,7 @@ class PositiveClassComputer(graph:GraphT[String,String],
       }
       catch { case e: Exception =>  }
     }
-    
+    //println ("Iteration: "+iteration);
     //print("[max=" + classes.getMaxSize + "]");
     
     classes.getClasses
@@ -111,7 +122,7 @@ class PositiveClassComputer(graph:GraphT[String,String],
         	ret.put(x, entry.e2.formula);    
         }
     }
-    print ("RET: ",ret);
+    //print ("RET: ",ret);
     ret
   }
 }
