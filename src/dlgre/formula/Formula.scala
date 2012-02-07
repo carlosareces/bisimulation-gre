@@ -6,8 +6,10 @@ import grapht._;
 
 abstract class Formula {
   	var memoizedExtension : BitSetSet[String] = null;
-          
-  	def prettyprint : String;
+        
+  	    def toString : String;      
+  	    
+		def prettyprint : String;
 
         def isSatisfied(u:String, graph:GraphT[String,String]) : Boolean;
 

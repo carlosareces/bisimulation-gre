@@ -9,8 +9,17 @@ case class Existential(role:String, sub:Formula) extends Formula {
 		graph.getAllNodes.exists { v => graph.hasEdge(u,role,v) && sub.isSatisfied(v,graph) };            
         }
           
-          
-	override def prettyprint = {
+  		override def toString = {
+  		  if (role == "terminal") {
+  			  ""
+  		  } else if (sub == Top()) {
+  			  role
+  		  } else {  //Ex-small.(Ex-terminal.(T)) & Ex-green.(Ex-terminal.(T)) & Ex-cube.(T): s6
+  			  role + " " + sub.toString;
+  		  }
+        } 
+  		
+  		override def prettyprint = {
           "Ex-" + role + ".(" + sub.prettyprint + ")";       
         }
         

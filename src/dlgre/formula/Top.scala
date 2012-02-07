@@ -7,7 +7,11 @@ case class Top extends Formula {
 	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
    		true       
         }
-        
+ 
+       override def toString = {
+          ""
+        }
+ 	
         override def prettyprint = {
           "T"
         }

@@ -16,19 +16,23 @@ class ClassContainer(graph:GraphT[String,String]) {
   }
  
   //Ahora tenemos 2 formulas (fi_O, fi_R)
-  case class Entry2(e1:Entry, e2:Entry){
+  case class Entry2(e1:Entry, e2:HashSet[Entry]){
     override def equals(that: Any): Boolean =
-      that.isInstanceOf[Entry2] &&  that.asInstanceOf[Entry2].e1.extension == e1.extension && 
-      							    that.asInstanceOf[Entry2].e2.extension == e2.extension;
+      that.isInstanceOf[Entry2] && that.asInstanceOf[Entry2].e1.extension == e1.extension;
     
-    override def hashCode = e2.extension.hashCode;
+    override def hashCode = e1.extension.hashCode;
     
-    override def toString = "(" + e1.toString() + ", " + e2.toString() + ")";
+    override def toString = {
+      var res:String = "(" + e1.toString() + ", { ";
+      e2.foreach { ext => res += ext.toString() + " , " }
+      res += "})";
+      res;
+    }
   }
   
   val classesGraph = new grapht.GraphT[Entry2,String]();
   val uninformativeClasses = new HashSet[BitSetSet[String]];
-  val potentiallyUninformative = new Queue[Entry2];
+  val potentiallyUninformative = new Queue[Entry];
   
   private val memoizedExtensions = new HashMap[Formula,BitSetSet[String]];
 
@@ -38,7 +42,7 @@ class ClassContainer(graph:GraphT[String,String]) {
         
         //RA: When I add Top it add with probability 1
         classesGraph.addNode( Entry2( Entry( graph.getNodeSet(nodes), new Top() ),
-                                      Entry( graph.getNodeSet(nodes), new Top() ) ) );
+                                      new HashSet[Entry]() += Entry( graph.getNodeSet(nodes), new Top() ) ) );
 
         
         
@@ -65,7 +69,7 @@ class ClassContainer(graph:GraphT[String,String]) {
         
         // Devuelve true si cada clase representa un solo elemento (nombre propio).
         def isAllSingletons = {
-          getClasses.forall { cl => cl.e2.extension.size  == 1 }//Solamente me fijo en formulas fi_R
+          getClasses.forall { cl => cl.e1.extension.size  == 1 }//Solamente me fijo en formulas fi_O
         }
         
 
@@ -76,111 +80,117 @@ class ClassContainer(graph:GraphT[String,String]) {
           val extension2 = getExtension(f2);
           val entry1 = Entry(extension1,f1);
           val entry2 = Entry(extension2,f2);
-          val entry = Entry2(entry1,entry2);
+          var entry:Entry2 = null; 
+          
           //println("Entry: " + entry);
-          if( classesGraph.containsNode(entry) ) {
-        	  //println("La formula ya existe");
-        	  false;
-          }
-          else if( uninformativeClasses.contains(extension1) )
+          //println("Agregar f1: " + f1.prettyprint + " f2: " + f2.prettyprint);
+          if( uninformativeClasses.contains(extension1) ) // extension 1 es pq nos fijamos solamente en 1r formula
           {
-        	  //println("Hay otra formula que representa la misma extension");
+        	  println("La formula " +f1.prettyprint + " no es informativa");
         	  false;
           }
           else if ( !isNontrivial(extension1) ) {
-           	  //println("La formula representa conjunto vacio (no representa ningun elemento).");
+           	  println("La formula " +f1.prettyprint + " representa conjunto vacio (no representa ningun elemento).");
         	  false;
-          } else {
-              val knownClasses = getClasses; // Lista de (Entry, Entry).
+          }
+          else if ( !isNontrivial(extension2) ) {
+           	  println("La formula " +f2.prettyprint + " representa conjunto vacio (no representa ningun elemento).");
+        	  false;
+          } 
+          else {
+              val knownClasses = getClasses; // Es una lista de Entry2.
               var ret = false;
               
               potentiallyUninformative.clear();
               
               knownClasses.foreach { other =>
+                
                 if( other.e1.extension.size > 1 ) { // No es singleton.
+                  val conjunction1 = new Conjunction(List(f1,other.e1.formula)).removeConjunctionsWithTop;
                   val newExtension1 = other.e1.extension.intersect(extension1);
-                  val newExtension2 = other.e2.extension.intersect(extension2);
-                  val conjunction1 = new Conjunction(List(f1,other.e1.formula));
-                  val conjunction2 = new Conjunction(List(f2,other.e2.formula));
-
+                  var newNode: Boolean = true;
+	                  
+           		  classesGraph.getAllNodes.foreach { node => if( node.e1 == entry1 ) { entry = node } };
+           		  if (entry == null) {
+           			  entry = Entry2(Entry(newExtension1, conjunction1), new HashSet[Entry]());
+           		  }
                   
-                  
-                  memoizedExtensions += conjunction1 -> newExtension1
-                  memoizedExtensions += conjunction2 -> newExtension2  
-                  
-            	  if( isNontrivial(newExtension1)  && isInformative(newExtension1) ) {
-                      val inter = Entry2(Entry(newExtension1,  conjunction1),Entry(newExtension2,  conjunction2));
-            	      if( addToGraph(inter) ) {
-                          ret = true;
-                      }
+            	  if( (isNontrivial(newExtension1) && isInformative(newExtension1)) || (f1==Top) ) {
+					  println("\t\tSe agrego " + conjunction1.prettyprint + " : " + newExtension1);
+            		  memoizedExtensions += conjunction1 -> newExtension1;
+	                  
+	                  other.e2.foreach { en =>
+	                  	  val conjunction2 = new Conjunction(List(f2,en.formula)).removeConjunctionsWithTop;
+						  val newExtension2 = en.extension.intersect(extension2);
+						
+						  if( isNontrivial(newExtension2)  && isInformative(newExtension2) ) {
+							  memoizedExtensions += conjunction2 -> newExtension2;
+							  entry.e2 += Entry(newExtension2, conjunction2);
+							  println("\t\t\t-> " + conjunction2.prettyprint + " : " + newExtension2);
+						  }
+	                  }
+	                  
+	                  //println("\t isNonTrivial: " + isNontrivial(newExtension2) + " is informative: " + isInformative(newExtension2));
+	                  //if (!isNontrivial(newExtension2)) println("viene de isNontrivial");
+	                  //if (!isInformative(newExtension2)) println("viene de isInformative");
+           	    	  if (!entry.e2.isEmpty) {
+           	    		  ret = addToGraph(entry);
+           	    	  }
                   }
                 }
               }
-            
-
               if( getClasses.size > maxSize ) {
                 maxSize = getClasses.size;
               }
-                
-              //checkInformativity;
               ret
           }
           
         }
-        
+        //-------------------------------------
         private def addToGraph(entry:Entry2) = {
           val children = findMaximalSubsets(entry);
-          
           
           if( isInformative(entry, children) ) {
             val parents = findMinimalSupersets(entry);
             classesGraph.addNode(entry);
-           //RA: fixme!! 0.5 because I don't know right now
-            children.foreach { ch => classesGraph.addEdge(entry, ch, "")}//, 0.5) }
+           
+            children.foreach { ch => classesGraph.addEdge(entry, ch, "")}//ahora entry es un par... 
             parents.foreach { par => 
-                //RA: fixme!! 0.5
-                classesGraph.addEdge(par, entry, "");//, 0.5);
-                potentiallyUninformative += par;
+                classesGraph.addEdge(par, entry, "");
+                potentiallyUninformative += par.e1;
             }
             
             removeUninformativeSubsets();
 
             true
           } else {
-            uninformativeClasses += entry.e1.extension;
+            uninformativeClasses += entry.e1.extension; //ver aca si esta bien...
             false
           }
         }
-        
+        //-----------------------------------
         private def findMaximalSubsets(entry:Entry2) = {
           val ret = new HashSet[Entry2]
           
-          classesGraph.getRoots.foreach { r =>
-            if( entry.e1.extension intersects r.e1.extension ) {
-              classesGraph.foreachDFS( r,
-                  u => if( u.e1.extension isSubsetOf entry.e1.extension ) { ret += u },
-                  u => u.e1.extension isSubsetOf entry.e1.extension
-                )
-              
-            }
-          }
-          
-          
+    	  classesGraph.getRoots.foreach { r =>
+    	  	if( entry.e1.extension intersects r.e1.extension ) {
+    		  classesGraph.foreachDFS( r,
+    				u => if( u.e1.extension isSubsetOf entry.e1.extension ) { ret += u },
+    				u => u.e1.extension isSubsetOf entry.e1.extension
+    		  		)
+    	  	}
+    	  }
           ret
         }
         
         private def findMinimalSupersets(entry:Entry2) = {
           val ret = new HashSet[Entry2]
-          
-          classesGraph.getLeaves.foreach { l =>
-              classesGraph.foreachDFSr( l,
-                  u => if( entry.e1.extension isSubsetOf u.e1.extension ) { ret += u },
-                  u => entry.e1.extension isSubsetOf u.e1.extension
-                )
-          }
-          
-          
-          
+    	  classesGraph.getLeaves.foreach { l =>
+          	classesGraph.foreachDFSr( l,
+          			u => if( entry.e1.extension isSubsetOf u.e1.extension ) { ret += u },
+          			u => entry.e1.extension isSubsetOf u.e1.extension
+          	)
+    	  }
           ret
         }
         
@@ -204,29 +214,30 @@ class ClassContainer(graph:GraphT[String,String]) {
        
         // Saca las formulas "subsumed".
         private def removeUninformativeSubsets() = {
-          val checked = new HashSet[Entry2];
+          val checked = new HashSet[Entry];
           var ret = false;
           
           potentiallyUninformative.foreach { pu =>
             //println("Checking RUS " + pu);
+            val puEntry = Entry2(pu, new HashSet[Entry]());
             if( !checked.contains(pu)
-                && !uninformativeClasses.contains(pu.e1.extension)
-                && ! isInformative(pu, 
-                                   classesGraph.mapOutEdges(pu, 
+                && !uninformativeClasses.contains(pu.extension)
+                && ! isInformative(puEntry, 
+                                   classesGraph.mapOutEdges(puEntry, 
                                                             {edge => classesGraph.getTgt(edge)}) ) ) {
               //println(" -> uninformative, removing",pu);
               
-              classesGraph.foreachInEdge(pu, { src =>
-                potentiallyUninformative += src;
+              classesGraph.foreachInEdge(puEntry, { src =>
+                potentiallyUninformative += src.e1;
                 
-                classesGraph.foreachOutEdge(pu, { tgt =>
+                classesGraph.foreachOutEdge(puEntry, { tgt =>
                   classesGraph.addEdge(src, tgt, "");//, 0.5);
                 });
               });
               
               
-              classesGraph.removeNode(pu);
-              uninformativeClasses += pu.e1.extension;
+              classesGraph.removeNode(puEntry);
+              uninformativeClasses += pu.extension;
               ret = true;
             } else {
               checked += pu;

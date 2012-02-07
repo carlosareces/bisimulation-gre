@@ -8,7 +8,11 @@ case class Negation(sub:Formula) extends Formula {
   	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
           ! sub.isSatisfied(u,graph)  
         }
-          
+
+	override def toString = {
+   		"not " + sub.toString       
+        }
+  	
 	override def prettyprint = {
    		"~" + sub.prettyprint       
         }
