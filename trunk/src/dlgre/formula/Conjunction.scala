@@ -7,9 +7,15 @@ import grapht._;
 import dlgre.BitSetSet;
 
 case class Conjunction(sub:List[Formula]) extends Formula {
-  	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
+
+		override def isSatisfied(u:String, graph:GraphT[String,String]) = {
           sub.forall { f => f.isSatisfied(u,graph) }  
         }
+		
+  		override def toString = {
+			join(sub.map { f => f.toString }, " y ");
+        } 
+  		
           
           
 	override def prettyprint = {

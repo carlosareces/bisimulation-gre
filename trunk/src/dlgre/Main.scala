@@ -21,12 +21,14 @@ object Main {//1
     val maxIteration = args(5);
     val target = args(4);
     val fw = new FileWriter("test.txt") ;
-    //var informative = true;
-    //if (args.length > 6){
-    //  var informative = true; 
-    //} else {
-    //  var informative = false;
-    //}
+    val fw2 = new FileWriter("texto-test.txt") ;
+    
+    var informative:Boolean = false;
+    if (args(6)=="informative"){
+      informative = true; 
+    } else {
+      informative = false;
+    }
    //println(args.length);
    //println(informative, target, maxIteration);
     // * warmup for runtime measurements
@@ -80,32 +82,30 @@ object Main {//1
       while(iteration < maxIteration.toInt) {//6
         println("---------------------------------");
         fw.write("\n---------------------------------");
+        fw2.write("\n---------------------------------");
         iteration += 1;
         //Aca le paso false, pero le deberia pasar true para que me muestre los logs
-        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, false).compute;
+        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, informative).compute;
       
         //println(" done, " + (System.currentTimeMillis - start) + " ms.");
         //println("\nBisimulation classes with their concepts (positive mode):");
         if (target=="all"){//7
-          result.foreach { entry => 
-            println(entry.e2.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,","));
-          	fw.write("\n" + entry.e2.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,",")); };
-          
-          //println("\nOld form (positive mode):");
-         // result.foreach { entry => println(entry.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,",")) };
+            println("-------------------------------------");
+            result.foreach { entry2 =>
+	        	println(entry2);
+	        	fw.write(entry2 + "\n");
+	        	fw2.write(entry2 + "\n");
+		    }
         } else {
             //Aca imprimo solo para el target
               result.foreach { 
-              entry => 
-                if (entry.e2.extension.asScalaCollection.contains(target)){
-                  //println("\nFormula de la derecha: ");
-                  print(entry.e2.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,",")+" ---- ");
-                  //println("\nFormula de la izquierda: ");
-                  //result.foreach { entry => 
-                  println(entry.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,","));
-                  fw.write("\n" + entry.e2.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,",")+" ---- ");
-                  fw.write(entry.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.e2.extension.asScalaCollection,","));
-                }
+            	entry2 => entry2.e2.foreach {
+            		entry =>
+            			if (entry.extension.asScalaCollection.contains(target)){
+		                  println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+" ---- \n");
+		                }
+            	}
             }
          }//7 fin 
       }// fin 6 while result.foreach { entry => println(entry.extension.asScalaCollection.toString + ": " + dlgre.realize.Realizer.realize(entry.formula.removeConjunctionsWithTop, "noun", "drawer")) };
@@ -120,6 +120,7 @@ object Main {//1
       result.foreach { fmla => println(simplifier.simplify(fmla).prettyprint + ": " + util.StringUtils.join(fmla.extension(graph).asScalaCollection,",")) };
     }//fin 5 else
     fw.close();
+    fw2.close();
   }
 
   
