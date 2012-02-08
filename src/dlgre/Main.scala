@@ -64,16 +64,22 @@ object Main {//1
     var rolesOrdenados = List[String]()
     val so = scala.io.Source.fromFile(args(2))//"modelos/prob_uso_ord/P_uso_ord-1.txt")
     so.getLines.foreach( line => {//3
+      try {
     	var sp = line.split("->");
     	var rol = sp.apply(0)
     	rolesToProbUse(rol) = (sp.apply(1).toFloat)
     	rolesOrdenados ::= rol;
+      }	
+      catch { case e: Exception => println("LINEA-no tenida en cuenta: "+ line); }
     })//fin 3
     val so2 = scala.io.Source.fromFile(args(3))//"modelos/prob_disc/prob_disc-1.txt")
     so2.getLines.foreach( line => {//4
+      try {
     	var sp2 = line.split("->");
     	//RA: adding line specting first element string "->" second element(double)
     	rolesToProbDisc(sp2.apply(0)) = sp2.apply(1).toFloat;
+      }
+      catch { case e: Exception => println("LINEA-no tenida en cuenta: "+ line); }
     })//fin 4
     if( positiveMode ) {//5
       //println("Positive mode");
@@ -135,17 +141,16 @@ object Main {//1
   (doc \ "individual").foreach { indiv =>
           val node = mygetattr(indiv, "id");
          
-      //(indiv \ "predicate" ).foreach { element =>
-       //       val pred = mygetattr(element, "pred");
-       //       ret.addPredicate(node, pred); 
-      //}
+      (indiv \ "predicate" ).foreach { element =>
+              val pred = mygetattr(element, "pred");
+              ret.addPredicate(node, pred); 
+      }
       
       (indiv \ "related").foreach { element =>
               val rel = mygetattr(element, "rel");
               val to = mygetattr(element, "to");
               
               ret.addEdge(node, to, rel);
-            
       }
   }
     
