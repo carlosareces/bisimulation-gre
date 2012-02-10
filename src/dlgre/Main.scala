@@ -61,25 +61,50 @@ object Main {//1
     
     val rolesToProbUse = new HashMap[String,Float]
     val rolesToProbDisc = new HashMap[String,Float]
-    var rolesOrdenados = List[String]()
+    var rolesDesOrdenados = List[String]()
     val so = scala.io.Source.fromFile(args(2))//"modelos/prob_uso_ord/P_uso_ord-1.txt")
+    var num:Int = 0;
     so.getLines.foreach( line => {//3
       try {
+        
     	var sp = line.split("->");
-    	var rol = sp.apply(0)
-    	rolesToProbUse(rol) = (sp.apply(1).toFloat)
-    	rolesOrdenados ::= rol;
+    	var rol = (sp.apply(0)).trim
+    	rolesToProbUse(rol) = ((sp.apply(1).trim).toFloat)
+    	rolesDesOrdenados ::= rol;
+    	num = num + 1;
       }	
-      catch { case e: Exception => println("LINEA-no tenida en cuenta: "+ line); }
+      catch { case e: Exception => ; }
+      
     })//fin 3
+/*-----------------*/
+    var arr = new Array[Float](num);
+      var i:Int = 0;
+      rolesDesOrdenados.foreach(r => {
+        var p_use: Float = 1;
+        p_use = rolesToProbUse(r);
+        arr.update(i,p_use);
+        i = i+1;
+      })
+      scala.util.Sorting.quickSort(arr)
+     
+      var rolesOrdenados = List[String]()
+      arr.foreach(el => {
+        rolesDesOrdenados.foreach(rol => {
+        	if (rolesToProbUse(rol)==el) { 
+        	  rolesOrdenados ::= rol
+        	}
+        })
+      })
+
+/*------------------*/      
     val so2 = scala.io.Source.fromFile(args(3))//"modelos/prob_disc/prob_disc-1.txt")
     so2.getLines.foreach( line => {//4
       try {
     	var sp2 = line.split("->");
     	//RA: adding line specting first element string "->" second element(double)
-    	rolesToProbDisc(sp2.apply(0)) = sp2.apply(1).toFloat;
+    	rolesToProbDisc(sp2.apply(0).trim) = (sp2.apply(1).trim).toFloat;
       }
-      catch { case e: Exception => println("LINEA-no tenida en cuenta: "+ line); }
+      catch { case e: Exception => ; }//no hace nada en caso de leer lineas vacias o con otro formato
     })//fin 4
     if( positiveMode ) {//5
       //println("Positive mode");
@@ -92,11 +117,11 @@ object Main {//1
         iteration += 1;
         //Aca le paso false, pero le deberia pasar true para que me muestre los logs
         val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, informative).compute;
-      
-        //println(" done, " + (System.currentTimeMillis - start) + " ms.");
+        println("\n-----------------------------------------------------------------------------");
+        println(" done, " + (System.currentTimeMillis - start) + " ms.");
         //println("\nBisimulation classes with their concepts (positive mode):");
         if (target=="all"){//7
-            println("-------------------------------------");
+            //println("-------------------------------------");
             result.foreach { entry2 =>
 	        	println(entry2);
 	        	fw.write(entry2 + "\n");
@@ -109,10 +134,10 @@ object Main {//1
             		entry =>
             			if (entry.extension.asScalaCollection.contains(target)){
 		                  println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
-		                  fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+" ---- \n");
+		                  fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                }
             	}
-            }
+             }
          }//7 fin 
       }// fin 6 while result.foreach { entry => println(entry.extension.asScalaCollection.toString + ": " + dlgre.realize.Realizer.realize(entry.formula.removeConjunctionsWithTop, "noun", "drawer")) };
     } else { //fin  positive-node
