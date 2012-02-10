@@ -23,10 +23,18 @@ case class Entry2(e1: Entry, e2: HashSet[Entry]) {
 	override def hashCode = e1.extension.hashCode;
 
 	override def toString = {
-		var res: String = "(" + e1.toString() + ", { ";
-		e2.foreach { ext => res += ext.toString() + " , " }
-		res += "})";
-		res;
+		var res: String = e1.toString() + ", { ";
+		var resAnt: String = e1.toString() + ", { ";
+		var last: String = "";
+		
+		e2.foreach { ext => 
+		  resAnt = res;
+ 		  res += ext.toString() + " , "
+ 		  last = ext.toString();
+ 		}
+		
+		resAnt += last + " }";
+		resAnt;
 /*		var res: String = "";
 		e2.foreach { ext => res += "(" + e1.toString() + ", " + ext.toString() + ")\n" }
 		res;*/

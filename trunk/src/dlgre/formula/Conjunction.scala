@@ -13,7 +13,7 @@ case class Conjunction(sub:List[Formula]) extends Formula {
         }
 		
   		override def toString = {
-			join(sub.map { f => f.toString }, " y ");
+			join(sub.map { f => f.toString }, " , ");
         } 
   		
           
