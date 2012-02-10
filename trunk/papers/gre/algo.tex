@@ -73,12 +73,19 @@ $\RE \leftarrow \{(\top,\top)\}$
 }
 }
 \Else{
+%\For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
+%  \If{
+%    $\interp{\psi_R \sqcap \exists R.\varphi_R} \neq \emptyset$}
+%    {
+%    add $(\psi_O, \psi_R \sqcap \exists R.\varphi_R)$ to $\RE$ \;
+%    }
 \For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
-  \If{$\psi_O \sqcap \exists R.\varphi_O$ is not subsumed in $\RE$ {\bf and}
-    $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \emptyset$ {\bf and}
-    $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \interp{\psi_O}$}{
+  \If{%$\psi_O \sqcap \exists R.\varphi_O$ is not subsumed in $\RE$ {\bf and}
+    $\interp{\psi_R \sqcap \exists R.\varphi_R} \neq \emptyset$ {\bf and}
+    $\interp{\psi_R \sqcap \exists R.\varphi_R} \neq \interp{\psi_R}$}{
     add $(\psi_O, \psi_R \sqcap \exists R.\varphi_R)$ to $\RE$ \;
-    remove subsumed formulas from $\RE$\;}
+    %remove subsumed formulas from $\RE$\; No borramos porque no afectamos a fiO
+    }
   }
 }
 \end{algorithm}

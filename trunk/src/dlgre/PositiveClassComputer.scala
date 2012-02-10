@@ -41,7 +41,17 @@ class PositiveClassComputer(graph: GraphT[String, String],
     //RA: here need to add-rename the condition of stop
 
     val log = new FileWriter("log-test.txt");
-
+    val rolesToRandUse = new HashMap[String,Float]
+    val rolesToRandDisc = new HashMap[String,Float]
+    
+    //Establezco valores random para cada relacion que quedan estaticos, no cambio de criterio
+    rolesOrdenados.foreach { r =>
+    	var rand1: Float = Math.abs(new Random().nextFloat());
+    	var rand2: Float = Math.abs(new Random().nextFloat());
+    	rolesToRandUse(r) = rand1;
+    	rolesToRandDisc(r) = rand2;
+    }
+    
     while (madeChanges && !classes.isAllSingletons) { //&& (iteration < maxIteration) ) {
       print("En while mientras haya cambios y no sean todos singletones------------------\n\n");
 
@@ -57,8 +67,8 @@ class PositiveClassComputer(graph: GraphT[String, String],
           print("ROL: " + r + "\n");
           if (!rel_used.contains(r)) {
 
-            val rand1: Float = Math.abs(new Random().nextFloat());
-            val rand2: Float = Math.abs(new Random().nextFloat());
+           // val rand1: Float = Math.abs(new Random().nextFloat());
+            //val rand2: Float = Math.abs(new Random().nextFloat());
 
             var p_use: Float = 1;
             var p_disc: Float = 1;
@@ -76,15 +86,15 @@ class PositiveClassComputer(graph: GraphT[String, String],
               case e: Exception =>
                 print(r + " no tiene p_disc: usando 1\n");
             }
-            if (rand1 <= p_use) {
-              print("\tDio prob_uso: " + p_use + " mayor que rand1: " + rand1 + " reviso las clases...\n");
+            if (rolesToRandUse(r) <= p_use) {
+              print("\tDio prob_uso: " + p_use + " mayor que rand1: " + rolesToRandUse(r) + " reviso las clases...\n");
               classes.getClasses.foreach { cl =>
 
                 print("\tClase: " + cl.toString + "\n");
-                print("\tRelacion: " + r + " P_disc: " + p_disc + " rand2:" + rand2 + "\n");
+                print("\tRelacion: " + r + " P_disc: " + p_disc + " rand2:" + rolesToRandDisc(r) + "\n");
 
                 cl.e2.foreach { entry =>
-                  if (rand2 <= p_disc) {
+                  if (rolesToRandDisc(r) <= p_disc) {
                     print("\t\tDiscernible: (" + new Existential(r, cl.e1.formula).prettyprint);
                     print(", " + new Existential(r, entry.formula).prettyprint + ")\n");
                     if (classes.add(new Existential(r, cl.e1.formula), new Existential(r, entry.formula))) {
@@ -103,7 +113,7 @@ class PositiveClassComputer(graph: GraphT[String, String],
                 }
               }
             } else {
-              println(r + ", no dio la probabilidad de uso, rand: " + rand1 + " Prob_uso: " + p_use);
+              println(r + ", no dio la probabilidad de uso, rand: " + rolesToRandUse(r) + " Prob_uso: " + p_use);
             }
           }
         }

@@ -131,7 +131,7 @@ def add(f1: Formula, f2: Formula) = {
 				println("\nIS not trivial: "+newExtension2+" , "+isNontrivial(newExtension2));
 				println("\nes informativa newExt2"+isNontrivial(newExtension2));
 				
-				if (isNontrivial(newExtension2)){//&& isInformative(newExtension2)) { saque esto por nueva condicion 
+				if (isNontrivial(newExtension2) && isInformative(newExtension2)) { //saque esto por nueva condicion 
 					memoizedExtensions += conjunction2 -> newExtension2;
 					entry.e2 += Entry(newExtension2, conjunction2);
 					print(conjunction2.prettyprint + ":" + newExtension2 + ", ");
