@@ -8,11 +8,19 @@
 \usepackage{latexsym}
 \usepackage[draft]{fixme}
 \usepackage{xspace}
+\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
+
 \setlength\titlebox{6.5cm}    % Expanding the titlebox
 
 \newcommand{\pdisc}{\small \textsf{p\_disc}\xspace}
 \newcommand{\puse}{\small \textsf{p\_use}\xspace}
 
+\newcommand{\RE}{\textsf{RE}\xspace}
+\newcommand{\REL}{\textsf{REL}\xspace}
+\newcommand{\IR}{\textrm{I}\!\textrm{R}}
+\newcommand{\gM}{\mathcal{M}}
+\newcommand{\el}{\mathcal{EL}}
+\newcommand{\interp}[1]{|\!|#1|\!|}
 
 \title{Enriching a referential expresion with overspecification and nondeterminism}
 
@@ -48,6 +56,14 @@
 \begin{abstract}
   This paper present an algorithm with a new form of adquire automatically reference expresion with overspecification and nondeterminism. We modify the algorithm described in~\cite{areces08} adding probabilities of use and discernibility extracted from a corpora in order to generate referential expresion like we see in a manual corpus of referential expresion. We will show how the algorithm can learn probabilities from the manual corpus of some picture make by~\cite{viethen} and use those probabilities in another pictures with similarity vocabulary with successfull results. We achieve \% precision and \% recall. 
 \end{abstract}
+
+\paragraph{Main contributions}
+\begin{itemize}
+\item We address needs discussed in deemter et al.\ article on non determinism and overspecification
+\item We show how to implement the ideas as a modification of areces et al.\ algorithm
+\item We show how to compute \pdisc y \puse from corpus
+\item We test in interesting examples
+\end{itemize}
 
 \input{gre}
 \input{overspecification}
