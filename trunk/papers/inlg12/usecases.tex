@@ -3,3 +3,16 @@
 \fxnote{Carlos y Romina working here}
 
 FIND INTERESING EXAMPLES (e.g., failures of overspecification of the IA algorithm). 
+
+\begin{enumerate}
+
+\item Incluir relaciones: comparacion con el algoritmo de EL anterior que priorizaba 
+propiedades. 
+
+\item Overspecification mediante \puse.  Example where with one fix order, the IA algorithm cannot generate two overspecified expressions. Ejemplo: orden "type, color, size" modelo con dos esferas una grande una chica una azul, una verde" Dos expresiones overspecified "ball, blue" y "ball, big" pero cualquier orden va a priorizar color sobre size o vice-versa, por lo que puede generar solo una de ellas.  Buscar en el corpus un ejemplo similar. 
+
+\item Overspecification mediante \pdisc: "ball, blue, big" con modelo igual al anterior.  El algoritmo IA generaria solo "ball, blue" o "ball, big" pero no puede seguir overspecifing una vez que el target se alcanzo.  Nuestro algoritmo puede hacerlo si falla \pdisc. 
+
+\item Comparar No-determinismo random vs. no-determinismo guiado por corpus.  Experimento, tomar modelo de 7 elementos, hacer 20 corridas con el algoritmo usando \pdisc y \puse del corpus, y 20 corridas con \pdisc y \puse al azar, y comparar con el corpus.  
+
+\end{enumerate}
