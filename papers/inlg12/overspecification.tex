@@ -15,3 +15,14 @@ such as the red cup in this situation. To account for this, the IA could be revi
 
 In this paper we address the concrete questions: ``Why and how do speakers overspecify their references?'' and ``Why and how do speakers produce different referring expressions in isomorphic scenarios?''. In other words, in this paper we propose and test a non-deterministic algorithm that is able to generate overspecified referring expressions.  
 
+
+%%%% p_use p_disc
+
+The probability of use of a property p_i is the probability that p_i is included in a referring expression without considering how discriminating this property is in the referring context. This property is related with ‘salience’; in general, if the salience of a property is high, its use probability is high due to the fact that is a property that ‘comes to mind’ easily and the person may decide to include it in the referring expression before even considering its discriminatory power in context. For instance, bright colors or unusual sizes are properties with high probability of use because they catch the speaker attention very easily. However, as we define it, the probabilty of use is not the same as salience, since probability of use is defined independently of the particular context in which the referring expression is produced, while salience is in general defined with respect to the context. 
+
+p_use (p_i) = (# uses of p_i) / (# of RE)
+ 
+The probability of discrimination of a property p_i is the probability that p_i is understood by the audience (i.e., the interpreter of the referring expression). By understood we mean that the interpreter is able to identify the target as an object that exhibits the property p_i. The property of discrimination is affected by different factors: The first factor is the certainty that the property p_i is true of the target (for instance, gradable properties are not certain because people might have different opinions of whether something is small or middle sized). The second factor is the certainty that the audience will know about the property p_i (for instance, a technical property will have a low probability of discrimination). The third factor is lexical, does the audience how the property p_i, is realized in the target language?
+
+p_disc = \sum ( 1 \ length RE) \ #RE donde aparece p_i
+
