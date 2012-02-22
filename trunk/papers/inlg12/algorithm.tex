@@ -8,7 +8,7 @@
 %\newcommand{\puse}{\textit{p}\_\textit{use}}
 %\newcommand{\pdisc}{\textit{p}\_\textit{disc}}
 
-The algorithm is a modification of the algorithm presented by \cite{Areces2008}
+The algorithm is a modification of the algorithm presented by \cite{arec2:2008:Areces}
 
 We are trying to have an algorithm that generate a reference expresion for a target element in a fixed situation, like in the picture. 
 \begin{figure}[htb]
@@ -19,7 +19,7 @@ We are trying to have an algorithm that generate a reference expresion for a tar
 Example figure
 }
 \end{figure}
-The element that we are try to generate a reference expresion has properties and relation with others elements. Let's go to call this description "the model", that model can be in xml format like the following example.
+The element that we are try to generate a reference expresion has properties and relation with others elements. Let's go to call this description ``the model'', that model can be in xml format like the following example.
 \begin{verbatim}
 <problem refer-to="b1">
   <individual id="b1">
@@ -40,7 +40,7 @@ The element that we are try to generate a reference expresion has properties and
   </individual>
 </problem>
 \end{verbatim}
-The first thing that we saw is there are algorithms that gives all properties of element before give a relation with another elements, but it see not human. A human can use relations, properties but there is not standard form of use, it mean not everytimes human use properties or relation it depends of the situation. In order to take into account this problem and give more human reference expresion we modify the model for give the same importance to properties and relation, we create a dummy element wich is going to be related to each elements with te relation of the properties that the elements has, it mean every property is going to be a relation with the dummy element "c" like we show in the example.
+The first thing that we saw is there are algorithms that gives all properties of element before give a relation with another elements, but it see not human. A human can use relations, properties but there is not standard form of use, it mean not everytimes human use properties or relation it depends of the situation. In order to take into account this problem and give more human reference expresion we modify the model for give the same importance to properties and relation, we create a dummy element wich is going to be related to each elements with te relation of the properties that the elements has, it mean every property is going to be a relation with the dummy element ``c'' like we show in the example.
 
 \begin{verbatim}
 <problem refer-to="b1">
@@ -68,27 +68,29 @@ The first thing that we saw is there are algorithms that gives all properties of
 and plus, we use the probabilities for properties and relation calculated from a human corpora.
 With this background we explain the algorithm.
 
-\REL is the set of relation symbols in the signature. It include the properties that are right now relation to the dummy simbol "c". 
+\REL is the set of relation symbols in the signature. It include the properties that are right now relation to the dummy simbol ``c''. 
 
 For each $R \in \REL$ we asume defined two values $R.\puse \in \IR$, the 
 probability of using relation $R$ in a RE; and $R.\pdisc \in \IR$, the 
 probability that the hearer recognizes relation $R$. 
 
 The algorithm compute the $\mathcal{L}$-similarity sets from a model. 
-We are going to have 2 set of formulas, the first one is the set of formulas that have not overspecification, and give the limit of iteration of the program, and the second one the set of formulas that give overspecification for some elements in case that they run enough for found them.
+We are going to have 2 set of formulas, the first one set of formulas are that have not overspecification, and give the limit of iterations of the program, and the second one set of formulas gives overspecification for some elements in case that they run enough for found them.
 
-We calculate random numbers for each relation, those random numbers are fixed for the entire execution, it mean that we want not to re-calculate the random in each time for relation, it is like a human don't chance your main of if a word is used or not and if it is discernible or not.
+We calculate two random numbers for each relation, those random numbers are fixed for the entire execution, one for use an another for discernibility. 
+
+it mean that we want not to re-calculate the random in each time for relation, it is like a human don't chance your main of if a word is used or not and if it is discernible or not.
 
 How the algorithm take the goal?
-While there is change in the first formula, for each of the relation ordered by higher probability of use, if the probability of use if higher than a
+While there is change in the first set os formulas, for each of the relation ordered by higher probability of use, if the probability of use if higher than random probability of the relation for each partition at the moment if the probability of discernibility is higher than the random probability of the relation we add the informatives formulas of each side of set of formulas, but if the discernibility probability of the relation is less than the random probability for that relation we only add the formula to the right side, it is the side that have overspecification.
+When no chance of the left side is made the algorithm finish. You can see that sometimes the algorithm generate one overspecification and finish because not see change in the left side, it is to prevent the non-termination of the algorithm.
 
-, we saw the probability of use of
 \begin{algorithm}[h]
 \dontprintsemicolon
 \caption{Computing the $\mathcal{L}$-similarity sets}
 \label{algo:bisim-l}
 \KwIn{A model $\gM = (\Delta, \interp{\cdot})$ , a list $Rs \in \REL^*$ ordered by $R.\puse$
- and a list of random probabilities for each relation}
+ and a two list of random probabilities for each relation one for use, an another for discernibility}
 \KwOut{A set \RE of pairs of formulas such that
 $\{\interp{\varphi_R} \mid (\varphi_O,\varphi_R) \in \RE\}$ is the set of
 $\mathcal{L}$-similarity 
@@ -99,7 +101,7 @@ $\RE \leftarrow \{(\top,\top)\}$
 \While{$\exists (\varphi_O,\varphi_R) \in \RE. |\interp{\varphi_O}|>1$}{
     \RE'.\emph{Obs} $\leftarrow$ \RE.\emph{Obs} \;
     \For{$R \in Rs$}{
-        \If{random() $\le R.\puse$}{
+        \If{$R.\randomuse \le R.\puse$}{
             \For{$P \in \RE$}{
                 add$_\mathcal{L}(R, P, \RE)$}
                 }\;
@@ -136,7 +138,7 @@ $\RE \leftarrow \{(\top,\top)\}$
 \dontprintsemicolon
 \caption{add$_\el(R, (\varphi_O, \varphi_R), \RE)$}
 \label{algo:bisim-add-el}
-\If{random() $\le R.\pdisc$}{
+\If{$R.\randomdisc \le R.\pdisc$}{
 \For{$(\psi_O,\psi_R) \in \RE$ with $|\interp{\psi_O}| > 1$}{
   \If{$\psi_O \sqcap \exists R.\varphi_O$ is not subsumed in $\RE$ {\bf and}
     $\interp{\psi_O \sqcap \exists R.\varphi_O} \neq \emptyset$ {\bf and}
