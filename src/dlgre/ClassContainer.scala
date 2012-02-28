@@ -12,7 +12,7 @@ case class Entry(extension: BitSetSet[String], formula: Formula) {
 
 	override def hashCode = extension.hashCode;
 
-	override def toString = formula.prettyprint + " : " + extension;
+	override def toString = formula.prettyprint + ": " + extension;
 }
 
 //Ahora tenemos 2 formulas (fi_O, fi_R)
@@ -23,6 +23,7 @@ case class Entry2(e1: Entry, e2: HashSet[Entry]) {
 	override def hashCode = e1.extension.hashCode;
 
 	override def toString = {
+	    //print("PRINT!!!!!!!!!!!!!!!!");
 		var res: String = e1.toString() + ", { ";
 		var resAnt: String = e1.toString() + ", { ";
 		var last: String = "";
@@ -39,6 +40,26 @@ case class Entry2(e1: Entry, e2: HashSet[Entry]) {
 		e2.foreach { ext => res += "(" + e1.toString() + ", " + ext.toString() + ")\n" }
 		res;*/
 	}
+    def showString = {
+	    //print("PRINT!!!!!!!!!!!!!!!!");
+      //sacar
+/*		var res: String = e1.toString() + ", { ";
+		var resAnt: String = e1.toString() + ", { ";
+		var last: String = "";
+		
+		e2.foreach { ext => 
+		  resAnt = res;
+ 		  res += ext.toString() + " , "
+ 		  last = ext.toString();
+ 		}
+		
+		resAnt += last + " }";
+		resAnt;*/
+		var res: String = "";
+		e2.foreach { ext => res += "(" + e1.toString() + ", " + ext.toString() + ")\n" }
+		res;
+	}
+
 }
 
 val classesGraph = new grapht.GraphT[Entry2, String]();
@@ -120,28 +141,24 @@ def add(f1: Formula, f2: Formula) = {
 				found = false;
 			}
 
-			if (isNontrivial(newExtension1) /*&& isInformative(newExtension1)*/) {
-				print("\t\tSe agrega (" + entry.e1 + ", { ");
+			if ( isNontrivial(newExtension1) /*&& isInformative1(newExtension1)*/ ) {
+				println("\t\tSe agrega (" + entry.e1 + ", { ");
 				memoizedExtensions += conjunction1 -> newExtension1;
 
 				other.e2.foreach { en =>
-				val conjunction2 = new Conjunction(List(f2, en.formula)).removeConjunctionsWithTop;
-				val newExtension2 = en.extension.intersect(extension2);
+					val conjunction2 = new Conjunction(List(f2, en.formula)).removeConjunctionsWithTop;
+					val newExtension2 = en.extension.intersect(extension2);
 
-				println("\nIS not trivial: "+newExtension2+" , "+isNontrivial(newExtension2));
-				println("\nes informativa newExt2"+isNontrivial(newExtension2));
+					print("\t" + conjunction2.prettyprint + ": " + newExtension2 + ":");
+					println("es informativa2: " + isInformative2(newExtension2));
 				
-				if (isNontrivial(newExtension2) && isInformative(newExtension2)) { //saque esto por nueva condicion 
-					memoizedExtensions += conjunction2 -> newExtension2;
-					entry.e2 += Entry(newExtension2, conjunction2);
-					print(conjunction2.prettyprint + ":" + newExtension2 + ", ");
-				}
+					if (isNontrivial(newExtension2) && isInformative2(newExtension2)) { //saque esto por nueva condicion 
+						memoizedExtensions += conjunction2 -> newExtension2;
+						entry.e2 += Entry(newExtension2, conjunction2);
+					}
 				}
 				print("})\n");
 
-				//println("\t isNonTrivial: " + isNontrivial(newExtension2) + " is informative: " + isInformative(newExtension2));
-				//if (!isNontrivial(newExtension2)) println("viene de isNontrivial");
-				//if (!isInformative(newExtension2)) println("viene de isInformative");
 				if (!found && !entry.e2.isEmpty) {
 					ret = addToGraph(entry) || ret;
 				}
@@ -149,7 +166,6 @@ def add(f1: Formula, f2: Formula) = {
 				println("No es informativo, no se agrega " + entry.e1);
 			}
 		}
-		println("}).");
 		}
 		if (getClasses.size > maxSize) {
 			maxSize = getClasses.size;
@@ -168,8 +184,8 @@ private def addToGraph(entry: Entry2) = {
 
 		children.foreach { ch => classesGraph.addEdge(entry, ch, "") }
 		parents.foreach { par =>
-		classesGraph.addEdge(par, entry, "");
-		potentiallyUninformative += par.e1;
+			classesGraph.addEdge(par, entry, "");
+			potentiallyUninformative += par.e1;
 		}
 
 		removeUninformativeSubsets();
@@ -257,13 +273,31 @@ private def removeUninformativeSubsets() = {
 // Devuelve true si la extension no existe en las clases y no es "subsumed" sobre las mismas.
 // _should_ be deprecated, but right now this is faster than
 // computing the children and then checking informativity only over those.
-private def isInformative(set: BitSetSet[String]) = {
+private def isInformative1(set: BitSetSet[String]) = {
 	val unionOverSubsets = graph.getNodeSet;
 
 	getClasses.foreach { cl =>
-	if (cl.e1.extension isSubsetOf set) {
-		unionOverSubsets.addAll(cl.e1.extension);
+		if (cl.e1.extension isSubsetOf set) {
+			unionOverSubsets.addAll(cl.e1.extension);
+		}
 	}
+
+	set != unionOverSubsets
+}
+
+
+// Devuelve true si la extension no existe en las clases y no es "subsumed" sobre las mismas.
+// _should_ be deprecated, but right now this is faster than
+// computing the children and then checking informativity only over those.
+private def isInformative2(set: BitSetSet[String]) = {
+	val unionOverSubsets = graph.getNodeSet;
+
+	getClasses.foreach { cl =>
+		cl.e2.foreach { en =>
+			if (en.extension isSubsetOf set) {
+				unionOverSubsets.addAll(en.extension);
+			}
+		}
 	}
 
 	set != unionOverSubsets

@@ -64,6 +64,7 @@ object Main {//1
     var rolesDesOrdenados = List[String]()
     val so = scala.io.Source.fromFile(args(2))//"modelos/prob_uso_ord/P_uso_ord-1.txt")
     var num:Int = 0;
+    
     so.getLines.foreach( line => {//3
       try {
         
@@ -73,8 +74,9 @@ object Main {//1
     	rolesDesOrdenados ::= rol;
     	num = num + 1;
       }	
-      catch { case e: Exception => ; }
       
+      catch { case e: Exception => ; }
+      //println("ROLES DESORDENADOS; "+rolesDesOrdenados);
     })//fin 3
 /*-----------------*/
     var arr = new Array[Float](num);
@@ -112,8 +114,8 @@ object Main {//1
       //maxIteration: Ahora se toma como parametro
       while(iteration < maxIteration.toInt) {//6
         println("---------------------------------");
-        fw.write("\n---------------------------------");
-        fw2.write("\n---------------------------------");
+        fw.write("\n---------------------------------\n");
+        fw2.write("\n---------------------------------\n");
         iteration += 1;
         //Aca le paso false, pero le deberia pasar true para que me muestre los logs
         val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, informative).compute;
@@ -121,12 +123,25 @@ object Main {//1
         println(" done, " + (System.currentTimeMillis - start) + " ms.");
         //println("\nBisimulation classes with their concepts (positive mode):");
         if (target=="all"){//7
-            //println("-------------------------------------");
+            println("-------------------------------------");
             result.foreach { entry2 =>
 	        	println(entry2);
 	        	fw.write(entry2 + "\n");
 	        	fw2.write(entry2 + "\n");
 		    }
+            //sacar
+          /*result.foreach { 
+            	entry2 => entry2.e2.foreach {
+            		entry =>
+            			//if (entry.extension.asScalaCollection.contains(target)){
+		                  println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  //println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  
+		                  fw2.write("\n" + entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                //}
+            	}
+          }*/
         } else {
             //Aca imprimo solo para el target
               result.foreach { 
@@ -134,7 +149,10 @@ object Main {//1
             		entry =>
             			if (entry.extension.asScalaCollection.contains(target)){
 		                  println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                  fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  
+		                  fw2.write("\n" + entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                }
             	}
              }

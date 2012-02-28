@@ -15,7 +15,7 @@ case class Existential(role:String, sub:Formula) extends Formula {
   		  } else if (sub == Top()) {
   			  role
   		  } else {  //Ex-small.(Ex-terminal.(T)) & Ex-green.(Ex-terminal.(T)) & Ex-cube.(T): s6
-  			  role + " " + sub.toString;
+  			  role + "( " + sub.toString + ")";
   		  }
         } 
   		

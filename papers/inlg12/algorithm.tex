@@ -89,8 +89,9 @@ When no chance of the left side is made the algorithm finish. You can see that s
 \dontprintsemicolon
 \caption{Computing the $\mathcal{L}$-similarity sets}
 \label{algo:bisim-l}
-\KwIn{A model $\gM = (\Delta, \interp{\cdot})$ , a list $Rs \in \REL^*$ ordered by $R.\puse$
- and a two list of random probabilities for each relation one for use, an another for discernibility}
+\KwIn{A model $\gM = (\Delta, \interp{\cdot})$ , a list $Rs \in \REL^*$
+ %and a two list of random probabilities for each relation one for use, an another for discernibility
+}
 \KwOut{A set \RE of pairs of formulas such that
 $\{\interp{\varphi_R} \mid (\varphi_O,\varphi_R) \in \RE\}$ is the set of
 $\mathcal{L}$-similarity 
@@ -98,6 +99,10 @@ sets of $\gM$.}
 
 $\RE \leftarrow \{(\top,\top)\}$
 
+\For{$R \in Rs$}{
+	$R.\randomuse$ = Random()\\
+	$R.\randomdisc$ = Random()
+}
 \While{$\exists (\varphi_O,\varphi_R) \in \RE. |\interp{\varphi_O}|>1$}{
     \RE'.\emph{Obs} $\leftarrow$ \RE.\emph{Obs} \;
     \For{$R \in Rs$}{
