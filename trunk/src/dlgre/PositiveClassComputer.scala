@@ -63,6 +63,7 @@ class PositiveClassComputer(graph: GraphT[String, String],
       var rel_used = new HashSet[String]()
 
       try {
+        //println("ROLES ORDENADOS: "+rolesOrdenados)
         rolesOrdenados.foreach { r =>
           print("ROL: " + r + "\n");
           if (!rel_used.contains(r)) {
@@ -100,6 +101,8 @@ class PositiveClassComputer(graph: GraphT[String, String],
                     if (classes.add(new Existential(r, cl.e1.formula), new Existential(r, entry.formula))) {
                       madeChanges = true;
                       rel_used += r;
+                      //print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+                      //REVISAR ESTO
                       throw new Exception("break");
                     }
                   } else {
@@ -119,7 +122,7 @@ class PositiveClassComputer(graph: GraphT[String, String],
         }
       } catch { case e: Exception => }
     }
-    print("\t\tClases que quedaron: " + classes.getClasses);
+    //print("\t\tClases que quedaron: " + classes.getClasses);
     log.close();
     classes.getClasses
 
