@@ -20,6 +20,9 @@ case class Entry2(e1: Entry, e2: HashSet[Entry]) {
 	override def equals(that: Any): Boolean =
 		that.isInstanceOf[Entry2] && that.asInstanceOf[Entry2].e1.extension == e1.extension;
 
+	//override def equals2(that: Any): Boolean =
+		//that.isInstanceOf[Entry2] && that.asInstanceOf[Entry2].e2.extension == e2.extension;
+	
 	override def hashCode = e1.extension.hashCode;
 
 	override def toString = {
@@ -102,7 +105,7 @@ def isAllSingletons = {
 
 // Devuelve true, si se agrega nueva formula. Para esto se fija si la formula
 // representa un subconjunto mas chico de elementos (pero no vacio).
-def add(f1: Formula, f2: Formula) = {
+def addAmbos(f1: Formula, f2: Formula) = {
 	val extension1 = getExtension(f1);
 	val extension2 = getExtension(f2);
 	val entry1 = Entry(extension1, f1);
@@ -111,17 +114,17 @@ def add(f1: Formula, f2: Formula) = {
 
 	//println("Entry: " + entry);
 	//println("Agregar f1: " + f1.prettyprint + " f2: " + f2.prettyprint);
-	if (uninformativeClasses.contains(extension1) && f1!=Top) // extension 1 es pq nos fijamos solamente en 1r formula
+	/*if (uninformativeClasses.contains(extension1) && f1!=Top) // extension 1 es pq nos fijamos solamente en 1r formula
 	{
-		println("La formula1 " + f1.prettyprint + " : " + extension1 + " no es informativa");
+		//println("La formula1 " + f1.prettyprint + " : " + extension1 + " no es informativa");
 		false;
 	} else if (!isNontrivial(extension1)) {
-		println("La formula1 " + f1.prettyprint  + " : " + extension1 + " no representa ningun elemento.");
+		//println("La formula1 " + f1.prettyprint  + " : " + extension1 + " no representa ningun elemento.");
 		false;
 	} else if (!isNontrivial(extension2)) {
-		println("La formula2 " + f2.prettyprint  + " : " + extension2 + " no representa ningun elemento.");
+		//println("La formula2 " + f2.prettyprint  + " : " + extension2 + " no representa ningun elemento.");
 		false;
-	} else {
+	} else {*/
 		val knownClasses = getClasses; // Es una lista de Entry2.
 		var ret = false;
 
@@ -129,51 +132,115 @@ def add(f1: Formula, f2: Formula) = {
 
 		knownClasses.foreach { other =>
 
-		if (other.e1.extension.size > 1) { // No es singleton.
-			val conjunction1 = new Conjunction(List(f1, other.e1.formula)).removeConjunctionsWithTop;
-			val newExtension1 = other.e1.extension.intersect(extension1);
-			var newNode: Boolean = true;
-
-			classesGraph.getAllNodes.foreach { node => if (node.e1 == entry1) { entry = node } };
-			var found: Boolean = true;
-			if (entry == null) {
-				entry = Entry2(Entry(newExtension1, conjunction1), new HashSet[Entry]());
-				found = false;
-			}
-
-			if ( isNontrivial(newExtension1) /*&& isInformative1(newExtension1)*/ ) {
-				println("\t\tSe agrega (" + entry.e1 + ", { ");
-				memoizedExtensions += conjunction1 -> newExtension1;
-
-				other.e2.foreach { en =>
-					val conjunction2 = new Conjunction(List(f2, en.formula)).removeConjunctionsWithTop;
-					val newExtension2 = en.extension.intersect(extension2);
-
-					print("\t" + conjunction2.prettyprint + ": " + newExtension2 + ":");
-					println("es informativa2: " + isInformative2(newExtension2));
+			if (other.e1.extension.size > 1) { // No es singleton.
+				val conjunction1 = new Conjunction(List(f1, other.e1.formula)).removeConjunctionsWithTop;
+				val newExtension1 = other.e1.extension.intersect(extension1);
+				var newNode: Boolean = true;
 				
-					if (isNontrivial(newExtension2) && isInformative2(newExtension2)) { //saque esto por nueva condicion 
-						memoizedExtensions += conjunction2 -> newExtension2;
-						entry.e2 += Entry(newExtension2, conjunction2);
+				var found: Boolean = false;
+				classesGraph.getAllNodes.foreach { node => if (node.e1 == entry1) { found = true; } };
+				
+				if (found == false) {
+					entry = Entry2(Entry(newExtension1, conjunction1), new HashSet[Entry]());
+				
+					if ( isNontrivial(newExtension1) /*&& isInformative1(newExtension1)*/ ) {
+						//println("\t\tSe agrega (" + entry.e1 + ", { ");
+						memoizedExtensions += conjunction1 -> newExtension1;
+	
+						other.e2.foreach { en =>
+							val conjunction2 = new Conjunction(List(f2, en.formula)).removeConjunctionsWithTop;
+							val newExtension2 = en.extension.intersect(extension2);
+		
+							//print("\t" + conjunction2.prettyprint + ": " + newExtension2 + ":");
+							//println("es informativa2: " + isInformative2(newExtension2));
+						    //println("\nOTHER:::"+en);
+						    //println("FORMULA:::"+f2.prettyprint);
+						    
+						    if (isNontrivial(newExtension2)) {
+								if (isInformative2(newExtension2)){ 
+									memoizedExtensions += conjunction2 -> newExtension2;
+									entry.e2 += Entry(newExtension2, conjunction2);
+								}
+								else {
+									memoizedExtensions += conjunction2 -> newExtension2;
+									val rolesViejos: Set[String] = en.formula.roles;
+									var rolesNuevos: Set[String] = f2.roles; 
+									println("Roles viejos: " + rolesViejos + ", roles nuevos: " + rolesNuevos);
+									if ( rolesViejos.intersect(rolesNuevos).isEmpty ) { // 
+										entry.e2 += Entry(newExtension2, conjunction2);
+									}
+								}
+						    }
+						}//fin foreach
+						ret = addToGraph(entry) || ret;
+					} else {
+						println("No es informativo, no se agrega " + entry.e1);
 					}
 				}
-				print("})\n");
-
-				if (!found && !entry.e2.isEmpty) {
-					ret = addToGraph(entry) || ret;
-				}
-			} else {
-				println("No es informativo, no se agrega " + entry.e1);
 			}
-		}
 		}
 		if (getClasses.size > maxSize) {
 			maxSize = getClasses.size;
 		}
 		ret
-	}
-
 }
+
+
+//-------------------------------------
+def addUna(f2: Formula) = {
+	val extension2 = getExtension(f2);
+	val entry2 = Entry(extension2, f2);
+
+	//println("Entry: " + entry);
+	//println("Agregar f1: " + f1.prettyprint + " f2: " + f2.prettyprint);
+	/*if (uninformativeClasses.contains(extension1) && f1!=Top) // extension 1 es pq nos fijamos solamente en 1r formula
+	{
+		//println("La formula1 " + f1.prettyprint + " : " + extension1 + " no es informativa");
+		false;
+	} else if (!isNontrivial(extension1)) {
+		//println("La formula1 " + f1.prettyprint  + " : " + extension1 + " no representa ningun elemento.");
+		false;
+	} else if (!isNontrivial(extension2)) {
+		//println("La formula2 " + f2.prettyprint  + " : " + extension2 + " no representa ningun elemento.");
+		false;
+	} else {*/
+		val knownClasses = getClasses; // Es una lista de Entry2.
+		var ret = false;
+		potentiallyUninformative.clear();
+
+		knownClasses.foreach { other =>
+			other.e2.foreach { en =>
+				val conjunction2 = new Conjunction(List(f2, en.formula)).removeConjunctionsWithTop;
+				val newExtension2 = en.extension.intersect(extension2);
+				//print("\t" + conjunction2.prettyprint + ": " + newExtension2 + ":");
+				//println("es informativa2: " + isInformative2(newExtension2));
+			    //println("\nOTHER:::"+en);
+			    //println("FORMULA:::"+f2.prettyprint);
+
+			    if (isNontrivial(newExtension2)) { // Si respresenta algun elemento
+					if (isInformative2(newExtension2)) { 
+						memoizedExtensions += conjunction2 -> newExtension2;
+						other.e2 += Entry(newExtension2, conjunction2);
+					}
+					else {//caso no informative 
+						memoizedExtensions += conjunction2 -> newExtension2;
+						val rolesViejos: Set[String] = en.formula.roles;
+						var rolesNuevos: Set[String] = f2.roles; 
+						println("Roles viejos: " + rolesViejos + ", roles nuevos: " + rolesNuevos +" "+rolesViejos.intersect(rolesNuevos).isEmpty);
+						if ( rolesViejos.intersect(rolesNuevos).isEmpty ) { // 
+							other.e2 += Entry(newExtension2, conjunction2);
+							println("CASO AGREGUE::: "+other+ " ::: " +conjunction2);
+						}
+					}
+			    }
+			}//fin foreach
+		}
+		ret
+}
+
+
+
+
 //-------------------------------------
 private def addToGraph(entry: Entry2) = {
 	val children = findMaximalSubsets(entry);
@@ -300,7 +367,7 @@ private def isInformative2(set: BitSetSet[String]) = {
 		}
 	}
 
-	set != unionOverSubsets
+	(set != unionOverSubsets)//||(set == unionOverSubsets) 
 }
 
 /*

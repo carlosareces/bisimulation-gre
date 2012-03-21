@@ -14,25 +14,24 @@ import java.util.ArrayList
 import org.jgrapht.graph._;
 import scala.collection.mutable._;
 import util.StringUtils.join;
+import scala.util.Random;
 
 object Main {//1
   def main(args : Array[String]) : Unit = {//2
-    val positiveMode = (args(0) == "positive");
-    val maxIteration = args(5);
-    val target = args(4);
-    val fw = new FileWriter("test.txt") ;
-    val fw2 = new FileWriter("texto-test.txt") ;
+   
+   	val positiveMode = (args(0) == "positive");
+   	val maxIteration = args(5);
+   	val target = args(4);
     
+   	
+   	val fw = new FileWriter(args(6)+"der-formula-test.txt") ;
+   	val fw2 = new FileWriter(args(6)+"der-texto-test.txt") ;
+   	val fw3 = new FileWriter(args(6)+"izq-texto-test.txt") ;
+   	val fw4 = new FileWriter(args(6)+"izq-formula-test.txt") ;
+   
     var informative:Boolean = false;
-    if (args(6)=="informative"){
-      informative = true; 
-    } else {
-      informative = false;
-    }
-   //println(args.length);
-   //println(informative, target, maxIteration);
-    // * warmup for runtime measurements
     
+ 
     // LB: I changed (0,20 to 0,0) these line in order to remove the runtime error in RandomGenerator
   /*  Iterator.range(0,0).foreach { x =>
       val graph = dlgre.generate.RandomGenerator.generate(20, 10, 4, 0.1, 0.1);
@@ -52,9 +51,6 @@ object Main {//1
       readGraph(args(1))
     }*/
     
-    //println("Loaded graph: " + graph.getAllNodes.size + " nodes, " + graph.getAllEdges.size + " edges.");
-    
-    //print("\nComputing bisimulation classes ");
     
     val start = System.currentTimeMillis;
     val simplifier = new dlgre.formula.Simplifier(graph);
@@ -75,8 +71,7 @@ object Main {//1
     	num = num + 1;
       }	
       
-      catch { case e: Exception => ; }
-      //println("ROLES DESORDENADOS; "+rolesDesOrdenados);
+      catch { case e: Exception => println("Fail input use_probabilities file\n"); }
     })//fin 3
 /*-----------------*/
     var arr = new Array[Float](num);
@@ -106,7 +101,7 @@ object Main {//1
     	//RA: adding line specting first element string "->" second element(double)
     	rolesToProbDisc(sp2.apply(0).trim) = (sp2.apply(1).trim).toFloat;
       }
-      catch { case e: Exception => ; }//no hace nada en caso de leer lineas vacias o con otro formato
+      catch { case e: Exception => println("Fail disc_probabilities file\n") ; }//no hace nada en caso de leer lineas vacias o con otro formato
     })//fin 4
     if( positiveMode ) {//5
       //println("Positive mode");
@@ -114,62 +109,86 @@ object Main {//1
       //maxIteration: Ahora se toma como parametro
       while(iteration < maxIteration.toInt) {//6
         println("---------------------------------");
-        fw.write("\n---------------------------------\n");
+        fw.write("\n---------------------------------\n");	
         fw2.write("\n---------------------------------\n");
         iteration += 1;
-        //Aca le paso false, pero le deberia pasar true para que me muestre los logs
-        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, informative).compute;
+        
+        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados).compute;
         println("\n-----------------------------------------------------------------------------");
         println(" done, " + (System.currentTimeMillis - start) + " ms.");
         //println("\nBisimulation classes with their concepts (positive mode):");
         if (target=="all"){//7
             println("-------------------------------------");
-            result.foreach { entry2 =>
-	        	println(entry2);
-	        	fw.write(entry2 + "\n");
-	        	fw2.write(entry2 + "\n");
-		    }
-            //sacar
-          /*result.foreach { 
-            	entry2 => entry2.e2.foreach {
+            result.foreach {       
+              
+              entry2 => entry2.e2.foreach {
+            	  	fw4.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+		            fw3.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
             		entry =>
-            			//if (entry.extension.asScalaCollection.contains(target)){
-		                  println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
-		                  //println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
-		                  fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+            			
+		                //println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                //println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                
+		                fw2.write("\n" + entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                  
-		                  fw2.write("\n" + entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
-		                //}
-            	}
-          }*/
+              }
+		    }
+                       
         } else {
             //Aca imprimo solo para el target
               result.foreach { 
             	entry2 => entry2.e2.foreach {
             		entry =>
             			if (entry.extension.asScalaCollection.contains(target)){
-		                  println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
-		                  println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  //println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  //println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                  fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                  
 		                  fw2.write("\n" + entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                }
             	}
-             }
-         }//7 fin 
+             
+              }
+
+              result.foreach { entry2 =>
+            	//entry2 => entry2.e1 {
+            		//entry =>
+            		if (entry2.e1.extension.asScalaCollection.contains(target)){
+		                 //println(entry2.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+		                 //println(entry2.e1.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+		                 fw4.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+		                 
+		                 fw3.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+		            }
+            	}
+              }
       }// fin 6 while result.foreach { entry => println(entry.extension.asScalaCollection.toString + ": " + dlgre.realize.Realizer.realize(entry.formula.removeConjunctionsWithTop, "noun", "drawer")) };
+    
     } else { //fin  positive-node
       println("\nBisim mode");
       print("..[max=0]");
 
       val result = new BisimulationClassesComputer(graph, List[String](), rolesToProbUse).compute;
 
-      println(" done, " + (System.currentTimeMillis - start) + " ms.");
+      var tiempo = System.currentTimeMillis - start;
+      if (tiempo>1000){
+        var mostrar_tiempo = tiempo/1000;
+        if (mostrar_tiempo>60){
+          println(" done, " + mostrar_tiempo/60 + " m.");
+        }
+        else println(" done, " + tiempo + " s.");
+      }
+
+      else println(" done, " + tiempo + " ms.");
       println("\nBisimulation classes with their concepts:");
       result.foreach { fmla => println(simplifier.simplify(fmla).prettyprint + ": " + util.StringUtils.join(fmla.extension(graph).asScalaCollection,",")) };
     }//fin 5 else
     fw.close();
     fw2.close();
+    fw3.close();
+    fw4.close();
+
   }
 
   
@@ -197,8 +216,8 @@ object Main {//1
       }
   }
     
+    
     ret
-
   }
   
   private def mygetattr(node : scala.xml.Node, attr : String) = {
@@ -207,4 +226,5 @@ object Main {//1
       case _ => throw new Exception("Undefined attribute " + attr + " in node " + node); 
     }
   }
+  
 }
