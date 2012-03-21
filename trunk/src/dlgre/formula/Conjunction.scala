@@ -15,8 +15,10 @@ case class Conjunction(sub:List[Formula]) extends Formula {
   		override def toString = {
 			join(sub.map { f => f.toString }, " , ");
         } 
-  		
-          
+		
+  		//override def rolesUsados = {
+	    //      join(sub.map { f => f.rolesUsados });
+	    //} 
           
 	override def prettyprint = {
           join(sub.map { f => f.prettyprint }, " & ");

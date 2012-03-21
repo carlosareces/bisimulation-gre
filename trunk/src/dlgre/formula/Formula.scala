@@ -17,7 +17,7 @@ abstract class Formula {
         
         def setToExtension(set:BitSetSet[String], graph:GraphT[String,String]) : Unit;
         
-        
+               
         def extension(graph:GraphT[String,String]) = {
           if( memoizedExtension == null ) {
             memoizedExtension = graph.getNodeSet;
@@ -31,11 +31,24 @@ abstract class Formula {
         def simplifyConjunctions(simplifier : List[Formula] => List[Formula]) : Formula = {
           this match {
             case Conjunction(l) => conjoin(simplifier(l map { x => x.simplifyConjunctions(simplifier)}))
+
             case Existential(r,sub) => Existential(r,sub.simplifyConjunctions(simplifier))
             case Literal(x,y) => this
             case Negation(sub) => Negation(sub.simplifyConjunctions(simplifier))
             case Top() => this
           }
+       }
+        
+        def roles: Set[String] = {
+          var res:HashSet[String] = new HashSet[String]();
+          this match {
+            case Conjunction(l) => l.foreach { f => res = res.union(f.roles) }
+            case Existential(r,sub) => res.add(r)
+            case Literal(x,y) => res.add(x)
+            case Negation(sub) => 
+            case Top() => 
+          }
+          res
        }
         
         def removeConjunctionsWithTop = {

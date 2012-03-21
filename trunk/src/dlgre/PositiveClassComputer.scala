@@ -17,28 +17,19 @@ import collection.JavaConversions._;
 class PositiveClassComputer(graph: GraphT[String, String],
   rolesToProbUse: Map[String, Float],
   rolesToProbDisc: Map[String, Float],
-  rolesOrdenados: List[String],
-  informative: Boolean) {
+  rolesOrdenados: List[String]) {
   val classes = new ClassContainer(graph);
 
   def compute = { //esta parte no se ejecuta ya que son todas relaciones
     val simplifier = new dlgre.formula.Simplifier(graph);
     // initialize predicates
     graph.getAllPredicates.foreach { p =>
-      classes.add(new Literal(p, true), new Literal(p, true));
+      classes.addAmbos(new Literal(p, true), new Literal(p, true));//esta no deberia pasar porque no tengo literales
+      println("CASO LITERAL :S");
     }
     //RA: Probabilities for roles from modelos/order.txt
 
     var madeChanges = true;
-    /*val s = scala.io.Source.fromFile("modelos/order.txt")
-    s.getLines.foreach( line => {
-        var sp = line.split(" -> ");
-    	//RA: adding line specting first element string "->" second element(double)
-    	rolesToProb(sp.apply(0)) = sp.apply(1).toDouble;
-    })
-    print ("ROLES _TO _PROB: ", rolesToProb);*/
-    // iterate over roles
-    //RA: here need to add-rename the condition of stop
 
     val log = new FileWriter("log-test.txt");
     val rolesToRandUse = new HashMap[String,Float]
@@ -51,12 +42,11 @@ class PositiveClassComputer(graph: GraphT[String, String],
     	rolesToRandUse(r) = rand1;
     	rolesToRandDisc(r) = rand2;
     }
-    
+    var it:Int = 0;
     while (madeChanges && !classes.isAllSingletons) { //&& (iteration < maxIteration) ) {
-      print("En while mientras haya cambios y no sean todos singletones------------------\n\n");
-
+      //print("En while mientras haya cambios y no sean todos singletones------------------\n\n");
+      it = it+1;
       madeChanges = false;
-
       //print("----------------------------- " + iteration);
 
       //RA: Para cada relacion le asignamos un booleano diciendo si esta relacion ya se uso.
@@ -65,30 +55,23 @@ class PositiveClassComputer(graph: GraphT[String, String],
       try {
         //println("ROLES ORDENADOS: "+rolesOrdenados)
         rolesOrdenados.foreach { r =>
-          print("ROL: " + r + "\n");
+          //print("ROL: " + r + "\n");
           if (!rel_used.contains(r)) {
-
-           // val rand1: Float = Math.abs(new Random().nextFloat());
-            //val rand2: Float = Math.abs(new Random().nextFloat());
 
             var p_use: Float = 1;
             var p_disc: Float = 1;
-            print("\t Probando el rol (ordenados por prob-uso): " + r + "\n");
 
             try { p_use = rolesToProbUse(r); }
             catch {
               case e: Exception =>
-
-                print(r + " no tiene p_use: usando 1\n");
             }
 
             try { p_disc = rolesToProbDisc(r); }
             catch {
               case e: Exception =>
-                print(r + " no tiene p_disc: usando 1\n");
             }
             if (rolesToRandUse(r) <= p_use) {
-              print("\tDio prob_uso: " + p_use + " mayor que rand1: " + rolesToRandUse(r) + " reviso las clases...\n");
+              //print("\tDio prob_uso: " + p_use + " mayor que rand1: " + rolesToRandUse(r) + " reviso las clases...\n");
               classes.getClasses.foreach { cl =>
 
                 print("\tClase: " + cl.toString + "\n");
@@ -96,22 +79,19 @@ class PositiveClassComputer(graph: GraphT[String, String],
 
                 cl.e2.foreach { entry =>
                   if (rolesToRandDisc(r) <= p_disc) {
-                    print("\t\tDiscernible: (" + new Existential(r, cl.e1.formula).prettyprint);
-                    print(", " + new Existential(r, entry.formula).prettyprint + ")\n");
-                    if (classes.add(new Existential(r, cl.e1.formula), new Existential(r, entry.formula))) {
+                    //print("\t\tDiscernible: (" + new Existential(r, cl.e1.formula).prettyprint);
+                    //print(", " + new Existential(r, entry.formula).prettyprint + ")\n");
+                	
+                    if (classes.addAmbos((new Existential(r, cl.e1.formula)), new Existential(r, entry.formula))) {
                       madeChanges = true;
                       rel_used += r;
-                      //print("!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
-                      //REVISAR ESTO
-                      throw new Exception("break");
+                      
+                      //throw new Exception("break");//para que era?
                     }
-                  } else {
-                    print("\t\tNo discernible: (Top, " + new Existential(r, entry.formula).prettyprint + ")\n");
-                    if (classes.add(new Top(), new Existential(r, entry.formula))) {
-                      //madeChanges = true; es del lado derecho, no se considera cambio       
-                      rel_used += r;
-                      throw new Exception("break");
-                    }
+                  } else if (classes.addUna(new Existential(r, entry.formula))){
+                		  rel_used += r;
+                		  madeChanges=true;
+                		  //throw new Exception("break"); //para que era? un break,salir del  ciclo try
                   }
                 }
               }
@@ -120,6 +100,7 @@ class PositiveClassComputer(graph: GraphT[String, String],
             }
           }
         }
+        //REVISE: Agregue madeChanges=True, por si sale por aca en caso de agrego a la derecha
       } catch { case e: Exception => }
     }
     //print("\t\tClases que quedaron: " + classes.getClasses);
@@ -128,7 +109,7 @@ class PositiveClassComputer(graph: GraphT[String, String],
 
   }
 
-  def computeForJava = {
+  def computeForJava = {//que es esto, porque es de e1??
     val ret = new java.util.HashMap[String, Formula]();
     val classes = compute;
 
