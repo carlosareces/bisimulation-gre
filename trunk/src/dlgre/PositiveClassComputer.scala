@@ -17,14 +17,15 @@ import collection.JavaConversions._;
 class PositiveClassComputer(graph: GraphT[String, String],
   rolesToProbUse: Map[String, Float],
   rolesToProbDisc: Map[String, Float],
-  rolesOrdenados: List[String]) {
+  rolesOrdenados: List[String],
+  categorias: HashMap[String, String]) {
   val classes = new ClassContainer(graph);
 
   def compute = { //esta parte no se ejecuta ya que son todas relaciones
     val simplifier = new dlgre.formula.Simplifier(graph);
     // initialize predicates
     graph.getAllPredicates.foreach { p =>
-      classes.addAmbos(new Literal(p, true), new Literal(p, true));//esta no deberia pasar porque no tengo literales
+      classes.addAmbos(new Literal(p, true), new Literal(p, true), "");//esta no deberia pasar porque no tengo literales
       println("CASO LITERAL :S");
     }
     //RA: Probabilities for roles from modelos/order.txt
@@ -71,7 +72,14 @@ class PositiveClassComputer(graph: GraphT[String, String],
 	                  //if (rolesToRandDisc(r) <= p_disc) {
 	                    //print("\t\tDiscernible: (" + new Existential(r, cl.e1.formula).prettyprint);
 	                    //print(", " + new Existential(r, entry.formula).prettyprint + ")\n");
-	                    if (classes.addAmbos((new Existential(r, cl.e1.formula)), new Existential(r, entry.formula))) {
+	                    var categoria : String = "otra";
+	                  	try {
+	                     categoria = categorias(r);
+	                  	}
+	                  	catch {
+	                  	  case e:Exception => println(r + " " + e.toString());
+	                  	}
+	                    if (classes.addAmbos((new Existential(r, cl.e1.formula)), new Existential(r, entry.formula), categoria)) {
 	                      madeChanges = true;
 	                      rel_used += r;
 	                      //throw new Exception("break");//para que era?
@@ -106,7 +114,7 @@ class PositiveClassComputer(graph: GraphT[String, String],
 	    }
     }
     log.close();
-	classes.getClasses
+	classes.getClasses;
   }
 
   

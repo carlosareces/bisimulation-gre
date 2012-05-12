@@ -18,23 +18,18 @@ import scala.util.Random;
 
 object Main {//1
   def main(args : Array[String]) : Unit = {//2
-   print(args);
    	val positiveMode = (args(0) == "positive");
-    
    	//val maxIteration = args(5);
    	//val target = args(4); saque disc.txt que era 3
     val maxIteration = args(4);
-    
    	val target = args(3);
+   	val cat = scala.io.Source.fromFile(args(5));
    	//aca reemplace 6 por 5 es el directorio donde se ponen los resultados
-   	val fw = new FileWriter(args(5)+"der-formula-test.txt") ;
-   	val fw2 = new FileWriter(args(5)+"der-texto-test.txt") ;
+   	val fw = new FileWriter(args(6)+"der-formula-test.txt") ;
+   	val fw2 = new FileWriter(args(6)+"der-texto-test.txt") ;
    	//val fw3 = new FileWriter(args(5)+"izq-texto-test.txt") ;
    	//val fw4 = new FileWriter(args(5)+"izq-formula-test.txt") ;
-   
     var informative:Boolean = false;
-    
- 
     // LB: I changed (0,20 to 0,0) these line in order to remove the runtime error in RandomGenerator
   /*  Iterator.range(0,0).foreach { x =>
       val graph = dlgre.generate.RandomGenerator.generate(20, 10, 4, 0.1, 0.1);
@@ -45,8 +40,6 @@ object Main {//1
         val result = new BisimulationClassesComputer(graph).compute;
       }
     }*/
-    
-    
     val graph = readGraph(args(1));
     /*if( args(1) == "random" ) {
       dlgre.generate.RandomGenerator.generate(args(2), args(3), args(4), args(5), args(6))
@@ -63,6 +56,7 @@ object Main {//1
     var rolesDesOrdenados = List[String]()
     val so = scala.io.Source.fromFile(args(2))//"modelos/prob_uso_ord/P_uso_ord-1.txt")
     var num:Int = 0;
+    val categorias = new HashMap[String, String];
     
     so.getLines.foreach( line => {//3
       try {
@@ -76,6 +70,19 @@ object Main {//1
       
       catch { case e: Exception => println("Fail input use_probabilities file\n"); }
     })//fin 3
+    
+    cat.getLines.foreach( line => {//3
+      try {
+        
+    	var sp = line.split(":");
+    	var c = (sp.apply(0)).trim;
+    	var lista = (sp.apply(1)).trim;
+    	var parte = lista.split(" ");
+    	parte.foreach( elem => {categorias += elem.trim -> c})
+       }	
+     catch { case e: Exception => println("Fail input use_probabilities file\n"); }
+    })//fin 3
+
 /*-----------------*/
     var arr = new Array[Float](num);
       var i:Int = 0;
@@ -119,7 +126,7 @@ object Main {//1
         fw2.write("\n---------------------------------\n");
         iteration += 1;
         
-        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados).compute;
+        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, categorias).compute;
         println("\n-----------------------------------------------------------------------------");
         println(" done, " + (System.currentTimeMillis - start) + " ms.");
         //println("\nBisimulation classes with their concepts (positive mode):");
