@@ -18,16 +18,19 @@ import scala.util.Random;
 
 object Main {//1
   def main(args : Array[String]) : Unit = {//2
-   
+   print(args);
    	val positiveMode = (args(0) == "positive");
-   	val maxIteration = args(5);
-   	val target = args(4);
     
-   	
-   	val fw = new FileWriter(args(6)+"der-formula-test.txt") ;
-   	val fw2 = new FileWriter(args(6)+"der-texto-test.txt") ;
-   	val fw3 = new FileWriter(args(6)+"izq-texto-test.txt") ;
-   	val fw4 = new FileWriter(args(6)+"izq-formula-test.txt") ;
+   	//val maxIteration = args(5);
+   	//val target = args(4); saque disc.txt que era 3
+    val maxIteration = args(4);
+    
+   	val target = args(3);
+   	//aca reemplace 6 por 5 es el directorio donde se ponen los resultados
+   	val fw = new FileWriter(args(5)+"der-formula-test.txt") ;
+   	val fw2 = new FileWriter(args(5)+"der-texto-test.txt") ;
+   	//val fw3 = new FileWriter(args(5)+"izq-texto-test.txt") ;
+   	//val fw4 = new FileWriter(args(5)+"izq-formula-test.txt") ;
    
     var informative:Boolean = false;
     
@@ -56,7 +59,7 @@ object Main {//1
     val simplifier = new dlgre.formula.Simplifier(graph);
     
     val rolesToProbUse = new HashMap[String,Float]
-    val rolesToProbDisc = new HashMap[String,Float]
+    val rolesToProbDisc = new HashMap[String,Float] //lo dejo por si en el futuro lo usamos por ahora va a estar vacio
     var rolesDesOrdenados = List[String]()
     val so = scala.io.Source.fromFile(args(2))//"modelos/prob_uso_ord/P_uso_ord-1.txt")
     var num:Int = 0;
@@ -94,7 +97,8 @@ object Main {//1
       })
 
 /*------------------*/      
-    val so2 = scala.io.Source.fromFile(args(3))//"modelos/prob_disc/prob_disc-1.txt")
+    /*aca comente la parte de levantar archivo de discernibilidades.
+     * val so2 = scala.io.Source.fromFile(args(3))//"modelos/prob_disc/prob_disc-1.txt")
     so2.getLines.foreach( line => {//4
       try {
     	var sp2 = line.split("->");
@@ -102,7 +106,9 @@ object Main {//1
     	rolesToProbDisc(sp2.apply(0).trim) = (sp2.apply(1).trim).toFloat;
       }
       catch { case e: Exception => println("Fail disc_probabilities file\n") ; }//no hace nada en caso de leer lineas vacias o con otro formato
-    })//fin 4
+    })//fin 4*/
+    
+    
     if( positiveMode ) {//5
       //println("Positive mode");
       var iteration: Int = 0;
@@ -122,8 +128,8 @@ object Main {//1
             result.foreach {       
               
               entry2 => entry2.e2.foreach {
-            	  	fw4.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
-		            fw3.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+            	  	//fw4.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+		            //fw3.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
             		entry =>
             			
 		                //println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
@@ -157,9 +163,9 @@ object Main {//1
             		if (entry2.e1.extension.asScalaCollection.contains(target)){
 		                 //println(entry2.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
 		                 //println(entry2.e1.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
-		                 fw4.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+		              //   fw4.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
 		                 
-		                 fw3.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
+		                // fw3.write("\n" + entry2.e1.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry2.e1.extension.asScalaCollection,",")+"\n");
 		            }
             	}
               }
@@ -186,8 +192,8 @@ object Main {//1
     }//fin 5 else
     fw.close();
     fw2.close();
-    fw3.close();
-    fw4.close();
+ //   fw3.close();
+ //   fw4.close();
 
   }
 
