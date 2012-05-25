@@ -169,7 +169,7 @@ def addAmbos(f1: Formula, f2: Formula, categoria: String) = {
 									memoizedExtensions += conjunction2 -> newExtension2;
 									val rolesViejos: Set[String] = en.formula.roles;
 									var rolesNuevos: Set[String] = f2.roles; 
-									println("Roles viejos: " + rolesViejos + ", roles nuevos: " + rolesNuevos);
+									//println("Roles viejos: " + rolesViejos + ", roles nuevos: " + rolesNuevos);
 									if ( rolesViejos.intersect(rolesNuevos).isEmpty ) { // 
 										entry.e2 += Entry(newExtension2, conjunction2, newCategorias2);
 									}
@@ -178,7 +178,7 @@ def addAmbos(f1: Formula, f2: Formula, categoria: String) = {
 						}//fin foreach
 						ret = addToGraph(entry) || ret;
 					} else {
-						println("No es informativo, no se agrega " + entry.e1);
+						//println("No es informativo, no se agrega " + entry.e1);
 					}
 				}
 			}
