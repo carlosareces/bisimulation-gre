@@ -52,6 +52,7 @@ object Main {//1
     val simplifier = new dlgre.formula.Simplifier(graph);
     
     val rolesToProbUse = new HashMap[String,Float]
+    val rolesToProbUseFijos = new HashMap[String,Float]
     val rolesToProbDisc = new HashMap[String,Float] //lo dejo por si en el futuro lo usamos por ahora va a estar vacio
     var rolesDesOrdenados = List[String]()
     val so = scala.io.Source.fromFile(args(2))//"modelos/prob_uso_ord/P_uso_ord-1.txt")
@@ -64,6 +65,7 @@ object Main {//1
     	var sp = line.split("->");
     	var rol = (sp.apply(0)).trim
     	rolesToProbUse(rol) = ((sp.apply(1).trim).toFloat)
+    	rolesToProbUseFijos(rol) = ((sp.apply(1).trim).toFloat)
     	rolesDesOrdenados ::= rol;
     	num = num + 1;
       }	
@@ -80,8 +82,9 @@ object Main {//1
     	var parte = lista.split(" ");
     	parte.foreach( elem => {categorias += elem.trim -> c})
        }	
-     catch { case e: Exception => println("Fail input use_probabilities file\n"); }
+     catch { case e: Exception => println("Fail input categories file\n"); }
     })//fin 3
+    print("Categorias:"+categorias);
 
 /*-----------------*/
     var arr = new Array[Float](num);
@@ -125,7 +128,11 @@ object Main {//1
         fw.write("\n---------------------------------\n");	
         fw2.write("\n---------------------------------\n");
         iteration += 1;
-        
+        if (iteration!=0) {
+        	rolesToProbUseFijos.foreach(r => {
+        	rolesToProbUse+= r;
+        	})
+        }
         val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, categorias).compute;
         println("\n-----------------------------------------------------------------------------");
         println(" done, " + (System.currentTimeMillis - start) + " ms.");
@@ -196,11 +203,26 @@ object Main {//1
       else println(" done, " + tiempo + " ms.");
       println("\nBisimulation classes with their concepts:");
       result.foreach { fmla => println(simplifier.simplify(fmla).prettyprint + ": " + util.StringUtils.join(fmla.extension(graph).asScalaCollection,",")) };
+
     }//fin 5 else
+    println("blue->"+Math.abs(new Random().nextFloat()));
+    println("large->"+Math.abs(new Random().nextFloat()));
+    println("ball->"+Math.abs(new Random().nextFloat()));
+    println("centre->"+Math.abs(new Random().nextFloat()));
+    println("front->"+Math.abs(new Random().nextFloat()));
+    println("left-of->"+Math.abs(new Random().nextFloat()));
+    println("cube->"+Math.abs(new Random().nextFloat()));
+    println("green->"+Math.abs(new Random().nextFloat()));
+    println("small->"+Math.abs(new Random().nextFloat()));
+    println("right-of->"+Math.abs(new Random().nextFloat()));
+    println("on-top->"+Math.abs(new Random().nextFloat()));
+    println("above-of->"+Math.abs(new Random().nextFloat()));
     fw.close();
     fw2.close();
  //   fw3.close();
  //   fw4.close();
+
+    
 
   }
 
