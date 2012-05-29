@@ -25,8 +25,8 @@ object Main {//1
    	val target = args(3);
    	val cat = scala.io.Source.fromFile(args(5));
    	//aca reemplace 6 por 5 es el directorio donde se ponen los resultados
-   	val fw = new FileWriter(args(6)+"der-formula-test.txt") ;
-   	val fw2 = new FileWriter(args(6)+"der-texto-test.txt") ;
+   	val fw = new FileWriter(args(6)+"formula.txt") ;
+   	val fw2 = new FileWriter(args(6)+"texto.txt") ;
    	//val fw3 = new FileWriter(args(5)+"izq-texto-test.txt") ;
    	//val fw4 = new FileWriter(args(5)+"izq-formula-test.txt") ;
     var informative:Boolean = false;
@@ -217,6 +217,8 @@ object Main {//1
     println("right-of->"+Math.abs(new Random().nextFloat()));
     println("on-top->"+Math.abs(new Random().nextFloat()));
     println("above-of->"+Math.abs(new Random().nextFloat()));
+    println("right>"+Math.abs(new Random().nextFloat()));
+    println("left->"+Math.abs(new Random().nextFloat()));
     fw.close();
     fw2.close();
  //   fw3.close();

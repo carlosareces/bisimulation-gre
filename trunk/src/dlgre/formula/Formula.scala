@@ -5,9 +5,11 @@ import dlgre.BitSetSet;
 import grapht._;
 
 abstract class Formula {
-  	var memoizedExtension : BitSetSet[String] = null;
+  		var memoizedExtension : BitSetSet[String] = null;
         
-  	    def toString : String;
+  		var categorias : Set[String] = Set();//new HashSet[String];//null;
+
+  		def toString : String;
   	    
   	    def prettyprint : String;
 
