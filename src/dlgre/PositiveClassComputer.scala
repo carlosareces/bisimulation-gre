@@ -14,13 +14,13 @@ import util.StringUtils.join;
 
 import collection.JavaConversions._;
 
-class PositiveClassComputer(graph: GraphT[String, String],
+class PositiveClassComputer(carpeta: String,iteration:Int, graph: GraphT[String, String],
   rolesToProbUse: Map[String, Float],
   rolesToProbDisc: Map[String, Float],
   rolesOrdenados: List[String],
   categorias: HashMap[String, String]) {
   val classes = new ClassContainer(graph);
-
+  
   def compute = { //esta parte no se ejecuta ya que son todas relaciones
     val simplifier = new dlgre.formula.Simplifier(graph);
     // initialize predicates
@@ -37,17 +37,25 @@ class PositiveClassComputer(graph: GraphT[String, String],
     //val log = new FileWriter("log-test.txt");
     var rolesToRandUse = new HashMap[String,Float]
     //val rolesToRandDisc = new HashMap[String,Float]
-    val randomProb = new FileWriter("randomProbabilities.txt") ;
+    /*if (iteration==1) {
+      var file_random_prob = new FileWriter(carpeta+"randomProbabilities.txt") ;
+    }
+    else {*/
+      var file_random_prob = new FileWriter(carpeta+"randomProbabilities.txt", true) ;
+    //}
     //Establezco valores random para cada relacion que quedan estaticos, no cambio de criterio
+    file_random_prob.write("\n---------------------------------vez: "+iteration+"\n");
     rolesOrdenados.foreach { r =>
     	//var rand1: Float = Math.abs(new Random().nextFloat());
     	//var rand2: Float = Math.abs(new Random().nextFloat());
     	rolesToRandUse(r) = Math.abs(new Random().nextFloat());//rand1;
     	//rolesToRandDisc(r) = rand2;
+    	
+    	file_random_prob.write(r+"->"+rolesToRandUse(r)+"\n");
     }
-    println("ROLES TO RAND USE: "+rolesToRandUse);
-    println("PROB ROLES:        "+rolesToProbUse);
-    println("ROLES ORDENADOS: "+rolesOrdenados);
+   // println("ROLES TO RAND USE: "+rolesToRandUse);
+    //println("PROB ROLES:        "+rolesToProbUse);
+    //println("ROLES ORDENADOS: "+rolesOrdenados);
     var it:Int = 0;
     
     var probMenores1:Boolean = true; //esto va a ser el resultado de una funcion que dice si todas las prob son menos que 1
@@ -137,7 +145,7 @@ class PositiveClassComputer(graph: GraphT[String, String],
 	    	  probMenores1=true;   
 	    }
     }
-    //log.close();
+    file_random_prob.close();
     //println("Cantidad que dio green ball "+count+" de "+it*2 );
 	classes.getClasses;
   }

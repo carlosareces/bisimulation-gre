@@ -125,16 +125,16 @@ object Main {//1
       //maxIteration: Ahora se toma como parametro
       while(iteration < maxIteration.toInt) {//6
         println("---------------------------------");
-        fw.write("\n---------------------------------\n");	
-        fw2.write("\n---------------------------------\n");
+        fw.write("\n---------------------------------"+iteration+"\n");	
+        fw2.write("\n---------------------------------"+iteration+"\n");
         iteration += 1;
         if (iteration!=0) {
         	rolesToProbUseFijos.foreach(r => {
         	rolesToProbUse+= r;
         	})
         }
-        val result = new PositiveClassComputer(graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, categorias).compute;
-        println("\n-----------------------------------------------------------------------------");
+        val result = new PositiveClassComputer(args(6),iteration, graph, rolesToProbUse, rolesToProbDisc, rolesOrdenados, categorias).compute;
+        println("\n-----------------------------------------------------------------------------"+iteration+"\n");
         println(" done, " + (System.currentTimeMillis - start) + " ms.");
         //println("\nBisimulation classes with their concepts (positive mode):");
         if (target=="all"){//7
@@ -205,7 +205,7 @@ object Main {//1
       result.foreach { fmla => println(simplifier.simplify(fmla).prettyprint + ": " + util.StringUtils.join(fmla.extension(graph).asScalaCollection,",")) };
 
     }//fin 5 else
-    println("blue->"+Math.abs(new Random().nextFloat()));
+   /* println("blue->"+Math.abs(new Random().nextFloat()));
     println("large->"+Math.abs(new Random().nextFloat()));
     println("ball->"+Math.abs(new Random().nextFloat()));
     println("centre->"+Math.abs(new Random().nextFloat()));
@@ -218,7 +218,7 @@ object Main {//1
     println("on-top->"+Math.abs(new Random().nextFloat()));
     println("above-of->"+Math.abs(new Random().nextFloat()));
     println("right>"+Math.abs(new Random().nextFloat()));
-    println("left->"+Math.abs(new Random().nextFloat()));
+    println("left->"+Math.abs(new Random().nextFloat()));*/
     fw.close();
     fw2.close();
  //   fw3.close();
