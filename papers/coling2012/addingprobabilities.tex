@@ -10,6 +10,16 @@ The algorithm is a modification of the algorithm presented by \cite{arec2:2008:A
 
 We are trying to have an algorithm that generate a reference expresion for a target element in a fixed situation, like in the picture. 
 
+\newcommand{\nBlue}{\mathit{blue}\xspace}
+\newcommand{\nGreen}{\mathit{green}\xspace}
+\newcommand{\nSmall}{\mathit{small}\xspace}
+\newcommand{\nBig}{\mathit{big}\xspace}
+\newcommand{\nBall}{\mathit{ball}\xspace}
+\newcommand{\nBox}{\mathit{box}\xspace}
+\newcommand{\nOntop}{\mathit{ontop}\xspace}
+\newcommand{\nBelow}{\mathit{below}\xspace}
+\newcommand{\nNextto}{\mathit{nextto}\xspace}
+
 \begin{figure}[ht]
 \begin{minipage}[b]{0.45\linewidth}
 \centering
@@ -17,11 +27,75 @@ We are trying to have an algorithm that generate a reference expresion for a tar
 \caption{Input model}
 \label{GRE3D7-stimulus}
 \end{minipage}
-\hspace{0.5cm}
-\begin{minipage}[b]{0.45\linewidth}
+\hspace*{-0.2cm}
+\begin{minipage}[b]{0.5\linewidth}
 \centering
-text 
-text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text 
+
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
+  ]
+ \node[n,label=above:$a$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nSmall\\[-2pt] 
+      \nBlue \\[-2pt] 
+      \nBall\end{array}$}] (a) {};
+
+ \node[n,label=above:$b$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nBlue\\[-2pt] 
+      \nBox\end{array}$}, right of=a] (b) {};
+
+ \node[n,label=below:$c$,label=above:{
+    \relsize{-1}$\begin{array}{c}
+      \nSmall\\[-2pt] 
+      \nGreen\\[-2pt] 
+      \nBall\end{array}$}, above of=b] (c) {};
+
+ \node[n,label=above:$d$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nSmall\\[-2pt] 
+      \nGreen\\[-2pt] 
+      \nBox\end{array}$}, right of=b] (d) {};
+
+ \node[n,label=above:$e$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nBlue\\[-2pt] 
+      \nBall\end{array}$}, right of=d] (e) {};
+
+ \node[n,label=above:$f$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nGreen\\[-2pt] 
+      \nBox\end{array}$}, right of=e] (f) {};
+
+ \node[n,label=below:$g$,label=above:{
+    \relsize{-1}$\begin{array}{c}
+      \nSmall\\[-2pt] 
+      \nBlue\\[-2pt] 
+      \nBox\end{array}$}, above of=f] (g) {};
+
+
+ \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
+ \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+
+ \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nNextto$} (e);
+ \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nNextto$} (d);
+
+ \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
+ \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
+
+\draw[dotted] (-.4,-1.3) rectangle (7.1,2.8);
+
+% \draw [aSniffing,bend right=40] (c) to node[auto,swap]{\relsize{-1}$\aSniffing$} (b);
+
+% \draw[aSniffing, bend left=40] (d) to node[auto]{\relsize{-1}$\aSniffing$} (e);
+% \draw[aSniffing, bend left=40] (e) to node[auto,swap]{\relsize{-1}$\aSniffing$} (d);
+
+ \end{tikzpicture}
 \caption{Model as a labeled graph}
 \label{GRE3D7-stimulus-graph}
 \end{minipage}
