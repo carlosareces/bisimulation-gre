@@ -1,2 +1,2 @@
 all:
-	rubber coling2012.tex
+	rubber -d coling2012.tex
