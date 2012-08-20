@@ -8,14 +8,15 @@
 \usepackage{xspace}
 \usepackage{relsize}
 \usepackage{graphicx}
-\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
+%\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
+\usepackage{algpseudocode}
+\usepackage{multicol}
 \usepackage{tikz}
 \usetikzlibrary{automata}
 
-\newcommand{\pdisc}{\small \textsf{p\_disc}\xspace}
-\newcommand{\puse}{\small \textsf{p\_use}\xspace}
-\newcommand{\randomuse}{\small \textsf{random\_use}\xspace}
-\newcommand{\randomdisc}{\small \textsf{random\_disc}\xspace}
+%\newcommand{\puse}{\textsf{\small p}{$_\emph{use}$}\xspace}
+\newcommand{\puse}{\ensuremath{\textsf{p}_\emph{use}}\xspace}
+\newcommand{\randomuse}{\ensuremath{\textsf{rnd}_\emph{use}}\xspace}
 \newcommand{\RE}{\textsf{RE}\xspace}
 \newcommand{\REL}{\textsf{REL}\xspace}
 \newcommand{\IR}{\textrm{I}\!\textrm{R}}
