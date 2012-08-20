@@ -9,35 +9,26 @@
 The algorithm is a modification of the algorithm presented by \cite{arec2:2008:Areces}
 
 We are trying to have an algorithm that generate a reference expresion for a target element in a fixed situation, like in the picture. 
-\begin{figure}[htb]
+
+\begin{figure}[ht]
+\begin{minipage}[b]{0.45\linewidth}
 \centering
-\includegraphics[width=0.3\linewidth]{images/17.jpg}
-\caption{ 
-\label{figura1}
-Example figure
-}
+\includegraphics[width=\textwidth]{images/3.jpg}
+\caption{Input model}
+\label{GRE3D7-stimulus}
+\end{minipage}
+\hspace{0.5cm}
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+text 
+text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text text 
+\caption{Model as a labeled graph}
+\label{GRE3D7-stimulus-graph}
+\end{minipage}
 \end{figure}
-The element that we are try to generate a reference expresion has properties and relation with others elements. Let's go to call this description ``the model'', that model can be in xml format like the following example.
-\begin{verbatim}
-<problem refer-to="b1">
-  <individual id="b1">
-    <predicate="yellow" />
-    <predicate="bowl" />
-    <related="above" to="b3"/>
-  </individual>
-  <individual id="b2">
-    <predicate="yellow" />
-    <predicate="bowl" />
-  </individual>
-  <individual id="c">
-  </individual>
-  <individual id="b3">
-    <predicate="blue" />
-    <predicate="cube" />
-    <related="bellow" to="b1"/>
-  </individual>
-</problem>
-\end{verbatim}
+
+
+
 The first thing that we saw is there are algorithms that gives all properties of element before give a relation with another elements, but it see not human. A human can use relations, properties but there is not standard form of use, it mean not everytimes human use properties or relation it depends of the situation. In order to take into account this problem and give more human reference expresion we modify the model for give the same importance to properties and relation, we create a dummy element wich is going to be related to each elements with te relation of the properties that the elements has, it mean every property is going to be a relation with the dummy element ``c'' like we show in the example.
 
 \begin{verbatim}
