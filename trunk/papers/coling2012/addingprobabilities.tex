@@ -111,122 +111,129 @@ The algorithm is a modification of the algorithm presented by \cite{arec2:2008:A
 %While there is change in the first set os formulas, for each of the relation ordered by higher probability of use, if the probability of use if higher than random probability of the relation for each partition at the moment if the probability of discernibility is higher than the random probability of the relation we add the informatives formulas of each side of set of formulas, but if the discernibility probability of the relation is less than the random probability for that relation we only add the formula to the right side, it is the side that have overspecification.
 %When no chance of the left side is made the algorithm finish. You can see that sometimes the algorithm generate one overspecification and finish because not see change in the left side, it is to prevent the non-termination of the algorithm.
 
-%\begin{figure}[t]
-%\begin{minipage}[b]{0.5\linewidth}
-%\small
-%\centering
-%\begin{algorithm}[H]
-%\dontprintsemicolon
-%\caption{Computing the $\mathcal{L}$-similarity sets}\label{algo:bisim-l}
-%\KwIn{A model $\gM = (\Delta, \interp{\cdot})$ , a list $Rs \in (\REL \times I\!\!R)^*$
-% of relation symbols with their \puse values
-%}
-%\KwOut{A set of formulas \RE such that
-%$\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
-%$\mathcal{L}$-similarity sets of $\gM$.}
-
-%$\RE \leftarrow \{\top\}$
-
-%\For{$(R,R.\puse) \in Rs$}{
-%	$R.\randomuse$ = Random()\\
-%}
-%\While{$\exists \varphi \in \RE. |\interp{\varphi_O}|>1$}{
-%    \RE' $\leftarrow$ \RE \;
-%    \For{$(R, R.\puse) \in Rs$}{
-%        \If{$R.\randomuse \le R.\puse$}{
-%            \For{$\varphi \in \RE$}{
-%                add$_\mathcal{L}(R, \varphi, \RE)$}
-%                }\;
-%            \If{\RE $\not =$ \RE'}{exit}
-%            }
-%   \If{\RE $=$ \RE'}{exit}
-%}
-%\end{algorithm}
-%\end{minipage}
-%\hspace*{0.5cm}
-%\begin{minipage}[b]{0.45\linewidth}
-%\small
-%\centering
-%\begin{algorithm}[H]
-%\dontprintsemicolon
-%\caption{add$_\el(R, \varphi, \RE)$} \label{algo:bisim-add-el}
-
-%\For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}{
-%  \If{$\psi \sqcap \exists R.\varphi$ is not subsumed in $\RE$ {\bf and}
-%    $\interp{\psi \sqcap \exists R.\varphi} \neq \emptyset$ {\bf and}
-%    $\interp{\psi \sqcap \exists R.\varphi} \neq \interp{\psi}$}{
-%    add $\psi \sqcap \exists R.\varphi$ to $\RE$ \;
-%    remove subsumed formulas from $\RE$\;
-%  }
-%}
-%\end{algorithm}
-%\vspace*{2cm}
-%\end{minipage}
-%\caption{Algorithms}\label{fig:algorithms}
-%\end{figure}
-
-
-\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-\renewcommand{\algorithmicensure}{\textbf{Output:}}
-
-\begin{multicols}{2}
-
-\begin{tabular}{p{.95\linewidth}}\hline
-\small \textbf{Algorithm 1:} Computing $\mathcal{L}$-similarity sets\\ \hline
-\end{tabular}
-
-\begin{algorithmic}
-\small 
-
-\Require A model $\gM = (\Delta, \interp{\cdot})$, a list $Rs \in (\REL \times I\!\!R)^*$
+\begin{figure}[t]
+\begin{minipage}[b]{0.5\linewidth}
+\small
+\centering
+\begin{algorithm}[H]
+\dontprintsemicolon
+\caption{Computing $\mathcal{L}$-similarity sets}\label{algo:bisim-l}
+\KwIn{A model $\gM = (\Delta, \interp{\cdot})$ , a list $Rs \in (\REL \times I\!\!R)^*$
  of relation symbols with their \puse values, ordered by \puse
-\Ensure A set of formulas \RE such that \\ $\{\interp{\varphi} \mid \varphi \in \RE\}$ are the
-$\mathcal{L}$-similarity sets of $\gM$.
+}
+\KwOut{A set of formulas \RE such that
+$\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
+$\mathcal{L}$-similarity sets of $\gM$.}
 
-\State
-\State $\RE \leftarrow \{\top\}$
-\For{$(R,R.\puse) \in Rs$}
-  \State $R.\randomuse$ = Random()
-  \State $R.\incuse = (1-R.\puse)/$MaxIterations
-\EndFor
+$\RE \leftarrow \{\top\}$
 
-\While{$(\exists (R,R.\puse \in Rs).(R.\puse < 1)$}
-  \While{$(\exists \varphi \in \RE).(|\interp{\varphi}|>1)$}
-    \State    \RE' $\leftarrow$ \RE 
-    \For{$(R, R.\puse) \in Rs$}
-       \If{$R.\randomuse \le R.\puse$}
-          \For{$\varphi \in \RE$}
-              \State add$_\mathcal{L}(R, \varphi, \RE)$
-              \If{\RE $\not =$ \RE'}
-                 \State ExitFor
-             \EndIf
-          \EndFor
-       \EndIf
-     \EndFor
-     \If{\RE $=$ \RE'}
-        \State ExitWhile
-     \EndIf
-  \EndWhile
-  \Comment We increment all propabilities
-  \For{$(R,R.\puse) \in Rs$}
-    \State $(R,R.\puse) \leftarrow (R, R.\puse + R.\incuse)$
-  \EndFor
-\EndWhile
-\end{algorithmic}
+\For{$(R,R.\puse) \in Rs$}{
+	$R.\randomuse$ = Random()\\
+        $R.\incuse = (1-R.\puse)/$MaxIterations
+}
 
-\begin{tabular}{p{.95\linewidth}}\hline
-\small \textbf{Algorithm 2:} add$_{\mathcal{EL}}(R,\varphi,\RE)$\\ \hline
-\end{tabular}
+\While{$(\exists (R,R.\puse \in Rs).(R.\puse < 1)$}{
+  \While{$\exists \varphi \in \RE. |\interp{\varphi_O}|>1$}{
+      \RE' $\leftarrow$ \RE \;
+      \For{$(R, R.\puse) \in Rs$}{
+          \If{$R.\randomuse \le R.\puse$}{
+              \For{$\varphi \in \RE$}{
+                  add$_\mathcal{L}(R, \varphi, \RE)$}
+                  }\;
+              \If{\RE $\not =$ \RE'}{exit}
+              }
+     \If{\RE $=$ \RE'}{exit}
+  }
+  \For{$(R,R.\puse) \in Rs$}{
+    $(R,R.\puse) \leftarrow (R, R.\puse + R.\incuse)$
+  }
+}
+\end{algorithm}
+\end{minipage}
+\hspace*{0.5cm}
+\begin{minipage}[b]{0.45\linewidth}
+\small
+\centering
+\begin{algorithm}[H]
+\dontprintsemicolon
+\caption{add$_\el(R, \varphi, \RE)$} \label{algo:bisim-add-el}
 
-\begin{algorithmic}
-\For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}
+\For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}{
   \If{$\psi \sqcap \exists R.\varphi$ is not subsumed in $\RE$ {\bf and}
     $\interp{\psi \sqcap \exists R.\varphi} \neq \emptyset$ {\bf and}
-    $\interp{\psi \sqcap \exists R.\varphi} \neq \interp{\psi}$}
-      \State add $\psi \sqcap \exists R.\varphi$ to $\RE$
-      \State remove subsumed formulas from $\RE$
-  \EndIf
-\EndFor
-\end{algorithmic}
-\end{multicols}
+    $\interp{\psi \sqcap \exists R.\varphi} \neq \interp{\psi}$}{
+    add $\psi \sqcap \exists R.\varphi$ to $\RE$ \;
+    remove subsumed formulas from $\RE$\;
+  }
+}
+\end{algorithm}
+\vspace*{2cm}
+\end{minipage}
+\caption{Algorithms including Probabilities}\label{fig:algorithms}
+\end{figure}
+
+
+%\renewcommand{\algorithmicrequire}{\textbf{Input:}}
+%\renewcommand{\algorithmicensure}{\textbf{Output:}}
+
+%\begin{multicols}{2}
+
+%\begin{tabular}{p{.95\linewidth}}\hline
+%\small \textbf{Algorithm 1:} Computing $\mathcal{L}$-similarity sets\\ \hline
+%\end{tabular}
+
+%\begin{algorithmic}
+%\small 
+
+%\Require A model $\gM = (\Delta, \interp{\cdot})$, a list $Rs \in (\REL \times I\!\!R)^*$
+% of relation symbols with their \puse values, ordered by \puse
+%\Ensure A set of formulas \RE such that \\ $\{\interp{\varphi} \mid \varphi \in \RE\}$ are the
+%$\mathcal{L}$-similarity sets of $\gM$.
+
+%\State
+%\State $\RE \leftarrow \{\top\}$
+%\For{$(R,R.\puse) \in Rs$}
+%  \State $R.\randomuse$ = Random()
+%  \State $R.\incuse = (1-R.\puse)/$MaxIterations
+%\EndFor
+
+%\While{$(\exists (R,R.\puse \in Rs).(R.\puse < 1)$}
+%  \While{$(\exists \varphi \in \RE).(|\interp{\varphi}|>1)$}
+%    \State    \RE' $\leftarrow$ \RE 
+%    \For{$(R, R.\puse) \in Rs$}
+%       \If{$R.\randomuse \le R.\puse$}
+%          \For{$\varphi \in \RE$}
+%              \State add$_\mathcal{L}(R, \varphi, \RE)$
+%              \If{\RE $\not =$ \RE'}
+%                 \State ExitFor
+%             \EndIf
+%          \EndFor
+%       \EndIf
+%     \EndFor
+%     \If{\RE $=$ \RE'}
+%        \State ExitWhile
+%     \EndIf
+%  \EndWhile
+%  \Comment We increment all propabilities
+%  \For{$(R,R.\puse) \in Rs$}
+%    \State $(R,R.\puse) \leftarrow (R, R.\puse + R.\incuse)$
+%  \EndFor
+%\EndWhile
+%\end{algorithmic}
+
+%\begin{tabular}{p{.95\linewidth}}\hline
+%\small \textbf{Algorithm 2:} add$_{\mathcal{EL}}(R,\varphi,\RE)$\\ \hline
+%\end{tabular}
+
+%\begin{algorithmic}
+%\For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}
+%  \If{$\psi \sqcap \exists R.\varphi$ is not subsumed in $\RE$ {\bf and}
+%    $\interp{\psi \sqcap \exists R.\varphi} \neq \emptyset$ {\bf and}
+%    $\interp{\psi \sqcap \exists R.\varphi} \neq \interp{\psi}$}
+%      \State add $\psi \sqcap \exists R.\varphi$ to $\RE$
+%      \State remove subsumed formulas from $\RE$
+%  \EndIf
+%\EndFor
+%\end{algorithmic}
+%\end{multicols}
 
