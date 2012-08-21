@@ -59,22 +59,23 @@ the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset
 done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
 
 In this article we continue this line of research.  The partition algorithms described in~\cite{arec:refe08,arec:usin11} require an 
-ordered lists of the properties that can be used to described the objects in the scenario, and the coverage results reported over Viethen and 
+ordered lists of the properties that can be used to described the objects in the scene, and the coverage results reported over Viethen and 
 Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that partition algorithms have the capacity of producing REs similar to those produces by human subjects, provided a suitable ordering over relations appearing 
 in the input scene. In this article we will discuss how this order can actually be learnt from corpora.  
 
 Our goal is actually twofold. First we show how we can add non-determinism to the partition algorithms, by replacing the fixed ordering 
-over the properties of the input scenario by a \emph{probability of use} of each property, and modifying the algorithm accordingly.  
-In this way, each call to the algorithm can produce different REs for the same input scenario and target.  We will then show that given suitable corpora of RE (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probability of use so that REs are generated with a probability distribution that matches the ones found in the corpora.  
+over the properties of the input scene by a \emph{probability of use} of each property, and modifying the algorithm accordingly.  
+In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of RE (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probability of use so that REs are generated with a probability distribution that matches the ones found in the corpora.  
 
 The rest of the paper is structured as follows. In Section~\ref{sec:algorithm} we introduce the technical details of the 
 partition algorithms presented in~\cite{arec:refe08,arec:usin11} and show how to introduce non-determinism using 
-the probability of use of the properties in the input scenario.  In this section, we assume that these probabilities are provided as 
+the probability of use of the properties in the input scene.  In this section, we assume that these probabilities are provided as 
 input to the algorithm. In Section~\ref{sec:learning}, we show how to estimate the 
-probability of use of a property from training data. Given corpora consisting of pairs (scenario, target) together with the REs used to 
-describe the target in each case, we propose a method to compute the probability of use of each property for each scenario, and use a machine learning approach to generalize these properties to new targets and scenarios not appearing in the corpora. 
+probability of use of a property from training data. Given corpora consisting of pairs (scene, target) together with the REs used to 
+describe the target in each case, we propose a method to compute the probability of use of each property for each scene, and use a machine learning approach to generalize these properties to new targets and scenes not appearing in the corpora. 
 
 Preliminary testing of the resulting algorithms shows that there is still one factor missing to property account for the REs found in corpora: overspecification.  Partition algorithms only allow a mild form of over-specification in the REs produced.  We discuss this in Section~\ref{sec:overspecification} and propose a slight modification that generate the kind of over-specification found in corpora. 
+Section~\ref{sec:evaluation} presents a quantitative evaluation of the final algorithm and discusses interesting examples. We show that when trained with scenes from the GRE3D7 corpora the algorithm can achieve a probability distribution that coincides in a 84.15\% with the probability distribution of REs used by humans for that scene. 
 
-Section~\ref{sec:evaluation} evaluation presents a cuantitative evaluation of our REG algorithm and we discusses INTERESTING EXAMPLES. Section~\ref{sec:discussion} discusses previous work, applications and motivations of our proposal. Section~\ref{sec:conclusion} concludes and points to future work.
+Finally in Section~\ref{sec:discussion} we discuss previous work, applications and further motivations for our proposal; focusing on recent work discussing the role of non-determinism and over-specification in the generation of referring expressions. Section~\ref{sec:conclusion} concludes the article and points to future work.
 
