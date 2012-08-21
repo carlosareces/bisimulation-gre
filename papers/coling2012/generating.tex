@@ -16,21 +16,22 @@ enough information so that the interlocutor will be able to identify the intende
 The generation of referring expressions is a well developed field in automated natural language generation.
 Building upon Dale and Reiter's foundational work~\cite{dale89cooking,Dale1995},
 various proposals have investigated the generation of different kinds of referring expressions 
-such as relational expressions (``the blue ball next to the box''~\cite{dale91:_gener_refer_expres_invol_relat}),
-reference to sets (``the two small boxes''~\cite{Stone2000}), or more expressive logical connectives (``the 
-blue ball not in the box''~\cite{deemter02:_gener_refer_expres}).
+such as relational expressions (``the blue ball next to the cube''~\cite{dale91:_gener_refer_expres_invol_relat}),
+reference to sets (``the two small cubes''~\cite{Stone2000}), or more expressive logical connectives (``the 
+blue ball not on top of the cube''~\cite{deemter02:_gener_refer_expres}).
 
-Referring expressions involving relations, in particular, have
+REs involving relations, in particular, have
 received increasing attention recently; especially in the context of
-spatial referring expressions in situated generation (e.g.~\cite{kelleher06:_increm_gener_of_spatial_refer}), where it seems
-particularly natural to use expressions such as ``the ball next to the box''.  However, the classical algorithm by~\cite{dale91:_gener_refer_expres_invol_relat} was shown to be unable to generate satisfying REs in practice~\cite{viethen06:_algor_for_gener_refer_expres}.  Furthermore, the Dale
-and Haddock algorithm and most of its successors (such as~\cite{kelleher06:_increm_gener_of_spatial_refer}) are vulnerable to
-the problem of ``infinite regress'', where the algorithm jumps back
+spatial referring expressions in situated generation (e.g.~\cite{kelleher06:_increm_gener_of_spatial_refer}), where it is
+particularly natural to use expressions such as ``the ball next to the box''.  However, the classical algorithm by~\cite{dale91:_gener_refer_expres_invol_relat} was shown to be unable to generate satisfying REs in practice (see the 
+analysis over the \emph{cabinet corpus} in~\cite{viethen06:_algor_for_gener_refer_expres}).  Furthermore, the Dale
+and Haddock algorithm and many of its successors (such as~\cite{kelleher06:_increm_gener_of_spatial_refer}) are vulnerable to
+the problem of \emph{infinite regress}, where the algorithm jumps back
 and forth between generating descriptions for two related individuals
 infinitely, as in ``the book on the table which supports a book on the
-table \ldots''.
+table \ldots''
 
-In~\cite{arec:refe08,arec:usin11} new algorithms have been proposed for the generation 
+In~\cite{arec:refe08,arec:usin11} new, low complexity algorithms have been proposed for the generation 
 of relational REs (including references to sets) that eliminate the risk of infinite regression. 
 These algorithms are based on different variations of the partition refinement algorithms of~\cite{paig:thre87}.
 Given a knowledge base containing the information about a situation, the information is 
@@ -43,31 +44,37 @@ parts in the partition (e.g., whether the REs can contain negations, or relation
 
 The idea of using a formal language to describe the information that an RE should convey has been mentioned
 already in~\cite{Krahmer2003,gardent07:_gener_bridg_defin_descr}.  In~\cite{arec:refe08,arec:usin11} the 
-combination of partition refinement algorithms and different formal languages are used to organize existing 
+combination of partition refinement algorithms and different formal languages is used to classify existing 
 GRE approaches in an expressiveness hierarchy.  For instance, the classical Dale and Reiter algorithms
 compute purely conjunctive formulas; \cite{deemter02:_gener_refer_expres} extends this language by
-adding the other propositional connectives, whereas\cite{dale91:_gener_refer_expres_invol_relat} extends it by
+adding the other propositional connectives, whereas~\cite{dale91:_gener_refer_expres_invol_relat} extends it by
 allowing existential quantification.
 
+The partition algorithms presented in~\cite{arec:refe08,arec:usin11} effectively
+compute REs for all individuals in the domain at the same time; and ensure termination with a formula of 
+the formal language chosen that uniquely describes the target, if such a formula exists (i.e., if the 
+formal language chosen is expressive enough to uniquely identify the target in the input model). In~\cite{arec:refe08}
+it is shown that the partition algorithm using the description language \el as formal language is capable of generating 67\% of 
+the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset. This is in sharp contrast with the analysis 
+done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
 
-============================
+In this article we continue this line of research.  The partition algorithms described in~\cite{arec:refe08,arec:usin11} require an 
+ordered lists of the properties that can be used to described the objects in the scenario, and the coverage results reported over Viethen and 
+Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that partition algorithms have the capacity of producing REs similar to those produces by human subjects, provided a suitable ordering over relations appearing 
+in the input scene. In this article we will discuss how this order can actually be learnt from corpora.  
 
-THESIS DE JETTE
+Our goal is actually twofold. First we show how we can add non-determinism to the partition algorithms, by replacing the fixed ordering 
+over the properties of the input scenario by a \emph{probability of use} of each property, and modifying the algorithm accordingly.  
+In this way, each call to the algorithm can produce different REs for the same input scenario and target.  We will then show that given suitable corpora of RE (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probability of use so that REs are generated with a probability distribution that matches the ones found in the corpora.  
 
+The rest of the paper is structured as follows. In Section~\ref{sec:algorithm} we introduce the technical details of the 
+partition algorithms presented in~\cite{arec:refe08,arec:usin11} and show how to introduce non-determinism using 
+the probability of use of the properties in the input scenario.  In this section, we assume that these probabilities are provided as 
+input to the algorithm. In Section~\ref{sec:learning}, we show how to estimate the 
+probability of use of a property from training data. Given corpora consisting of pairs (scenario, target) together with the REs used to 
+describe the target in each case, we propose a method to compute the probability of use of each property for each scenario, and use a machine learning approach to generalize these properties to new targets and scenarios not appearing in the corpora. 
 
-Furthermore, the view of GRE as a problem of computing DL formulas
-with a given extension allows us to apply existing algorithms for the
-latter problem to obtain efficient algorithms for GRE.  We present
-algorithms that compute such formulas for the description logics \el\
-(which allows only conjunction and existential quantification).  These algorithms effectively
-compute REs for all individuals in the domain at the same time, which
-allows them to systematically avoid the infinite regress problem.  The
-\el\ algorithm is capable of generating 67\% of the relational REs in
-the \cite{viethen06:_algor_for_gener_refer_expres} dataset, in about
-15 milliseconds.  
+Preliminary testing of the resulting algorithms shows that there is still one factor missing to property account for the REs found in corpora: overspecification.  Partition algorithms only allow a mild form of over-specification in the REs produced.  We discuss this in Section~\ref{sec:overspecification} and propose a slight modification that generate the kind of over-specification found in corpora. 
 
-
-The paper is structured as follows. We will show how to generate REs by computing DL similarity sets for  \el\ in Section~\ref{sec:algorithm} preferring properties that are more comonly found in corpora.  In Section~\ref{sec:learning}, we SHOW HOW TO estimate the 
-PROBABILITY OF USE of a property by generalizing from training data. Section~\ref{sec:overspecification}
-WE propose a modified algorithm that generate the kind of overspecification found in corpora. Section~\ref{sec:evaluation} evaluation presents a cuantitative evaluation of our REG algorithm and we discusses INTERESTING EXAMPLES. Section~\ref{sec:discussion} discusses previous work, applications and motivations of our proposal. Section~\ref{sec:conclusion} concludes and points to future work.
+Section~\ref{sec:evaluation} evaluation presents a cuantitative evaluation of our REG algorithm and we discusses INTERESTING EXAMPLES. Section~\ref{sec:discussion} discusses previous work, applications and motivations of our proposal. Section~\ref{sec:conclusion} concludes and points to future work.
 
