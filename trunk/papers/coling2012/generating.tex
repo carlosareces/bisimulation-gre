@@ -31,7 +31,7 @@ and forth between generating descriptions for two related individuals
 infinitely, as in ``the book on the table which supports a book on the
 table \ldots''
 
-In~\cite{arec:refe08,arec:usin11} new, low complexity algorithms have been proposed for the generation 
+In~\cite{arec2:2008:Areces,arec:usin11} new, low complexity algorithms have been proposed for the generation 
 of relational REs (including references to sets) that eliminate the risk of infinite regression. 
 These algorithms are based on different variations of the partition refinement algorithms of~\cite{paig:thre87}.
 Given a knowledge base containing the information about a situation, the information is 
@@ -43,22 +43,22 @@ on the expressive power of the formal language used to describe the elements of 
 parts in the partition (e.g., whether the REs can contain negations, or relational information). 
 
 The idea of using a formal language to describe the information that an RE should convey has been mentioned
-already in~\cite{Krahmer2003,gardent07:_gener_bridg_defin_descr}.  In~\cite{arec:refe08,arec:usin11} the 
+already in~\cite{Krahmer2003,gardent07:_gener_bridg_defin_descr}.  In~\cite{arec2:2008:Areces,arec:usin11} the 
 combination of partition refinement algorithms and different formal languages is used to classify existing 
 GRE approaches in an expressiveness hierarchy.  For instance, the classical Dale and Reiter algorithms
 compute purely conjunctive formulas; \cite{deemter02:_gener_refer_expres} extends this language by
 adding the other propositional connectives, whereas~\cite{dale91:_gener_refer_expres_invol_relat} extends it by
 allowing existential quantification.
 
-The partition algorithms presented in~\cite{arec:refe08,arec:usin11} effectively
+The partition algorithms presented in~\cite{arec2:2008:Areces,arec:usin11} effectively
 compute REs for all individuals in the domain at the same time; and ensure termination with a formula of 
 the formal language chosen that uniquely describes the target, if such a formula exists (i.e., if the 
-formal language chosen is expressive enough to uniquely identify the target in the input model). In~\cite{arec:refe08}
+formal language chosen is expressive enough to uniquely identify the target in the input model). In~\cite{arec2:2008:Areces}
 it is shown that the partition algorithm using the description language \el as formal language is capable of generating 67\% of 
 the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset. This is in sharp contrast with the analysis 
 done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
 
-In this article we continue this line of research.  The partition algorithms described in~\cite{arec:refe08,arec:usin11} require an 
+In this article we continue this line of research.  The partition algorithms described in~\cite{arec2:2008:Areces,arec:usin11} require an 
 ordered lists of the properties that can be used to described the objects in the scene, and the coverage results reported over Viethen and 
 Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that partition algorithms have the capacity of producing REs similar to those produces by human subjects, provided a suitable ordering over relations appearing 
 in the input scene. In this article we will discuss how this order can actually be learnt from corpora.  
@@ -68,7 +68,7 @@ over the properties of the input scene by a \emph{probability of use} of each pr
 In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of RE (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probability of use so that REs are generated with a probability distribution that matches the ones found in the corpora.  
 
 The rest of the paper is structured as follows. In Section~\ref{sec:algorithm} we introduce the technical details of the 
-partition algorithms presented in~\cite{arec:refe08,arec:usin11} and show how to introduce non-determinism using 
+partition algorithms presented in~\cite{arec2:2008:Areces,arec:usin11} and show how to introduce non-determinism using 
 the probability of use of the properties in the input scene.  In this section, we assume that these probabilities are provided as 
 input to the algorithm. In Section~\ref{sec:learning}, we show how to estimate the 
 probability of use of a property from training data. Given corpora consisting of pairs (scene, target) together with the REs used to 
