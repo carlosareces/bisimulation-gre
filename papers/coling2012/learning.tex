@@ -69,8 +69,72 @@ What is the purpose of generating REs if one already has REs of the target in th
 
 If there is no corpus on the target scene we need a corpus that uses the same kind of attributes and we apply the following methodology. In order to generalize from the corpora we need it to be annotated with the kinds of attributes that their tokens represent. In the domain of the corpus GRE3D7 we use the kind of attributes defined in~\cite{viet:gene11}. 
 
-\textbf{Romi: Add a paragraph here explaining how we do the learning}
+The learning was done with WEKA~\cite{Hall:WEK09}, training with every other picture that have the same vocabulary, we use linear regression to learn the function of probability of use for each groups of properties named. After we replace the variables of the function by the values of the target figure.  
 
-\textbf{Romi: Add a table here that describes the features used in the learning}
+Which attributes we include in order to do the learning?
+Those attributes was found in the model.
+\begin{itemize}
+\item target-has: if the target element has the property.
+\item count-prop-rel: count of properties plus relations that the target has.
+\item noun-target-has: count of nouns that the target has
+\item adjective-target-has: count of adjectives that the target has.
+\item relations-target-has: count of the relations that the target has.
+\item distractor-has: if the distractor neighbour has the property.
+\item discernibility: in the discernibility as defined in~\cite{gatt:nond11}, it is calculated like 1/count of time that the word appear in the model.
+\end{itemize}
 
-\textbf{Romi: Insert here a table with the kind of attributes, tokens of this kind, and learned probability of use}
+Note that we learn idem probabilities for green and blue, because they are in the same group, but the algorithm is not going to use both, because one target element has not both properties, it the algorithm see in the model.
+
+
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+Categories & Properties  \\
+\hline
+taxonomic & ball \\
+        	& cube \\
+absolute	& blue \\
+        	& green \\
+relational  & left of\\
+   		 & right of\\
+   		 & on top of\\
+   		 & bellow of\\
+relative	& top\\
+   		 & left\\
+   		 & right\\
+   		 & front\\
+small   	 &\\
+large   	 &\\
+\hline
+\end{tabular}
+\caption{Categories}\label{categories}}
+\end{center}
+\end{table}
+ 
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+Categories & Properties & Learnt probability of use\\
+\hline
+taxonomic & ball   	&  1.0\\
+        	& cube   	&  1.0\\
+absolute	& blue   	&  0.9881\\
+        	& green  	&  0.9881\\
+relational  & left of	&  0.168775\\
+   		 & right of   &  0.168775\\
+   		 & on top of  &  0.168775\\
+   		 & below of  &  0.168775\\
+relative	& top    	  &  0.0042\\
+   		 & left    	  &  0.0042\\
+   		 & right      &  0.0042\\
+   		 & front      &  0.0042\\
+   		 & centre      &  0.0042\\
+small   	 &  		  &  0.3434\\
+large   	 &  		  &  0.0306\\
+\hline
+\end{tabular}
+\caption{Properties for categories plus learnt probabilities}\label{categories-probabilities}}
+\end{center}
+\end{table}
+
+
