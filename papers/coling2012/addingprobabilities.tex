@@ -3,19 +3,20 @@
 Partition algorithms for GRE are based on the following basic idea: given a 
 scenario $S$, the objects appearing in $S$ are successively classified according
 to their properties into finer and finer classes. A description (in some formal language $\mathcal{L}$) of each 
-class is computed every time a class is refined.   The procedure stops when the 
-set of classes stabilize, i.e., no further refinement is possible with the information 
-available in the scene.  If the target element is in a singleton class, then 
+class is computed every time a class is refined.   The procedure always stops when the 
+set of classes stabilizes, i.e., no further refinement is possible with the information 
+available in the scene\footnote{Of course, if we are only interested in a referring expression for 
+a given target we can stop the procedure as soon as the target is the only element of some of the classes.}.  If the target element is in a singleton class, then 
 the formal description of that class is a referring expression; otherwise the 
 target cannot be unequivocally described (in $\mathcal{L}$).  
 
 In this section we will describe a modification of the algorithm presented 
 by~\cite{arec2:2008:Areces} where the fixed order of the properties in the 
 scenario is replaced by a finite probability distribution.  The required changes
-are fairly straightforward and the complete algorithm in shown in Figures~\ref{fig:algo1} and~\ref{fig:algo2}. 
+are fairly straightforward and the complete algorithm in shown is Figures~\ref{fig:algo1} and~\ref{fig:algo2}. 
 
-In order to understand how the algorithm works we need first to introduce some 
-basic notions.  The input to the algorithm will be a relation model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$
+In order to understand how the algorithm works, and the differences with the original proposal, we need first to introduce some 
+basic notions.  The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scenario, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scenario its intended extension.  For example, 
 the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model shown in Figure~\ref{GRE3D7-stimulus-graph}.
@@ -39,10 +40,9 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 \caption{Input scenario}
 \label{GRE3D7-stimulus}
 \end{minipage}
-\hspace*{-0.2cm}
-\begin{minipage}[b]{0.5\linewidth}
+\hspace*{-0.35cm}
+\begin{minipage}[b]{0.6\linewidth}
 \centering
-
 \begin{tikzpicture}
   [
     n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
@@ -102,12 +102,16 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
  \draw[dotted] (-.4,-1.3) rectangle (7.1,2.8);
 
  \end{tikzpicture}
-\caption{Model as a labeled graph}
+\caption{Scenario as a relational model}
 \label{GRE3D7-stimulus-graph}
 \end{minipage}
 \end{figure}
 
+It is clear that a scenario can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$).  The algorithm assumes that these issues have been dealt off and that the model encodes a suitable representation of the scenario we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two, and unary
+properties can be encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is blue saying that it is related to the dummy element by the blue binary relation).
 
+In what follows, we will use formulas of the $\el$ description logic language~\cite{} to describe refinement classes.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE which are the ones we will find in the corpora used for our evaluation.  But the particular formal language used is independent of the mail algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) 
+functions can be used, depending of the language involved.     
 
 %The first thing that we saw is there are algorithms that gives all properties of element before give a relation with another elements, but it see not human. A human can use relations, properties but there is not standard form of use, it mean not everytimes human use properties or relation it depends of the situation. In order to take into account this problem and give more human reference expresion we modify the model for give the same importance to properties and relation, we create a dummy element wich is going to be related to each elements with te relation of the properties that the elements has, it mean every property is going to be a relation with the dummy element ``c'' like we show in the example.
 
@@ -172,7 +176,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
 \centering
 \begin{algorithm}[H]
 \dontprintsemicolon
-\caption{add$_\el(R, \varphi, \RE)$} \label{algo:bisim-add-el}
+\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el}
 
 \For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
   \If(\tcp*[f]{\footnotesize the new class is smaller than the original}){\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize the new class is not redundant}\\
