@@ -2,17 +2,23 @@
 
 Partition algorithms for GRE are based on the following basic idea: given a 
 scenario $S$, the objects appearing in $S$ are successively classified according
-to their properties into finer and finer classes. A formal description of each 
+to their properties into finer and finer classes. A description (in some formal language $\mathcal{L}$) of each 
 class is computed every time a class is refined.   The procedure stops when the 
 set of classes stabilize, i.e., no further refinement is possible with the information 
-available in the scene.  If the target element is in a singletton class, then 
-the formal description of that class is a referring expression. 
+available in the scene.  If the target element is in a singleton class, then 
+the formal description of that class is a referring expression; otherwise the 
+target cannot be unequivocally described (in $\mathcal{L}$).  
 
 In this section we will describe a modification of the algorithm presented 
 by~\cite{arec2:2008:Areces} where the fixed order of the properties in the 
 scenario is replaced by a finite probability distribution.  The required changes
-are fairly straightforward and the complete algorithm 
+are fairly straightforward and the complete algorithm in shown in Figures~\ref{fig:algo1} and~\ref{fig:algo2}. 
 
+In order to understand how the algorithm works we need first to introduce some 
+basic notions.  The input to the algorithm will be a relation model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$
+where $\Delta$ is the non-empty domain of objects in the scenario, and $\interp{\cdot}$ is an 
+interpretation function that assigns to all properties in the scenario its intended extension.  For example, 
+the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model shown in Figure~\ref{GRE3D7-stimulus-graph}.
 
 \newcommand{\nBlue}{\mathit{blue}\xspace}
 \newcommand{\nGreen}{\mathit{green}\xspace}
@@ -30,7 +36,7 @@ are fairly straightforward and the complete algorithm
 \centering
 \includegraphics[width=\textwidth]{images/3.jpg}
 \vspace*{-.1cm}
-\caption{Input model}
+\caption{Input scenario}
 \label{GRE3D7-stimulus}
 \end{minipage}
 \hspace*{-0.2cm}
@@ -126,38 +132,38 @@ are fairly straightforward and the complete algorithm
 \begin{algorithm}[H]
 \dontprintsemicolon
 \caption{Computing $\mathcal{L}$-similarity sets}\label{algo:bisim-l}
-\KwIn{A model $\gM$ , a list $Rs \in (\REL \times I\!\!R)^*$
+\KwIn{A model $\gM$ , a list Rs $\in (\REL \times I\!\!R)^*$
  of relation symbols with their \puse values, ordered by \puse
 }
 \KwOut{A set of formulas \RE such that
 $\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
 $\mathcal{L}$-similarity sets of $\gM$}
 
-$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize The most general description $\top$ applies to all elements in the scene}
+$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scenario}
 
-\For{$(R,R.\puse) \in Rs$}{
-	$R.\randomuse$ = Random(0,1)\tcp*[f]{\footnotesize $R.\randomuse$ is the probability of using $R$}
-        $R.\incuse = (1-R.\puse)/$MaxIterations\tcp*[f]{\footnotesize $R.\puse$ are incremented by $R.\incuse$ in each loop}
+\For{\em (R,R.\puse) $\in$ Rs}{
+	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
+        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse are incremented by R.\incuse in each loop}
 }
 
-\While(\tcp*[f]{\footnotesize $R.\puse$ are incremented till they reach 1}){$\exists ((R,R.\puse) \in Rs).(R.\puse < 1)$}{
-  \While(\tcp*[f]{\footnotesize while some class has at least two elements}){$\exists \varphi \in \RE. |\interp{\varphi}|>1$}{
+\While(\tcp*[f]{\footnotesize R.\puse are incremented till they reach 1}){\em $\exists$((R,R.\puse) $\in$ Rs).(R.\puse < 1)}{
+  \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(|\interp{\varphi}|>1)$}{
       \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
-      \For{$(R, R.\puse) \in Rs$}{
-          \If(\tcp*[f]{\footnotesize $R$ will be used in the expression}){$R.\randomuse \le R.\puse$}{
-              \For{$\varphi \in \RE$}{
-                  add$_\mathcal{L}(R, \varphi, \RE)$\tcp*[f]{\footnotesize refine all classes using $R$}}
+      \For{\em (R, R.\puse) $\in$ Rs}{
+          \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
+              \For{\em $\varphi \in$ \RE}{
+                  add$_\mathcal{L}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
                   }\;
-              \If(\tcp*[f]{\footnotesize the classification has changed}){\RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest $R.\puse$}}
+              \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
               }
-     \If({\tcp*[f]{\footnotesize the classification has stabilized})\RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase $R.\puse$}}
+     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}
   }
-  \For{$(R,R.\puse) \in Rs$}{
-    $R.\puse \leftarrow R.\puse + R.\incuse$\tcp*[f]{\footnotesize increse $R.\puse$}
+  \For{\em (R,R.\puse) $\in$ Rs}{
+    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize increase R.\puse}
   }
 }
 \end{algorithm}
-\caption{Main algorithm, dealing with probabilities}\label{fig:algo1}
+\vspace*{-.5cm}\caption{Main algorithm, dealing with probabilities}\label{fig:algo1}
 \end{figure}
 
 
@@ -168,16 +174,16 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize The most general description $\t
 \dontprintsemicolon
 \caption{add$_\el(R, \varphi, \RE)$} \label{algo:bisim-add-el}
 
-\For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}{
-  \If(\tcp*[f]{\footnotesize the new class is smaller than the original}){$\psi \sqcap \exists R.\varphi$ is not subsumed in $\RE$ {\bf and} \tcp*[f]{\footnotesize the new class is not redundant}\\
-    \ \ \ $\interp{\psi \sqcap \exists R.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize the new class is not empty}\\
-    \ \ \ $\interp{\psi \sqcap \exists R.\varphi} \neq \interp{\psi}$ }{
-    add $\psi \sqcap \exists R.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification}
+\For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
+  \If(\tcp*[f]{\footnotesize the new class is smaller than the original}){\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize the new class is not redundant}\\
+    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize the new class is not empty}\\
+     \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$ }{
+    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
     remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
   }
 }
 \end{algorithm}
-\caption{Refinement function for the \el-language, }\label{fig:algo2}
+\vspace*{-.5cm}\caption{Refinement function for the \el-language, }\label{fig:algo2}
 \end{figure}
 
 

@@ -3,6 +3,7 @@
 %% Optional instructions for authors within the tex file are provided as comments and start with 'for authors:...'
 \documentclass[10pt,a5paper,twoside]{article}
 \usepackage{coling2012}
+\usepackage{amsmath}
 \usepackage{latexsym}
 \usepackage[draft]{fixme}
 \usepackage{xspace}
@@ -14,8 +15,8 @@
 \usepackage{tikz}
 \usetikzlibrary{automata}
 
-%\newcommand{\puse}{\textsf{\small p}{$_\emph{use}$}\xspace}
-\newcommand{\puse}{\ensuremath{\textsf{p}_\emph{use}}\xspace}
+\newcommand{\tup}[1]{\langle #1 \rangle}
+\newcommand{\puse}{\ensuremath{\textsf{p}_\textit{use}}}
 \newcommand{\randomuse}{\ensuremath{\textsf{rnd}_\emph{use}}\xspace}
 \newcommand{\incuse}{\ensuremath{\textsf{inc}_\emph{use}}\xspace}
 \newcommand{\RE}{\textsf{RE}\xspace}
