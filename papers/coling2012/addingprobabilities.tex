@@ -5,7 +5,7 @@ scenario $S$, the objects appearing in $S$ are successively classified according
 to their properties into finer and finer classes. A description (in some formal language $\mathcal{L}$) of each 
 class is computed every time a class is refined.   The procedure always stops when the 
 set of classes stabilizes, i.e., no further refinement is possible with the information 
-available in the scene\footnote{Of course, if we are only interested in a referring expression for 
+available in the scenario\footnote{Of course, if we are only interested in a referring expression for 
 a given target we can stop the procedure as soon as the target is the only element of some of the classes.}.  If the target element is in a singleton class, then 
 the formal description of that class is a referring expression; otherwise the 
 target cannot be unequivocally described (in $\mathcal{L}$).  
@@ -13,13 +13,13 @@ target cannot be unequivocally described (in $\mathcal{L}$).
 In this section we will describe a modification of the algorithm presented 
 by~\cite{arec2:2008:Areces} where the fixed order of the properties in the 
 scenario is replaced by a finite probability distribution.  The required changes
-are fairly straightforward and the complete algorithm in shown is Figures~\ref{fig:algo1} and~\ref{fig:algo2}. 
+are fairly straightforward and the complete algorithm is shown in Figures~\ref{fig:algo1} and~\ref{fig:algo2}. 
 
 In order to understand how the algorithm works, and the differences with the original proposal, we need first to introduce some 
 basic notions.  The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scenario, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scenario its intended extension.  For example, 
-the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model shown in Figure~\ref{GRE3D7-stimulus-graph}.
+the scenario shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$, for example, is $\{e_3,e_4,e_6\}$.
 
 \newcommand{\nBlue}{\mathit{blue}\xspace}
 \newcommand{\nGreen}{\mathit{green}\xspace}
@@ -108,27 +108,13 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 \end{figure}
 
 It is clear that a scenario can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$).  The algorithm assumes that these issues have been dealt off and that the model encodes a suitable representation of the scenario we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two, and unary
-properties can be encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is blue saying that it is related to the dummy element by the blue binary relation).
+properties can be encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is \emph{blue} saying that it is related to the dummy element by the \emph{blue} binary relation).
 
-In what follows, we will use formulas of the $\el$ description logic language~\cite{} to describe refinement classes.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE which are the ones we will find in the corpora used for our evaluation.  But the particular formal language used is independent of the mail algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) 
-functions can be used, depending of the language involved.     
+On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Formally, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
 
-%The first thing that we saw is there are algorithms that gives all properties of element before give a relation with another elements, but it see not human. A human can use relations, properties but there is not standard form of use, it mean not everytimes human use properties or relation it depends of the situation. In order to take into account this problem and give more human reference expresion we modify the model for give the same importance to properties and relation, we create a dummy element wich is going to be related to each elements with te relation of the properties that the elements has, it mean every property is going to be a relation with the dummy element ``c'' like we show in the example.
+In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE, which are the ones we will find in the corpora used for our evaluation\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detail description of $\el$, we refer to~\cite{baad:desc03}.  For this paper, we only need to know that the interpretation of the formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
 
-
-%$\REL$ is the set of relation symbols in the signature. It include the properties that are right now relation to the dummy simbol ``c''. 
-
-
-%The algorithm compute the $\mathcal{L}$-similarity sets from a model. 
-%We are going to have 2 set of formulas, the first one set of formulas are that have not overspecification, and give the limit of iterations of the program, and the second one set of formulas gives overspecification for some elements in case that they run enough for found them.
-
-%We calculate two random numbers for each relation, those random numbers are fixed for the entire execution, one for use an another for discernibility. 
-
-%it mean that we want not to re-calculate the random in each time for relation, it is like a human don't chance your main of if a word is used or not and if it is discernible or not.
-
-%How the algorithm take the goal?
-%While there is change in the first set os formulas, for each of the relation ordered by higher probability of use, if the probability of use if higher than random probability of the relation for each partition at the moment if the probability of discernibility is higher than the random probability of the relation we add the informatives formulas of each side of set of formulas, but if the discernibility probability of the relation is less than the random probability for that relation we only add the formula to the right side, it is the side that have overspecification.
-%When no chance of the left side is made the algorithm finish. You can see that sometimes the algorithm generate one overspecification and finish because not see change in the left side, it is to prevent the non-termination of the algorithm.
+We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el}. Algorithm~\ref{algo:bisim-l} takes as input a model $\gM$ and a list Rs of pairs (R,R.\puse) that link each relation R to some probability of use R.\puse. I.e., if $\REL$ is the set of all relation symbols in the model then 
 
 \begin{figure}[t]
 \small
@@ -187,71 +173,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
   }
 }
 \end{algorithm}
-\vspace*{-.5cm}\caption{Refinement function for the \el-language, }\label{fig:algo2}
+\vspace*{-.5cm}\caption{Refinement function for the \el-language}\label{fig:algo2}
 \end{figure}
 
-
-%\renewcommand{\algorithmicrequire}{\textbf{Input:}}
-%\renewcommand{\algorithmicensure}{\textbf{Output:}}
-
-%\begin{multicols}{2}
-
-%\begin{tabular}{p{.95\linewidth}}\hline
-%\small \textbf{Algorithm 1:} Computing $\mathcal{L}$-similarity sets\\ \hline
-%\end{tabular}
-
-%\begin{algorithmic}
-%\small 
-
-%\Require A model $\gM = (\Delta, \interp{\cdot})$, a list $Rs \in (\REL \times I\!\!R)^*$
-% of relation symbols with their \puse values, ordered by \puse
-%\Ensure A set of formulas \RE such that \\ $\{\interp{\varphi} \mid \varphi \in \RE\}$ are the
-%$\mathcal{L}$-similarity sets of $\gM$.
-
-%\State
-%\State $\RE \leftarrow \{\top\}$
-%\For{$(R,R.\puse) \in Rs$}
-%  \State $R.\randomuse$ = Random()
-%  \State $R.\incuse = (1-R.\puse)/$MaxIterations
-%\EndFor
-
-%\While{$(\exists (R,R.\puse \in Rs).(R.\puse < 1)$}
-%  \While{$(\exists \varphi \in \RE).(|\interp{\varphi}|>1)$}
-%    \State    \RE' $\leftarrow$ \RE 
-%    \For{$(R, R.\puse) \in Rs$}
-%       \If{$R.\randomuse \le R.\puse$}
-%          \For{$\varphi \in \RE$}
-%              \State add$_\mathcal{L}(R, \varphi, \RE)$
-%              \If{\RE $\not =$ \RE'}
-%                 \State ExitFor
-%             \EndIf
-%          \EndFor
-%       \EndIf
-%     \EndFor
-%     \If{\RE $=$ \RE'}
-%        \State ExitWhile
-%     \EndIf
-%  \EndWhile
-%  \Comment We increment all propabilities
-%  \For{$(R,R.\puse) \in Rs$}
-%    \State $(R,R.\puse) \leftarrow (R, R.\puse + R.\incuse)$
-%  \EndFor
-%\EndWhile
-%\end{algorithmic}
-
-%\begin{tabular}{p{.95\linewidth}}\hline
-%\small \textbf{Algorithm 2:} add$_{\mathcal{EL}}(R,\varphi,\RE)$\\ \hline
-%\end{tabular}
-
-%\begin{algorithmic}
-%\For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}
-%  \If{$\psi \sqcap \exists R.\varphi$ is not subsumed in $\RE$ {\bf and}
-%    $\interp{\psi \sqcap \exists R.\varphi} \neq \emptyset$ {\bf and}
-%    $\interp{\psi \sqcap \exists R.\varphi} \neq \interp{\psi}$}
-%      \State add $\psi \sqcap \exists R.\varphi$ to $\RE$
-%      \State remove subsumed formulas from $\RE$
-%  \EndIf
-%\EndFor
-%\end{algorithmic}
-%\end{multicols}
 
