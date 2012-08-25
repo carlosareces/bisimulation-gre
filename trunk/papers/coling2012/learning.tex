@@ -69,10 +69,8 @@ What is the purpose of generating REs if one already has REs of the target in th
 
 If there is no corpus on the target scene we need a corpus that uses the same kind of attributes and we apply the following methodology. In order to generalize from the corpora we need it to be annotated with the kinds of attributes that their tokens represent. In the domain of the corpus GRE3D7 we use the kind of attributes defined in~\cite{viet:gene11}. 
 
-The learning was done with WEKA~\cite{Hall:WEK09}, training with every other picture that have the same vocabulary, we use linear regression to learn the function of probability of use for each groups of properties named. After we replace the variables of the function by the values of the target figure.  
+The learning was done with WEKA~\cite{Hall:WEK09}, training on all the stimuli excluding the figure that we intend to describe. We use linear regression to learn the function of probability of use for each word in the vocabulary. For a given figure, we replace the variables of the obtained function by the values of the features in the figure. In order to do the learning process we use the following attributes extracted automatically from the model:  
 
-Which attributes we include in order to do the learning?
-Those attributes was found in the model.
 \begin{itemize}
 \item target-has: if the target element has the property.
 \item count-prop-rel: count of properties plus relations that the target has.
