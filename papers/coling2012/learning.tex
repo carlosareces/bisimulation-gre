@@ -38,15 +38,14 @@ Defining a balanced set of stimuli scenes is extremely hard as different variabl
 
 \subsection{Calculating \puse\ when a corpus for the scene is available}
 
-Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have a corpus $C$ of REs for $t$ in that scene available (this is exactly the kind of information we will find in the GRE3D7 corpus).  We will use the REs in $C$ to define the relations 
-in our model, then we will estimate \puse for each of these relations simply as the percentage of REs in which the relation appears.  I.e., 
+Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ of REs for $t$ in that scene (this is exactly the kind of information we find in the GRE3D7 corpus).  We will use the REs in $C$ first to define the relational model 
+used by the algorithm, and then estimate \puse for each of the relations in the model as the percentage of REs in which the relation appears.  I.e., 
 \begin{equation}\label{eq1}
 R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
 \end{equation}
-This estimation is overlysimplified and, for example, it does not differentiate between the properties of a target and the properties of a landmark object used in a relational RE to complete the description of the target.  But it is extremely easy to compute, and we will see that 
-it already produces natural REs that match those found in the corpus. 
+This estimation is overlysimplified and, for example, it does not differentiate between the properties of a target and the properties of a landmark object used in a relational RE to complete the description of the target.  But it is extremely easy to compute, and we will see in Section~\ref{sec:evaluation} that it already produces natural REs that match those found in the corpus. 
 
-To clarify the computation of R.\puse and the model $\gM$ associated to each scene we list the required steps in detail, and how we carried them out in the GRE3D7 corpus.
+To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, and discuss how we carried them out in the GRE3D7 corpus.
 
 \vspace*{-.4cm}
 \begin{enumerate}
@@ -65,10 +64,7 @@ Figure~\ref{GRE3D7-stimulus-graph}.\\[-2em]
 
 %For example, the signature of the model shown in Figure~\ref{GRE3D7-stimulus-graph} is \{\emph{small}, \emph{large}, \emph{blue}, \emph{green}, \emph{ball}, \emph{cube}, \emph{ontop}, \emph{below}, \emph{rightof}, \emph{leftof}\}.
 
-
-Starting from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding corpus shown in Table~\ref{corpus-distribution}, the resulting signature and their associated \puse\ are listed in Table~\ref{probability-of-use}. 
-
-As you can observe from the table, the probability of use does not specify the absolute preference of an attribute over another for any scene in the domain. As an example notice that ``cube'' has a probability lower than ``small'' although, in general, taxonomic properties such as ``cube'' are preferred over size properties such as ``small''. The probabilities of use calculated in this manner give a higher probability to the properties of the target. The advantage of the simplicity of our approach to calculating probabilities of use in this way is that their calculation can be automatized if necessary with ease. 
+Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the GRE3D7 corpus). Starting from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding corpus shown in Table~\ref{corpus-distribution}, the resulting signature and their associated \puse\ are listed in Table~\ref{probability-of-use}. 
 
 \begin{table}[h!]
 \begin{center}
@@ -91,7 +87,10 @@ top & 0.186 \\
 \end{center}
 \end{table}
 
-What is the purpose of generating REs if one already has REs of the target in that scene? The purpose is have an algorithm that generates REs that could have been in the corpus according to the distribution of properties observed. As we will show in Section~\ref{sec:evaluation}, the algorithm will be able to generate REs like ``small ball on top of blue cube'' to describe the target in Figure~\ref{corpus-distribution}, which could have naturally appeared in the corpora. In the following section we describe how to calculate the probability of use if no such specific corpora is available. 
+Notice that the value R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model $\gM$.  
+For that reason, for example, the value of \emph{bal}.\puse\ is 1, while the value of \emph{cube}.\puse is 0.178.  These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain values for new targets and scenes in the next section.  Perhaps not surprisingly, using these values the algorithm generates REs matching the ones found in the corpus.  More interestingly, as we discuss in Section~\ref{sec:evaluation} it does so with a distribution that matches the one found in the corpus and, as Table~\ref{} shows, even the generated REs not found in the corpus are natural.    
+
+%As we will show in Section~\ref{sec:evaluation}, the algorithm will be able to generate REs like ``small ball on top of blue cube'' to describe the target in Figure~\ref{corpus-distribution}, which could have naturally appeared in the corpora. 
 
 \subsection{Learning to describe new objects}
 
