@@ -35,15 +35,17 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 \newcommand{\nBall}{\mathit{ball}\xspace}
 \newcommand{\nCube}{\mathit{cube}\xspace}
 \newcommand{\nOntop}{\mathit{ontop}\xspace}
+\newcommand{\nTop}{\mathit{top}\xspace}
 \newcommand{\nBelow}{\mathit{below}\xspace}
 \newcommand{\nRightof}{\mathit{rightof}\xspace}
 \newcommand{\nLeftof}{\mathit{leftof}\xspace}
+\newcommand{\nLeft}{\mathit{left}\xspace}
 
 \begin{figure}[ht]
 \begin{minipage}[b]{0.45\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/3.jpg}
-\vspace*{-.1cm}
+\vspace*{.15cm}
 \caption{Input scene}
 \label{GRE3D7-stimulus}
 \end{minipage}
@@ -57,18 +59,22 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
   ]
  \node[n,label=above:$e_1$,label=below:{
     \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-2pt]
       \nSmall\\[-2pt] 
       \nBlue \\[-2pt] 
       \nBall\end{array}$}] (a) {};
 
  \node[n,label=above:$e_2$,label=below:{
     \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-2pt]
       \nBig\\[-2pt] 
       \nBlue\\[-2pt] 
       \nCube\end{array}$}, right of=a] (b) {};
 
  \node[n,label=below:$e_3$,label=above:{
     \relsize{-1}$\begin{array}{c}
+      \nTop\\[-2pt]
+      \nLeft\\[-2pt]
       \nSmall\\[-2pt] 
       \nGreen\\[-2pt] 
       \nBall\end{array}$}, above of=b] (c) {};
@@ -93,6 +99,7 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 
  \node[n,label=below:$e_7$,label=above:{
     \relsize{-1}$\begin{array}{c}
+      \nTop\\[-2pt]
       \nSmall\\[-2pt] 
       \nBlue\\[-2pt] 
       \nCube\end{array}$}, above of=f] (g) {};
@@ -106,7 +113,7 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
  \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
  \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
 
- \draw[dotted] (-.4,-1.3) rectangle (7.1,2.8);
+ \draw[dotted] (-.4,-1.4) rectangle (7.1,3.1);
 
  \end{tikzpicture}
 \caption{scene as a relational model}
