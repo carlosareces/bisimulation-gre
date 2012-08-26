@@ -48,17 +48,18 @@ it already produces natural REs that match those found in the corpus.
 
 To clarify the computation of R.\puse and the model $\gM$ associated to each scene we list the required steps in detail, and how we carried them out in the GRE3D7 corpus.
 
+\vspace*{-.4cm}
 \begin{enumerate}
-\item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``on top of'' should be matched to a single token \emph{ontop}.
+\item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``on top of'' should be matched to a single token \emph{ontop}.\\[-2em]
 
-\item Remove hyperonyms from $T$. E.g., if both \emph{cube} and \emph{thing} appear in $T$, delete \emph{thing}.
+\item Remove hyperonyms from $T$. E.g., if both \emph{cube} and \emph{thing} appear in $T$, delete \emph{thing}.\\[-2em]
 
-\item If the set of tokens obtained in the previous steps contains synonyms normalize them to a representative in the synonym class, and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{little} and \emph{small} are both represented by the token \emph{small}.  
+\item If the set of tokens obtained in the previous steps contains synonyms normalize them to a representative in the synonym class, and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{little} and \emph{small} are both represented by the token \emph{small}.\\[-2em]
 
-\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that all the REs in the corpus are REs in the model. E.g., the $\el$ formulas corresponding to the REs in Table~\ref{corpus-distribution} should all denote the target in $\gM$ depicted in 
-Figure~\ref{GRE3D7-stimulus-graph}.
+\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that all the REs in the corpus are REs in the model. E.g., the $\el$ formulas corresponding to the REs in Table~\ref{corpus-distribution} should all denote the target in the model $\gM$ depicted in 
+Figure~\ref{GRE3D7-stimulus-graph}.\\[-2em]
 
-\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).   
+\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).\\[-2em]
 
 \end{enumerate}
 
