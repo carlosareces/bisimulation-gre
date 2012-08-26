@@ -5,7 +5,7 @@ other scenes in the domain, using a machine learning algorithm.   We will exempl
 
 \subsection{A corpus of referring expressions}
 
-The corpus used in this paper is known as the GRE3D7 corpus and consists of 4480 referring expressions. This corpus is the largest corpus of distinguishing descriptions developed to date. These referring expressions describe objects in 32 stimuli 3D scenes. Each scene contains a small number of simple objects (cubes and balls), and the individual descriptions were elicited in the absence of a preceding discourse. The stimulus scenes are designed in a way that encourage the use of relations between objects, but do not require them. For a detailed description of the collection procedure see~\cite[Chapter 5]{viet:gene11}. A sample stimulus used in the corpus collection is shown in Figure~\ref{GRE3D7-stimulus} (the target object is marked with an arrow). Table~\ref{corpus-distribution} shows the REs that appear in the corpus for Figure~\ref{GRE3D7-stimulus} together with their number of occurrences in the corpus and the percentage that they represent.  
+In what follows we will use the GRE3D7 corpus of~\shortcite{viet:gene11} which consists of 4480 referring expressions. This is the largest corpus of distinguishing descriptions developed to date. The REs in the corpus describe objects in 32 3D scenes. Each scene contains a small number of simple objects (cubes and balls), and the individual descriptions were elicited in the absence of a preceding discourse. The stimulus scenes are designed in a way that encourage the use of relations between objects, but do not require them. For a detailed description of the collection procedure see~\cite[Chapter 5]{viet:gene11}. A sample scene used in the corpus collection is shown in Figure~\ref{GRE3D7-stimulus} (the target object is marked with an arrow). Table~\ref{corpus-distribution} shows the REs that appear in the corpus for Figure~\ref{GRE3D7-stimulus} together with their total number of occurrences and the percentage these totals represent.  
 
 \begin{table}[h!]
 \begin{center}
@@ -31,14 +31,27 @@ green ball on top of cube & 1 & 0.71\% \\
 \end{center}
 \end{table}
 
-The REs in the corpus were produced by 294 participants, each participant produced 16 referring expressions corresponding to 16 different scenes. In this way, 140 descriptions for each of the 32 scenes were obtained resulting in a corpus of 4480 REs in total. This corpus is particularly well suited for the goal of this paper, namely, studying non-deterministic choices while selecting the content of the REs, since it contains input from many different speakers. 
+The REs in the corpus were produced by 294 participants. Each participant produced 16 referring expressions corresponding to 16 different scenes. In this way, 140 descriptions for each of the 32 scenes were obtained, resulting in a corpus of 4480 REs in total. 
+
+Defining a balanced set of stimuli scenes is extremely hard as different variables like the exact size of the objects, their spatial distribution or the color assignment can elicit particular reactions on the subjects.  Still, the GRE3D7 corpora provides a complex and interesting data set to study the choices made by different subjects when selecting the content of REs. 
 
 
-\subsection{Calculating the probability of use}
+\subsection{Calculating \puse\ when a corpus for the scene is available}
 
-In order to calculate the probability of use required by the algorithm from corpora we propose the following methodologies depending of the kind of corpora that exists.
+Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have a corpus $C$ of REs for $t$ in that scene available (this is exactly the kind of information we will find in the GRE3D7 corpus).  We will use the REs in $C$ to define the relations 
+in our model, then we will estimate \puse for each of these relations simply as the percentage of REs in which the relation appears.  I.e., 
+$$
+R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
+$$
+This estimation is overlysimplified and, por example, it does not differentiate between the properties of a target and the properties of a landmark object used in a relational RE to complete the description of the target.  But it is extremely easy to compute, and we will see that 
+it already produces natural REs that match those found in the corpus. 
 
-If there exists corpora of referring expressions for the target object that wants to be described we follow the next steps. First we tokenize the referring expressions into attributes. This process is similar to a typical string tokenization in which each word is matched to an attribute---e.g., ``green''---except that relational attributes are multi-word expressions matched to a single token----e.g., ``on top of''. Second, the vocabulary of the stimulus is obtained by identifying the distinct tokens that appear in the REs. Third, if the vocabulary contains synonyms---e.g., box and cube---we choose one of them and normalize the REs to include only one of synonym chosen. Finally, we define the probability of use of a token as the percentage of REs in which the token appear in a given stimuli. This vocabulary is the signature of the relational model that is used as input of the algorithm as described in Section~\ref{sec:algorithm}. For example, the signature of the model shown in Figure~\ref{GRE3D7-stimulus-graph} is \texttt{\{small,large,blue,green,ball,cube,ontop,below,rightof,leftof\}}. Once this signature is extracted from corpora the model for each figure (e.g.~the model in Figure~\ref{GRE3D7-stimulus-graph}) is constructed by defining the interpretation $\interp{\cdot}$ in such a way that all the REs in the corpus are REs in the model. 
+To clarify the computation of R.\puse we list the required steps in detail, and how we carried them out in the GRE3D7 corpus.
+
+\begin{enumerate}
+\item Tokenize the referring expressions into attributes. This process is similar to a typical string tokenization in which each word is matched to an attribute---e.g., ``green''---except that relational attributes are multi-word expressions matched to a single token----e.g., ``on top of''. 
+\item Second, the vocabulary of the stimulus is obtained by identifying the distinct tokens that appear in the REs. Third, if the vocabulary contains synonyms---e.g., box and cube---we choose one of them and normalize the REs to include only one of synonym chosen. Finally, we define the probability of use of a token as the percentage of REs in which the token appear in a given stimuli. This vocabulary is the signature of the relational model that is used as input of the algorithm as described in Section~\ref{sec:algorithm}. For example, the signature of the model shown in Figure~\ref{GRE3D7-stimulus-graph} is \{\emph{small}, \emph{large}, \emph{blue}, \emph{green}, \emph{ball}, \emph{cube}, \emph{ontop}, \emph{below}, \emph{rightof}, \emph{leftof}\}. Once this signature is extracted from corpora the model for each scene (e.g., the model in Figure~\ref{GRE3D7-stimulus-graph}) is constructed by defining the interpretation $\interp{\cdot}$ in such a way that all the REs in the corpus are REs in the model. 
+\end{enumerate}
 
 The three steps of pre-processing the corpora were already done in the GRE3D7 corpora semi-automatically so we did not need to do them ourselves. The REs shown in Table~\ref{corpus-distribution} had already gone through the preprocessing steps. The resulting vocabulary and their associated probabilities of use obtained from the corpus are shown in Table~\ref{probability-of-use}. As you can observe from the table, the probability of use does not specify the absolute preference of an attribute over another for any scene in the domain. As an example notice that ``cube'' has a probability lower than ``small'' although, in general, taxonomic properties such as ``cube'' are preferred over size properties such as ``small''. The probabilities of use calculated in this manner give a higher probability to the properties of the target. The advantage of the simplicity of our approach to calculating probabilities of use in this way is that their calculation can be automatized if necessary with ease. 
 
@@ -69,7 +82,7 @@ What is the purpose of generating REs if one already has REs of the target in th
 
 If there is no corpus on the target scene we need a corpus that uses the same kind of attributes and we apply the following methodology. In order to generalize from the corpora we need it to be annotated with the kinds of attributes that their tokens represent. In the domain of the corpus GRE3D7 we use the kind of attributes defined in~\cite{viet:gene11}. 
 
-The learning was done with WEKA~\cite{Hall:WEK09}, training on all the stimuli excluding the figure that we intend to describe. We use linear regression to learn the function of probability of use for each word in the vocabulary. For a given figure, we replace the variables of the obtained function by the values of the features in the figure. In order to do the learning process we use the following attributes extracted automatically from the model:  
+The learning was done with WEKA~\cite{Hall:WEK09}, training on all the stimuli excluding the scene that we intend to describe. We use linear regression to learn the function of probability of use for each word in the vocabulary. For a given scene, we replace the variables of the obtained function by the values of the features in the scene. In order to do the learning process we use the following attributes extracted automatically from the model:  
 
 \begin{itemize}
 \item target-has: if the target element has the property.
