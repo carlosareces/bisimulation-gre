@@ -88,11 +88,11 @@ top & 0.186 \\
 \end{table}
 
 Notice that the value R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model $\gM$.  
-For that reason, for example, the value of \emph{bal}.\puse\ is 1, while the value of \emph{cube}.\puse is 0.178.  These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain values for new targets and scenes in the next section.  Perhaps not surprisingly, using these values the algorithm generates REs matching the ones found in the corpus.  More interestingly, as we discuss in Section~\ref{sec:evaluation} it does so with a distribution that matches the one found in the corpus and, as Table~\ref{} shows, even the generated REs not found in the corpus are natural.    
+For that reason, for example, the value of \emph{bal}.\puse\ is 1, while the value of \emph{cube}.\puse is 0.178.  These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain values for new targets and scenes using a machine learning approach in the next section.  Perhaps not surprisingly, using these values the algorithm generates REs matching the ones found in the corpus.  More interestingly, as we discuss in Section~\ref{sec:evaluation} it does so with a distribution that matches the one found in the corpus and, as Table~\ref{} shows, even the generated REs not found in the corpus are natural.    
 
 %As we will show in Section~\ref{sec:evaluation}, the algorithm will be able to generate REs like ``small ball on top of blue cube'' to describe the target in Figure~\ref{corpus-distribution}, which could have naturally appeared in the corpora. 
 
-\subsection{Learning to describe new objects}
+\subsection{Calculating \puse\ for scenes without corpora}
 
 If there is no corpus on the target scene we need a corpus that uses the same kind of attributes and we apply the following methodology. In order to generalize from the corpora we need it to be annotated with the kinds of attributes that their tokens represent. In the domain of the corpus GRE3D7 we use the kind of attributes defined in~\cite{viet:gene11}. 
 
