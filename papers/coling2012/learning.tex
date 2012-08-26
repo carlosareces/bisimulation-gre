@@ -1,7 +1,7 @@
-\section{Learning to describe new objects from corpora}
-\label{sec:learning}
+\section{Learning to describe new objects from corpora}\label{sec:learning}
 
-In the previous section we presented an algorithm that assumes that each property used in the referring expressions has a known probability of use. In this section, we describe how to calculate these probabilities from corpora when there is one available, and how to estimate them if there is no such corpora. This section starts by describing the corpora that we use for calculating the probabilities of use. Then we present the method used in the calculation. And finally we propose a methodology for estimating the probability of use of properties when describing objects for which no corpora is available. 
+In the previous section we presented an algorithm that assumes that each relation R used in a referring expressions has a known probability of use R.\puse. In this section, we describe how to calculate these probabilities from corpora.  The general set up is the following: we assume available a corpus of REs associated to different scenes that are prototypical of the domain in which the GRE algorithm will have to operate.   We show first how to calculate R.\puse values for those scenes for which a corpus of REs is available.  We then show how to generalize these values to 
+other scenes in the domain, using a machine learning algorithm.   We will exemplify the methodology using the GRE3D7 corpus which we introduce in the next section. 
 
 \subsection{A corpus of referring expressions}
 
