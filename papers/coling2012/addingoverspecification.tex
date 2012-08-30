@@ -1,2 +1,57 @@
-\section{Generating overspecified descriptions}
-\label{sec:overspecification}
+\section{Generating overspecified descriptions} \label{sec:overspecification}
+
+As it stand, Algorithm~\ref{algo:bisim-l} allows very little overspecification in the REs it
+generates.  A relation with a low \puse\ might be enough by 
+(by itself or in combination with some of the relations already considered) to 
+identify the target. Once this relation is added, we obtain an RE, but a shorter, 
+more specific RE might be possible, by eliminating some of the previous refinements. 
+Hence, the resulting RE might be overspecified. This is the same kind of overspecification 
+that the original incremental algorithm allows.  But it has been argued~\cite{xxx} that 
+a might higher degree of overspecification is usually found in corpora, and this 
+is indeed what can be seen in the GRE3D7 corpus.  As we can see in Table~\ref{xxx}, 
+the target is described 16.43\% of the times as a ``small green ball'' when ``green 
+ball'' is already an RE.  Using the \puse\ values learnt from the calculus explained
+in the previous section, Algorithm~\ref{algo:bisim-l} cannot simulate this behavior. 
+
+Because the fundamental idea of the algorithm is semantics, handling overspecification in 
+a natural way is difficult. If two properties have the same interpretation in a given 
+model, then once the first has been considered the second will not refine the classes 
+obtained so far, and hence the algorithm won't include it in the generated descriptions. 
+On the other hand, if we disregard the condition the informativeness constrain (i.e., 
+the fact that the addition of a relation indeed refine the class, eliminating some of 
+the elements it contains), then we run the risk of generating descriptions like ``the green 
+green ball.''
+
+As a compromise, we consider the following variation of Algorithm~\ref{algo:bisim-l} were 
+we disregard the informativeness constrain (i.e., we allow the inclusion of new relations 
+in the description, even if they do not refine the associated class) \emph{but only during the 
+first loop of the algorithm}.  That is, during the first loop over the elements in the 
+input list Rs, we will allow the inclusion of all relations that do not trivialize the 
+description (i.e., the associated class is not empty).  Because this is done only during 
+the first loop, we know that repeated properties will not appear in the generated REs.  
+In the remaining loops, additional properties will be added only if they are informative. 
+The modified algorithm is shown in Figure~\ref{fig:algo3}.
+
+\begin{figure}[t]
+\small
+\centering
+\begin{algorithm}[H]
+\dontprintsemicolon
+\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el-over}
+
+\eIf(\tcp*[f]{\footnotesize are we in the first loop?}){\em FirstLoop?}{
+    Informative $\leftarrow$ $\top$ \tcp*[f]{\footnotesize allow overspecification}}{
+    Informative $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$ \tcp*[f]{\footnotesize informative: smaller than the original?}}
+\For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
+  \If{\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant: can't be obtained form \RE?}\\
+    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial: has elements?}\\
+     \ \ \  \emph{Informative}}{
+    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
+    remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
+  }
+}
+\end{algorithm}
+\vspace*{-.5cm}\caption{Refinement function with overspecification for the \el-language}\label{fig:algo3}
+\end{figure}
+
+Clearly, Algorithm~\ref{algo:bisim-add-el-over} does not capture all possible forms of overspecification, but as we will see in the next section it does account for most of the kinds of overspecification found in the GRE3D7 corpus.  
