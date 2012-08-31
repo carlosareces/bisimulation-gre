@@ -43,7 +43,7 @@ Total & 140 & 100 & 10000 & 100 & 80,51 \\
 \end{center}
 \end{table}
 
-In order to put our results in perspective we compare the accuracy obtained for several of the figures in the corpus using the probability of used inferred (column Learned \puse) and the probability of used directly extracted from corpora (column Extracted \puse) as explained in Section~\ref{sec:learning}. We show the accuracy results in Table~\ref{results-algo-all}. The random baseline (column Random) is calculated in by producing random probabilities of use and then running the algorithm 10000 using these random probabilities. Not only the intersection between the randomly generated REs and the corpus is lower but also many of  the REs generated in this way are not naturally sounding (e.g. ``small on the top of a blue cube that is below of something that is small''). 
+In order to put our results in perspective we compare the accuracy obtained for several of the figures in the corpus using the probability of used inferred (column Learned \puse) and the probability of used directly extracted from corpora (column Extracted \puse) as explained in Section~\ref{sec:learning}. We show the accuracy results in Table~\ref{results-algo-all}. The random baseline (column Random) is calculated in by producing random probabilities of use and then running the algorithm 10000 using these random probabilities. Not only the intersection between the randomly generated REs and the corpus is lower but also many of  the REs generated in this way are not naturally sounding (e.g. ``small on the top of a blue cube that is below of something that is small''). We also show the results of accuracy for uniform distribution (column uniform)
 
 \begin{table}[h!]
 \begin{center}
@@ -70,8 +70,8 @@ Average	&	87.125\%	&	75.03125\%	&	16.33625\%	&	5.55\%	\\
 \end{center}
 \end{table}
 
-The entropy is a measure of the amount of uncertainty associated with the value of the variable. The cross entropy between two probability distributions measures the average number of bits needed to identify an event from a set of possibilities. The cross entropy for two distributions p and q over the same probability space can be calculate by the formula... 
-
+The entropy a measure of the amount of uncertainty associated with the value of the variable. The cross entropy between two probability distributions measures the average number of bits needed to identify an event from a set of possibilities. The cross entropy for two distributions p and q over the same probability space can be calculate by the formula... 
+chapter 6.7 
 
 
 when they are discrete, we take as a probability space the REs that the algorithm was generate plus the RE that the corpus has that have not generate by the algorithm, and then calculate for each (corpus, machine-learned, random and uniform), the named formula. In the following picture~\ref{Entropy} we show the results that we obtains for each figure.
