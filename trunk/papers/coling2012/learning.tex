@@ -86,7 +86,7 @@ target & whether the target element has the property \\
 \#rel-prop & number of properties and relations that the target has\\
 \#rel & number of the relations that the target has \\
 landmark & whether a landmark of the target has the property, an object is a landmark if there is a direct relation in the model between them \\
-discernibility & 1 over the number of objects in the model that have the property \\
+discrimination & 1 over the number of objects in the model that have the property \\
 \hline
 \end{tabular}
 \caption{Features used for learning the \puse for each token in the signature of the scenes \label{features}}
@@ -94,7 +94,7 @@ discernibility & 1 over the number of objects in the model that have the propert
 \end{table}
 \end{small}
 
-Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain that we are not able to learn, and has an impact in our performance, is that the properties of type size (namely, small and large) are used when much more when the target cannot be uniquely identified with taxonomical (ball and cube) and absolute (green and blue) properties only. In other words, in the GRE3D7 corpus the size is used more often (90.2\%) of the time when it is the resulting RE is not overspecified than when it is (26\%). It may not be possible to learn this characteristic from the GRE3D7 data since even with the domain dependent features defined in~\cite[Chapter 6]{viet:gene11}, it could not be learned by decision trees. As a result we can see in Table~\ref{probability-of-use} that for Fig 13 the value estimated for ``large'' are not close to those calculated from corpora. 
+Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain that we are not able to learn, and has an impact in our performance, is that the properties of type size (namely, small and large) are used when much more when the target cannot be uniquely identified with taxonomical (ball and cube) and absolute (green and blue) properties only. In other words, in the GRE3D7 corpus the size is used more often (90.2\%) of the time when it is the resulting RE is not overspecified than when it is (34\%). It may not be possible to learn this characteristic from the GRE3D7 data since even with the domain dependent features defined in~\cite[Chapter 6]{viet:gene11}, it could not be learned by decision trees. As a result we can see in Table~\ref{probability-of-use} that for Fig 13 the value estimated for ``large'' are not close to the value calculated from corpora. 
 
 \begin{table}[h!]
 \begin{center}
@@ -121,3 +121,4 @@ below-of & 0 & 0 & & \\
 \end{center}
 \end{table}
 
+Our linear regression are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the saliency of a color depends strongly on whether the target object is of that color, and it does not depend on its discrimination power in the model. Moreover, it learns that the on-top relation is used more frequently than the horizontal relations (left-of and right-of) which confirms a previous finding reported in~\cite{viet:gene11}. Finally, it learned a surprising fact of the GRE3D7 corpus (not found by previous work), that is that size is used more frequently in an overspecified manner when the target and landmark share the size. Size was used in overspecified REs when in 49\% of the descriptions for scenes where target and landmark shared the size, and 25\% of the time when target and landmark did not share the size. This can be explained by the observation that if landmark and target share a property, this property is more salient. 
