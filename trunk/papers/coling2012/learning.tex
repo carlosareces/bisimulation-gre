@@ -72,7 +72,7 @@ For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the va
 
 \subsection{Calculating \puse\ for scenes without corpora for the target} \label{subsec:learning}
 
-If there is no corpora that describes the target we can estimate the \puse from corpora on a different scene in the same domain. 
+If there is no corpora that describes the target we can estimate the \puse from corpora on a different scenes in the same domain. 
 
 
 The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all the scenes of the GRE3D7 corpora excluding the scene that we wanted  to describe. We use linear regression to learn the function of \puse for each word in the signature. For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to describe. We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed in Table~\ref{features}.  
