@@ -1,21 +1,17 @@
-#Explicacion de los parametros del sistema.
+#Input of the system.
 
-= Parametros que toma =
+= Parameters =
 
-positive - ya que es la forma positiva del algoritmo original
+positive - Required by the original algorithm
 
-modeloFig1Gre7-2.xml - el modelo en un archivo xml
+model.xml - the model in a xml file
 
-P_disc-1.txt - la probabilidad de discernibilidad
+P_use.txt - probabilities of use of each of the words in the vocabulary
 
-s1 - target object o "all" si queremos descripcion para todos los objetos
+s1 - target object if we want to have referring expression for only one object or "all" for descriptions of all the objects.
 
-140 - cantidad de iteraciones implica cantidad de expresiones que queremos generar, aunque a veces puede no generar
+140 - count of referring expression that the system is going to generate
 
-resFig1-GRE7-2/ - carpeta donde queremos que guarde los resultados, necesita la /
+wordsForOverspecification.txt - words that the system is going to use for overspecification.
 
-EJEMPLO:
-positive modeloFig1Gre7-2.xml P_uso-1.txt P_disc-1.txt s1 140 resFig1-GRE7-2/
-
-
-En la carpeta de salida eran las formulas y el texto de ambos lados el derecho con overspecification y el izquierdo sin.
+results/ - folder where the system is  going to put the results.
