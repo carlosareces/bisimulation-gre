@@ -5,7 +5,7 @@ other scenes in the domain, using a machine learning algorithm.   We will exempl
 
 \subsection{A corpus of referring expressions}
 
-In what follows we will use the GRE3D7 corpus of~\shortcite{viet:gene11} which consists of 4480 referring expressions. This is the largest corpus of distinguishing descriptions developed to date. The REs in the corpus describe objects in 32 3D scenes. Each scene contains a small number of simple objects (cubes and balls), and the individual descriptions were elicited in the absence of a preceding discourse. The stimulus scenes are designed in a way that encourage the use of relations between objects, but do not require them. For a detailed description of the collection procedure see~\cite[Chapter 5]{viet:gene11}. A sample scene used in the corpus collection is shown in Figure~\ref{GRE3D7-stimulus} (the target object is marked with an arrow). Table~\ref{corpus-distribution} shows the REs that appear in the corpus for Figure~\ref{GRE3D7-stimulus} together with their total number of occurrences and the percentage these totals represent.  
+The GRE3D7 corpus of~\shortcite{viet:gene11} consists of 4480 referring expressions. It is the largest corpus of distinguishing descriptions developed to date. The REs in the corpus describe objects in 32 3D scenes. Each scene contains a small number of simple objects (cubes and balls), and the individual descriptions were elicited in the absence of a preceding discourse. The stimulus scenes are designed in a way that encourage the use of relations between objects, but do not require them (i.e., a purely propositional RE for the target always exists). For a detailed description of the collection procedure see~\cite[Chapter 5]{viet:gene11}. A sample scene used in the corpus collection is shown in Figure~\ref{GRE3D7-stimulus} (the target object is marked with an arrow). Table~\ref{corpus-distribution} shows the REs that appear in the corpus for Figure~\ref{GRE3D7-stimulus} together with their total number of occurrences and the percentage these totals represent.  
 
 \begin{table}[h!]
 \begin{center}
@@ -31,40 +31,42 @@ green ball on top of cube & 1 & 0.71\% \\
 \end{center}
 \end{table}
 
-The REs in the corpus were produced by 294 participants. Each participant produced 16 referring expressions corresponding to 16 different scenes. In this way, 140 descriptions for each of the 32 scenes were obtained, resulting in a corpus of 4480 REs in total. 
+The REs in the corpus were produced by 294 participants, each participant producing 16 referring expressions corresponding to 16 different scenes. In this way, 140 descriptions for each of the 32 scenes were obtained, resulting in a corpus of 4480 REs in total. 
 
 Defining a balanced set of stimuli scenes is extremely hard as different variables like the exact size of the objects, their spatial distribution or the color assignment can elicit particular reactions on the subjects.  Still, the GRE3D7 corpora provides a complex and interesting data set to study the choices made by different subjects when selecting the content of REs. 
 
 
 \subsection{Calculating \puse\ when a corpus for the scene is available}
 
-Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ of REs for $t$ in that scene (this is exactly the kind of information we find in the GRE3D7 corpus).  We will use the REs in $C$ first to define the relational model 
-used by the algorithm, and then estimate \puse\ for each of the relations in the model as the percentage of REs in which the relation appears.  I.e., 
+Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ of REs for $t$ in that scene (this is exactly the kind of information we find in the GRE3D7 corpus).  We use the REs in $C$ to define the relational model 
+used by the algorithm.  Then we estimate the value of \puse\ for each of the relations in the model as the percentage of REs in which the relation appears.  I.e., 
 \begin{equation}\label{eq1}
 R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
 \end{equation}
+
+\noindent
 This estimation is overly simplified and, for example, it does not differentiate between the properties of a target and the properties of a landmark object used in a relational RE to complete the description of the target.  But it is extremely easy to compute, and we will see in Section~\ref{sec:evaluation} that it already produces natural REs that match those found in the corpus. 
 
-To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, and discuss how we carried them out in the GRE3D7 corpus.
+To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, and discuss how we carried them out in the GRE3D7 corpus:
 
 \vspace*{-.4cm}
 \begin{enumerate}
-\item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``on top of'' should be matched to a single token \emph{ontop}.\\[-2em]
+\item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``on top of'' should be matched to a single token like \emph{ontop}.\\[-1.9em]
 
 \item Remove hyperonyms from $T$. E.g., if both \emph{cube} and \emph{thing} appear in $T$, delete \emph{thing}.\\[-2em]
 
-\item If the set of tokens obtained in the previous steps contains synonyms normalize them to a representative in the synonym class, and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{little} and \emph{small} are both represented by the token \emph{small}.\\[-2em]
+\item If the set of tokens obtained in the previous steps contains synonyms normalize them to a representative in the synonym class, and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{little} and \emph{small} are both represented by the token \emph{small}.\\[-1.9em]
 
 \item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that all the REs in the corpus are REs in the model. E.g., the $\el$ formulas corresponding to the REs in Table~\ref{corpus-distribution} should all denote the target in the model $\gM$ depicted in 
-Figure~\ref{GRE3D7-stimulus-graph}.\\[-2em]
+Figure~\ref{GRE3D7-stimulus-graph}.\\[-1.9em]
 
-\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).\\[-2em]
+\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).\\[-1.9em]
 
 \end{enumerate}
 
 %For example, the signature of the model shown in Figure~\ref{GRE3D7-stimulus-graph} is \{\emph{small}, \emph{large}, \emph{blue}, \emph{green}, \emph{ball}, \emph{cube}, \emph{ontop}, \emph{below}, \emph{rightof}, \emph{leftof}\}.
 
-Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the GRE3D7 corpus). Starting from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding corpus shown in Table~\ref{corpus-distribution}, the resulting signature and their associated \puse\ are listed in Table~\ref{probability-of-use}. 
+Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the GRE3D7 corpus). Starting from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding corpus shown in Table~\ref{corpus-distribution}, the resulting signature and their associated \puse\ are listed in the first three columns of Table~\ref{probability-of-use}. 
 
 \begin{table}[h!]
 \begin{center}
@@ -91,8 +93,8 @@ below-of & 0 & 0 & & \\
 \end{center}
 \end{table}
 
-Notice that the value R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model $\gM$.  
-For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the value of \emph{cube}.\puse is 0.178.  These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain values for new targets and scenes using a machine learning approach in the next section.  Perhaps not surprisingly, using these values the algorithm generates REs matching the ones found in the corpus.  More interestingly, as we discuss in Section~\ref{sec:evaluation} it does so with a distribution that matches the one found in the corpus and, as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
+Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
+For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the value of \emph{cube}.\puse\ is 0.178.  These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain values for new targets and scenes using a machine learning approach in the next section.  Not surprisingly, using these values for R.\puse\ the REs generated most often by the algorithm can be found in the corpus.  More interestingly, as we discuss in Section~\ref{sec:evaluation} the algorithm generates REs with a distribution that matches the one found in the corpus and, as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
 %As we will show in Section~\ref{sec:evaluation}, the algorithm will be able to generate REs like ``small ball on top of blue cube'' to describe the target in Figure~\ref{corpus-distribution}, which could have naturally appeared in the corpora. 
 
