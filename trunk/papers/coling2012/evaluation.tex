@@ -49,7 +49,7 @@ In order to put our results in perspective we compare the accuracy obtained for 
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-Figure & Model \puse &  Learned \puse & Random \puse &  Uniform \puse \\
+Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
 \hline
 
 %	&	Corpus-direct	&	Machine learning	&	Random	&	Uniform	\\
@@ -62,7 +62,7 @@ Fig. 12	&	80.21\%	&	81.29\%	&	57.09\%	&	6.68\%	\\
 Fig. 13	&	89.98\%	&	50.79\%	&	9.30\%	&	3.59\%	\\
 Fig. 21	&	92.13\%	&	80.01\%	&	8.45\%	&	6.77\%	\\
 \hline
-Average	&	87.125\%	&	75.03125\%	&	16.33625\%	&	5.55\%	\\
+Average	&	87.125\%	&	75.03\%	&	16.34\%	&	5.55\%	\\
 
 \hline
 \end{tabular}
@@ -70,12 +70,14 @@ Average	&	87.125\%	&	75.03125\%	&	16.33625\%	&	5.55\%	\\
 \end{center}
 \end{table}
 
-Since the accuracy metric is considered strict and not capturing well the precision of the results, we also compute the cross-entropy~\cite{juraksky:spee08} between the corpus distribution of REs and each algorithm (the Model, the Learned, and the two baselines).    
+The table shows that the accuracy is not stable for all scenes, ranging from 84.49\% in Fig 1 to 50.79\% in Fig 13. The drop in accuracy that we see for Fig 13 is due to the characteristic of the behavior of size in the domain that we were not able to capture and that we discussed in Section~\ref{sec:learning}. 
+
+To show the results from a different perspective than that of accuracy we also compute the cross-entropy~\cite{juraksky:spee08} between the corpus distribution of REs and each algorithm (the Model, the Learned, and the two baselines).    
 
 %The entropy a measure of the amount of uncertainty associated with the value of the variable. The cross entropy between two probability distributions measures the average number of bits needed to identify an event from a set of possibilities. The cross entropy for two distributions p and q over the same probability space can be calculate by the formula... 
 %chapter 6.7 
 
-In Figure~\ref{Entropy} we show the results that we obtains for each scene in Table~\ref{results-algo-all}.
+In Figure~\ref{Entropy} we show the results that we obtains for each scene in Table~\ref{results-algo-all}. 
 
 \begin{figure}[h!]
 \begin{center}
@@ -85,5 +87,5 @@ In Figure~\ref{Entropy} we show the results that we obtains for each scene in Ta
 \caption{Cross-entropy between the corpus distribution of REs and each algorithm}\label{Entropy}
 \end{figure}
 
-We can see that there is a correlation between the accuracy and the cross entropy but the accuracy is more strict than the cross entropy.
-
+In the figure we can observe that the learning and model cross-entropies are, in general, much closer to the corpus entropy than the random and uniform cross-entropies. Fig 12 is the only exception, where the random distribution is close to the learning and model because the randomly selected values of \puse are close to the learned values of \puse by chance. This exception is also evident in Table~\ref{results-algo-all} where random is 57.09\% for Fig 12.
+In the figure we can also observe that the algorithm that uses the \puse directly calculated on the corpus of the scene (model) has a cross-entropy with respect to the corpus distribution that is very close to the cross-entropy between the corpus distribution and the distribution obtained by the algorithm when run with the \puse learned from corpora that does not describe the target scene (learning). This observation supports the learning mechanism proposed in Section~\ref{subsec:learning} to estimate the \puse when no corpora of REs of the target scene is available. 
