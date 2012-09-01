@@ -7,8 +7,10 @@ import grapht._;
 abstract class Formula {
   		var memoizedExtension : BitSetSet[String] = null;
         
-  		var categorias : Set[String] = Set();//new HashSet[String];//null;
+  		var categorias : Set[String] = Set();
 
+  		var cantidadExiste: Int = 0;
+  		
   		def toString : String;
   	    
   	    def prettyprint : String;

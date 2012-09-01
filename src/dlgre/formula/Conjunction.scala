@@ -7,6 +7,10 @@ import grapht._;
 import dlgre.BitSetSet;
 
 case class Conjunction(sub:List[Formula]) extends Formula {
+		sub.foreach { f => 
+		  	cantidadExiste += f.cantidadExiste;
+		  	categorias = categorias.union(f.categorias); // Categoria de Ex-r1(*)^Ex-r2(*) es {r1, r2}.
+		  };
 
 		override def isSatisfied(u:String, graph:GraphT[String,String]) = {
           sub.forall { f => f.isSatisfied(u,graph) }  
@@ -20,7 +24,7 @@ case class Conjunction(sub:List[Formula]) extends Formula {
 	    //      join(sub.map { f => f.rolesUsados });
 	    //} 
           
-	override def prettyprint = {
+		override def prettyprint = {
           join(sub.map { f => f.prettyprint }, " & ");
         }
         
