@@ -102,7 +102,7 @@ Average	&	87.13\%	&	75.03\%	&	16.34\%	&	5.55\%	\\
 \end{table}
 
 Because accuracy is considered a very strict messure that in some cases can 
-be too stern on the predicted results we also computed the entry of the probability distribution of REs found in the corpues, and the cross-entropy between the corpus distribution of REs and the execution of each algorithm we just described~\cite{juraksky:spee08}. Figure~\ref{Entropy} show the results for the eight scenes we are considering. 
+be too stern on the evaluated algorithms we also computed the entropy of the probability distribution of REs found in the corpues, and the cross-entropy between the corpus distribution of REs and the execution of each algorithm we just described~(see~\cite{juraksky:spee08} for details on cross-entropy evaluation). Figure~\ref{Entropy} show the results for the eight scenes we are considering. 
 
 \begin{figure}[h!]
 \begin{center}
@@ -112,6 +112,6 @@ be too stern on the predicted results we also computed the entry of the probabil
 \caption{Cross-entropy between the corpus distribution of REs and each algorithm}\label{Entropy}
 \end{figure}
 
-We can observe that the cross-entropies from the first two runs (\emph{scene} and \emph{leaned}) are, in general, much closer to the corpus entropy than \emph{random}'s and \emph{uniform}'s cross-entropies.  Only in Scene 12 \emph{random} approaches, by chance, the other two. 
+We can observe that the cross-entropies from the first two runs (\emph{scene} and \emph{learned}) are, in general, much closer to the corpus entropy than \emph{random}'s and \emph{uniform}'s cross-entropies.  Only in Scene 12 \emph{random} approaches, by chance, the other two. 
 
 The figure clearly shows also that the cross entropies of \emph{scene} and \emph{learned} are in most cases very close to each other. This observation supports the learning mechanism proposed in Section~\ref{subsec:learning} to estimate the \puse\ when no corpora of REs of the target scene is available. 
