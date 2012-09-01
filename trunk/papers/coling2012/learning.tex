@@ -27,7 +27,7 @@ small ball on top of small cube & 1 & 0.71\% \\
 green ball on top of cube & 1 & 0.71\% \\
 \hline
 \end{tabular}
-\caption{Referring expressions produced by the subjects for Figure~\ref{GRE3D7-stimulus}\label{corpus-distribution}}
+\caption{Referring expressions produced by the subjects for Figure~\ref{GRE3D7-stimulus}}\label{corpus-distribution}
 \end{center}
 \end{table}
 
@@ -72,54 +72,73 @@ For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the va
 
 \subsection{Calculating \puse\ for scenes without corpora for the target} \label{subsec:learning}
 
-If there is no corpora that describes the target we can estimate the \puse from corpora on a different scenes in the same domain. 
+If there is no corpora that describes the target we can estimate  \puse\ values from corpora on different scenes in the same domain using machine learning. 
 
-
-The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all the scenes of the GRE3D7 corpora excluding the scene that we wanted  to describe. We use linear regression to learn the function of \puse for each word in the signature. For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to describe. We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed in Table~\ref{features}.  
+To test this approach, we selected eight different scenes from the GRE3D7 corpus, and for each, we used the rest of the corpus for machine learning. We chosed WEKA~\cite{Hall:WEK09} for rapid prototyping, and used linear regression to learn a function estimating the value of \puse\ for each relation in the signature.  We used simple features that can be extracted automatically from the relational model and which are independed of a particular domain. These features are explained in Table~\ref{features}.  
 
 \begin{small}
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|l|p{10cm}|}
+\begin{tabular}{|l|p{10cm}|} 
 \hline
-target & whether the target element has the property \\
-\#rel-prop & number of properties and relations that the target has\\
-\#rel & number of the relations that the target has \\
-landmark & whether a landmark of the target has the property, an object is a landmark if there is a direct relation in the model between them \\
-discrimination & 1 over the number of objects in the model that have the property \\
+\small target-has     & \small boolean, true if the target has the property \\
+\small \#rel-prop     & \small integer, number of properties and relations that the target has\\
+\small \#rel          & \small integer, number of the relations that the target has \\
+\small landmark-has   & \small boolean, true if a landmark of the target has the property\\
+\small discrimination & \small real,  inverse of the number of objects in the model that have the property \\
 \hline
 \end{tabular}
-\caption{Features used for learning the \puse for each token in the signature of the scenes \label{features}}
+\caption{Features used for learning \puse\ values for each relation in the signature a scene}\label{features}
 \end{center}
 \end{table}
 \end{small}
 
-Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain that we are not able to learn, and has an impact in our performance, is that the properties of type size (namely, small and large) are used when much more when the target cannot be uniquely identified with taxonomical (ball and cube) and absolute (green and blue) properties only. In other words, in the GRE3D7 corpus the size is used more often (90.2\%) of the time when it is the resulting RE is not overspecified than when it is (34\%). It may not be possible to learn this characteristic from the GRE3D7 data since even with the domain dependent features defined in~\cite[Chapter 6]{viet:gene11}, it could not be learned by decision trees. As a result we can see in Table~\ref{probability-of-use} that for Fig 13 the value estimated for ``large'' are not close to the value calculated from corpora. 
+Our feature set is intentionally simple to ensure that it is domain independent. 
+As a result it will not be able to capture all characteristics of the scenes in the corpus. 
+Perhaps the most important characteristic of our domain that these features do not capture, 
+and which has an important impact in the performance of the algorithm, is that the relations 
+\emph{small} and \emph{large} are used much more when the target cannot be uniquely identified 
+using taxonomical (\emph{ball} and \emph{cube}) and absolute (\emph{green} and \emph{blue}) properties. 
+Indeed, in the GRE3D7 corpus size is used more often (90.2\% of the times) if the resulting 
+RE is not overspecified than when it is (only 34\% of the time). It is unclear if this correlation 
+can be learned from the GRE3D7 data, as it could not be captured even with the domain dependent 
+features defined in~\cite[Chapter 6]{viet:gene11}. 
+
+The learned values for two scenes from the corpus are shown in Table~\ref{probability-of-use}.  As it can be seen 
+the value estimated for \emph{large} in Scene 13 is too large, and far from the value calculated from corpora. This
+will be the main reason of the relatively low accuracy score for this scene as we will see in Section~\ref{sec:evaluation}. 
 
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-\multirow{2}{*}{Token}      & \multicolumn{2}{|c|}{Scene 3} & \multicolumn{2}{|c|}{Scene 13}\\     \cline{2-5} 
+\multirow{2}{*}{Relation}      & \multicolumn{2}{|c|}{Scene 3} & \multicolumn{2}{|c|}{Scene 13}\\     \cline{2-5} 
  & Model \puse & Learned \puse & Model \puse & Learned \puse \\
 \hline
-ball     & 1.000 & 1.000 & 1.000 & 1.000 \\
-cube     & 1.000 & 1.000 & 1.000 & 1.000 \\
-green    & 0.978 & 0.993 & 1.000 & 0.988 \\
-small    & 0.257 & 0.346 & 0.043 & 0.199 \\
-on-top   & 0.178 & 0.179 & 0.000 & 0.000\\ 
-blue     & 0.150 & 0.124 & 0.064 & 0.135 \\
-large    & 0.107 & 0.030 & 0.307 & 0.738 \\
-left     & 0.007 & 0.002 & 0.000 & 0.002 \\
-top      & 0.007 & 0.000 & 0.000 & 0.000 \\
-right    & 0.000 & 0.001 & 0.064 & 0.001 \\
-left-of  & 0.000 & 0.000 & 0.000 & 0.000 \\
-right-of & 0.000 & 0.000 & 0.064 & 0.102 \\
-below-of & 0.000 & 0.000 & 0.000 & 0.000 \\
+\emph{ball}     & 1.000 & 1.000 & 1.000 & 1.000 \\
+\emph{cube}     & 1.000 & 1.000 & 1.000 & 1.000 \\
+\emph{green}    & 0.978 & 0.993 & 1.000 & 0.988 \\
+\emph{small}    & 0.257 & 0.346 & 0.043 & 0.199 \\
+\emph{on-top}   & 0.178 & 0.179 & 0.000 & 0.000\\ 
+\emph{blue}     & 0.150 & 0.124 & 0.064 & 0.135 \\
+\emph{large}    & 0.107 & 0.030 & 0.307 & 0.738 \\
+\emph{left}     & 0.007 & 0.002 & 0.000 & 0.002 \\
+\emph{top}      & 0.007 & 0.000 & 0.000 & 0.000 \\
+\emph{right}    & 0.000 & 0.001 & 0.064 & 0.001 \\
+\emph{leftof}  & 0.000 & 0.000 & 0.000 & 0.000 \\
+\emph{rightof} & 0.000 & 0.000 & 0.064 & 0.102 \\
+\emph{belowof} & 0.000 & 0.000 & 0.000 & 0.000 \\
 \hline
 \end{tabular}
-\caption{Probabilities of use of the tokens from the corpora in Table~\ref{GRE3D7-stimulus}\label{probability-of-use}}
+\caption{\puse\ for the relations from the corpora in Table~\ref{GRE3D7-stimulus}}\label{probability-of-use}
 \end{center}
 \end{table}
 
-Our linear regression are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the saliency of a color depends strongly on whether the target object is of that color, and it does not depend on its discrimination power in the model. Moreover, it learns that the on-top relation is used more frequently than the horizontal relations (left-of and right-of) which confirms a previous finding reported in~\cite{viet:gene11}. Finally, it learned a surprising fact of the GRE3D7 corpus (not found by previous work), that is that size is used more frequently in an overspecified manner when the target and landmark share the size. Size was used in overspecified REs when in 49\% of the descriptions for scenes where target and landmark shared the size, and 25\% of the time when target and landmark did not share the size. This can be explained by the observation that if landmark and target share a property, this property is more salient. 
+Despite its bare simplicity, the functions obtained by linear regression are able to learn interesting 
+characteristics of the domain.  For example, they correctly model that the saliency of a color depends 
+strongly on whether the target object is of that color, and it does not depend on its discrimination power 
+in the model.  They also correctly predict that the \emph{ontop} relation is used more frequently than 
+the horizontal relations (\emph{leftof} and \emph{rightof}), as reported in~\cite{viet:gene11}. Interestingly, 
+the also indicate a characteristic of the GRE3D7 corpus (not mentioned in previous work): size is used more 
+frequently used for overspecification when the target and landmark have the same size. Size is used in 
+overspecified REs in 49\% of the descriptions for scenes where target and landmark have the same size, and only 25\% of the time when target and landmark have different size. This can be explained by the observation that if landmark and target share a property, this property is more salient. 
