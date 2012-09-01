@@ -5,7 +5,8 @@ import grapht._;
 import dlgre.BitSetSet;
 
 case class Negation(sub:Formula) extends Formula {
-  	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
+	cantidadExiste = sub.cantidadExiste;
+	override def isSatisfied(u:String, graph:GraphT[String,String]) = {
           ! sub.isSatisfied(u,graph)  
         }
 
