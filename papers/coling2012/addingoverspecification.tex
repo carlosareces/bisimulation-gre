@@ -17,12 +17,12 @@ Because the fundamental idea of the algorithm is semantic, handling overspecific
 a natural way is difficult. If two properties have the same interpretation in a given 
 model, then once the first has been considered the second will not refine the classes 
 obtained so far, and hence the algorithm will not include it in the generated descriptions. 
-On the other hand, if we disregard the condition the informativeness constrain (i.e., 
+On the other hand, if we disregard the condition the informativeness constraint (i.e., 
 the fact that the addition of a relation indeed refine the class, eliminating some of 
 the elements it contains), then we run the risk of generating descriptions like ``the green 
 green ball.''
 
-As a compromise, we consider the following variation of Algorithm~\ref{algo:bisim-l} were 
+As a compromise, we consider the following variation of Algorithm~\ref{algo:bisim-l} where 
 we disregard the informativeness constrain for propositional information (i.e., we allow the inclusion of new properties 
 in the description, even if they do not refine the associated class) \emph{but only during the 
 first loop of the algorithm}.  That is, during the first loop over the elements in the 
