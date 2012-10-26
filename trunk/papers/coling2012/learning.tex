@@ -49,18 +49,16 @@ A sample scene is shown in Figure~\ref{GRE3D7-stimulus} (the target is marked wi
 
 %\subsection{Calculating \puse\ when a corpus for the scene is available}
 
-In order to be able to estimate the probability of use R.\puse for new scenes we calculate the R.\puse of each training scene target $t$ in the corpus in the following way.
+To estimate the probability of use R.\puse for new scenes we calculate the R.\puse of each training scene target $t$ in the corpus in the following way.
 %Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ of REs for $t$ in that scene (this is exactly the kind of information we find in the GRE3D7 corpus).  
 First, we use the REs for $t$ in the corpus $C$ to define the relational model $\gM$
 used by the algorithm.  
 Then we calculate the value of \puse\ for each of the relations in the model as the percentage of REs in which the relation appears.  I.e., 
-\begin{equation}\label{eq1}
-R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
-\end{equation}
-
+R.\puse = (\# \mbox{ of REs in $C$ in which R appears})/(\# \mbox{of REs in $C$}).
+%
 %\noindent
 %This estimation is overly simplified and, for example, it does not differentiate between the properties of a target and the properties of a landmark object used in a relational RE to complete the description of the target.  But it is extremely easy to compute, and we will see in Section~\ref{sec:evaluation} that it already produces natural REs that match those found in the corpus. 
-
+%
 %To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, and discuss how we carried them out in the GRE3D7 corpus:
 %
 %\vspace*{-.4cm}
@@ -80,8 +78,8 @@ R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in
 %
 %Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the GRE3D7 corpus). 
 %For example, starting from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding corpus of referring expressions of it, the resulting \puse\ are listed in the first three columns of Table~\ref{probability-of-use}. 
-
-Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model of the scene.  
+%
+The values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the scene.  
 For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the value of \emph{cube}.\puse\ is 0.178.  These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain values for new targets and scenes using a machine learning approach. 
 % in the next section.  Not surprisingly, using these values for R.\puse\ the REs generated most often by the algorithm can be found in the corpus.  More interestingly, as we discuss in Section~\ref{sec:evaluation} the algorithm generates REs with a distribution that matches the one found in the corpus and, as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
@@ -121,7 +119,7 @@ To test this approach, we selected eight different scenes for testing from the G
 %features defined in~\cite[Chapter 6]{viet:gene11}. 
 
 %The learned values for two testing scenes from the corpus are shown in Table~\ref{probability-of-use}. To show the learning performance, the table compare the learned values to the values directly extracted from the REs describing the scene. 
-The values learned are not statistically significantly different from those  calculated from REs describing the target of the scene using~(\ref{eq1}) with one exception: The value learned for \emph{large} and \emph{small}. This is due to the fact that the relations \emph{small} and \emph{large} are used much more when the target cannot be uniquely identified using taxonomical (\emph{ball} and \emph{cube}) and absolute (\emph{green} and \emph{blue}) properties, but our features do not capture such dependencies. This is the reason of the relatively low accuracy score of our algorithm for this scene as we will see in Section~\ref{sec:evaluation}. 
+The values learned are not statistically significantly different from those  calculated from REs describing the target of the scene with one exception: The values learned for \emph{large} and \emph{small}. This is due to the fact that the relations \emph{small} and \emph{large} are used much more when the target cannot be uniquely identified using taxonomical (\emph{ball} and \emph{cube}) and absolute (\emph{green} and \emph{blue}) properties, but our features do not capture such dependencies. This is the reason of the relatively low accuracy score of our algorithm for this scene as we will see in Section~\ref{sec:evaluation}. 
 %
 %\begin{table}[h!]
 %\begin{center}
