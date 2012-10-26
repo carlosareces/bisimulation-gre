@@ -11,7 +11,7 @@ target cannot be unequivocally described (in $\mathcal{L}$).
 
 We present a modification of the algorithm in~\cite{arec2:2008:Areces} where the fixed order of properties in the 
 input scene is replaced by a finite probability distribution. Required changes
-are fairly straightforward (see Figures~\ref{fig:algo1} and~\ref{fig:algo3}), but 
+are fairly straightforward (see Figure~\ref{fig:algo3}), but 
 the behavior of the resulting algorithm is strikingly changed. To start with, the 
 algorithm is now non-deterministic: two runs of the algorithm with the same 
 input might result in different REs for objects in the scene.
@@ -118,9 +118,9 @@ On termination, the algorithm computes what are called the $\mathcal{L}$-similar
 
 In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detailed description of $\el$, we refer to~\cite{baad:desc03}.  For this paper, we only need to know that the interpretation of the formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
 
-We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el-over}. Algorithm~\ref{algo:bisim-l} takes as input a model $\gM$ and a list Rs of pairs (R,R.\puse) that links each relation R to some probability of use R.\puse. I.e., if $\REL$ is the set of all relation symbols in the model (i.e., the \emph{signature} of the model) then Rs $\in (\REL \times [0,1])^*$. Moreover, we assume Rs to be ordered by R.\puse. 
+%We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el-over}. 
 
-\begin{figure}[t]
+\begin{figure}[!t]
 \small
 \centering
 \begin{algorithm}[H]
@@ -156,17 +156,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
   }
 }
 \end{algorithm}
-\vspace*{-.5cm}\caption{Main algorithm, dealing with probabilities}\label{fig:algo1}
-\end{figure}
 
-The set $\RE$ will contain the formal description of the refinement classes and it is initialized by the most general description $\top$.  
-For each R, we first compute R.\randomuse, a random number in [0,1].  If R.\randomuse $\le$ R.\puse\ then we will use R to refine the set of classes.  The value of R.\puse\ will be incremented by $R.\incuse$ in each main loop, to ensure that all relations are, at some point, considered by the algorithm.  This ensures that a referring expression will be found if it exist; but gives higher probability to expressions using relations with a high R.\puse. 
- 
-While $\RE$ contains descriptions that can be refined (i.e., classes with at least two elements) we will call the refinement function add$_\mathcal{L}$(R,$\varphi$,$\RE$) successively with each relation in Rs. A change in one of the classes, can trigger changes in others. For that reason, if $\RE$ changes, we exit the for-loop to start again with the relations of higher R.\puse. If after trying to refine the set with all relations in Rs, the set $\RE$ has not changed, then we have reach a stable state (i.e., the classes described in $\RE$ cannot be further refined, using the current R.\puse\ values). We will then increment all the R.\puse\ values and start the procedure again. 
-
-\begin{figure}[t]
-\small
-\centering
 \begin{algorithm}[H]
 \dontprintsemicolon
 \caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el-over}
@@ -183,11 +173,20 @@ While $\RE$ contains descriptions that can be refined (i.e., classes with at lea
   }
 }
 \end{algorithm}
-\vspace*{-.5cm}\caption{Refinement function with overspecification for the \el-language}\label{fig:algo3}
+\vspace*{-.5cm}\caption{Refinement algorithm with probabilities and overspecification for the \el-language}\label{fig:algo3}
+
 \end{figure}
 
+Algorithm~\ref{algo:bisim-l} takes as input a model $\gM$ and a list Rs of pairs (R,R.\puse) that links each relation R to some probability of use R.\puse. I.e., if $\REL$ is the set of all relation symbols in the model (i.e., the \emph{signature} of the model) then Rs $\in (\REL \times [0,1])^*$. Moreover, we assume Rs to be ordered by R.\puse. 
+%
+The set $\RE$ will contain the formal description of the refinement classes and it is initialized by the most general description $\top$.  
+For each R, we first compute R.\randomuse, a random number in [0,1].  If R.\randomuse $\le$ R.\puse\ then we will use R to refine the set of classes.  The value of R.\puse\ will be incremented by $R.\incuse$ in each main loop, to ensure that all relations are, at some point, considered by the algorithm.  This ensures that a referring expression will be found if it exist; but gives higher probability to expressions using relations with a high R.\puse. 
+ 
+While $\RE$ contains descriptions that can be refined (i.e., classes with at least two elements) we will call the refinement function add$_\mathcal{L}$(R,$\varphi$,$\RE$) successively with each relation in Rs. A change in one of the classes, can trigger changes in others. For that reason, if $\RE$ changes, we exit the for-loop to start again with the relations of higher R.\puse. If after trying to refine the set with all relations in Rs, the set $\RE$ has not changed, thenc we have reach a stable state (i.e., the classes described in $\RE$ cannot be further refined, using the current R.\puse\ values). We will then increment all the R.\puse\ values and start the procedure again. 
 
-Algorithm~\ref{algo:bisim-add-el-over} almost coincides with the one described in~\cite{arec2:2008:Areces}.  In the for loop it will refine each description in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (the new  class cannot be obtained as the union of classes already represented in $\RE$), \emph{non-trivial} (the new class is not empty), and \emph{informative} (the new class should not coincide with the original class).  If all this conditions are met, the new description is added to $\RE$, and redundant descriptions possible created by the addition of the new description are eliminated. The if else at begin of the algorithm~\ref{algo:bisim-add-el-over} is for do overspecification only in the first loop (while) of the main algorithm no checking for the informativeness.    
+
+
+Algorithm~\ref{algo:bisim-add-el-over} almost coincides with the one described in~\cite{arec2:2008:Areces}.  Consider the \textbf{for} loop, it will refine each descriptions in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (the new  class cannot be obtained as the union of classes already represented in $\RE$), \emph{non-trivial} (the new class is not empty), and \emph{informative} (the new class should not coincide with the original class).  If all this conditions are met, the new description is added to $\RE$, and redundant descriptions possible created by the addition of the new description are eliminated. The \textbf{if} statement at the beginning of Algorithm~\ref{algo:bisim-add-el-over} disregards the informativity test during the first loop of the algorithm allowing overspecification.    
 
 %Suppose fixed an input model $\gM$ and values for Rs, and fix also some target element $t$.  Assume also that $t$ indeed has an $\el$-referring expression.  Upon termination, Algorithm~\ref{fig:algo1} will compute an $\el$ formula $\varphi$ such that $\interp{\varphi} = \{t\}$, but $\varphi$ might be different in each run of the algorithm (even though $\gM$ and Rs are fixed).  If we repeat this experiment a statistically significant number of times, we can define an estimate of the probability distribution of the REs generated by the algorithm for $t$, given $\gM$ and Rs. In Section~\ref{sec:evaluation} we will show that given a corpus of REs for $\gM$, it is possible to define R.\puse\ values so that this probability distribution matches with good accuracy the probability distribution of REs found in the corpus.  
 
