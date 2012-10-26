@@ -1,24 +1,23 @@
-\section{Adding probabilities to a symbolic algorithm} \label{sec:algorithm}
+\section{Adding non-determinism and overspecification} \label{sec:algorithm}
 
 Refinement algorithms for GRE are based on the following basic idea: given a 
 scene $S$, the objects appearing in $S$ are successively classified according
 to their properties into finer and finer classes. A description (in some formal language $\mathcal{L}$) of each 
-class is computed every time a class is refined.   The procedure always stops when the 
+class is computed every time a class is refined. The procedure always stops when the 
 set of classes stabilizes, i.e., no further refinement is possible with the information 
 available in the scene\footnote{Of course, if we are only interested in a referring expression for 
-a given target we can stop the procedure as soon as the target is the only element of some of the classes.}.  If the target element is in a singleton class, then 
-the formal description of that class is a referring expression; otherwise the 
+a given target we can stop the procedure as soon as the target is the only element of some of the classes.}.  If the target element is in a singleton class, then the formal description of that class is a referring expression; otherwise the 
 target cannot be unequivocally described (in $\mathcal{L}$).  
 
 In this section we present a modification of the algorithm in~\cite{arec2:2008:Areces} where the fixed order of properties in the 
-input scene is replaced by a finite probability distribution.  Required changes
+input scene is replaced by a finite probability distribution. Required changes
 are fairly straightforward (see Figures~\ref{fig:algo1} and~\ref{fig:algo2}), but 
 the behavior of the resulting algorithm is strikingly changed. To start with, the 
 algorithm is now non-deterministic: two runs of the algorithm with the same 
-input might result in different REs for the objects in the scene.
+input might result in different REs for objects in the scene.
 
-In order to understand how the algorithm works, and the differences with the original proposal, we need first to introduce some 
-basic notions.  The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
+In order to understand how the algorithm works, and differences with the original proposal, we need first to introduce some 
+basic notions. The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scene its intended extension.  For example, 
 the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$, for example, is $\{e_3,e_4,e_6\}$.
@@ -116,7 +115,7 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 \end{minipage}
 \end{figure}
 
-It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary), and unary
+It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on). The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe. Moreover, we will assume that all relations are \emph{binary}. We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary), and unary
 properties can be encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is \emph{blue} saying that it is related to the dummy element by the \emph{blue} binary relation).
 
 On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
@@ -192,8 +191,7 @@ While $\RE$ contains descriptions that can be refined (i.e., classes with at lea
 \end{figure}
 
 
-Algorithm~\ref{algo:bisim-add-el-over} almost coincides with the one described in~\cite{arec2:2008:Areces}.  It will refine each descriptions in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (the new  class cannot be obtained as the union of classes already represented in $\RE$), \emph{non-trivial} (the new class is not empty), and 
-\emph{informative} (the new class should not coincide with the original class).  If all this conditions are met, the new description is added to $\RE$, and redundant descriptions possible created by the addition of the new description are eliminated.   
+Algorithm~\ref{algo:bisim-add-el-over} almost coincides with the one described in~\cite{arec2:2008:Areces}.  In the for loop it will refine each descriptions in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (the new  class cannot be obtained as the union of classes already represented in $\RE$), \emph{non-trivial} (the new class is not empty), and \emph{informative} (the new class should not coincide with the original class).  If all this conditions are met, the new description is added to $\RE$, and redundant descriptions possible created by the addition of the new description are eliminated. The if else at begining of the algorithm if for do overspecification only in the first loop of the main algorithm.   
 
-Suppose fixed an input model $\gM$ and values for Rs, and fix also some target element $t$.  Assume also that $t$ indeed has an $\el$-referring expression.  Upon termination, Algorithm~\ref{fig:algo1} will compute an $\el$ formula $\varphi$ such that $\interp{\varphi} = \{t\}$, but $\varphi$ might be different in each run of the algorithm (even though $\gM$ and Rs are fixed).  If we repeat this experiment a statistically significant number of times, we can define an estimate of the probability distribution of the REs generated by the algorithm for $t$, given $\gM$ and Rs. In Section~\ref{sec:evaluation} we will show that given a corpus of REs for $\gM$, it is possible to define R.\puse\ values so that this probability distribution matches with good accuracy the probability distribution of REs found in the corpus.  
+%Suppose fixed an input model $\gM$ and values for Rs, and fix also some target element $t$.  Assume also that $t$ indeed has an $\el$-referring expression.  Upon termination, Algorithm~\ref{fig:algo1} will compute an $\el$ formula $\varphi$ such that $\interp{\varphi} = \{t\}$, but $\varphi$ might be different in each run of the algorithm (even though $\gM$ and Rs are fixed).  If we repeat this experiment a statistically significant number of times, we can define an estimate of the probability distribution of the REs generated by the algorithm for $t$, given $\gM$ and Rs. In Section~\ref{sec:evaluation} we will show that given a corpus of REs for $\gM$, it is possible to define R.\puse\ values so that this probability distribution matches with good accuracy the probability distribution of REs found in the corpus.  
 
