@@ -88,23 +88,18 @@ For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the va
 
 %If there are no corpora that describes the target we can estimate  \puse\ values from corpora on different scenes in the same domain using machine learning. 
 
-To test this approach, we selected eight different scenes for testing from the GRE3D7 corpus, and for each, we used the rest of the corpus for machine learning. We used linear regression~\cite{Hall:WEK09} to learn a function estimating the value of \puse\ for each proposition and relation in the domain.  We used simple features that can be extracted automatically from the relational model and domain independent. These features are listed in Table~\ref{features}.  
+To test this approach, we selected eight different scenes for testing from the GRE3D7 corpus, and for each, we used the rest of the corpus for machine learning. We used linear regression~\cite{Hall:WEK09} to learn a function estimating the value of \puse\ for each proposition and relation in the domain.  We used simple features that can be extracted automatically from the relational model and are domain independent:  
 
 \begin{small}
-\begin{table}[h!]
 \begin{center}
-\begin{tabular}{|l|p{10cm}|} 
-\hline
+\begin{tabular}{l@{\ :=\ }p{10cm}} 
 \small target-has     & \small boolean, true if the target has the property \\
 \small \#rel-prop     & \small integer, number of properties and relations that the target has\\
 \small \#rel          & \small integer, number of the relations that the target has \\
 \small landmark-has   & \small boolean, true if a landmark of the target has the property\\
 \small discrimination & \small real,  inverse of the number of objects in the model that have the property \\
-\hline
 \end{tabular}
-\caption{Features used for learning \puse\ values for each relation in the signature a scene}\label{features}
 \end{center}
-\end{table}
 \end{small}
 
 %Our feature set is intentionally simple to ensure that it is domain independent. 
