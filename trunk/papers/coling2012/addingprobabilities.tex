@@ -16,11 +16,11 @@ the behavior of the resulting algorithm is strikingly changed. To start with, th
 algorithm is now non-deterministic: two runs of the algorithm with the same 
 input might result in different REs for objects in the scene.
 
-In order to understand how the algorithm works, and how it differs the original proposal, we need first to introduce some 
-basic notions. The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
+The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scene its intended extension.  For example, 
 the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$, for example, is $\{e_3,e_4,e_6\}$.
+A scene can be encoded in different ways as a relational model. The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe. We also assume that all relations are \emph{binary} (relations of other arity can be encoded as binary).
 
 \newcommand{\nBlue}{\mathit{blue}\xspace}
 \newcommand{\nGreen}{\mathit{green}\xspace}
@@ -113,8 +113,6 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 \end{minipage}
 \end{figure}
 
-It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on). The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe. Moreover, we will assume that all relations are \emph{binary}. We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary), and unary
-properties can be encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is \emph{blue} saying that it is related to the dummy element by the \emph{blue} binary relation).
 
 On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
 
