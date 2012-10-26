@@ -1,80 +1,96 @@
 \section{Learning to describe new objects from corpora}\label{sec:learning}
 
-In the previous section we presented an algorithm that assumes that each relation R used in a referring expressions has a known probability of use R.\puse. In this section, we describe how to calculate these probabilities from corpora.  The general set up is the following: we assume available a corpus of REs associated to different scenes that are prototypical of the domain in which the GRE algorithm will have to operate.   We show first how to calculate R.\puse\ values for those scenes for which a corpus of REs is available.  We then show how to generalize these values to 
-other scenes in the domain, using a machine learning algorithm.   We will exemplify the methodology using the GRE3D7 corpus which we introduce in the next section. 
+The algorithm presented in the previous section assumes that each relation R used in a referring expressions has a known probability of use R.\puse. In this section, we describe how to learn these probabilities from corpora.  %The general set up is the following: we assume available a corpus of REs associated to different scenes that are prototypical of the domain in which the GRE algorithm will have to operate.   
+%We show first how to calculate R.\puse\ values for those scenes for which a corpus of REs is available.  We then show how to generalize these values to 
+%other scenes in the domain, using a machine learning algorithm.   We will exemplify the methodology using the GRE3D7 corpus which we introduce in the next section. 
+We use the GRE3D7 corpus to illustrate our learning set up. 
 
-\subsection{A corpus of referring expressions}
-
-The GRE3D7 corpus of~\shortcite{viet:gene11} consists of 4480 referring expressions. It is the largest corpus of distinguishing descriptions developed to date. The REs in the corpus describe objects in 32 3D scenes. Each scene contains a small number of simple objects (cubes and balls), and the individual descriptions were elicited in the absence of a preceding discourse. The stimulus scenes are designed in a way that encourage the use of relations between objects, but do not require them (i.e., a purely propositional RE for the target always exists). For a detailed description of the collection procedure see~\cite[Chapter 5]{viet:gene11}. A sample scene used in the corpus collection is shown in Figure~\ref{GRE3D7-stimulus} (the target object is marked with an arrow). Table~\ref{corpus-distribution} shows the REs that appear in the corpus for Figure~\ref{GRE3D7-stimulus} together with their total number of occurrences and the percentage these totals represent.  
-
-\begin{table}[h!]
-\begin{center}
-\begin{tabular}{|l|c|c|}
-\hline
-Referring expressions & Occurrences & Percentage \\
-\hline
-green ball & 91 & 65.00\% \\
-small green ball & 23 & 16.43\% \\
-small green ball on top of large blue cube & 8 & 5.71\% \\
-green ball on top of blue cube & 5 & 3.57\% \\
-green ball on top of large blue cube & 5 & 3.57\% \\
-small green ball on top of blue cube & 2 & 1.43\% \\
-ball on top of cube & 1 & 0.71\% \\
-small green ball on top of large blue cube to the left & 1 & 0.71\% \\
-small ball on top large cube & 1 & 0.71\% \\
-green ball on top & 1 & 0.71\% \\
-small ball on top of small cube & 1 & 0.71\% \\
-green ball on top of cube & 1 & 0.71\% \\
-\hline
-\end{tabular}
-\caption{Referring expressions produced by the subjects for Figure~\ref{GRE3D7-stimulus}}\label{corpus-distribution}
-\end{center}
-\end{table}
+%\subsection{A corpus of referring expressions}
 
 The REs in the corpus were produced by 294 participants, each participant producing 16 referring expressions corresponding to 16 different scenes. In this way, 140 descriptions for each of the 32 scenes were obtained, resulting in a corpus of 4480 REs in total. 
+%The GRE3D7 corpus contains 4480 referring expressions. 
+%It is the largest corpus of distinguishing descriptions developed to date. 
+The REs in the corpus describe objects in 32 3D scenes and each scene contains seven objects. The individual descriptions were elicited in the absence of a preceding discourse. 
+%The stimulus scenes are designed in a way that encourage the use of relations between objects. 
+A sample scene is shown in Figure~\ref{GRE3D7-stimulus} (the target is marked with an arrow) for more details on the corpus see GRE3D7~\cite[Chapter 5]{viet:gene11}. Importantly for our purposes, the corpus not only contain propositional REs (as other benchmark corpora in the area~\cite{gatt-balz-kow:2008:ENLG}) but also relational REs naturally produced by people. For example, the REs ``small ball on top of cube'' is used to describe Figure~\ref{GRE3D7-stimulus}. Our algorithm is one of the few that can generate relational REs in an efficient and reliable way so we need a corpus of relational REs to test it in its full potential. It is worth mentioning that, although people only used 16 propositional properties and 4 relational properties in their REs, and converged to between 10 and 30 different descriptions of the same target, the possible different correct \emph{relational REs} for a generation algorithm are in the order of several hundred. Hence, reproducing the corpus distribution is a complex task.    
+% , but do not require them (i.e., a purely propositional RE for the target always exists). 
+%For a detailed description of the collection procedure see~\cite[Chapter 5]{viet:gene11}. 
+% Table~\ref{corpus-distribution} shows the REs that appear in the corpus for Figure~\ref{GRE3D7-stimulus} together with their total number of occurrences and the percentage these totals represent.  
+% 
+%
+%\begin{table}[h!]
+%\begin{center}
+%\begin{tabular}{|l|c|c|}
+%\hline
+%Referring expressions & Occurrences & Percentage \\
+%\hline
+%green ball & 91 & 65.00\% \\
+%small green ball & 23 & 16.43\% \\
+%small green ball on top of large blue cube & 8 & 5.71\% \\
+%green ball on top of blue cube & 5 & 3.57\% \\
+%green ball on top of large blue cube & 5 & 3.57\% \\
+%small green ball on top of blue cube & 2 & 1.43\% \\
+%ball on top of cube & 1 & 0.71\% \\
+%small green ball on top of large blue cube to the left & 1 & 0.71\% \\
+%small ball on top large cube & 1 & 0.71\% \\
+%green ball on top & 1 & 0.71\% \\
+%small ball on top of small cube & 1 & 0.71\% \\
+%green ball on top of cube & 1 & 0.71\% \\
+%\hline
+%\end{tabular}
+%\caption{Referring expressions produced by the subjects for Figure~\ref{GRE3D7-stimulus}}\label{corpus-distribution}
+%\end{center}
+%\end{table}
 
-Defining a balanced set of stimuli scenes is extremely hard as different variables like the exact size of the objects, their spatial distribution or the color assignment can elicit particular reactions on the subjects.  Still, the GRE3D7 corpora provides a complex and interesting data set to study the choices made by different subjects when selecting the content of REs. 
+
+%Defining a balanced set of stimuli scenes is extremely hard as different variables like the exact size of the objects, their spatial distribution or the color assignment can elicit particular reactions on the subjects.  Still, the GRE3D7 corpora provides a complex and interesting data set to study the choices made by different subjects when selecting the content of REs. 
 
 
-\subsection{Calculating \puse\ when a corpus for the scene is available}
 
-Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ of REs for $t$ in that scene (this is exactly the kind of information we find in the GRE3D7 corpus).  We use the REs in $C$ to define the relational model 
-used by the algorithm.  Then we estimate the value of \puse\ for each of the relations in the model as the percentage of REs in which the relation appears.  I.e., 
+%\subsection{Calculating \puse\ when a corpus for the scene is available}
+
+In order to be able to estimate the probability of use R.\puse for new scenes we calculate the R.\puse of each training scene target $t$ in the corpus in the following way.
+%Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ of REs for $t$ in that scene (this is exactly the kind of information we find in the GRE3D7 corpus).  
+First, we use the REs for $t$ in the corpus $C$ to define the relational model $\gM$
+used by the algorithm.  
+Then we calculate the value of \puse\ for each of the relations in the model as the percentage of REs in which the relation appears.  I.e., 
 \begin{equation}\label{eq1}
 R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
 \end{equation}
 
-\noindent
-This estimation is overly simplified and, for example, it does not differentiate between the properties of a target and the properties of a landmark object used in a relational RE to complete the description of the target.  But it is extremely easy to compute, and we will see in Section~\ref{sec:evaluation} that it already produces natural REs that match those found in the corpus. 
+%\noindent
+%This estimation is overly simplified and, for example, it does not differentiate between the properties of a target and the properties of a landmark object used in a relational RE to complete the description of the target.  But it is extremely easy to compute, and we will see in Section~\ref{sec:evaluation} that it already produces natural REs that match those found in the corpus. 
 
-To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, and discuss how we carried them out in the GRE3D7 corpus:
+%To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, and discuss how we carried them out in the GRE3D7 corpus:
+%
+%\vspace*{-.4cm}
+%\begin{enumerate}
+%\item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``on top of'' should be matched to a single token like \emph{ontop}.\\[-1.9em]
+%
+%\item Remove hyperonyms from $T$. E.g., if both \emph{cube} and \emph{thing} appear in $T$, delete \emph{thing}.\\[-2em]
+%
+%\item If the set of tokens obtained in the previous steps contains synonyms normalize them to a representative in the synonym class, and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{little} and \emph{small} are both represented by the token \emph{small}.\\[-1.9em]
+%
+%\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that all the REs in the corpus are REs in the model. E.g., the $\el$ formulas corresponding to the REs in Table~\ref{corpus-distribution} should all denote the target in the model $\gM$ depicted in 
+%Figure~\ref{GRE3D7-stimulus-graph}.\\[-1.9em]
+%
+%\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).\\[-1.9em]
+%
+%\end{enumerate}
+%
+%Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the GRE3D7 corpus). 
+For example, starting from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding corpus of referring expressions of it, the resulting \puse\ are listed in the first three columns of Table~\ref{probability-of-use}. 
 
-\vspace*{-.4cm}
-\begin{enumerate}
-\item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``on top of'' should be matched to a single token like \emph{ontop}.\\[-1.9em]
-
-\item Remove hyperonyms from $T$. E.g., if both \emph{cube} and \emph{thing} appear in $T$, delete \emph{thing}.\\[-2em]
-
-\item If the set of tokens obtained in the previous steps contains synonyms normalize them to a representative in the synonym class, and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{little} and \emph{small} are both represented by the token \emph{small}.\\[-1.9em]
-
-\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that all the REs in the corpus are REs in the model. E.g., the $\el$ formulas corresponding to the REs in Table~\ref{corpus-distribution} should all denote the target in the model $\gM$ depicted in 
-Figure~\ref{GRE3D7-stimulus-graph}.\\[-1.9em]
-
-\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).\\[-1.9em]
-
-\end{enumerate}
-
-Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the GRE3D7 corpus). Starting from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding corpus shown in Table~\ref{corpus-distribution}, the resulting signature and their associated \puse\ are listed in the first three columns of Table~\ref{probability-of-use}. 
-
-Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
-For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the value of \emph{cube}.\puse\ is 0.178.  These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain values for new targets and scenes using a machine learning approach in the next section.  Not surprisingly, using these values for R.\puse\ the REs generated most often by the algorithm can be found in the corpus.  More interestingly, as we discuss in Section~\ref{sec:evaluation} the algorithm generates REs with a distribution that matches the one found in the corpus and, as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
+Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model of the scene.  
+For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the value of \emph{cube}.\puse\ is 0.178.  These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain values for new targets and scenes using a machine learning approach. 
+% in the next section.  Not surprisingly, using these values for R.\puse\ the REs generated most often by the algorithm can be found in the corpus.  More interestingly, as we discuss in Section~\ref{sec:evaluation} the algorithm generates REs with a distribution that matches the one found in the corpus and, as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
 
-\subsection{Calculating \puse\ for scenes without corpora for the target} \label{subsec:learning}
+%\subsection{Calculating \puse\ for scenes without corpora for the target} \label{subsec:learning}
 
-If there are no corpora that describes the target we can estimate  \puse\ values from corpora on different scenes in the same domain using machine learning. 
+%If there are no corpora that describes the target we can estimate  \puse\ values from corpora on different scenes in the same domain using machine learning. 
 
-To test this approach, we selected eight different scenes from the GRE3D7 corpus, and for each, we used the rest of the corpus for machine learning. We chosed WEKA~\cite{Hall:WEK09} for rapid prototyping, and used linear regression to learn a function estimating the value of \puse\ for each relation in the signature.  We used simple features that can be extracted automatically from the relational model and which are independed of a particular domain. These features are explained in Table~\ref{features}.  
+To test this approach, we selected eight different scenes for testing from the GRE3D7 corpus, and for each, we used the rest of the corpus for machine learning. We used linear regression~\cite{Hall:WEK09} to learn a function estimating the value of \puse\ for each proposition and relation in the domain.  We used simple features that can be extracted automatically from the relational model and domain independent. These features are listed in Table~\ref{features}.  
 
 \begin{small}
 \begin{table}[h!]
@@ -93,52 +109,51 @@ To test this approach, we selected eight different scenes from the GRE3D7 corpus
 \end{table}
 \end{small}
 
-Our feature set is intentionally simple to ensure that it is domain independent. 
-As a result it will not be able to capture all characteristics of the scenes in the corpus. 
-Perhaps the most important characteristic of our domain that these features do not capture, 
-and which has an important impact in the performance of the algorithm, is that the relations 
-\emph{small} and \emph{large} are used much more when the target cannot be uniquely identified 
-using taxonomical (\emph{ball} and \emph{cube}) and absolute (\emph{green} and \emph{blue}) properties. 
-Indeed, in the GRE3D7 corpus size is used more often (90.2\% of the times) if the resulting 
-RE is not overspecified than when it is (only 34\% of the time). It is unclear if this correlation 
-can be learned from the GRE3D7 data, as it could not be captured even with the domain dependent 
-features defined in~\cite[Chapter 6]{viet:gene11}. 
+%Our feature set is intentionally simple to ensure that it is domain independent. 
+%As a result it are not be able to capture all characteristics of the scenes in the corpus. 
+%Perhaps the most important characteristic of our domain that these features do not capture, 
+%and which has an important impact in the performance of the algorithm, is that the relations 
+%\emph{small} and \emph{large} are used much more when the target cannot be uniquely identified 
+%using taxonomical (\emph{ball} and \emph{cube}) and absolute (\emph{green} and \emph{blue}) properties. 
+%Indeed, in the GRE3D7 corpus size is used more often (90.2\% of the times) if the resulting 
+%RE is not overspecified than when it is (only 34\% of the time). It is unclear if this correlation 
+%can be learned from the GRE3D7 data, as it could not be captured even with the domain dependent 
+%features defined in~\cite[Chapter 6]{viet:gene11}. 
 
-The learned values for two scenes from the corpus are shown in Table~\ref{probability-of-use}.  As it can be seen 
-the value estimated for \emph{large} in Scene 13 is too large, and far from the value calculated from corpora. This
-will be the main reason of the relatively low accuracy score of our algorithm for this scene as we will see in Section~\ref{sec:evaluation}. 
+%The learned values for two testing scenes from the corpus are shown in Table~\ref{probability-of-use}. To show the learning performance, the table compare the learned values to the values directly extracted from the REs describing the scene. 
+The values learned are not statistically significantly different from those extracted calculated from REs describing the target of the scene using~(\ref{eq1}) with one exception: The value learned for \emph{large} and \emph{small}. This is due to the fact that the relations \emph{small} and \emph{large} are used much more when the target cannot be uniquely identified using taxonomical (\emph{ball} and \emph{cube}) and absolute (\emph{green} and \emph{blue}) properties, but our features do not capture such dependencies. This is the reason of the relatively low accuracy score of our algorithm for this scene as we will see in Section~\ref{sec:evaluation}. 
+%
+%\begin{table}[h!]
+%\begin{center}
+%\begin{tabular}{|l|c|c|c|c|}
+%\hline
+%\multirow{2}{*}{Relation}      & \multicolumn{2}{|c|}{Scene 3} & \multicolumn{2}{|c|}{Scene 13}\\     \cline{2-5} 
+% & Model \puse & Learned \puse & Model \puse & Learned \puse \\
+%\hline
+%\emph{ball}     & 1.000 & 1.000 & 1.000 & 1.000 \\
+%\emph{cube}     & 1.000 & 1.000 & 1.000 & 1.000 \\
+%\emph{green}    & 0.978 & 0.993 & 1.000 & 0.988 \\
+%\emph{small}    & 0.257 & 0.346 & 0.043 & 0.199 \\
+%\emph{on-top}   & 0.178 & 0.179 & 0.000 & 0.000\\ 
+%\emph{blue}     & 0.150 & 0.124 & 0.064 & 0.135 \\
+%\emph{large}    & 0.107 & 0.030 & 0.307 & 0.738 \\
+%\emph{left}     & 0.007 & 0.002 & 0.000 & 0.002 \\
+%\emph{top}      & 0.007 & 0.000 & 0.000 & 0.000 \\
+%\emph{right}    & 0.000 & 0.001 & 0.064 & 0.001 \\
+%\emph{leftof}  & 0.000 & 0.000 & 0.000 & 0.000 \\
+%\emph{rightof} & 0.000 & 0.000 & 0.064 & 0.102 \\
+%\emph{belowof} & 0.000 & 0.000 & 0.000 & 0.000 \\
+%\hline
+%\end{tabular}
+%\caption{\puse\ for the relations from the corpora in Table~\ref{GRE3D7-stimulus}}\label{probability-of-use}
+%\end{center}
+%\end{table}
 
-\begin{table}[h!]
-\begin{center}
-\begin{tabular}{|l|c|c|c|c|}
-\hline
-\multirow{2}{*}{Relation}      & \multicolumn{2}{|c|}{Scene 3} & \multicolumn{2}{|c|}{Scene 13}\\     \cline{2-5} 
- & Model \puse & Learned \puse & Model \puse & Learned \puse \\
-\hline
-\emph{ball}     & 1.000 & 1.000 & 1.000 & 1.000 \\
-\emph{cube}     & 1.000 & 1.000 & 1.000 & 1.000 \\
-\emph{green}    & 0.978 & 0.993 & 1.000 & 0.988 \\
-\emph{small}    & 0.257 & 0.346 & 0.043 & 0.199 \\
-\emph{on-top}   & 0.178 & 0.179 & 0.000 & 0.000\\ 
-\emph{blue}     & 0.150 & 0.124 & 0.064 & 0.135 \\
-\emph{large}    & 0.107 & 0.030 & 0.307 & 0.738 \\
-\emph{left}     & 0.007 & 0.002 & 0.000 & 0.002 \\
-\emph{top}      & 0.007 & 0.000 & 0.000 & 0.000 \\
-\emph{right}    & 0.000 & 0.001 & 0.064 & 0.001 \\
-\emph{leftof}  & 0.000 & 0.000 & 0.000 & 0.000 \\
-\emph{rightof} & 0.000 & 0.000 & 0.064 & 0.102 \\
-\emph{belowof} & 0.000 & 0.000 & 0.000 & 0.000 \\
-\hline
-\end{tabular}
-\caption{\puse\ for the relations from the corpora in Table~\ref{GRE3D7-stimulus}}\label{probability-of-use}
-\end{center}
-\end{table}
-
-Despite its bare simplicity, the functions obtained by linear regression are able to learn interesting 
+Despite its simplicity, the functions obtained by linear regression are able to learn interesting 
 characteristics of the domain.  For example, they correctly model that the saliency of a color depends 
 strongly on whether the target object is of that color, and it does not depend on its discrimination power 
 in the model.  They also correctly predict that the \emph{ontop} relation is used more frequently than 
 the horizontal relations (\emph{leftof} and \emph{rightof}), as reported in~\cite{viet:gene11}. Interestingly, 
 they also indicate a characteristic of the GRE3D7 corpus not mentioned in previous work: size is more 
 frequently used for overspecification when the target and landmark have the same size (it is used in 
-overspecified REs in 49\% of the descriptions for scenes where target and landmark have the same size, and only 25\% of the time when target and landmark have different size). This can be explained by the observation that if landmark and target share a property, this property is more salient. 
+overspecified REs in 49\% of the descriptions for scenes where target and landmark have the same size, and only 25\% of the time when target and landmark have different size). %This can be explained by the observation that if landmark and target share a property, this property is more salient. 
