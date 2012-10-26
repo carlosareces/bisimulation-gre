@@ -121,7 +121,7 @@ To test this approach, we selected eight different scenes for testing from the G
 %features defined in~\cite[Chapter 6]{viet:gene11}. 
 
 %The learned values for two testing scenes from the corpus are shown in Table~\ref{probability-of-use}. To show the learning performance, the table compare the learned values to the values directly extracted from the REs describing the scene. 
-The values learned are not statistically significantly different from those extracted calculated from REs describing the target of the scene using~(\ref{eq1}) with one exception: The value learned for \emph{large} and \emph{small}. This is due to the fact that the relations \emph{small} and \emph{large} are used much more when the target cannot be uniquely identified using taxonomical (\emph{ball} and \emph{cube}) and absolute (\emph{green} and \emph{blue}) properties, but our features do not capture such dependencies. This is the reason of the relatively low accuracy score of our algorithm for this scene as we will see in Section~\ref{sec:evaluation}. 
+The values learned are not statistically significantly different from those  calculated from REs describing the target of the scene using~(\ref{eq1}) with one exception: The value learned for \emph{large} and \emph{small}. This is due to the fact that the relations \emph{small} and \emph{large} are used much more when the target cannot be uniquely identified using taxonomical (\emph{ball} and \emph{cube}) and absolute (\emph{green} and \emph{blue}) properties, but our features do not capture such dependencies. This is the reason of the relatively low accuracy score of our algorithm for this scene as we will see in Section~\ref{sec:evaluation}. 
 %
 %\begin{table}[h!]
 %\begin{center}
@@ -150,7 +150,7 @@ The values learned are not statistically significantly different from those extr
 %\end{table}
 
 Despite its simplicity, the functions obtained by linear regression are able to learn interesting 
-characteristics of the domain.  For example, they correctly model that the saliency of a color depends 
+characteristics of the domain.  E.g., they correctly model that the saliency of a color depends 
 strongly on whether the target object is of that color, and it does not depend on its discrimination power 
 in the model.  They also correctly predict that the \emph{ontop} relation is used more frequently than 
 the horizontal relations (\emph{leftof} and \emph{rightof}), as reported in~\cite{viet:gene11}. Interestingly, 
