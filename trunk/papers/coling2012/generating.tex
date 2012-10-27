@@ -30,11 +30,13 @@ and forth between descriptions for two related individuals, as in ``the book on 
 table \ldots''
 
 \shortcite{arec2:2008:Areces,arec:usin11} have proposed low complexity algorithms for the generation 
-of relational REs (including references to sets) that eliminate the risk of infinite regression. 
+of relational REs 
+%(including references to sets) 
+that eliminate the risk of infinite regression. 
 These algorithms are based on different variations of the partition refinement algorithms of~\shortcite{paig:thre87}.
 The information provided by a given scene is interpreted as a relational model whose 
 objects are classified into sets that fit the same description.  
-This classification is successively \emph{refined} (while possible) till the target 
+This classification is successively \emph{refined}  till the target 
 is the only element fitting the description of its class.  The existence of an RE will 
 depend both on the information available in the input scene, and on the expressive power of the formal 
 language used to describe elements of the different classes in the refinement. 
@@ -48,18 +50,20 @@ language used to describe elements of the different classes in the refinement.
 %allowing existential quantification.
 
 Refinement algorithms %presented in~\cite{arec2:2008:Areces,arec:usin11} 
-effectively compute REs for all individuals in the domain, at the same time. The algorithms always terminate, and on termination return a formula of 
+effectively compute REs for all individuals in the domain, at the same time. The algorithms always terminate, and on termination they return a formula of 
 the formal language chosen that uniquely describes the target, if the 
-formal language is expressive enough to uniquely identify the target in the input model. \shortcite{arec2:2008:Areces}
-show that the refinement algorithm using the description language \el  is capable of generating 67\% of 
-the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
-done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
+formal language is expressive enough to uniquely identify the target in the input model. 
+%\shortcite{arec2:2008:Areces}
+%show that the refinement algorithm using the description language \el  is capable of generating 67\% of 
+%the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
+%done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
 
 Refinement algorithms require an 
-ordered list of properties that can be used to described the objects in the scene, and the coverage results reported over Viethen and 
-Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that refinement algorithms have the capacity of producing REs similar to those produced by human subjects, provided a suitable ordering over relations appearing 
-in the input scene is available, but it is unclear which of all possible orders should be used.  In this article we directly address this issue.  
-Our goal is actually twofold. First we show how we can add non-determinism and overspecification to the refinement algorithms, by replacing the fixed ordering 
+ordered list of properties that can be used to described the objects in the scene, and the naturalness of the generated REs strongly depend on this ordering. 
+%coverage results reported over Viethen and 
+%Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that refinement algorithms have the capacity of producing REs similar to those produced by human subjects, provided a suitable ordering over relations appearing 
+%in the input scene is available, but it is unclear which of all possible orders should be used.  In this article we directly address this issue.  
+The goal of this paper is twofold. First we show how we can add non-determinism and overspecification to the refinement algorithms, by replacing the fixed ordering 
 over properties of the input scene by a \emph{probability of use} for each property, and modifying the algorithm accordingly.  
 In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of REs (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probabilities of use so that REs are generated with a probability distribution that matches those found in the corpora.  
 
