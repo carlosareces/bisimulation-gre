@@ -33,14 +33,14 @@ table \ldots''
 of relational REs 
 %(including references to sets) 
 that eliminate the risk of infinite regression. 
-These algorithms are based on different variations of the partition refinement algorithms of~\shortcite{paig:thre87}.
+These algorithms are based on variations of the partition refinement algorithms of~\shortcite{paig:thre87}.
 The information provided by a given scene is interpreted as a relational model whose 
 objects are classified into sets that fit the same description.  
 This classification is successively \emph{refined}  till the target 
-is the only element fitting the description of its class.  The existence of an RE will 
-depend both on the information available in the input scene, and on the expressive power of the formal 
+is the only element fitting the description of its class.  The existence of an RE 
+depends on the information available in the input scene, and on the expressive power of the formal 
 language used to describe elements of the different classes in the refinement. 
-
+%
 %The idea of using a formal language to describe the information that an RE should convey has been discussed 
 %already in~\cite{Krahmer2003,gardent07:_gener_bridg_defin_descr}.  In~\cite{arec2:2008:Areces,arec:usin11} the 
 %combination of partition refinement algorithms and different formal languages is used to classify existing 
@@ -48,16 +48,16 @@ language used to describe elements of the different classes in the refinement.
 %compute purely conjunctive formulas; \cite{deemter02:_gener_refer_expres} extends this language by
 %adding the other propositional connectives, whereas~\cite{dale91:_gener_refer_expres_invol_relat} extends it by
 %allowing existential quantification.
-
+%
 Refinement algorithms %presented in~\cite{arec2:2008:Areces,arec:usin11} 
-effectively compute REs for all individuals in the domain, at the same time. The algorithms always terminate, and on termination they return a formula of 
-the formal language chosen that uniquely describes the target, if the 
-formal language is expressive enough to uniquely identify the target in the input model. 
+effectively compute REs for all individuals in the domain, at the same time. The algorithms always terminate returning a formula of 
+the formal language chosen that uniquely describes the target (if the 
+formal language is expressive enough to identify the target in the input model). 
 %\shortcite{arec2:2008:Areces}
 %show that the refinement algorithm using the description language \el  is capable of generating 67\% of 
 %the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
 %done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
-
+%
 Refinement algorithms require an 
 ordered list of properties that can be used to described the objects in the scene, and the naturalness of the generated REs strongly depend on this ordering. 
 %coverage results reported over Viethen and 

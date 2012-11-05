@@ -36,14 +36,14 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 \newcommand{\nLeft}{\mathit{left}\xspace}
 
 \begin{figure}[ht]
-\begin{minipage}[b]{0.45\linewidth}
+\begin{minipage}[b]{0.42\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/3.jpg}
-\vspace*{-.1cm}
-\caption{Input scene}
+\vspace*{-.25cm}
+\vspace*{-.4cm}\caption{Input scene}
 \label{GRE3D7-stimulus}
 \end{minipage}
-\hspace*{-0.35cm}
+\hspace*{-0.2cm}
 \begin{minipage}[b]{0.6\linewidth}
 \centering
 \begin{tikzpicture}
@@ -55,20 +55,20 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
     \relsize{-1}$\begin{array}{c}
       \nLeft\\[-2pt]
       \nSmall\\[-2pt] 
-      \nBlue \\[-2pt] 
+      \nBlue \ \  
       \nBall\end{array}$}] (a) {};
 
  \node[n,label=above:$e_2$,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nLeft\\[-2pt]
       \nBig\\[-2pt] 
-      \nBlue\\[-2pt] 
+      \nBlue \ \  
       \nCube\end{array}$}, right of=a] (b) {};
 
  \node[n,label=below:$e_3$,label=above:{
     \relsize{-1}$\begin{array}{c}
-      \nTop \ \       \nLeft\\[-2pt]
-      \nSmall \ \       \nGreen\\[-2pt] 
+      \nTop \ \       \nLeft \ \ 
+      \nSmall \ \       \nGreen \ \ 
       \nBall\end{array}$}, above of=b] (c) {};
 
  \node[n,label=above:$e_4$,label=below:{
@@ -92,7 +92,7 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
  \node[n,label=below:$e_7$,label=above:{
     \relsize{-1}$\begin{array}{c}
       \nTop \ \ 
-      \nSmall\\[-2pt] 
+      \nSmall\ \ 
       \nBlue \ \  
       \nCube\end{array}$}, above of=f] (g) {};
 
@@ -105,10 +105,10 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
  \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
  \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
 
- \draw[dotted] (-.4,-1.4) rectangle (7.1,2.6);
+ \draw[dotted] (-.65,-1.2) rectangle (7.1,2.1);
 
  \end{tikzpicture}
-\caption{Scene as a relational model}
+\vspace*{-.4cm}\caption{Scene as a relational model}
 \label{GRE3D7-stimulus-graph}
 \end{minipage}
 \end{figure}
@@ -116,9 +116,10 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 
 On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
 
-The algorithm we will discuss uses formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. 
+The algorithm we discuss uses formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. 
 %For a detailed description of $\el$, we refer to~\cite{baad:desc03}.  
-The interpretation of the $\el$ formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
+The interpretation of the $\el$ formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. 
+%For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
 
 %We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el-over}. 
 
@@ -146,14 +147,14 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
       \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
       \For{\em (R, R.\puse) $\in$ Rs}{
           \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
-              \For{\em $\varphi \in$ \RE}{
+              \lFor{\em $\varphi \in$ \RE}{
                   add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
                   }\;
               \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
               }
      \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}
   }
-  \For{\em (R,R.\puse) $\in$ Rs}{
+  \lFor{\em (R,R.\puse) $\in$ Rs}{
     R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize increase R.\puse}
   }
 }
@@ -163,11 +164,11 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
 \dontprintsemicolon
 \caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el-over}
 
-\eIf(\tcp*[f]{\footnotesize are we in the first loop?}){\em FirstLoop?}{
-    Informative $\leftarrow$ TRUE \tcp*[f]{\footnotesize allow overspecification}}{
-    Informative $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$ \tcp*[f]{\footnotesize informative: smaller than the original?}}
+\If(\tcp*[f]{\footnotesize are we in the first loop?}){\em FirstLoop?}{
+    Informative $\leftarrow$ TRUE \tcp*[f]{\footnotesize allow overspecification}}
+\lElse(\tcp*[f]{\footnotesize informative: smaller than the original?}) {Informative $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
 \For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
-  \If{\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant: can't be obtained form \RE?}\\
+  \If{\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant: can't be obtained from \RE?}\\
     \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial: has elements?}\\
      \ \ \  \emph{Informative}}{
     add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
@@ -179,16 +180,15 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
 
 \end{figure}
 
-Algorithm~\ref{algo:bisim-l} takes as input a model $\gM$ and a list Rs of pairs (R,R.\puse) that links each relation R to some probability of use R.\puse. I.e., if $\REL$ is the set of all relation symbols in the model (i.e., the \emph{signature} of the model) then Rs $\in (\REL \times [0,1])^*$. Moreover, we assume Rs to be ordered by R.\puse. 
+Algorithm~\ref{algo:bisim-l} takes as input a model and a list Rs of pairs (R,R.\puse) that links each relation R $\in \REL$, the set of all relation symbols in the model,  to some probability of use R.\puse. 
+%I.e., if $\REL$ is the set of all relation symbols in the model then Rs $\in (\REL \times [0,1])^*$. We assume Rs to be ordered by R.\puse. 
 %
 The set $\RE$ will contain the formal description of the refinement classes and it is initialized by the most general description $\top$.  
 For each R, we first compute R.\randomuse, a random number in [0,1].  If R.\randomuse $\le$ R.\puse\ then we will use R to refine the set of classes.  The value of R.\puse\ will be incremented by R.$\incuse$ in each main loop, to ensure that all relations are, at some point, considered by the algorithm.  This ensures that a referring expression will be found if it exist; but gives higher probability to expressions using relations with a high R.\puse. 
- 
-While $\RE$ contains descriptions that can be refined (i.e., classes with at least two elements) we will call the refinement function add$_\mathcal{L}$(R,$\varphi$,$\RE$) successively with each relation in Rs. A change in one of the classes, can trigger changes in others. For that reason, if $\RE$ changes, we exit the \textbf{for} loop to start again with the relations of higher R.\puse. If after trying to refine the set with all relations in Rs, the set $\RE$ has not changed, then we have reach a stable state (i.e., the classes described in $\RE$ cannot be further refined, using the current R.\puse\ values). We will then increment all the R.\puse\ values and start the procedure again. 
-
-
-
-Algorithm~\ref{algo:bisim-add-el-over} almost coincides with the one described in~\cite{arec2:2008:Areces}.  Consider the \textbf{for} loop, it will refine each descriptions in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (the new  class cannot be obtained as the union of classes already represented in $\RE$), \emph{non-trivial} (the new class is not empty), and \emph{informative} (the new class should not coincide with the original class).  If all this conditions are met, the new description is added to $\RE$, and redundant descriptions possible created by the addition of the new description are eliminated. The \textbf{if} statement at the beginning of Algorithm~\ref{algo:bisim-add-el-over} disregards the informativity test during the first loop of the algorithm allowing overspecification.    
+ %
+While $\RE$ contains descriptions that can be refined (i.e., classes with at least two elements) we will call the refinement function add$_\mathcal{L}$(R,$\varphi$,$\RE$) successively with each relation in Rs. A change in one of the classes, can trigger changes in others. For that reason, if $\RE$ changes, we exit the \textbf{for} loop to start again with the relations of higher R.\puse. If after trying to refine the set with all relations in Rs, the set $\RE$ has not changed, then we have reach a stable state (i.e., the classes described in $\RE$ cannot be further refined with the current R.\puse\ values). We will then increment all the R.\puse\ values and start the procedure again. 
+%
+Algorithm~\ref{algo:bisim-add-el-over} almost coincides with the one in~\cite{arec2:2008:Areces}.  The \textbf{for} loop will refine each descriptions in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (it cannot be obtained from classes already in $\RE$), \emph{non-trivial} (it is not empty), and \emph{informative} (it does not coincide with the original class).  If these conditions are met, the new description is added to $\RE$, and redundant descriptions created by the new description are eliminated. The \textbf{if} statement at the beginning of Algorithm~\ref{algo:bisim-add-el-over} disregards the informativity test during the first loop of the algorithm allowing overspecification.    
 
 %Suppose fixed an input model $\gM$ and values for Rs, and fix also some target element $t$.  Assume also that $t$ indeed has an $\el$-referring expression.  Upon termination, Algorithm~\ref{fig:algo1} will compute an $\el$ formula $\varphi$ such that $\interp{\varphi} = \{t\}$, but $\varphi$ might be different in each run of the algorithm (even though $\gM$ and Rs are fixed).  If we repeat this experiment a statistically significant number of times, we can define an estimate of the probability distribution of the REs generated by the algorithm for $t$, given $\gM$ and Rs. In Section~\ref{sec:evaluation} we will show that given a corpus of REs for $\gM$, it is possible to define R.\puse\ values so that this probability distribution matches with good accuracy the probability distribution of REs found in the corpus.  
 
