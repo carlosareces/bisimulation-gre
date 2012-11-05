@@ -7,10 +7,7 @@ We use the GRE3D7 corpus to illustrate our learning set up.
 
 %\subsection{A corpus of referring expressions}
 
-The REs in the corpus were produced by 294 participants, each participant producing 16 referring expressions for 16 scenes. In this way, 140 descriptions for 32 different scenes were obtained, resulting in a corpus of 4480 REs in total. 
-%The GRE3D7 corpus contains 4480 referring expressions. 
-%It is the largest corpus of distinguishing descriptions developed to date. 
-The REs in the corpus describe a target in a 3D scene containing seven objects. The individual descriptions were elicited in the absence of a preceding discourse. 
+The REs in the corpus were produced by 294 participants, each producing 16 referring expressions for 16 scenes. In this way, 140 descriptions for 32 different scenes were obtained, resulting in a corpus of 4480 REs describing a target in a 3D scene containing seven objects. Each description was elicited in the absence of a preceding discourse. 
 %The stimulus scenes are designed in a way that encourage the use of relations between objects. 
 A sample scene is shown in Figure~\ref{GRE3D7-stimulus} (the target is marked with an arrow). For more details on the corpus see~\cite[Chapter 5]{viet:gene11}. Importantly for our purposes, the corpus not only contains propositional REs (as other benchmark corpora in the area, e.g.,~\cite{gatt-balz-kow:2008:ENLG}) but also relational REs naturally produced by people. For example, the RE ``small ball on top of cube'' is used to describe the target in Figure~\ref{GRE3D7-stimulus}. As our algorithm is one of the few that can generate relational REs in an efficient and reliable way, a corpus of relational REs is needed to test its full potential. It is worth mentioning that, although people only used 16 propositional properties and 4 relational properties in their REs, and converged to between 10 and 30 different descriptions of the same target, the possible different correct \emph{relational REs} for a generation algorithm are in the order of several hundred. Hence, reproducing the corpus distribution is a complex task.    
 % , but do not require them (i.e., a purely propositional RE for the target always exists). 
@@ -89,20 +86,19 @@ For that reason, for example, in the scene in Figure~\ref{GRE3D7-stimulus} the v
 %If there are no corpora that describes the target we can estimate  \puse\ values from corpora on different scenes in the same domain using machine learning. 
 
 We selected eight different scenes for testing from the GRE3D7 corpus, and for each, we used the rest of the corpus for training. We used linear regression~\cite{Hall:WEK09} to learn a function estimating the value of \puse\ for each relation in the domain.  We used simple, domain independent features that can be extracted automatically from the relational model:  
-
+\vspace*{-.4cm}
 \begin{small}
 \begin{center}
-\begin{tabular}{l@{\ :=\ }p{10cm}} 
+\begin{tabular}{@{\ \ \ \ \ \ \ \ }l@{\ :=\ }p{10cm}} 
 \small target-has(R)      & \small true if the target is in R \\
 \small \#relations        & \small number of relations the target is in\\
 \small \#bin-relations    & \small number of the binary relations the target is in \\
-\small landmark-has(R)    & \small true if a landmark\footnotemark of the target is in R\\
+\small landmark-has(R)    & \small true if a landmark (i.e., an object directly related to the target) is in R\\
 \small discrimination(R)  & \small 1 divided the number of objects in the model that are in R \\
 \end{tabular}
 \end{center}
 \end{small}
-
-\footnotetext{A landmark is an object that is directly related to the target.}
+\vspace*{-.4cm}
 
 %Our feature set is intentionally simple to ensure that it is domain independent. 
 %As a result it are not be able to capture all characteristics of the scenes in the corpus. 
