@@ -99,28 +99,19 @@ The table shows that the accuracy is not stable for all scenes, ranging from 86.
 \textit{A comparative evaluation for the TUNA-corpus. 
 Using \puse learned as described in Section~\ref{sec:learning} and running our algorithm 100 times we adquire the following results:
 About the evaluation method 
-In the evaluation results reported below, we use two
-of the intrinsic methods used in the ASGRE Chal-
-lenge. The first of these is Minimality, defined as
-the proportion of descriptions produced by a system
-that are maximally brief, as per the original defini-
-tion in Dale (1989). The second is the Dice coeffi-
-cient, used to compare the description produced by
-a system (DS ) to the human-produced description
-(DH ) on the same input domain. Dice is estimated
-as follows:
-2 × |DS ∩ DH |
-|DS | + |DH |
-(1)For this paper, we also computed MASI, a ver-
-sion of the Jaccard similarity coefficient proposed
-by Passonneau (2006) which multiplies the simi-
-larity value by a monotonicity coefficient, biasing
+In the evaluation results reported below, we use the intrinsic methods used in the ASGRE Challenge. Minimality, defined as the proportion of descriptions produced by a system
+that are maximally brief, as per the original definition in Dale (1989). The Dice coefficient, used to compare the description produced by
+a system to the human-produced description on the same input domain. %Dice is estimated
+%as follows:
+%2 × |DS ∩ DH |
+%|DS | + |DH |
+MASI, a version of the Jaccard similarity coefficient proposed
+by Passonneau (2006) which multiplies the similarity value by a monotonicity coefficient, biasing
 the measure towards those cases where DS and
 DH have an empty set difference. Intuitively, this
 means that those system-produced descriptions are
 preferred which do not include attributes that are
-omitted by a human. Thus, two of our intrinsic mea-
-sures assess Humanlikeness (Dice and MASI), while
+omitted by a human. Thus, two of our intrinsic measures assess Humanlikeness (Dice and MASI), while
 Minimality reflects the extent to which an algorithm
 conforms to brevity, one of the principles that has
 emerged from the ASGRE literature.}
@@ -132,8 +123,8 @@ emerged from the ASGRE literature.}
 %Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
 	& DICE	&	MASI	&	A\_ACCURACY	&	UNIQUENESS	&	MINIMALITY	\\
 \hline
-Furniture	&	0,79\%	&	0,57\%	&	0,425\%	&	0,475\%	&	0,0125\%	\\
-People	&	0,647\%	&	0,368\%	&	0,19\%	&	1\%	&	0,0\%	\\
+Furniture	&	0,79\%	&	0,58\%	&	0,43\%	&	0,48\%	&	0,0125\%	\\
+People	&	0,65\%	&	0,37\%	&	0,19\%	&	1\%	&	0,0\%	\\
 \hline
 \end{tabular}
 \caption{Percentage average adquired for Furniture and People}
@@ -151,7 +142,7 @@ People	&	0,647\%	&	0,368\%	&	0,19\%	&	1\%	&	0,0\%	\\
 &	DICE	&	MASI	&	A\_ACCURACY	&	UNIQUENESS	&	MINIMALITY	\\
 \hline
 Furniture	&	0,87\%	&	0,7525\%	&	0,65\%	&	0,4625\%	&	0,0125\%	\\
-People	&	0,811\%	&	0,677\%	&	0,602\%	&	0,97\%	&	0,0147\%	\\
+People	&	0,81\%	&	0,68\%	&	0,60\%	&	0,97\%	&	0,0147\%	\\
 \hline
 \end{tabular}
 \caption{Percentage average adquired for Furniture and People considering 20 first frequencies}
@@ -160,6 +151,26 @@ People	&	0,811\%	&	0,677\%	&	0,602\%	&	0,97\%	&	0,0147\%	\\
 
 
 \textit{We compare our results with the algorithm that win the ASGRE-challenge in 2008, we used the same corpus and the same tools provided for the organization of the challenge, we will show DICE, MASI, A\_ACCURACY, UNIQUENESS and MINIMALITY. \cite{graph08}}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/graphResults.jpg}
+\end{center}
+\vspace*{-2em}
+\caption{Graph results \label{graphResults}}
+\end{figure}
+
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=.7\textwidth]{images/graphResults.jpg}
+\end{center}
+\vspace*{-2em}
+\caption{Graph results \label{graphResults2}}
+\end{figure}
+
+They have severals systems that take into account a costs functions 4 kind of systems: 1 Simple, 2 Stochastic, 3 Free-stochastic, 4 Free-naive and for each those the Orders A Random and B Cost-based. The system submitted to the challenge was the 4 B.\\
+
+Our results taking in count the first one RE produced by thes system is comparable to their results, but with a lower measures, if we take into account our the results allowing more than just one RE, our results are better.
 
 To show the results from a different perspective than that of accuracy we also compute the cross-entropy~\cite{juraksky:spee08} between the corpus distribution of REs and each algorithm (the Model, the Learned, and the two baselines).    
 

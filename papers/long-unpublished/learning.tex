@@ -62,21 +62,14 @@ et al., 2007), a set of human-produced referring expressions (REs) for entities 
 pictures of furniture or people. The corpus was
 collected during an online elicitation experiment in
 which subjects typed descriptions of a target referent
-in a DOMAIN in which there were also 6 other entities (‘distractors’). Each RE in the corpus is paired
-with a domain representation consisting of the target referent and the set of distractors, each with their
-possible attributes and values; Figure 1(a) shows an
-example of an entity representation.
-In each human-produced RE, substrings are annotated with the attribute(s) they express (‘realise’).
-For the Challenge, the attributes in each RE were
-extracted to produce a DESCRIPTION, i.e. a set of attribute-value pairs to describe the target referent.
-An example, corresponding to a human-produced
-RE for Figure 1(a), is shown in Figure 1(b).
-For the ASGRE Challenge, the 780 singular descriptions in the corpus were used, and divided
+in a DOMAIN in which there were also 6 other entities (‘distractors’). 
+This corpus contains plural and singular parts. In this paper we will use the singular part like used for the ASGRE Challenge. Each scene is an XML file that contains the target and distractors with theirs properties, the RE given for a human, and the annotation of this.   
+For the challenge 780 singular descriptions in the corpus were used, and divided
 into 60\% training data, 20\% development data and
 20\% test data. Participants were given both input
 (DOMAIN) and output (DESCRIPTION) parts in the
 training and development data, but just inputs in the
-test data. They were asked to submit the corresponding outputs for test data inputs.}
+test data.}
 
 
 \subsection{Calculating \puse\ when a corpus for the scene is available}
@@ -137,9 +130,7 @@ as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the 
 If there is no corpora that describes the target we can estimate the \puse from corpora on a different scenes in the same domain. 
 
 
-The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all the scenes of the GRE3D7 \textit{and TUNA} 
-corpora excluding 
-the scene that we wanted  to describe. We use linear regression to learn the function of \puse for each word in the signature. 
+The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the GRE3D7 \textit{and the TUNA-corpus}. We use linear regression to learn the function of \puse\ for each word in the signature. 
 For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to describe. 
 We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed 
 in Table~\ref{features}.  
@@ -157,14 +148,14 @@ between them \\
 discrimination & 1 over the number of objects in the model that have the property \\
 \hline
 \end{tabular}
-\caption{Features used for learning the \puse for each token in the signature of the scenes \textit{(GRE3D7)} \label{features}}
+\caption{Features used for learning the \puse for each token in the signature of the scenes \textit{(GRE3D7 and TUNA-corpus)} \label{features}}
 \end{center}
 \end{table}
 \end{small}
 
 Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations 
 between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain that we are not able 
-to learn, and has an impact in our performance, is that the properties of type size (namely, small and large) are used when much more 
+to learn, and has an impact in our performance, \textit{for example, in the case of the GRE3D7} the properties of type size (namely, small and large) are used when much more 
 when the target cannot be uniquely identified with taxonomical (ball and cube) and absolute (green and blue) properties only. 
 In other words, in the GRE3D7 corpus the size is used more often (90.2\%) of the time when it is the resulting RE is not overspecified 
 than when it is (34\%). It may not be possible to learn this characteristic from the GRE3D7 data since even with the domain dependent 
