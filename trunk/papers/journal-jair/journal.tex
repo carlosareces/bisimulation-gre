@@ -2,6 +2,8 @@
 \usepackage{jair, theapa, rawfonts}
 \usepackage{amsmath}
 \usepackage{latexsym}
+%\usepackage[landscape]{geometry}
+\usepackage{lscape}
 %\usepackage[draft]{fixme}
 \usepackage{xspace}
 \usepackage{relsize}
@@ -10,6 +12,10 @@
 \usepackage{tikz}
 \usepackage{todonotes}
 \usetikzlibrary{automata}
+\usepackage{floatrow}
+\DeclareFloatFont{tiny}{\tiny}% "scriptsize" is defined by floatrow, "tiny" not
+\floatsetup[table]{font=tiny}
+
 
 \newcommand{\tup}[1]{\langle #1 \rangle}
 \newcommand{\puse}{\ensuremath{\textsf{p}_\textit{use}}}
@@ -91,8 +97,8 @@ and the Laboratoire Internationale Associ\'e ``INFINIS''.
 }
 
 \appendix
-\section*{Appendix A. Probability Distributions for N-Queens}
-
+\section*{Appendix}
+\input{apendice}
 
 \vskip 0.2in
 \bibliography{journal}
