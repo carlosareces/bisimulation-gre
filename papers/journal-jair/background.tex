@@ -1,0 +1,75 @@
+\section{Background} \label{background}
+
+REs involving relations have
+received increasing attention recently; especially in the context of
+spatial referring expressions in situated generation (e.g., \cite{kelleher06:_increm_gener_of_spatial_refer}), where it is
+particularly natural to use expressions involving spatial relations such as ``the ball on top of the cube.''  However, the classical algorithm by~\shortcite{dale91:_gener_refer_expres_invol_relat} was shown to be unable to generate satisfying REs in practice (see the 
+analysis over the \emph{cabinet corpus} in~\cite{viethen06:_algor_for_gener_refer_expres}).  Furthermore, the Dale
+and Haddock algorithm and many of its successors (such as~\cite{kelleher06:_increm_gener_of_spatial_refer}) are vulnerable to
+the problem of \emph{infinite regress}, where the algorithm enters an infinite loop, jumping back
+and forth between descriptions for two related individuals, as in ``the book on the table which supports a book on the
+table \ldots''
+
+\shortcite{arec2:2008:Areces,arec:usin11} have proposed low complexity algorithms for the generation 
+of relational REs 
+%(including references to sets) 
+that eliminate the risk of infinite regression. 
+These algorithms are based on variations of the partition refinement algorithms of~\shortcite{paig:thre87}.
+The information provided by a given scene is interpreted as a relational model whose 
+objects are classified into sets that fit the same description.  
+This classification is successively \emph{refined}  till the target 
+is the only element fitting the description of its class.  The existence of an RE 
+depends on the information available in the input scene, and on the expressive power of the formal 
+language used to describe elements of the different classes in the refinement. 
+
+Refinement algorithms %presented in~\cite{arec2:2008:Areces,arec:usin11} 
+effectively compute REs for all individuals in the domain, at the same time. The algorithms always terminate returning a formula of 
+the formal language chosen that uniquely describes the target (if the 
+formal language is expressive enough to identify the target in the input model). 
+%\shortcite{arec2:2008:Areces}
+%show that the refinement algorithm using the description language \el  is capable of generating 67\% of 
+%the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
+%done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
+
+All REG algorithms require an 
+ordered list of properties that can be used to described the objects in the scene, and the naturalness of the generated REs strongly depends on this ordering. 
+%coverage results reported over Viethen and 
+%Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that refinement algorithms have the capacity of producing REs similar to those produced by human subjects, provided a suitable ordering over relations appearing 
+%in the input scene is available, but it is unclear which of all possible orders should be used.  In this article we directly address this issue.  
+%The goal of this paper is twofold. First we show how we can add non-determinism and overspecification to the refinement algorithms, by replacing the fixed ordering 
+%over properties of the input scene by a \emph{probability of use} for each property, and modifying the algorithm accordingly.  
+%In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of REs (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probabilities of use so that REs are generated with a probability distribution that matches the one found in corpora.  
+
+
+\shortcite{arec2:2008:Areces}
+show that the refinement algorithm using the description language \el as formal language is capable of generating 67\% of 
+the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
+done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
+
+As mentioned, refinement algorithms require an 
+ordered list of the properties that can be used to described the objects in the scene, and the coverage results reported over Viethen and 
+Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that refinement algorithms have the capacity of producing REs similar to those produced by human subjects, provided a suitable ordering over relations appearing 
+in the input scene is available, but it is unclear which of all possible orders should be used.  In this article we directly address this issue.  
+
+Our goal is actually twofold. First we show how we can add non-determinism to the refinement algorithms, by replacing the fixed ordering 
+over the properties of the input scene by a \emph{probability of use} for each property, and modifying the algorithm accordingly.  
+In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of REs (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probability of use so that REs are generated with a probability distribution that matches those found in the corpora.  
+
+The rest of the paper is structured as follows. In Section~\ref{sec:algorithm} we introduce the technical details of the 
+refinement algorithms presented in~\cite{arec2:2008:Areces,arec:usin11} and show how to introduce non-determinism using 
+the probability of use of the properties in the input scene. In this section, we assume that these probabilities are provided as 
+input to the algorithm. In Section~\ref{sec:learning}, we show how to estimate the 
+probability of use of a property from training data. Given corpora consisting of pairs (scene, target) together with the REs used to 
+describe the target in each case, we propose a method to compute the probability of use of each property for each scene, and use a machine learning approach to generalize these properties to new targets and scenes not appearing in the corpora. 
+
+Testing of the resulting algorithms shows that there is still one factor missing to property account for the REs found in corpora: overspecification.  Refinement algorithms only allow a mild form of over-specification in the REs produced.  We discuss this in 
+Section~\ref{sec:overspecification} and propose a modification that let the algorithm generate overspecified, but non trivially redundant RE.  The modification proposed is inspired by the work of~\shortcite{keysar:Curr98}, on the egocentric basis of language.  
+Section~\ref{sec:evaluation} presents a quantitative evaluation of the resulting algorithm and discusses interesting examples \textit{over the GRE3D7 and the TUNA-corpus}. 
+We show that when trained with scenes from the GRE3D7 corpora the algorithm can generate REs with a probability distribution that, 
+in certain scenes, coincides with an up to 84.49\% of accuracy with the probability distribution of REs used by humans for that scene. 
+\textit{We compare our results with the TUNA-corpus with results of the ASGRE challenge and show better results than the adquire for the best system in 2008.
+In Section~\ref{sec:error} we show an interesting analysis of errors that can be taken into account in the next works.}
+
+In Section~\ref{sec:discussion} we discuss related work, motivations and future lines of research, focusing on recent work discussing the role 
+of non-determinism and over-specification in the generation of referring expressions. 
+
