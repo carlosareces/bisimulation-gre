@@ -1,0 +1,58 @@
+\documentclass[a4paper]{book}
+
+\usepackage[left=3.81cm, right=2.54cm, top=2.54cm, bottom=3.17cm]{geometry}
+\usepackage[T1]{fontenc} 
+\usepackage[latin1]{inputenc} % latin1 char encoding
+\usepackage[spanish]{babel}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsthm} % theorems
+\usepackage{enumerate}
+\usepackage{epsfig}
+\usepackage{multirow}
+
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,automata,positioning,fit}
+
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{algorithm}
+\usepackage{algorithmic}
+
+\usepackage{fixme}
+\usepackage{xspace}
+\usepackage{ifthen}
+
+\usepackage{pdfpages}
+\selectlanguage{spanish}
+\usepackage[utf8]{inputenc}
+
+\renewcommand{\listtablename}{Indice de Tablas}
+\renewcommand{\tablename}{Tabla}
+
+% Sin sangria
+%\parindent=0mm  
+
+% Espacio entre parrafos
+%\parskip=4mm
+
+% Dialogue template
+\newenvironment{dialogue}%
+   {\begin{it}%
+    \begin{list}{}%
+         {\setlength{\leftmargin}{.3cm}}%
+         \item[]}%
+   {\end{list}%
+    \end{it}}
+
+\begin{document}
+
+% PARTE PRELIMINAR
+\input{preliminar/preliminar}
+
+% PARTE PRINCIPAL
+\input{principal/principal}
+
+
