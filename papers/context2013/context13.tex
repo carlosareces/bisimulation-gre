@@ -1,0 +1,80 @@
+% This is LLNCS.DEM the demonstration file of
+% the LaTeX macro package from Springer-Verlag
+% for Lecture Notes in Computer Science,
+% version 2.4 for LaTeX2e as of 16. April 2010
+%
+
+%%%%%%%%%%%%%%%%%%
+%
+% Almost final version: PB, 9am French time, 7/7/2011
+% Some typos small rewriting and some discussion added to section 4, LB, 8pm Argentinean time 7/7/2011
+% IT'S DONE IT"S DONE IT"S DONE AND IT"S NICE......9AM French time 8/7/2011
+
+\documentclass{llncs}
+%
+
+%lu-paclages
+\usepackage{graphicx}
+\usepackage{tikz}
+\usepgflibrary{arrows}
+\usepackage{url}
+\usepackage[silent,draft]{fixme}
+
+\newenvironment{dialogue}%
+   {\begin{it}%
+    \begin{list}{}%
+         {\setlength{\leftmargin}{.6cm}}%
+         \item[]}%
+   {\end{list}%
+    \end{it}} 
+
+\newcounter{dlnr}
+\newcommand{\dl}{\addtocounter{dlnr}{01}(\thedlnr)}
+
+\usepackage{wasysym}
+\usetikzlibrary{snakes}
+
+\newcommand{\explicature}
+{ \tiny{)}\scriptsize{)}\footnotesize{)}\small{)}\normalsize{)} }
+\newcommand{\ipremise}{$\gluon$}
+\newcommand{\iconclusion}{$\photon$}
+\newcommand{\identity}{\begin{tiny})))))\end{tiny}}
+
+\usepackage{lscape}
+\usepackage{xspace}
+
+
+\begin{document}
+
+\mainmatter              % start of the contributions
+%
+\title{Generating natural and useful referring expressions}
+%
+\titlerunning{Generating natural and useful referring expressions}  % abbreviated title (for running head)
+%
+\author{Luciana Benotti \and Romina Altamirano}
+%
+\authorrunning{Luciana Benotti and Romina Altamirano} % abbreviated author list (for running head)
+%
+\institute{LIIS Team, Universidad Nacional de C\'ordoba, Argentina\\
+\email{benotti@famaf.unc.edu.ar, ialtamir@famaf.unc.edu.ar},\\ 
+\url{http://cs.famaf.unc.edu.ar/~luciana/, http://cs.famaf.unc.edu.ar/~romina/}
+}
+
+\maketitle              % typeset the title of the contribution
+
+\begin{abstract}
+
+\end{abstract}
+%
+% Sections start
+\section{Introduction}
+
+
+\bibliographystyle{splncs03}
+% you bib file should really go here 
+\bibliography{benotti}
+
+\end{document}
+
+
