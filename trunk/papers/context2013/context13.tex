@@ -19,6 +19,24 @@
 \usepgflibrary{arrows}
 \usepackage{url}
 \usepackage[silent,draft]{fixme}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{xspace}
+\usepackage{relsize}
+\usepackage[algoruled,vlined]{algorithm2e}
+\usepackage{tikz}
+\usetikzlibrary{automata}
+
+\newcommand{\tup}[1]{\langle #1 \rangle}
+\newcommand{\puse}{\ensuremath{\textsf{p}_\textit{use}}}
+\newcommand{\randomuse}{\ensuremath{\textsf{rnd}_\emph{use}}\xspace}
+\newcommand{\incuse}{\ensuremath{\textsf{inc}_\emph{use}}\xspace}
+\newcommand{\RE}{\textsf{RE}\xspace}
+\newcommand{\REL}{\textsf{REL}\xspace}
+\newcommand{\IR}{\textrm{I}\!\textrm{R}}
+\newcommand{\gM}{\mathcal{M}}
+\newcommand{\el}{\ensuremath{\mathcal{EL}}\xspace}
+\newcommand{\interp}[1]{|\!|#1|\!|}
 
 \newenvironment{dialogue}%
    {\begin{it}%
@@ -48,9 +66,9 @@
 
 \mainmatter              % start of the contributions
 %
-\title{Generating natural and useful referring expressions}
+\title{Evaluation of a refinement algorithm for the generation of referring expressions}
 %
-\titlerunning{Generating natural and useful referring expressions}  % abbreviated title (for running head)
+\titlerunning{Evaluation of a refinement algorithm for the generation of referring expressions}  % abbreviated title (for running head)
 %
 \author{Luciana Benotti \and Romina Altamirano}
 %
@@ -68,12 +86,17 @@
 \end{abstract}
 %
 % Sections start
-\section{Introduction}
+\input{generating}
+\input{addingprobabilities}
+\input{learning}
+%\input{addingoverspecification}
+\input{evaluation}
+\input{discussion}
 
 
 \bibliographystyle{splncs03}
 % you bib file should really go here 
-\bibliography{benotti}
+\bibliography{coling2012}
 
 \end{document}
 
