@@ -19,15 +19,31 @@ input might result in different REs for objects in the scene.
 The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scene its intended extension.  For example, 
-the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$, for example, is $\{e_3,e_4,e_6\}$.
+the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{Tuna-scene}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{blue}}$, for example, is $\{e_5,e_6,e_7\}$.
 %A scene can be encoded in different ways as a relational model. The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe. We also assume that all relations are \emph{binary} (relations of other arity can be encoded as binary).
 
-\fixme{Romi, can you replace the image and model with an image from TUNA furniture?}
-
+\newcommand{\nChair}{\mathit{chair}\xspace}
+\newcommand{\nFan}{\mathit{fan}\xspace}
+\newcommand{\nGray}{\mathit{gray}\xspace}
 \newcommand{\nBlue}{\mathit{blue}\xspace}
 \newcommand{\nGreen}{\mathit{green}\xspace}
+\newcommand{\nLeft}{\mathit{left}\xspace}
+\newcommand{\nRight}{\mathit{right}\xspace}
 \newcommand{\nSmall}{\mathit{small}\xspace}
+\newcommand{\nLarge}{\mathit{large}\xspace}
 \newcommand{\nBig}{\mathit{big}\xspace}
+\newcommand{\nEquisuno}{\mathit{x-1}\xspace}
+\newcommand{\nEquisdos}{\mathit{x-2}\xspace}
+\newcommand{\nEquistres}{\mathit{x-3}\xspace}
+\newcommand{\nEquiscuatro}{\mathit{x-4}\xspace}
+\newcommand{\nEquiscinco}{\mathit{x-5}\xspace}
+
+\newcommand{\nYuno}{\mathit{y-1}\xspace}
+\newcommand{\nYdos}{\mathit{y-2}\xspace}
+\newcommand{\nYtres}{\mathit{y-3}\xspace}
+\newcommand{\nFront}{\mathit{front}\xspace}
+\newcommand{\nBack}{\mathit{front}\xspace}
+
 \newcommand{\nBall}{\mathit{ball}\xspace}
 \newcommand{\nCube}{\mathit{cube}\xspace}
 \newcommand{\nOntop}{\mathit{ontop}\xspace}
@@ -35,79 +51,98 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 \newcommand{\nBelow}{\mathit{below}\xspace}
 \newcommand{\nRightof}{\mathit{rightof}\xspace}
 \newcommand{\nLeftof}{\mathit{leftof}\xspace}
-\newcommand{\nLeft}{\mathit{left}\xspace}
+
 
 \begin{figure}[ht]
-\begin{minipage}[b]{0.42\linewidth}
+\begin{minipage}[b]{0.5\linewidth}
 \centering
-\includegraphics[width=\textwidth]{images/3.jpg}
+\includegraphics[width=\textwidth]{images/tuna.jpg}
 \vspace*{-.25cm}
 \vspace*{-.4cm}\caption{Input scene}
-\label{GRE3D7-stimulus}
+\label{Tuna-scene}
 \end{minipage}
 \hspace*{-0.2cm}
-\begin{minipage}[b]{0.6\linewidth}
+\begin{minipage}[b]{0.5\linewidth}
 \centering
 \begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+    n/.style={circle,fill,draw,inner sep=2pt,node distance=1.4cm},
     aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
   ]
- \node[n,label=above:$e_1$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLeft\\[-2pt]
-      \nSmall\\[-2pt] 
-      \nBlue \ \  
-      \nBall\end{array}$}] (a) {};
-
- \node[n,label=above:$e_2$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLeft\\[-2pt]
-      \nBig\\[-2pt] 
-      \nBlue \ \  
-      \nCube\end{array}$}, right of=a] (b) {};
-
- \node[n,label=below:$e_3$,label=above:{
-    \relsize{-1}$\begin{array}{c}
-      \nTop \ \       \nLeft \ \ 
-      \nSmall \ \       \nGreen \ \ 
-      \nBall\end{array}$}, above of=b] (c) {};
-
+ 
  \node[n,label=above:$e_4$,label=below:{
     \relsize{-1}$\begin{array}{c}
-      \nSmall\\[-2pt] 
-      \nGreen\\[-2pt] 
-      \nCube\end{array}$}, right of=b] (d) {};
+      \nFront \\[-2pt]
+      \nSmall \\[-2pt]
+      \nGray \\
+      \nEquisuno \\
+      \nYdos \\
+      \nFan \\ \end{array}$}] (d) {};
 
  \node[n,label=above:$e_5$,label=below:{
     \relsize{-1}$\begin{array}{c}
-      \nBig\\[-2pt] 
-      \nBlue\\[-2pt] 
-      \nBall\end{array}$}, right of=d] (e) {};
+      \nFront \\[-2pt]
+      \nLarge \\[-2pt]
+      \nBlue \\
+      \nEquisdos \\
+      \nYdos \\
+      \nChair \\\end{array}$}, right of=d] (e) {};
 
  \node[n,label=above:$e_6$,label=below:{
     \relsize{-1}$\begin{array}{c}
-      \nBig\\[-2pt] 
-      \nGreen\\[-2pt] 
-      \nCube\end{array}$}, right of=e] (f) {};
+      \nBack \\[-2pt]
+      \nLarge \\[-2pt]
+      \nBlue \\
+      \nEquiscuatro \\
+      \nYtres \\
+      \nFan\\ \end{array}$}, right of=e] (f) {};
 
- \node[n,label=below:$e_7$,label=above:{
+ \node[n,label=above:$e_7$,label=below:{
     \relsize{-1}$\begin{array}{c}
-      \nTop \ \ 
-      \nSmall\ \ 
-      \nBlue \ \  
-      \nCube\end{array}$}, above of=f] (g) {};
+      \nLeft \\[-2pt]
+      \nLarge \\[-2pt]
+      \nBlue \\
+      \nEquiscinco \\
+      \nYtres \\
+      \nChair\end{array}$}, right of=f] (g) {};
+\node[n,label=above:$e_1$,label=right:{
+    \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-4pt]
+      \nLarge\\[-4pt] 
+      \nGreen \\  
+      \nEquisuno \\
+      \nYdos \\
+      \nFan\end{array}$}, above of=d] (a) {};
 
- \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
- \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+ \node[n,label=above:$e_2$,label=right:{
+    \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-4pt]
+      \nLarge\\[-4pt] 
+      \nGreen \\  
+      \nEquiscuatro \\
+      \nYuno \\
+      \nChair\end{array}$}, above of=e] (b) {};
 
- \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
- \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+ \node[n,label=above:$e_3$,label=right:{
+    \relsize{-1}$\begin{array}{c}
+      \nFront \\[-4pt]
+      \nSmall \\[-4pt]
+      \nGray \\
+      \nEquiscinco \\
+      \nYuno \\
+      \nChair\end{array}$}, above of=f] (c) {};
 
- \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
- \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
 
- \draw[dotted] (-.65,-1.2) rectangle (7.1,2.1);
+ %\draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
+ %\draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+
+ %\draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
+ %\draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+
+ %\draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
+ %\draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
+
+ \draw[dotted] (-0.5,-2.0) rectangle (5.0,2.5);
 
  \end{tikzpicture}
 \vspace*{-.4cm}\caption{Scene as a relational model}
@@ -144,14 +179,14 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
         R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ are incremented by R.\incuse in each loop}
 }
 
-\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are incremented until they reach 1}}{
+\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are inc. until they reach 1}}{
   \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
       \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
       \For{\em (R, R.\puse) $\in$ Rs}{
           \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
               \lFor{\em $\varphi \in$ \RE}{
-                  add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
-                  }\;
+                  add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine classes using R}}
+                  }\
               \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
               }
      \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}

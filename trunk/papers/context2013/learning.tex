@@ -8,46 +8,65 @@ The general set up is the following: we assume available a corpus of REs associa
 to different scenes that are prototypical of the domain in which the GRE algorithm will have to operate.   
 We show first how to calculate R.\puse\ values for those scenes for which a corpus of REs is available.  
 We then show how to generalize these values to 
-other scenes in the domain, using a machine learning algorithm. \textit{First we} will exemplify the methodology using 
-the GRE3D7 corpus which we introduce in the next section \textit{and second we will show how to do the same with the TUNA-corpus 
-that will be introduce before of the GRE3D7.}
-
+other scenes in the domain, using a machine learning algorithm. We will exemplify the methodology using 
+the TUNA-corpus that will be introduce in the Section~\ref{sec:tuna}.
 
 \subsection{\textit{The TUNA-corpus: A corpus of referring expressions}}
+\label{sec:tuna}
 
-\textit{The ASGRE Challenge used the TUNA Corpus (Gatt
+The ASGRE Challenge used the TUNA Corpus (Gatt
 et al., 2007), a set of human-produced referring expressions (REs) for entities in visual domains of
 pictures of furniture or people. The corpus was
 collected during an online elicitation experiment in
 which subjects typed descriptions of a target referent
-in a DOMAIN in which there were also 6 other entities (‘distractors’). 
-This corpus contains plural and singular parts. In this paper we will use the singular part like used for the ASGRE Challenge. Each scene is an XML file that contains the target and distractors with theirs properties, the RE given for a human, and the annotation of this.   
+in a domain in which there were also 6 other entities distractors.
+This corpus contains plural and singular parts. In this paper we will use the singular part like used for the ASGRE Challenge. Each scene contains the target and distractors with theirs properties, the RE given for a human, and a manual annotation of this.   
 For the challenge 780 singular descriptions in the corpus were used, and divided
 into 60\% training data, 20\% development data and
-20\% test data. Participants were given both input
-(DOMAIN) and output (DESCRIPTION) parts in the
+20\% test data. Participants were given both input and output parts in the
 training and development data, but just inputs in the
-test data.}
+test data.
+\begin{figure}[ht]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/tuna-people.jpg}
+\vspace*{-.25cm}
+\vspace*{-.4cm}\caption{TUNA-corpus people scene}
+\label{Tuna-people-scene}
+\end{minipage}
+\hspace*{-0.2cm}
+\begin{minipage}[b]{0.5\linewidth}
 
+
+\centering
+\includegraphics[width=\textwidth]{images/tuna.jpg}
+\vspace*{-.25cm}
+\vspace*{-.4cm}\caption{TUNA-corpus furniture scene}
+\label{Tuna-furniture-scene}
+\end{minipage}
+%\end{figure}
+\end{figure}
 
 \subsection{Calculating \puse\ when a corpus for the scene is available}
 
-Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ 
-of REs for $t$ in that scene (this is exactly the kind of information we find in the GRE3D7 corpus \textit{and in the TUNA-corpus}).  
-We use the REs in $C$ to define the relational model 
-used by the algorithm.  Then we estimate the value of \puse\ for each of the relations in the model as the percentage of REs 
-in which the relation appears.  I.e., 
+Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ for scenes similar    
+of REs for $t$ in that scene (this is exactly the kind of information we find in the TUNA-corpus).  
+We use the models provided by TUNA as input of our algorithm.  
+Then we estimate the value of \puse\ for each of the relations in the model as the percentage of REs 
+in which the relation appears. I.e., 
 \begin{equation}\label{eq1}
 R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
 \end{equation}
 
 \noindent
 This estimation is overly simplified and, for example, it does not differentiate between the properties of a target and the 
-properties of a landmark object used in a relational RE to complete the description of the target.  But it is extremely easy 
+properties of a landmark object used in a relational RE to complete the description of the target, but in this case people don't use too much descriptions of lansmarks. It is extremely easy 
 to compute, and we will see in Section~\ref{sec:evaluation} that it already produces natural REs that match those found in the corpus. 
 
 To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, 
-and discuss how we carried them out in the GRE3D7 corpus:
+and discuss how we carried them out in the TUNA corpus:
+
+ESTAS COSAS... YO LAS SACARIA...
 
 \vspace*{-.4cm}
 \begin{enumerate}
@@ -63,32 +82,33 @@ and \emph{small} are both represented by the token \emph{small}.\\[-1.9em]
 \item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that all the REs in the corpus are REs in the model.
  E.g., the $\el$ formulas corresponding to the REs in Table~\ref{corpus-distribution} should all denote the target in the model $\gM$ 
 depicted in 
-Figure~\ref{GRE3D7-stimulus-graph}.\\[-1.9em]
+Figure~\ref{Tuna-scene}.\\[-1.9em]
 
 \item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).\\[-1.9em]
 
 \end{enumerate}
 
-Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the GRE3D7 corpus). 
-Starting from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding corpus shown in Table~\ref{corpus-distribution}, 
+Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the TUNA corpus). 
+Starting from the scene in Figure~\ref{Tuna-scene} and the corresponding corpus (PROBLEMA: TENEMOS UN SOLA RE...) shown in Table~\ref{corpus-distribution}, 
 the resulting signature and their associated \puse\ are listed in the first three columns of Table~\ref{probability-of-use}. 
 
 Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model 
 $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
-For that reason, for example, the value of \emph{ball}.\puse\ is 1, while the value of \emph{cube}.\puse\ is 0.178.  
-These probabilities will not be useful to describe different targets in different scenes.  We will see how we can use them to obtain
- values for new targets and scenes using a machine learning approach in the next section.  Not surprisingly, using these values for 
-R.\puse\ the REs generated most often by the algorithm can be found in the corpus.  More interestingly, as we discuss in 
+
+For that reason, for example, the value of \emph{chair}.\puse\ is (AGREGAR ACA), while the value of \emph{fan}.\puse\ is (AGREGAR ACA)  
+These probabilities will not be useful to describe different targets in different scenes. We will see how we can use them to obtain
+ values for new targets and scenes using a machine learning approach in the next section. Not surprisingly, using these values for 
+R.\puse\ the REs generated most often by the algorithm can be found in the corpus. More interestingly, as we discuss in 
 Section~\ref{sec:evaluation} the algorithm generates REs with a distribution that matches the one found in the corpus and, 
 as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
 
 \subsection{Calculating \puse\ for scenes without corpora for the target} \label{subsec:learning}
 
-If there is no corpora that describes the target we can estimate the \puse from corpora on a different scenes in the same domain. 
+If there is no corpora that describes the target we can estimate the \puse~from corpora on a different scenes in the same domain. 
 
 
-The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the GRE3D7 \textit{and the TUNA-corpus}. We use linear regression to learn the function of \puse\ for each word in the signature. 
+The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the TUNA-corpus. We use linear regression to learn the function of \puse\ for each word in the signature. 
 For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to describe. 
 We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed 
 in Table~\ref{features}.  
@@ -106,21 +126,14 @@ between them \\
 discrimination & 1 over the number of objects in the model that have the property \\
 \hline
 \end{tabular}
-\caption{Features used for learning the \puse for each token in the signature of the scenes \textit{(GRE3D7 and TUNA-corpus)} \label{features}}
+\caption{Features used for learning the \puse for each token in the signature of the scenes of the TUNA-corpus} 
+\label{features}
 \end{center}
 \end{table}
 \end{small}
-
 Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations 
-between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain that we are not able 
-to learn, and has an impact in our performance, \textit{for example, in the case of the GRE3D7} the properties of type size (namely, small and large) are used when much more 
-when the target cannot be uniquely identified with taxonomical (ball and cube) and absolute (green and blue) properties only. 
-In other words, in the GRE3D7 corpus the size is used more often (90.2\%) of the time when it is the resulting RE is not overspecified 
-than when it is (34\%). It may not be possible to learn this characteristic from the GRE3D7 data since even with the domain dependent 
-features defined in~\cite[Chapter 6]{viet:gene11}, it could not be learned by decision trees. As a result we can see in 
-Table~\ref{probability-of-use} that for Fig 13 the value estimated for ``large'' are not close to the value calculated from corpora. 
-\textit{In the case of the TUNA-corpus we show that we couldn't learn the dependency of dimension-x and dimension-y, it mean, when a person adds 
-dimension-x is highly probably that he includes dimension-y in his referring expression.}
+between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain is that we are not able 
+to learn, and has an impact in our performance, we show that we couldn't learn the dependency of dimension-x and dimension-y, it mean, when a person adds dimension-x is highly probably that he includes dimension-y in his referring expression.
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
@@ -142,16 +155,17 @@ right-of & 0 & 0 & 0.064 & 0.1023 \\
 below-of & 0 & 0 & 0 & 0 \\
 \hline
 \end{tabular}
-\caption{Probabilities of use of the tokens from the corpora in Table~\ref{GRE3D7-stimulus}  \textit{(GRE3D7)} \label{probability-of-use}}
+\caption{Probabilities of use of the tokens from the corpora in Table~\ref{Tuna-scene}} 
+\label{probability-of-use}
 \end{center}
 \end{table}
 
 \textit{Using} linear regression we are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the 
 saliency of a color depends strongly on whether the target object is of that color, and it does not depend on its discrimination power 
-in the model. Moreover, it learns that the on-top relation is used more frequently than the horizontal relations (left-of and right-of) 
-which confirms a previous finding reported in~\cite{viet:gene11}. Finally, it learned a surprising fact of the GRE3D7 corpus
- (not found by previous work), that is that size is used more frequently in an overspecified manner when the target and landmark share the
- size. Size was used in overspecified REs when in 49\% of the descriptions for scenes where target and landmark shared the size, and 25\% 
+in the model. Moreover, (VER SI DEJAMOS ESTO) it learns that the on-top relation is used more frequently than the horizontal relations (left-of and right-of) 
+which confirms a previous finding reported in~\cite{viet:gene11}. Finally, it learned a surprising fact of the TUNA corpus
+ (not found by previous work), that is that size is used more frequently in an overspecified manner(VERIFICAR SI ESTO SE CUMPLE EN TUNA) when the target and landmark share the
+ size. (REESCRIBIR ESTA PARTE, LA NOCION DE LANDMARK NO ES TAN USADA EN TUNA)Size was used in overspecified REs when in 49\% of the descriptions for scenes where target and landmark shared the size, and 25\% 
 of the time when target and landmark did not share the size. This can be explained by the observation that if landmark and target share a
  property, this property is more salient. 
 
