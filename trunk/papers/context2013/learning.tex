@@ -11,9 +11,10 @@ We then show how to generalize these values to
 other scenes in the domain, using a machine learning algorithm. We will exemplify the methodology using 
 the TUNA-corpus that will be introduce in the Section~\ref{sec:tuna}.
 
-\subsection{\textit{The TUNA-corpus: A corpus of referring expressions}}
+\subsection{The TUNA-corpus: A corpus of referring expressions}
 \label{sec:tuna}
-
+%\usepackage{wrapfig}
+%\begin{wrapfigure}{r}{40mm}
 The ASGRE Challenge used the TUNA Corpus (Gatt
 et al., 2007), a set of human-produced referring expressions (REs) for entities in visual domains of
 pictures of furniture or people. The corpus was
@@ -26,27 +27,30 @@ into 60\% training data, 20\% development data and
 20\% test data. Participants were given both input and output parts in the
 training and development data, but just inputs in the
 test data.
+
 \begin{figure}[ht]
-\begin{minipage}[b]{0.5\linewidth}
+\begin{minipage}{0.50\linewidth}
 \centering
+%\hspace*{-.8cm}
 \includegraphics[width=\textwidth]{images/tuna-people.jpg}
-\vspace*{-.25cm}
-\vspace*{-.4cm}\caption{TUNA-corpus people scene}
+
+%\vspace*{-.4cm}
+\captionof{TUNA-corpus people scene}
 \label{Tuna-people-scene}
 \end{minipage}
-\hspace*{-0.2cm}
-\begin{minipage}[b]{0.5\linewidth}
-
-
+%\hspace*{-0.21cm}
+\begin{minipage}{0.5\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/tuna.jpg}
-\vspace*{-.25cm}
-\vspace*{-.4cm}\caption{TUNA-corpus furniture scene}
+%\vspace*{-.25cm}
+%\vspace*{-.4cm}
+\captionof{TUNA-corpus furniture scene}
+%\captionof{figure}{Texto del pie de figura},
 \label{Tuna-furniture-scene}
 \end{minipage}
 %\end{figure}
 \end{figure}
-
+%\end{wrapfigure}
 \subsection{Calculating \puse\ when a corpus for the scene is available}
 
 Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ for scenes similar    
