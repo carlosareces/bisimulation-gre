@@ -13,8 +13,6 @@ the TUNA-corpus that will be introduce in the Section~\ref{sec:tuna}.
 
 \subsection{The TUNA-corpus: A corpus of referring expressions}
 \label{sec:tuna}
-%\usepackage{wrapfig}
-%\begin{wrapfigure}{r}{40mm}
 The ASGRE Challenge used the TUNA Corpus (Gatt
 et al., 2007), a set of human-produced referring expressions (REs) for entities in visual domains of
 pictures of furniture or people. The corpus was
@@ -35,29 +33,31 @@ test data.
 \includegraphics[width=\textwidth]{images/tuna-people.jpg}
 
 %\vspace*{-.4cm}
-\captionof{TUNA-corpus people scene}
+\caption{TUNA-corpus people scene}
 \label{Tuna-people-scene}
 \end{minipage}
-%\hspace*{-0.21cm}
-\begin{minipage}{0.5\linewidth}
+%\vspace*{-.38cm}
+\begin{minipage}{0.50\linewidth}
 \centering
+\vspace*{.2cm}
 \includegraphics[width=\textwidth]{images/tuna.jpg}
 %\vspace*{-.25cm}
 %\vspace*{-.4cm}
-\captionof{TUNA-corpus furniture scene}
-%\captionof{figure}{Texto del pie de figura},
+
+\caption{TUNA-corpus furniture scene}
 \label{Tuna-furniture-scene}
 \end{minipage}
-%\end{figure}
 \end{figure}
-%\end{wrapfigure}
 \subsection{Calculating \puse\ when a corpus for the scene is available}
 
-Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ for scenes similar    
-of REs for $t$ in that scene (this is exactly the kind of information we find in the TUNA-corpus).  
-We use the models provided by TUNA as input of our algorithm.  
-Then we estimate the value of \puse\ for each of the relations in the model as the percentage of REs 
-in which the relation appears. I.e., 
+The TUNA corpus has two different domains furniture and people, so for each domain we calculate \puse\ of each word in the domain, and then calculate for each scene with a machine learning approach a function of the \puse\ for each word of that new scene that was not used for train. 
+
+The annotation of the TUNA corpus have just properties for objects and have not relations between them annotated, there is a relation given by the positions but is it not annotated as relational properties between objects.
+
+%Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ for scenes similar of REs in the same domain (this is exactly the kind of information we find in the TUNA-corpus).  
+%We use the models provided by TUNA as input of our algorithm.  
+%We aisle the scene for which we want to compute the \puse\ and use all another REs of scenes. Then we estimate the value of \puse\ for each of the relations in the model as the percentage of REs 
+%in which the relation appears. I.e., 
 \begin{equation}\label{eq1}
 R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
 \end{equation}
@@ -93,7 +93,7 @@ Figure~\ref{Tuna-scene}.\\[-1.9em]
 \end{enumerate}
 
 Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the TUNA corpus). 
-Starting from the scene in Figure~\ref{Tuna-scene} and the corresponding corpus (PROBLEMA: TENEMOS UN SOLA RE...) shown in Table~\ref{corpus-distribution}, 
+Starting from the scene in Figure~\ref{Tuna-scene}
 the resulting signature and their associated \puse\ are listed in the first three columns of Table~\ref{probability-of-use}. 
 
 Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model 
@@ -107,13 +107,10 @@ Section~\ref{sec:evaluation} the algorithm generates REs with a distribution tha
 as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
 
-\subsection{Calculating \puse\ for scenes without corpora for the target} \label{subsec:learning}
-
-If there is no corpora that describes the target we can estimate the \puse~from corpora on a different scenes in the same domain. 
-
+\subsection{Calculating \puse\ for each word of scenes training with another scenes} \label{subsec:learning}
 
 The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the TUNA-corpus. We use linear regression to learn the function of \puse\ for each word in the signature. 
-For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to describe. 
+For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to obtain the \puse\ for describe. 
 We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed 
 in Table~\ref{features}.  
 
@@ -137,29 +134,42 @@ discrimination & 1 over the number of objects in the model that have the propert
 \end{small}
 Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations 
 between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain is that we are not able 
-to learn, and has an impact in our performance, we show that we couldn't learn the dependency of dimension-x and dimension-y, it mean, when a person adds dimension-x is highly probably that he includes dimension-y in his referring expression.
+to learn, and has an impact in our performance, we show that we couldn't learn the dependency of dimension-x and dimension-y, it mean, when a person adds dimension-x is highly probably that he includes dimension-y in his referring expression. ACA PUEDO PONER UNA TABLA DE PEOPLE PARA QUE QUEDE MAS LENO, O HACERLA MAS CHIQUITA A LA LETRA, O PONER SOLO LAS PROPIEDADES QUE HAY EN EL DOMINIO.
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|c|}
 \hline
-Token & Model Fig 3 \puse & Learned Fig 3\puse & Model Fig 13 \puse & Learned Fig 13 \puse \\
+Token for Model Fig. \ref{Tuna-scene} & \puse learned\\
 \hline
-ball & 1.0 & 1.0 & 1.0 & 1.0 \\
-cube & 1.0 & 1.0 & 1.0 & 1.0 \\
-green & 0.978 & 0.993 & 1.0 & 0.9875 \\
-small & 0.257 & 0.346 & 0.0428 & 0.1993 \\
-on-top & 0.178 & 0.179 & 0 & 0\\ 
-blue & 0.15 & 0.124 & 0.064 & 0.1353 \\
-large & 0.107 & 0.03 & 0.307 & 0.7378 \\
-left & 0.007 & 0.002 & 0 & 0.0024 \\
-top & 0.007 & 0 & 0 & 0 \\
-right & 0 & 0.001 & 0.064 & 0.0005 \\
-left-of & 0 & 0 & 0 & 0 \\
-right-of & 0 & 0 & 0.064 & 0.1023 \\
-below-of & 0 & 0 & 0 & 0 \\
+colour-blue & 0.8864 \\
+colour-green & 0.0036 \\
+colour-gray & 0.0 \\
+colour-other & 0.0063 \\
+colour-red & 0.0044 \\
+orientation-back & 0.0238 \\
+orientation-front & 0.0503 \\
+orientation-left & 0.2486 \\
+orientation-right & 0.0 \\
+other-other & 0.0353 \\
+size-large & 0.211039 \\
+size-other & 0.0031 \\
+size-small & 0.04620 \\
+type-chair & 0.9371 \\
+type-desk & 0.0 \\
+type-fan & 0.0 \\
+type-other & 0.047 \\
+type-sofa & -0.0053 \\
+x-dimension-1 & -0.0284 \\
+x-dimension-2 & 0.004 \\
+x-dimension-3 & 0.0039 \\
+x-dimension-4 & 0.0 \\
+x-dimension-5 & 0.2712 \\
+y-dimension-1 & -0.0213 \\
+y-dimension-2 & 0.0 \\
+y-dimension-3 & 0.2941 \\
 \hline
 \end{tabular}
-\caption{Probabilities of use of the tokens from the corpora in Table~\ref{Tuna-scene}} 
+\caption{Probabilities of use of the tokens from the corpora for scene 101t5} 
 \label{probability-of-use}
 \end{center}
 \end{table}
@@ -172,4 +182,8 @@ which confirms a previous finding reported in~\cite{viet:gene11}. Finally, it le
  size. (REESCRIBIR ESTA PARTE, LA NOCION DE LANDMARK NO ES TAN USADA EN TUNA)Size was used in overspecified REs when in 49\% of the descriptions for scenes where target and landmark shared the size, and 25\% 
 of the time when target and landmark did not share the size. This can be explained by the observation that if landmark and target share a
  property, this property is more salient. 
+
+We did a comparison of our results with the results in the challenge 2008, but how we had just one RE to compare we did a human evaluation that we will explain in the next chapter.
+
+Our algorithm is capable of give more than one RE but like comparison will be not fair we just use the more frequent RE given by the algorithm in 100 runnings.
 

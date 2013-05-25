@@ -32,15 +32,15 @@ the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\g
 \newcommand{\nSmall}{\mathit{small}\xspace}
 \newcommand{\nLarge}{\mathit{large}\xspace}
 \newcommand{\nBig}{\mathit{big}\xspace}
-\newcommand{\nEquisuno}{\mathit{x 1}\xspace}
-\newcommand{\nEquisdos}{\mathit{x 2}\xspace}
-\newcommand{\nEquistres}{\mathit{x 3}\xspace}
-\newcommand{\nEquiscuatro}{\mathit{x 4}\xspace}
-\newcommand{\nEquiscinco}{\mathit{x 5}\xspace}
+\newcommand{\nEquisuno}{\mathit{x1}\xspace}
+\newcommand{\nEquisdos}{\mathit{x2}\xspace}
+\newcommand{\nEquistres}{\mathit{x3}\xspace}
+\newcommand{\nEquiscuatro}{\mathit{x4}\xspace}
+\newcommand{\nEquiscinco}{\mathit{x5}\xspace}
 
-\newcommand{\nYuno}{\mathit{y 1}\xspace}
-\newcommand{\nYdos}{\mathit{y 2}\xspace}
-\newcommand{\nYtres}{\mathit{y 3}\xspace}
+\newcommand{\nYuno}{\mathit{y1}\xspace}
+\newcommand{\nYdos}{\mathit{y2}\xspace}
+\newcommand{\nYtres}{\mathit{y3}\xspace}
 \newcommand{\nFront}{\mathit{front}\xspace}
 \newcommand{\nBack}{\mathit{front}\xspace}
 
@@ -51,7 +51,6 @@ the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\g
 \newcommand{\nBelow}{\mathit{below}\xspace}
 \newcommand{\nRightof}{\mathit{rightof}\xspace}
 \newcommand{\nLeftof}{\mathit{leftof}\xspace}
-
 
 \begin{figure}[ht]
 \begin{minipage}[b]{0.5\linewidth}
@@ -66,10 +65,9 @@ the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\g
 \centering
 \begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=2pt,node distance=1.4cm},
+    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
     aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
   ]
- 
  \node[n,label=above:$e_4$,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nFront \\[-2pt]
@@ -131,22 +129,11 @@ the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\g
       \nEquiscinco \\
       \nYuno \\
       \nChair\end{array}$}, above of=f] (c) {};
-
-
- %\draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
- %\draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
-
- %\draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
- %\draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
-
- %\draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
- %\draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
-
  \draw[dotted] (-0.5,-2.0) rectangle (5.0,2.5);
 
  \end{tikzpicture}
 \vspace*{-.4cm}\caption{Scene as a relational model}
-\label{GRE3D7-stimulus-graph}
+\label{TUNA-scene-graph}
 \end{minipage}
 \end{figure}
 
@@ -175,13 +162,13 @@ $\mathcal{L}$-similarity classes of $\gM$}
 $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}
 
 \For{\em (R,R.\puse) $\in$ Rs}{
-	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
-        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ are incremented by R.\incuse in each loop}
+	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} 
+        R.\incuse = (1 $-$ R.\puse) / MaxIterations
 }
 
-\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are inc. until they reach 1}}{
+\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are incremented until 1}}{
   \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
-      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
+      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} 
       \For{\em (R, R.\puse) $\in$ Rs}{
           \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
               \lFor{\em $\varphi \in$ \RE}{
@@ -208,7 +195,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
   \If{\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant: can't be obtained from \RE?}\\
     \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial: has elements?}\\
      \ \ \  \emph{Informative}}{
-    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
+    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification}
     remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
   }
 }
