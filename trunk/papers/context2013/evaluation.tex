@@ -1,8 +1,51 @@
+\section{Evaluation} \label{sec:automaticeval}
+
+We perform a automatic evaluation with the metrics given by~\cite{} in the ASGRE-challenge obtainnig the following results.
+
+A comparative evaluation for the TUNA-corpus. 
+Using \puse learned as described in Section~\ref{sec:learning} and running our algorithm 100 times we adquire the following results:
+About the evaluation method 
+In the evaluation results reported below, we use the intrinsic methods used in the ASGRE Challenge. Minimality, defined as the proportion of descriptions produced by a system
+that are maximally brief, as per the original definition in Dale (1989). The Dice coefficient, used to compare the description produced by
+a system to the human-produced description on the same input domain. %Dice is estimated
+MASI, a version of the Jaccard similarity coefficient proposed
+by Passonneau (2006) which multiplies the similarity value by a monotonicity coefficient, biasing
+the measure towards those cases where DS and
+DH have an empty set difference. Intuitively, this
+means that those system-produced descriptions are
+preferred which do not include attributes that are
+omitted by a human. Thus, two of our intrinsic measures assess Humanlikeness (Dice and MASI), while
+Minimality reflects the extent to which an algorithm
+conforms to brevity, one of the principles that has
+emerged from the ASGRE literature.}
+We also did another comparison taking into account the 20 first RE that the system produced named SIS\_Furniture\_20 and SIS\_People\_20 in table~\ref{Tabla_sis_1_20}, and when in those 20 is the given for a human we choise this one, we obtain the following results:
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|}
+\hline
+%Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
+	& DICE	&	MASI	&	A\_ACCURACY	&	UNIQUENESS	&	MINIMALITY	\\
+\hline
+Furniture	&	0,79\%	&	0,58\%	&	0,43\%	&	0,48\%	&	0,0125\%	\\
+People	&	0,65\%	&	0,37\%	&	0,19\%	&	1\%	&	0,0\%	\\
+
+\hline
+
+SIS\_Furniture\_20	&	0,87\%	&	0,7525\%	&	0,65\%	&	0,4625\%	&	0,0125\%	\\
+SIS\_People\_20	&	0,81\%	&	0,68\%	&	0,60\%	&	0,97\%	&	0,0147\%	\\
+\hline
+\end{tabular}
+\caption{Percentage average adquired for Furniture and People}
+\label{Tabla_sis_1_20}
+\end{center}
+\end{table}
+
 \section{Human evaluation} \label{sec:evaluation}
 
 We aisle the RE that our system gives another RE that not coincides with the one given by a human in the corpus, and with those realize a human evaluation in order to see if the RE produced by the system are prefered by human than the RE produced by humans. Two judges were asked by each pair of RE.
 
-We have 43 pictures of furniture and 55 pictures of people, for wach of them we manually realize the referring expressions (including the properties given as results by our algorithm) and ask people to evaluate which one is a RE it is that univocally identifies the target object and wich one is better in sense that will be more usefull for a human who is not seeing the red box to identify the object. For do it we prepare a webpage with each of the pictures and 2 choices randomly ordered human and system RE. Out goal is to try to show if RE produced by our system are at less as good as the produced by human, and also we will show that they are even better.
+We have 43 pictures of furniture (from 80) and 55 pictures of people (from 68), for wach of them we manually realize the referring expressions (including the properties given as results by our algorithm) and ask people to evaluate which one is a RE it is that univocally identifies the target object and wich one is better in sense that will be more usefull for a human who is not seeing the red box to identify the object. For do it we prepare a webpage with each of the pictures and 2 choices randomly ordered human and system RE. Out goal is to try to show if RE produced by our system are at less as good as the produced by human, and also we will show that they are even better.
 
 %\begin{table}[h!]
 %\begin{center}
