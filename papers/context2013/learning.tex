@@ -23,9 +23,9 @@ into 80\% training data, 20\% test.
 Each participant in the elicitation experiment carried out 38 trials, 20 de furniture y 18 people 
 %http://staff.um.edu.mt/albert.gatt/pubs/tunaFormat.pdf
 
-The furniture sub-corpus consists of 900 descriptions from 45 native or fluent speakers of English.
-Participants described objects in 20 trials (Evaluating algorithms for the Generation of Referring Expressions
-using a balanced corpus)
+%The furniture sub-corpus consists of 900 descriptions from 45 native or fluent speakers of English.
+%Participants described objects in 20 trials (Evaluating algorithms for the Generation of Referring Expressions
+%using a balanced corpus)
 
 \begin{figure}[ht]
 %\begin{minipage}{0.60\linewidth}
@@ -71,8 +71,6 @@ The TUNA corpus has two different domains (furniture and people), so for each wo
 To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, 
 and discuss how we carried them out in the TUNA corpus:
 
-%ESTAS COSAS... YO LAS SACARIA...
-
 \begin{enumerate}
 \item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``in the top row'' 
 should be matched to a single token like \emph{y1}.
@@ -91,7 +89,7 @@ and \emph{guy} are both represented by the token \emph{man}.
 \end{enumerate}
 
 Starting from the scene in Figure~\ref{Tuna-scene}
-the resulting signature and their associated \puse\ are listed in the Table~\ref{probability-of-use} and for the Figure~\ref{Tuna-people-scene} in Table~\ref{probability-of-use-people}. 
+the resulting signature and their associated \puse\ are listed in the Table~\ref{probability-of-use} and for the Figure~\ref{Tuna-people-scene} in Table~\ref{probability-of-use-people}. In those tables we show only the probabilities higher to 0.2.
 
 Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model 
 $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
@@ -102,7 +100,6 @@ These probabilities will not be useful to describe different targets in differen
 R.\puse\ the REs generated most often by the algorithm can be found in the corpus. More interestingly, as we discuss in 
 Section~\ref{sec:evaluation} the algorithm generates REs with a distribution that matches the one found in the corpus and, 
 as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
-
 
 
 The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the TUNA-corpus. We use linear regression to learn the function of \puse\ for each word in the signature. 
@@ -135,32 +132,15 @@ to learn, and has an impact in our performance, we show that we couldn't learn t
 \hline
 Token for Model Fig. \ref{Tuna-scene} & \puse learned\\
 \hline
-colour-blue & 0.8864 \\
-colour-green & 0.0036 \\
-colour-gray & 0.0 \\
-colour-other & 0.0063 \\
-colour-red & 0.0044 \\
-orientation-back & 0.0238 \\
-orientation-front & 0.0503 \\
-orientation-left & 0.2486 \\
-orientation-right & 0.0 \\
-other-other & 0.0353 \\
-size-large & 0.211039 \\
-size-other & 0.0031 \\
-size-small & 0.04620 \\
-type-chair & 0.9371 \\
-type-desk & 0.0 \\
-type-fan & 0.0 \\
-type-other & 0.047 \\
-type-sofa & -0.0053 \\
-x-dimension-1 & -0.0284 \\
-x-dimension-2 & 0.004 \\
-x-dimension-3 & 0.0039 \\
-x-dimension-4 & 0.0 \\
-x-dimension-5 & 0.2712 \\
-y-dimension-1 & -0.0213 \\
-y-dimension-2 & 0.0 \\
-y-dimension-3 & 0.2941 \\
+chair 	&	0.94	\\
+blue 	&	0.89	\\
+y3 	&	0.29	\\
+x5 	&	0.27	\\
+left 	&	0.25	\\
+large 	&	0.21	\\
+front 	&	0.05	\\
+small 	&	0.05	\\
+back 	&	0.02	\\
 \hline
 \end{tabular}
 \caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-scene}} 
@@ -173,33 +153,15 @@ y-dimension-3 & 0.2941 \\
 \hline
 Token for Model Fig. \ref{Tuna-scene-people} & \puse learned\\
 \hline
-y-dimension-3 & 0.0267 \\
-y-dimension-2 & 0.2 \\
-other-clothing & 0.0036 \\
-orientation-right & 0.0073 \\
-type-other & 0.0657 \\
-hairColour-light & 0.1054 \\
-hasGlasses-1 & 0.7113 \\
-x-dimension-5 & 0.1819 \\
-age-old & 0.0511 \\
-other-other & 0.0305 \\
-y-dimension-1 & 0.0054 \\
-hasHair-1 & 0.1338 \\
-type-person & 0.7939 \\
-hasHair-0 & 0.0 \\
-hasSuit-1 & 0.0 \\
-orientation-front & -0.0152 \\
-age-unknown & 0.0036 \\
-hasBeard-1 & 0.0 \\
-age-0 & 0.0 \\
-x-dimension-4 & 0.0 \\
-hasShirt-1 & 0.0109 \\
-x-dimension-2 & 0.0246 \\
-x-dimension-3 & 0.0 \\
-x-dimension-1 & 0.0 \\
-hairColour-dark & -0.1281 \\
-hasTie-1 & 0.0079 \\
-orientation-left & 0.0073 \\
+person 	&	0.79	\\
+hasGlasses 	&	0.71	\\
+y2 	&	0.20	\\
+x5 	&	0.18	\\
+hasHair	&	0.13	\\
+hairLight 	&	0.11	\\
+ageOld 	&	0.05	\\
+y3 	&	0.03	\\
+x2 	&	0.02	\\
 \hline 
 \end{tabular}
 \caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-people-scene}} 
