@@ -90,7 +90,6 @@ and \emph{guy} are both represented by the token \emph{man}.
 
 \end{enumerate}
 
-Steps 1-5 above are easy to carry out. 
 Starting from the scene in Figure~\ref{Tuna-scene}
 the resulting signature and their associated \puse\ are listed in the Table~\ref{probability-of-use} and for the Figure~\ref{Tuna-people-scene} in Table~\ref{probability-of-use-people}. 
 
@@ -105,7 +104,6 @@ Section~\ref{sec:evaluation} the algorithm generates REs with a distribution tha
 as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
 
-\subsection{Calculating \puse\ for each word of scenes training with another scenes} \label{subsec:learning}
 
 The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the TUNA-corpus. We use linear regression to learn the function of \puse\ for each word in the signature. 
 For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to obtain the \puse\ for describe. 
