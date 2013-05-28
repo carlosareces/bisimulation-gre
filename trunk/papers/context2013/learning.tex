@@ -2,30 +2,28 @@
 \label{sec:learning}
 
 In the previous section we presented an algorithm that assumes that each relation R 
-used in a referring expressions has a known probability of use R.\puse. In this section, 
+used in a referring expression has a known probability of use R.\puse. 
+Intuitively, the R.\puse is the probability of using relation R to describe the target. For example, in Figure~\ref{Tuna-scene} the probability of using blue to describe the target, which is surrounded by a red square, is higher than the probability of using the fact that the chair is facing left although both are properties of the target. The probability of using green is not null because a green object may be used in a relational description of the target (for example, the blue chair far from the green fan). In this section, 
 we describe how to calculate these probabilities from corpora.  
 The general set up is the following: we assume available a corpus of REs associated 
-to different scenes that are prototypical of the domain in which the GRE algorithm will have to operate.   
+to different scenes that are prototypical of the domain in which the GRE algorithm has to operate.   
 We show first how to calculate R.\puse\ values for those scenes for which a corpus of REs is available.  
 We then show how to generalize these values to 
-other scenes in the domain, using a machine learning algorithm. We will exemplify the methodology using 
-the TUNA-corpus that will be introduce in the Section~\ref{sec:tuna}.
+other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using 
+the TUNA-corpus that is introduced in the Section~\ref{sec:tuna}.
 
 \subsection{The TUNA-corpus: A corpus of referring expressions}
 \label{sec:tuna}
-The TUNA Corpus is a set of human-produced referring expressions (REs) for entities in visual domains of
-pictures of furniture or people as you can see in Figure~\ref{Tuna-people-scene} and Figure~\ref{Tuna-furniture-scene}. The corpus was
-collected during an online elicitation experiment in
-which subjects typed descriptions of a target referent or referents
-in a domain in which there were also 5 or 6 other entities distractors (5 in cases of plural targets it is the target were 2 objects), always there were 7 objects. In the experiment, the participation was not controlled, but there was a main condition manipulated the +/-LOC: in +LOC condition, participants were told that they could refer to entities using any of their properties (including their location on the screen). In the -LOC condition, they were discouraged from doing so, though not prevented. 
+The TUNA Corpus~\cite{vanDeemter:2006:BST:1706269.1706296} is a set of human-produced referring expressions (REs) for entities in visual domains of pictures of furniture and people as exemplified in Figures~\ref{Tuna-people-scene} and~\ref{Tuna-furniture-scene}. The corpus was
+collected during an online elicitation experiment in which subjects typed descriptions of a target single referent or pair of referents. 
+In each picture there were 5 or 6 other objects. 
+%In the experiment, the participation was not controlled, but there was a main condition manipulated the +/-LOC: in +LOC condition, participants were told that they could refer to entities using any of their properties (including their location on the screen). In the -LOC condition, they were discouraged from doing so, though not prevented. 
 The attributes for each entity include properties such as an object's colour or a person's characteristic such as have beard etc., and the location of the image in the visual display in a grid.
 In this paper we will use the singular part as used for the ASGRE Challenge. Each scene contains the target and distractors with theirs properties, the RE given for a human, and a manual annotation of this.   
 The corpus has 780 singular descriptions divided
 into 60\% training data, 20\% development data and
 20\% test data. 
-%Participants were given both input and output parts in the
-%training and development data, but just inputs in the
-%test data.
+
 
 \begin{figure}[ht]
 \begin{minipage}{0.50\linewidth}
