@@ -3,18 +3,15 @@
 
 In the previous section we presented an algorithm that assumes that each relation R 
 used in a referring expression has a known probability of use R.\puse. 
-Intuitively, the R.\puse is the probability of using relation R to describe the target. For example, in Figure~\ref{Tuna-scene} the probability of using blue to describe the target, which is surrounded by a red square, is higher than the probability of using the fact that the chair is facing left although both are properties of the target. The probability of using green is not null because a green object may be used in a relational description of the target (for example, the blue chair far from the green fan). In this section, 
+Intuitively, the R.\puse is the probability of using relation R to describe the target. For example, in Figure~\ref{Tuna-scene} the probability of using blue to describe the target, which is surrounded by a red square, is higher than the probability of using the fact that the chair is facing left although both are properties of the target. The probability of using green is not cero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). In this section, 
 we describe how to calculate these probabilities from corpora.  
 The general set up is the following: we assume available a corpus of REs associated 
-to different scenes that are prototypical of the domain in which the GRE algorithm has to operate.   
-We show first how to calculate R.\puse\ values for those scenes for which a corpus of REs is available.  
-We then show how to generalize these values to 
-other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using 
-the TUNA-corpus that is introduced in the Section~\ref{sec:tuna}.
+to different scenes that are prototypical of the domain in which the GRE algorithm has to operate; we call this, the traning data.   
+We then show how to generalize these values to other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using the TUNA-corpus that is introduced in the Section~\ref{sec:tuna}. We show how to calculate \puse in Section~\ref{calculate}. 
 
 \subsection{The TUNA-corpus: A corpus of referring expressions}
 \label{sec:tuna}
-The TUNA Corpus~\cite{Gatt:2008:TCO:1708322.1708365} is a set of human-produced referring expressions (REs) for entities in visual domains of pictures of furniture and people as exemplified in Figures~\ref{Tuna-people-scene} and~\ref{Tuna-furniture-scene}. The corpus was
+The TUNA Corpus~\cite{Gatt:2008:TCO:1708322.1708365} is a set of human-produced referring expressions (REs) for entities in visual domains of pictures of furniture and people as exemplified in Figures~\ref{Tuna-scene} and~\ref{Tuna-people-scene}. The corpus was
 collected during an online elicitation experiment in which subjects typed descriptions of a target single referent or pair of referents. 
 In each picture there were 5 or 6 other objects. 
 %In the experiment, the participation was not controlled, but there was a main condition manipulated the +/-LOC: in +LOC condition, participants were told that they could refer to entities using any of their properties (including their location on the screen). In the -LOC condition, they were discouraged from doing so, though not prevented. 
@@ -45,50 +42,52 @@ ROMI: ADD HERE HOW MANY PEOPLE WERE USED IN THE DATA COLLECTION.
 %\label{Tuna-furniture-scene}
 %\end{minipage}
 \end{figure}
-\subsection{Calculating \puse\ when a corpus for the scene is available}
 
-The TUNA corpus has two different domains furniture and people, so for each domain we calculate \puse\ of each word in the domain, and then calculate for each scene with a machine learning approach a function of the \puse\ for each word of that new scene that was not used for train. 
+\subsection{Calculating the probability of use of properties}\label{calculate}
 
-The annotation of the TUNA corpus have just properties for objects and have not relations between them annotated, there is a relation given by the positions but is it not annotated as relational properties between objects.
+The TUNA corpus has two different domains (furniture and people), so for each word in each domain we train a machine learning model that computes a function of the \puse\ for each word. When this function is instantiated with a set of domain independent features that we define below. 
+
+%The annotation of the TUNA corpus have just properties for objects and have not relations between them annotated, there is a relation given by the positions but is it not annotated as relational properties between objects.
 
 %Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ for scenes similar of REs in the same domain (this is exactly the kind of information we find in the TUNA-corpus).  
 %We use the models provided by TUNA as input of our algorithm.  
 %We aisle the scene for which we want to compute the \puse\ and use all another REs of scenes. Then we estimate the value of \puse\ for each of the relations in the model as the percentage of REs 
 %in which the relation appears. I.e., 
-\begin{equation}\label{eq1}
-R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
-\end{equation}
+%\begin{equation}\label{eq1}
+%R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
+%\end{equation}
 
-\noindent
-This estimation is overly simplified and, for example, it does not differentiate between the properties of a target and the 
-properties of a landmark object used in a relational RE to complete the description of the target, but in this case people don't use too much descriptions of lansmarks. It is extremely easy 
-to compute, and we will see in Section~\ref{sec:evaluation} that it already produces natural REs that match those found in the corpus. 
+%\noindent
+%This estimation is overly simplified and, for example, it does not differentiate between the properties of a target and the 
+%properties of a landmark object used in a relational RE to complete the description of the target, but in this case people don't use too much descriptions of lansmarks. It is extremely easy 
+%to compute, and we will see in Section~\ref{sec:evaluation} that it already produces natural REs that match those found in the corpus. 
 
 To clarify the computation of R.\puse\ and the model $\gM$ associated to each scene we list the required steps in detail, 
 and discuss how we carried them out in the TUNA corpus:
 
-ESTAS COSAS... YO LAS SACARIA...
+%ESTAS COSAS... YO LAS SACARIA...
 
 \begin{enumerate}
-\item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``on top of'' 
-should be matched to a single token like \emph{ontop}.
+\item Tokenize the referring expressions and call the set of tokens $T$. In particular, multi-word expressions like ``in the top row'' 
+should be matched to a single token like \emph{y1}.
 
-\item Remove hyperonyms from $T$. E.g., if both \emph{cube} and \emph{thing} appear in $T$, delete \emph{thing}.
+\item Remove hyperonyms from $T$. E.g., if both \emph{man} and \emph{picture} appear in $T$, delete \emph{picture}.
 
 \item If the set of tokens obtained in the previous steps contains synonyms normalize them to a representative in the synonym class, 
-and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{little} 
-and \emph{small} are both represented by the token \emph{small}.
+and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{man} 
+and \emph{guy} are both represented by the token \emph{man}.
 
-\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that all the REs in the corpus are REs in the model.
- E.g., the $\el$ formulas corresponding to the REs in Table~\ref{corpus-distribution} should all denote the target in the model $\gM$ 
+\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that the RE of the scene is an RE in the model.
+ E.g., the $\el$ formulas corresponding to the RE
+ROMI: PODRIAS REVISAR EL SIGUIENTE TEXTO? in Table~\ref{corpus-distribution} should all denote the target in the model $\gM$ 
 depicted in 
 Figure~\ref{Tuna-scene}.
 
-\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).\\[-1.9em]
+\item For each R $\in \REL$ we assign 1 to R.\puse\ if R occurs in the RE, we assign 0 otherwise.
 
 \end{enumerate}
 
-Steps 1-5 above are easy to carry out (actually, the tokenization and normalization steps were already done in the TUNA corpus). 
+Steps 1-5 above are easy to carry out. 
 Starting from the scene in Figure~\ref{Tuna-scene}
 the resulting signature and their associated \puse\ are listed in the first three columns of Table~\ref{probability-of-use}. 
 
@@ -116,10 +115,7 @@ in Table~\ref{features}.
 \begin{tabular}{|l|p{10cm}|}
 \hline
 target & whether the target element has the property \\
-\#rel-prop & number of properties and relations that the target has\\
-\#rel & number of the relations that the target has \\
-landmark & whether a landmark of the target has the property, an object is a landmark if there is a direct relation in the model 
-between them \\
+loc & whether the RE may use the location of the target in the figure\\
 discrimination & 1 over the number of objects in the model that have the property \\
 \hline
 \end{tabular}
