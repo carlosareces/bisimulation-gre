@@ -19,7 +19,13 @@ The attributes for each entity include properties such as an object's colour or 
 In this paper we will use the singular part as of the TUNA corpus. The corpus contains 780 singular referring expressions divided
 into 80\% training data, 20\% test. 
 
-ROMI: ADD HERE HOW MANY PEOPLE WERE USED IN THE DATA COLLECTION. 
+%XML Format Guidelines for the TUNA Corpus dice 	
+Each participant in the elicitation experiment carried out 38 trials, 20 de furniture y 18 people 
+%http://staff.um.edu.mt/albert.gatt/pubs/tunaFormat.pdf
+
+The furniture sub-corpus consists of 900 descriptions from 45 native or fluent speakers of English.
+Participants described objects in 20 trials (Evaluating algorithms for the Generation of Referring Expressions
+using a balanced corpus)
 
 \begin{figure}[ht]
 %\begin{minipage}{0.60\linewidth}
@@ -78,18 +84,15 @@ and call the resulting set $\REL$; it will be the signature of the model $\gM$ u
 and \emph{guy} are both represented by the token \emph{man}.
 
 \item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that the RE of the scene is an RE in the model.
- E.g., the $\el$ formulas corresponding to the RE
-ROMI: PODRIAS REVISAR EL SIGUIENTE TEXTO? in Table~\ref{corpus-distribution} should all denote the target in the model $\gM$ 
-depicted in 
-Figure~\ref{Tuna-scene}.
+ E.g., the $\el$ formula $\exists$\emph{left}.$\top \sqcap \exists$\emph{blue}.$\top \sqcap \exists$\emph{chair}.$\top$ (\emph{left} in this model is taking as the orientation left of the chair) corresponding to the RE should denote the target in the model $\gM$ depicted in Figure~\ref{Tuna-scene}. If the corpus has more than one RE the model should include all the properties in order that the algorithm could generate them.\\
 
-\item For each R $\in \REL$ we assign 1 to R.\puse\ if R occurs in the RE, we assign 0 otherwise.
+\item For each R $\in \REL$ we assign 1 to R.\puse\ if R occurs in the RE, we assign 0 otherwise. In case that the corpus has more than one RE per picture use the average of occurrence in them.
 
 \end{enumerate}
 
 Steps 1-5 above are easy to carry out. 
 Starting from the scene in Figure~\ref{Tuna-scene}
-the resulting signature and their associated \puse\ are listed in the first three columns of Table~\ref{probability-of-use}. 
+the resulting signature and their associated \puse\ are listed in the Table~\ref{probability-of-use} and for the Figure~\ref{Tuna-people-scene} in Table~\ref{probability-of-use-people}. 
 
 Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model 
 $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
@@ -126,8 +129,9 @@ discrimination & 1 over the number of objects in the model that have the propert
 \end{small}
 Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations 
 between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain is that we are not able 
-to learn, and has an impact in our performance, we show that we couldn't learn the dependency of dimension-x and dimension-y, it mean, when a person adds dimension-x is highly probably that he includes dimension-y in his referring expression. ACA PUEDO PONER UNA TABLA DE PEOPLE PARA QUE QUEDE MAS LENO, O HACERLA MAS CHIQUITA A LA LETRA, O PONER SOLO LAS PROPIEDADES QUE HAY EN EL DOMINIO.
+to learn, and has an impact in our performance, we show that we couldn't learn the dependency of dimension-x and dimension-y, it mean, when a person adds dimension-x is highly probably that he includes dimension-y in his referring expression. 
 \begin{table}[h!]
+ \begin{minipage}{0.5\textwidth} 
 \begin{center}
 \begin{tabular}{|l|c|}
 \hline
@@ -161,10 +165,52 @@ y-dimension-2 & 0.0 \\
 y-dimension-3 & 0.2941 \\
 \hline
 \end{tabular}
-\caption{Probabilities of use of the tokens from the corpora for scene 101t5} 
+\caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-scene}} 
 \label{probability-of-use}
 \end{center}
+\end{minipage}%
+\begin{minipage}{0.5\textwidth} 
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Token for Model Fig. \ref{Tuna-scene-people} & \puse learned\\
+\hline
+y-dimension-3 & 0.0267 \\
+y-dimension-2 & 0.2 \\
+other-clothing & 0.0036 \\
+orientation-right & 0.0073 \\
+type-other & 0.0657 \\
+hairColour-light & 0.1054 \\
+hasGlasses-1 & 0.7113 \\
+x-dimension-5 & 0.1819 \\
+age-old & 0.0511 \\
+other-other & 0.0305 \\
+y-dimension-1 & 0.0054 \\
+hasHair-1 & 0.1338 \\
+type-person & 0.7939 \\
+hasHair-0 & 0.0 \\
+hasSuit-1 & 0.0 \\
+orientation-front & -0.0152 \\
+age-unknown & 0.0036 \\
+hasBeard-1 & 0.0 \\
+age-0 & 0.0 \\
+x-dimension-4 & 0.0 \\
+hasShirt-1 & 0.0109 \\
+x-dimension-2 & 0.0246 \\
+x-dimension-3 & 0.0 \\
+x-dimension-1 & 0.0 \\
+hairColour-dark & -0.1281 \\
+hasTie-1 & 0.0079 \\
+orientation-left & 0.0073 \\
+\hline 
+\end{tabular}
+\caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-people-scene}} 
+\label{probability-of-use-people}
+\end{center}
+\end{minipage}%
 \end{table}
+
+%\end{table}
 
 \textit{Using} linear regression we are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the 
 saliency of a color depends strongly on whether the target object is of that color, and it does not depend on its discrimination power 
