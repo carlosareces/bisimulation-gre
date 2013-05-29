@@ -88,18 +88,13 @@ and \emph{guy} are both represented by the token \emph{man}.
 
 \end{enumerate}
 
-Starting from the scene in Figure~\ref{Tuna-scene}
-the resulting signature and their associated \puse\ are listed in the Table~\ref{probability-of-use} and for the Figure~\ref{Tuna-people-scene} in Table~\ref{probability-of-use-people}. In those tables we show only the probabilities higher to 0.2.
 
-Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model 
-$\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
-
-For that reason, for example, the value of \emph{chair}.\puse\ is (AGREGAR ACA), while the value of \emph{fan}.\puse\ is (AGREGAR ACA)  
-These probabilities will not be useful to describe different targets in different scenes. We will see how we can use them to obtain
- values for new targets and scenes using a machine learning approach in the next section. Not surprisingly, using these values for 
-R.\puse\ the REs generated most often by the algorithm can be found in the corpus. More interestingly, as we discuss in 
-Section~\ref{sec:evaluation} the algorithm generates REs with a distribution that matches the one found in the corpus and, 
-as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
+%For that reason, for example, the value of \emph{chair}.\puse\ is (AGREGAR ACA), while the value of \emph{fan}.\puse\ is (AGREGAR ACA)  
+%These probabilities will not be useful to describe different targets in different scenes. We will see how we can use them to obtain
+% values for new targets and scenes using a machine learning approach in the next section. Not surprisingly, using these values for 
+%R.\puse\ the REs generated most often by the algorithm can be found in the corpus. More interestingly, as we discuss in 
+%Section~\ref{sec:evaluation} the algorithm generates REs with a distribution that matches the one found in the corpus and, 
+%as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
 
 The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the TUNA corpus. We use linear regression to learn the function of \puse\ for each word in the signature. 
@@ -107,8 +102,7 @@ For a given scene, we replace the variables of the obtained function by the valu
 We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed 
 in Table~\ref{features}.  
 
-%\begin{small}
-\begin{table}[h!]
+\begin{table}[htbp]
 \begin{center}
 \begin{tabular}{|l|p{10cm}|}
 \hline
@@ -117,14 +111,23 @@ loc & whether the RE may use the location of the target in the figure\\
 discrimination & 1 over the number of objects in the model that have the property \\
 \hline
 \end{tabular}
+\vspace*{.03cm}
 \caption{Features used for learning the \puse ~for each token in the signature of the scenes of the TUNA corpus} 
 \label{features}
 \end{center}
 \end{table}
-%\end{small}
+\vspace*{-.9cm}
 Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations 
 between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain is that we are not able 
 to learn, and has an impact in our performance, we show that we couldn't learn the dependency of dimension-x and dimension-y, it mean, when a person adds dimension-x is highly probably that he includes dimension-y in his referring expression. 
+
+Starting from the scene in Figure~\ref{Tuna-scene}
+the resulting signature and their associated \puse\ are listed in the Table~\ref{probability-of-use} and for the Figure~\ref{Tuna-people-scene} in Table~\ref{probability-of-use-people}. In those tables we show only the probabilities higher or equal to 0.2.
+
+Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model 
+$\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
+
+
 \begin{table}[h!]
  \begin{minipage}{0.5\textwidth} 
 %\begin{center}
@@ -143,6 +146,7 @@ small 	&	0.05	\\
 back 	&	0.02	\\
 \hline
 \end{tabular}
+\vspace*{.09cm}
 \caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-scene}} 
 \label{probability-of-use}
 %\end{center}
@@ -165,12 +169,13 @@ x2 	&	0.02	\\
 \hline 
 \end{tabular}
 %\begin{center}
+\vspace*{.09cm}
 \caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-people-scene}} 
 \label{probability-of-use-people}
 %\end{center}
 \end{minipage}
 \end{table}
-
+\vspace*{-.9cm}
 %\end{table}
 
 \textit{Using} linear regression we are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the 
