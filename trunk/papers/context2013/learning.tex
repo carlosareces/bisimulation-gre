@@ -7,9 +7,9 @@ Intuitively, the R.\puse is the probability of using relation R to describe the 
 we describe how to calculate these probabilities from corpora.  
 The general set up is the following: we assume available a corpus of REs associated 
 to different scenes that are prototypical of the domain in which the GRE algorithm has to operate; we call this, the traning data.   
-We then show how to generalize these values to other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using the TUNA-corpus that is introduced in the Section~\ref{sec:tuna}. We show how to calculate \puse in Section~\ref{calculate}. 
+We then show how to generalize these values to other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using the TUNA corpus that is introduced in the Section~\ref{sec:tuna}. We show how to calculate \puse in Section~\ref{calculate}. 
 
-\subsection{The TUNA-corpus: A corpus of referring expressions}
+\subsection{The TUNA corpus: A corpus of referring expressions}
 \label{sec:tuna}
 The TUNA Corpus~\cite{Gatt:2008:TCO:1708322.1708365} is a set of human-produced referring expressions (REs) for entities in visual domains of pictures of furniture and people as exemplified in Figures~\ref{Tuna-scene} and~\ref{Tuna-people-scene}. The corpus was
 collected during an online elicitation experiment in which subjects typed descriptions of a target single referent or pair of referents. 
@@ -33,7 +33,7 @@ Each participant in the elicitation experiment carried out 38 trials, 20 de furn
 \includegraphics[width=0.8\textwidth]{images/tuna-people.jpg}
 
 %\vspace*{-.4cm}
-\caption{TUNA-corpus people scene}
+\caption{TUNA corpus people scene}
 \label{Tuna-people-scene}
 %\end{minipage}
 %\vspace*{-.38cm}
@@ -44,7 +44,7 @@ Each participant in the elicitation experiment carried out 38 trials, 20 de furn
 %\vspace*{-.25cm}
 %\vspace*{-.4cm}
 
-%\caption{TUNA-corpus furniture scene}
+%\caption{TUNA corpus furniture scene}
 %\label{Tuna-furniture-scene}
 %\end{minipage}
 \end{figure}
@@ -55,7 +55,7 @@ The TUNA corpus has two different domains (furniture and people), so for each wo
 
 %The annotation of the TUNA corpus have just properties for objects and have not relations between them annotated, there is a relation given by the positions but is it not annotated as relational properties between objects.
 
-%Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ for scenes similar of REs in the same domain (this is exactly the kind of information we find in the TUNA-corpus).  
+%Suppose we want to automatically generate REs for target $t$ in a given scene, and that we do have available a corpus $C$ for scenes similar of REs in the same domain (this is exactly the kind of information we find in the TUNA corpus).  
 %We use the models provided by TUNA as input of our algorithm.  
 %We aisle the scene for which we want to compute the \puse\ and use all another REs of scenes. Then we estimate the value of \puse\ for each of the relations in the model as the percentage of REs 
 %in which the relation appears. I.e., 
@@ -82,7 +82,7 @@ and call the resulting set $\REL$; it will be the signature of the model $\gM$ u
 and \emph{guy} are both represented by the token \emph{man}.
 
 \item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that the RE of the scene is an RE in the model.
- E.g., the $\el$ formula $\exists$\emph{left}.$\top \sqcap \exists$\emph{blue}.$\top \sqcap \exists$\emph{chair}.$\top$ (\emph{left} in this model is taking as the orientation left of the chair) corresponding to the RE should denote the target in the model $\gM$ depicted in Figure~\ref{Tuna-scene}. If the corpus has more than one RE the model should include all the properties in order that the algorithm could generate them.\\
+ E.g., the $\el$ formula $\exists$\emph{left}.$\top \sqcap \exists$\emph{blue}.$\top \sqcap \exists$\emph{chair}.$\top$ (\emph{left} in this model is taking as the orientation left of the chair) corresponding to the RE should denote the target in the model $\gM$ depicted in Figure~\ref{Tuna-scene}. If the corpus has more than one RE the model should include all the properties in order that the algorithm could generate them.
 
 \item For each R $\in \REL$ we assign 1 to R.\puse\ if R occurs in the RE, we assign 0 otherwise. In case that the corpus has more than one RE per picture use the average of occurrence in them.
 
@@ -102,12 +102,12 @@ Section~\ref{sec:evaluation} the algorithm generates REs with a distribution tha
 as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
 
-The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the TUNA-corpus. We use linear regression to learn the function of \puse\ for each word in the signature. 
+The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we are learning) for all the scenes of the TUNA corpus. We use linear regression to learn the function of \puse\ for each word in the signature. 
 For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to obtain the \puse\ for describe. 
 We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed 
 in Table~\ref{features}.  
 
-\begin{small}
+%\begin{small}
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|l|p{10cm}|}
@@ -117,20 +117,20 @@ loc & whether the RE may use the location of the target in the figure\\
 discrimination & 1 over the number of objects in the model that have the property \\
 \hline
 \end{tabular}
-\caption{Features used for learning the \puse for each token in the signature of the scenes of the TUNA-corpus} 
+\caption{Features used for learning the \puse ~for each token in the signature of the scenes of the TUNA corpus} 
 \label{features}
 \end{center}
 \end{table}
-\end{small}
+%\end{small}
 Our feature set is intentionally simplistic in order for it to be domain independent. As a result there are some complex relations 
 between characteristics of the scenes that it is not able to capture. The most important characteristic of our domain is that we are not able 
 to learn, and has an impact in our performance, we show that we couldn't learn the dependency of dimension-x and dimension-y, it mean, when a person adds dimension-x is highly probably that he includes dimension-y in his referring expression. 
 \begin{table}[h!]
  \begin{minipage}{0.5\textwidth} 
-\begin{center}
+%\begin{center}
 \begin{tabular}{|l|c|}
 \hline
-Token for Model Fig. \ref{Tuna-scene} & \puse learned\\
+Token for Model Fig. \ref{Tuna-scene} & \puse~learned\\
 \hline
 chair 	&	0.94	\\
 blue 	&	0.89	\\
@@ -145,13 +145,13 @@ back 	&	0.02	\\
 \end{tabular}
 \caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-scene}} 
 \label{probability-of-use}
-\end{center}
-\end{minipage}%
+%\end{center}
+\end{minipage}
 \begin{minipage}{0.5\textwidth} 
-\begin{center}
+%\begin{center}
 \begin{tabular}{|l|c|}
 \hline
-Token for Model Fig. \ref{Tuna-scene-people} & \puse learned\\
+Token for Model Fig. \ref{Tuna-people-scene} & \puse~learned\\
 \hline
 person 	&	0.79	\\
 hasGlasses 	&	0.71	\\
@@ -164,10 +164,11 @@ y3 	&	0.03	\\
 x2 	&	0.02	\\
 \hline 
 \end{tabular}
+%\begin{center}
 \caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-people-scene}} 
 \label{probability-of-use-people}
-\end{center}
-\end{minipage}%
+%\end{center}
+\end{minipage}
 \end{table}
 
 %\end{table}
