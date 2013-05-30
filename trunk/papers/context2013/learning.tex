@@ -3,14 +3,64 @@
 
 In the previous section we presented an algorithm that assumes that each relation R 
 used in a referring expression has a known probability of use R.\puse. 
-Intuitively, the R.\puse~is the probability of using relation R to describe the target. For example, in Figure~\ref{Tuna-scene} the probability of using blue to describe the target, which is surrounded by a red square, is higher than the probability of using the fact that the chair is facing left although both are properties of the target. The probability of using green is not cero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). In this section, 
-we describe how to calculate these probabilities from corpora.  
+Intuitively, the R.\puse~is the probability of using relation R to describe the target. In Tables~\ref{probability-of-use} and~\ref{probability-of-use-people} we show the probabilities of use that we are able to learn from corpora and to apply to the models of Figures~\ref{Tuna-scene} and \ref{Tuna-people-scene}.  In Figure~\ref{Tuna-scene} the probability of using the relation blue to describe the target is higher than the probability of using the fact that the chair is facing left although both are properties of the target. The probability of using green is not cero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). 
+
+In this section, we describe how to calculate these probabilities from corpora.  
 The general set up is the following: we assume available a corpus of REs associated 
 to different scenes that are prototypical of the domain in which the GRE algorithm has to operate; we call this, the traning data.   
-We then show how to generalize these values to other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using the TUNA corpus that is introduced in the Section~\ref{sec:tuna}. We show how to calculate \puse~in Section~\ref{calculate}. 
+We then show how to generalize these values to other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using the TUNA corpus. 
 
-\subsection{The TUNA corpus: A corpus of referring expressions}
-\label{sec:tuna}
+\begin{table}[h!]
+ \begin{minipage}{0.48\textwidth} 
+%\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Top 10 relations in Figure \ref{Tuna-scene} & learned \puse\\
+\hline
+chair 	&	0.94	\\
+blue 	&	0.89	\\
+y3 	&	0.29	\\
+x5 	&	0.27	\\
+left 	&	0.25	\\
+large 	&	0.21	\\
+green 	&	0.05	\\
+small 	&	0.05	\\
+back 	&	0.02	\\
+\hline
+\end{tabular}
+%\vspace*{.09cm}
+\caption{Probabilities of use learned from corpora and instantiated for Figure~\ref{Tuna-scene}} 
+\label{probability-of-use}
+%\end{center}
+\end{minipage}
+\begin{minipage}{0.48\textwidth} 
+%\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Top 10 relations in Figure \ref{Tuna-people-scene} & learned \puse\\
+\hline
+person 	&	0.79	\\
+hasGlasses 	&	0.71	\\
+y2 	&	0.20	\\
+x5 	&	0.18	\\
+hasHair	&	0.13	\\
+hairLight 	&	0.11	\\
+ageOld 	&	0.05	\\
+y3 	&	0.03	\\
+x2 	&	0.02	\\
+\hline 
+\end{tabular}
+%\begin{center}
+%\vspace*{.09cm}
+\caption{Probabilities of use learned from corpora and instantiated for Figure~\ref{Tuna-people-scene}} 
+\label{probability-of-use-people}
+%\end{center}
+\end{minipage}
+\end{table}
+%\vspace*{-.9cm}
+%\end{table}
+
+
 The TUNA Corpus~\cite{Gatt:2008:TCO:1708322.1708365} is a set of human-produced referring expressions (REs) for entities in visual domains of pictures of furniture and people as exemplified in Figures~\ref{Tuna-scene} and~\ref{Tuna-people-scene}. The corpus was
 collected during an online elicitation experiment in which subjects typed descriptions of a target single referent or pair of referents. 
 In each picture there were 5 or 6 other objects. 
@@ -33,7 +83,7 @@ In order to collect the corpus, each participant in the elicitation experiment c
 \includegraphics[width=0.8\textwidth]{images/tuna-people.jpg}
 
 %\vspace*{-.4cm}
-\caption{TUNA corpus people scene}
+\caption{Scene used during the collection of the TUNA corpus. The referring expression collected has to distinguish the target from the rest of the people. For this scene, the RE was \emph{the man with glasses}}. 
 \label{Tuna-people-scene}
 %\end{minipage}
 %\vspace*{-.38cm}
@@ -48,8 +98,6 @@ In order to collect the corpus, each participant in the elicitation experiment c
 %\label{Tuna-furniture-scene}
 %\end{minipage}
 \end{figure}
-
-\subsection{Calculating the probability of use of properties}\label{calculate}
 
 The TUNA corpus has two different domains (furniture and people), so for each word in each domain we train a machine learning model that computes a function of the \puse~for each word. When this function is instantiated with a set of domain independent features that we define below. 
 
@@ -106,8 +154,8 @@ in Table~\ref{features}.
 \begin{center}
 \begin{tabular}{|l|p{10cm}|}
 \hline
-target & whether the target element has the property \\
-loc & whether the RE may use the location of the target in the figure\\
+target-has & whether the target element has the property \\
+location-has & whether the RE may use the location of the target in the figure\\
 discrimination & 1 over the number of objects in the model that have the property \\
 \hline
 \end{tabular}
@@ -126,57 +174,6 @@ the resulting signature and their associated \puse\ are listed in the Table~\ref
 
 Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model 
 $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
-
-
-\begin{table}[h!]
- \begin{minipage}{0.5\textwidth} 
-%\begin{center}
-\begin{tabular}{|l|c|}
-\hline
-Token for Model Fig. \ref{Tuna-scene} & \puse~learned\\
-\hline
-chair 	&	0.94	\\
-blue 	&	0.89	\\
-y3 	&	0.29	\\
-x5 	&	0.27	\\
-left 	&	0.25	\\
-large 	&	0.21	\\
-front 	&	0.05	\\
-small 	&	0.05	\\
-back 	&	0.02	\\
-\hline
-\end{tabular}
-\vspace*{.09cm}
-\caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-scene}} 
-\label{probability-of-use}
-%\end{center}
-\end{minipage}
-\begin{minipage}{0.5\textwidth} 
-%\begin{center}
-\begin{tabular}{|l|c|}
-\hline
-Token for Model Fig. \ref{Tuna-people-scene} & \puse~learned\\
-\hline
-person 	&	0.79	\\
-hasGlasses 	&	0.71	\\
-y2 	&	0.20	\\
-x5 	&	0.18	\\
-hasHair	&	0.13	\\
-hairLight 	&	0.11	\\
-ageOld 	&	0.05	\\
-y3 	&	0.03	\\
-x2 	&	0.02	\\
-\hline 
-\end{tabular}
-%\begin{center}
-%\vspace*{.09cm}
-\caption{Probabilities of use of the tokens from the corpora for Figure~\ref{Tuna-people-scene}} 
-\label{probability-of-use-people}
-%\end{center}
-\end{minipage}
-\end{table}
-%\vspace*{-.9cm}
-%\end{table}
 
 Using linear regression we are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the 
 saliency of a color depends strongly on whether the target object is of that color, and it does not depend on its discrimination power 
