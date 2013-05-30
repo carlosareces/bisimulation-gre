@@ -19,7 +19,7 @@ input might result in different REs for objects in the scene.
 The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scene its intended extension.  For example, 
-the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{TUNA-scene-graph}. In Figure~\ref{TUNA-scene-graph}, $\Delta = \{e_1,\ldots,e_7\}$, and for example the extension of blue is $\interp{\emph{blue}} = \{e_5,e_6,e_7\}$ because 3 objects are blue in the scene.
+the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{TUNA-scene-graph}. In Figure~\ref{TUNA-scene-graph}, $\Delta = \{e_1,\ldots,e_7\}$, and for example the extension of blue is $\interp{\emph{blue}} = \{e_5,e_6,e_7\}$ because 3 objects are blue in the scene. In the Figure, xn indicates that the object is in position n with regard to its x-dimension in the grid and yn is interpreted similarly. 
 %A scene can be encoded in different ways as a relational model. The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe. We also assume that all relations are \emph{binary} (relations of other arity can be encoded as binary).
 
 \newcommand{\nChair}{\mathit{chair}\xspace}
@@ -57,7 +57,7 @@ the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\g
 \centering
 \includegraphics[width=\textwidth]{images/tuna.jpg}
 \vspace*{-.25cm}
-\vspace*{-.4cm}\caption{Input scene}
+\vspace*{-.4cm}\caption{Scene, target \emph{blue chair facing left}}
 \label{Tuna-scene}
 \end{minipage}
 \hspace*{-0.2cm}
@@ -132,7 +132,7 @@ the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\g
  \draw[dotted] (-0.5,-2.0) rectangle (5.0,2.5);
 
  \end{tikzpicture}
-\vspace*{-.4cm}\caption{Scene as a relational model}
+\vspace*{-.4cm}\caption{The scene as a relational model}
 \label{TUNA-scene-graph}
 \end{minipage}
 \end{figure}
