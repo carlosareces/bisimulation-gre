@@ -3,11 +3,11 @@
 
 In the previous section we presented an algorithm that assumes that each relation R 
 used in a referring expression has a known probability of use R.\puse. 
-Intuitively, the R.\puse is the probability of using relation R to describe the target. For example, in Figure~\ref{Tuna-scene} the probability of using blue to describe the target, which is surrounded by a red square, is higher than the probability of using the fact that the chair is facing left although both are properties of the target. The probability of using green is not cero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). In this section, 
+Intuitively, the R.\puse~is the probability of using relation R to describe the target. For example, in Figure~\ref{Tuna-scene} the probability of using blue to describe the target, which is surrounded by a red square, is higher than the probability of using the fact that the chair is facing left although both are properties of the target. The probability of using green is not cero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). In this section, 
 we describe how to calculate these probabilities from corpora.  
 The general set up is the following: we assume available a corpus of REs associated 
 to different scenes that are prototypical of the domain in which the GRE algorithm has to operate; we call this, the traning data.   
-We then show how to generalize these values to other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using the TUNA corpus that is introduced in the Section~\ref{sec:tuna}. We show how to calculate \puse in Section~\ref{calculate}. 
+We then show how to generalize these values to other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using the TUNA corpus that is introduced in the Section~\ref{sec:tuna}. We show how to calculate \puse~in Section~\ref{calculate}. 
 
 \subsection{The TUNA corpus: A corpus of referring expressions}
 \label{sec:tuna}
@@ -51,7 +51,7 @@ Each participant in the elicitation experiment carried out 38 trials, 20 de furn
 
 \subsection{Calculating the probability of use of properties}\label{calculate}
 
-The TUNA corpus has two different domains (furniture and people), so for each word in each domain we train a machine learning model that computes a function of the \puse\ for each word. When this function is instantiated with a set of domain independent features that we define below. 
+The TUNA corpus has two different domains (furniture and people), so for each word in each domain we train a machine learning model that computes a function of the \puse~for each word. When this function is instantiated with a set of domain independent features that we define below. 
 
 %The annotation of the TUNA corpus have just properties for objects and have not relations between them annotated, there is a relation given by the positions but is it not annotated as relational properties between objects.
 
@@ -101,7 +101,7 @@ The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, 
 For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to obtain the \puse\ for describe. 
 We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed 
 in Table~\ref{features}.  
-
+\vspace*{-.3cm}
 \begin{table}[htbp]
 \begin{center}
 \begin{tabular}{|l|p{10cm}|}
@@ -112,7 +112,7 @@ discrimination & 1 over the number of objects in the model that have the propert
 \hline
 \end{tabular}
 \vspace*{.03cm}
-\caption{Features used for learning the \puse ~for each token in the signature of the scenes of the TUNA corpus} 
+\caption{Features used for learning the \puse~for each token in the signature of the scenes of the TUNA corpus} 
 \label{features}
 \end{center}
 \end{table}
@@ -178,7 +178,7 @@ x2 	&	0.02	\\
 \vspace*{-.9cm}
 %\end{table}
 
-\textit{Using} linear regression we are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the 
+Using linear regression we are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the 
 saliency of a color depends strongly on whether the target object is of that color, and it does not depend on its discrimination power 
 in the model. Moreover, (VER SI DEJAMOS ESTO) it learns that the on-top relation is used more frequently than the horizontal relations (left-of and right-of) 
 which confirms a previous finding reported in~\cite{viet:gene11}. Finally, it learned a surprising fact of the TUNA corpus
