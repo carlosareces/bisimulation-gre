@@ -66,21 +66,31 @@ SYS\_People\_20	&	.81		&	.68	&	.60		&	.01	\\
 
 In the picture~\ref{graficoPresicionFurniture} we can see that taking the first RE our system is a little lower than GRAPH but taking into account the forst 5 more frequent RE given by the system our accuracy is the same of GRAPH, and taking 20 into account our system is as far better, for people in the picture~\ref{graficoPresicionPeople} we can see that even less that 3 we have the same accuracy as GRAPH, and also if we take into account more RE the system is better.
 
-\begin{figure}[ht]
-%\begin{minipage}{0.50\linewidth}
-\centering
-\includegraphics[width=0.8\textwidth]{images/furniturePrec.png}
-\caption{Comparison of accuracy of GRAPH and our system for furniture}
-\label{graficoPresicionFurniture}
-\end{figure}
 
 \begin{figure}[ht]
-%\begin{minipage}{0.50\linewidth}
+\begin{minipage}{0.39\linewidth}
 \centering
-\includegraphics[width=0.8\textwidth]{images/peoplePrec.png}
+\includegraphics[width=\textwidth]{images/furniturePrec.png}
+\caption{Comparison of accuracy of GRAPH and our system for furniture}
+\label{graficoPresicionFurniture}
+%\end{figure}
+\end{minipage}
+%\begin{figure}[ht]
+\begin{minipage}{0.39\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/precP.png}
 \caption{Comparison of accuracy of GRAPH and our system for people}
 \label{graficoPresicionPeople}
+\end{minipage}
+\begin{minipage}{0.20\linewidth}
+
+\centering
+\includegraphics[width=\textwidth]{images/legenda.png}
+\end{minipage}
+
 \end{figure}
+
+
 
 Also we analyze the the RE founded in the corpus that the system does not generate in a first frequency, and found that there were a 13.75\% in furniture that were not RE, it is were underspecified sentences with does not identifies the target object. For people the proportion was lower just a 5.88\%. We saw that when a person used another word that was not taking in account in the annotation part of the corpus, it was annotated as ``other'', and our system was not capable of generate ``other'' because it was not in the model.
 In the table there is a percentage of times that in 100 runs the system does not generates the RE given by the human, as showed in Table~\ref{error-people} the human were more difficult to generate in the first 100 because the RE were longer and when the RE have less probability of occur. If the it system does not generates the RE in 100 of runs does not mean that the system could not generate them, it just mean that the system need to be running more in order to generate this RE.\\
