@@ -103,7 +103,7 @@ In order to collect the corpus, each participant in the elicitation experiment c
 %\end{minipage}
 \end{figure}
 
-The TUNA corpus has two different domains called furniture and people. For each word in each domain we train a machine learning model that computes a function of its \puse. When this function is instantiated with a set of domain independent features that we define below. 
+For each word in each corpora domain we train a machine learning model that computes a function of its \puse. When this function is instantiated with a set of domain independent features that we define below. 
 
 %The annotation of the TUNA corpus have just properties for objects and have not relations between them annotated, there is a relation given by the positions but is it not annotated as relational properties between objects.
 
@@ -133,7 +133,7 @@ should be matched to a single token like \emph{y1}.
 and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{man} 
 and \emph{guy} are both represented by the token \emph{man}.
 
-\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that the RE of the scene in the corpus uniquely identifies the target in the model. E.g., the $\el$ formula $\exists$\emph{left}.$\top \sqcap \exists$\emph{blue}.$\top \sqcap \exists$\emph{chair}.$\top$, which represents the RE ``the blue chair facing left'' found in the corpus for this scene, denotes the target and only the target in the model $\gM$ depicted in Figure~\ref{TUNA-scene-graph}. If the corpus includes more than one RE per scene, the model should include all the properties used to describe the scene.
+\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that the RE of the scene in the corpus uniquely identifies the target in the model. E.g., the $\el$ formula $\exists$\emph{left}.$\top \sqcap \exists$\emph{blue}.$\top \sqcap \exists$\emph{chair}.$\top$, which represents the RE ``the blue chair facing left'' found in the corpus for the scene in Figure~\ref{Tuna-scene}, denotes the target and only the target in the model $\gM$ depicted in Figure~\ref{TUNA-scene-graph}. If the corpus includes more than one RE per scene, the model should include all the properties used to describe the scene.
 
 \item For each R $\in \REL$ we assign 1 to R.\puse\ if R occurs in the RE, we assign 0 otherwise. In case that the corpus has more than one RE per scene we calculate the proportion of appearance of each property.
 
@@ -148,7 +148,7 @@ and \emph{guy} are both represented by the token \emph{man}.
 %as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the corpus are natural.    
 
 
-The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, training on the training data of the TUNA corpus. We use linear regression to learn the function of \puse\ for each relation in the signature. 
+The learning was done with the machine learning toolkit WEKA~\cite{Hall:WEK09}, learning on the training data of the TUNA corpus. We use linear regression to learn the function of \puse\ for each relation in the signature. 
 For a given scene, we replace the variables of the obtained function by the values of the features in the scene that we want to describe. 
 We use simple features to obtain the function, all the features can be extracted automatically from the relational model and are listed 
 in Table~\ref{features}.  
@@ -181,5 +181,5 @@ $\gM$, and we could argue that they are correlated to the \emph{saliency} of R i
 Using linear regression we are able to learn interesting characteristics of the domain. To start with, it learns known facts such that the 
 saliency of a color depends strongly on whether the target object is of that color, and it does not depend on its discrimination power 
 in the model. Moreover, it learns that size relations (e.g., large and small) is used more frequently when it has a higher discriminative power
-which confirms a previous finding reported in~\cite{viet:gene11}. Finally, it is able to learn that the orientation properties (e.g., left and right) are used as a last resource, when it is necessary to identify the target uniquely in cases they were warned do not tu use the location of the object in the scene as explain in~\ref{tunaDescription}. 
+which confirms a previous finding reported in~\cite{viet:gene11}. Finally, it is able to learn that the orientation properties (e.g., facing left and facing right) are used as a last resource, when it is necessary to identify the target uniquely. 
 
