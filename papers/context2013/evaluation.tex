@@ -12,15 +12,20 @@ The Graph algorithm defines the generation of referring expressions as a graph s
 Dice coefficient 
 This is a set comparison metric, ranging between 0 and 1, where
 1 indicates a perfect match between sets. For two
-attribute sets A and B, Dice is computed as follows:
+attribute sets A and B, Dice is computed as follows:\\
 
-$Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$
-\\
+$Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
+
+
 The MASI score \cite{Passonneau06measuringagreement}~is an adaptation of the Jaccard coefficient
 which biases it in favour of similarity where one set
 is a subset of the other. Like Dice, it ranges between
 0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
-$MASI(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$
+
+
+$Masi(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
+
+
 where $\delta$ is a monotonicity coefficient defined as follows:
 
 
