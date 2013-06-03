@@ -243,19 +243,18 @@ Taking into account just the coincidences between jugdes the Table~\ref{system-b
 
 Sometimes comparison was unfair because human gives a RE that includes relation that were not annotated so, the system haven't the posibility of produce them. A point in favor of the system is that sometimes the human did an underespecified RE and the system has a better one.\\
 
-
-Sometimes judges choices the same RE for example in Figure~\ref{smallBlueFan1} the RE given by the human was underspecified, so they choice the system one because was a RE. Another times just RE given by the system was intuitivelly less complex than the human one like in Figure~\ref{smallBlueFan} where RE of the system was ``small blue fan'' and the human RE was ``bottom row, blue fan''.
+In Figure~\ref{smallBlueFan1} the human RE was ``blue frontal chair'', and the system ``the blue bottom chair'' the judge selected the system RE, in this case our intuition is that the property ``bottom'' helps more than the property ``frontal'' which have a probability lower for our system. Another times just RE given by the system was intuitivelly less complex than the human one like in Figure~\ref{smallBlueFan} where RE of the system was ``small blue fan'' and the human RE was ``bottom row, blue fan''.
 \begin{figure}[ht]
 \begin{minipage}{0.50\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/tuna.jpg} % esta es la 101t5 la que mostramos al principio
-\caption{TUNA corpus furniture scene}
+\caption{Scene used during the collection of the TUNA corpus. The human RE was ``blue frontal chair'', and the system ``the blue bottom chair''. Judges prefer the system generated.}
 \label{smallBlueFan1}
 \end{minipage}
 \begin{minipage}{0.50\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
-\caption{TUNA corpus furniture scene}
+\caption{Scene used during the collection of the TUNA corpus. The human RE ``bottom row, blue fan'', and the system ``small blue fan''. Judges prefer the system generated.}
 \label{smallBlueFan}
 \end{minipage}
 \end{figure}
@@ -275,7 +274,7 @@ Sometimes judges choices the same RE for example in Figure~\ref{smallBlueFan1} t
 \begin{minipage}{0.50\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/s28t25.png}
-\caption{Scene used during the collection of the TUNA corpus. The human RE was ``man in middle row, on the right'', and the system ``the man with a beard wearing glasses''. Judges prefer}
+\caption{Scene used during the collection of the TUNA corpus. The human  RE was ``man on top row in middle'', and the system ``man in the middle column''. Judges prefer the human RE.}
 \label{s28t25}
 %\end{figure}
 \end{minipage}
@@ -283,11 +282,12 @@ Sometimes judges choices the same RE for example in Figure~\ref{smallBlueFan1} t
 \begin{minipage}{0.50\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/s120t26.png}
-\caption{Scene used during the collection of the TUNA corpus. The human RE was ``man with white beard'', and the system ``the man with a beard ''. Judges prefer}
+\caption{Scene used during the collection of the TUNA corpus. The human RE was ``the guy with glasses in the middle of the top row'', and the system ``the guy with glasses in the middle column''. Judges were not agree in their preference.}
 \label{s307t21}
 \end{minipage}
 \end{figure}
 
+There were cases in wich the judges choice the human RE for example in Figure~\ref{s28t25}~the human RE was more overspecified with ``on top row'' than the system, here the human gives a RE that includes both axis in the grid and the system just one, this kind of RE were the person includes both axis information was a property that was not captured by our system.
 
+In Figure~\ref{s307t21}~we show an example in which both judge were not agree and they select one the human RE and other the system RE.  The human RE was ``the guy with glasses in the middle of the top row'', and the system ``the guy with glasses in the middle column'', in this case we see that not always human prefer RE that includes both axis of the grid.
 
-EN HUMAN EVALUATION AGREGAR CASOS EN LOS QUE LOS JUECES CONSISTENTEMENTE ELIGIERON LA EXPRESION DE LA PERSONA Y CASOS EN LOS QUE LOS JUEVES ELIGIERON CONSISTENTEMENTE EXPRESIONES HUMANAS. DAR UNA IDEA DE PORQUE LAS EXPRESIONES DEL SISTEMA SON A VECES MEJORES Y PORQUE A VECES LAS DE LOS HUMANOS SON MEJORES (E.G. DEPENDENCIA ENTRE X E Y)
