@@ -7,11 +7,35 @@ In this section we present the two different evaluations we performed on our alg
 
 In this section we present the comparison of our algorithm to the state of the art algorithm Graph introduced above. The Graph algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare ourselves to the Graph algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
 
-The Graph algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polinomial. We compare to this algorithm using the metrics accuracy, dice and masi. Accuracy is defined as the percentage of exact matchs between each RE produced by a human and the RE produced by the system for the same scence. 
+The Graph algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polinomial. We compare to this algorithm using the metrics accuracy, dice and masi. Accuracy is defined as the percentage of exact matchs between each RE produced by a human and the RE produced by the system for the same scence. \\
 
-ADD DEFINITION OF DICE HERE FROM PAPER OF TUNA 2008 (WITH FORMULAS).  
+Dice coefficient 
+This is a set comparison metric, ranging between 0 and 1, where
+1 indicates a perfect match between sets. For two
+attribute sets A and B, Dice is computed as follows:
 
-ADD DEFINITION OF MASI HERE FROM PAPER OF TUNA 2008 (WITH FORMULAS). 
+$Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$
+\\
+The MASI score \cite{Passonneau06measuringagreement}~is an adaptation of the Jaccard coefficient
+which biases it in favour of similarity where one set
+is a subset of the other. Like Dice, it ranges between
+0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
+$MASI(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$
+where $\delta$ is a monotonicity coefficient defined as follows:
+
+
+ \begin{equation}
+     \delta  = \left\{
+	       \begin{array}{ll}
+		 0      & if A \cap B = \emptyset \\
+		 1 & if A = B  \\
+		 \frac{2}{3}     & if A \subset B ~or~ B \subset A\\
+		 \frac{1}{3}     & otherwise
+	       \end{array}
+	     \right.
+ \end{equation}
+
+
 Intuitively, this
 means that those system-produced descriptions are
 preferred which do not include attributes that are
