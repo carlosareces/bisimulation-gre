@@ -7,7 +7,7 @@ In this section we present the two different evaluations we performed on our alg
 
 In this section we present the comparison of our algorithm to the state of the art algorithm Graph introduced above. The Graph algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare ourselves to the Graph algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
 
-The Graph algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polynomial. We compare to this algorithm using the metrics accuracy, dice and masi. Accuracy is defined as the percentage of exact matches between each RE produced by a human and the RE produced by the system for the same scene. \\
+The Graph algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polynomial. We compare to this algorithm using the metrics accuracy, Dice and \textsc{masi}. Accuracy is defined as the percentage of exact matches between each RE produced by a human and the RE produced by the system for the same scene. \\
 
 Dice coefficient is a set comparison metric, ranging between 0 and 1, where
 1 indicates a perfect match between sets. For two
@@ -16,13 +16,13 @@ attribute sets A and B, Dice is computed as follows:\\
 $Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
 
 
-The Masi score \cite{Passonneau06measuringagreement}~is an adaptation of the Jaccard coefficient
+The \textsc{masi} score \cite{Passonneau06measuringagreement}~is an adaptation of the Jaccard coefficient
 which biases it in favor of similarity where one set
 is a subset of the other. Like Dice, it ranges between
 0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
 
 
-$Masi(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
+$\textsc{masi}(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
 
 
 where $\delta$ is a monotonicity coefficient defined as follows:
@@ -52,7 +52,7 @@ In Table~\ref{Tabla_sis_1_20} we show the automatic metrics and compare the perf
 \begin{tabular}{|l|c|c|c|}
 \hline
 %Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
-	 	& 	DICE		&	MASI	&	ACCURACY		\\
+	 	& 	Dice		&	\textsc{masi}	&	ACCURACY		\\
 \hline
 GRAPH system, Furniture domain	& 	.80 		&	.59	&	.48		 	\\
 GRAPH system, People domain 	& 	.72		&	.48	&	.28			\\
@@ -86,7 +86,7 @@ Our system, People domain (top 20)   &	.81		&	.68	&	.60		\\
 %15	0.28	0.54
 %20	0.28	0.6
 
-Accuracy, Dice and Masi assess humanlikeness with respect to a corpus of human referring expressions.
+Accuracy, Dice and \textsc{masi} assess humanlikeness with respect to a corpus of human referring expressions.
 
 In the Figure~\ref{graficoPresicion} the accuracy for our system and the graph system is compared. The left graph corresponds to the furniture domain and the right graph corresponds to the people domain. We can see that taking the top 1 RE our system accuracy is lower than Graph performance for the people domain. However, if we consider the top 20 REs that our algorithm is able to produce we can see that the accuracy for both domains gets higher than 60\%. This shows that our algorithm is able to generate REs that are more similar to those produced by humans than the graph algorithm, although these REs are not ranked first. Another result that we can observe is that the people domain accuracy is much lower for the top 1 RE than for the furniture domain (19 vs 46), but the accuracy stabilizes when REs lower in our ranking are considered. This may be explained by the fact that the training set for the people domain is smaller and less balanced and hence, the probabilities of use inferred do not generalize as well as in the furniture domain. 
 
