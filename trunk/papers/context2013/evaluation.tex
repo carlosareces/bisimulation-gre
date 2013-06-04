@@ -7,7 +7,7 @@ In this section we present the two different evaluations we performed on our alg
 
 In this section we present the comparison of our algorithm to the state of the art algorithm Graph introduced above. The Graph algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare ourselves to the Graph algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
 
-The Graph algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polynomial. We compare to this algorithm using the metrics accuracy, Dice and \textsc{masi}. Accuracy is defined as the percentage of exact matches between each RE produced by a human and the RE produced by the system for the same scene. \\
+The Graph algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polynomial. We compare to this algorithm using the metrics accuracy, Dice and \textsc{masi}. Accuracy is defined as the percentage of exact matches between each RE produced by a human and the RE produced by the system for the same scene. 
 
 Dice coefficient is a set comparison metric, ranging between 0 and 1, where
 1 indicates a perfect match between sets. For two
@@ -280,15 +280,15 @@ In Figure~\ref{BlueChair} the human RE was ``blue frontal chair'', and the syste
 \begin{minipage}{0.50\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/s59t26.jpg}
-\caption{Scene used during the collection of the TUNA corpus. The human  RE was \emph{man on top row in middle}, and the system \emph{man in the middle column}. Judges prefer the human RE.}
+\caption{Scene used during the collection of the TUNA corpus. The human  RE was \emph{the man with black hair}, and the system \emph{the man wearing glasses in the fourth column}. Judges prefer the human RE.}
 \label{s28t25}
 %\end{figure}
 \end{minipage}
 %\begin{figure}[ht]
 \begin{minipage}{0.50\linewidth}
 \centering
-\includegraphics[width=\textwidth]{images/s120t26.jpg}
-\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{the guy with glasses in the middle of the top row}, and the system \emph{the guy with glasses in the middle column}. Judges did not agree in their preference.}
+\includegraphics[width=\textwidth]{images/s315t21.jpg}
+\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{man with a beard}, and the system \emph{man with a beard wearing glasses}. Judges did not agree in their preference.}
 \label{s307t21}
 \end{minipage}
 \end{figure}
