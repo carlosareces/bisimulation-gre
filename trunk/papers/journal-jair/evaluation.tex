@@ -124,83 +124,304 @@ In the figure we can also observe that the algorithm that uses the \puse directl
 \subsection{Evaluation of the TUNA-corpus}
 %\label{sec:evaluationTUNA}
 
-A comparative evaluation for the TUNA-corpus. 
-Using \puse learned as described in Section~\ref{sec:learning} and running our algorithm 100 times we adquire the following results:
-About the evaluation method 
-In the evaluation results reported below, we use the intrinsic methods used in the ASGRE Challenge. Minimality, defined as the proportion of descriptions produced by a system
-that are maximally brief, as per the original definition in Dale (1989). The Dice coefficient, used to compare the description produced by
-a system to the human-produced description on the same input domain. %Dice is estimated
-%as follows:
-%2 × |DS ∩ DH |
-%|DS | + |DH |
-MASI, a version of the Jaccard similarity coefficient proposed
-by Passonneau (2006) which multiplies the similarity value by a monotonicity coefficient, biasing
-the measure towards those cases where DS and
-DH have an empty set difference. Intuitively, this
+In this section we present the comparison of our algorithm to the state of the art algorithm Graph introduced above. The Graph algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare ourselves to the Graph algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
+
+The Graph algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polynomial. We compare to this algorithm using the metrics accuracy, Dice and \textsc{masi}. Accuracy is defined as the percentage of exact matches between each RE produced by a human and the RE produced by the system for the same scene. 
+
+Dice coefficient is a set comparison metric, ranging between 0 and 1, where
+1 indicates a perfect match between sets. For two
+attribute sets A and B, Dice is computed as follows:\\
+
+$Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
+
+
+The \textsc{masi} score \cite{Passonneau06measuringagreement}~is an adaptation of the Jaccard coefficient
+which biases it in favor of similarity where one set
+is a subset of the other. Like Dice, it ranges between
+0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
+
+
+$\textsc{masi}(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
+
+
+where $\delta$ is a monotonicity coefficient defined as follows:
+
+
+ \begin{equation}
+     \delta  = \left\{
+	       \begin{array}{ll}
+		 0      & if A \cap B = \emptyset \\
+		 1 & if A = B  \\
+		 \frac{2}{3}     & if A \subset B ~or~ B \subset A\\
+		 \frac{1}{3}     & otherwise
+	       \end{array}
+	     \right.
+ \end{equation}
+
+
+Intuitively, this
 means that those system-produced descriptions are
 preferred which do not include attributes that are
-omitted by a human. Thus, two of our intrinsic measures assess Humanlikeness (Dice and MASI), while
-Minimality reflects the extent to which an algorithm
-conforms to brevity, one of the principles that has
-emerged from the ASGRE literature.}
-We also did another comparison taking into account the 20 first RE that the system produced named SIS\_Furniture\_20 and SIS\_People\_20 in table~\ref{Tabla_sis_1_20}, and when in those 20 is the given for a human we choise this one, we obtain the following results:
+omitted by a human.  
+
+In Table~\ref{Tabla_sis_1_20} we show the automatic metrics and compare the performance of our system  with the graph system for the first RE in the ranking and the first 20 REs in the ranking. 
 
 \begin{table}[h!]
 \begin{center}
-\begin{tabular}{|l|c|c|c|c|c|}
+\begin{tabular}{|l|c|c|c|}
 \hline
 %Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
-	& DICE	&	MASI	&	A\_ACCURACY	&	UNIQUENESS	&	MINIMALITY	\\
+	 	& 	Dice		&	\textsc{masi}	&	ACCURACY		\\
 \hline
-Furniture	&	0,79\%	&	0,58\%	&	0,43\%	&	0,48\%	&	0,0125\%	\\
-People	&	0,65\%	&	0,37\%	&	0,19\%	&	1\%	&	0,0\%	\\
-
+GRAPH system, Furniture domain	& 	.80 		&	.59	&	.48		 	\\
+GRAPH system, People domain 	& 	.72		&	.48	&	.28			\\
 \hline
-
-SIS\_Furniture\_20	&	0,87\%	&	0,7525\%	&	0,65\%	&	0,4625\%	&	0,0125\%	\\
-SIS\_People\_20	&	0,81\%	&	0,68\%	&	0,60\%	&	0,97\%	&	0,0147\%	\\
+Our system, Furniture domain (top 1)	&	.80		&	.60	&	.47		\\
+Our system, People domain (top 1)	&	.65		&	.37	&	.19		\\
+\hline
+Our system, Furniture domain (top 20)&	.87		&	.75  	&	.65		\\
+Our system, People domain (top 20)   &	.81		&	.68	&	.60		\\
 \hline
 \end{tabular}
-\caption{Percentage average adquired for Furniture and People}
+%\vspace*{.1cm}
+\caption{Comparison of the Graph algorithm and our system. We consider the 3 automatic metrics for the top 1 and the top 20 REs produced by our algorithm.}
+\vspace*{-.5cm}
 \label{Tabla_sis_1_20}
 \end{center}
 \end{table}
+%\vspace*{-.9cm}
+%Estos son los numeros que obtuve de accuracy para furniture (con estos hice el grafico)
+%	GRAPH	OUR SYSTEM
+%1	0.48	0.43
+%5	0.48	0.5
+%10	0.48	0.5375
+%15	0.48	0.6
+%20	0.48	0.65
+
+% y estos para people
+%	GRAPH	OUR SYSTEM
+%1	0.28	0.19
+%5	0.28	0.42
+%10	0.28	0.47
+%15	0.28	0.54
+%20	0.28	0.6
+
+Accuracy, Dice and \textsc{masi} assess humanlikeness with respect to a corpus of human referring expressions. In the Figure~\ref{graficoPresicion} the accuracy for our system and the graph system is compared. The left graph corresponds to the furniture domain and the right graph corresponds to the people domain. We can see that taking the top 1 RE our system accuracy is lower than Graph performance for the people domain. However, if we consider the top 20 REs that our algorithm is able to produce we can see that the accuracy for both domains gets higher than 60\%. This shows that our algorithm is able to generate REs that are more similar to those produced by humans than the graph algorithm, although these REs are not ranked first. 
+
+Another result that we can observe is that the people domain accuracy is much lower for the top 1 RE than for the furniture domain (19 vs 46), but the accuracy stabilizes when REs lower in our ranking are considered. This may be explained by the fact that the training set for the people domain is smaller and less balanced and hence, the probabilities of use inferred do not generalize as well as in the furniture domain. 
+
+\begin{figure}[ht]
+\begin{minipage}{0.49\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/furniturePrec.png}
+%\end{figure}
+\end{minipage}
+%\begin{figure}[ht]
+\begin{minipage}{0.49\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/precP.png}
+\end{minipage}
+\caption{Comparison of the accuracy of the Graph algorithm and our system. The x axis shows indicates that the accuracy was calculated considering the x first REs in the ranking. The y axis indicates the accuracy. Our system is depicted as a dotted line and the Graph system as a continuous line.\label{graficoPresicion}}
+\end{figure}
+
+ 
+
+%The dotted line is that represented by our system and the another is that represents the GRAPH performance.
+
+%Also we analyze the RE founded in the corpus that the system does not generate in a first frequency, and found that there were a 13.75\% in furniture that were not RE, those were underspecified sentences with does not identifies the target object. For people the proportion was lower just a 5.88\%. We saw that when a person used another word that was not taking into account in the annotation of the corpus, it was annotated as ``other'', and our system was not capable of generate ``other'' because it was not in the model.
+%In the table~\ref{error-furniture} there is a percentage of times in 100 runs that the system does not generates the RE given by the human for furniture, and as showed in Table~\ref{error-people} the human were more difficult to generate in the first 100 because the RE were longer the RE have less probability of occur. If the system does not generates the RE in 100 of runs does not mean that the system could not generate them, it just mean that the system need to be running more in order to generate this RE.\\
+
 
 %\begin{table}[h!]
 %\begin{center}
-%\begin{tabular}{|l|c|c|c|c|c|}
+%\begin{tabular}{|l|c|c|}
 %\hline
-%%Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
-%&	DICE	&	MASI	&	A\_ACCURACY	&	UNIQUENESS	&	MINIMALITY	\\
+%		& Count		& Percentage\\
 %\hline
-%Furniture	&	0,87\%	&	0,7525\%	&	0,65\%	&	0,4625\%	&	0,0125\%	\\
-%People	&	0,81\%	&	0,68\%	&	0,60\%	&	0,97\%	&	0,0147\%	\\
+%It is not RE	&	11	&	13.75 \\
+%%		&	37	&	46.25\% \\
+%Contains ``other''	&	6	&	7.50 \\
+%\hline
+%SYS does not generated the RE in 100 runs	&	8	&	10.00 \\
+%SYS generated but not with higher frequency	&	18	&	22.5 \\
 %\hline
 %\end{tabular}
-%\caption{Percentage average adquired for Furniture and People considering 20 first frequencies}
+%%\vspace*{.1cm}
+%\caption{Clasification of RE that the system could not generates or generates with low frequency for Furniture}
+%\label{error-people}
+%\end{center}
+%\end{table}
+%%\vspace*{-.4cm}
+
+%\begin{table}[h!]
+%\begin{center}
+%\begin{tabular}{|l|c|c|}
+%\hline
+%			& Count		& Percentage\\
+%\hline
+%It is not RE		&	4	&	5.88 \\
+%Contains ``other''	&	6	&	8.82 \\
+%\hline
+%SYS does not generated the RE in 100 runs	&	17	&	25.00 \\
+%SYS generated but not with higher frequency	&	28	&	41.18 \\
+%%BIEN			&	13	&	19.12\% \\
+
+%\hline
+%\end{tabular}
+%%\vspace*{.1cm}
+%\caption{Clasification of RE that the system could not generates or generates with low frequency for People}
+%\label{error-furniture}
+%\end{center}
+%\end{table}
+%%\vspace*{-.4cm}
+
+\subsection{Human evaluation} \label{sec:humanevaluation}
+
+We asked two human judges native speakers of English to evaluate our referring expressions via an experiment on the web. The authors of the paper did not participate during the evaluation. The judges could register to the evaluation system so that they did not have to complete it in one go, the could come back to it later. During the evaluation we showed each judge the scenes and two randomly ordered REs. One RE corresponded to the RE present in the corpus and produced by a person and the other RE corresponded to the top 1 RE produced by our system. We asked the judges to select the RE that would be more useful to identify the target in the scene. That is, to select it from among the other objects in the stimulus pictures. 
+
+Our goal is to show that even if the RE generated by our algorithm does not coincide with the RE produced by a human in the corpus collection, it can be judged as good or even better than the REs generated by humans. 
+
+%\begin{table}[h!]
+%\begin{center}
+%\begin{tabular}{|c|c|c|c|}
+%\hline
+%           & Agree in & Not agree & Total\\
+%\hline 
+%Furniture & 25       & 18        & 43 \\
+%People    & 25       & 30        & 55 \\
+%Total     & 50       & 48        & 98 \\
+%\hline
+%\end{tabular}
+%\caption{Agree between judges} 
+%\label{agree-judges}
 %\end{center}
 %\end{table}
 
-We compare our results with the algorithm that win the ASGRE-challenge in 2008, we used the same corpus and the same tools provided for the organization of the challenge, we will show dice, masi, accuracy, uniqueness and minimality. \cite{graph08}
+%esta tabla no ayuda...no se que decir, no se como justificar que no coincidan...
+%In the Table~\ref{agree-judges} we can see that the both judges choice the same RE 25 times for Furniture and 25 times for People, 
 
-\begin{figure}[h!]
+In Table~\ref{system-versus-human} we show the results from the human evaluation experiment.
+The REs produced by the system were considered equal or better by both
+judges in 60 \% of the cases and, by at least one judge in 92\% of the cases.
+
+\begin{table}[h!]
 \begin{center}
-\includegraphics[width=.7\textwidth]{images/graphResults.jpg}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+%total scenes in evaluation set &                           80   &             68
+ & Furniture domain & People domain & Weighted mean \\
+\hline
+system equal to human  	&	.46	&	.19	&	.33 \\
+system better by 2 judges &	.29 	& 	.24 	& 	.27 \\
+system better by 1 or 2 judges & .51	&	.68	&	.59 \\
+system worse by 2 judges &	.03	&	.13	&	.08 \\
+system equal or better by 2 judges  &.75  &       .43	&       .60 \\
+system equal or better by 1 judge  &.97	&	.87	&	.92 \\
+\hline
+\end{tabular}
+%\vspace*{.1cm}
+\caption{Percentage of system versus human selected choices} 
+\label{system-versus-human}
+\vspace*{-.5cm}
 \end{center}
-\vspace*{-2em}
-\caption{Graph results \label{graphResults}}
+\end{table}
+
+%In the Table~\ref{system-versus-human} we show the percentage of the judges selections, the judge selected more the RE generated by our system than the human RE.
+
+%\begin{table}[h!]
+%\begin{center}
+%\begin{tabular}{|c|c|c|c|}
+%\hline
+%Judge    & Human choice & System choice & Total\\
+%\hline 
+%Judge1 & 25       & 30        & 55 \\
+%Judge2    & 23       & 32        & 55 \\
+%\hline
+%\end{tabular}
+%\caption{System versus human selected choice for People} 
+%\label{system-versus-human-people}
+%\end{center}
+%\end{table}
+
+%In the case of pictures of people you can see in the Table~\ref{system-versus-human-people} that the judges selected more RE generated by our system but the difference in not very significant.
+
+%\begin{table}[h!]
+%\begin{center}
+%\begin{tabular}{|c|c|c|c|c|c|}
+%\hline
+%           & System & System (\%) & Human & Human (\%) & Total\\
+%\hline
+%Furniture & 23  & .92 &  2 & .08  & 25 \\
+%People    & 16  & .64 & 9  & .36 & 25 \\
+%\hline
+%Total     & 39  & .78    & 11 & .22 & 50  \\
+%\hline
+%\end{tabular}
+%%\vspace*{.1cm}
+%\caption{Coincidences between judges, the system is the preferred the 78\% of times} 
+%\label{system-better}
+%\end{center}
+%\end{table}
+%%\vspace*{-.9cm}
+%Taking into account just the coincidences between judges the Table~\ref{system-better} shows the percentage of their preference, they preferred the system in 78\% of times.
+
+%Sometimes comparison was unfair because human gives a RE that includes relation that were not annotated so, the system haven't the possibility of produce them. A point in favor of the system is that sometimes the human did an underspecified RE and the system has a better one.
+
+Below, we illustrate the evaluation experiment by showing examples of cases in which the system expression was considered better by both judges, by only one judge or by neither of them. 
+
+Figure~\ref{smallBlueFan} illustrates a case in which the human generated an underspecified RE while the system produced an RE which univocally identifies the target. The RE generated by the system for this figure is ``small blue fan'' while the RE produced by the human is ``blue fan''. The human RE fails to uniquely identify the target and is then not preferred by the human judges. Humans are known for producing underspecified REs which may be due to cognitive limitations for not being able to consider the whole referential context at the same time. Our algorithm is able to consider the whole referential context and combine this ability with the probability of use of the REs learned from humans. 
+
+\begin{figure}[h]
+\begin{minipage}{0.49\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
+\caption{Scene used during the collection of the TUNA corpus. The human RE \emph{blue fan}, and the system \emph{small blue fan}. Judges prefer the system generated.}
+\label{smallBlueFan}
+\end{minipage}
+\begin{minipage}{0.49\linewidth}
+\centering
+\vspace*{.4cm}
+\includegraphics[width=\textwidth]{images/tuna.jpg} % esta es la 101t5 la que mostramos al principio
+\vspace*{-.4cm}
+\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{blue frontal chair}, and the system \emph{the blue chair in the bottom}. Both human judges prefer the system generated RE.}
+\label{BlueChair}
+\end{minipage}
 \end{figure}
 
-\begin{figure}[h!]
-\begin{center}
-\includegraphics[width=.7\textwidth]{images/graphResults.jpg}
-\end{center}
-\vspace*{-2em}
-\caption{Graph results \label{graphResults2}}
+
+In Figure~\ref{BlueChair} the human RE was ``blue frontal chair'', and the system RE was ``the blue chair in the bottom''; both judges selected the system RE. This case can be explained by the fact that, in this domain, the property ``bottom'' helps more during the identification than the property ``frontal'' because it concentrates the attention of the interpreter in the lower part of the scene. Our system learns this fact by learning a higher value of \puse~for ``bottom'' than for ``frontal'' from the training data. 
+
+%Sometimes the judges choice the human RE for example in Figure~\ref{largeGreyChair} the
+%system RE was ``large grey chair facing away'' and the human RE was ``the top left grey chair''.
+
+%\begin{figure}[ht]
+%%\begin{minipage}{0.50\linewidth}
+%\centering
+%\includegraphics[width=0.8\textwidth]{images/largeGreyChair.jpg}
+%\caption{TUNA corpus furniture scene}
+%\label{largeGreyChair}
+%\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}{0.49\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/s59t26.jpg}
+\caption{Scene used during the collection of the TUNA corpus. The human  RE was \emph{the man with black hair}, and the system \emph{the man wearing glasses in the fourth column}. Judges prefer the human RE.}
+\label{s28t25}
+%\end{figure}
+\end{minipage}
+%\begin{figure}[ht]
+\begin{minipage}{0.49\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/s315t21.jpg}
+\vspace*{-.3cm}
+\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{man with a beard}, and the system \emph{man with a beard wearing glasses}. Judges did not agree in their preference.}
+\label{s307t21}
+\end{minipage}
 \end{figure}
 
-They have severals systems that take into account a costs functions 4 kind of systems: 1 Simple, 2 Stochastic, 3 Free-stochastic, 4 Free-naive and for each those the Orders A Random and B Cost-based. The system submitted to the challenge was the 4 B.\\
+Figure~\ref{s28t25} is an example for which both judges preferred the human expression. The human  RE was ``the man with black hair'', and the system's ``the man wearing glasses in the fourth column''. This example makes evident the fact that, in the people domain some properties are more salient in some images than in others because of different shades of colours. Gradable properties such as this ones (in contrast to absolute properties) are still an open problem for GRE algorithms. 
 
-Our results taking in count the first one RE produced by thes system is comparable to their results, but with a lower measures, if we take into account our the results allowing more than just one RE, our results are better.
+Figure~\ref{s307t21}~illustrates a case in which the system RE was more overspecified than the human RE; the system included ``wearing glasses'' while the human did not. In this case one human subject preferred the system RE and the other the human RE. The amount of overspecification is a subjective matter where human themselves disagree. Further evaluation where REs are actually used for a task would be interesting to investigate this issue.  
 
 
