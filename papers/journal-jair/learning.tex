@@ -57,24 +57,42 @@ different scenes. In this way, 140 descriptions for each of the 32 scenes were o
 \subsection{The TUNA-corpus: A corpus of referring expressions}
 \label{sec:learningTUNA}
 
-The TUNA (Towards a UNified Algorithm for the generation of referring expressions) Corpus (Gatt et al., 2007), is a set of human-produced referring expressions (REs) for entities in visual domains of
-pictures of furniture or people. The corpus was
-collected during an online elicitation experiment in
-which 50 native or fluent speakers of English typed descriptions for 38 different figures of a target referent
-in a domain in which there were also 6 other entities (‘distractors’). 
-Each scene contains the target and distractors with theirs properties, the RE given for a human, and the semantic annotation of this.   
-They show a figure that contains the pictures of furnitures or people in a grid 5x3 like in the following figure, whit the target object maket with a red rectangle.
+%The TUNA (Towards a UNified Algorithm for the generation of referring expressions) Corpus (Gatt et al., 2007), is a set of human-produced referring expressions (REs) for entities in visual domains of
+%pictures of furniture or people. The corpus was
+%collected during an online elicitation experiment in
+%which 50 native or fluent speakers of English typed descriptions for 38 different figures of a target referent
+%in a domain in which there were also 6 other entities (‘distractors’). 
+%Each scene contains the target and distractors with theirs properties, the RE given for a human, and the semantic annotation of this.   
+%They show a figure that contains the pictures of furnitures or people in a grid 5x3 like in the following figure, whit the target object maket with a red rectangle.
 
-\begin{figure}[ht] 
+\label{tunaDescription}The TUNA Corpus~\cite{gatt-balz-kow:2008:ENLG} is a set of human-produced referring expressions (REs) for entities in visual domains of pictures of furniture and people as exemplified in Figures~\ref{Tuna-scene} and~\ref{Tuna-people-scene}. The corpus was
+collected during an online elicitation experiment in which subjects typed descriptions of a target single referent or pair of referents. 
+In each picture there were 5 or 6 other objects. 
+In the experiment, the participation was not controlled, but there was a main condition manipulated the +/-LOC: in +LOC condition, participants were told that they could refer to entities using any of their properties (including their location on the screen). In the -LOC condition, they were discouraged from doing so, though not prevented. 
+The attributes for each entity include properties such as an object's color or a person's characteristic such as having dark hear.
+In this paper we will use the singular part of the TUNA corpus. The corpus contains 780 singular referring expressions divided
+into 80\% training data, 20\% test. 
+
+In order to collect the corpus, each participant in the elicitation experiment carried out 38 trials, 20 furniture descriptions and 18 people descriptions.  
+
+\begin{figure}[h]
+\begin{minipage}{0.40\linewidth}
 \centering
-\includegraphics[width=.6 \textwidth]{images/imagen.png}
-\caption{TUNA: picture of furniture}
-\label{picture_furniture}
+\includegraphics[width=\textwidth]{images/tuna-people.jpg}
+%\caption{Scene used during the collection of the TUNA corpus. The referring expression collected has to distinguish the target from the rest of the people. For this scene, the RE was \emph{the man with glasses}.}
+\caption{hola}
+\label{Tuna-people-scene}
+\end{minipage}
+\begin{minipage}{0.40\linewidth}
+\centering
+\vspace*{.4cm}
+\includegraphics[width=\textwidth]{images/tuna.jpg} % esta es la 101t5 la que mostramos al principio
+\vspace*{-.4cm}
+\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{blue frontal chair}, and the system \emph{the blue chair in the bottom}}
+\label{Tuna-scene}
+\end{minipage}
 \end{figure}
 
-The TUNA Corpus was annotated with the main objective to evaluate the output of algorithms for the Generation of Referring Expressions (GRE) with Natural Language Generation, with particular regard for the semantic content of the expressions.
-
-A characteristic of this corpus is that have 1 RE for each scene and it contains about 2000 descriptions.
 
 
 \subsection{Calculating \puse\ when a corpus for the scene is available}
@@ -87,6 +105,8 @@ in which the relation appears.  I.e.,
 \begin{equation}\label{eq1}
 R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
 \end{equation}
+
+In the case of the TUNA corpus the calculation is not neccesary because we have only one RE for each scene.
 
 \noindent
 This estimation is overly simplified and, for example, it does not differentiate between the properties of a target and the 
@@ -112,7 +132,7 @@ and \emph{small} are both represented by the token \emph{small}.\\[-1.9em]
 depicted in 
 Figure~\ref{GRE3D7-stimulus-graph}.\\[-1.9em]
 
-\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}).\\[-1.9em]
+\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}) if we ave many RE for each scene or we assign 1 to R.\puse\ if R occurs in the RE, we assign 0 otherwise.
 
 \end{enumerate}
 
@@ -132,7 +152,7 @@ as Table~\ref{results-algo-fig3} shows, even the generated REs not found in the 
 
 \subsection{Calculating \puse\ for scenes without corpora for the target} \label{subsec:learning}
 
-If there is no corpora that describes the target we can estimate the \puse from corpora on a different scenes in the same domain. 
+If there is no corpora that describes the target we can estimate the \puse~from corpora on a different scenes in the same domain. 
 
 We use simple features to obtain the function, all the features can be extracted automatically from the relational model 
 and are listed 
@@ -143,12 +163,13 @@ in Table~\ref{features}.
 \begin{center}
 \begin{tabular}{|l|p{10cm}|}
 \hline
-target & whether the target element has the property \\
-\#rel-prop & number of properties and relations that the target has\\
-\#rel & number of the relations that the target has \\
+target & whether the target element has the property. \\
+\#rel-prop & number of properties and relations that the target has.\\
+\#rel & number of the relations that the target has. \\
 landmark & whether a landmark of the target has the property, an object is a landmark if there is a direct relation in the model 
-between them \\
-discrimination & 1 over the number of objects in the model that have the property \\
+between them (for the GRE3D7).\\
+location-has & whether the RE may use the location of the target in the figure (for TUNA corpus).\\
+discrimination & 1 over the number of objects in the model that have the property.  \\
 \hline
 \end{tabular}
 \caption{Features used for learning the \puse ~for each token in the signature of the scenes \textit{(GRE3D7 and TUNA-corpus)} \label{features}}

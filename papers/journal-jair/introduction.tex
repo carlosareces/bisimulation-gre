@@ -5,7 +5,7 @@ have no difficulty in accomplishing this task, by producing a referring expressi
 such as ``the green ball on the cube'' for example. Now imagine a computer being confronted
 with the same task, aiming to point out individual $e3$. Assuming it has access to a
 database containing all the relevant properties of the objects in the scene as shown in the figure, it needs to
-find some combination of properties which applies to $e3$ , and not to the other objects.
+find some combination of properties which applies to $e3$, and not to the other objects.
 There is a choice though: There are many ways in which $e3$ can be set apart from the
 rest (``the green ball on the left'', ``the small green ball'', ``the ball on the blue cube''), and
 the computer has to decide which of these is optimal in the given context. Moreover,
@@ -31,7 +31,7 @@ toys together with a human user~\cite{foster-etal-ijcai2009} needs to refer to t
 
 Our goal is actually twofold. First we show how we can add non-determinism to the refinement algorithms, by replacing the fixed ordering 
 over the properties of the input scene by a \emph{probability of use} for each property, and modifying the algorithm accordingly.  
-In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of REs (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probability of use so that REs are generated with a probability distribution that matches those found in the corpora.  
+In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of REs (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) ot the TUNA corpus introduced in~\cite{gatt-balz-kow:2008:ENLG} we can estimate these probability of use so that REs are generated with a probability distribution that matches those found in the corpora.  
 
 All REG algorithms require an 
 ordered list of properties that can be used to described the objects in the scene, and the naturalness of the generated REs strongly depends on this ordering. 
@@ -66,7 +66,7 @@ Section~\ref{sec:evaluation} presents a quantitative evaluation of the resulting
 We show that when trained with scenes from the GRE3D7 corpora the algorithm can generate REs with a probability distribution that, 
 in certain scenes, coincides with an up to 84.49\% of accuracy with the probability distribution of REs used by humans for that scene. 
 \textit{We compare our results with the TUNA-corpus with results of the ASGRE challenge and show better results than the adquire for the best system in 2008.
-In Section~\ref{sec:error} we show an interesting analysis of errors that can be taken into account in the next works.}
+In Section~\ref{sec:error} we show an interesting analysis of errors that can be taken into account in the next works.}, then in Section~\ref{sec:related-work} we describe related work in the area.
 
-In Section~\ref{sec:discussion} we discuss related work, motivations and future lines of research, focusing on recent work discussing the role 
+In Section~\ref{sec:discussion} we discuss motivations and future lines of research, focusing on recent work discussing the role 
 of non-determinism and over-specification in the generation of referring expressions. 
