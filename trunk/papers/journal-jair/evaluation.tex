@@ -44,7 +44,8 @@ ball,front,on-top(cube,left) & 0 & 0 & 1 & 0,01 & 0 \\
 Total & 140 & 100 & 10000 & 100 & 80,51 \\
 \hline
 \end{tabular}
-\caption{Referring expressions produced by the algorithm for Figure~\ref{GRE3D7-stimulus}\label{results-algo-fig3}}
+\caption{Referring expressions produced by the algorithm for Figure~\ref{GRE3D7-stimulus}}
+\label{results-algo-fig3}
 \end{center}
 \end{table}
 
@@ -94,11 +95,12 @@ Average	&	85.7\%	&	70.91\%	&	6.07\%	&	0.00\%	\\
 
 \hline
 \end{tabular}
-\caption{Percentage on intersection between the REs generated using directly extracted from the figure corpora\label{results-algo-all}, learned probabilities, random and uniform probabilities}
+\caption{Percentage on intersection between the REs generated using directly extracted from the figure corpora, learned probabilities, random and uniform probabilities}
+\label{results-algo-all}
 \end{center}
 \end{table}
 
-The table shows that the accuracy is not stable for all scenes, ranging from 86.59\% in Fig. 17 to 46.49\% in Fig. 15. The drop in accuracy that we see for Fig 15 is due to the characteristic of the behavior of size in the domain that we were not able to capture and that we discussed in Section~\ref{sec:learning}. 
+The table shows that the accuracy is not stable for all scenes, ranging from 86.59\% in Fig.~17 to 46.49\% in Fig. 15. The drop in accuracy that we see for Fig. 15 is due to the characteristic of the behavior of size in the domain that we were not able to capture and that we discussed in Section~\ref{sec:learning}. 
 
 To show the results from a different perspective than that of accuracy we also compute the cross-entropy~\cite{juraksky:spee08} between the corpus distribution of REs and each algorithm (the Model, the Learned, and the two baselines).    
 
@@ -108,17 +110,15 @@ To show the results from a different perspective than that of accuracy we also c
 %In Figure~\ref{Entropy} we show the results that we obtains for each scene in Table~\ref{results-algo-all} 
 %\texit{over the GRE3D7.} 
 
-%\begin{figure}[h!]
-%\begin{center}
-%\includegraphics[width=.9\textwidth]{images/entropyComplete.jpg}
-%\end{center}
+\begin{figure}[h!]
+\begin{center}
+\includegraphics[width=.9\textwidth]{images/entropy.jpg}
+\end{center}
 %\vspace*{-2em}
-%\caption{Cross-entropy between the corpus distribution of REs and each algorithm \textit{over the GRE3D7}}\label{Entropy}
-%\end{figure}
+\caption{Cross-entropy between the corpus distribution of REs and each algorithm \textit{over the GRE3D7}}\label{Entropy}
+\end{figure}
 
-
-
-In the figure at~\ref{sec:apendice} we can observe that the learning and model cross-entropies are, in general, much closer to the corpus entropy than the random and uniform cross-entropies. \textit{In Figures 18 and 30 the random distribution are better and closer to learning and model because the randomly selected values of \puse are close to the learned values of \puse by chance. Those are also evident in Table~\ref{results-algo-all} where random are 31,66\% for Fig. 18 and 38,83\% for Fig. 30.}
+In the Fig.~\ref{Entropy} we can observe that the learning and model cross-entropies are, in general, much closer to the corpus entropy than the random and uniform cross-entropies. In the Apendix~\ref{sec:apendice} there is a complete entropy of all the scenes. \textit{In Fig. 18 and 30 the random distribution are better and closer to learning and model because the randomly selected values of \puse are close to the learned values of \puse by chance. Those are also evident in Table~\ref{results-algo-all} where random are 31,66\% for Fig. 18 and 38,83\% for Fig. 30.}
 In the figure we can also observe that the algorithm that uses the \puse directly calculated on the corpus of the scene (model) has a cross-entropy with respect to the corpus distribution that is very close to the cross-entropy between the corpus distribution and the distribution obtained by the algorithm when run with the \puse learned from corpora that does not describe the target scene (learning). This observation supports the learning mechanism proposed in Section~\ref{subsec:learning} to estimate the \puse when no corpora of REs of the target scene is available. 
 
 \subsection{Evaluation of the TUNA-corpus}
@@ -221,7 +221,8 @@ Another result that we can observe is that the people domain accuracy is much lo
 \centering
 \includegraphics[width=\textwidth]{images/precP.png}
 \end{minipage}
-\caption{Comparison of the accuracy of the Graph algorithm and our system. The x axis shows indicates that the accuracy was calculated considering the x first REs in the ranking. The y axis indicates the accuracy. Our system is depicted as a dotted line and the Graph system as a continuous line.\label{graficoPresicion}}
+\caption{Comparison of the accuracy of the Graph algorithm and our system. The x axis shows indicates that the accuracy was calculated considering the x first REs in the ranking. The y axis indicates the accuracy. Our system is depicted as a dotted line and the Graph system as a continuous line.}
+\label{graficoPresicion}
 \end{figure}
 
  
@@ -375,16 +376,19 @@ Figure~\ref{smallBlueFan} illustrates a case in which the human generated an und
 \begin{minipage}{0.49\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
-\caption{Scene used during the collection of the TUNA corpus. The human RE \emph{blue fan}, and the system \emph{small blue fan}. Judges prefer the system generated.}
+
 \label{smallBlueFan}
+%\caption{Scene used during the collection of the TUNA corpus. The human RE \emph{blue fan}, and the system \emph{small blue fan}. Judges prefer the system generated.}
 \end{minipage}
+
 \begin{minipage}{0.49\linewidth}
 \centering
 \vspace*{.4cm}
 \includegraphics[width=\textwidth]{images/tuna.jpg} % esta es la 101t5 la que mostramos al principio
 \vspace*{-.4cm}
-\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{blue frontal chair}, and the system \emph{the blue chair in the bottom}. Both human judges prefer the system generated RE.}
 \label{BlueChair}
+%\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{blue frontal chair}, and the system \emph{the blue chair in the bottom}. Both human judges prefer the system generated RE.}
+
 \end{minipage}
 \end{figure}
 
@@ -415,7 +419,7 @@ In Figure~\ref{BlueChair} the human RE was ``blue frontal chair'', and the syste
 \centering
 \includegraphics[width=\textwidth]{images/s315t21.jpg}
 \vspace*{-.3cm}
-\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{man with a beard}, and the system \emph{man with a beard wearing glasses}. Judges did not agree in their preference.}
+%\caption{Scene used during the collection of the TUNA corpus. The human RE was \emph{man with a beard}, and the system \emph{man with a beard wearing glasses}. Judges did not agree in their preference.}
 \label{s307t21}
 \end{minipage}
 \end{figure}
