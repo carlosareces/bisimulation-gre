@@ -1,0 +1,75 @@
+\section{Descripción del problema}
+\label{sec:intro}
+
+En ling\"u\'{i}stica una expresión referencial (RE) es una expresión que identifica unívocamente a un objeto de para un interlocutor, desde un conjunto de posibles distractores. Por ejemplo si nosotros queremos identificar a un cierto animal d de un conjunto de mascotas, la expresión ``el perro'' será ER si d es el único perro en el conjunto, y si nosotros estamos seguros que nuestro interlocutor identificará a d como un perro. Para una persona esto sería una tarea fácil de realizar, pensemos ahora como lo haría una computadora, supongamos que queremos conseguir un algoritmo que genere automáticamente esas expresiones referenciales que a la gente genera. Una propiedad es una característica de un entidad particular por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto, cada entidad puede tener muchas propiedades, e incluso puede tener relaciones, así como las relaciones familiares, las relaciones con respecto a la posición física, etc. Para que una computadora pueda generar las ER generadas por las personas, primero debería seleccionar las propiedades y/o relaciones que se incluirán en la ER, deberá tener una base de datos conteniendo las propiedades y relaciones relevantes de la escena, podemos imaginar que una computadora podrá generar muchas más expresiones referenciales que una persona, es un desafío que direccionaremos en esta tesis generar las ER más parecidas a las que un humano generaría, o a las que la mayoría de la gente generaría, nuestra meta será imitar al humano en la generación de expresiones referenciales. Esta selección de la ER más apropiada también debe tener en cuenta al interlocutor, es natural que los humanos demos distintas ER a distintos interlocutores. En el área muchas veces se habla de optimalidad de la ER, pero con diferentes significados, para algunos una ER óptima es aquella que dice lo mínimo necesario para identificar al objeto target, para otros es la menos esfuerzo requiere del interlocutor para identificarlo
+Usamos generación de ER todo el tiempo en la vida real, y así los sistemas también las usan, son necesarios los algoritmos para generarlas automáticamente, las ER han sido estudiadas y tienen muchas aplicaciones prácticas desde generación de reportes meteorológicos a generación automática de resúmenes de información médica~\cite{dale2000}. Muchos sistemas de GLN incluyen un módulo de GER ~\cite{Mellish2004}.
+Las expresiones referenciales ocupan un papel central en la comunicación, popr ejemplo sistemas que proveen advertencias en navegación aerea
+ (White, Clark, and Moore 2010) necesitan referirse a los vuelos, en sistemas de navegación en auto~\cite{Drager:2012:GLN:2380816.2380908} se necesitan generar descripciones espaciales para áreas (tomar la siguiente calle a la derecha de la iglesia), y sistemas de diálogo con un robot que ensambla piezas para la contrucción de juguetes~\cite{foster-etal-ijcai2009} necesita referirse a las piezas (insertá el tornillo verde en el cubo)
+
+%Our goal is actually twofold. First we show how we can add non-determinism to the
+%refinement algorithms, by replacing the fixed ordering over the properties of the input scene
+%by a probability of use for each property, and modifying the algorithm accordingly. In this
+%way, each call to the algorithm can produce different REs for the same input scene and
+%target. We will then show that given suitable corpora of REs (like the GRE3D7 corpora
+%discussed in (Viethen, 2011)) ot the TUNA corpus introduced in (Gatt et al., 2008) we can
+%estimate these probability of use so that REs are generated with a probability distribution
+%that matches those found in the corpora.
+%All REG algorithms require an ordered list of properties that can be used to described
+%the objects in the scene, and the naturalness of the generated REs strongly depends on this
+%ordering.
+%(Areces et al., 2008) show that the refinement algorithm using the description language
+%EL as formal language is capable of generating 67\% of the relational REs in the (Viethen &
+%Dale, 2006) dataset, when all possible orders of the relations in the domain are considered.
+%This is in sharp contrast with the analysis done in (Viethen & Dale, 2006) over the cabinet
+%corpus, of algorithms based in Dale and Reiter's original proposal.
+%As mentioned, refinement algorithms require an ordered list of the properties that can
+%be used to described the objects in the scene, and the coverage results reported over Viethen
+%and Dale's cabinet corpus means that some ordering produces a reasonably wide coverage.
+%In other words, it has been shown that refinement algorithms have the capacity of producing
+%REs similar to those produced by human subjects, provided a suitable ordering over relations
+%appearing in the input scene is available, but it is unclear which of all possible orders should
+%be used. In this article we directly address this issue.
+%The rest of the paper is structured as follows. In Section 3 we introduce the technical
+%details of the refinement algorithms presented in (Areces et al., 2008, 2011) and show how
+%to introduce non-determinism using the probability of use of the properties in the input
+%scene. In this section, we assume that these probabilities are provided as input to the
+%algorithm. In Section 4, we show how to estimate the probability of use of a property from
+%training data. Given corpora consisting of pairs (scene, target) together with the REs used
+%to describe the target in each case, we propose a method to compute the probability of use
+%of each property for each scene, and use a machine learning approach to generalize these
+%properties to new targets and scenes not appearing in the corpora.
+%Testing of the resulting algorithms shows that there is still one factor missing to prop-
+%erty account for the REs found in corpora: overspecification. Refinement algorithms only
+%allow a mild form of over-specification in the REs produced. We discuss this in Section 5
+%and propose a modification that let the algorithm generate overspecified, but non trivially
+%redundant RE. The modification proposed is inspired by the work of (Keysar et al., 1998),
+%on the egocentric basis of language. Section 6 presents a quantitative evaluation of the
+%resulting algorithm and discusses interesting examples over the GRE3D7 and the TUNA-
+%corpus. We show that when trained with scenes from the GRE3D7 corpora the algorithm
+%can generate REs with a probability distribution that, in certain scenes, coincides with an
+%up to 84.49\% of accuracy with the probability distribution of REs used by humans for that
+%scene. We compare our results with the TUNA-corpus with results of the ASGRE challenge
+%and show better results than the adquire for the best system in 2008. In Section 7 we show
+%an interesting analysis of errors that can be taken into account in the next works., then in
+%Section 8 we describe related work in the area.
+%In Section 9 we discuss motivations and future lines of research, focusing on recent work
+%discussing the role of non-determinism and over-specification in the generation of referring
+%expressions.
+
+
+
+
+
+
+\section{Contribuciones}
+
+\begin{itemize}
+ \item Un algoritmo para la generación de expresiones referenciales independiente de dominio.
+ \item Un corpus de ER de un dominio mucho más natural que los existentes hasta el momento.
+ \item Una metodología de aplicación.
+\end{itemize}
+
+\section{Mapa de la tesis}
+Esta tesis se divide en 7 cap\'{i}tulos, en el Capítulo~\ref{sec:seleccion} se hablará de las distintas aproximaciones a la solución de la selección automática de contenido para la generación de expresiones referenciales, daremos los algoritmos existentes en el área, las aproximaciones empíricas y hablaremos de que es lo que se propone como ER óptima. Luego en el Capítulo~\ref{sec:metodologia} hablaremos de los corpus existentes y la forma de aplicación de los algoritmos, como se evaluan. Dado que los corpus existentes eran de dominios muy acotados, en esta tesis se realizó un corpus de ER de un dominio mucho más natural a los existentes, y se explica en el Capítulo
+~\ref{sec:corpus}, luego en el Capítulo~\ref{sec:algoritmo} presentamos nuestra propuesta, explicamos como nuestro algoritmo resuelve los problemas antes mencionados de no-determinismo y sobre-especificación para luego en el Capítulo~\ref{sec:evaluacion} daremos una evaluación general de 3 corpus analizados, realizando interesantes comparaciones con resultados obtenidos en el Challenge de GRE, y con un análisis de error, el cual nos permitirá dar interesantes conclusiones en el Capítulo~\ref{sec:conclusiones} y líneas de trabajo futuro.
+
