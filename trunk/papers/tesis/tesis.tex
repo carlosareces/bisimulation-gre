@@ -2,11 +2,12 @@
 
 \usepackage[left=3.81cm, right=2.54cm, top=2.54cm, bottom=3.17cm]{geometry}
 \usepackage[T1]{fontenc} 
-\usepackage[latin1]{inputenc} % latin1 char encoding
-\usepackage[spanish]{babel}
-\usepackage{amssymb}
-\usepackage{amsmath}
-\usepackage{amsthm} % theorems
+%\usepackage[spanish, activeacute]{babel}
+%\usepackage[latin1]{inputenc} %Letras con acentos, enies.
+
+%\usepackage{amssymb}
+%\usepackage{amsmath}
+%\usepackage{amsthm} % theorems
 \usepackage{enumerate}
 \usepackage{epsfig}
 \usepackage{multirow}
@@ -26,8 +27,6 @@
 \usepackage{ifthen}
 
 \usepackage{pdfpages}
-\selectlanguage{spanish}
-\usepackage[utf8]{inputenc}
 
 \renewcommand{\listtablename}{Indice de Tablas}
 \renewcommand{\tablename}{Tabla}
@@ -50,7 +49,23 @@
 \begin{document}
 
 % PARTE PRELIMINAR
-\input{preliminar/preliminar}
+%\input{preliminar/preliminar}
+
+\frontmatter % Numeros de paginas con numeros romanos
+
+\include{portada}
+%\include{preliminar/evaluadores}
+\newpage
+\mbox{}
+\include{dedicatoria}
+\newpage
+\mbox{}
+\include{resumen}
+
+\tableofcontents
+%\include{prefacio} --- Esto es opcional, no es necesario
+%\include{agradecimientos} Esto se hace al final
+%\include{resumen} Esto se hace al final
 
 % PARTE PRINCIPAL
 
@@ -70,10 +85,11 @@
 
 \include{6_evaluacion}
 
-\include{7_conlusiones}
-
+\include{7_conclusiones}
 \vskip 0.2in
+%\bibliographystyle{apa} %es mas linda pero da errores
+\bibliographystyle{plain}
 \bibliography{bibliografia}
-\bibliographystyle{theapa}
+
 \end{document}
 
