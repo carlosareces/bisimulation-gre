@@ -9,6 +9,36 @@
 \subsection{Graph}
 \subsection{Bisimulación}
 
+En este capítulo daremos una introducción a lógicas de descripción (DL del acrónimo en inglés description logic) y luego daremos el algoritmo en el cual nos basamos en esta tesis.
+
+Hay distintas lógicas, y entre ellas se diferencian por como se generan, por ejemplo ALC y EL, la diferencia es que ALC incluye negaciones y EL no.
+
+La gramática de ALC es:
+
+\todo{Agregar formula aca}
+
+y la de EL es:
+
+\todo{Agregar formula aca}
+
+donde p es un símbolo proposicional, y R esta en el conjunto de símbolos relacionales.
+
+Las fórmulas son interpretadas en modelos de primer orden M=(Delta, Intep) donde Delta es un conjunto no vacío y la Intep es la siguiente función:
+
+Cada fórmula denota un conjunto de entidades del dominio, así podemos usar las fórmulas para denotar conjuntos.
+
+Llamaremos similaridad a la noción de preservación de fórmulas
+
+Dada una DL diremos que una entidad i es similar a i' en el modelo M si para la cualquien fórmula Fi de L (lógica considerada) i pertenece a la Inter(Fi) tenesmos que i' también pertenece. Por lo tanto no hay fórmula que pueda distinguirlas. La similaridad no es una relación simétrica
+
+por ejemplo f1 es EL-similar a f2 pero f2 no es EL-similar a f1 
+
+En ALC la similaridad es una realción simétrica porque el lenguaje contiene la negación.
+
+La idea es transformar el problema de GRE al problema de computar una fórmula de DL cuya extensión es el elemento target (o los elementos targets) ya que una fórmula describe un conjunto.
+
+
+
 \section{Aproximaciones empíricas a la solución de REG}
 
 \subsection{Corpus existente}
