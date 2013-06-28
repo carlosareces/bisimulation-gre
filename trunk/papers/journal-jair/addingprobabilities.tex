@@ -2,7 +2,7 @@
 
 Refinement algorithms for GRE are based on the following basic idea: given a 
 scene $S$, the objects appearing in $S$ are successively classified according
-to their properties into finer and finer classes. A description (in some formal language $\mathcal{L}$) of each 
+to their properties into finer and finer classes. A description (in some formal language $\mathcal{L}$)  of each 
 class is computed every time a class is refined. The procedure always stops when the 
 set of classes stabilizes, i.e., no further refinement is possible with the information 
 available in the scene\footnote{Of course, if we are only interested in a referring expression for 
@@ -10,6 +10,33 @@ a given target we can stop the procedure as soon as the target is the only eleme
 If the target element is in a singleton class, then 
 the formal description of that class is a referring expression; otherwise the 
 target cannot be unequivocally described (in $\mathcal{L}$).  
+
+It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary).
+
+On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
+
+There is many $\mathcal{L}$, we will name ALC and EL 
+
+ACA VOY A PONER gramatica para generar... ALC y EL
+
+
+In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE, which are the ones we will find in the corpora used for our evaluation\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detail description of $\el$, we refer to~\cite{baad:desc03}.  
+
+
+
+In the aplication we will use the language EL because is more natural for RE, 
+% , we only need to know that the interpretation of the formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
+
+
+%We need first to introduce some basic notions.  
+The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
+where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
+interpretation function that assigns to all properties in the scene its intended extension.  For example, 
+the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$, for example, is $\{e_3,e_4,e_6\}$.
+
+We call Fii subsumed if the union of another Fij if the union of interpretations of Fij s is the interp of Fii, so Fii have not information enough, it means we have a formula with more information for the elements of the interp of Fii\\
+
+T is the most general description (a formula) that includes all elements of the model, is like ``thing'' every element will be a thing.\\
 
 In following part we will explain and example of execusion of the algorithms~\ref{algoritmoOriginal} taking into account the EL logic language and then we will show how to add probabilities to the algorithm.
 
@@ -21,14 +48,13 @@ In following part we will explain and example of execusion of the algorithms~\re
 \caption{Algorithms \label{algoritmoOriginal}}
 \end{figure}
 
-\todo{here, some definitions... in order to undertend then...}
 
 \subsection{An example of execusion}
 
 We will run the algorithm for the Figure~\ref{figure22}, the algorithm start with a fixed list of properties and relations, supose that that list is the following:
 
-ordered properties: ball, cube, red, yellow, small, red.\\
-ordered relations: leftof, rightof, ontopof, bellowof.
+ordered properties (prop): ball, cube, red, yellow, small, red.\\
+ordered relations (rel): leftof, rightof, ontopof, bellowof.
 
 \begin{figure}[h!]
 \begin{center}
@@ -38,13 +64,19 @@ ordered relations: leftof, rightof, ontopof, bellowof.
 \caption{A figure of the GRE3D7 corpus\label{figure22}}
 \end{figure}
 
+We will return RE, that will compute formula for all elements in the domain.\\
+
+RE=T=$\{ e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\ in the beginig 
+The first for divides the T set in sets of  each property
+Let's start with the property ball, so the algorithm has the set of balls: $\{ e_1, e_3, e_5 \}$, cubes: $\{ e_2, e_4, e_6, e_7 \}$, now we are capable to delete the T, because it is subsumed to the two other sets. 
+red things: $\{e_5\}$, $\{e_2, e_4, e_7\}$\\
+yellow things: $\{e_1, e_3\}$, $\{e_6\}$ \\
+small: $\{e_1\}$, $\{e_2\}$, $\{e_3\}$, $\{e_6\}$, $\{e_7\}$
+
+At this point we already have the target in a singleton set. So the formula for it is ``red and ball'', and also for s6 which formula is ``yellow cube''.\\
 
 
-T=\{ s1, s2, s3, s4, s5, s6, s7\}\\
-Let's start with the property ball, so the algorithm has the set of balls: \{ s1, s3, s5 \}
-the following property is cube, so we have the set of cubes: \{ s2, s4, s6, s7 \}, now we are capable to delete the T, because it is subsumed to the two other sets. 
-The next property is red: the sets intersected with those we had of red things are: \{s5\}, \{ s2, s4, s7\}, and we already have the target in a singleton set. So the formula is red and ball.
-
+As we show this algorithm depends of the order of properties and relations.\\
 
 
 \section{Adding probabilities to a symbolic algorithm} \label{sec:algorithm}
@@ -62,12 +94,14 @@ corpus of REs for a given scene, it is possible to compute a suitable probabilit
 distribution for the probability of use of the relations in the scene, in such a way that the probability 
 distribution of the REs generated by the model simulates the one found in the corpus.
 
+We consider unary
+properties encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is \emph{blue} saying that it is related to the dummy element by the \emph{blue} binary relation).
 
-In order to understand how the algorithm works, and the differences with the original proposal, we need first to introduce some 
-basic notions.  The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
-where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
-interpretation function that assigns to all properties in the scene its intended extension.  For example, 
-the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$, for example, is $\{e_3,e_4,e_6\}$.
+%In order to understand how the algorithm works, and the differences with the original proposal, {\it MOVED we need first to introduce some 
+%basic notions.  The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
+%where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
+%interpretation function that assigns to all properties in the scene its intended extension.  For example, 
+%the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$, for example, is $\{e_3,e_4,e_6\}$.}
 
 \newcommand{\nBlue}{\mathit{blue}\xspace}
 \newcommand{\nGreen}{\mathit{green}\xspace}
@@ -162,12 +196,12 @@ the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the mode
 \end{minipage}
 \end{figure}
 
-It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary), and unary
-properties can be encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is \emph{blue} saying that it is related to the dummy element by the \emph{blue} binary relation).
+%It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary), and unary
+%properties can be encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is \emph{blue} saying that it is related to the dummy element by the \emph{blue} binary relation).
 
-On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
+%On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
 
-In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE, which are the ones we will find in the corpora used for our evaluation\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detail description of $\el$, we refer to~\cite{baad:desc03}.  For this paper, we only need to know that the interpretation of the formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
+%In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE, which are the ones we will find in the corpora used for our evaluation\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detail description of $\el$, we refer to~\cite{baad:desc03}.  For this paper, we only need to know that the interpretation of the formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
 
 We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el}. Algorithm~\ref{algo:bisim-l} takes as input a model $\gM$ and a list Rs of pairs (R,R.\puse) that links each relation R to some probability of use R.\puse. I.e., if $\REL$ is the set of all relation symbols in the model (i.e., the \emph{signature} of the model) then Rs $\in (\REL \times [0,1])^*$. Moreover, we assume Rs to be ordered by R.\puse. 
 
