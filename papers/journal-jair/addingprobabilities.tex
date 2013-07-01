@@ -1,5 +1,19 @@
 \section{Bisimulation algorithm (probably in the background section...)}
 
+\newcommand{\nBlue}{\mathit{blue}\xspace}
+\newcommand{\nGreen}{\mathit{green}\xspace}
+\newcommand{\nSmall}{\mathit{small}\xspace}
+\newcommand{\nBig}{\mathit{big}\xspace}
+\newcommand{\nBall}{\mathit{ball}\xspace}
+\newcommand{\nCube}{\mathit{cube}\xspace}
+\newcommand{\nOntop}{\mathit{ontop}\xspace}
+\newcommand{\nTop}{\mathit{top}\xspace}
+\newcommand{\nBelow}{\mathit{below}\xspace}
+\newcommand{\nRightof}{\mathit{rightof}\xspace}
+\newcommand{\nLeftof}{\mathit{leftof}\xspace}
+\newcommand{\nLeft}{\mathit{left}\xspace}
+
+
 Refinement algorithms for GRE are based on the following basic idea: given a 
 scene $S$, the objects appearing in $S$ are successively classified according
 to their properties into finer and finer classes. A description (in some formal language $\mathcal{L}$)  of each 
@@ -15,7 +29,7 @@ It is clear that a scene can be encoded in different ways as a relational model 
 
 On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
 
-There is many $\mathcal{L}$, we will name $\alc$ and $\el$
+%There is many $\mathcal{L}$, we will name $\alc$ and $\el$
 
 ACA VOY A PONER gramatica para generar... ALC y EL
 
@@ -62,9 +76,11 @@ RE=$\{T\}$ and its $\interp{T}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\ in t
 
 The first loop for of the algorithm is in the properties. For each property realize add $\el$ \{ $\varphi$, RE\},
 
-A formula $\varphi$ will be added to RE if its interpretation has at least one element, then for each formula $\psi$ in RE the conjuntion $\varphi$ \cup $\psi$ need to be not subsumed in RE, the \interp{$\varphi$ \cup $\psi$} need to be not empty, and be disctint of \interp{$\psi$}. 
+A formula $\varphi$ will be added to RE if its interpretation has at least one element, then for each formula $\psi$ in RE the conjuntion 
+$\varphi  \cup \psi$ need to be not subsumed in RE, the $\interp{\varphi \cup \psi}$ need to be not empty, and be disctint of 
+$\interp{\psi}$. 
 
-So first we add the set of balls, so RE = \{ T, ball\} then the set of cubes, so RE = \{ T, ball, cube\}, now we have that \interp{ball} = $\{ e_1, e_3, e_5 \}$, \interp{cube} = $\{ e_2, e_4, e_6, e_7 \}$, so, we are capable to delete T, because it is subsumed to the two other sets. The turn is now for red, \interp{red} is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the \interp{.} of each set in RE we obtain, \{e_5\} and  \{e_2, e_4, e_7\}, now RE = \{ball, cube, ball and red, cube and red\}, following with yellow, we have, \interp{yellow} = \{e_1, e_3, e_6\} and we obtain RE = \{ball and yellow, cube and yellow, ball and red, cube and red\} note than here already clean the formula ball because it is subsumed, and the formula cube too.
+So first we add the set of balls, so RE = \{ T, ball\} then the set of cubes, so RE = \{ T, ball, cube\}, now we have that $\interp{ball}$ = $\{ e_1, e_3, e_5 \}$, $\interp{cube}$ = $\{ e_2, e_4, e_6, e_7 \}$, so, we are capable to delete T, because it is subsumed to the two other sets. The turn is now for red, $\interp{red}$ is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each set in RE we obtain, $\{e_5\}$ and  $\{e_2, e_4, e_7\}$, now RE = $\{ball, cube, ball and red, cube and red\}$, following with yellow, we have, $\interp{yellow}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{ball and yellow, cube and yellow, ball and red, cube and red\}$ note than here already clean the formula ball because it is subsumed, and the formula cube too.
 
 yellow things: $\{e_1, e_3\}$, $\{e_6\}$ \\
 small: $\{e_1\}$, $\{e_2\}$, $\{e_3\}$, $\{e_6\}$, $\{e_7\}$
@@ -99,18 +115,6 @@ properties encoded as binary relations including one additional `dummy' element 
 %interpretation function that assigns to all properties in the scene its intended extension.  For example, 
 %the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$, for example, is $\{e_3,e_4,e_6\}$.}
 
-\newcommand{\nBlue}{\mathit{blue}\xspace}
-\newcommand{\nGreen}{\mathit{green}\xspace}
-\newcommand{\nSmall}{\mathit{small}\xspace}
-\newcommand{\nBig}{\mathit{big}\xspace}
-\newcommand{\nBall}{\mathit{ball}\xspace}
-\newcommand{\nCube}{\mathit{cube}\xspace}
-\newcommand{\nOntop}{\mathit{ontop}\xspace}
-\newcommand{\nTop}{\mathit{top}\xspace}
-\newcommand{\nBelow}{\mathit{below}\xspace}
-\newcommand{\nRightof}{\mathit{rightof}\xspace}
-\newcommand{\nLeftof}{\mathit{leftof}\xspace}
-\newcommand{\nLeft}{\mathit{left}\xspace}
 
 \begin{figure}[ht]
 \begin{minipage}[b]{0.45\linewidth}
