@@ -25,9 +25,10 @@ If the target element is in a singleton class, then
 the formal description of that class is a referring expression; otherwise the 
 target cannot be unequivocally described (in $\mathcal{L}$).  
 
-It is clear that a scene can be encoded in different ways as a relational model (for example in \ref{figure22}, we could argue that $e_1$ is also \emph{leftof} $e_2$, not considered because they are no touching).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary).
+It is clear that a scene can be encoded in different ways as a relational model (for example in \ref{figure22}, we could argue that $e_1$ is also \emph{leftof} $e_2$, not considered because they are no touching). The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary).
 
-On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, the referring expression ``$ball$'' and ``$cube$''  are more specific and then contain more information than $\top$.
+On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. 
+%Intuitively, the referring expression ``\textsf{ball}'' and ``\textsf{cube}''  are more specific and then contain more information than $\top$.
 
 %There is many $\mathcal{L}$, we will name $\alc$ and $\el$
 
@@ -39,9 +40,11 @@ In what follows, we use formulas of the $\el$ description logic language~\cite{b
 The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scene their intended extension.  For example, 
-the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$ is $\{e_3,e_4,e_6\}$.
+the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\textsf{green}}$ is $\{e_3,e_4,e_6\}$.
 
-$\top$ is a formula that represents the most general description whose interpretation includes all elements of the model. It could be realize as the RE with the noun ``thing''. We say that a formula is \emph{subsumed} by other formulas, if it extension can be cover by the union of the extensions of the other formulas. For example, in Figure~\ref{figure22}, $\top$ is subsumed by ball and cube, because $\interp{\top}$ = $\interp{ball} \cup \interp{cube}$ = $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$. Intuitively the formula cube or ball have more information than $\top$, for each element of $\top$, there is a formula that gives more information, say ``cube'' is more informative than say ``thing''.\\
+$\top$ is a formula that represents the most general description whose interpretation includes all elements of the model. It could be realize as the RE with the noun ``thing''. We say that a formula is \emph{subsumed} by other formulas, if it extension can be cover by the union of the extensions of the other formulas. For example, in Figure~\ref{figure22}, $\top$ is subsumed by ``\textsf{ball}'' and ``\textsf{cube}'', because $\interp{\top}$ = $\interp{\textsf{ball}} \cup \interp{\textsf{cube}}$.
+%= $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$. 
+Intuitively the formula ``\textsf{cube}'' or ``\textsf{ball}'' have more information than $\top$, for each element of $\top$, there is a formula that gives more information, say ``\textsf{cube}'' is more informative than say ``thing''.\\
 
 In the following we will explain an example of execusion of the algorithm shown in ~\ref{algoritmoOriginal} taking into account the $\el$ logic language. This algorithm where first presented in~\cite{arec2:2008:Areces}.
 \begin{figure}[h!]
@@ -50,18 +53,18 @@ In the following we will explain an example of execusion of the algorithm shown 
 \end{center}
 \vspace*{-2em}
 \caption{Algorithms}
-\label{Algorithms }
+\label{algoritmoOriginal}
 \end{figure}
 
 \subsection{An example of execusion}
 
 We will run the algorithm for the Scene~\ref{figure22}, the algorithm start with a fixed list of properties and relations, supose that those lists are the following:
 
-ordered properties (prop): ball, cube, red, yellow, small, large.\\
-ordered relations (rel): leftof, rightof, ontopof, bellowof.
+ordered properties (prop): \textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
+ordered relations (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
 
 \begin{figure}
-\begin{center}
+\begin{center}	
 \includegraphics[width=.5\textwidth]{images/22.jpg}
 \end{center}
 \vspace*{-2em}
@@ -69,7 +72,7 @@ ordered relations (rel): leftof, rightof, ontopof, bellowof.
 \label{figure22}
 \end{figure}
 
-We will return RE, there will be a formula for each element in the domain (if that formula exists or that model).\\
+We will return RE, there will be a formula for each element in the domain (if that formula exists on that model).\\
 
 In the begining RE=$\{\top\}$ and its $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\
 
@@ -78,10 +81,10 @@ The first loop for of the algorithm is in the properties. For each property real
 A formula $\varphi$ will be added to RE if its interpretation has at least one element, then for each formula $\psi$ in RE the conjunction 
 $\varphi  \cup \psi$ need to be not subsumed in RE, the $\interp{\varphi \cup \psi}$ need to be not empty, and its interpretation need to be distinct of $\interp{\psi}$ as we can see in the algorithm~\ref{algoritmoOriginal}.
 
-So first we add the formula \textsf{ball}, so RE = \{$\top$, ball\} then the formula ``cube'', so RE = \{$\top$, ball, cube\}, now we have that $\interp{ball}$ = $\{e_1, e_3, e_5\}$, $\interp{cube}$ = $\{e_2, e_4, e_6, e_7\}$, so, we are capable to delete $\top$, because it is subsumed to the two other sets. The turn is now for the formula ``red'', $\interp{red}$ is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each formula in RE we obtain, $\{e_5\}$ and $\{e_2, e_4, e_7\}$, now RE = $\{ball, cube, ball \wedge red, cube \wedge red\}$, following with ``yellow'', we have, $\interp{yellow}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{ball \wedge yellow, cube \wedge yellow, ball \wedge red, cube \wedge red\}$ note than here we already delete the formula ``ball'' because it was subsumed, and the formula ``cube'' too.
-Doing the same with ``small'' we have RE = $\{ball \wedge yellow \wedge small, cube \wedge yellow \wedge small, ball \wedge red, cube \wedge red, cube \wedge red \wedge small\}$. Next property is ``large'' so, we have RE = $\{ball \wedge yellow \wedge small, cube \wedge yellow \wedge small, ball \wedge red, cube \wedge red \wedge large, cube \wedge red \wedge small\}$. Note that here we cannot add ``large'' to a formula ``$red \wedge cube$'' because it interpretation has only one element, and the condition say that it need to have more than one in order to add the intersection with others formulas.
+So first we add the formula \textsf{ball}, so RE = \{$\top$, \textsf{ball}\} then the formula \textsf{cube}, so RE = \{$\top$, \textsf{ball}, \textsf{cube}\}, now we have that $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, so, we are capable to delete $\top$, because it is subsumed to the two other sets. The turn is now for the formula \textsf{red}, $\interp{\textsf{red}}$ is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each formula in RE we obtain, $\{e_5\}$ and $\{e_2, e_4, e_7\}$, now RE = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, following with \textsf{yellow}, we have, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. Note than here we already delete the formula \textsf{ball} because it was subsumed, and the formula \textsf{cube} too.
+Doing the same with \textsf{small} we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Next property is \textsf{large} so, we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Note that here we cannot add \textsf{large} to a formula $\textsf{red} \wedge \textsf{cube}$ because it interpretation has only one element, and the condition say that it need to have more than one in order to add the intersection with others formulas.
 
-Until now RE = $\{ball \wedge yellow \wedge small, cube \wedge yellow \wedge small, ball \wedge red, cube \wedge red \wedge large, cube \wedge red \wedge small\}$ and we have the following extensions: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$. There is two formulas that can be refined more, the  $ball \wedge yellow \wedge small$ and $cube \wedge red \wedge small$ because they have more than one element each, so we enter en in the while cicle of Algorithm 1, in line 4. Now is the turn of relations, the first one is ``leftof'' we for each formula $\varphi$ in RE will try to add$\el$ ($\exists leftof.\varphi$, RE). Note that $\psi$ only can be $ball \wedge yellow \wedge small$ or  $cube \wedge red \wedge small$ because those are the ones that its interpretation have more than one element. There is not $\varphi$ and $\psi$ that can be apply. Continuing with rightof we add $cube \wedge yellow \wedge small \wedge \exists rightof. cube \wedge red \wedge small$, and so on with ``topof'' we add $small \wedge red \wedge cube \wedge \exists ontop. small \wedge yellow \wedge ball$ and the algoritm ends with RE = $\{ball \wedge yellow \wedge small, cube \wedge yellow \wedge small, ball \wedge red, cube \wedge red \wedge large, cube \wedge red \wedge small, cube \wedge yellow \wedge small \wedge \exists rightof. cube \wedge red \wedge small, small \wedge red \wedge cube \wedge \exists ontop. small \wedge yellow \wedge ball\}$, here all elements are in a singleton class and not further refinement can be done.
+Until now RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ and we have the following extensions: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$. There is two formulas that can be refined more, the  $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ and $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because they have more than one element each, so we enter en in the while cicle of Algorithm 1, in line 4. Now is the turn of relations, the first one is \textsf{leftof} we for each formula $\varphi$ in RE will try to add$\el$ ($\exists \textsf{leftof}.\varphi$, RE). Note that $\psi$ only can be $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ or $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because those are the ones that its interpretation have more than one element. There is not $\varphi$ and $\psi$ that can be apply. Continuing with \textsf{rightof} we add $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, and so on with \textsf{topof} we add $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ and the algoritm ends with RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, here all elements are in a singleton class and not further refinement can be done.
 
 
 %can be applied to $cube \wedge red \wedge small$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
