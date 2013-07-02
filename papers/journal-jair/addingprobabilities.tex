@@ -20,12 +20,12 @@ to their properties into finer and finer classes. A description (in some formal 
 class is computed every time a class is refined. The procedure always stops when the 
 set of classes stabilizes, i.e., no further refinement is possible with the information 
 available in the scene\footnote{Of course, if we are only interested in a referring expression for 
-a given target we can stop the procedure as soon as the target is the only element of some of the classes.}
+a given target we can stop the procedure as soon as the target is the only element of some of the classes.}.
 If the target element is in a singleton class, then 
 the formal description of that class is a referring expression; otherwise the 
 target cannot be unequivocally described (in $\mathcal{L}$).  
 
-It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary).
+It is clear that a scene can be encoded in different ways as a relational model (for example in \ref{figure22}, we could argue that $e_1$ is also \emph{leftof} $e_2$, not considered because they are no touching).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary).
 
 On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
 
@@ -33,18 +33,18 @@ On termination, the algorithm computes what are called the $\mathcal{L}$-similar
 
 ACA VOY A PONER gramatica para generar... ALC y EL
 
-In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes because it is more natural for RE.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE, which are the ones we will find in the corpora used for our evaluation\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detail description of $\el$, we refer to~\cite{baad:desc03}.  
+In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes because it is more natural for RE generation.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE, which are the ones we found in the corpora used for our evaluation\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. %	For a detail description of $\el$, we refer to~\cite{baad:desc03}.  
 
 The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scene its intended extension.  For example, 
 the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\emph{green}}$ is $\{e_3,e_4,e_6\}$.
 
-T is the most general description (a formula) that includes all elements of the model, is like ``thing'' every element will be a thing.
+T is the most general description (a formula) which interpretation includes all elements of the model, it is like ``thing'' every element will be a thing.
 
-We will say that a formula is subsumed if their extension can be cover by a sum of extension of other formulas. For example, in the Figure~\ref{figure22}, T if subsumed to ball and cube, because $\interp{T}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ and the $\interp{ball}$ = $\{e_1, e_3, e_5\}$, $\interp{cube}$ = $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$ \\
+We will say that a formula is subsumed for others, if their extension can be cover by the union of extensions of other formulas. For example, in the Figure~\ref{figure22}, T is subsumed to ball and cube, because $\interp{T}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ and the $\interp{ball}$ = $\{e_1, e_3, e_5\}$, $\interp{cube}$ = $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$. Intuitively the formula cube or ball have more information than T, for each element of T, there is a formula that gives more information, say ``cube'' is more informative than say ``thing''.\\
 
-In following part we will explain and example of execusion of the algorithms~\ref{algoritmoOriginal} taking into account the $\el$ logic language and then we will show how to add probabilities to the algorithm.
+In the following part we will explain an example of execusion of the algorithms~\ref{algoritmoOriginal} taking into account the $\el$ logic language and then we will show how to add probabilities to the algorithms.
 
 \begin{figure}[h!]
 \begin{center}
@@ -56,7 +56,7 @@ In following part we will explain and example of execusion of the algorithms~\re
 
 \subsection{An example of execusion}
 
-We will run the algorithm for the Figure~\ref{figure22}, the algorithm start with a fixed list of properties and relations, supose that that list is the following:
+We will run the algorithm for the Figure~\ref{figure22}, the algorithm start with a fixed list of properties and relations, supose that those lists are the following:
 
 ordered properties (prop): ball, cube, red, yellow, small, large.\\
 ordered relations (rel): leftof, rightof, ontopof, bellowof.
@@ -66,33 +66,31 @@ ordered relations (rel): leftof, rightof, ontopof, bellowof.
 \includegraphics[width=.5\textwidth]{images/22.jpg}
 \end{center}
 \vspace*{-2em}
-\caption{A figure of the GRE3D7 corpus}
+\caption{A figure of the GRE3D7 corpus - The name of the objects are not appearing in the corpus}
 \label{figure22}
 \end{figure}
 
-We will return RE, that will compute formula for all elements in the domain.\\
+We will return RE, there will be a formula for each element in the domain (if that formula exists or that model).\\
 
-RE=$\{T\}$ and its $\interp{T}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\ in the beginig 
+In the begining RE=$\{T\}$ and its $\interp{T}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\
 
-The first loop for of the algorithm is in the properties. For each property realize add $\el$ \{ $\varphi$, RE\},
+The first loop for of the algorithm is in the properties. For each property realize add$\el$ \{ $\varphi$, RE\},
 
-A formula $\varphi$ will be added to RE if its interpretation has at least one element, then for each formula $\psi$ in RE the conjuntion 
-$\varphi  \cup \psi$ need to be not subsumed in RE, the $\interp{\varphi \cup \psi}$ need to be not empty, and be disctint of 
-$\interp{\psi}$. 
+A formula $\varphi$ will be added to RE if its interpretation has at least one element, then for each formula $\psi$ in RE the conjunction 
+$\varphi  \cup \psi$ need to be not subsumed in RE, the $\interp{\varphi \cup \psi}$ need to be not empty, and its interpretation need to be distinct of $\interp{\psi}$ as we can see in the algorithm \ref{algoritmoOriginal}.
 
-So first we add the set of balls, so RE = \{ T, ball\} then the set of cubes, so RE = \{ T, ball, cube\}, now we have that $\interp{ball}$ = $\{ e_1, e_3, e_5 \}$, $\interp{cube}$ = $\{ e_2, e_4, e_6, e_7 \}$, so, we are capable to delete T, because it is subsumed to the two other sets. The turn is now for red, $\interp{red}$ is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each set in RE we obtain, $\{e_5\}$ and  $\{e_2, e_4, e_7\}$, now RE = $\{ball, cube, ball and red, cube and red\}$, following with yellow, we have, $\interp{yellow}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{ball and yellow, cube and yellow, ball and red, cube and red\}$ note than here already clean the formula ball because it is subsumed, and the formula cube too.
+So first we add the formula ``ball'', so RE = \{T, ball\} then the formula ``cube'', so RE = \{T, ball, cube\}, now we have that $\interp{ball}$ = $\{e_1, e_3, e_5\}$, $\interp{cube}$ = $\{e_2, e_4, e_6, e_7\}$, so, we are capable to delete T, because it is subsumed to the two other sets. The turn is now for the formula ``red'', $\interp{red}$ is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each formula in RE we obtain, $\{e_5\}$ and $\{e_2, e_4, e_7\}$, now RE = $\{ball, cube, ball \wedge red, cube \wedge red\}$, following with ``yellow'', we have, $\interp{yellow}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{ball \wedge yellow, cube \wedge yellow, ball \wedge red, cube \wedge red\}$ note than here we already delete the formula ``ball'' because it was subsumed, and the formula ``cube'' too.
+Doing the same with ``small'' we have RE = $\{ball \wedge yellow \wedge small, cube \wedge yellow \wedge small, ball \wedge red, cube \wedge red, cube \wedge red \wedge small\}$. Next property is ``large'' so, we have RE = $\{ball \wedge yellow \wedge small, cube \wedge yellow \wedge small, ball \wedge red, cube \wedge red \wedge large, cube \wedge red \wedge small\}$. Note that here we cannot add ``large'' to a formula ``$red \wedge cube$'' because it interpretation has only one element, and the condition say that it need to have more than one in order to add the intersection with others formulas.
 
-yellow things: $\{e_1, e_3\}$, $\{e_6\}$ \\
-small: $\{e_1\}$, $\{e_2\}$, $\{e_3\}$, $\{e_6\}$, $\{e_7\}$
+Until now RE = $\{ball \wedge yellow \wedge small, cube \wedge yellow \wedge small, ball \wedge red, cube \wedge red \wedge large, cube \wedge red \wedge small\}$ and we have the following extensions: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$. There is two formulas that can be refined more, the  $ball \wedge yellow \wedge small$ and $cube \wedge red \wedge small$ because they have more than one element each, so we enter en in the while cicle of Algorithm 1, in line 4. Now is the turn of relations, the first one is ``leftof'' we for each formula $\varphi$ in RE will try to add$\el$ ($\exists leftof.\varphi$, RE), can be applied to $cube \wedge red \wedge small$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
+%its interpretation is $\{e_7\}$ with $\psi$ is $cube \wedge yellow \wedge small$, the others combinations can't be apply because they don't do true the preconditions. The following relation is rightof, 
 
-At this point we already have the target in a singleton set. So the formula for it is ``red and ball'', and also for s6 which formula is ``yellow cube''.\\
+%leftof, rightof, ontopof, bellowof
 
-
-As we show this algorithm depends of the order of properties and relations.\\
-
+%At this point we already have the target in a singleton set. So the formula for it is ``red and ball'', and also for s6 which formula is ``yellow cube''.\\
+%As we show this algorithm depends of the order of properties and relations.\\
 
 \section{Adding probabilities to a symbolic algorithm} \label{sec:algorithm}
-
 
 In this section we present a modification of the algorithm in~\cite{arec2:2008:Areces} where the fixed order of the properties in the 
 input scene is replaced by a finite probability distribution.  The required changes
