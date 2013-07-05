@@ -1,17 +1,19 @@
 \section{Bisimulation algorithm (probably in the background section...)}
 
-\newcommand{\nBlue}{\mathit{blue}\xspace}
-\newcommand{\nGreen}{\mathit{green}\xspace}
-\newcommand{\nSmall}{\mathit{small}\xspace}
-\newcommand{\nBig}{\mathit{big}\xspace}
-\newcommand{\nBall}{\mathit{ball}\xspace}
-\newcommand{\nCube}{\mathit{cube}\xspace}
-\newcommand{\nOntop}{\mathit{ontop}\xspace}
-\newcommand{\nTop}{\mathit{top}\xspace}
-\newcommand{\nBelow}{\mathit{below}\xspace}
-\newcommand{\nRightof}{\mathit{rightof}\xspace}
-\newcommand{\nLeftof}{\mathit{leftof}\xspace}
-\newcommand{\nLeft}{\mathit{left}\xspace}
+\newcommand{\nBlue}{\textsf{blue}\xspace}
+\newcommand{\nGreen}{\textsf{green}\xspace}
+\newcommand{\nSmall}{\textsf{small}\xspace}
+\newcommand{\nBig}{\textsf{big}\xspace}
+\newcommand{\nRed}{\textsf{red}\xspace}
+\newcommand{\nYellow}{\textsf{yellow}\xspace}
+\newcommand{\nBall}{\textsf{ball}\xspace}
+\newcommand{\nCube}{\textsf{cube}\xspace}
+\newcommand{\nOntop}{\textsf{ontop}\xspace}
+\newcommand{\nTop}{\textsf{top}\xspace}
+\newcommand{\nBelow}{\textsf{below}\xspace}
+\newcommand{\nRightof}{\textsf{rightof}\xspace}
+\newcommand{\nLeftof}{\textsf{leftof}\xspace}
+\newcommand{\nLeft}{\textsf{left}\xspace}
 
 
 Refinement algorithms for GRE are based on the following basic idea: given a 
@@ -32,33 +34,32 @@ On termination, the algorithm computes what are called the $\mathcal{L}$-similar
 
 %There is many $\mathcal{L}$, we will name $\alc$ and $\el$
 
-ACA VOY A PONER gramatica para generar... ALC y EL
-
-In what follows, we use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes \footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}.
+%ACA VOY A PONER gramatica para generar... ALC y EL no quedaria bien aca, hay que ver lo agregamos antes o no hace falta
+In what follows, we use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes \footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$($\varphi$,\RE) functions can be used depending on the language involved.}.
  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for describing conjunctive and relational REs, which are the ones we find in  corpora. 
 
 The input to the algorithm will be a relational model $\mathcal{M} = \tup{\Delta, \interp{\cdot}}$,
 where $\Delta$ is the non-empty domain of objects in the scene, and $\interp{\cdot}$ is an 
 interpretation function that assigns to all properties in the scene their intended extension.  For example, 
-the scene shown in Figure~\ref{GRE3D7-stimulus} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\textsf{green}}$ is $\{e_3,e_4,e_6\}$.
+the scene shown in Figure~\ref{figure22} could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$ shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta = \{e_1,\ldots,e_7\}$, and $\interp{\textsf{red}}$ is $\{e_2, e_4, e_5, e_7\}$.
 
-$\top$ is a formula that represents the most general description whose interpretation includes all elements of the model. It could be realize as the RE with the noun ``thing''. We say that a formula is \emph{subsumed} by other formulas, if it extension can be cover by the union of the extensions of the other formulas. For example, in Figure~\ref{figure22}, $\top$ is subsumed by ``\textsf{ball}'' and ``\textsf{cube}'', because $\interp{\top}$ = $\interp{\textsf{ball}} \cup \interp{\textsf{cube}}$.
+$\top$ is a formula that represents the most general description whose interpretation includes all elements of the model. It could be realize as the RE with the noun ``\textsf{thing}''. We say that a formula is \emph{subsumed} by other formulas, if it extension can be cover by the union of the extensions of the other formulas. For example, in Figure~\ref{figure22}, $\top$ is subsumed by ``\textsf{ball}'' and ``\textsf{cube}'', because $\interp{\top}$ = $\interp{\textsf{ball}} \cup \interp{\textsf{cube}}$.
 %= $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$. 
-Intuitively the formula ``\textsf{cube}'' or ``\textsf{ball}'' have more information than $\top$, for each element of $\top$, there is a formula that gives more information, say ``\textsf{cube}'' is more informative than say ``thing''.\\
+Intuitively the formula ``\textsf{cube}'' or ``\textsf{ball}'' have more information than $\top$, for each element of $\top$, there is a formula that gives more information, say ``\textsf{cube}'' is more informative than say ``\textsf{thing}''.\\
 
-In the following we will explain an example of execusion of the algorithm shown in ~\ref{algoritmoOriginal} taking into account the $\el$ logic language. This algorithm where first presented in~\cite{arec2:2008:Areces}.
+In the following we will explain an example of execusion of the algorithm shown in Figure~\ref{algoritmoOriginal} taking into account the $\el$ logic language. This algorithm where first presented in~\cite{arec2:2008:Areces}.
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{images/algoritmoOriginal.png}
 \end{center}
 \vspace*{-2em}
-\caption{Algorithms}
+\caption{Algorithms for GRE with Description Logic}
 \label{algoritmoOriginal}
 \end{figure}
 
 \subsection{An example of execusion}
 
-We will run the algorithm for the Scene~\ref{figure22}, the algorithm start with a fixed list of properties and relations, supose that those lists are the following:
+We will run the algorithm for the Scene~\ref{figure22}, the algorithm start with a fixed list of properties and relations, suppose that those lists are the following:
 
 ordered properties (prop): \textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
 ordered relations (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
@@ -67,24 +68,94 @@ ordered relations (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \t
 \begin{center}	
 \includegraphics[width=.5\textwidth]{images/22.jpg}
 \end{center}
-\vspace*{-2em}
+\vspace*{-1.5em}
 \caption{A 3D scene of geometric figures}
 \label{figure22}
+%\end{figure}
+\begin{minipage}[b]{0.6\linewidth}
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
+  ]
+ \node[n,label=above:$e_1$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-2pt]
+      \nSmall\\[-2pt] 
+      \nYellow \\[-2pt] 
+      \nBall\end{array}$}] (a) {};
+
+ \node[n,label=above:$e_2$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-2pt]
+      \nSmall\\[-2pt] 
+      \nRed\\[-2pt] 
+      \nCube\end{array}$}, right of=a] (b) {};
+
+ \node[n,label=below:$e_3$,label=above:{
+    \relsize{-1}$\begin{array}{c}
+      \nTop\\[-2pt]
+      \nLeft\\[-2pt]
+      \nSmall\\[-2pt] 
+      \nYellow\\[-2pt] 
+      \nBall\end{array}$}, above of=b] (c) {};
+
+ \node[n,label=above:$e_4$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nRed\\[-2pt] 
+      \nCube\end{array}$}, right of=b] (d) {};
+
+ \node[n,label=above:$e_5$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nRed\\[-2pt] 
+      \nBall\end{array}$}, right of=d] (e) {};
+
+ \node[n,label=above:$e_6$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nSmall\\[-2pt] 
+      \nYellow\\[-2pt] 
+      \nCube\end{array}$}, right of=e] (f) {};
+
+ \node[n,label=above:$e_7$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nSmall\\[-2pt] 
+      \nRed\\[-2pt] 
+      \nCube\end{array}$}, right of=f] (g) {};
+
+ \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
+ \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+
+ \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
+ \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+
+ \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
+ \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
+
+ \draw[dotted] (-.4,-1.7) rectangle (7.5,3.3);
+
+ \end{tikzpicture}
+\caption{Scene as a relational model}
+\label{GRE3D7-stimulus-graph}
+\end{minipage}
 \end{figure}
 
-We will return RE, there will be a formula for each element in the domain (if that formula exists on that model).\\
+
+The algorithm always ends, and return RE, a set of formulas that describes each element in the domain (if that formula exists).\\
 
 In the begining RE=$\{\top\}$ and its $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\
 
-The first loop for of the algorithm is in the properties. For each property realize add$\el$ ($\varphi$, RE),
+The first loop for of the algorithm is in the properties. For each property realize add$_\el$ ($\varphi$, RE),
 
 A formula $\varphi$ will be added to RE if its interpretation has at least one element, then for each formula $\psi$ in RE the conjunction 
-$\varphi  \cup \psi$ need to be not subsumed in RE, the $\interp{\varphi \cup \psi}$ need to be not empty, and its interpretation need to be distinct of $\interp{\psi}$ as we can see in the algorithm~\ref{algoritmoOriginal}.
+$\varphi  \wedge \psi$ need to be not subsumed in RE, the $\interp{\varphi \cup \psi}$ need to be not empty, and its interpretation need to be distinct of $\interp{\psi}$. Then the subsumed formulas will be clean.
 
-So first we add the formula \textsf{ball}, so RE = \{$\top$, \textsf{ball}\} then the formula \textsf{cube}, so RE = \{$\top$, \textsf{ball}, \textsf{cube}\}, now we have that $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, so, we are capable to delete $\top$, because it is subsumed to the two other sets. The turn is now for the formula \textsf{red}, $\interp{\textsf{red}}$ is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each formula in RE we obtain, $\{e_5\}$ and $\{e_2, e_4, e_7\}$, now RE = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, following with \textsf{yellow}, we have, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. Note than here we already delete the formula \textsf{ball} because it was subsumed, and the formula \textsf{cube} too.
-Doing the same with \textsf{small} we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Next property is \textsf{large} so, we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Note that here we cannot add \textsf{large} to a formula $\textsf{red} \wedge \textsf{cube}$ because its interpretation has only one element, and the condition say that it need to have more than one in order to add the intersection with others formulas.
+The first property is \textsf{ball}, RE = \{$\top$, \textsf{ball}\}, then the following property is \textsf{cube}, RE = \{$\top$, \textsf{ball}, \textsf{cube}\}, but now the $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, so, we can delete $\top$, because it is subsumed to the two other formulas. The turn is now for the property \textsf{red}, $\interp{\textsf{red}}$ is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each formula in RE we obtain, $\{e_5\}$ and $\{e_2, e_4, e_7\}$, RE = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, following with \textsf{yellow}, we have, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. Note than here we already delete the formula \textsf{ball} because it was subsumed, and the formula \textsf{cube} too.
+Doing the same with \textsf{small} we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Next property is \textsf{large} so, we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Note that here we cannot add \textsf{large} to a formula $\textsf{red} \wedge \textsf{cube}$ because its interpretation has only one element, and the condition say that it need to have more than one.
 
-Until now RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ and we have the following extensions: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$. There is two formulas that can be refined more, the  $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ and $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because they have more than one element each, so we enter en in the while cicle of Algorithm 1, in line 4. Now is the turn of relations, the first one is \textsf{leftof} we for each formula $\varphi$ in RE will try to add$\el$ ($\exists \textsf{leftof}.\varphi$, RE). Note that $\psi$ only can be $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ or $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because those are the ones that its interpretation have more than one element. There is not $\varphi$ and $\psi$ that can be apply. Continuing with \textsf{rightof} we add $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, and so on with \textsf{topof} we add $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ and the algoritm ends with RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, here all elements are in a singleton class and not further refinement can be done.
+Until now RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ and we have the following extensions: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectively. There is two formulas that can be refined more, the  $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ and $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because they have more than one element each, so we enter en in the while cicle of Algorithm 1, in line 4. Now is the turn of relations, the first one is \textsf{leftof}, for each formula $\varphi$ in RE will try to add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Note that $\psi$ only can be $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ or $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because those are the ones that its interpretation have more than one element. There is not $\varphi$ and $\psi$ that can be apply. Continuing with \textsf{rightof} we add $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, and so on with \textsf{topof} we add $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ and the algorithm ends with RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, here all elements are in a singleton class and not further refinement can be done.
 
 
 %can be applied to $cube \wedge red \wedge small$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
@@ -208,64 +279,64 @@ properties encoded as binary relations including one additional `dummy' element 
 
 We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el}. Algorithm~\ref{algo:bisim-l} takes as input a model $\gM$ and a list Rs of pairs (R,R.\puse) that links each relation R to some probability of use R.\puse. I.e., if $\REL$ is the set of all relation symbols in the model (i.e., the \emph{signature} of the model) then Rs $\in (\REL \times [0,1])^*$. Moreover, we assume Rs to be ordered by R.\puse. 
 
-\begin{figure}[t]
-\small
-\centering
-\begin{algorithm}[H]
-\dontprintsemicolon
-\caption{Computing $\mathcal{L}$-similarity classes}\label{algo:bisim-l}
-\KwIn{\footnotesize A model $\gM$ and a list Rs $\in (\REL \times [0,1])^*$
- of relation symbols with their \puse\ values, ordered by \puse}
-\KwOut{\footnotesize A set of formulas \RE such that
-$\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
-$\mathcal{L}$-similarity classes of $\gM$}
+%\begin{figure}[t]
+%\small
+%\centering
+%\begin{algorithm}[H]
+%\dontprintsemicolon
+%\caption{Computing $\mathcal{L}$-similarity classes}\label{algo:bisim-l}
+%\KwIn{\footnotesize A model $\gM$ and a list Rs $\in (\REL \times [0,1])^*$
+% of relation symbols with their \puse\ values, ordered by \puse}
+%\KwOut{\footnotesize A set of formulas \RE such that
+%$\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
+%$\mathcal{L}$-similarity classes of $\gM$}
 
-$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}
+%$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}
 
-\For{\em (R,R.\puse) $\in$ Rs}{
-	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
-        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ are incremented by R.\incuse in each loop}
-}
+%\For{\em (R,R.\puse) $\in$ Rs}{
+%	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
+%        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ are incremented by R.\incuse in each loop}
+%}
 
-\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are incremented until they reach 1}}{
-  \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(|\interp{\varphi}|>1)$}{
-      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
-      \For{\em (R, R.\puse) $\in$ Rs}{
-          \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
-              \For{\em $\varphi \in$ \RE}{
-                  add$_\mathcal{L}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
-                  }\;
-              \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
-              }
-     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}
-  }
-  \For{\em (R,R.\puse) $\in$ Rs}{
-    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize increase R.\puse}
-  }
-}
-\end{algorithm}
-\vspace*{-.5cm}\caption{Main algorithm, dealing with probabilities}\label{fig:algo1}
-\end{figure}
+%\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are incremented until they reach 1}}{
+%  \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(|\interp{\varphi}|>1)$}{
+%      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
+%      \For{\em (R, R.\puse) $\in$ Rs}{
+%          \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
+%              \For{\em $\varphi \in$ \RE}{
+%                  add$_\mathcal{L}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
+%                  }\;
+%              \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
+%              }
+%     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}
+%  }
+%  \For{\em (R,R.\puse) $\in$ Rs}{
+%    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize increase R.\puse}
+%  }
+%}
+%\end{algorithm}
+%\vspace*{-.5cm}\caption{Main algorithm, dealing with probabilities}\label{fig:algo1}
+%\end{figure}
 
 
-\begin{figure}[t]
-\small
-\centering
-\begin{algorithm}[H]
-\dontprintsemicolon
-\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el}
+%\begin{figure}[t]
+%\small
+%\centering
+%\begin{algorithm}[H]
+%\dontprintsemicolon
+%\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el}
 
-\For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
-  \If(\tcp*[f]{\footnotesize informative: smaller than the original?}){\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant: can't be obtained from \RE?}\\
-    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial: has elements?}\\
-     \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$ }{
-    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
-    remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
-  }
-}
-\end{algorithm}
-\vspace*{-.5cm}\caption{Refinement function for the \el-language}\label{fig:algo2}
-\end{figure}
+%\For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
+%  \If(\tcp*[f]{\footnotesize informative: smaller than the original?}){\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant: can't be obtained from \RE?}\\
+%    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial: has elements?}\\
+%     \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$ }{
+%    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
+%    remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
+%  }
+%}
+%\end{algorithm}
+%\vspace*{-.5cm}\caption{Refinement function for the \el-language}\label{fig:algo2}
+%\end{figure}
 
 The set $\RE$ will contain the formal description of the refinement classes and it is initialized by the most general description $\top$.  
 For each R, we first compute R.\randomuse, a random number in [0,1].  If R.\randomuse $\le$ R.\puse\ then we will use R to refine the set of classes.  The value of R.\puse\ will be incremented by $R.\incuse$ in each main loop, to ensure that all relations are, at some point, considered by the algorithm.  This ensures that a referring expression will be found if it exist; but gives higher probability to expressions using relations with a high R.\puse. 
