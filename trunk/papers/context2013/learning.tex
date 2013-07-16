@@ -5,11 +5,11 @@ In the previous section we presented an algorithm that assumes that each relatio
 used in a referring expression has a known probability of use R.\puse. 
 Intuitively, the R.\puse~is the probability of using relation R to describe the target. In Tables~\ref{probability-of-use} and~\ref{probability-of-use-people} we show the probabilities of use that we are able to learn from corpora and to apply to the models of Figures~\ref{Tuna-scene} and \ref{Tuna-people-scene}.  In Figure~\ref{Tuna-scene}, the probability of using \emph{blue} to describe the target is higher than the probability of using \emph{facing left}, although both are properties of the target.
 
-The probability of using green is not cero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). 
+The probability of using green is not zero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). 
 
 In this section, we describe how to calculate these probabilities from corpora.  
 The general set up is the following: we assume available a corpus of REs associated 
-to different scenes that are prototypical of the domain in which the GRE algorithm has to operate; we call this, the training data.   
+to different scenes that are prototypical of the domain in which the GRE algorithm has to operate; we call this the training data.   
 We then show how to generalize these values to other scenes in the domain, using a machine learning algorithm. We exemplify the methodology using the TUNA corpus. 
 
 \begin{table}[h!]
@@ -70,7 +70,7 @@ x2 	&	0.02	\\
 collected during an online elicitation experiment in which subjects typed descriptions of a target single referent or pair of referents. 
 In each picture there were 5 or 6 other objects. 
 In the experiment, the participation was not controlled, but there was a main condition manipulated the +/-LOC: in +LOC condition, participants were told that they could refer to entities using any of their properties (including their location on the screen). In the -LOC condition, they were discouraged from doing so, though not prevented. 
-The attributes for each entity include properties such as an object's color or a person's characteristic such as having dark hear.
+The attributes for each entity include properties such as an object's color or a person's characteristic such as having dark hair.
 In this paper we will use the singular part of the TUNA corpus. The corpus contains 780 singular referring expressions divided
 into 80\% training data, 20\% test. 
 
