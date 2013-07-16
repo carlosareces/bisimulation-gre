@@ -1,13 +1,13 @@
 \section{Evaluation} \label{sec:evaluation}
 
-In this section we present the two different evaluations we performed on our algorithm. Section~\ref{sec:automaticevaluation} describes an evaluation with respect to the state of the art algorithm Graph~\cite{KrahmerGRAPH}. Graph was the top performer in both editions of the ASGRE, shared task~\cite{gatt-balz-kow:2008:ENLG}. Due to the limitations of the automatic metrics, in Section~\ref{sec:humanevaluation} we perform a human evaluation in  which we ask human subjects to compare the output produced by our algorithm to expressions produced by humans. 
+In this section we present the two different evaluations we performed on our algorithm. Section~\ref{sec:automaticevaluation} describes an evaluation with respect to the state of the art algorithm GRAPH~\cite{KrahmerGRAPH}. GRAPH was the top performer in both editions of the ASGRE, shared task~\cite{gatt-balz-kow:2008:ENLG}. Due to the limitations of the automatic metrics, in Section~\ref{sec:humanevaluation} we perform a human evaluation in  which we ask human subjects to compare the output produced by our algorithm to expressions produced by humans. 
   
 
 \subsection{Automatic evaluation} \label{sec:automaticevaluation}
 
 In this section we present the comparison of our algorithm to the state of the art algorithm Graph introduced above. The Graph algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare algorithm to the Graph algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
 
-The Graph algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polynomial. We compare to this algorithm using the metrics accuracy, Dice and \textsc{masi}. Accuracy is defined as the percentage of exact matches between each RE produced by a human and the RE produced by the system for the same scene. 
+The GRAPH algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. This algorithm is NP-complete in worst-case complexity while our algorithm using the \el language is polynomial. We compare to this algorithm using the metrics accuracy, Dice and \textsc{masi}. Accuracy is defined as the percentage of exact matches between each RE produced by a human and the RE produced by the system for the same scene. 
 
 Dice coefficient is a set comparison metric, ranging between 0 and 1, where
 1 indicates a perfect match between sets. For two
