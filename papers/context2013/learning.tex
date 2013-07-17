@@ -5,7 +5,7 @@ In the previous section we presented an algorithm that assumes that each relatio
 used in a referring expression has a known probability of use R.\puse. 
 Intuitively, the R.\puse~is the probability of using relation R to describe the target. In Tables~\ref{probability-of-use} and~\ref{probability-of-use-people} we show the probabilities of use that we are able to learn from corpora and to apply to the models of Figures~\ref{Tuna-scene} and \ref{Tuna-people-scene}.  In Figure~\ref{Tuna-scene}, the probability of using \emph{blue} to describe the target is higher than the probability of using \emph{facing left}, although both are properties of the target.
 
-The probability of using green is not zero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). 
+The probability of using \emph{green} is not zero because a green object may be used in a relational description of the target (for example, ``the blue chair far from the green fan''). 
 
 In this section, we describe how to calculate these probabilities from corpora.  
 The general set up is the following: we assume available a corpus of REs associated 
@@ -135,7 +135,7 @@ should be matched to a single token like \emph{y1}.
 and call the resulting set $\REL$; it will be the signature of the model $\gM$ used by the algorithm. E.g., the tokens \emph{man} 
 and \emph{guy} are both represented by the token \emph{man}.
 
-\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that the RE of the scene in the corpus uniquely identifies the target in the model. E.g., the $\el$ formula $\exists$\emph{left}.$\top \sqcap \exists$\emph{blue}.$\top \sqcap \exists$\emph{chair}.$\top$, which represents the RE ``the blue chair facing left'' found in the corpus for the scene in Figure~\ref{Tuna-scene}, denotes the target and only the target in the model $\gM$ depicted in Figure~\ref{TUNA-scene-graph}. If the corpus includes more than one RE per scene, the model should include all the properties used to describe the scene.
+\item For each scene, define $\gM$ such that the interpretation $\interp{\cdot}$ ensures that all REs in the corpus are REs. E.g., the $\el$ formula $\exists$\emph{left}.$\top \sqcap \exists$\emph{blue}.$\top \sqcap \exists$\emph{chair}.$\top$, which represents the RE ``the blue chair facing left'' found in the corpus for the scene in Figure~\ref{Tuna-scene}, is a RE for the target in the model $\gM$ depicted in Figure~\ref{TUNA-scene-graph}. 
 
 \item For each R $\in \REL$ we assign 1 to R.\puse\ if R occurs in the RE, we assign 0 otherwise. In case that the corpus has more than one RE per scene we calculate the proportion of appearance of each property.
 
@@ -161,8 +161,8 @@ in Table~\ref{features}.
 \hline
 target-has & whether the target element has the property \\
 location-has & whether the RE may use the location of the target in the figure\\
-discrimination & 1 over the number of objects in the model that have the property \\
-\puse (learned) & probability of using the property to describe the target \\
+discrimination & 1 / the number of objects in the model that have the property \\
+\puse & probability of using the property to describe the target \\
 \hline
 \end{tabular}
 \vspace*{.03cm}
@@ -176,7 +176,7 @@ Our feature set is intentionally simplistic in order for it to be domain indepen
 between characteristics of the scenes that it is not able to capture. 
 
 Starting from the scene in Figure~\ref{Tuna-scene}
-the resulting signature and their associated \puse\ are listed in the Table~\ref{probability-of-use} and for the Figure~\ref{Tuna-people-scene} in Table~\ref{probability-of-use-people}. 
+the resulting signature and their associated \puse\ are listed in the Table~\ref{probability-of-use} and for the Figure~\ref{Tuna-people-scene} in Table~\ref{probability-of-use-people}. Notice that even though the TUNA corpus contains only one RE per scene the \puse~values represent the proportion of use of each property as learned using linear regression. 
 
 Notice that the values R.\puse\ obtained in this way should be interpreted as the probability of using R to describe the target in model 
 $\gM$, and we could argue that they are correlated to the \emph{saliency} of R in the model.  
