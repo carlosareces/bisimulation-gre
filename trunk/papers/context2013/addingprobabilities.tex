@@ -138,7 +138,7 @@ the scene shown in Figure~\ref{Tuna-scene} could be represented by the model $\g
 \end{figure}
 
 
-On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them apart (i.e, no formula in $\mathcal{L}$ can distinguish them). All the objects in Figure~\ref{Tuna-scene} are distinguishable, but if, for instance, the color is not considered $e_2$ and $e_7$ are indistinguishable and, hence, will remain in the same similarity class when the algorithm terminates. 
+On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them apart (i.e, no formula in $\mathcal{L}$ can distinguish them). All the objects in Figure~\ref{Tuna-scene} are distinguishable, but if, for instance, color and position are not considered then $e_2$ and $e_7$ are indistinguishable and, hence, will remain in the same similarity class when the algorithm terminates. 
 
 The algorithm we discuss uses formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detailed description of $\el$, we refer to~\cite{baad:desc03}.  
 The interpretation of the $\el$ formula $\exists$\emph{green}.$\top$ is the set of all the green elements of the model. In Figure~\ref{Tuna-scene}, $\interp{\exists$\emph{green}.$\top}=\{e_1,e_2\}$. The interpretation of $\psi \sqcap \varphi$ is the set of all elements that satisfy $\psi$ and $\varphi$. In Figure~\ref{Tuna-scene}, $\interp{\exists$\emph{green}.$\top \sqcap \exists$\emph{chair}.$\top}=\{e_2\}$.
@@ -201,7 +201,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
 \vspace*{-.5cm}\caption{Refinement algorithm with probabilities for the \el-language}\label{fig:algo3}
 \end{figure}
 
-Algorithm~\ref{algo:bisim-l} takes as input a model and a list Rs of pairs (R,R.\puse) that links each relation R $\in \REL$, the set of all relation symbols in the model,  to some probability of use R.\puse. For example, \emph{green} and \emph{large} are relations in the model of Figure~\ref{TUNA-scene-graph}.  
+Algorithm~\ref{algo:bisim-l} takes as input a model and a list Rs of pairs (R,R.\puse) that links each relation R $\in \REL$, the set of all relation symbols in the model\footnote{We represent each unary relation R as binary, hence $\interp{\exists \mbox{\em R}.\varphi$} is the set of all elements in the model that have the property R},  to some probability of use R.\puse. For example, \emph{green} and \emph{large} are relations in the model of Figure~\ref{TUNA-scene-graph}.  
 %I.e., if $\REL$ is the set of all relation symbols in the model then Rs $\in (\REL \times [0,1])^*$. We assume Rs to be ordered by R.\puse. 
 %
 The set $\RE$ contains the formal description of the refinement classes and it is initialized by the most general description $\top$. The formula $\top$ can be intuitively understood as the referring expression \emph{thing} or \emph{thingummy}.  
