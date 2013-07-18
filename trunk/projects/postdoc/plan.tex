@@ -1,0 +1,400 @@
+\documentclass[10.9pt,a4paper]{article}
+
+\usepackage[spanish]{babel}
+\usepackage[draft]{fixme}
+\usepackage{url,latexsym,amssymb,color}
+\usepackage{a4wide}
+\usepackage{xcolor}
+\usepackage{natbib}
+\usepackage{xspace}
+\usepackage{ifpdf}
+\usepackage{colortbl}
+\usepackage{enumerate}
+\usepackage{setspace}
+\usepackage[margin=1.25in]{geometry}
+
+\title{Plan de Trabajo y Actividades}
+
+\date{}
+
+% Este comando no funciona :(
+% Igual no hay drama que figure como "Bibliografia"
+\renewcommand{\refname}{\normalfont\large\textbf{Referencias Bibliogr\'aficas}}
+
+\begin{document}
+
+\maketitle
+
+\begin{description}
+	\item [T\'itulo del Trabajo:] Sistemas de di\'alogo sensibles al contexto para entornos virtuales
+	\item [Alumno:] Lic. David Nicol\'as Racca
+	\item [Director:] Dra. Luciana Benotti
+	\item [Co-Director:] Dr. Carlos Eduardo Areces
+\end{description}
+
+
+
+\section{Objetivos}
+%Referidos al proposito de la investigacion. El objetivo especifico refleja el 
+%resultado esperable en el plazo previsto para la realización del plan. El 
+%objetivo general, al cual contribuye el objetivo especifico, se orienta
+%hacia resultados posibles de obtener en el largo plazo en la linea de 
+%investigacion mediante trabajos ulteriores no incluidos en el plan.
+
+Como objetivo general de este proyecto proponemos investigar 
+sistemas de di\'alogo humano-computadora con soporte para interacci\'on 
+en entornos de tres dimensiones (3D). Concretamente, estos sistemas 
+generan autom\'aticamente instrucciones en lenguaje natural (castellano, 
+ingl\'es, alem\'an, etc.) para guiar a un usuario durante la 
+ejecuci\'on de una tarea determinada~\citep{arec:dial10}. Un ejemplo
+cl\'asico son las instrucciones generadas por un GPS. En forma mas general,
+esta clase de sistemas se utilizan como sistemas de asistencia en la 
+web (e.g., recomendaciones de compra en un sitio de comercio electr\'onico,
+instrucciones t\'ecnicas para usuarios no expertos, etc.), sistemas de control 
+de dispositivos por voz (e.g., veh\'iculos, smartphones, smart-tv, etc.), o 
+hasta en interfaces multimodales (e.g., videojuegos interactivos con reconocimiento 
+de movimientos y gestos).
+
+Como objetivo espec\'ifico proponemos dise\~nar modelos 
+computacionales y algoritmos para mejorar la generaci\'on de 
+instrucciones del sistema y la interpretaci\'on de las respuestas del 
+usuario. 
+Un sistema de di\'alogo del tipo que nos interesa 
+debe ser capaz de entablar una comunicaci\'on coherente, y debe 
+adaptarse a los posibles errores de interpretaci\'on de las instrucciones 
+produciendo nuevas instrucciones cuando sea necesario. Para ello deber\'a 
+ser capaz de analizar el contexto de interacci\'on del di\'alogo con el 
+objetivo de intentar inferir las intenciones del usuario.
+El usuario se encontrar\'a en un entorno virtual en tres dimensiones
+en el que podr\'a interactuar con objetos y explorar el ambiente provisto. 
+En este entorno, el usuario tendr\'a que ejecutar las instrucciones 
+provistas por el sistema por medio de acciones f\'isicas y tendr\'a la 
+posibilidad de solicitar ayuda mediante mensajes en lenguaje natural.
+
+En las etapas iniciales de la investigaci\'on, nos concentraremos en un 
+modelo que permita la comunicaci\'on de informaci\'on ling\"u\'istica de 
+manera unidireccional, esto es, mensajes en lenguaje natural desde el 
+sistema hacia el usuario. La restricci\'on al caso unidireccional tiene por 
+objetivo simplificar la representaci\'on y el manejo del contexto de
+interacci\'on. En posteriores etapas se extender\'a el modelo unidireccional 
+para permitir intercambio ling\"u\'istico bidireccional.
+
+
+
+
+\section{Antecedentes}
+%Indicar el marco teorico de la investigacion y las hipotesis de trabajo 
+%propuestas consignando, sobre que otros trabajos de investigacion 
+%propios o de contribuciones de terceros, se basan.
+
+% Marco teorico del problema.
+El objetivo principal de un sistema de di\'alogo generador de instrucciones 
+situadas es desempe\~nar el rol de gu\'ia o asistente virtual para ayudar a 
+un usuario a llevar a cabo una tarea en un entorno f\'isico (ya sea virtual o 
+real). Estos sistemas tienen la capacidad de comunicarse con el 
+usuario mediante lenguaje natural y poseen sensores y mecanismos para 
+obtener informaci\'on sobre el entorno f\'isico en el cual est\'an situados. 
+Un aspecto crucial de la habilidad comunicacional de estos sistemas es la 
+capacidad de detectar la evoluci\'on del usuario en la tarea y de poder 
+recuperarse de malos entendidos o errores de interpretaci\'on.
+Por esta raz\'on, los sistemas generadores de instrucciones deben ser 
+sensibles al contexto, llevando registro del estado del entorno de 
+interacci\'on para poder interpretar correctamente las acciones y mensajes 
+que los usuarios le env\'ian al sistema.
+
+% Pragmatica: Es por el lado en donde el trabajo de Lu y Carlos se 
+% relaciona
+Esta propuesta de investigaci\'on se enmarca entonces en el \'area 
+de la pragm\'atica del lenguaje natural desde un punto de vista computacional. 
+Esta es un \'area interdisciplinaria a la que contribuyen por un lado distintas
+\'areas de Ciencias de la Computaci\'on (e.g., dise\~no de algoritmos, 
+complejidad, representaci\'on del conocimiento), y por otro teor\'ias 
+ling\"u\'isticas (e.g., implicaturas conversacionales~\citep{grice75}, 
+an\'alisis gramatical del contexto conversacional~\citep{ginzburg09}), 
+sociol\'ogicas (e.g., an\'alisis conversacional~\citep{schegloff87b}, 
+\emph{joint actions} y \emph{grounding}~\citep{clark96}) y 
+filos\'oficas (e.g., teor\'ia de los actos del habla~\citep{austin62}). Su 
+objetivo es estudiar c\'omo el contexto, en el que la conversaci\'on est\'a 
+situada, contribuye al significado de cada enunciado de la conversaci\'on.
+La transmisi\'on de significado depende no s\'olo de la informaci\'on 
+ling\"u\'istica (e.g., reglas gram\'aticales y morfol\'ogicas), sino tambi\'en 
+de informaci\'on extraling\"u\'istica (e.g., situaci\'on f\'isica donde la 
+comunicaci\'on est\'a situada, experiencias previas de los hablantes u 
+objetivo comunicacional).
+Una misma oraci\'on puede significar cosas diferentes en
+distintos contextos. El \'area de la pragm\'atica estudia entonces el
+proceso por el cual una oraci\'on es desambiguada usando su contexto. 
+%En pragm\'atica se distingue entre oraci\'on (forma gramatical que toma 
+%el acto ling\"u\'istico) y enunciado (oraci\'on m\'as su contexto). La 
+%habilidad de entender un enunciado se denomina competencia 
+%pragm\'atica. Explicar la competencia pragm\'atica implica explicar 
+%c\'omo una persona hace inferencias sobre una oraci\'on y su contexto
+%para interpretar adecuadamente el enunciado que el emisor intenta 
+%transmitir.
+
+Para que un sistema de di\'alogo establezca una comunicaci\'on natural 
+con los usuarios, debe demostrar habilidad pragm\'atica. Para ello el 
+sistema debe definir el tipo de informaci\'on contextual que se debe 
+representar y las tareas de inferencia sobre la oraci\'on y contexto 
+que son necesarias para interpretar un enunciado.
+
+% Inferencia: Necesario para linkear con el trabajo de Carlos.
+Podemos entender como inferencia toda operaci\'on que transforme 
+informaci\'on impl\'icita en expl\'icita. Esta definici\'on es lo 
+suficientemente general como para cubrir tareas que van desde la 
+inferencia l\'ogica (e.g., tareas de inferencia en l\'ogicas para la 
+descripci\'on~\citep{DBLP:conf/dlog/2003handbook}), hasta tareas de 
+inferencia habituales en inteligencia artificial (e.g., 
+\emph{Planning}~\citep{nau04,beno:mus11,beno:aaa11}). 
+Un sistema de di\'alogo realiza continuamente dos tipos de operaciones de 
+inferencia:
+\begin{enumerate}[(1)]
+    \item  Por un lado, necesita inferencia para interpretar la 
+    informaci\'on recibida e incorporarla al repositorio de datos del sistema.
+    \item Por otro lado, necesita inferencia para decidir que parte de la 
+    informacion disponible se debe transmitir al usuario.
+\end{enumerate}
+
+Una de las tareas de inferencia principales relacionadas con (2), que es 
+particularmente importante en conversaciones situadas, es la generaci\'on 
+de expresiones referenciales. Un sistema de di\'alogo situado en un 
+entorno f\'isico debe ser capaz de producir expresiones referenciales no 
+ambiguas que le permitan al usuario poder identificar los objetos
+correctos. Recientemente, se han investigado formas de utilizar 
+teor\'ias de l\'ogica computacional para inferir las propiedades de los 
+objetos a utilizar en las expresiones 
+referenciales~\citep{arec:refe08,arec:usin11,altamirano-areces-benotti:2012:POSTERS}.
+
+
+
+
+\section{Actividades y Metodolog\'ia}
+%Enumerar las tareas a desarrollar y las metodologias experimentales y 
+%tecnicas a emplear en el plan de trabajo propuesto para la obtencion 
+%de resultados y la demostracion de hipotesis.
+
+La primer actividad a realizar ser\'a el relevamiento y estudio del material 
+bibliogr\'afico de metodolog\'ias existentes para el desarrollo de sistemas 
+de di\'alogo en entornos 3D, enfatizando principalmente el estudio de la
+interacci\'on entre el sistema y el usuario, y las tareas de inferencia 
+propuestas en (1) y (2).
+
+Una vez realizado el estudio de la bibliograf\'ia b\'asica, el siguiente 
+objetivo consistir\'a en dise\~nar e implementar los componentes que 
+conformar\'an el sistema encargado de la generaci\'on de instrucciones y 
+de la interpretaci\'on de respuestas del usuario.
+Este proceso se dividir\'a en dos etapas: primero se construir\'an los 
+componentes y algoritmos necesarios para obtener un modelo de 
+comunicaci\'on unidireccional entre el sistema y el usuario. Dicho modelo 
+s\'olo permitir\'a la comunicaci\'on de mensajes en lenguaje 
+natural desde el sistema hacia el usuario. En este caso, el usuario s\'olo 
+podr\'a comunicarse con el sistema mediante la ejecuci\'on de 
+acciones f\'isicas en el entorno 3D. Para el desarrollo de este modelo en 
+particular nos concentraremos en estudiar el tipo de inferencia dado 
+en (2), esto es, inferencia para determinar el contenido de las 
+contribuciones ling\"u\'isticas seg\'un el contexto de interacci\'on.
+Con respecto al tipo de inferencia (2), dise\~naremos algoritmos de
+selecci\'on de oraciones usando \emph{planning} a partir de un corpus 
+ling\"u\'istico de interacci\'on humano-humano~\citep{beno:acl11,beno:hci12}.
+Inicialmente estos algoritmos tendr\'an en cuenta la posici\'on actual del 
+usuario y pr\'oxima acci\'on a realizar, como informaci\'on contextual. 
+Luego los extenderemos con informaci\'on contextual discursiva y de 
+comportamiento previo.
+
+Luego de estudiar el modelo unidireccional, se extender\'a
+el mismo al caso bidireccional. 
+El modelo de comunicaci\'on bidireccional le permitir\'a al usuario 
+comunicarse con el sistema utilizando lenguaje natural.
+%, adem\'as de la interacci\'on f\'isica con el entorno.
+Para ello, se pondr\'a en pr\'actica el tipo de inferencia que hemos mencionado
+en (1). En relaci\'on a esto, hemos investigado y evaluando la 
+utilizaci\'on de modelos computacionales de 
+\emph{Grounding}~\citep{traum99} en sistemas generadores de 
+instrucciones situados~\citep{racc:ENLG11,raccathesis}. Para 
+comparar los algoritmos y modelos definidos en los mencionados trabajos 
+hemos implementado un sistema generador de instrucciones y participado en 
+la competencia internacional denominada \emph{Generating Instructions 
+in Virtual Environments} 
+(GIVE)\footnote{\url{http://www.give-challenge.org}. La competencia 
+posee el respaldo de los grupos de inter\'es SIGSEM, SIGDIAL y SIGGEN de 
+la \emph{Association for Computational Linguistics 
+(ACL}).}.
+Dicho sistema obtuvo resultados positivos en la mayor\'ia de las 
+m\'etricas de evaluaci\'on con diferencias estad\'isticamente significativas 
+sobre los dem\'as participantes~\citep{stri:ENLG11}.
+Utilizando los datos de comportamiento de usuario de la competencia,
+proponemos dise\~nar una arquitectura de aprendizaje por
+refuerzos~\citep{sutton98} para privilegiar el uso de instrucciones
+que, en contextos similares, hayan logrado que el usuario se acerque a
+la meta.
+
+Para continuar y complementar el estudio de t\'ecnicas de \emph{grounding} 
+computacional, hemos participado en la competencia \emph{Dialogue State 
+Tracking Challenge} organizada en forma conjunta por 
+\emph{Microsoft Research}, \emph{Carnegie Mellon University} 
+y \emph{Honda Research Institute}~\citep{williams:2012:SDCTD}. 
+%Los algoritmos que desarrollamos para este evento ser\'an de utilidad para la 
+%implementaci\'on de los m\'etodos de inferencia mencionados en (1).
+Esta competencia nos permitir\'a comparar diversos algoritmos basados en 
+t\'ecnicas de aprendizaje autom\'atico supervisado para la tarea de inferencia 
+presentada en (1) en situaciones conversacionales de di\'alogo hablado.
+
+% ICT 2013
+Asi mismo, se planea que el doctorando realice una estancia corta como
+investigador asistente en el \emph{Institute for Creative Technologies} (ICT) 
+de la \emph{University of Southern California}. Durante esta estancia se
+trabajar\'a en conjunto con renombrados investigadores del \'area de sistemas
+de di\'alogo, en particular, 
+%con el Dr. David Devault y el Dr. David Traum en 
+%procesamiento de discurso incremental para sistemas de di\'alogo. La 
+%experiencia adquirida durante este trabajo ser\'a importante para la 
+%implementaci\'on de los m\'etodos en descriptos en (1) y (2). Cabe destacar
+%que el doctorando ha sido seleccionado como pasante para realizar dicha 
+%estancia entre los meses de Mayo y Agosto de 2013.
+con el Dr. David DeVault y el Dr. David Traum en predicci\'on de frases 
+incompletas durante di\'alogos, en el contexto del proyecto de procesamiento 
+de lenguaje incremental de ICT. La predicci\'on de frases permite a un 
+agente conversacional no s\'olo completar la oraci\'on generando as\'i una 
+interacci\'on natural sino mejorar el reconocimiento del habla modelando 
+las expectativas predecidas. Por esta raz\'on los avances logrados en este 
+proyecto tendr\'an un impacto directo en las tareas de inferencia (1) y (2) que 
+se investigan en este proyecto.
+
+% REG
+En trabajo previo~\citep{racc:ENLG11}, hemos implementado el 
+algoritmo de generaci\'on de descripciones~\citep{dale95} para la 
+generaci\'on de expresiones referenciales. Se planea investigar la 
+adaptaci\'on de algoritmos basados en 
+bisimulaci\'on~\citep{arec:refe08,arec:usin11,altamirano-areces-benotti:2012:POSTERS} para la generaci\'on de 
+expresiones referenciales multi-oraci\'on en entornos din\'amicos similares 
+a GIVE.
+
+Resumiendo entonces, la tesis abarcar\'a en principio cuatro grandes l\'ineas 
+de investigaci\'on en el \'area pragm\'atica de interfaces conversacionales 
+situadas.
+\begin{enumerate}
+
+    \item Modelado del terreno com\'un (\emph{common ground}) 
+    discursivo y de los operadores de \emph{grounding} usados en 
+    conversaci\'on situada~\citep{benotti-EtAl:2012:ACL2012short}.
+
+    \item Dise\~no de un modelo de optimizaci\'on basado en aprendizaje 
+    por refuerzo y \emph{planning} para la generaci\'on de instrucciones 
+    causalmente apropiadas~\citep{beno:acl11}.
+
+    \item Utilizaci\'on de t\'ecnicas de minimizaci\'on de aut\'omatas para la 
+    producci\'on de expresiones referenciales, prestando especial atenci\'on 
+    al caso multi-oraci\'on.
+
+    \item Comparaci\'on de t\'ecnicas de aprendizaje autom\'atico aplicadas 
+    a la interpretaci\'on de oraciones de di\'alogo habladas teniendo en cuenta, 
+    en la interpretaci\'on, el contexto conversacional, con el objetivo de 
+    mejorar el reconocimiento del habla modelando impl\'icitamente las 
+    expectativas conversacionales. 
+
+\end{enumerate}
+
+Durante todo el proyecto, los resultados te\'oricos y aplicados ser\'an 
+presentados en conferencias locales e internacionales, y en revistas 
+cient\'ificas pertinentes a las \'areas de investigaci\'on afectadas.
+Adem\'as, se planea participar en cursos de posgrado y seminarios afines
+al \'area de trabajo. 
+%Cabe mencionar que el alumno ha asistido recientemente
+%a la Escuela de Ciencias Inform\'aticas ECI 2012, aprobando el curso
+%\emph{Advanced Speech Processing Techniques} dictado por el Dr. John Hansen
+%de la Universidad de Dallas, USA.
+
+A continuaci\'on se muestra un resumen de las actividades a desarrollar y 
+el cronograma que se propone para los primeros tres a\~nos del doctorado.
+Las columnas del cronograma representan trimestres.
+
+{\footnotesize
+\begin{center}
+\begin{tabular}{|p{7cm}||p{2mm}|p{2mm}|p{2mm}|p{2mm}||p{2mm}|p{2mm}|p{2mm}|p{2mm
+}||p{2mm}|p{2mm}|p{2mm}|p{2mm}||}
+\hline
+ \rowcolor[rgb]{0.8,0.8,0.8}\hspace{3.5cm}Tarea 
+& 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12\\
+
+\hline 1. Relevamiento bibliogr\'afico y estudio del material 
+& $\times$ & $\times$ &&& $\times$ & $\times$ &&& $\times$ &&&\\
+
+\hline 2. Comparaci\'on de t\'ecnicas de aprendizaje autom\'atico
+&$\times$ & $\times$ & $\times$ & $\times$ &&&&&&&&\\
+
+\hline 3. Modelado del \emph{common ground} discursivo
+&&&& $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ &&&\\
+
+\hline 4. T\'ecnicas de aprendizaje por refuerzo
+&&&&&& $\times$ & $\times$ & $\times$ & $\times$ &&&\\
+
+\hline 5. Expresiones referenciales multi-sentencia
+&&&&&&&& $\times$ & $\times$ & $\times$ & $\times$ &\\
+
+\hline 6. Diseminaci\'on de resultados
+&&&& $\times$ &&&& $\times$ &&&& $\times$\\
+
+\hline
+\end{tabular}\end{center}
+}
+
+
+
+\section{Factibilidad}
+%Indicar si el lugar de trabajo cuenta con la infraestructura, los servicios y 
+%el equipamiento a emplear. Detallar el origen de los recursos financieros 
+%requeridos para la realizacion del plan propuesto. Enumerar los equipos 
+%mas importantes a ser utilizados en el desarrollo de su plan de trabajo 
+%en la institucion propuesta como lugar de trabajo para la beca o en otra.
+
+% El lugar de trabajo cuenta con la infraestructura y servicios necesarios.
+El doctorado se realizar\'a en la Facultad de Matem\'atica, Astronom\'ia y 
+F\'isica (FaMAF) de la Universidad Nacional de C\'ordoba que cuenta con el 
+equipamiento e infraestructura necesaria para su desarrollo: espacio 
+f\'isico para el doctorando, biblioteca y computadoras con acceso a 
+internet.
+% Origen de los recursos financieros para la realizacion del proyecto.
+El trabajo se realizar\'a en el marco del proyecto 
+\emph{``Natural Processing for Virtual Asistants''} que recibi\'o un premio
+\emph{SUR AWARD} de IBM y es dirigido por la Dra. Benotti. Se cuenta 
+adem\'as con los recursos del proyecto PICT-PRH 
+\emph{``Dialogue Systems for Virtual Environments''}
+que tiene a los Dres. Benotti y Areces como investigadores responsables.
+Los mencionados proyectos cuentan tambi\'en con recursos para financiar 
+vi\'aticos para asistir a conferencias locales e internacionales, y para 
+visitar colaboradores en pa\'ises extranjeros.
+
+% Vinculacion del director/co-director con colaboradores y equipos externos
+La Dra. Benotti y el Dr. Areces han sido miembros del grupo 
+TALARIS, parte del \emph{Laboratoire Lorrain de Recherche en 
+Informatique et ses Applications} (LORIA) cuyo principal tema de 
+investigaci\'on es la ling\"u\'istica computacional con \'enfasis en 
+sem\'antica e inferencia~\citep{arec:dial10}.
+La Dra. Benotti ha colaborado tambi\'en con el grupo de investigaci\'on 
+\emph{Natural Language Dialogue Group} del \emph{Institute for 
+Creative Technologies} en el desarrollo de modelos computacionales de 
+pragm\'atica para sistemas de di\'alogo~\citep{benotti09a}.
+
+% Colaboracion local
+% Dar informacion sobre el grupo de PLN de famaf.
+%Esta propuesta de investigaci\'on se desarrollar\'a en el marco del 
+%\emph{Grupo de Procesamiento de Lenguaje Natural}
+%(PLN) de FaMAF. 
+Esta propuesta de investigacion se desarrollar\'a en el marco del \emph{
+Grupo de L\'ogica, Interacci\'on y Sistemas Inteligentes (LIIS)} de FaMAF.
+A nivel nacional dicho grupo colabora con GLyC, \emph{Grupo de L\'ogica, 
+Lenguaje y Computabilidad}, parte del Departamento de Computaci\'on de 
+la Universidad de Buenos Aires, en el \'area de representaci\'on del 
+conocimiento e inferencia. En particular, ambos grupos han colaborado en 
+la investigaci\'on de t\'ecnicas de gesti\'on del conocimiento en sistemas de 
+di\'alogo~\citep{arec:usin11}. Adem\'as de lo mencionado, LIIS colabora 
+con el grupo de investigaci\'on y desarrollo \emph{SilverGate} de IBM 
+Argentina~\cite{benotti-EtAl:2012:ACL2012short}.
+
+%\nocite{kehler04,devault08}
+\begin{spacing}{0.77}
+\bibliographystyle{named}
+\bibliography{plan}
+\end{spacing}
+
+\end{document}
