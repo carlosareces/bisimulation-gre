@@ -5,7 +5,7 @@ In this section we present two different evaluations we performed on our algorit
 
 \subsection{Automatic evaluation} \label{sec:automaticevaluation}
 
-In this section we present the comparison of our algorithm to the state of the art algorithm GRAPH introduced above. The GRAPH algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare algorithm to the Graph algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
+In this section we present the comparison of our algorithm to the state of the art algorithm GRAPH introduced above. The GRAPH algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare algorithm to the GRAPH algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
 
 The GRAPH algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. We compare to this algorithm using the metrics accuracy, Dice and \textsc{masi}. Accuracy is defined as the percentage of exact matches between each RE produced by a human and the RE produced by the system for the same scene. 
 
@@ -45,7 +45,7 @@ means that those system-produced descriptions are
 preferred which do not include attributes that are
 omitted by a human.  
 
-In Table~\ref{Tabla_sis_1_20} we show the automatic metrics and compare the performance of our system  with the graph system for the first RE in the ranking and the first 20 REs in the ranking. 
+In Table~\ref{Tabla_sis_1_20} we show the automatic metrics and compare the performance of our system  with the GRAPH system for the first RE in the ranking and the first 20 REs in the ranking. 
 
 \begin{table}[h!]
 \begin{center}
@@ -71,7 +71,7 @@ Our system, People domain (top 20)   &	.81		&	.68	&	.60		\\
 \end{center}
 \end{table}
 \vspace*{-.5cm}
-Accuracy, Dice and \textsc{masi} assess humanlikeness with respect to a corpus of human referring expressions. In the Figure~\ref{graficoPresicion} the accuracy for our system and the GRAPH system is compared. The left GRAPH corresponds to the furniture domain and the right graph corresponds to the people domain. We can see that taking the top 1 RE our system accuracy is lower than GRAPH performance for the people domain. However, if we consider the top 20 REs that our algorithm is able to produce we can see that the accuracy for both domains gets higher than 60\%. This shows that our algorithm is able to generate REs that are more similar to those produced by humans than the graph algorithm, although these REs are not ranked first. 
+Accuracy, Dice and \textsc{masi} assess humanlikeness with respect to a corpus of human referring expressions. In the Figure~\ref{graficoPresicion} the accuracy for our system and the GRAPH system is compared. The left GRAPH corresponds to the furniture domain and the right GRAPH corresponds to the people domain. We can see that taking the top 1 RE our system accuracy is lower than GRAPH performance for the people domain. However, if we consider the top 20 REs that our algorithm is able to produce we can see that the accuracy for both domains gets higher than 60\%. This shows that our algorithm is able to generate REs that are more similar to those produced by humans than the GRAPH algorithm, although these REs are not ranked first. 
 
 Another result that we can observe is that the people domain accuracy is much lower for the top 1 RE than for the furniture domain (19 vs 47), but the accuracy stabilizes when REs lower in our ranking are considered. This may be explained by the fact that the training set for the people domain is smaller and less balanced and hence, the probabilities of use inferred do not generalize as well as in the furniture domain. 
 
@@ -86,7 +86,7 @@ Another result that we can observe is that the people domain accuracy is much lo
 \centering
 \includegraphics[width=\textwidth]{images/precP.png}
 \end{minipage}
-\caption{Comparison of the accuracy of the GRAPH algorithm and our system. The x axis indicates that the accuracy was calculated considering the x first REs in the ranking. The y axis indicates the accuracy. Our system is depicted as a dotted line and the Graph system as a continuous line.\label{graficoPresicion}}
+\caption{Comparison of the accuracy of the GRAPH algorithm and our system. The x axis indicates that the accuracy was calculated considering the x first REs in the ranking. The y axis indicates the accuracy. Our system is depicted as a dotted line and the GRAPH system as a continuous line.\label{graficoPresicion}}
 \end{figure}
 
  
