@@ -21,3 +21,36 @@ La recolección se llevo a cabo mediante una página web en la que registramos 20 
 
 \section{Anotación del corpus}
 
+this is a quick overview of our annotation scheme:
+
+- Every object on the map has been labelled with an unique id (e,g, rest3, pub2 etc.)
+
+- Attribute values are annotated in English (e.g., restaurant, theatre etc.), but proper names (for streets etc.) are kept in their original (Portuguese) form.
+
+- Each object has 26 possible attributes. 
+
+- In the case of plural descriptions, the attribute set is repeated for each object, so the annotator will use up to 52 attributes.
+
+- 10 attributes denote the main target object: 
+  type (e.g., restaurant)
+  name (e.g., McDonalds)
+  in(street-id, avenue-id etc.)
+  left(obj-id)
+  right(obj-id)
+  at-corner/between(street1,street2)
+  near(obj-id)
+  in-front-of(obj-id)
+  behind(obj-id)
+  other(anything else mentioned in the description)
+
+- The other 16 attributes denote the additional landmark objects mentioned in the description, hereby called d1..d4. For instance, in "the restaurat next to the church, on Chapel st.") we have: target=restaurant, d1=church and d2=Chapel-st.
+
+- For each of these 4 additional landmarks d1..d4, we will annotate 4 attributes:
+  landmark id
+  landmark type
+  landmark name
+  landmark others (anything else said about the object
+
+- Every attribute has a strict list of permitted values. For instance, for the target on our Map 1 the possible values for the attribute type are only two: "restaurant" or "others". The value "others" gives the annotator a chance to give an answer when the description shows something highly unusual. 
+
+- For the spatial attributes (left, near etc.) we allow values denoting most objects on the map, except for those that are clearly illegal. For instance, in the case of "left" possible values include most objects on screen, except for those on the right of the target object.
