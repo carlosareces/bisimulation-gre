@@ -15,11 +15,11 @@ Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, por e
 
 La gram\'atica de ALC es:
 
-\todo{Agregar formula aca}
+\fxnote{Agregar formula aca}
 
 y la de EL es:
 
-\todo{Agregar formula aca}
+\fxnote{Agregar formula aca}
 
 donde p es un s\'imbolo proposicional, y R esta en el conjunto de s\'imbolos relacionales.
 
@@ -39,27 +39,27 @@ La idea es transformar el problema de GRE al problema de computar una f\'ormula 
 
 REs involving relations have received increasing attention recently;
 especially in the context of spatial referring expressions in situated
-generation (e.g., \cite{kelleher06:\_increm\_gener\_of\_spatial\_refer}),
+generation (e.g., \cite{kelleher06:increm}),
 where it is particularly natural to use expressions involving spatial
 relations such as ``the ball on top of the cube.''  However, the
 classical algorithm
-by~\shortcite{dale91:\_gener\_refer\_expres\_invol\_relat} was shown to be
+by~\cite{dale91:gener} was shown to be
 unable to generate satisfying REs in practice (see the analysis over
 the \emph{cabinet corpus}
-in~\cite{viethen06:\_algor\_for\_gener\_refer\_expres}).  Furthermore, the
+in~\cite{viethen06:algor}).  Furthermore, the
 Dale and Haddock algorithm and many of its successors (such
-as~\cite{kelleher06:\_increm\_gener\_of\_spatial\_refer}) are vulnerable to
+as~\cite{kelleher06:increm}) are vulnerable to
 the problem of \emph{infinite regress}, where the algorithm enters an
 infinite loop, jumping back and forth between descriptions for two
 related individuals, as in ``the book on the table which supports a
 book on the table \ldots''
 
-\shortcite{arec2:2008:Areces,arec:usin11} have proposed low complexity
+\cite{arec2:2008:Areces,arec:usin11} have proposed low complexity
 algorithms for the generation of relational REs
 %(including references to sets) 
 that eliminate the risk of infinite regression.  These algorithms are
 based on variations of the partition refinement algorithms
-of~\shortcite{paig:thre87}.  The information provided by a given scene
+of~\cite{paig:thre87}.  The information provided by a given scene
 is interpreted as a relational model whose objects are classified into
 sets that fit the same description.  This classification is
 successively \emph{refined} till the target is the only element
@@ -75,7 +75,7 @@ time. The algorithms always terminate returning a formula of the
 formal language chosen that uniquely describes the target (if the
 formal language is expressive enough to identify the target in the
 input model).
-%\shortcite{arec2:2008:Areces}
+%\cite{arec2:2008:Areces}
 %show that the refinement algorithm using the description language \el  is capable of generating 67\% of 
 %the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
 %done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
