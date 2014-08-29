@@ -1,7 +1,15 @@
 \chapter{Selecci\'on de contenido de expresiones referenciales}
 \label{sec:seleccion}
 
+La selecci\'on de cuales propiedades y/o relaciones con otros objetos incluir en una expresio\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial, claramente ser\'a muy distinta la expresi\'on si nuestro objetivo es dar la m\'inima expresi\'on referencial que identifique al objeto que si nuestro objetivo es ser colaborativos con nuestro interlocutor, el la vida hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos daria una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente ya no poseemos esa clase de informaci\'on.
+
+En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresiones referenciales como la gente har\'ia, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea los humanos.
+
+En este cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales y explicaremos los algoritmos m\'as conocidos en el \'area.
+
 \section{Generaci\'on autom\'atica de expresiones referenciales}
+
+El desaf\'io de la generaci\'on autom\'atica de contenido para las expresiones referenciales viene dado porque una computadora no sabe cuales son las propiedades m\'as sobresalientes de un objetos
 
 \section{Algoritmos de REG}
 
@@ -29,13 +37,15 @@ Cada f\'ormula denota un conjunto de entidades del dominio, as\'i podemos usar l
 
 Llamaremos similaridad a la noci\'on de preservaci\'on de f\'ormulas
 
-Dada una DL diremos que una entidad i es similar a i' en el modelo M si para la cualquien f\'ormula Fi de L (l\'ogica considerada) i pertenece a la Inter(Fi) tenesmos que i' tambi\'en pertenece. Por lo tanto no hay f\'ormula que pueda distinguirlas. La similaridad no es una relaci\'on sim\'etrica
+Dada una DL diremos que una entidad i es similar a i' en el modelo M si para la cualquien f\'ormula Fi de L (l\'ogica considerada) i pertenece a la Inter(Fi) tenemos que i' tambi\'en pertenece. Por lo tanto no hay f\'ormula que pueda distinguirlas. La similaridad no es una relaci\'on sim\'etrica
 
 por ejemplo f1 es EL-similar a f2 pero f2 no es EL-similar a f1 
 
 En ALC la similaridad es una realci\'on sim\'etrica porque el lenguaje contiene la negaci\'on.
 
 La idea es transformar el problema de GRE al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets) ya que una f\'ormula describe un conjunto.
+
+
 
 REs involving relations have received increasing attention recently;
 especially in the context of spatial referring expressions in situated

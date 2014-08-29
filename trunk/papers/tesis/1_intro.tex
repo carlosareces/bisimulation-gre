@@ -16,18 +16,20 @@ single out the target. But, as we shall see, finding minimal references is compu
 expensive, and it is not necessarily what speakers do, nor what is most useful to hearers.
 
 So, what is Referring Expression Generation? Referring expressions play a central role
-in communication, and have been studied extensively in many branches of (computational) linguistics, including Natural Language Generation (NLG). NLG is concerned with the process of automatically converting non-linguistic information (e.g.,
+in communication, and have been studied extensively in many branches of (computational) linguistics,
+ including Natural Language Generation (NLG). NLG is concerned with the process of automatically converting non-linguistic information (e.g.,
 from a database such as the one illustrated in our figure) into natural language text, which is useful for practical applications
 ranging from generating weather forecasts to summarizing medical information~\cite{dale2000}. Of all the subtasks of NLG, Referring Expression Generation (REG) is
 among those that have received most scholarly attention. A survey of implemented,
 practical NLG systems shows that virtually all of them, regardless of their purpose,
 contain an REG module of some sort~\cite{Mellish2004}. This is hardly surprising
 in view of the central role that reference plays in communication. A system providing
-advice about air travel (White, Clark, and Moore 2010) needs to refer to flights (“the
-cheapest flight,” “the KLM direct flight”), an in-car navigation system~\cite{Drager:2012:GLN:2380816.2380908}
-needs to generate spatial descriptions for areas (“take the bridge next to the church on your right”), and a robot dialogue system that assembles construction
+advice about air travel (White, Clark, and Moore 2010) needs to refer to flights (``the
+cheapest flight'' ``the KLM direct flight''), an in-car navigation system~\cite{Drager:2012:GLN:2380816.2380908}
+needs to generate spatial descriptions for areas (``take the bridge next to the church on your right''), 
+and a robot dialogue system that assembles construction
 toys together with a human user~\cite{foster-etal-ijcai2009} needs to refer to the components
-(“insert the green bolt through the end of this red cube”).
+(``insert the green bolt through the end of this red cube'').
 
 
 Our goal is actually twofold. First we show how we can add non-determinism to the refinement algorithms, by replacing the fixed ordering 
