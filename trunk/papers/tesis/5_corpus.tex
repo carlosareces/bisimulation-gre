@@ -1,25 +1,25 @@
 \chapter{Recolecci\'on y an\'alisis del corpus ZOOM}
 \label{sec:corpus}
 
-\section{Características del corpus}
+\section{Caracter\'{i}sticas del corpus}
 
 Dominio: mapas de streetmaps.\\
-Idiomas: español, inglés y portugués.\\
+Idiomas: espa\~nol, ingl\'es y portugu\'es.\\
 
-Otras características: 
+Otras caracter\'{i}sticas: 
 \begin{itemize}
 
 \item Targets singulares y plurales, los plurales tienen 2 lugares del mismo tipo.
-\item Imágenes con zoom.
+\item Im\'agenes con zoom.
 
 \end{itemize}
 
-\section{Método de recolección del corpus}
+\section{M\'etodo de recolecci\'on del corpus}
 
-La recolección se llevo a cabo mediante una página web en la que registramos 20 ER dichas por la gente. Cada persona dió 22 ER de mapas distintos, los primeros 2 mapas eran solamente para que la persona se acostumbre a usar el sistema, 11 de los cuales tenían target singular, es decir sólo 1 target y las otras 11 target plural, es decir tenían 2 targets.
+La recolecci\'on se llevo a cabo mediante una p\'agina web en la que registramos 20 ER dichas por la gente. Cada persona di\'o 22 ER de mapas distintos, los primeros 2 mapas eran solamente para que la persona se acostumbre a usar el sistema, 11 de los cuales ten\'{i}an target singular, es decir s\'olo 1 target y las otras 11 target plural, es decir ten\'{i}an 2 targets.
 
 
-\section{Anotación del corpus}
+\section{Anotaci\'on del corpus}
 
 this is a quick overview of our annotation scheme:
 
@@ -53,9 +53,41 @@ this is a quick overview of our annotation scheme:
 
 - Every attribute has a strict list of permitted values. For instance, for the target on our Map 1 the possible values for the attribute type are only two: "restaurant" or "others". The value "others" gives the annotator a chance to give an answer when the description shows something highly unusual. 
 
+
+- Cada objeto en el mapa se ha marcado con un identificador \'unico (e, g, rest3, pub2 etc.)
+
+- Los valores de atributo se anotan en Ingl\'es (por ejemplo, restaurante, cine, etc.), pero los nombres propios (para calles, etc.) se mantienen en su forma original (Portugu\'es).
+
+- Cada objeto tiene 26 posibles atributos.
+
+- En el caso de las descripciones plurales, el conjunto de atributo se repite para cada objeto, por lo que el anotador utilizar\'a hasta 52 atributos.
+
+- 10 atributos denotan el objeto principal objetivo:
+  tipo (por ejemplo, restaurante)
+  nombre (por ejemplo, McDonalds)
+  en (calle-id, etc. avenida-id)
+  izquierda (obj-id)
+  derecha (obj-id)
+  en esquina / entre (Street1, Street2)
+  cerca (obj-id)
+  en-frente-de (obj-id)
+  detr\'as (obj-id)
+  Otros (cualquier otra cosa menciona en la descripci\'on)
+
+- Los otros 16 atributos denotan los objetos se\~nal adicionales que se mencionan en la descripci\'on, por la presente se llama d1..d4. Por ejemplo, en ". El restaurante sirve platos locales junto a la iglesia, en la capilla de St") tenemos: target = restaurante, d1 = d2 = iglesia y capilla-st.
+
+- Para cada uno de estos 4 puntos de referencia adicionales d1..d4, vamos a anotar 4 atributos:
+  Identificaci\'on del hito
+  Tipo de se\~nal
+  del punto de inter\'es
+  hito otros (nada m\'as dijo sobre el objeto
+
+- Cada atributo tiene una lista estricta de los valores permitidos. Por ejemplo, para el objetivo en nuestro Mapa 1 los valores posibles para el tipo de atributo son s\'olo dos: "restaurante" o "los otros". El valor de "otros" le da al anotador una oportunidad de dar una respuesta cuando la descripci\'on muestra algo muy inusual.
+
+
 - For the spatial attributes (left, near etc.) we allow values denoting most objects on the map, except for those that are clearly illegal. For instance, in the case of "left" possible values include most objects on screen, except for those on the right of the target object.
 
-
+- Para los atributos espaciales (izquierda, cerca, etc.) permitimos que los valores que denota la mayor\'{i}a de los objetos en el mapa, a excepci\'on de aquellos que son claramente ilegales. Por ejemplo, en el caso de la "izquierda" posibles valores incluyen la mayor\'{i}a de los objetos en la pantalla, a excepci\'on de los de la derecha del objeto de destino.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
 \section{Background}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
@@ -65,11 +97,26 @@ In this section we briefly discuss a number of REG corpora publicly available fo
 
 TUNA \cite{tuna-corpus} was the first prominent REG corpus to be made publicly available for research purposes. The corpus was developed in a series of general-purpose controlled experiments, containing 2280 descriptions produced by 60 speakers in two domains (1200 descriptions of furniture items and 1080 descriptions of people's photographs). TUNA does not contain relational descriptions, and it is possibly the only resource of this kind to include situations of reference to sets. The TUNA corpus has been extensively used in a series of shared tasks \cite{reg2009}.
 
+TUNA \cite{tuna-corpus} fue el primer prominente corpus REG para estar disponible al p\'ublico para fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, que contiene 2.280 descripciones producidas por 60 altavoces en dos dominios (1.200 descripciones de art\'{i}culos de los muebles y 1080 en las descripciones de las fotograf\'{i}as de las personas). AT\'UN no contiene descripciones relacionales, y es posiblemente el \'unico recurso de este tipo para incluir situaciones de referencia a los conjuntos. El corpus AT\'UN se ha utilizado ampliamente en una serie de tareas compartidas \cite{reg2009}.
+
+
+
 GRE3D3 and its extension GRE3D7 \cite{gre3d3,gre3d7} were developed in a series of web-based experiments primarily focussed on the study of relational descriptions. GRE3D3 contains 630 descriptions produced by 63 speakers, and GRE3D7 contains 4480 descriptions produced by 287 speakers, making it the largest of its kind to date. The GRE3D domain consists of simple visual scenes containing only two kinds of objects (boxes and spheres) with limited variation in colour and size. In each scene, there is only one possible spatial relation between target and the nearest landmark. Both corpora contain atomic and relational descriptions.
+
+
+GRE3D3 and its extension GRE3D7 \cite{gre3d3,gre3d7}
+se desarrollaron en una serie de experimentos basados en la Web se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 altavoces, y GRE3D7 contiene 4.480 descripciones producidas por 287 oradores, por lo que es el mayor de su tipo hasta la fecha. El dominio GRE3D consta de escenas visuales simples que contienen s\'olo dos tipos de objetos (cajas y esferas) con variaci\'on limitada en color y tama\~no. En cada escena, s\'olo hay una posible relaci\'on espacial entre el objetivo y el hito m\'as cercano. Ambos cuerpos contienen descripciones at\'omicas y relacionales.
 
 Stars \cite{stars-mutual-disamb} and its extension Stars2 were collected for the study of referential overspecification (particularly in the case of relational descriptions). Stars was developed in a pilot web-based experiment, containing 704 descriptions produced by 64 speakers.  The more comprehensive Stars2 data set was produced in dialogue situations involving subject pairs, and it contains 884 descriptions produced by 56 speakers. Both domains make use of simple visual scenes containing up to four object types (e.g., stars, boxes, cones and spheres) with limited variation in colour and size. Differently from other REG corpora, however, Stars/2 includes a considerable number of complex situations of reference involving up to three objects, as in `the box near the sphere, next to the cone'. 
 
-Despite their usefulness and general contribution to the research in REG, the above domains are still at a certain distance from the kinds of visual scene that might be required for a practical, real-world application. The need for additional complexity and/or realism, and our own interest in the surface realisation task for the Spanish and Portuguese languages, has led us to build a new computational resource of this kind. This work is described in the next sections. Further discussion on the differences between the Zoom corpus and existing resources is presented in Sec. \ref{sec-annotation}. 
+
+Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se recogieron para el estudio de sobrevaloraci\'on referencial (particularmente en el caso de las descripciones relacionales). Estrellas se desarroll\'o en un experimento basado en la web piloto, que contiene 704 descripciones producidas por 64 altavoces. El conjunto de datos Stars2 m\'as completa se produjo en situaciones de di\'alogo que implican pares sujetos, y contiene 884 descripciones producidas por 56 altavoces. Ambos dominios hacen uso de escenas visuales simples que contienen hasta cuatro tipos de objetos (por ejemplo, estrellas, cajas, conos y esferas) con variaci\'on limitada en color y tama\~no. A diferencia de otros REG corpus, sin embargo, Estrellas / 2 incluye un n\'umero considerable de situaciones complejas de referencia que incluyan hasta tres objetos, como en `la caja cerca de la esfera, al lado del cono".
+
+
+Despite their usefulness and general contribution to the research in REG, the above domains are still at a certain distance from the kinds of visual scene that might be required for a practical, real-world application. The need for additional complexity and/or realism, and our own interest in the surface realisation task for the Spanish and Portuguese languages, has led us to build a new computational resource of this kind. This work is described in the next sections. Further discussion on the differences between the Zoom corpus and existing resources is presented in Sec. 
+
+
+A pesar de su utilidad y contribuci\'on general a la investigaci\'on en REG, los dominios anteriores se encuentran todav\'{i}a en una cierta distancia de los tipos de escena visual que podr\'{i}an ser necesarias para una aplicaci\'on en el mundo real pr\'actico. La necesidad de complejidad y / o realismo adicional, y nuestro propio inter\'es en la tarea realizaci\'on de superficie para los idiomas espa\~nol y portugu\'es, nos ha llevado a construir un nuevo recurso computacional de este tipo. Este trabajo se describe en las siguientes secciones. Continuaci\'on del debate sobre las diferencias entre el corpus Zoom y los recursos existentes se presenta en la Sec.\ref{sec-annotation}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
@@ -79,11 +126,18 @@ Despite their usefulness and general contribution to the research in REG, the ab
 
 In this section we describe the corpus main features, the participants, and the data collection and annotation tasks. Finally, we will also discuss a number of issues associated to collecting natural language descriptions in a domain that is significantly closer to real-world applications in a web-based experiment.   
 
+
+En esta secci\'on se describen las caracter\'{i}sticas principales de corpus, los participantes, y las tareas de recopilaci\'on de datos y anotaci\'on. Por \'ultimo, tambi\'en vamos a discutir una serie de cuestiones asociadas a la recogida de las descripciones en lenguaje natural en un dominio que es significativamente m\'as cerca de aplicaciones del mundo real en un experimento basado en la web.
 \subsection{Overview}
 
 We designed a web-based experiment to collect natural language descriptions of map locations in both Spanish and Portuguese. The collected data set constitutes a corpus of referring expressions for research in REG and related fields. 
 
-The situations of reference under consideration make use of map scenes in two degrees of detail (represented by low and high zoom levels), addressing both singular and plural descriptions, and taking into account a large number of subjects (about 100 speakers in each language). A fragment of the experiment interface is shown in Fig. \ref{fig-interface}.
+The situations of reference under consideration make use of map scenes in two degrees of detail (represented by low and high zoom levels), addressing both singular and plural descriptions, and taking into account a large number of subjects (about 100 speakers in each language). A fragment of the experiment interface is shown in Fig. 
+
+
+Se dise\~n\'o un experimento basado en la web para recopilar descripciones en lenguaje natural de ubicaciones de mapa en espa\~nol y en portugu\'es. El conjunto de datos recogidos constituye un corpus de expresiones referenciales para la investigaci\'on en REG y campos relacionados.
+
+Las situaciones de referencia en cuesti\'on hacen uso de mapa escenas en dos grados de detalle (representados por los niveles de zoom de alta y baja), frente a las descripciones plural y singular, y teniendo en cuenta un gran n\'umero de sujetos (unos 100 hablantes en cada idioma) . Un fragmento de la interfaz experimento se muestra en la Fig.\ref{fig-interface}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -100,7 +154,7 @@ The situations of reference under consideration make use of map scenes in two de
 
 Volunteers were recruited upon  invitation sent by email and social networks. The Portuguese portion of the corpus had 93 participants, being 66 (71.0\%) male and 27 (29.0\%) female. The Spanish corpus had 85 participants, being 59 male (69.4\%) and 26 female (30.6\%).
 
-
+Los voluntarios fueron reclutados por invitaci\'on enviada por correo electr\'onico y las redes sociales. La parte portuguesa del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 varones (69,4 \%) y 26 mujeres (30,6 \%).
 %.....................................
 \subsection{Procedure}
 %.....................................
@@ -111,6 +165,11 @@ Each map scene showed a particular location (e.g., a restaurant, pub, theatre et
 
 The first two images were fillers solely intended to make subjects familiar with the experiment setting, and the corresponding responses were not recorded. Incomplete trials, and ill-formed descriptions, were also discarded. 
 
+VolunteerSubjects recibieron un enlace web a la interfaz experimento en l\'{i}nea (similar a la Fig. \ Ref {fig-interface}) con instrucciones independientes. Se pidi\'o a los sujetos para seleccionar el idioma del experimento (portugu\'es, espa\~nol o Ingl\'es) y fueron informados sobre el prop\'osito del experimento. Edad y g\'enero detalles fueron recogidos con fines estad\'{i}sticos. El experimento consisti\'o en una serie de im\'agenes de mapa presentados en orden aleatorio, uno por uno.
+
+Cada mapa escena mostraba un lugar determinado (por ejemplo, un restaurante, pub, teatro, etc.) se\~nalado por una flecha. Para cada escena, se pidi\'o a los sujetos que imaginen que estaban dando consejos a un amigo y para completar la frase `Ser\'{i}a interesante para visitar ..." con una descripci\'on del lugar se\~nalado por la flecha. Despu\'es de pulsar un bot\'on `Siguiente ', se seleccion\'o otro est\'{i}mulo al azar hasta el final del experimento.
+
+Las dos primeras im\'agenes eran rellenos exclusivamente destinados para que los sujetos familiarizados con el entorno experimento, y no se registraron las respuestas correspondientes. Pruebas incompletas y descripciones mal formadas, tambi\'en se descartaron.
 
 
 %.....................................
@@ -123,7 +182,11 @@ For each city, 10 map locations were used. Each location was shown with a low an
 
 Half images showed a single arrow pointing to one map location (i.e., requiring a single description as `the restaurant on Baker street'), whereas the other half showed two arrows pointed to two different locations (and hence requiring a reference to a set, as in `the two restaurants near the museum'). 
 
+El experimento hizo uso de la interfaz especialmente dise\~nada se ilustra en la Fig. \ Ref {fig-interface} y un conjunto de im\'agenes de mapa obtenido de OpenStreetMap \ footnote {\ url {openstreetmap.org}}. Estos consist\'{i}an en fragmentos de mapas del centro de la ciudad de Madrid (por la parte espa\~nola del corpus) y Lisboa (para la parte portuguesa).
 
+Para cada ciudad, se utilizaron 10 localizaciones en el mapa. Cada ubicaci\'on se muestra con un bajo y un nivel alto de zoom, haciendo 20 im\'agenes en total. En ambos niveles de zoom de alta y baja al objetivo pretendido se mantuvo la misma, pero la versi\'on m\'as detallada, por supuesto, mostrar un mayor n\'umero de distractores y detalles adicionales en general. Adem\'as de eso, ciertos nombres de las calles y de la se\~nal no pueden ser representados en diferentes niveles de zoom.
+
+La mitad de las im\'agenes mostraron una sola flecha que apunta a un mapa de localizaci\'on (es decir, lo que requiere una sola descripci\'on como `el restaurante en la calle Baker), mientras que la otra mitad mostr\'o dos flechas apuntaban a dos lugares diferentes (y por lo tanto requiere una referencia a un conjunto, como en `los dos restaurantes cerca del museo").
 %.....................................
 \subsection{Data Collection and Annotation}
 %.....................................
@@ -136,6 +199,11 @@ In the Portuguese portion of the data, 78.6\% of the descriptions include relati
 Table \ref{tab-comparison} presents a comparison between the collected data and existing REG corpora. The domain information represents the number of possible atomic attributes and the number of relations in each description. The information on TUNA and Zoom descriptions is based on the singular portion of each corpus only. This represents the average description size (in number of annotated properties) and properties usage, which is taken to be  the proportion of properties that appear in the description over the total number of possible attributes and landmarks. From a REG perspective, larger description sizes and lower usage scores are likely to represent more complex situations of reference.
 
 %IP: I realise that what I meant to show here was not the number of possible relations in each corpus (which in some cases is very large - below, above, near, nextto, etc.) but simply the maximum number of relations that may appear in each description. This is the same as reporting the number of landmark objects in addition to the main target. I fixed this now by changing the text and column title to ``landmarks', and I also updated the Zoom rows from 7 relations to 4 landmarks. The data regarding the other corpora was already reflecting the number of landmarks rather than the number of relations, so no further changes were required.
+
+La p\'agina web experimento se mantuvo en l\'{i}nea hasta que se obtuvieron 100 ensayos completos para el portugu\'es y se obtuvieron 80 ensayos completos para el espa\~nol. Tras la verificaci\'on manual, se descartaron 602 descripciones portugueses mal formadas y 366 descripciones espa\~nolas. As\'{i}, la parte portuguesa del corpus consta de 1.358 descripciones mientras que la parte espa\~nola contiene 1.234 expresiones que se refieren. En la Secci\'on ~ \ ref {sec-problemas} se describen los criterios por los que se examinaron las descripciones mal formada. Tambi\'en se discuten los desaf\'{i}os que enfrentan en la recogida de las descripciones en lenguaje natural en un experimento basado en la web para un dominio que es significativamente m\'as cerca de aplicaciones del mundo real de los corpus REG existente.
+En la parte portuguesa de los datos, el 78,6 \% de las descripciones incluyen propiedades relacionales. Adem\'as de eso, el 36,4 \% eran m\'{i}nimamente distintivo, un 44,3 \% era falte espacio, y el 19,3 \% era underspecified. En la parte espa\~nola de los datos, 70 \% de las descripciones incluyen propiedades relacionales. Por otra parte, un 35 \% eran m\'{i}nimamente distintivo, el 40 \% era falte espacio, y el 25 \% era underspecified. No ciertamente en esta proporci\'on - descripciones underspecified as\'{i} como descripciones relacionales no son comunes en corpora REG existente.
+
+Tabla \ ref {tab-comparaci\'on} presenta una comparaci\'on entre los datos recogidos y corpus REG existente. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos y el n\'umero de relaciones en cada descripci\'on. La informaci\'on sobre el at\'un y las descripciones de zoom se basa en la parte singular de s\'olo cada corpus. Esto representa el tama\~no medio de la descripci\'on (en n\'umero de propiedades anotadas) y la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia. Desde una perspectiva de REG, de mayor tama\~no descripci\'on y las puntuaciones m\'as bajas de uso es probable que representan las situaciones m\'as complejas de referencia.
 
 
 \begin{table}[ht]
@@ -177,6 +245,19 @@ Both referential contexts and referring expressions were represented in XML form
 
 As in \cite{tuna-corpus}, the contents of referring expressions are represented by ATTRIBUTE-SET nodes containing a list of attribute names and their values. The following example illustrates a fragment of this representation for an elicited description. Objects in each input context were represented in a similar fashion.
 
+Anotaci\'on se realiz\'o como sigue. Cada expresi\'on se hace referencia fue modelado como la transmisi\'on de una descripci\'on del objeto de destino principal y, opcionalmente, hasta cuatro descripciones de puntos de referencia relacionados. El esquema de anotaci\'on consisti\'o en tres atributos objetivo, cuatro atributos se\~nal para cada uno de los cuatro posibles objetos se\~nal, y siete propiedades relacionales. Esto hace 26 posibles atributos para cada expresi\'on referencial. En el caso de las descripciones plural (es decir, los que implican dos objetos de destino), este conjunto de atributos se duplica.
+
+Cada objeto fue anotado con los atributos at\'omicos {\ em tipo}, {\ nombre em} y {\ em otros} y, en el caso de objetos emblem\'aticos, tambi\'en con su {\ em Identificaci\'on}. Adem\'as de eso, se consideraron siete propiedades relacionales: {\ em en / sobre / a} \ footnote {Los tres preposiciones fueron agregadas como un \'unico atributo, ya que tienen aproximadamente el mismo significado en los idiomas considerados}, {\ em pr\'oximo -para}, {\ em derecho de}, {\ em izquierda de}, {\ em en-frente-de}, {\ em detr\'as de}, y la relaci\'on de varios valores {\ em entre} pretende representar relaciones `esquina '.
+
+Los valores posibles para la {\ em tipo} y {\ nombre em} atributos est\'an predefinidos por cada contexto referencial. El {\ em otros} atributo puede asignar cualquier valor de cadena, y se pretende representar cualquier pieza no est\'andar de la informaci\'on transmitida por la expresi\'on que se refiere. Para las relaciones espaciales, los valores posibles son los identificadores de objetos disponibles en cada escena.
+
+Las descripciones recogidas fueron totalmente anotados por dos anotadores independientes. Despu\'es de la terminaci\'on, un tercer anotador asumi\'o el papel de juez y siempre que la anotaci\'on final. Dado que el esquema de anotaci\'on fue bastante sencillo (es decir, en gran parte porque las respuestas no est\'andar simplemente se asignan a la {\ em otros} atributo), acuerdo entre los jueces, medida por Kappa \ cite {kappa} fue del 84 \% en el nivel de atributo .
+
+Ambos contextos referenciales y expresiones que se refieren estuvieron representados en formato XML utilizando una versi\'on simplificada del formato XML adoptado en el corpus AT\'UN \ cite {at\'un corpus}. Las descripciones se agruparon en nodos TRIAL contienen informaci\'on general sobre cada tema (es decir, identificaci\'on, edad y sexo), seguido de su / su lista de respuestas. Cada respuesta identifica el contexto en que se produjo, y la expresi\'on en referencia adecuada.
+
+Al igual que en \ cite {at\'un corpus}, el contenido de las expresiones referenciales est\'an representados por nodos atributo de conjunto que contiene una lista de nombres de atributos y sus valores. El siguiente ejemplo ilustra un fragmento de esta representaci\'on para una descripci\'on suscit\'o. Los objetos en cada contexto de entrada estaban representados de una manera similar.
+
+
 \tiny{
 \begin{verbatim}
 <TRIAL ID="2" SPEAKER="166" AGE="18" GENDER="m">
@@ -202,7 +283,9 @@ In each description, attribute names for the first landmark object are preceded 
 
 The set of images, text descriptions and their XML representations constitutes the Zoom corpus of referring expressions, to be made publicly available for research purposes. As a first step in this direction, the following sections present the results of a machine learning approach to REG based on the Portuguese portion of the data.
 
+En cada descripci\'on, los nombres de atributos para el primer objeto hito van precedidas de la etiqueta `landmark- 'como en el ejemplo anterior. Hitos posteriores fueron etiquetados como 'segundo hito "y as\'{i} sucesivamente. Esto fue motivado por la necesidad de proporcionar nombres de atributos \'unicos para el beneficio de los algoritmos REG.
 
+El conjunto de im\'agenes, textos descriptivos y sus representaciones XML constituye el corpus zoom de expresiones que se refieren, a poner a disposici\'on p\'ublica para fines de investigaci\'on. Como primer paso en esta direcci\'on, las siguientes secciones se presentan los resultados de un enfoque de aprendizaje autom\'atico para reg basan en la parte portuguesa de los datos.
 
 
 %.....................................
@@ -219,6 +302,16 @@ the previous section, the Zoom domain is likely contain more complex situations 
 
 The proportion of overspecified referring expressions of the Zoom corpus is similar to that found in previous work. However, the proportion of relational descriptions is presently higher. Relational descriptions constitute a challenge for REG algorithms due to the computational complexity associated to their generation~\cite{survey}. A further challenge posed by the Zoom corpus is the fact that it contains two descriptions for every target based on different - but related - models corresponding to the same map location seen with different zoom levels. For instance a map with higher zoom level (2X) is illustrated in Fig.~\ref{fig-with-zoom}, and the same map with lower zoom level is shown in Fig.~\ref{fig-interface}. 
 
+
+Corpora anterior de expresiones referenciales se han recogido en los dominios de dise\~no especial y muy controladas. Recopilaci\'on corpus de un dominio que es directamente relevante para aplicaciones del mundo real plantea un reto importante no s\'olo para el proceso de recolecci\'on y anotaci\'on en s\'{i}, sino tambi\'en a los algoritmos REG existentes. Esto se hace evidente por la gran proporci\'on de las expresiones referenciales que deben ser desechados de forma manual desde nuestra base de datos porque el no constitu\'{i}a una expresi\'on que se refiere de la meta prevista. Esta proporci\'on es del 30 \% de la parte portuguesa del conjunto de datos y el 23 \% de la parte espa\~nola.
+
+Las descripciones mal formadas fueron descartados siguiendo los criterios que explicamos aqu\'{i}. Como se ve en la Fig. ~ \ Ref {fig-interface} sujetos ten\'{i}an que completar la frase `` Ser\'{i}a interesante visitar ... '' con un sintagma nominal que describe la ubicaci\'on se\~nalada por la flecha. Sin embargo, algunas de las expresiones que se refieren no eran frases nominales, sino frases completas. Por ejemplo, las respuestas tales como `` Vamos a ir a pizza express, es realmente barato '' fueron descartados debido a que el sujeto ten\'{i}a en mente un objetivo comunicativo que no sea la identificaci\'on del objetivo. Por otra parte, unos sujetos completaron el experimento con frases como `` No me gusta la comida r\'apida '' que eran claramente de dominio. Del mismo modo, hemos eliminado todas las expresiones que describen un objeto que no sea el objetivo previsto, que utiliza las propiedades que no eran verdad del objetivo, todas las situaciones en que el sujeto ten\'{i}a que describir dos objetos pero describen s\'olo una, y todas las descripciones que contienen s\'olo el b\'asico tipo de atributo (como en `` la iglesia '').
+
+Despu\'es de este proceso de limpieza de la parte portuguesa del corpus contiene todav\'{i}a un 19,3 \% de expresiones que se refieren underspecified y la parte espa\~nola de un 25 \%. Un ejemplo de expresi\'on que se refiere underspecified se muestra en la figura ~ \ ref {fig-interface}.; la expresi\'on que se refiere `` el pub en Cowgate '' se underspecified porque hay dos bares en la calle Cowgate en el mapa. El porcentaje de expresiones que se refieren underspecified en el corpus Zoom es mucho mayor que lo reportado en la corpora descrito en el la secci\'on anterior, que no es mayor que 5 \%. Estudios psicoling\"u\'{i}sticos anterior ~ \ cite {} Clark1986 han encontrado que m\'as del 20 \% de las expresiones que se refieren en el discurso de origen natural se underspecified con respecto al contexto establecido. En los dominios suficientemente complejas, ~ \ cite {} Clark1986 encontr\'o que los hablantes a menudo producir una expresi\'on que se refiere underspecified inicial, y luego reparar si es necesario en lugar de producir una descripci\'on identifica de forma un\'{i}voca desde el principio. Como se discuti\'o en
+el apartado anterior, el dominio de zoom es probable que contenga situaciones m\'as complejas de referencia si se compara con los recursos existentes de este tipo, es decir, la descripci\'on de zoom son en promedio m\'as tiempo, y tienen un uso atributo medio m\'as bajo. Esto, en nuestra opini\'on, puede explicar la alta proporci\'on de underspecification referencial en nuestros datos.
+
+La proporci\'on de expresiones que se refieren falte espacio del corpus Zoom es similar a la encontrada en el trabajo anterior. Sin embargo, la proporci\'on de las descripciones relacionales es actualmente superior. Descripciones relacionales constituyen un desaf\'{i}o para los algoritmos REG debido a la complejidad computacional asociada a su generaci\'on ~ \ cite {} encuesta. Otro desaf\'{i}o que plantea el corpus Zoom es el hecho de que contiene dos descripciones para cada objetivo bas\'andose en diferente - pero relacionados - modelos correspondientes a la misma ubicaci\'on mapa visto con diferentes niveles de zoom. Por ejemplo, un mapa con mayor nivel de zoom (2X) se ilustra en la Fig. ~ \ Ref {fig-con-zoom}, y el mismo mapa con un menor nivel de zoom se muestra en la Fig. ~ \ Ref {fig-interface}.
+
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=8.5cm]{figures/with-zoom.jpg}\\[0pt]
@@ -229,7 +322,7 @@ The proportion of overspecified referring expressions of the Zoom corpus is simi
 
 The underlying models for these two maps are different but not unrelated. The map with 2X zoom contains fewer objects but may include more properties due to the added level of detail. The  referring expression for the target in the 1X map may or may not be the same as in the 2X map. For instance, the referring expression  ``the pub at Cowgate'' is underspecified on the 1X map, but it is minimally distinguishing on the 2X map. Changes of this kind are common in interactive applications.  The context of reference during an interaction changes in structure, in the number of objects and referable properties. The challenge for REG algorithms would be to produced an appropriate description for the modified context without starting from scratch. REG algorithms based on local (rather than global) context partitioning (e.g., ~\cite{areces08}) seem to have an advantage in this respect, and in this sense we hope that the Zoom data will help the research in the field to move forward.
 
- 
+ Los modelos subyacentes de estos dos mapas son diferentes, pero no sin relaci\'on. El mapa con zoom 2X contiene menos objetos, pero pueden ser m\'as propiedades debido al mayor nivel de detalle. La expresi\'on que se refiere a la diana en el mapa 1X puede o no puede ser el mismo que en el mapa 2X. Por ejemplo, la expresi\'on se refiere `` el pub en Cowgate '' se underspecified en el mapa 1X, pero es distinguir m\'{i}nimamente en el mapa 2X. Cambios de este tipo son comunes en aplicaciones interactivas. El contexto de referencia durante una interacci\'on cambios en la estructura, en el n\'umero de objetos y propiedades referibles. El desaf\'{i}o para los algoritmos REG ser\'{i}a producido una descripci\'on apropiada para el contexto modificado sin empezar desde cero. REG algoritmos basados en local (no mundiales) partici\'on contexto (por ejemplo, ~ \ cite {} areces08) parecen tener una ventaja en este sentido, y en este sentido esperamos que los datos de zoom ayudar\'an a la investigaci\'on en el campo para mover hacia adelante.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -252,6 +345,14 @@ From the outcome of the 12 binary classifiers, a description is built by conside
 Since every attribute that corresponds to a positive prediction is always selected, the algorithm does not regard uniqueness as a stop condition. As a result, the output description may convey a certain amount of overspecification.
 
 
+El presente modelo se compone de 12 clasificadores binarios que representan si los atributos referenciales individuales deben ser seleccionados para su inclusi\'on en una descripci\'on de salida. Los clasificadores se corresponden con atributos at\'omicos del destino y objeto primer hito ({\ em tipo}, {\ nombre em} y {\ em otros}), y las relaciones. Atributos referenciales de otros objetos emblem\'aticos no se modelaron debido a la escasez de datos y tambi\'en para reducir los costos computacionales. Por razones similares, el valor m\'ultiple {\ em entre} relaci\'on es tambi\'en actualmente caso omiso, y `relaciones esquina 'que implican a dos puntos de referencia (por ejemplo, dos calles) se modelan como dos tareas de clasificaci\'on independientes.
+
+Dos caracter\'{i}sticas de aprendizaje fueron considerados por cada clasificador: {\ em landmarkCount}, que representa el n\'umero de objetos se\~nal cerca de la diana principal, y {\ em DistractorCount}, que representa el n\'umero de objetos del mismo tipo que el objetivo dentro de la pertinente contexto en el mapa.
+
+A partir de los resultados de los 12 clasificadores binarios, una descripci\'on se construye teniendo en cuenta los atributos de destino at\'omicas en el primer lugar. Por cada predicci\'on positiva, se selecciona el atributo at\'omica correspondiente para su inclusi\'on en la descripci\'on de salida. A continuaci\'on, se consideran las relaciones. Si se prev\'e ninguna relaci\'on, el algoritmo termina devolviendo una descripci\'on at\'omica del objeto de destino principal. Si la descripci\'on incluye una relaci\'on, se selecciona el objeto de punto de inter\'es relacionadas, as\'{i}, y el algoritmo se llama de forma recursiva para describir el siguiente objeto.
+
+Puesto que cada atributo que corresponde a una predicci\'on positiva est\'a siempre seleccionado, el algoritmo no considera singularidad como una condici\'on de parada. Como resultado, la descripci\'on de salida puede transmitir una cierta cantidad de sobrevaloraci\'on.
+
 %......................
 \subsection{Procedure}
 %......................
@@ -260,13 +361,15 @@ We used a subset of singular descriptions from the Portuguese portion of the cor
 
 Following \cite{thiago-svm}, we built a REG model using support vector machines with radial basis function kernel. The classifiers were trained and tested using 6-fold cross validation. Optimal parameters were selected using grid search as follows: for each step in the main cross-fold validation, one fold is reserved for testing, and the remaining $k-1$ folders are subject  to a second cross-validation procedure in which different parameter combinations are attempted. The $C$ parameter is assigned the values 1, 10, 100 and 1000, and $\gamma$ is assigned 1, 0.1, 0.001 and 0.0001. The best-performing parameter set is selected to build a classifier trained from the $k-1$ folders, and tested on the test data. This procedure is repeated for every iteration of the main cross-validation procedure.
 
+Se utiliz\'o un subconjunto de descripciones singulares de la parte portuguesa del corpus. Esto comprende 821 descripciones producidos en 9 escenas. La evaluaci\'on se llev\'o a cabo mediante la comparaci\'on de la descripci\'on corpus ante la salida del sistema para medir la precisi\'on global (es decir, el n\'umero de coincidencias exactas entre las dos descripciones), dados \ cite {} dados y MASI \ cite {} masi coeficientes (es decir, el grado de solapamiento entre la salida del algoritmo y la descripci\'on corpus correspondiente).
 
+Siguiendo \ cite {thiago-svm}, construimos un modelo REG uso de m\'aquinas de vectores soporte con radial kernel de funci\'on de base. Los clasificadores se capacit\'o y sometieron a pruebas de 6 veces la validaci\'on cruzada. Los par\'ametros \'optimos fueron seleccionados mediante b\'usqueda en la red de la siguiente manera: para cada paso en el principal validaci\'on cruzada veces, un solo reba\~no est\'a reservado para las pruebas, y los restantes $ k-1 $ carpetas est\'an sujetas a un segundo procedimiento de validaci\'on cruzada en la que diferentes par\'ametros combinaciones se intentan. El par\'ametro $ $ C se le asignan los valores de 1, 10, 100 y 1000, y $ \ gamma $ es asignado en 1, 0,1, 0,001 y 0,0001. El conjunto de par\'ametros de mejor desempe\~no es seleccionada para construir un clasificador entrenado desde las carpetas $ k-1 $, y probado en los datos de prueba. Este procedimiento se repite para cada iteraci\'on del procedimiento principal de validaci\'on cruzada.
 %......................
 \subsection{REG Results}
 %......................
 
 Table \ref{tab-reg-results} summarizes the results obtained by the REG algorithm built from SVM classifiers, those obtained by a baseline system representing a relational extension of the Dale \& Reiter Incremental Algorithm, and by a Random selection strategy.  
-
+Tabla \ ref {tab-REG-resultados} resume los resultados obtenidos por el algoritmo REG construido a partir de SVM clasificadores, los obtenidos mediante un sistema de l\'{i}nea de base que representa una extensi\'on relacional de la \& Reiter Incremental Algoritmo Dale, y por una estrategia de selecci\'on aleatoria.
 
 % these results are for SVM.All.VAR-   compared to the AEI- baseline
 \begin{table}[ht]
@@ -289,6 +392,13 @@ In what follows we compare accuracy scores obtained by every algorithm pair usin
 In terms of overall accuracy\footnote{And also in terms of MASI scores, although this is presently not further discussed.}, the SVM approach outperforms both alternatives. The difference from the second best-performing algorithm (i.e., the Incremental approach) is highly significant ($\chi^{2}=$ 79.87, df=1, p$<$0.0001). Only in terms of Dice scores an opposite effect is observed (T=137570.5, p$=$ 0.01413). 
 
 We also assessed the performance of the individual classifiers. Table \ref{tab-svm-results} shows these results as measured by precision (P), recall (R), F1-measure (F1) and area under the ROC curve (AUC). 
+
+
+En lo que sigue se comparan precisi\'on resultados obtenidos por cada par algoritmo mediante la prueba de chi cuadrado, y comparamos {\ em dados} puntajes utilizando la prueba de rangos con signo {\ em de Wilcoxon}.
+
+En t\'erminos de precisi\'on global \ footnote {Y tambi\'en en cuanto a las puntuaciones MASI, aunque actualmente no se discute m\'as.}, El m\'etodo SVM supera a ambas alternativas. La diferencia con el segundo algoritmo de mejor rendimiento (es decir, el enfoque incremental) es altamente significativo ($ \ chi ^ {2} = $ 79,87, df = 1, p $ <$ 0,0001). S\'olo en cuanto a las puntuaciones de los dados se observa el efecto contrario (T = 137570.5, p $ = $ 0,01413).
+
+Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \ ref {tab-SVM-resultados} muestra estos resultados, medida por la precisi\'on (P), memoria (R), F1-medida (F1) y el \'area bajo la curva ROC (AUC).
 
 %these are the rsults for the training over the set of ALL speakers 
 \begin{table}[ht]
@@ -321,7 +431,7 @@ We also assessed the performance of the individual classifiers. Table \ref{tab-s
 
 From these results we notice that highly frequent attributes (e.g., type and name) were classified  with high accuracy, whereas others (e.g., multivalue attributes and relations) were not. 
 
-
+A partir de estos resultados nos damos cuenta de que los atributos muy frecuentes (por ejemplo, el tipo y nombre) se clasificaron con gran precisi\'on, mientras que otros (por ejemplo, los atributos de varios valores y relaciones) no lo eran.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       >2
 \section{Final remarks}
@@ -338,6 +448,16 @@ Second, Zoom descriptions are prone to convey relations between a single target 
 
 As future work, we intend to make the corpus publicly available for research on multiple aspects of content selection and surface realisation in REG. In particular, we envisage the use of the Zoom corpus as training and test data for machine learning models of REG, and also to address further issues that have not been addressed in the present paper. These include  the generation of referring expressions from knowledge bases with different degrees of detail, and the issues of between-speakers and within-speakers variation in REG.
 
+
+En este trabajo se ha presentado el corpus de zoom de las descripciones en lenguaje natural de localizaciones en el mapa. El corpus tiene en cuenta un dominio que es significativamente m\'as cerca de aplicaciones del mundo real, y aborda las situaciones m\'as complejas de referencia de los recursos existentes de este tipo. En particular, el dominio de zoom hace uso de contextos con diferentes niveles de detalle, y contiene ejemplos de referencia singular y plural producido por un n\'umero relativamente grande de hablantes en ambos idiomas espa\~nol y portugu\'es.
+
+Los resultados preliminares de un enfoque basado en SVM a REG - que fueron \'unicamente presenta para la futura evaluaci\'on de algoritmos REG basados â€‹â€‹en datos Zoom \- alusi\'on a la complejidad real de la tarea REG en este dominio en un n\'umero de maneras.
+
+En primer lugar, nos damos cuenta de que un enfoque basado en SVM similar en \ cite {thiago-svm} en GRE3D3 y GRE3D7 datos ha obtenido considerablemente mayor precisi\'on media (0,46 y 0,64 respectivamente) y una mayor media de las puntuaciones de los dados (0,78 y 0,89 respectivamente). Esto es, por supuesto, se explica por el aumento de la complejidad del dominio Zoom (por ejemplo, en el n\'umero de posibles objetos y propiedades at\'omicas y relacionales etc.). Sin embargo, nos damos cuenta tambi\'en que el esquema de anotaci\'on Zoom \- aunque teniendo en cuenta la ya gran n\'umero de posibles atributos - sigue siendo demasiado simple. En particular, el atributo {\ em dem\'as} ha sido usado en exceso y, como consecuencia, las posibilidades de reproducci\'on de las descripciones corpus es estrecho. Es evidente que a\'un queda trabajo por hacer para ampliar el esquema de anotaci\'on y dividida {\ em otros} en un mayor n\'umero de atributos.
+
+En segundo lugar, las descripciones de zoom son propensos a transmitir las relaciones entre un solo objetivo y varios objetos emblem\'aticos, como en `el restaurante en la calle 5, cerca de la biblioteca '. Aunque es com\'un en el uso del lenguaje, el uso de m\'ultiples propiedades relacionales de esta manera ha sido poco investigado, tal vez debido a que puede dar lugar a descripciones ambiguas, como en `el restaurante cerca de la iglesia en la calle Jackson y el bar en la calle 5 'para un restaurante situado cerca del cruce de estas dos calles.
+
+Como trabajo futuro, tenemos la intenci\'on de hacer que el corpus a disposici\'on del p\'ublico para la investigaci\'on sobre m\'ultiples aspectos de la selecci\'on de contenidos y la realizaci\'on de superficie en REG. En particular, prevemos el uso del corpus zoom como datos de entrenamiento y prueba de modelos de aprendizaje autom\'atico de REG, y tambi\'en para abordar otras cuestiones que no se han abordado en el presente trabajo. Estos incluyen la generaci\'on de expresiones referenciales de bases de conocimiento con diferentes grados de detalle, y las cuestiones de la variaci\'on entre los altavoces y dentro-hablantes en REG.
 
 %..........................
 \section*{Acknowledgements}
