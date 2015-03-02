@@ -1,143 +1,11 @@
 \chapter{Recolecci\'on y an\'alisis del corpus ZOOM}
 \label{sec:corpus}
 
-\section{Caracter\'{i}sticas del corpus}
+En esta secci\'on se describen las caracter\'{i}sticas principales del corpus, los participantes, y las tareas de recopilaci\'on de datos y anotaci\'on. Por \'ultimo, tambi\'en vamos a discutir una serie de cuestiones asociadas a la obtenci\'on de descripciones en lenguaje natural en un dominio que es significativamente m\'as cerca de aplicaciones del mundo real en un experimento basado en la web.
 
-Dominio: mapas de streetmaps.\\
-Idiomas: espa\~nol, ingl\'es y portugu\'es.\\
+Se dise\~n\'o un experimento basado en la web para recopilar descripciones en lenguaje natural de ubicaciones de mapa en espa\~nol y en portugu\'es. El conjunto de datos obtenidos constituye un corpus de expresiones referenciales para la investigaci\'on en REG y campos relacionados.
 
-Otras caracter\'{i}sticas: 
-\begin{itemize}
-
-\item Targets singulares y plurales, los plurales tienen 2 lugares del mismo tipo.
-\item Im\'agenes con zoom.
-
-\end{itemize}
-
-\section{M\'etodo de recolecci\'on del corpus}
-
-La recolecci\'on se llevo a cabo mediante una p\'agina web en la que registramos 20 ER dichas por la gente. Cada persona di\'o 22 ER de mapas distintos, los primeros 2 mapas eran solamente para que la persona se acostumbre a usar el sistema, 11 de los cuales ten\'{i}an target singular, es decir s\'olo 1 target y las otras 11 target plural, es decir ten\'{i}an 2 targets.
-
-
-\section{Anotaci\'on del corpus}
-
-this is a quick overview of our annotation scheme:
-
-- Every object on the map has been labelled with an unique id (e,g, rest3, pub2 etc.)
-
-- Attribute values are annotated in English (e.g., restaurant, theatre etc.), but proper names (for streets etc.) are kept in their original (Portuguese) form.
-
-- Each object has 26 possible attributes. 
-
-- In the case of plural descriptions, the attribute set is repeated for each object, so the annotator will use up to 52 attributes.
-
-- 10 attributes denote the main target object: 
-  type (e.g., restaurant)
-  name (e.g., McDonalds)
-  in(street-id, avenue-id etc.)
-  left(obj-id)
-  right(obj-id)
-  at-corner/between(street1,street2)
-  near(obj-id)
-  in-front-of(obj-id)
-  behind(obj-id)
-  other(anything else mentioned in the description)
-
-- The other 16 attributes denote the additional landmark objects mentioned in the description, hereby called d1..d4. For instance, in "the restaurat next to the church, on Chapel st.") we have: target=restaurant, d1=church and d2=Chapel-st.
-
-- For each of these 4 additional landmarks d1..d4, we will annotate 4 attributes:
-  landmark id
-  landmark type
-  landmark name
-  landmark others (anything else said about the object
-
-- Every attribute has a strict list of permitted values. For instance, for the target on our Map 1 the possible values for the attribute type are only two: "restaurant" or "others". The value "others" gives the annotator a chance to give an answer when the description shows something highly unusual. 
-
-
-- Cada objeto en el mapa se ha marcado con un identificador \'unico (e, g, rest3, pub2 etc.)
-
-- Los valores de atributo se anotan en Ingl\'es (por ejemplo, restaurante, cine, etc.), pero los nombres propios (para calles, etc.) se mantienen en su forma original (Portugu\'es).
-
-- Cada objeto tiene 26 posibles atributos.
-
-- En el caso de las descripciones plurales, el conjunto de atributo se repite para cada objeto, por lo que el anotador utilizar\'a hasta 52 atributos.
-
-- 10 atributos denotan el objeto principal objetivo:
-  tipo (por ejemplo, restaurante)
-  nombre (por ejemplo, McDonalds)
-  en (calle-id, etc. avenida-id)
-  izquierda (obj-id)
-  derecha (obj-id)
-  en esquina / entre (Street1, Street2)
-  cerca (obj-id)
-  en-frente-de (obj-id)
-  detr\'as (obj-id)
-  Otros (cualquier otra cosa menciona en la descripci\'on)
-
-- Los otros 16 atributos denotan los objetos se\~nal adicionales que se mencionan en la descripci\'on, por la presente se llama d1..d4. Por ejemplo, en ". El restaurante sirve platos locales junto a la iglesia, en la capilla de St") tenemos: target = restaurante, d1 = d2 = iglesia y capilla-st.
-
-- Para cada uno de estos 4 puntos de referencia adicionales d1..d4, vamos a anotar 4 atributos:
-  Identificaci\'on del hito
-  Tipo de se\~nal
-  del punto de inter\'es
-  hito otros (nada m\'as dijo sobre el objeto
-
-- Cada atributo tiene una lista estricta de los valores permitidos. Por ejemplo, para el objetivo en nuestro Mapa 1 los valores posibles para el tipo de atributo son s\'olo dos: "restaurante" o "los otros". El valor de "otros" le da al anotador una oportunidad de dar una respuesta cuando la descripci\'on muestra algo muy inusual.
-
-
-- For the spatial attributes (left, near etc.) we allow values denoting most objects on the map, except for those that are clearly illegal. For instance, in the case of "left" possible values include most objects on screen, except for those on the right of the target object.
-
-- Para los atributos espaciales (izquierda, cerca, etc.) permitimos que los valores que denota la mayor\'{i}a de los objetos en el mapa, a excepci\'on de aquellos que son claramente ilegales. Por ejemplo, en el caso de la "izquierda" posibles valores incluyen la mayor\'{i}a de los objetos en la pantalla, a excepci\'on de los de la derecha del objeto de destino.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
-\section{Background}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
-\label{sec-background}
-
-In this section we briefly discuss a number of REG corpora publicly available for research purposes, and how these resources compare to our current work.
-
-TUNA \cite{tuna-corpus} was the first prominent REG corpus to be made publicly available for research purposes. The corpus was developed in a series of general-purpose controlled experiments, containing 2280 descriptions produced by 60 speakers in two domains (1200 descriptions of furniture items and 1080 descriptions of people's photographs). TUNA does not contain relational descriptions, and it is possibly the only resource of this kind to include situations of reference to sets. The TUNA corpus has been extensively used in a series of shared tasks \cite{reg2009}.
-
-TUNA \cite{tuna-corpus} fue el primer prominente corpus REG para estar disponible al p\'ublico para fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, que contiene 2.280 descripciones producidas por 60 altavoces en dos dominios (1.200 descripciones de art\'{i}culos de los muebles y 1080 en las descripciones de las fotograf\'{i}as de las personas). AT\'UN no contiene descripciones relacionales, y es posiblemente el \'unico recurso de este tipo para incluir situaciones de referencia a los conjuntos. El corpus AT\'UN se ha utilizado ampliamente en una serie de tareas compartidas \cite{reg2009}.
-
-
-
-GRE3D3 and its extension GRE3D7 \cite{gre3d3,gre3d7} were developed in a series of web-based experiments primarily focussed on the study of relational descriptions. GRE3D3 contains 630 descriptions produced by 63 speakers, and GRE3D7 contains 4480 descriptions produced by 287 speakers, making it the largest of its kind to date. The GRE3D domain consists of simple visual scenes containing only two kinds of objects (boxes and spheres) with limited variation in colour and size. In each scene, there is only one possible spatial relation between target and the nearest landmark. Both corpora contain atomic and relational descriptions.
-
-
-GRE3D3 and its extension GRE3D7 \cite{gre3d3,gre3d7}
-se desarrollaron en una serie de experimentos basados en la Web se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 altavoces, y GRE3D7 contiene 4.480 descripciones producidas por 287 oradores, por lo que es el mayor de su tipo hasta la fecha. El dominio GRE3D consta de escenas visuales simples que contienen s\'olo dos tipos de objetos (cajas y esferas) con variaci\'on limitada en color y tama\~no. En cada escena, s\'olo hay una posible relaci\'on espacial entre el objetivo y el hito m\'as cercano. Ambos cuerpos contienen descripciones at\'omicas y relacionales.
-
-Stars \cite{stars-mutual-disamb} and its extension Stars2 were collected for the study of referential overspecification (particularly in the case of relational descriptions). Stars was developed in a pilot web-based experiment, containing 704 descriptions produced by 64 speakers.  The more comprehensive Stars2 data set was produced in dialogue situations involving subject pairs, and it contains 884 descriptions produced by 56 speakers. Both domains make use of simple visual scenes containing up to four object types (e.g., stars, boxes, cones and spheres) with limited variation in colour and size. Differently from other REG corpora, however, Stars/2 includes a considerable number of complex situations of reference involving up to three objects, as in `the box near the sphere, next to the cone'. 
-
-
-Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se recogieron para el estudio de sobrevaloraci\'on referencial (particularmente en el caso de las descripciones relacionales). Estrellas se desarroll\'o en un experimento basado en la web piloto, que contiene 704 descripciones producidas por 64 altavoces. El conjunto de datos Stars2 m\'as completa se produjo en situaciones de di\'alogo que implican pares sujetos, y contiene 884 descripciones producidas por 56 altavoces. Ambos dominios hacen uso de escenas visuales simples que contienen hasta cuatro tipos de objetos (por ejemplo, estrellas, cajas, conos y esferas) con variaci\'on limitada en color y tama\~no. A diferencia de otros REG corpus, sin embargo, Estrellas / 2 incluye un n\'umero considerable de situaciones complejas de referencia que incluyan hasta tres objetos, como en `la caja cerca de la esfera, al lado del cono".
-
-
-Despite their usefulness and general contribution to the research in REG, the above domains are still at a certain distance from the kinds of visual scene that might be required for a practical, real-world application. The need for additional complexity and/or realism, and our own interest in the surface realisation task for the Spanish and Portuguese languages, has led us to build a new computational resource of this kind. This work is described in the next sections. Further discussion on the differences between the Zoom corpus and existing resources is presented in Sec. 
-
-
-A pesar de su utilidad y contribuci\'on general a la investigaci\'on en REG, los dominios anteriores se encuentran todav\'{i}a en una cierta distancia de los tipos de escena visual que podr\'{i}an ser necesarias para una aplicaci\'on en el mundo real pr\'actico. La necesidad de complejidad y / o realismo adicional, y nuestro propio inter\'es en la tarea realizaci\'on de superficie para los idiomas espa\~nol y portugu\'es, nos ha llevado a construir un nuevo recurso computacional de este tipo. Este trabajo se describe en las siguientes secciones. Continuaci\'on del debate sobre las diferencias entre el corpus Zoom y los recursos existentes se presenta en la Sec.\ref{sec-annotation}. 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
-\section{Experiment}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
-\label{sec-experiment}
-
-In this section we describe the corpus main features, the participants, and the data collection and annotation tasks. Finally, we will also discuss a number of issues associated to collecting natural language descriptions in a domain that is significantly closer to real-world applications in a web-based experiment.   
-
-
-En esta secci\'on se describen las caracter\'{i}sticas principales de corpus, los participantes, y las tareas de recopilaci\'on de datos y anotaci\'on. Por \'ultimo, tambi\'en vamos a discutir una serie de cuestiones asociadas a la recogida de las descripciones en lenguaje natural en un dominio que es significativamente m\'as cerca de aplicaciones del mundo real en un experimento basado en la web.
-\subsection{Overview}
-
-We designed a web-based experiment to collect natural language descriptions of map locations in both Spanish and Portuguese. The collected data set constitutes a corpus of referring expressions for research in REG and related fields. 
-
-The situations of reference under consideration make use of map scenes in two degrees of detail (represented by low and high zoom levels), addressing both singular and plural descriptions, and taking into account a large number of subjects (about 100 speakers in each language). A fragment of the experiment interface is shown in Fig. 
-
-
-Se dise\~n\'o un experimento basado en la web para recopilar descripciones en lenguaje natural de ubicaciones de mapa en espa\~nol y en portugu\'es. El conjunto de datos recogidos constituye un corpus de expresiones referenciales para la investigaci\'on en REG y campos relacionados.
-
-Las situaciones de referencia en cuesti\'on hacen uso de mapa escenas en dos grados de detalle (representados por los niveles de zoom de alta y baja), frente a las descripciones plural y singular, y teniendo en cuenta un gran n\'umero de sujetos (unos 100 hablantes en cada idioma) . Un fragmento de la interfaz experimento se muestra en la Fig.\ref{fig-interface}.
+Las situaciones de referencia en cuesti\'on hacen uso de mapas con dos grados de detalle (representados por los niveles de zoom de alto y bajo), se pidieron descripciones en plural y singular, tuvimos en cuenta un gran n\'umero de personas (unos 100 hablantes en cada idioma) . Un fragmento de la interfaz experimento se muestra en la Fig.\ref{fig-interface}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -147,46 +15,126 @@ Las situaciones de referencia en cuesti\'on hacen uso de mapa escenas en dos gra
 \end{center}
 \end{figure}
 
+\section{Caracter\'{i}sticas del corpus}
+
+Dominio: mapas de streetmaps.Lisboa y Madrid.\\
+Idiomas: espa\~nol y portugu\'es.\\
+
+Otras caracter\'{i}sticas: 
+\begin{itemize}
+
+\item Targets singulares y plurales, los plurales tienen 2 lugares del mismo tipo.
+\item Im\'agenes con 2 tipos de zoom.
+
+\end{itemize}
+
+
+\section{M\'etodo de recolecci\'on del corpus}
+
+La recolecci\'on se llevo a cabo mediante una p\'agina web en la que registramos 20 ER dichas por cada persona. Cada persona di\'o 22 ER de mapas distintos, los primeros 2 mapas eran solamente para que la persona se acostumbre a usar el sistema, 11 de los cuales ten\'{i}an target singular, es decir s\'olo 1 target y las otras 11 target plural, es decir ten\'{i}an 2 targets.
 
 %.....................................
-\subsection{Subjects}
+\section{A cerca de las personas que completaron el experimento}
 %.....................................
 
-Volunteers were recruited upon  invitation sent by email and social networks. The Portuguese portion of the corpus had 93 participants, being 66 (71.0\%) male and 27 (29.0\%) female. The Spanish corpus had 85 participants, being 59 male (69.4\%) and 26 female (30.6\%).
+\todo{Esta seccion se llamaba Subjects...}
 
-Los voluntarios fueron reclutados por invitaci\'on enviada por correo electr\'onico y las redes sociales. La parte portuguesa del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 varones (69,4 \%) y 26 mujeres (30,6 \%).
+ER hechas por personas voluntarias a las cuales se les envi\'o una invitaci\'on por correo electr\'onico o redes sociales. La parte en Portugues del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 varones (69,4 \%) y 26 mujeres (30,6 \%).
 %.....................................
-\subsection{Procedure}
+\section{Procedimiento}
 %.....................................
 
-Subjects received a web link to the on-line experiment interface (similar to Fig. \ref{fig-interface}) with self-contained instructions. Subjects were required to select the language of the experiment (Portuguese, Spanish or English) and were briefed on the purpose of the experiment. Age and gender details were collected for statistical purposes. The experiment consisted of a series of map images presented in random order, one by one. 
+Las personas voluntarias recibieron un enlace web a la interfaz del experimento (similar a la Fig. \ Ref {fig-interface}) que tambi\'en conten\'{í}a las instrucciones. Se pidi\'o seleccionar el idioma del experimento (portugu\'es o espa\~nol ) y fueron informados sobre el prop\'osito del experimento. Detalles de edad y g\'enero detalles fueron solicitados con fines estad\'{i}sticos. El experimento consisti\'o en una serie de im\'agenes de mapa presentados en orden aleatorio, uno por uno.
 
-Each map scene showed a particular location (e.g., a restaurant, pub, theatre etc.) pointed by an arrow. For each scene, subjects were required to imagine that they were giving travel advice to a friend and to complete the sentence `It would be interesting to visit...' with a description of the location pointed by the arrow. After pressing a `Next' button, another stimulus was selected at random until the end of the experiment. 
+Cada mapa mostraba un lugar determinado (por ejemplo, un restaurante, pub, teatro, etc.) se\~nalado por una flecha (o dos, en el caso de los plurales). Para cada escena, se pidi\'o a los voluntarios que imaginen que estaban dando consejos a un amigo y que deb\'{i}an completar la frase `Ser\'{i}a interesante visitar ..." con una descripci\'on del lugar se\~nalado por la flecha. Despu\'es de pulsar un bot\'on `Siguiente ', se seleccion\'aba otro est\'{i}mulo al azar hasta el final del experimento.
 
-The first two images were fillers solely intended to make subjects familiar with the experiment setting, and the corresponding responses were not recorded. Incomplete trials, and ill-formed descriptions, were also discarded. 
+Las dos primeras im\'agenes eran rellenos exclusivamente destinados para que los voluntarios se familiarizaran con el entorno del experimento, y no se registraron las respuestas correspondientes. 
 
-VolunteerSubjects recibieron un enlace web a la interfaz experimento en l\'{i}nea (similar a la Fig. \ Ref {fig-interface}) con instrucciones independientes. Se pidi\'o a los sujetos para seleccionar el idioma del experimento (portugu\'es, espa\~nol o Ingl\'es) y fueron informados sobre el prop\'osito del experimento. Edad y g\'enero detalles fueron recogidos con fines estad\'{i}sticos. El experimento consisti\'o en una serie de im\'agenes de mapa presentados en orden aleatorio, uno por uno.
-
-Cada mapa escena mostraba un lugar determinado (por ejemplo, un restaurante, pub, teatro, etc.) se\~nalado por una flecha. Para cada escena, se pidi\'o a los sujetos que imaginen que estaban dando consejos a un amigo y para completar la frase `Ser\'{i}a interesante para visitar ..." con una descripci\'on del lugar se\~nalado por la flecha. Despu\'es de pulsar un bot\'on `Siguiente ', se seleccion\'o otro est\'{i}mulo al azar hasta el final del experimento.
-
-Las dos primeras im\'agenes eran rellenos exclusivamente destinados para que los sujetos familiarizados con el entorno experimento, y no se registraron las respuestas correspondientes. Pruebas incompletas y descripciones mal formadas, tambi\'en se descartaron.
+Se descartaron pruebas incompletas y descripciones mal formadas.
+\todo{Ampliar sobre esto}
 
 
 %.....................................
-\subsection{Materials}
+\section{Materiales}
 %.....................................
 
-The experiment made use of the purpose-built interface illustrated in Fig. \ref{fig-interface} and a set of map images obtained from OpenStreetMap\footnote{\url{openstreetmap.org}}. These consisted of fragments of maps of the city centre of Madrid (for the Spanish portion of the corpus) and Lisbon (for the Portuguese portion). 
 
-For each city, 10 map locations were used. Each location was shown with a low and a high zoom levels, making 20 images in total. In both low and high zoom levels  the intended target was kept the same, but the more detailed version would of course display a larger number of distractors and additional details in general. In addition to that, certain street and landmark names might not be depicted at different zoom levels.
+El experimento hizo uso de la interfaz especialmente dise\~nada la cual se muestra en la Fig. \ref{fig-interface} y un conjunto de im\'agenes de mapas obtenido de OpenStreetMap\footnote{\url{openstreetmap.org}}. Estos consist\'{i}an en fragmentos de mapas del centro de la ciudad de Madrid (por la parte espa\~nola del corpus) y Lisboa (para la parte portuguesa).
 
-Half images showed a single arrow pointing to one map location (i.e., requiring a single description as `the restaurant on Baker street'), whereas the other half showed two arrows pointed to two different locations (and hence requiring a reference to a set, as in `the two restaurants near the museum'). 
+Para cada ciudad, se utilizaron 10 \todo{localizaciones} en el mapa. Cada ubicaci\'on se muestra con un nivel bajo y alto de zoom, haciendo 20 im\'agenes en total. En ambos niveles de zoom el objetivo se\~{n}alado se mantuvo, pero la versi\'on m\'as detallada, por supuesto, se ve un mayor n\'umero de distractores y detalles adicionales en general. Algunos nombres de las calles y de landmarks pueden no aparecer en diferentes niveles de zoom.
 
-El experimento hizo uso de la interfaz especialmente dise\~nada se ilustra en la Fig. \ Ref {fig-interface} y un conjunto de im\'agenes de mapa obtenido de OpenStreetMap \ footnote {\ url {openstreetmap.org}}. Estos consist\'{i}an en fragmentos de mapas del centro de la ciudad de Madrid (por la parte espa\~nola del corpus) y Lisboa (para la parte portuguesa).
+La mitad de las im\'agenes mostraron una sola flecha que apunta a un objeto en el mapa (es decir, lo que requiere una sola descripci\'on como `el restaurante en la calle Baker), mientras que la otra mitad mostr\'o dos flechas que apuntaban a dos lugares diferentes (y por lo tanto requieren una referencia a un conjunto, como en "los dos restaurantes cerca del museo").
 
-Para cada ciudad, se utilizaron 10 localizaciones en el mapa. Cada ubicaci\'on se muestra con un bajo y un nivel alto de zoom, haciendo 20 im\'agenes en total. En ambos niveles de zoom de alta y baja al objetivo pretendido se mantuvo la misma, pero la versi\'on m\'as detallada, por supuesto, mostrar un mayor n\'umero de distractores y detalles adicionales en general. Adem\'as de eso, ciertos nombres de las calles y de la se\~nal no pueden ser representados en diferentes niveles de zoom.
 
-La mitad de las im\'agenes mostraron una sola flecha que apunta a un mapa de localizaci\'on (es decir, lo que requiere una sola descripci\'on como `el restaurante en la calle Baker), mientras que la otra mitad mostr\'o dos flechas apuntaban a dos lugares diferentes (y por lo tanto requiere una referencia a un conjunto, como en `los dos restaurantes cerca del museo").
+\section{Anotaci\'on del corpus}
+
+\todo{Aca poner imagen, que muestre los id}
+- Cada objeto en el mapa se marcad\'o con un identificador \'unico (e, g, rest3, pub2 etc.)
+
+- Los valores de los atributos se anotaron en Ingl\'es (por ejemplo, restaurant, pub, street, etc.), pero los nombres propios (para calles, etc.) se mantuvieron en su forma original, tal cual se v\'e en el mapa (Espa\~{n}ol, Portugu\'es).
+
+- Cada objeto tiene 26 posibles atributos.
+
+- En el caso de las descripciones plurales, el conjunto de atributos se repite para cada objeto, por lo que el anotador pod\'{i}a utilizar hasta 52 atributos.
+
+- 10 atributos denotan el objeto principal (target):
+  tipo (por ejemplo, restaurante)
+  nombre (por ejemplo, McDonalds)
+  en (calle-id, etc. avenida-id)
+  izquierda (obj-id)
+  derecha (obj-id)
+  en esquina / entre (Street1, Street2)
+  cerca (obj-id)
+  en-frente-de (obj-id)
+  detr\'as (obj-id)
+  Otros (cualquier otra cosa mencionada en la descripci\'on)
+
+- Los otros 16 atributos denotan los objetos adicionales que se mencionan en la descripci\'on, a los cuales llamamos d1..d4. Por ejemplo, en "El restaurante que esta junto a la iglesia, en la calle Chapel") tenemos: target = restaurante, d1 = church (Iglesia) y d2 = Chapel-Street (Calle Chapel).
+
+- Para cada uno de como m\'aximo 4 puntos de referencia (landmarks) adicionales d1..d4 nombrados en la ER, vamos a anotar 4 atributos:
+  landmark Identificaci\'on (Id)
+  landmark Tipo de referenca (un sustantivo, restaurant, pub...)
+  landmark nombre
+  landmark otro (alguna otra cosa dicha sobre el objeto)
+
+- Cada atributo tiene una lista estricta de los valores permitidos. Por ejemplo, para el objetivo en nuestro Mapa 1 los valores posibles para el tipo de atributo son s\'olo dos: "restaurante" u "otro". El valor "otro" le da al anotador una oportunidad de dar una respuesta cuando la descripci\'on muestra algo muy inusual.
+
+
+- Para los atributos espaciales (izquierda, cerca, etc.) permitimos que los valores que denota la mayor\'{i}a de los objetos en el mapa, a excepci\'on de aquellos que son claramente ilegales. Por ejemplo, en el caso de la "izquierda" posibles valores incluyen la mayor\'{i}a de los objetos en la pantalla, a excepci\'on de los de la derecha del objeto de destino.
+%MOVER A OTRO LADO ESTA SECCION
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
+%\section{Background}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
+%\label{sec-background}
+
+%In this section we briefly discuss a number of REG corpora publicly available for research purposes, and how these resources compare to our current work.
+
+%TUNA \cite{tuna-corpus} was the first prominent REG corpus to be made publicly available for research purposes. The corpus was developed in a series of general-purpose controlled experiments, containing 2280 descriptions produced by 60 speakers in two domains (1200 descriptions of furniture items and 1080 descriptions of people's photographs). TUNA does not contain relational descriptions, and it is possibly the only resource of this kind to include situations of reference to sets. The TUNA corpus has been extensively used in a series of shared tasks \cite{reg2009}.
+
+%TUNA \cite{tuna-corpus} fue el primer prominente corpus REG para estar disponible al p\'ublico para fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, que contiene 2.280 descripciones producidas por 60 altavoces en dos dominios (1.200 descripciones de art\'{i}culos de los muebles y 1080 en las descripciones de las fotograf\'{i}as de las personas). AT\'UN no contiene descripciones relacionales, y es posiblemente el \'unico recurso de este tipo para incluir situaciones de referencia a los conjuntos. El corpus AT\'UN se ha utilizado ampliamente en una serie de tareas compartidas \cite{reg2009}.
+
+
+
+%GRE3D3 and its extension GRE3D7 \cite{gre3d3,gre3d7} were developed in a series of web-based experiments primarily focussed on the study of relational descriptions. GRE3D3 contains 630 descriptions produced by 63 speakers, and GRE3D7 contains 4480 descriptions produced by 287 speakers, making it the largest of its kind to date. The GRE3D domain consists of simple visual scenes containing only two kinds of objects (boxes and spheres) with limited variation in colour and size. In each scene, there is only one possible spatial relation between target and the nearest landmark. Both corpora contain atomic and relational descriptions.
+
+
+%GRE3D3 and its extension GRE3D7 \cite{gre3d3,gre3d7}
+%se desarrollaron en una serie de experimentos basados en la Web se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 altavoces, y GRE3D7 contiene 4.480 descripciones producidas por 287 oradores, por lo que es el mayor de su tipo hasta la fecha. El dominio GRE3D consta de escenas visuales simples que contienen s\'olo dos tipos de objetos (cajas y esferas) con variaci\'on limitada en color y tama\~no. En cada escena, s\'olo hay una posible relaci\'on espacial entre el objetivo y el hito m\'as cercano. Ambos cuerpos contienen descripciones at\'omicas y relacionales.
+
+%Stars \cite{stars-mutual-disamb} and its extension Stars2 were collected for the study of referential overspecification (particularly in the case of relational descriptions). Stars was developed in a pilot web-based experiment, containing 704 descriptions produced by 64 speakers.  The more comprehensive Stars2 data set was produced in dialogue situations involving subject pairs, and it contains 884 descriptions produced by 56 speakers. Both domains make use of simple visual scenes containing up to four object types (e.g., stars, boxes, cones and spheres) with limited variation in colour and size. Differently from other REG corpora, however, Stars/2 includes a considerable number of complex situations of reference involving up to three objects, as in `the box near the sphere, next to the cone'. 
+
+
+%Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se recogieron para el estudio de sobrevaloraci\'on referencial (particularmente en el caso de las descripciones relacionales). Estrellas se desarroll\'o en un experimento basado en la web piloto, que contiene 704 descripciones producidas por 64 altavoces. El conjunto de datos Stars2 m\'as completa se produjo en situaciones de di\'alogo que implican pares sujetos, y contiene 884 descripciones producidas por 56 altavoces. Ambos dominios hacen uso de escenas visuales simples que contienen hasta cuatro tipos de objetos (por ejemplo, estrellas, cajas, conos y esferas) con variaci\'on limitada en color y tama\~no. A diferencia de otros REG corpus, sin embargo, Estrellas / 2 incluye un n\'umero considerable de situaciones complejas de referencia que incluyan hasta tres objetos, como en `la caja cerca de la esfera, al lado del cono".
+
+
+%Despite their usefulness and general contribution to the research in REG, the above domains are still at a certain distance from the kinds of visual scene that might be required for a practical, real-world application. The need for additional complexity and/or realism, and our own interest in the surface realisation task for the Spanish and Portuguese languages, has led us to build a new computational resource of this kind. This work is described in the next sections. Further discussion on the differences between the Zoom corpus and existing resources is presented in Sec. 
+
+
+%A pesar de su utilidad y contribuci\'on general a la investigaci\'on en REG, los dominios anteriores se encuentran todav\'{i}a en una cierta distancia de los tipos de escena visual que podr\'{i}an ser necesarias para una aplicaci\'on en el mundo real pr\'actico. La necesidad de complejidad y / o realismo adicional, y nuestro propio inter\'es en la tarea realizaci\'on de superficie para los idiomas espa\~nol y portugu\'es, nos ha llevado a construir un nuevo recurso computacional de este tipo. Este trabajo se describe en las siguientes secciones. Continuaci\'on del debate sobre las diferencias entre el corpus Zoom y los recursos existentes se presenta en la Sec.\ref{sec-annotation}. 
+
+
+
 %.....................................
 \subsection{Data Collection and Annotation}
 %.....................................
