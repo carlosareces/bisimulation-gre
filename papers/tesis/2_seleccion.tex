@@ -14,6 +14,9 @@ El desaf\'io de la generaci\'on autom\'atica de contenido para las expresiones r
 \section{Algoritmos de REG}
 
 \subsection{Incremental}
+
+
+
 \subsection{Graph}
 \subsection{Bisimulaci\'on}
 
@@ -23,11 +26,11 @@ Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, por e
 
 La gram\'atica de ALC es:
 
-\fxnote{Agregar formula aca}
+\todo{Agregar formula aca}
 
 y la de EL es:
 
-\fxnote{Agregar formula aca}
+\todo{Agregar formula aca}
 
 donde p es un s\'imbolo proposicional, y R esta en el conjunto de s\'imbolos relacionales.
 
@@ -37,87 +40,152 @@ Cada f\'ormula denota un conjunto de entidades del dominio, as\'i podemos usar l
 
 Llamaremos similaridad a la noci\'on de preservaci\'on de f\'ormulas
 
-Dada una DL diremos que una entidad i es similar a i' en el modelo M si para la cualquien f\'ormula Fi de L (l\'ogica considerada) i pertenece a la Inter(Fi) tenemos que i' tambi\'en pertenece. Por lo tanto no hay f\'ormula que pueda distinguirlas. La similaridad no es una relaci\'on sim\'etrica
+Dada una DL diremos que una entidad i es similar a i' en el modelo M si para la cualquier f\'ormula Fi de L (l\'ogica considerada) i pertenece a la Inter(Fi) tenemos que i' tambi\'en pertenece. Por lo tanto no hay f\'ormula que pueda distinguirlas. La similaridad no es una relaci\'on sim\'etrica
 
 por ejemplo f1 es EL-similar a f2 pero f2 no es EL-similar a f1 
 
-En ALC la similaridad es una realci\'on sim\'etrica porque el lenguaje contiene la negaci\'on.
+En ALC la similaridad es una relaci\'on sim\'etrica porque el lenguaje contiene la negaci\'on.
 
 La idea es transformar el problema de GRE al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets) ya que una f\'ormula describe un conjunto.
 
+Las RE que involucran relaciones han recibido m\'as atenci\'on recientemente;
+especialmente en el contexto de las expresiones referenciales espaciales en 
+generaci\'on (por ejemplo,~\cite{kelleher06:increm}),
+donde es particularmente natural utilizar expresiones que implican 
+relaciones espaciales, tales como ``la pelota en la parte superior del cubo''. Sin embargo, el
+algoritmo cl\'asico
+por~\cite{dale91:gener} ha demostrado ser
+incapaz de generar RE satisfactorias en la pr\'actica (v\'ease el an\'alisis sobre
+el~\emph{cabinet corpus}
+en~\cite{viethen06:_algor_for_gener_refer_expres}). Adem\'as, el
+Dale y Haddock algoritmo y muchos de sus sucesores (tales
+como~\cite{kelleher06:increm}) son vulnerables a
+el problema de la \emph{regresi\'on infinita}, donde el algoritmo entra en un
+bucle infinito, saltando hacia atr\'as y hacia adelante entre las descripciones para dos
+individuos emparentados, como en `` el libro sobre la mesa que soporta una
+libro sobre la mesa \ldots ''
+
+%REs involving relations have received increasing attention recently;
+%especially in the context of spatial referring expressions in situated
+%generation (e.g., \cite{kelleher06:increm}),
+%where it is particularly natural to use expressions involving spatial
+%relations such as ``the ball on top of the cube.''  However, the
+%classical algorithm
+%by~\cite{dale91:gener} was shown to be
+%unable to generate satisfying REs in practice (see the analysis over
+%the \emph{cabinet corpus}
+%in~\cite{viethen06:_algor_for_gener_refer_expres}).  Furthermore, the
+%Dale and Haddock algorithm and many of its successors (such
+%as~\cite{kelleher06:increm}) are vulnerable to
+%the problem of \emph{infinite regress}, where the algorithm enters an
+%infinite loop, jumping back and forth between descriptions for two
+%related individuals, as in ``the book on the table which supports a
+%book on the table \ldots''
+
+%\cite{arec2:2008:Areces,arec:usin11} have proposed low complexity
+%algorithms for the generation of relational REs
+%%(including references to sets) 
+%that eliminate the risk of infinite regression.  These algorithms are
+%based on variations of the partition refinement algorithms
+%of~\cite{paig:thre87}.  The information provided by a given scene
+%is interpreted as a relational model whose objects are classified into
+%sets that fit the same description.  This classification is
+%successively \emph{refined} till the target is the only element
+%fitting the description of its class.  The existence of an RE depends
+%on the information available in the input scene, and on the expressive
+%power of the formal language used to describe elements of the
+%different classes in the refinement.
 
 
-REs involving relations have received increasing attention recently;
-especially in the context of spatial referring expressions in situated
-generation (e.g., \cite{kelleher06:increm}),
-where it is particularly natural to use expressions involving spatial
-relations such as ``the ball on top of the cube.''  However, the
-classical algorithm
-by~\cite{dale91:gener} was shown to be
-unable to generate satisfying REs in practice (see the analysis over
-the \emph{cabinet corpus}
-in~\cite{viethen06:_algor_for_gener_refer_expres}).  Furthermore, the
-Dale and Haddock algorithm and many of its successors (such
-as~\cite{kelleher06:increm}) are vulnerable to
-the problem of \emph{infinite regress}, where the algorithm enters an
-infinite loop, jumping back and forth between descriptions for two
-related individuals, as in ``the book on the table which supports a
-book on the table \ldots''
+\cite{arec2:2008:Areces,arec:usin11} han propuesto algoritmos de baja complejidad
+ para la generaci\'on de ER relacionales
+% (incluyendo referencias a juegos)
+que eliminan el riesgo de regresi\'on infinita. Estos algoritmos son
+basado en variaciones de los algoritmos de refinamiento partici\'on
+de~\cite{paig:thre87}. La informaci\'on proporcionada por una escena dada
+se interpreta como un modelo relacional cuyos objetos se clasifican en
+juegos que se adapten a la misma descripci\'on. Esta clasificaci\'on es
+sucesivamente \emph{refinado} hasta el blanco es el \'unico elemento
+ajuste de la descripci\'on de su clase. La existencia de un RE depende
+en la informaci\'on disponible en la escena de entrada, y en la expresiva
+poder del lenguaje formal utilizado para describir los elementos de la
+diferentes clases en el refinamiento.
 
-\cite{arec2:2008:Areces,arec:usin11} have proposed low complexity
-algorithms for the generation of relational REs
-%(including references to sets) 
-that eliminate the risk of infinite regression.  These algorithms are
-based on variations of the partition refinement algorithms
-of~\cite{paig:thre87}.  The information provided by a given scene
-is interpreted as a relational model whose objects are classified into
-sets that fit the same description.  This classification is
-successively \emph{refined} till the target is the only element
-fitting the description of its class.  The existence of an RE depends
-on the information available in the input scene, and on the expressive
-power of the formal language used to describe elements of the
-different classes in the refinement.
-
-Refinement
-algorithms %presented in~\cite{arec2:2008:Areces,arec:usin11}
-effectively compute REs for all individuals in the domain, at the same
-time. The algorithms always terminate returning a formula of the
-formal language chosen that uniquely describes the target (if the
-formal language is expressive enough to identify the target in the
-input model).
+%Refinement
+%algorithms %presented in~\cite{arec2:2008:Areces,arec:usin11}
+%effectively compute REs for all individuals in the domain, at the same
+%time. The algorithms always terminate returning a formula of the
+%formal language chosen that uniquely describes the target (if the
+%formal language is expressive enough to identify the target in the
+%input model).
 %\cite{arec2:2008:Areces}
 %show that the refinement algorithm using the description language \el  is capable of generating 67\% of 
 %the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
 %done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
 
+Los algoritmos de refinamiento
+% presenta en ~ \ cite {arec 2: 2008: Areces, arec: usin11}
+calcular efectivamente ER para todos los objetos en el dominio, al mismo
+tiempo. Los algoritmos siempre terminan devolviendo una f\'ormula del
+lenguaje formal elegido que describe un\'{i}vocamente el objetivo (si el
+lenguaje formal es suficientemente expresiva para identificar el target en el
+modelo de entrada).
 
-Refinement algorithms for GRE are based on the following basic idea:
-given a scene $S$, the objects appearing in $S$ are successively
-classified according to their properties into finer and finer
-classes. A description (in some formal language $\mathcal{L}$) of each
-class is computed every time a class is refined. The procedure always
-stops when the set of classes stabilizes, i.e., no further refinement
-is possible with the information available in the scene\footnote{Of
-  course, if we are only interested in a referring expression for a
-  given target we can stop the procedure as soon as the target is the
-  only element of some of the classes.}.  If the target element is in
-a singleton class, then the formal description of that class is a
-referring expression; otherwise the target cannot be unequivocally
-described (in $\mathcal{L}$).
+%Refinement algorithms for GRE are based on the following basic idea:
+%given a scene $S$, the objects appearing in $S$ are successively
+%classified according to their properties into finer and finer
+%classes. A description (in some formal language $\mathcal{L}$) of each
+%class is computed every time a class is refined. The procedure always
+%stops when the set of classes stabilizes, i.e., no further refinement
+%is possible with the information available in the scene\footnote{Of
+%  course, if we are only interested in a referring expression for a
+%  given target we can stop the procedure as soon as the target is the
+%  only element of some of the classes.}.  If the target element is in
+%a singleton class, then the formal description of that class is a
+%referring expression; otherwise the target cannot be unequivocally
+%described (in 
 
-It is clear that a scene can be encoded in different ways as a
-relational model (for example in \ref{figure22}, we could argue that
-$e_1$ is also \emph{leftof} $e_2$, not considered because they are no
-touching). The algorithm assumes that these issues have been resolved
-and that the model encodes a suitable representation of the scene we
-want to describe.  Moreover, we will assume that all relations are
-\emph{binary}.  We will not consider relations of arity greater than
-two (relations of higher arity can be encoded as binary relations via
-reification, if necessary).
+Algoritmos de refinamiento para GRE se basan en la siguiente idea b\'asica:
+dada una escena $S$, los objetos que aparecen en $S$ son sucesivamente
+clasificados de acuerdo con sus propiedades en m\'as y m\'as fino
+clases. Una descripci\'on (en alg\'un lenguaje formal de $\mathcal{L}$) de cada
+clase se calcula cada vez que una clase es refinado. El procedimiento siempre
+se detiene cuando el conjunto de clases se estabiliza, es decir, no mayor refinamiento
+que es posible con la informaci\'on disponible en la escena \footnote{De
+   Por supuesto, si s\'olo estamos interesados en una expresi\'on que se refiere a un
+   objetivo dado que puede detener el procedimiento en cuanto el objetivo es la
+   \'unico elemento de algunas de las clases.}. Si el elemento de destino est\'a en
+una clase singleton, entonces la descripci\'on formal de esa clase es un
+refiri\'endose expresi\'on; de lo contrario el destino no puede ser inequ\'{i}vocamente
+descrito (en $\mathcal{L}$).
 
-On termination, the algorithm computes what are called the
-$\mathcal{L}$-similarity classes of the input model $\gM$.
+%It is clear that a scene can be encoded in different ways as a
+%relational model (for example in \ref{figure22}, we could argue that
+%$e_1$ is also \emph{leftof} $e_2$, not considered because they are no
+%touching). The algorithm assumes that these issues have been resolved
+%and that the model encodes a suitable representation of the scene we
+%want to describe.  Moreover, we will assume that all relations are
+%\emph{binary}.  We will not consider relations of arity greater than
+%two (relations of higher arity can be encoded as binary relations via
+%reification, if necessary).
+
+Est\'a claro que una escena puede ser codificado en diferentes formas como una
+modelo relacional (por ejemplo, en \ref{figure22}, podr\'{i}amos argumentar que
+$e_1$ es tambi\'en \emph{leftof} $e_2$, no se considera porque hay
+tocando). El algoritmo asume que estas cuestiones se han resuelto
+y que el modelo codifica una representaci\'on adecuada de la escena que
+querer describir. Por otra parte, vamos a suponer que todas las relaciones son
+\emph{binario}. No vamos a considerar las relaciones de aridad mayor que
+dos (relaciones de mayor aridad pueden codificarse como relaciones binarias v\'{i}a
+reificaci\'on, si es necesario).
+
+%On termination, the algorithm computes what are called the
+%$\mathcal{L}$-similarity classes of the input model $\gM$.
 %Intuitively, the referring expression ``\textsf{ball}'' and ``\textsf{cube}''  are more specific and then contain more information than $\top$.
+
+
+Tras la resoluci\'on, el algoritmo calcula lo que se llama la
+$\mathcal{L}$ - clases de semejanza del modelo de entrada de $\gM$.
 
 %There is many $\mathcal{L}$, we will name $\alc$ and $\el$
 

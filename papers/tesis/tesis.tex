@@ -8,6 +8,7 @@
 %\usepackage{amssymb}
 %\usepackage{amsmath}
 %\usepackage{amsthm} % theorems
+
 \usepackage{enumerate}
 \usepackage{epsfig}
 \usepackage{multirow}
@@ -21,16 +22,19 @@
 \usepackage{url}
 \usepackage{verbatim}
 \usepackage{array}
-\usepackage{todo}
+\usepackage{todonotes}
 \usepackage{fixme}
 \usepackage{xspace}
 \usepackage{ifthen}
-
 \usepackage{pdfpages}
 
 \renewcommand{\listtablename}{Indice de Tablas}
 \renewcommand{\tablename}{Tabla}
-
+\hyphenation{a-tri-bu-tos}
+\hyphenation{re-fe-ren-cia-les}
+\hyphenation{ e-va-lua-ci\'on}
+\hyphenation{ma-yo-r\'ia} 
+\hyphenation{ge-ne-ra-ci\'on}
 % Sin sangria
 %\parindent=0mm  
 
@@ -83,7 +87,6 @@
 
 
 
-
 \begin{document}
 
 % PARTE PRELIMINAR
@@ -101,6 +104,7 @@
 \include{resumen}
 %\usepackage[spanish]{babel}
 %\usepackage[latin1]{inputenc} %Letras con acentos, enies.
+\renewcommand{\contentsname}{Contenidos}
 \tableofcontents
 %\include{prefacio} --- Esto es opcional, no es necesario
 %\include{agradecimientos} Esto se hace al final
@@ -111,7 +115,7 @@
 \mainmatter % Comienza la numeracion de paginas con numeros arabicos
 
 %\begin{comment}
-
+\renewcommand{\chaptername}{Cap\'itulo}
 \include{1_intro} %trabajo previo
 
 \include{2_seleccion}
