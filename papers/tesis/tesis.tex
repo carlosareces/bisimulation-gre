@@ -56,7 +56,7 @@
 %\DeclareFloatFont{tiny}{\tiny}% "scriptsize" is defined by floatrow, "tiny" not
 %\floatsetup[table]{font=tiny}
 
-\usepackage{algorithm}
+%\usepackage{algorithm}
 \usepackage{algorithmic}
 
 \newcommand{\tup}[1]{\langle #1 \rangle}
@@ -66,9 +66,9 @@
 \newcommand{\RE}{\textsf{RE}\xspace}
 \newcommand{\REL}{\textsf{REL}\xspace}
 \newcommand{\IR}{\textrm{I}\!\textrm{R}}
-\newcommand{\gM}{\mathcal{M}}
-\newcommand{\el}{\ensuremath{\mathcal{EL}}\xspace}
-\newcommand{\interp}[1]{|\!|#1|\!|}
+%\newcommand{\gM}{\mathcal{M}}
+%\newcommand{\el}{\ensuremath{\mathcal{EL}}\xspace}
+%\newcommand{\interp}[1]{|\!|#1|\!|}
 
 
 \newcommand{\nBlue}{\textsf{blue}\xspace}
@@ -86,6 +86,30 @@
 \newcommand{\nLeftof}{\textsf{leftof}\xspace}
 \newcommand{\nLeft}{\textsf{left}\xspace}
 
+\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
+
+\newcommand{\gM}{\ensuremath{\mathcal{M}}}
+\newcommand{\gL}{\ensuremath{\mathcal{L}}}
+
+\newcommand{\C}{\ensuremath{\mathcal{C}}\xspace}
+\newcommand{\M}{\ensuremath{\mathcal{M}}\xspace}
+%\newcommand{\RE}{\ensuremath{\mathit{RE}}\xspace}
+
+\newtheorem{definition}{Definition}[section]
+\newtheorem{theorem}{Theorem}[section]
+
+%\newcommand{\todo}[1]{\textbf{(#1)}}
+\newcommand{\ignore}[1]{}
+
+\newcommand{\el}{\ensuremath{\mathcal{EL}}\xspace}
+\newcommand{\alc}{\ensuremath{\mathcal{ALC}}\xspace}
+\newcommand{\form}{\mathsf{form}\xspace}
+\newcommand{\prop}{\ensuremath{\mathsf{prop}}\xspace}
+\newcommand{\simm}{\textsf{sim}}
+\newcommand{\rel}{\ensuremath{\mathsf{rel}}\xspace}
+\newcommand{\propm}{\ensuremath{\mathsf{prop}^\gM\xspace}}
+
+\newcommand{\interp}[1]{|\!|#1|\!|}
 
 
 \begin{document}

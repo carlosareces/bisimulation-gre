@@ -17,30 +17,187 @@ El desaf\'io de la generaci\'on autom\'atica de contenido para las expresiones r
 
 
 
-Este algoritmo de Dale busca sobre todo el conjunto de propiedades del target y elije el subconjunto m\'as chico posible que identifica un\'{i}vocamente al objeto target de los distractores en la escena considerada.
+Este algoritmo de Dale~\cite{dale89} busca sobre todo el conjunto de propiedades del target y elije el subconjunto m\'as chico posible que identifica un\'{i}vocamente al objeto target entre los distractores en la escena considerada como se muestra en el siguiente algoritmo.\\
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=8.5cm]{figures/greedy.png}\\[0pt]
+%\begin{figure}[ht]
+%\begin{center}
+%\includegraphics[width=8.5cm]{figures/greedy.png}\\[0pt]
 %\caption{Interface del experimento}
-\label{fig-greedy}
-\end{center}
-\end{figure}
+%\label{fig-greedy}
+%\end{center}
+%\end{figure}
+
+r - el objeto target\\
+D = \{d|d es un distractor de r\}\\
+KB - la base de conocimiento que contiene las propiedades de todos los objetos\\
+$P_{r}$ = $\{p|p(r) \in KB\}$\\
+L = $\{\}$ - la descripci\'on vac\'{i}a\\
+\\
+1. Chequea \'exito:\\
+    \textbf{if} D = $\emptyset$ \textbf{then} return L como una ER que distingue al target r
+    \textbf{elseif} $P_{r}$ = $\emptyset$ \textbf{then} fail
+    
+\textbf{else goto} Paso 2 \\
+\\
+2. Elegir Propiedad:
+ \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:
+    $D_{i}$ $\leftarrow$ D $ \cap$ \{x|x $\in$ D and $p_{i}$ (x) $\in$ KB\}
+    Elegir la propiedad $p_{j}$ tal que $D_{j}$ es el conjunto m\'as chico (es decir la que elimina m\'as distractores) \textbf{goto} Paso 3\\
+\\    
+3. Agregar $p_{j}$ a la descripci\'on actual\\
+L $\leftarrow$ L $\cup$ \{$p_{j}$\}\\
+D $\leftarrow$ $D_{j}$\\
+P $\leftarrow$ P -\{$p_{j}$\}\\
+\textbf{goto} Paso 1\\
 
 
+
+%Dado un dominio D que contiene un target referente r y un conjunto de distractores, una base de conocimiento KB que contiene las propiedades de los objetos.
+%Un conjunto de propiedades verdaderas para r, y una descripcion L inicialmente vac\'{i}a.
+
+Este algoritmo es de orden NP-complete
 
 \subsection{Incremental}
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=8.5cm]{figures/incremental.png}\\[0pt]
-%\caption{Interface del experimento}
-\label{fig-incremental}
-\end{center}
-\end{figure}
+Para reducir el orden de la b\'usqueda Dale \& Reiter hicieron el algoritmo Incremental que reduce la complejidad del algoritmo Greedy cambiando en el paso 2 en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada y que elimina al menos un distractor. Este algoritmo es de orden polinomial.
+
+r - el objeto target\\
+D = \{d|d es un distractor de r\}\\
+KB - la base de conocimiento que contiene las propiedades de todos los objetos\\
+$P_{r}$ = $\{p|p(r) \in KB\}$ ordenado seg\'un preferencia de propiedades\\
+L = $\{\}$ - la descripci\'on vac\'{i}a\\
+\\
+1. Chequea \'exito:\\
+    \textbf{if} D = $\emptyset$ \textbf{then} return L como una ER que distingue al target r
+    \textbf{elseif} $P_{r}$ = $\emptyset$ \textbf{then} fail\\
+\textbf{else goto} Paso 2 \\
+\\
+2. Seleccionar Propiedad:\\
+ \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:
+  \textbf{if} \{x|x $\in$ $D_{i}$ and $p_{i}$ (x) $\in$ KB\} $\neq$ $\emptyset$\\
+  \textbf{then} elegir $p_{j}$ e \textbf{goto} Paso 3\\
+  \textbf{else} $P_{r}$ =$P_{r}$ -$p_{j}$\\
+  \textbf{goto} Paso 1\\
+      \\    
+3. Agregar $p_{j}$ a la descripci\'on actual\\
+L $\leftarrow$ L $\cup$ \{$p_{j}$\}\\
+D $\leftarrow$ $D_{j}$\\
+P $\leftarrow$ P -\{$p_{j}$\}\\
+\textbf{goto} Paso 1\\
+
+%\begin{figure}[ht]
+%\begin{center}
+%\includegraphics[width=8.5cm]{figures/incremental.png}\\[0pt]
+%%\caption{Interface del experimento}
+%\label{fig-incremental}
+%\end{center}
+%\end{figure}
 
 \subsection{Graph}
+
 \subsection{Bisimulaci\'on}
+
+\alc\ and \el.
+
+\emph{Formulas} (or \emph{concepts}) $\varphi$ of $\alc$ are generated
+by the following grammar:
+$$
+\varphi,\varphi' ::= \top \mid p \mid \neg \varphi \mid \varphi \sqcap \varphi'
+\mid \exists R. \varphi
+$$
+where $p$ is in the set of propositional symbols \prop, and $R$ is in
+the set of relational symbols \rel. $\el$ is the negation-free
+fragment of $\alc$.
+
+Formulas of both $\alc$ and $\el$ are interpreted in ordinary
+relational first-order models $\gM = (\Delta,\interp{\cdot})$ where
+$\Delta$ is a non-empty set and $\interp{\cdot}$ is an
+interpretation function such that:
+$$
+\begin{array}{ccl}
+\interp{p} & \subseteq & \Delta  \mbox{ for $p \in \prop$}\\
+\interp{R} & \subseteq & \Delta \times \Delta  \mbox{ for $R \in \rel$}\\
+\interp{\neg \varphi} & = & \Delta - \interp{\varphi}\\
+\interp{\varphi \sqcap \varphi'} & = & \interp{\varphi} \cap \interp{\varphi'}\\
+\interp{\exists R.\varphi} & = & \{i \mid \mbox{for some } i', (i,i') \in \interp{R}\\
+& & \mbox{ and } i' \in \interp{\varphi} \}.\\
+\end{array}
+$$
+
+
+Every formula of a description logic denotes a set of individuals in
+the domain; thus we can use such formulas to describe sets.  For
+instance, in the model in Fig.~\ref{fig:dale-haddock}b, the formula
+$\mathsf{flower}$ denotes the set $\{f_1,f_2\}$; the formula
+$\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$ denotes
+$\{f_2\}$; and the formula $\mathsf{flower} \sqcap \neg
+\exists \mathsf{in}.\mathsf{hat}$ denotes $\{f_1\}$.
+
+Different description logics differ in the inventory of logical
+connectives they allow: While \alc\ permits negation, \el\
+doesn't. There are many other description logics in the literature;
+some that we will get back to in Section~\ref{sec:related} are
+$\mathcal{CL}$ (\el\ without existential quantification, i.e., only
+conjunctions of atoms); $\mathcal{PL}$ (\alc\ without existential
+quantification, i.e., propositional logic); and
+$\mathcal{ELU}_{(\neg)}$ (\el\ plus disjunction and atomic negation).
+
+Below, we will use a key notion of formula preservation that we call
+\emph{similarity}.  For any DL $\gL$, we will say that
+an individual $i$ is \emph{\gL-similar} to $i'$ in a given model $\gM$
+if for any formula $\varphi \in \gL$ such that $i \in
+\interp{\varphi}$, we also have $i' \in \interp{\varphi}$.
+Equivalently, there is no $\gL$-formula that holds of $i$ but not of
+$i'$.  We say that the \emph{\gL-similarity set} of some individual
+$i$ is the set of all individuals to which $i$ is \gL-similar.
+
+Notice that similarity is not necessarily a symmetrical relation: For
+instance, $f_1$ is \el-similar to $f_2$ in
+Fig.~\ref{fig:dale-haddock}b, but $f_2$ is not \el-similar to $f_1$
+(it satisfies the formula $\exists \mathsf{in}.\mathsf{hat}$ and $f_1$
+doesn't).  However, \alc-similarity is a symmetrical relation because
+the language contains negation; and indeed, $f_1$ is not \alc-similar
+to $f_2$ either because it satisfies $\neg \exists
+\mathsf{in}.\mathsf{hat}$.  Because \alc\ is more expressive than \el,
+it is  possible for some individual $a$ to be \el-similar but
+not \alc-similar to some individual $b$, but not vice versa.
+
+
+\ignore{
+
+Notice
+that, given that the language includes negation, the notion of
+$\alc$-similarity is symmetric: if $i$ is \alc-similar to $i'$ then
+$i'$ is \alc-similar to $i$.  This is not the case for all description
+logic.  In particular, the notion of $\el$-similarity is not
+symmetric.  Given a model $\gM$ and an individual $i$ in $\gM$, we
+will write \simm$_\alc(i)$, the similarity set, to all the elements of
+$\gM$ which are \alc-similar to $i$.x
+
+A key notion in studying description logics is \emph{simulation}.
+We will discuss in detail the case for $\alc$; further details can be
+found in~\cite{blac:moda01,kurt:expr99}.
+
+\begin{definition}
+Given a model $\gM = (\Delta,\interp{\cdot})$, and two individuals $i$ and $i'$ in $\gM$, an \emph{$\alc$-simulation} linking $i$ to $i'$  is a relation $Z
+\subseteq \Delta \times \Delta$ such that 
+\begin{itemize}
+\item[i)] $(i,i') \in Z$.\\[-1.5em]
+\item[ii)] if $(e_1, e_2) \in Z$ then $\propm(e_1) = \propm(e_2)$.\\[-1.5em]
+\item[iii)] if $(e_1,e_2) \in Z$ and for some $R \in \rel$ there is $e_1'$ such that
+$(e_1,e_1') \in \interp{R}$ then there is $e_2'$ such that $(e_2,e_2') \in \interp{R}$ and
+$(e_1',e_2') \in Z$.\\[-1.5em]
+\item[iv)] if $(e_1,e_2) \in Z$ and for some $R \in \rel$ there is $e_2'$ such that
+$(e_2,e_2') \in \interp{R}$ then there is $e_1'$ such that $(e_1,e_1') \in \interp{R}$ and
+$(e_1',e_2') \in Z$.
+\end{itemize}
+%A maximal subset of $\Delta$ all of whose elements are pairwise
+%bisimilar is called an \emph{\alc-bisimulation class} of $\gM$.
+\end{definition}
+
+}
+
+
 
 En este cap\'itulo daremos una introducci\'on a l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) y luego daremos el algoritmo en el cual nos basamos en esta tesis.
 
@@ -372,8 +529,12 @@ Until now RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \t
 
 \section{Aproximaciones emp\'iricas a la soluci\'on de REG}
 
+
+
 \subsection{Corpus existente}
 \subsection{Jette y otros trabajos emp\'iricos}
+
+%http://link.springer.com/chapter/10.1007/978-3-642-15573-4_9
 \subsection{M\'etricas de evaluaci\'on/comparaci\'on con corpus}
 
 
