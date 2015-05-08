@@ -95,24 +95,42 @@ P $\leftarrow$ P -\{$p_{j}$\}\\
 
 \subsection{Graph}
 
+El dominio que incluye al target y los distractores es representado como un grafo dirigido etiquetado. La representaci\'on gr\'afica de una escena visual se modela cada objeto de la escena como un v\'ertice en el grafo. Los atributos at\'omicos como color, tipo o tama\~no
+se representan como un loop en el correspondiente nodo. Ellos est\'an etiquetados con los nombres de atributos y los valores que el objeto en cuesti\'on tiene para estas propiedades. Las relaciones entre objetos, por ejemplo abajo, arriba se modelan como aristas entre los v\'ertices correspondientes.
+
+Para generar una descripci\'on distintiva, el algoritmo de b\'usqueda basado en el gr\'afo
+busca un subgrafo del grafo que identifica al target un\'{i}vocamente.
+
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda en primer lugar a lo ancho sobre el arbol conectado al subgrafo encontrado hasta ahora. Se busca en el espacio de manera exhaustiva,
+pero utiliza una heur\'{i}stica basada en el costo (descripto a continuaci\'on) que es capaz de podar el espacio de b\'usqueda.
+
+Informalmente, un subgrafo refiere al target si y s\'olo si puede ser
+`Colocado sobre 'el gr\'afico de dominio de tal manera que el v\'ertice que representa subgrafo
+el objeto de destino se puede `coloca sobre 'el v\'ertice del objetivo en el gr\'afico de dominio,
+y cada uno de los bordes marcados en el subgrafo puede ser `coloca sobre 'un correspondiente
+borde en el gr\'afico de dominio con la misma etiqueta y el mismo sentido. Por otra parte,
+un subgrafo es distinguir si y s\'olo si se puede `coloca sobre 'exactamente un
+v\'ertice en el gr\'afico de dominio. La noci\'on informal de un gr\'afico que se coloca sobre `'
+otro corresponde al concepto gr\'afico-te\'orico matem\'atico de
+subgrafo isomorfismo, Se modelan como aristas entre los v\'ertices correspondientes.
+
+
 \subsection{Bisimulaci\'on}
 
-\alc\ and \el.
 
-\emph{Formulas} (or \emph{concepts}) $\varphi$ of $\alc$ are generated
-by the following grammar:
+En este cap\'itulo daremos una introducci\'on a l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) y luego daremos el algoritmo en el cual nos basamos en esta tesis.
+
+Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, vamos a explicar \alc y \el.
+
+\emph{F\'ormulas} (o \emph{concepts}) $\varphi$ de $\alc$ son generadas por la siguiente gram\'atica;
 $$
 \varphi,\varphi' ::= \top \mid p \mid \neg \varphi \mid \varphi \sqcap \varphi'
 \mid \exists R. \varphi
 $$
-where $p$ is in the set of propositional symbols \prop, and $R$ is in
-the set of relational symbols \rel. $\el$ is the negation-free
-fragment of $\alc$.
+donde $p$ es el conjunto de los s\'imbolos proposicionales \prop y $R$ es el de los s\'imbolos relacionales \rel. $\el$ es la parte sin negaci\'on de $\alc$.
 
-Formulas of both $\alc$ and $\el$ are interpreted in ordinary
-relational first-order models $\gM = (\Delta,\interp{\cdot})$ where
-$\Delta$ is a non-empty set and $\interp{\cdot}$ is an
-interpretation function such that:
+Las f\'ormulas de ambos $\alc$ y $\el$ son interpretadas en modelos relacionales de primer orden $\gM = (\Delta,\interp{\cdot})$ donde
+$\Delta$ es un conjunto no vac\'io y $\interp{\cdot}$ es una funci\'on de interpretaci\'on tal que:
 $$
 \begin{array}{ccl}
 \interp{p} & \subseteq & \Delta  \mbox{ for $p \in \prop$}\\
@@ -124,106 +142,48 @@ $$
 \end{array}
 $$
 
-
-Every formula of a description logic denotes a set of individuals in
-the domain; thus we can use such formulas to describe sets.  For
-instance, in the model in Fig.~\ref{fig:dale-haddock}b, the formula
-$\mathsf{flower}$ denotes the set $\{f_1,f_2\}$; the formula
-$\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$ denotes
-$\{f_2\}$; and the formula $\mathsf{flower} \sqcap \neg
-\exists \mathsf{in}.\mathsf{hat}$ denotes $\{f_1\}$.
-
-Different description logics differ in the inventory of logical
-connectives they allow: While \alc\ permits negation, \el\
-doesn't. There are many other description logics in the literature;
-some that we will get back to in Section~\ref{sec:related} are
-$\mathcal{CL}$ (\el\ without existential quantification, i.e., only
-conjunctions of atoms); $\mathcal{PL}$ (\alc\ without existential
-quantification, i.e., propositional logic); and
-$\mathcal{ELU}_{(\neg)}$ (\el\ plus disjunction and atomic negation).
-
-Below, we will use a key notion of formula preservation that we call
-\emph{similarity}.  For any DL $\gL$, we will say that
-an individual $i$ is \emph{\gL-similar} to $i'$ in a given model $\gM$
-if for any formula $\varphi \in \gL$ such that $i \in
-\interp{\varphi}$, we also have $i' \in \interp{\varphi}$.
-Equivalently, there is no $\gL$-formula that holds of $i$ but not of
-$i'$.  We say that the \emph{\gL-similarity set} of some individual
-$i$ is the set of all individuals to which $i$ is \gL-similar.
-
-Notice that similarity is not necessarily a symmetrical relation: For
-instance, $f_1$ is \el-similar to $f_2$ in
-Fig.~\ref{fig:dale-haddock}b, but $f_2$ is not \el-similar to $f_1$
-(it satisfies the formula $\exists \mathsf{in}.\mathsf{hat}$ and $f_1$
-doesn't).  However, \alc-similarity is a symmetrical relation because
-the language contains negation; and indeed, $f_1$ is not \alc-similar
-to $f_2$ either because it satisfies $\neg \exists
-\mathsf{in}.\mathsf{hat}$.  Because \alc\ is more expressive than \el,
-it is  possible for some individual $a$ to be \el-similar but
-not \alc-similar to some individual $b$, but not vice versa.
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=8.5cm]{figures/pic-dale-haddock.pdf}\\[0pt]
+\caption{}
+\label{fig:dale-haddock}
+\end{center}
+\end{figure}
 
 
-\ignore{
+Cada f\'ormula de una descripci\'on l\'ogica denota un conjunto de objetos del dominio; por lo tanto podemos usar tales f\'ormulas para describir conjuntos. Por ejemplo en el modelo de la Figura.~\ref{fig:dale-haddock}b, la f\'ormula
+$\mathsf{flower}$ denota el conjunto $\{f_1,f_2\}$; La f\'ormula
+$\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$ denota
+$\{f_2\}$; y la f\'ormula $\mathsf{flower} \sqcap \neg
+\exists \mathsf{in}.\mathsf{hat}$ denota $\{f_1\}$.
 
-Notice
-that, given that the language includes negation, the notion of
-$\alc$-similarity is symmetric: if $i$ is \alc-similar to $i'$ then
-$i'$ is \alc-similar to $i$.  This is not the case for all description
-logic.  In particular, the notion of $\el$-similarity is not
-symmetric.  Given a model $\gM$ and an individual $i$ in $\gM$, we
-will write \simm$_\alc(i)$, the similarity set, to all the elements of
-$\gM$ which are \alc-similar to $i$.x
+Diferentes l\'ogicas de descripci\'on difieren en los conectores que permiten: Mientras que \alc\ permite negaci\'on, \el\
+no permite. 
 
-A key notion in studying description logics is \emph{simulation}.
-We will discuss in detail the case for $\alc$; further details can be
-found in~\cite{blac:moda01,kurt:expr99}.
+Hay muchas otras l\'ogicas de descripci\'on en la literatura por ejemplo 
 
-\begin{definition}
-Given a model $\gM = (\Delta,\interp{\cdot})$, and two individuals $i$ and $i'$ in $\gM$, an \emph{$\alc$-simulation} linking $i$ to $i'$  is a relation $Z
-\subseteq \Delta \times \Delta$ such that 
-\begin{itemize}
-\item[i)] $(i,i') \in Z$.\\[-1.5em]
-\item[ii)] if $(e_1, e_2) \in Z$ then $\propm(e_1) = \propm(e_2)$.\\[-1.5em]
-\item[iii)] if $(e_1,e_2) \in Z$ and for some $R \in \rel$ there is $e_1'$ such that
-$(e_1,e_1') \in \interp{R}$ then there is $e_2'$ such that $(e_2,e_2') \in \interp{R}$ and
-$(e_1',e_2') \in Z$.\\[-1.5em]
-\item[iv)] if $(e_1,e_2) \in Z$ and for some $R \in \rel$ there is $e_2'$ such that
-$(e_2,e_2') \in \interp{R}$ then there is $e_1'$ such that $(e_1,e_1') \in \interp{R}$ and
-$(e_1',e_2') \in Z$.
-\end{itemize}
-%A maximal subset of $\Delta$ all of whose elements are pairwise
-%bisimilar is called an \emph{\alc-bisimulation class} of $\gM$.
-\end{definition}
+$\mathcal{CL}$ (\el\ sin el cuantificador existencial, i.e., only
+conjunctions of atoms); $\mathcal{PL}$ (\alc\ l\'ogica propocisional); y
+$\mathcal{ELU}_{(\neg)}$ (\el\ m\'as disjunci\'on y negaci\'on at\'omica).
 
-}
+Usaremos una noci\'on de preservaci\'on de f\'ormulas que llamaremos
+\emph{similarity}. Para cualquier DL $\gL$, diremos que un individual $i$ es \emph{\gL-similar} a $i'$ en un modelo dado $\gM$
+si para cualquier f\'ormula $\varphi \in \gL$ tal que $i \in
+\interp{\varphi}$, tambi\'en tenemos que $i' \in \interp{\varphi}$.
+Equivalentemente, no hay $\gL$-f\'ormula que se mantenga para $i$ pero no para
+$i'$.  Diremos que \emph{\gL-conjunto de similaridad } de alg\'un individual
+$i$ es el conjunto de todos los individuales a los cuales $i$ es \gL-similar.
 
+Notar que la similaridad no es necesariamente una relaci\'on sim\'etrica: Por ejemplo: $f_1$ es \el-similar a $f_2$ en
+Fig.~\ref{fig:dale-haddock}b, pero $f_2$ no es \el-similar a $f_1$
+(satisface la f\'ormula $\exists \mathsf{in}.\mathsf{hat}$ y $f_1$
+no la satisface).  De todas maneras, \alc-similaridad es una relaci\'on sim\'etrica porque
+el languaje contiene negaci\'on; y en consecuencia, $f_1$ no es \alc-similar
+a $f_2$ porque este tampoco satisface $\neg \exists
+\mathsf{in}.\mathsf{hat}$.  Porque \alc\ es m\'as expresivo que \el,
+esto es, para alg\'un indivdual $a$ es posible ser \el-similar pero
+no \alc-similar a alg\'un individual $b$, pero no viceversa.
 
-
-En este cap\'itulo daremos una introducci\'on a l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) y luego daremos el algoritmo en el cual nos basamos en esta tesis.
-
-Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, por ejemplo ALC y EL, la diferencia es que ALC incluye negaciones y EL no.
-
-La gram\'atica de ALC es:
-
-\todo{Agregar formula aca}
-
-y la de EL es:
-
-\todo{Agregar formula aca}
-
-donde p es un s\'imbolo proposicional, y R esta en el conjunto de s\'imbolos relacionales.
-
-Las f\'ormulas son interpretadas en modelos de primer orden M=(Delta, Intep) donde Delta es un conjunto no vac\'io y la Intep es la siguiente funci\'on:
-
-Cada f\'ormula denota un conjunto de entidades del dominio, as\'i podemos usar las f\'ormulas para denotar conjuntos.
-
-Llamaremos similaridad a la noci\'on de preservaci\'on de f\'ormulas
-
-Dada una DL diremos que una entidad i es similar a i' en el modelo M si para la cualquier f\'ormula Fi de L (l\'ogica considerada) i pertenece a la Inter(Fi) tenemos que i' tambi\'en pertenece. Por lo tanto no hay f\'ormula que pueda distinguirlas. La similaridad no es una relaci\'on sim\'etrica
-
-por ejemplo f1 es EL-similar a f2 pero f2 no es EL-similar a f1 
-
-En ALC la similaridad es una relaci\'on sim\'etrica porque el lenguaje contiene la negaci\'on.
 
 La idea es transformar el problema de GRE al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets) ya que una f\'ormula describe un conjunto.
 
@@ -532,6 +492,11 @@ Until now RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \t
 
 
 \subsection{Corpus existente}
+
+\textcolor{blue}{Aca probablemente describa los corpus TUNA y GRE3D7}
+\label{sec:corpusGRE}
+\label{sec:corpusTUNA}
+
 \subsection{Jette y otros trabajos emp\'iricos}
 
 %http://link.springer.com/chapter/10.1007/978-3-642-15573-4_9

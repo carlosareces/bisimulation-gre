@@ -28,14 +28,14 @@ En esta secci\'on se presenta una modificaci\'on del algoritmo
 de~\cite{arec2:2008:Areces} donde el orden fijo de las propiedades de
 la escena de entrada se sustituye por una distribuci\'on de probabilidad finita. Los
 cambios requeridos son bastante sencillos (v\'ease
-Figuras~\ref{fig:algo1} y~\ref{fig:algo2}), pero el comportamiento del algoritmo 
+Figuras~\ref{algo:bisim-l} y~\ref{algo:bisim-add-el-over}), pero el comportamiento del algoritmo 
 resultante cambia notablemente. Para empezar, el
 algoritmo es ahora no determin\'istico: dos ejecusiones del algoritmo con la
 misma entrada podr\'{i}an resultar en diferentes REs para los objetos en la escena.
 Ahora podemos generar una distribuci\'on de probabilidad
 para las ER generadas por el algoritmo si lo ejecutamos muchas veces con
 el mismo input. Como vamos a mostrar emp\'{i}ricamente en
-Secci\'on~\ref{sec:Evaluaci\'on}, dado un corpus de ER para una escena determinada,
+Secci\'on~\ref{sec:evaluacion}, dado un corpus de ER para una escena determinada,
 es posible calcular una distribuci\'on de probabilidad adecuada para la
 probabilidad de uso de las propiedades y relaciones en la escena, de tal manera que
 la distribuci\'on de probabilidad de los REs generadas por el modelo
@@ -202,7 +202,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
   }
 }
 \end{algorithm}
-\vspace*{-.5cm}\caption{Refinement algorithm with probabilities and overspecification for the \el-language}\label{fig:algo3}
+\vspace*{-.5cm}\caption{Algoritmos de refinamiento con probabilidades y sobrespecificacion para el \el-language}\label{fig:algo3}
 
 \end{figure}
 
@@ -213,67 +213,67 @@ entrada un modelo $\gM$ y una lista de pares de tuplas (R, R.\puse) que vincula 
 relaci\'on R a una cierta probabilidad de uso R.\puse. Es decir, si $\REL$ es el
 conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura}
 del modelo), entonces R $\in (\REL \times [0,1])^*$. Por otra parte, asumimos que 
-Rs esta ordenado por R.\puse de mayor a menor.
+Rs esta ordenado por R.\puse\ de mayor a menor.
 
 
-%\begin{figure}[t]
-%\small
-%\centering
-%\begin{algorithm}[H]
-%\dontprintsemicolon
-%\caption{Computing $\mathcal{L}$-similarity classes}\label{algo:bisim-l}
-%\KwIn{\footnotesize A model $\gM$ and a list Rs $\in (\REL \times [0,1])^*$
-% of relation symbols with their \puse\ values, ordered by \puse}
-%\KwOut{\footnotesize A set of formulas \RE such that
-%$\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
-%$\mathcal{L}$-similarity classes of $\gM$}
+\begin{figure}[t]
+\small
+\centering
+\begin{algorithm}[H]
+\dontprintsemicolon
+\caption{Computing $\mathcal{L}$-similarity classes}\label{algo:bisim-l}
+\KwIn{\footnotesize A model $\gM$ and a list Rs $\in (\REL \times [0,1])^*$
+ of relation symbols with their \puse\ values, ordered by \puse}
+\KwOut{\footnotesize A set of formulas \RE such that
+$\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
+$\mathcal{L}$-similarity classes of $\gM$}
 
-%$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}
+$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}
 
-%\For{\em (R,R.\puse) $\in$ Rs}{
-%	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
-%        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ are incremented by R.\incuse in each loop}
-%}
+\For{\em (R,R.\puse) $\in$ Rs}{
+	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
+        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ are incremented by R.\incuse in each loop}
+}
 
-%\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are incremented until they reach 1}}{
-%  \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(|\interp{\varphi}|>1)$}{
-%      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
-%      \For{\em (R, R.\puse) $\in$ Rs}{
-%          \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
-%              \For{\em $\varphi \in$ \RE}{
-%                  add$_\mathcal{L}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
-%                  }\;
-%              \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
-%              }
-%     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}
-%  }
-%  \For{\em (R,R.\puse) $\in$ Rs}{
-%    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize increase R.\puse}
-%  }
-%}
-%\end{algorithm}
-%\vspace*{-.5cm}\caption{Main algorithm, dealing with probabilities}\label{fig:algo1}
-%\end{figure}
+\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are incremented until they reach 1}}{
+  \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(|\interp{\varphi}|>1)$}{
+      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
+      \For{\em (R, R.\puse) $\in$ Rs}{
+          \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
+              \For{\em $\varphi \in$ \RE}{
+                  add$_\mathcal{L}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
+                  }\;
+              \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
+              }
+     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}
+  }
+  \For{\em (R,R.\puse) $\in$ Rs}{
+    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize increase R.\puse}
+  }
+}
+\end{algorithm}
+\vspace*{-.5cm}\caption{Main algorithm, dealing with probabilities}\label{fig:algo1}
+\end{figure}
 
 
-%\begin{figure}[t]
-%\small
-%\centering
-%\begin{algorithm}[H]
-%\dontprintsemicolon
-%\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el}
+\begin{figure}[t]
+\small
+\centering
+\begin{algorithm}[H]
+\dontprintsemicolon
+\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el}
 
-%\For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
-%  \If(\tcp*[f]{\footnotesize informative:smaller than the original?}){\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant:can't be obtained from \RE?}\\
-%    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial:has elements?}\\
-%     \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$ }{
-%    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
-%    remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
-%  }
-%}
-%\end{algorithm}
-%\vspace*{-.5cm}\caption{Refinement function for the \el-language}\label{fig:algo2}
-%\end{figure}
+\For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
+  \If(\tcp*[f]{\footnotesize informative:smaller than the original?}){\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant:can't be obtained from \RE?}\\
+    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial:has elements?}\\
+     \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$ }{
+    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
+    remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
+  }
+}
+\end{algorithm}
+\vspace*{-.5cm}\caption{Refinement function for the \el-language}\label{fig:algo2}
+\end{figure}
 
 %The set $\RE$ will contain the formal description of the refinement
 %classes and it is initialized by the most general description $\top$.
@@ -332,15 +332,14 @@ clases. El valor de R.\puse\ se incrementar\'a en $R.\incuse$
 en cada ciclo principal, para asegurar que todas las relaciones son en alg\'un momento,
 consideradas por el algoritmo. Esto asegura que una expresi\'on referencial
 se encontrar\'a si existe; pero dar\'a mayor probabilidad a las expresiones
-queusan las relaciones con m\'as alto R.\puse.
+que usan las relaciones con m\'as alta R.\puse.
  
-Mientras que $\RE$ contiene descripciones que puede ser refinadas (es decir, las clases
+Mientras que $\RE$ contiene descripciones que pueden ser refinadas (es decir, las clases
 con al menos dos elementos) vamos a llamar a la funci\'on de refinamiento
 add$_\mathcal{L}$(R,$\varphi$,$\RE$) sucesivamente con cada relaci\'on
 de Rs. Un cambio en una de las clases, puede desencadenar cambios en
 las otras. Por esa raz\'on, si $\RE$ cambia, salimos del ciclo for y volvemos a
-empezar con las relaciones de m\'as alto R.\puse. Si despu\'es de probar
-para refinar el conjunto con todas las relaciones de Rs, el conjunto $\RE$ no ha
+empezar con las relaciones de m\'as alta R.\puse. Si despu\'es de probar refinar el conjunto con todas las relaciones de Rs, el conjunto $\RE$ no ha
 cambiado, hemos alcanzado un estado estable (es decir, las clases que se describen
 en $\RE$ no puede ser refinadas, utilizando los valores de R.\puse\ ). 
 A continuaci\'on, se incrementar\'an todos los valores de R.\puse\ y se iniciar\'a el
@@ -360,15 +359,15 @@ eliminadas.
 
 Supongamos que se fija un modelo de entrada $\gM$ y los valores de R.\puse, y se fija tambi\'en
 alg\'un elemento target $t$. Supongamos tambi\'en que $t$ tiene una expresion referencial en 
-$\el$ . Cuando termine el
+$\el$. Cuando termine el
 Algoritmo~\ref{fig:algo1} habra calculado una f\'ormula $\varphi$ de $\el$ tal
 que $\interp{\varphi} = \{t\}$, pero $\varphi$ pueden ser diferentes en
 cada ejecuci\'on del algoritmo (a pesar de que $\gM$ y Rs son fijos). Si nosotros
 repetimos este procedimiento un n\'umero estad\'{i}sticamente significativo de veces,
 podemos definir una estimaci\'on de la distribuci\'on de probabilidad de las ER
 generadas por el algoritmo para $t$, dado $\gM$ y Rs. En la
-Secci\'on~\ref{sec:Evaluaci\'on} vamos a demostrar que dado un corpus de ER
-para $\gM$, es posible definir los valores de R.\puse para que esta
+Secci\'on~\ref{sec:evaluacion} vamos a demostrar que dado un corpus de ER
+para $\gM$, es posible definir los valores de R.\puse\ para que esta
 distribuci\'on de probabilidad coincida con buena precisi\'on a la distribuci\'on de probabilidad
  de ER que se encuentra en el corpus.
 
@@ -403,9 +402,8 @@ escenas que son t\'{i}picos del dominio en el que el algoritmo GRE tiene que ope
 esas escenas para las que se dispone de un corpus de ER. A continuaci\'on, mostramos c\'omo
 generalizar estos valores a otras escenas en el dominio, utilizando un
 algoritmo de aprendizaje autom\'atico. En primer lugar vamos a ejemplificar la
-metodolog\'{i}a utilizando el corpus GRE3D7 que introducimos en la Secci\'on de
-~\ref{sec:learningGRE} y, a continuaci\'on mostraremos c\'omo hacer lo mismo con
-la TUNA-corpus que describimos en la Secci\'on~\ref{sec:learningTUNA}.
+metodolog\'{i}a utilizando el corpus GRE3D7~\ref{sec:corpusGRE} que introducimos y, a continuaci\'on mostraremos c\'omo hacer lo mismo con
+la TUNA-corpus7~\ref{sec:corpusTUNA}.
 
 
 \subsubsection{Calculando \puse\ cuando hay disponible un corpus para la escena considerada}
@@ -453,12 +451,12 @@ Esta estimaci\'on es demasiado simplificada y, por ejemplo, no
 diferencia las propiedades del target y las propiedades de
 los landmarks utilizadas en una RE relacional Para completar la descripci\'on
 del target. Pero es muy f\'acil de calcular, y vamos a ver
-en la Secci\'on~\ref{sec:Evaluaci\'on} que ya produce ER naturales
+en la Secci\'on~\ref{sec:evaluacion} que ya produce ER naturales
 que coinciden con las encontradas en el corpus.
 
 Para aclarar el c\'alculo de R.\puse \ en el modelo $\gM$ asociado
 a cada escena enumeramos los pasos necesarios en detalle, y discutimos c\'omo
-ellos son llevadod a cabo en el corpus GRE3D7:
+ellos son llevados a cabo en el corpus GRE3D7:
 
 
 \begin{enumerate}
@@ -552,9 +550,9 @@ para describir los diferentes targets en diferentes escenas. Veremos c\'omo se
 pueden utilizarlos para obtener valores para los nuevos targets y escenas utilizando un
 enfoque de aprendizaje autom\'atico en la siguiente secci\'on. No es de extra\~nar,
 que usando estos valores para R.\puse\ las ER generadas con mayor frecuencia por el
-algoritmo se puedab encontrar en el corpus. Como discutiremos en la Secci\'on~\ref{sec:Evaluaci\'on} el algoritmo genera ER
+algoritmo se puedab encontrar en el corpus. Como discutiremos en la Secci\'on~\ref{sec:evaluacion} el algoritmo genera ER
 con una distribuci\'on que coincide con la encontrada en el corpus y, como la
-Tabla~\ref{resultados-algo-fig3} muestra, incluso las ER generadas por el algoritmo que no se encontraron
+Tabla~\ref{results-algo-fig3} muestra, incluso las ER generadas por el algoritmo que no se encontraron
 en el corpus son naturales.
 
 
@@ -617,11 +615,10 @@ m\'as cuando el objetivo no puede ser identificada con taxon\'omica
 S\'olo las propiedades absolutas (verde y azul) (bola y cubo) y. En
 otras palabras, en el corpus GRE3D7 se utiliza el tama\~no m\'as frecuencia (90,2 \%)
 del tiempo cuando el RE resultante no se falte espacio que cuando est\'a
-(34 \%). Puede que no sea posible aprender esta caracter\'{i}stica de la
-Datos GRE3D7 ya que incluso con las funciones que dependen de dominio definidos
-en~\cite[Cap\'{i}tulo 6] {viet:gene11}, no pod\'{i}a ser aprendido por decisi\'on
-\'arboles. Como resultado podemos ver en la tabla~\ref{probabilidad de uso} que
-de la figura 13, el valor estimado para `` grandes '' no est\'an cerca de la
+(34 \%). Puede que no sea posible aprender esta caracter\'{i}stica de los
+datos del GRE3D7 ya que incluso con las funciones que dependen de dominio definidos
+en~\cite[Cap\'{i}tulo 6] {viet:gene11}, no pod\'{i}a ser aprendido por \'arboles decisi\'on. Como resultado podemos ver en la tabla~\ref{probability-of-use} que
+de la figura 13, el valor estimado para ``grande'' no est\'a cerca de la
 valor calculado a partir de corpus. \textit{En el caso de la TUNA-corpus
   mostramos que no pod\'{i}amos aprender la dependencia de la dimensi\'on-X y
   dimensi\'on-y, es decir, cuando una persona a\~nade dimensi\'on-x es altamente
@@ -652,51 +649,52 @@ below-of & 0 & 0 & 0 & 0 \\
 \end{center}
 \end{table}
 
-The learning was done with the machine learning toolkit
-WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we
-are learning) for all the scenes of the GRE3D7 \textit{and the
-  TUNA-corpus}.  We use linear regression to learn the function of
-\puse\ for each word in the signature.  For a given scene, we replace
-the variables of the obtained function by the values of the features
-in the scene that we want to describe.
+%The learning was done with the machine learning toolkit
+%WEKA~\cite{Hall:WEK09}, training on all minus one (the one for that we
+%are learning) for all the scenes of the GRE3D7 \textit{and the
+%  TUNA-corpus}.  We use linear regression to learn the function of
+%\puse\ for each word in the signature.  For a given scene, we replace
+%the variables of the obtained function by the values of the features
+%in the scene that we want to describe.
 
-Using linear regression we are able to learn interesting
-characteristics of the domain. To start with, it learns known facts
-such that the saliency of a color depends strongly on whether the
-target object is of that color, and it does not depend on its
-discrimination power in the model. Moreover, it learns that the on-top
-relation is used more frequently than the horizontal relations
-(left-of and right-of) which confirms a previous finding reported
-in~\cite{viet:gene11}. Finally, it learned a surprising fact of the
-GRE3D7 corpus (not found by previous work), that is that size is used
-more frequently in an overspecified manner when the target and
-landmark share the size. Size was used in overspecified REs in 49\% of
-the descriptions for scenes where target and landmark shared the size,
-and 25\% of the time when target and landmark did not share the
-size. This can be explained by the observation that if landmark and
-target share a property, this property is more salient.
+%Using linear regression we are able to learn interesting
+%characteristics of the domain. To start with, it learns known facts
+%such that the saliency of a color depends strongly on whether the
+%target object is of that color, and it does not depend on its
+%discrimination power in the model. Moreover, it learns that the on-top
+%relation is used more frequently than the horizontal relations
+%(left-of and right-of) which confirms a previous finding reported
+%in~\cite{viet:gene11}. Finally, it learned a surprising fact of the
+%GRE3D7 corpus (not found by previous work), that is that size is used
+%more frequently in an overspecified manner when the target and
+%landmark share the size. Size was used in overspecified REs in 49\% of
+%the descriptions for scenes where target and landmark shared the size,
+%and 25\% of the time when target and landmark did not share the
+%size. This can be explained by the observation that if landmark and
+%target share a property, this property is more salient.
 
 El aprendizaje se realiza con el kit de herramientas de aprendizaje autom\'atico
-WEKA~\cite{Hall:WEK09}, capacitaci\'on en todo lo que uno menos (el uno para que
-est\'an aprendiendo) para todas las escenas de la GRE3D7 \textit{y
+WEKA~\cite{Hall:WEK09}, entrenando en todo menos uno (para el que estamos aprendiendo) para todas las escenas de la GRE3D7 \textit{y
   TUNA-corpus}. Utilizamos regresi\'on lineal para aprender la funci\'on de
-\puse\ para cada palabra en la firma. Para una escena determinada, reemplazamos
+\puse\ para cada palabra en la signatura. Para una escena determinada, reemplazamos
 las variables de la funci\'on obtenida por los valores de las caracter\'{i}sticas
 en la escena que queremos describir.
 
-Utilizando regresi\'on lineal somos capaces de aprender interesante
-caracter\'{i}sticas del dominio. Para empezar, aprende hechos conocidos
+Utilizando regresi\'on lineal podemos aprender interesantes
+caracter\'{i}sticas del dominio. Para empezar, se aprenden hechos conocidos
 de tal manera que la prominencia de un color depende en gran medida de si el
-objeto de destino es de ese color, y que no depende de su
-poder de discriminaci\'on en el modelo. Por otra parte, se entera de que el on-top
-relaci\'on se utiliza con m\'as frecuencia que las relaciones horizontales
-(Izquierda y de derecha de) lo que confirma un hallazgo previo informado
-en~\cite{viet:gene11}. Por \'ultimo, se enter\'o de un hecho sorprendente de la
-GRE3D7 corpus (que no se encuentra por el trabajo anterior), que es que se utiliza el tama\~no
-m\'as frecuentemente de una manera falte espacio cuando el objetivo y
-hito compartir el tama\~no. Tama\~no fue utilizado en ER falte espacio en el 49 \% de
+target es de ese color, y que no depende de su
+poder de discriminaci\'on en el modelo. Por otra parte, vimos que la relaci\'on on-top
+ se utiliza con m\'as frecuencia que las relaciones horizontales
+(izquierda y iderechai) lo que confirma un hallazgo previo informado
+en~\cite{viet:gene11}. Por \'ultimo, vimos en el
+GRE3D7 corpus (que no fue reportado por el trabajo anterior), que es que se utiliza el tama\~no
+m\'as frecuentemente de una manera sobreespecificada
+
+%falte espacio cuando el 
+target y el landmark comparten el tama\~no. Tama\~no fue utilizado en ER de manera sobreespecificada en el 49 \% de
 las descripciones de escenas en las de destino y lugar de inter\'es compartidos del tama\~no,
-y el 25 \% de las veces cuando meta y punto de referencia no ha dado la
+y el 25 \% de las veces cuando target y el landmark no ha dado la
 tama\~no. Esto puede explicarse por la observaci\'on de que si hito y
 objetivo compartir una propiedad, esta propiedad es m\'as relevante.
 
@@ -961,11 +959,11 @@ El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamie
 %Descripci\'on$\mayor de $.
 Para cada R, primero calculamos R. \ randomuse, un n\'umero aleatorio en [0,1]. Si R. \ randomuse$\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de clases. El valor de R.\puse \ se incrementar\'a en R.$\incuse$ en cada bucle principal, para asegurar que todas las relaciones son, en alg\'un momento, considerado por el algoritmo. Esto asegura que una expresi\'on que se refiere se encontrar\'a si existe; pero da mayor probabilidad a las expresiones que utilizan las relaciones con un alto R.\puse.
 
-Mientras que$\RE$contiene descripciones que pueden ser refinados (es decir, las clases con al menos dos elementos) vamos a llamar a la funci\'on refinamiento agregar$_\mathcal {L}$(R,$\varphi $,$\RE$) sucesivamente con cada relaci\'on en Rs. Un cambio en una de las clases, puede desencadenar cambios en los dem\'as. Por esa raz\'on, si$\RE$ cambios, salimos del \textbf {for} bucle para empezar de nuevo con las relaciones de alto R.\puse. Si despu\'es de tratar de perfeccionar el conjunto de todas las relaciones en R, el conjunto$\RE$ no ha cambiado, entonces hemos llegado a un estado estable (es decir, las clases descritas en$\RE$ no puede ser refinado con la corriente R.\puse valores). A continuaci\'on, se incrementar\'a todos los R.\puse valores e iniciar el procedimiento de nuevo.
+Mientras que$\RE$contiene descripciones que pueden ser refinados (es decir, las clases con al menos dos elementos) vamos a llamar a la funci\'on refinamiento agregar$_\mathcal {L}$(R,$\varphi $,$\RE$) sucesivamente con cada relaci\'on en Rs. Un cambio en una de las clases, puede desencadenar cambios en los dem\'as. Por esa raz\'on, si $\RE$ cambios, salimos del \textbf {for} bucle para empezar de nuevo con las relaciones de alto R.\puse. Si despu\'es de tratar de perfeccionar el conjunto de todas las relaciones en R, el conjunto $\RE$ no ha cambiado, entonces hemos llegado a un estado estable (es decir, las clases descritas en$\RE$ no puede ser refinado con la corriente R.\puse valores). A continuaci\'on, se incrementar\'a todos los R.\puse valores e iniciar el procedimiento de nuevo.
 
-Algoritmo~\ref{fig:algo1} casi coincide con el de~\cite{arec2:2008:Areces}. El \ textbf {for} bucle refinar\'a cada descripciones en$\RE$utilizando la relaci\'on R y las otras descripciones que ya est\'an en$\RE $, bajo ciertas condiciones. La nueva descripci\'on debe ser \emph{no redundante} (que no se puede obtener a partir de clases que ya est\'an en$\RE$), \emph{no trivial} (que no est\'a vac\'{i}o), y \emph{informativo} (lo hace no coincide con la clase original). Si se cumplen estas condiciones, la nueva descripci\'on se a\~nade a$\RE $, y descripciones redundantes creados por la nueva descripci\'on se eliminan. La declaraci\'on \ textbf {if} al principio del algoritmo en la figura~\ref{fig:algo2} no tiene en cuenta la prueba de informatividad durante el primer bucle del algoritmo que permite especificaci\'on excesiva.
+Algoritmo~\ref{fig:algo1} casi coincide con el de~\cite{arec2:2008:Areces}. El \ textbf {for} bucle refinar\'a cada descripciones en $\RE$utilizando la relaci\'on R y las otras descripciones que ya est\'an en $\RE $, bajo ciertas condiciones. La nueva descripci\'on debe ser \emph{no redundante} (que no se puede obtener a partir de clases que ya est\'an en $\RE$ ), \emph{no trivial} (que no est\'a vac\'{i}o), y \emph{informativo} (lo hace no coincide con la clase original). Si se cumplen estas condiciones, la nueva descripci\'on se a\~nade a $\RE $, y descripciones redundantes creados por la nueva descripci\'on se eliminan. La declaraci\'on \ textbf {if} al principio del algoritmo en la figura~\ref{fig:algo2} no tiene en cuenta la prueba de informatividad durante el primer bucle del algoritmo que permite especificaci\'on excesiva.
 
-Supongamos que fija un modelo de entrada de$\$gM$ y los valores de R, y fijar tambi\'en alg\'un elemento objetivo$t $. Supongamos tambi\'en que $t$ efectivamente tiene una expresi\'on $\el$ -refiri\'endose. Tras la rescisi\'on, el algoritmo~\ref{fig:algo1} se calculan en $\el$ f\'ormula $\varphi$ tal que $\interp{\varphi} = \{t\}$, pero $\varphi$ podr\'{i}a ser diferente en cada ejecuci\'on del algoritmo (a pesar de que$\$gM$ y Rs son fijos). Si repetimos este experimento un n\'umero estad\'{i}sticamente significativo de veces, podemos definir una estimaci\'on de la distribuci\'on de probabilidad de las ER generados por el algoritmo de$t $, dado$\$gM$ y Rs. En la Secci\'on~\ref{sec:Evaluaci\'on} vamos a demostrar que dado un corpus de cosa por$\$gM$, es posible definir R.\puse valores para que esta distribuci\'on de probabilidad coincide con buena precisi\'on la distribuci\'on de probabilidad de cosa encontrado en el corpus.
+Supongamos que fija un modelo de entrada de $\gM$ y los valores de R, y fijar tambi\'en alg\'un elemento objetivo $t$. Supongamos tambi\'en que $t$ efectivamente tiene una expresi\'on $\el$ -refiri\'endose. Tras la rescisi\'on, el algoritmo~\ref{fig:algo1} se calculan en $\el$ f\'ormula $\varphi$ tal que $\interp{\varphi} = \{t\}$, pero $\varphi$ podr\'{i}a ser diferente en cada ejecuci\'on del algoritmo (a pesar de que $\gM$ y Rs son fijos). Si repetimos este experimento un n\'umero estad\'{i}sticamente significativo de veces, podemos definir una estimaci\'on de la distribuci\'on de probabilidad de las ER generados por el algoritmo de$t $, dado $\gM$ y Rs. En la Secci\'on~\ref{sec:evaluacion} vamos a demostrar que dado un corpus de cosa por $\gM$, es posible definir R.\puse valores para que esta distribuci\'on de probabilidad coincide con buena precisi\'on la distribuci\'on de probabilidad de cosa encontrado en el corpus.
 
 
 %\section{Aprendizaje autom\E1tico}
