@@ -7,17 +7,47 @@ En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresione
 
 En este cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales y explicaremos los algoritmos m\'as conocidos en el \'area.
 
+
+\textcolor{blue}{me parece que aca podrian ir estas 2 secciones o fusionarlas en una, me gustaria poner un ejmeplo, no se si aca o en el 1}
+
+\section{Propiedades de las ER}
+
+\section{Propiedades de los Algoritmos GER}
+
+
 \section{Generaci\'on autom\'atica de expresiones referenciales}
 
 El desaf\'io de la generaci\'on autom\'atica de contenido para las expresiones referenciales viene dado porque una computadora no sabe cuales son las propiedades m\'as sobresalientes de un objetos
 
 \section{Algoritmos de REG}
 
-\subsection{GREEDY}
+Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. 
+
+Por ejemplo: Que cosa es?(el tipo) Una pelota. Tiene color? Si. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.
+
+Con estos datos tenemos una base de conocimento (en ingles knowlege base KB), estos datos se pueden organizar en jerarquias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.
+
+Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identicar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran segun la cantidad de informaci\'on uqe den, si dan la m\'inima informaci\'on para identificarlas un\'ivocamente seran minimales, si dan m\'as informaci\'on estaran sobreespecificadas, pero en el caso de dar m\'as de la m\'inima informaci\'on... cu\'anta m\'as dar?
+
+El sistema deber\'ia tener una lista del orden de preferencia de los atributos a usar. 
+
+Para una persona identificar ciertos atributos puede ser m\'as f\'acil que identificar ciertos otros, por ejemplo cierto color verde podria ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir ``grande'' y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es ``grande''.
+
+Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta: 
+
+\begin{itemize}
+ \item Que propiedades o relaciones incluir
+ \item Cuando terminar (dar la expresi\'on minimal? o dar una expresi\'on sobreespecificada, si es sobreespecifica, que tan sobreespecificada?)
+ \item Que orden de preferencias seguir
+ \item Hacer o no backtraking
+ \item Incluir o no negaciones
+\end{itemize}
 
 
 
-Este algoritmo de Dale~\cite{dale89} busca sobre todo el conjunto de propiedades del target y elije el subconjunto m\'as chico posible que identifica un\'{i}vocamente al objeto target entre los distractores en la escena considerada como se muestra en el siguiente algoritmo.\\
+%\subsection{GREEDY}
+
+%Este algoritmo de Dale~\cite{dale89} busca sobre todo el conjunto de propiedades del target y elije el subconjunto m\'as chico posible que identifica un\'{i}vocamente al objeto target entre los distractores en la escena considerada como se muestra en el siguiente algoritmo.\\
 
 %\begin{figure}[ht]
 %\begin{center}
@@ -27,64 +57,67 @@ Este algoritmo de Dale~\cite{dale89} busca sobre todo el conjunto de propiedades
 %\end{center}
 %\end{figure}
 
-r - el objeto target\\
-D = \{d|d es un distractor de r\}\\
-KB - la base de conocimiento que contiene las propiedades de todos los objetos\\
-$P_{r}$ = $\{p|p(r) \in KB\}$\\
-L = $\{\}$ - la descripci\'on vac\'{i}a\\
-\\
-1. Chequea \'exito:\\
-    \textbf{if} D = $\emptyset$ \textbf{then} return L como una ER que distingue al target r
-    \textbf{elseif} $P_{r}$ = $\emptyset$ \textbf{then} fail
-    
-\textbf{else goto} Paso 2 \\
-\\
-2. Elegir Propiedad:
- \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:
-    $D_{i}$ $\leftarrow$ D $ \cap$ \{x|x $\in$ D and $p_{i}$ (x) $\in$ KB\}
-    Elegir la propiedad $p_{j}$ tal que $D_{j}$ es el conjunto m\'as chico (es decir la que elimina m\'as distractores) \textbf{goto} Paso 3\\
-\\    
-3. Agregar $p_{j}$ a la descripci\'on actual\\
-L $\leftarrow$ L $\cup$ \{$p_{j}$\}\\
-D $\leftarrow$ $D_{j}$\\
-P $\leftarrow$ P -\{$p_{j}$\}\\
-\textbf{goto} Paso 1\\
+%r - el objeto target\\
+%D = \{d|d es un distractor de r\}\\
+%KB - la base de conocimiento que contiene las propiedades de todos los objetos\\
+%$P_{r}$ = $\{p|p(r) \in KB\}$\\
+%L = $\{\}$ - la descripci\'on vac\'{i}a\\
+%\\
+%1. Chequea \'exito:\\
+%    \textbf{if} D = $\emptyset$ \textbf{then} return L como una ER que distingue al target r
+%    \textbf{elseif} $P_{r}$ = $\emptyset$ \textbf{then} fail
+%    
+%\textbf{else goto} Paso 2 \\
+%\\
+%2. Elegir Propiedad:
+% \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:
+%    $D_{i}$ $\leftarrow$ D $ \cap$ \{x|x $\in$ D and $p_{i}$ (x) $\in$ KB\}
+%    Elegir la propiedad $p_{j}$ tal que $D_{j}$ es el conjunto m\'as chico (es decir la que elimina m\'as distractores) \textbf{goto} Paso 3\\
+%\\    
+%3. Agregar $p_{j}$ a la descripci\'on actual\\
+%L $\leftarrow$ L $\cup$ \{$p_{j}$\}\\
+%D $\leftarrow$ $D_{j}$\\
+%P $\leftarrow$ P -\{$p_{j}$\}\\
+%\textbf{goto} Paso 1\\
 
 
 
-%Dado un dominio D que contiene un target referente r y un conjunto de distractores, una base de conocimiento KB que contiene las propiedades de los objetos.
-%Un conjunto de propiedades verdaderas para r, y una descripcion L inicialmente vac\'{i}a.
+%%Dado un dominio D que contiene un target referente r y un conjunto de distractores, una base de conocimiento KB que contiene las propiedades de los objetos.
+%%Un conjunto de propiedades verdaderas para r, y una descripcion L inicialmente vac\'{i}a.
 
-Este algoritmo es de orden NP-complete
+%Este algoritmo es de orden NP-complete
 
 \subsection{Incremental}
 
-Para reducir el orden de la b\'usqueda Dale \& Reiter hicieron el algoritmo Incremental que reduce la complejidad del algoritmo Greedy cambiando en el paso 2 en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada y que elimina al menos un distractor. Este algoritmo es de orden polinomial.
+Se describe a continuaci\'on el algoritmo Incremental de Dale \& Reiter el cual reduce la complejidad del algoritmo Greedy cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que elimina al menos un distractor. Este algoritmo es de orden polinomial.\\
 
-r - el objeto target\\
+
+\fbox{ \begin{minipage}{150mm}
+
+r - el objeto target que queremos identificar\\
 D = \{d|d es un distractor de r\}\\
 KB - la base de conocimiento que contiene las propiedades de todos los objetos\\
 $P_{r}$ = $\{p|p(r) \in KB\}$ ordenado seg\'un preferencia de propiedades\\
 L = $\{\}$ - la descripci\'on vac\'{i}a\\
-\\
+
 1. Chequea \'exito:\\
     \textbf{if} D = $\emptyset$ \textbf{then} return L como una ER que distingue al target r
     \textbf{elseif} $P_{r}$ = $\emptyset$ \textbf{then} fail\\
 \textbf{else goto} Paso 2 \\
 \\
 2. Seleccionar Propiedad:\\
- \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:
-  \textbf{if} \{x|x $\in$ $D_{i}$ and $p_{i}$ (x) $\in$ KB\} $\neq$ $\emptyset$\\
-  \textbf{then} elegir $p_{j}$ e \textbf{goto} Paso 3\\
-  \textbf{else} $P_{r}$ =$P_{r}$ -$p_{j}$\\
-  \textbf{goto} Paso 1\\
+ \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:\\
+ \textbf{if} \{x|x $\in$ $D_{i}$ and $p_{i}$ (x) $\in$ KB\} $\neq$ $\emptyset$\\
+ \textbf{then} elegir $p_{j}$ (el la primer propiedad en el orden que elimima al menos un distractor) e \textbf{goto} Paso 3\\
+ \textbf{else} $P_{r}$ =$P_{r}$ -$p_{j}$\\
+ \textbf{goto} Paso 1\\
       \\    
 3. Agregar $p_{j}$ a la descripci\'on actual\\
 L $\leftarrow$ L $\cup$ \{$p_{j}$\}\\
 D $\leftarrow$ $D_{j}$\\
 P $\leftarrow$ P -\{$p_{j}$\}\\
 \textbf{goto} Paso 1\\
-
+\end{minipage}}
 %\begin{figure}[ht]
 %\begin{center}
 %\includegraphics[width=8.5cm]{figures/incremental.png}\\[0pt]
