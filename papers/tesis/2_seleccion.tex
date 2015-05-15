@@ -1,9 +1,11 @@
 \chapter{Selecci\'on de contenido de expresiones referenciales}
 \label{sec:seleccion}
 
-La selecci\'on de cuales propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial, claramente ser\'a muy distinta la expresi\'on si nuestro objetivo es dar la m\'inima expresi\'on referencial que identifique al objeto que si nuestro objetivo es ser colaborativos con nuestro interlocutor, el la vida hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos daria una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente ya no poseemos esa clase de informaci\'on.
+La selecci\'on de cuales propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial, claramente ser\'a muy distinta la expresi\'on si nuestro objetivo es dar la m\'inima expresi\'on referencial que identifique al objeto que si nuestro objetivo es ser colaborativos con nuestro interlocutor.
 
-En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresiones referenciales como la gente har\'ia, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea los humanos.
+En una situaci\'on de la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente ya no poseemos esa clase de informaci\'on.
+
+En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia siular el comportamiento de la gente, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea los humanos.
 
 En este cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales y explicaremos los algoritmos m\'as conocidos en el \'area.
 
@@ -23,9 +25,9 @@ El desaf\'io de la generaci\'on autom\'atica de contenido para las expresiones r
 
 Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. 
 
-Por ejemplo: Que cosa es?(el tipo) Una pelota. Tiene color? Si. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.
+Por ejemplo:Que cosa es?(el tipo) Una pelota. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.
 
-Con estos datos tenemos una base de conocimento (en ingles knowlege base KB), estos datos se pueden organizar en jerarquias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.
+Con esta clase de datos para los objetos de la escena, tenemos una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo:conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.
 
 Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identicar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran segun la cantidad de informaci\'on uqe den, si dan la m\'inima informaci\'on para identificarlas un\'ivocamente seran minimales, si dan m\'as informaci\'on estaran sobreespecificadas, pero en el caso de dar m\'as de la m\'inima informaci\'on... cu\'anta m\'as dar?
 
@@ -33,14 +35,14 @@ El sistema deber\'ia tener una lista del orden de preferencia de los atributos a
 
 Para una persona identificar ciertos atributos puede ser m\'as f\'acil que identificar ciertos otros, por ejemplo cierto color verde podria ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir ``grande'' y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es ``grande''.
 
-Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta: 
+Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
 
 \begin{itemize}
- \item Que propiedades o relaciones incluir
+ \item Que propiedades o relaciones incluir?
  \item Cuando terminar (dar la expresi\'on minimal? o dar una expresi\'on sobreespecificada, si es sobreespecifica, que tan sobreespecificada?)
- \item Que orden de preferencias seguir
- \item Hacer o no backtraking
- \item Incluir o no negaciones
+ \item Que orden de preferencias seguir?
+ \item Hacer o no backtraking?
+ \item Incluir o no negaciones?
 \end{itemize}
 
 
@@ -71,7 +73,7 @@ Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
 %\\
 %2. Elegir Propiedad:
 % \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:
-%    $D_{i}$ $\leftarrow$ D $ \cap$ \{x|x $\in$ D and $p_{i}$ (x) $\in$ KB\}
+%    $D_{i}$ $\leftarrow$ D$\cap$ \{x|x $\in$ D and $p_{i}$ (x) $\in$ KB\}
 %    Elegir la propiedad $p_{j}$ tal que $D_{j}$ es el conjunto m\'as chico (es decir la que elimina m\'as distractores) \textbf{goto} Paso 3\\
 %\\    
 %3. Agregar $p_{j}$ a la descripci\'on actual\\
@@ -89,7 +91,9 @@ Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
 
 \subsection{Incremental}
 
-Se describe a continuaci\'on el algoritmo Incremental de Dale \& Reiter el cual reduce la complejidad del algoritmo Greedy cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que elimina al menos un distractor. Este algoritmo es de orden polinomial.\\
+Se describe a continuaci\'on el algoritmo Incremental de Dale \& Reiter el cual reduce la complejidad del algoritmo Greedy (el cual hac\'ia una b\'usqueda exaustiva y elegia la propiedad que m\'as distractores eliminaba en paso) cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que la posee al menos un distractor. Este algoritmo es de orden polinomial. Este algoritmo produce expresiones referenciales que pueden estar sobreespecificadas.\\
+
+\textcolor{blue}{reescribir esto porque no queda tabulado como un algoritmo}
 
 
 \fbox{ \begin{minipage}{150mm}
@@ -108,7 +112,9 @@ L = $\{\}$ - la descripci\'on vac\'{i}a\\
 2. Seleccionar Propiedad:\\
  \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:\\
  \textbf{if} \{x|x $\in$ $D_{i}$ and $p_{i}$ (x) $\in$ KB\} $\neq$ $\emptyset$\\
- \textbf{then} elegir $p_{j}$ (el la primer propiedad en el orden que elimima al menos un distractor) e \textbf{goto} Paso 3\\
+ \textbf{then} elegir $p_{j}$ e \textbf{goto} Paso 3\\
+ %(la primer propiedad en el orden que elimima\\ al menos un distractor) 
+ 
  \textbf{else} $P_{r}$ =$P_{r}$ -$p_{j}$\\
  \textbf{goto} Paso 1\\
       \\    
@@ -126,27 +132,100 @@ P $\leftarrow$ P -\{$p_{j}$\}\\
 %\end{center}
 %\end{figure}
 
+
+El objeto target que queremos identificar lo llamaremos {\it r},
+D es el conjunto de distractores de r,
+KB es la base de conocimiento que contiene para cada objeto los valores de sus propiedades.
+Tenemos $P_{r}$ propiedad de r que esta inclu\'ido en KB y adem\'as esta ordenado seg\'un preferencia de propiedades.\\
+L inicialmente es la descripci\'on vac\'{i}a al finalizar la ejecusi\'on tendr\'a el conjunto de propiedades con los cuales identificaremos a r.
+
+\textcolor{blue}{notar que si D es vacio, no hay nada para identificar, porque no hay distractores}
+
+La idea del algoritmo es ir eliminando distractores, por eso, en {\it Paso 1} si no hay distractores, se devuelve L como el conjunto de propiedades que identifica al target. Si todav\'ia hay distractores pero no quedan propiedades de r ($P_{r}$), falla porque no lo puede identificar un\'ivocamente. Si quedan propiedades de r, va al {\it Paso 2}, en el cual elije la propiedad de r que sigue en el orden de preferencias, pero que tambi\'en es propiedad de algun distractor (algun elemento de D) y va al {\it Paso 3}, en caso de que la propiedad no sea propiedad de algun distractor, se actualiza $P_{r}$ a $P_{r}$ menos la propiedad y se va al principio de nuevo.
+En el {\it Paso 3} se agrega la propiedad a la descripci\'on actual L, se actualiza $D$ con $D_{j}$, es decir con los elementos de $D$ que tienen la propiedad $_j$, se saca $_j$ de la lista de P y continua en {\it Paso 1}.\\
+
+\textcolor{blue}{Quizas deba poner mas cosas de estas aca...Theune and Krahmer proposed an extension that allows the generation of subsequent reference with the ia taking into account the discourse salience of the target referent (Krahmer and Theune, 1998; Theune, 2000; Krahmer and Theune, 2002), and a second one which allows the ia to produce referring expressions that
+contain binary relations to other objects (Theune, 2000; Krahmer and Theune, 2002). I will return to their relational extension in Section 2.3. Theune and Krahmer's approach works by assigning a salience score to all objects according to the
+focus/topic distinction by Hajicova (1993) and Centering Theory (Grosz et al., 1995). They alter the success criterion of the algorithm and only let it stop when here is no distractor left that is as or more salient than the target referent.
+Not all properties are the same. The qualitative diferences that exist between diferent properties were first discussed in the
+reg literature by van Deemter (2000, 2006). He pointed out that the appropriateness of
+vague orgradable properties such as small and large is dependent on the context in which they are used, while,
+for example, the colour of an object is absolute. Consider two descriptions in a domain of animals... (van Deemter, 2002), van Deemter considered the ia's logical completeness in terms of the Boolean operators of negation and disjunction. He extended it to
+be able to generate referring expressions that contain negated properties, such as Example (2.3), and descriptions of sets of objects, such as Example (2.4), or even (2.5), which contains a logical disjunction of properties. His algorithm proceeds
+in stages, trying longer and longer disjunctions of properties, if atomic properties
+and shorter disjunctions did not suffice to distinguish the target set.. he work on reference to sets was taken further by Gatt and van Deemter (2005, 2006), who have presented the most mature algorithms in this space to
+date. They used a similar procedure to the ia in that their algorithms are based
+on incremental processing of a preference order of properties. Their algorithms
+add a lot of complex machinery to the basic procedure to ensure that properties
+are chosen in a way that maximises coherence within the set of objects described
+by the referring expressions. For example, their approach will attempt to use
+properties of the same type for all the referents of a set. So, it would produce
+descriptions such as Examples (2.6) or (2.7) rather than Example (2.8) or.. }
+
 \subsection{Graph}
 
-El dominio que incluye al target y los distractores es representado como un grafo dirigido etiquetado. La representaci\'on gr\'afica de una escena visual se modela cada objeto de la escena como un v\'ertice en el grafo. Los atributos at\'omicos como color, tipo o tama\~no
-se representan como un loop en el correspondiente nodo. Ellos est\'an etiquetados con los nombres de atributos y los valores que el objeto en cuesti\'on tiene para estas propiedades. Las relaciones entre objetos, por ejemplo abajo, arriba se modelan como aristas entre los v\'ertices correspondientes.
+Un grafo (del griego grafos:dibujo, imagen) es un conjunto de objetos llamados v\'ertices o nodos unidos por enlaces llamadas aristas o arcos, que permiten representar relaciones binarias entre elementos de un conjunto. 
 
-Para generar una descripci\'on distintiva, el algoritmo de b\'usqueda basado en el gr\'afo
-busca un subgrafo del grafo que identifica al target un\'{i}vocamente.
+Son objeto de estudio de la teor\'{i}a de grafos. 
 
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda en primer lugar a lo ancho sobre el arbol conectado al subgrafo encontrado hasta ahora. Se busca en el espacio de manera exhaustiva,
-pero utiliza una heur\'{i}stica basada en el costo (descripto a continuaci\'on) que es capaz de podar el espacio de b\'usqueda.
+Un grafo G es un par ordenado $G=(V,E)$, donde:
 
-Informalmente, un subgrafo refiere al target si y s\'olo si puede ser
-`Colocado sobre 'el gr\'afico de dominio de tal manera que el v\'ertice que representa subgrafo
-el objeto de destino se puede `coloca sobre 'el v\'ertice del objetivo en el gr\'afico de dominio,
-y cada uno de los bordes marcados en el subgrafo puede ser `coloca sobre 'un correspondiente
-borde en el gr\'afico de dominio con la misma etiqueta y el mismo sentido. Por otra parte,
-un subgrafo es distinguir si y s\'olo si se puede `coloca sobre 'exactamente un
-v\'ertice en el gr\'afico de dominio. La noci\'on informal de un gr\'afico que se coloca sobre `'
-otro corresponde al concepto gr\'afico-te\'orico matem\'atico de
-subgrafo isomorfismo, Se modelan como aristas entre los v\'ertices correspondientes.
+    V es un conjunto de v\'ertices o nodos, y
+    E es un conjunto de aristas o arcos, que relacionan estos nodos.
 
+Normalmente V suele ser finito. Muchos resultados importantes sobre grafos no son aplicables para grafos infinitos.
+
+Se llama orden del grafo G a su n\'umero de v\'ertices, $|V|$.
+
+El grado de un v\'ertice o nodo $v \in V$ es igual al n\'umero de arcos que lo tienen como extremo.
+
+Un bucle es una arista que relaciona al mismo nodo; es decir, una arista donde el nodo inicial y el nodo final coinciden.
+
+Dos o m\'as aristas son paralelas si relacionan el mismo par de v\'ertices.
+
+Un grafo puede ser dirigido o no, etiquetado o no.
+
+T\'{i}picamente, un grafo se representa gr\'aficamente como un conjunto de puntos (v\'ertices o nodos) unidos por l\'{i}neas (aristas).
+
+Los grafos han sido muy estudiados, pr\'acticamente cualquier problema puede ser expresado como un problema de grafos, y aplicar algoritmos de b\'usqueda ya estudiados.
+
+Mirando la obtenci\'on de expresiones referenciales como un problema de grafos, el dominio que incluye al target y los distractores es representado como un grafo dirigido etiquetado. 
+
+Cada objeto de la escena se modela como un v\'ertice en el grafo. Los atributos at\'omicos como color, tipo o tama\~no se representan como un bucle en el correspondiente nodo. Est\'an etiquetados con los nombres de las propiedades y los valores que el objeto en cuesti\'on tiene para estas propiedades. 
+
+Las relaciones binarias entre objetos, por ejemplo abajo-de, arriba-de se modelan como aristas entre los nodos correspondientes.
+
+La base de conocimiento que incluye al target ahora esta expresada como los v\'ertices, las aristas y las etiquedas del grafo.
+
+%Krahmer et al.'s (2003) reformularon la tarea de seleccionar las propiedades y relaciones que contendr\'a una expresi\'on referencial como un problema de teor\'ia de grafos.
+
+Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente, le llama grafo distintivo (distinguishing graph).
+
+\textcolor{blue}{aca podria poner el algoritmo}
+
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda exaustiva, pero comenzando a lo ancho. \textcolor{blue}{aca hay que escribir mucho mas...} Utiliza una heur\'{i}stica basada en el costo (descripto a continuaci\'on) que es capaz de podar el espacio de b\'usqueda.
+
+
+%esto no se entiende nada
+%Informalmente, un subgrafo refiere al target si y s\'olo si puede ser
+%`Colocado sobre el gr\'afico de dominio de tal manera que el v\'ertice que representa subgrafo
+%del objeto target se puede `coloca sobre 'el v\'ertice del objetivo en el gr\'afico de dominio,
+%y cada uno de los bordes marcados en el subgrafo puede ser `coloca sobre 'un correspondiente
+%borde en el gr\'afico de dominio con la misma etiqueta y el mismo sentido. Por otra parte,
+un subgrafo distingue al target un\'ivocamente si y s\'olo si se puede `colocarlo sobre grafo original' y es exactamente el
+v\'ertice target. La noci\'on informal de un gr\'afico que se coloca sobre otro corresponde al concepto te\'orico matem\'atico de isomorfismo de grafos.
+
+En teor\'{i}a de grafos, un isomorfismo entre dos grafos G y H es una biyecci\'on f entre los conjuntos de sus v\'ertices $f:V(G) \rightarrow V(H)$ que preserva la relaci\'on de adyacencia. Es decir, cualquier par de v\'ertices u y v de G son adyacentes si y solo si lo son sus im\'agenes, $f(u)$ y $f(v)$, en H.
+
+
+
+
+\textcolor{blue}{aca quiero poner un ejemplo que muestre una imagen y el modelo como grafo}
+
+La funci\'on de costo esta definida sobre las aristas y v\'ertices del grafo dominio. El costo de un subgrafo se define como la suma sobre todas las aristas y v\'ertices que contiene el grafo.
+El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que representa al target.
+
+La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cuando estas se hacen m\'as costosas que el grafo de menor costo encontrado hasta el momento. Esta funci\'on hace que se prefieran propiedades sobre otras que tienen mayor costo.
 
 \subsection{Bisimulaci\'on}
 
@@ -190,7 +269,7 @@ $\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$ denota
 $\{f_2\}$; y la f\'ormula $\mathsf{flower} \sqcap \neg
 \exists \mathsf{in}.\mathsf{hat}$ denota $\{f_1\}$.
 
-Diferentes l\'ogicas de descripci\'on difieren en los conectores que permiten: Mientras que \alc\ permite negaci\'on, \el\
+Diferentes l\'ogicas de descripci\'on difieren en los conectores que permiten:Mientras que \alc\ permite negaci\'on, \el\
 no permite. 
 
 Hay muchas otras l\'ogicas de descripci\'on en la literatura por ejemplo 
@@ -207,7 +286,7 @@ Equivalentemente, no hay $\gL$-f\'ormula que se mantenga para $i$ pero no para
 $i'$.  Diremos que \emph{\gL-conjunto de similaridad } de alg\'un individual
 $i$ es el conjunto de todos los individuales a los cuales $i$ es \gL-similar.
 
-Notar que la similaridad no es necesariamente una relaci\'on sim\'etrica: Por ejemplo: $f_1$ es \el-similar a $f_2$ en
+Notar que la similaridad no es necesariamente una relaci\'on sim\'etrica:Por ejemplo:$f_1$ es \el-similar a $f_2$ en
 Fig.~\ref{fig:dale-haddock}b, pero $f_2$ no es \el-similar a $f_1$
 (satisface la f\'ormula $\exists \mathsf{in}.\mathsf{hat}$ y $f_1$
 no la satisface).  De todas maneras, \alc-similaridad es una relaci\'on sim\'etrica porque
@@ -296,7 +375,7 @@ diferentes clases en el refinamiento.
 %done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
 
 Los algoritmos de refinamiento
-% presenta en ~ \ cite {arec 2: 2008: Areces, arec: usin11}
+% presenta en~\cite{arec 2:2008:Areces, arec:usin11}
 calcular efectivamente ER para todos los objetos en el dominio, al mismo
 tiempo. Los algoritmos siempre terminan devolviendo una f\'ormula del
 lenguaje formal elegido que describe un\'{i}vocamente el objetivo (si el
@@ -412,8 +491,8 @@ We will run the algorithm for the Scene~\ref{figure22}, the algorithm
 start with a fixed list of properties and relations, suppose that
 those lists are the following:
 
-ordered properties (prop): \textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
-ordered relations (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
+ordered properties (prop):\textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
+ordered relations (rel):\textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
 
 \begin{figure}
 \begin{center}	
@@ -503,10 +582,10 @@ The first loop for of the algorithm is in the properties. For each property real
 A formula $\varphi$ will be added to RE if its interpretation has at least one element, then for each formula $\psi$ in RE the conjunction 
 $\varphi  \wedge \psi$ need to be not subsumed in RE, the $\interp{\varphi \cup \psi}$ need to be not empty, and its interpretation need to be distinct of $\interp{\psi}$. Then the subsumed formulas will be clean.
 
-The first property is \textsf{ball}, RE = \{$\top$, \textsf{ball}\}, then the following property is \textsf{cube}, RE = \{$\top$, \textsf{ball}, \textsf{cube}\}, but now the $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, so, we can delete $\top$, because it is subsumed to the two other formulas. The turn is now for the property \textsf{red}, $\interp{\textsf{red}}$ is: $\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each formula in RE we obtain, $\{e_5\}$ and $\{e_2, e_4, e_7\}$, RE = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, following with \textsf{yellow}, we have, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. Note than here we already delete the formula \textsf{ball} because it was subsumed, and the formula \textsf{cube} too.
+The first property is \textsf{ball}, RE = \{$\top$, \textsf{ball}\}, then the following property is \textsf{cube}, RE = \{$\top$, \textsf{ball}, \textsf{cube}\}, but now the $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, so, we can delete $\top$, because it is subsumed to the two other formulas. The turn is now for the property \textsf{red}, $\interp{\textsf{red}}$ is:$\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each formula in RE we obtain, $\{e_5\}$ and $\{e_2, e_4, e_7\}$, RE = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, following with \textsf{yellow}, we have, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. Note than here we already delete the formula \textsf{ball} because it was subsumed, and the formula \textsf{cube} too.
 Doing the same with \textsf{small} we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Next property is \textsf{large} so, we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Note that here we cannot add \textsf{large} to a formula $\textsf{red} \wedge \textsf{cube}$ because its interpretation has only one element, and the condition say that it need to have more than one.
 
-Until now RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ and we have the following extensions: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectively. There is two formulas that can be refined more, the  $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ and $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because they have more than one element each, so we enter en in the while cicle of Algorithm 1, in line 4. Now is the turn of relations, the first one is \textsf{leftof}, for each formula $\varphi$ in RE will try to add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Note that $\psi$ only can be $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ or $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because those are the ones that its interpretation have more than one element. There is not $\varphi$ and $\psi$ that can be apply. Continuing with \textsf{rightof} we add $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, and so on with \textsf{topof} we add $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ and the algorithm ends with RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, here all elements are in a singleton class and not further refinement can be done.
+Until now RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ and we have the following extensions:$\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectively. There is two formulas that can be refined more, the  $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ and $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because they have more than one element each, so we enter en in the while cicle of Algorithm 1, in line 4. Now is the turn of relations, the first one is \textsf{leftof}, for each formula $\varphi$ in RE will try to add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Note that $\psi$ only can be $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ or $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because those are the ones that its interpretation have more than one element. There is not $\varphi$ and $\psi$ that can be apply. Continuing with \textsf{rightof} we add $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, and so on with \textsf{topof} we add $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ and the algorithm ends with RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, here all elements are in a singleton class and not further refinement can be done.
 
 
 %can be applied to $cube \wedge red \wedge small$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
