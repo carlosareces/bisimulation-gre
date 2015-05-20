@@ -232,9 +232,13 @@ La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cu
 
 En este cap\'itulo daremos una introducci\'on a l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) y luego daremos el algoritmo en el cual nos basamos en esta tesis.
 
+La idea es transformar el problema de GRE al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets) ya que una f\'ormula describe un conjunto.
+
 Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, vamos a explicar \alc y \el.
 
-\emph{F\'ormulas} (o \emph{concepts}) $\varphi$ de $\alc$ son generadas por la siguiente gram\'atica;
+\textcolor{blue}{Figure sale en ingles, cambiar a espanol, no se como... todavia}
+
+\emph{F\'ormulas} (o \emph{conceptos}) $\varphi$ de $\alc$ son generadas por la siguiente gram\'atica;
 $$
 \varphi,\varphi' ::= \top \mid p \mid \neg \varphi \mid \varphi \sqcap \varphi'
 \mid \exists R. \varphi
@@ -245,12 +249,12 @@ Las f\'ormulas de ambos $\alc$ y $\el$ son interpretadas en modelos relacionales
 $\Delta$ es un conjunto no vac\'io y $\interp{\cdot}$ es una funci\'on de interpretaci\'on tal que:
 $$
 \begin{array}{ccl}
-\interp{p} & \subseteq & \Delta  \mbox{ for $p \in \prop$}\\
-\interp{R} & \subseteq & \Delta \times \Delta  \mbox{ for $R \in \rel$}\\
+\interp{p} & \subseteq & \Delta  \mbox{ para $p \in \prop$}\\
+\interp{R} & \subseteq & \Delta \times \Delta  \mbox{ para $R \in \rel$}\\
 \interp{\neg \varphi} & = & \Delta - \interp{\varphi}\\
 \interp{\varphi \sqcap \varphi'} & = & \interp{\varphi} \cap \interp{\varphi'}\\
-\interp{\exists R.\varphi} & = & \{i \mid \mbox{for some } i', (i,i') \in \interp{R}\\
-& & \mbox{ and } i' \in \interp{\varphi} \}.\\
+\interp{\exists R.\varphi} & = & \{i \mid \mbox{para alg\'un } i', (i,i') \in \interp{R}\\
+& & \mbox{ e } i' \in \interp{\varphi} \}.\\
 \end{array}
 $$
 
@@ -269,37 +273,37 @@ $\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$ denota
 $\{f_2\}$; y la f\'ormula $\mathsf{flower} \sqcap \neg
 \exists \mathsf{in}.\mathsf{hat}$ denota $\{f_1\}$.
 
-Diferentes l\'ogicas de descripci\'on difieren en los conectores que permiten:Mientras que \alc\ permite negaci\'on, \el\
+\textcolor{blue}{no se si dejar este ejemplo, o cambiarlo por uno es espa\~nol}
+
+Diferentes l\'ogicas de descripci\'on difieren en los conectores que permiten; Poe ejemplo \alc\ permite negaci\'on, pero \el\
 no permite. 
 
 Hay muchas otras l\'ogicas de descripci\'on en la literatura por ejemplo 
 
-$\mathcal{CL}$ (\el\ sin el cuantificador existencial, i.e., only
-conjunctions of atoms); $\mathcal{PL}$ (\alc\ l\'ogica propocisional); y
+$\mathcal{CL}$ (\el\ sin el cuantificador existencial, es decir solo conjunciones at\'omicas); $\mathcal{PL}$ (\alc\ l\'ogica propocisional); y
 $\mathcal{ELU}_{(\neg)}$ (\el\ m\'as disjunci\'on y negaci\'on at\'omica).
 
 Usaremos una noci\'on de preservaci\'on de f\'ormulas que llamaremos
-\emph{similarity}. Para cualquier DL $\gL$, diremos que un individual $i$ es \emph{\gL-similar} a $i'$ en un modelo dado $\gM$
+\emph{similaridad}. Para cualquier DL $\gL$, diremos que un individual $i$ es \emph{\gL-similar} a $i'$ en un modelo dado $\gM$
 si para cualquier f\'ormula $\varphi \in \gL$ tal que $i \in
 \interp{\varphi}$, tambi\'en tenemos que $i' \in \interp{\varphi}$.
 Equivalentemente, no hay $\gL$-f\'ormula que se mantenga para $i$ pero no para
 $i'$.  Diremos que \emph{\gL-conjunto de similaridad } de alg\'un individual
 $i$ es el conjunto de todos los individuales a los cuales $i$ es \gL-similar.
 
-Notar que la similaridad no es necesariamente una relaci\'on sim\'etrica:Por ejemplo:$f_1$ es \el-similar a $f_2$ en
+Notar que la similaridad no es necesariamente una relaci\'on sim\'etrica: Por ejemplo:$f_1$ es \el-similar a $f_2$ en
 Fig.~\ref{fig:dale-haddock}b, pero $f_2$ no es \el-similar a $f_1$
 (satisface la f\'ormula $\exists \mathsf{in}.\mathsf{hat}$ y $f_1$
 no la satisface).  De todas maneras, \alc-similaridad es una relaci\'on sim\'etrica porque
 el languaje contiene negaci\'on; y en consecuencia, $f_1$ no es \alc-similar
 a $f_2$ porque este tampoco satisface $\neg \exists
 \mathsf{in}.\mathsf{hat}$.  Porque \alc\ es m\'as expresivo que \el,
-esto es, para alg\'un indivdual $a$ es posible ser \el-similar pero
+esto es, para alg\'un individual $a$ es posible ser \el-similar pero
 no \alc-similar a alg\'un individual $b$, pero no viceversa.
 
 
-La idea es transformar el problema de GRE al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets) ya que una f\'ormula describe un conjunto.
 
-Las RE que involucran relaciones han recibido m\'as atenci\'on recientemente;
+\textcolor{blue}{SACAR ESTO... poner quizas en la introduccion o en primer capitulo. Las RE que involucran relaciones han recibido m\'as atenci\'on recientemente;
 especialmente en el contexto de las expresiones referenciales espaciales en 
 generaci\'on (por ejemplo,~\cite{kelleher06:increm}),
 donde es particularmente natural utilizar expresiones que implican 
@@ -314,7 +318,7 @@ como~\cite{kelleher06:increm}) son vulnerables a
 el problema de la \emph{regresi\'on infinita}, donde el algoritmo entra en un
 bucle infinito, saltando hacia atr\'as y hacia adelante entre las descripciones para dos
 individuos emparentados, como en `` el libro sobre la mesa que soporta una
-libro sobre la mesa \ldots ''
+libro sobre la mesa \ldots ''}
 
 %REs involving relations have received increasing attention recently;
 %especially in the context of spatial referring expressions in situated
@@ -499,7 +503,7 @@ ordered relations (rel):\textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \te
 \includegraphics[width=.5\textwidth]{images/22.jpg}
 \end{center}
 \vspace*{-1.5em}
-\caption{A 3D scene of geometric figures}\label{figure22}
+\caption{Escena 3D de figuras geom\'etricas}\label{figure22}
 \end{figure}
 
 \begin{figure}
@@ -568,7 +572,7 @@ ordered relations (rel):\textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \te
  \draw[dotted] (-.4,-1.7) rectangle (7.5,3.3);
 
  \end{tikzpicture}
-\caption{Scene as a relational model}\label{GRE3D7-stimulus-graph}
+\caption{La escena como modelo relacional}\label{GRE3D7-stimulus-graph}
 \end{minipage}
 \end{figure}
 

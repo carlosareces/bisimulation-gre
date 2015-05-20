@@ -1,78 +1,83 @@
 \chapter{Recolecci\'on y an\'alisis del corpus ZOOM}
 \label{sec:corpus}
 
-El corpus ZOOM fue realizado en un trabajo conjunto con la Univerdad de S\H ao Paulo Brasil, en esta secci\'on se describen las caracter\'{i}sticas principales del corpus, los participantes, y las tareas de recopilaci\'on de datos y anotaci\'on. Por \'ultimo, tambi\'en vamos a discutir una serie de cuestiones asociadas a la obtenci\'on mediante la web de descripciones en lenguaje natural en un dominio que esta significativamente m\'as cercano a las aplicaciones del mundo real.
+El corpus ZOOM fue un experimento realizado en un trabajo conjunto con la Universidad de S\H ao Paulo Brasil, a fin de crear un corpus de expresiones referenciales (ER) bilingual y con 2 niveles de zoom de un dominio mucho m\'as natural a las aplicaciones del mundo real que los existentes hasta el momento.\\
+
+En esta tesis se quiere mostrar que el algoritmo de bisimulaci\'on con probabilidades de uso de las palabras a partir de corpus podr\'a generar ER en un dominio que es directamente aplicable a aplicaciones de inteligencia artificial.\\
+
+En este Cap\'itulo en la Secci\'on~\ref{corpus-caracteristicas} se describen las caracter\'isticas del corpus, luego en Secci\'on~\ref{corpus-voluntarios} se dar\'an estad\'isticas de las personas que completaron el experimento, en la Secci\'on~\ref{corpus-metodo} se explicar\'a en detalle que se le pidi\'o a las personas involucradas en el experimento, en la Secci\'on~\ref{corpus-materiales} se mostrar\'an los materiales usados, y en la Secci\'on~\ref{corpus-anotacion} se hablar\'a de como se anot\'o el corpus, que expresiones se descartaron. Para finalizar el Cap\'itulo discutiremos la fiabilidad de obtener expresiones con este m\'etodo en la Secci\'on~\ref{corpus-discusion} y luego haremos una evaluaci\'on en Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos.\\
+
+\section{Caracter\'{i}sticas del corpus}
+\label{corpus-caracteristicas}
+
+El dominio del corpus es un conjunto de mapas de openstreetmaps.org de las ciudades Lisboa y Madrid.
+openstreetmaps.org es una p\'agina que tiene informaci\'on de mapas de todas partes del mundo, es una organizaci\'on en la que muchas personas de distintas partes del mundo colaboran para mantener la informaci\'on actualizada. Esta informaci\'on es de libre uso, es decir uno puede usar los mapas y solo hay que nombrar de donde fueron sacados.\\
+
+Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para targets singulares (Figuras~\ref{rest-singular} y~\ref{rest-singular2x}) y plurales (Figuras~\ref{rest-plural} y~\ref{rest-plural2x}), en los plurales se usaron referencias del mismo tipo y adem\'as se tuvo en cuenta mapas con 2 niveles de zoom X (Figuras~\ref{rest-singular} y~\ref{rest-plural}) y 2X (Figuras~\ref{rest-singular2x} y~\ref{rest-plural2x}).\\
 
 
+\begin{figure}
+
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{figures/rest-singular.png}\\[0pt]
+\vspace*{.1cm}
+\caption{Target singular con zoom X}
+\label{rest-singular}
+\end{minipage}
+\hspace*{0cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{figures/rest-plural.png}\\[0pt]
+\vspace*{.1cm}
+\caption{Target plural con zoom X}
+\label{rest-plural}
+\end{minipage}
+\end{figure}
+
+\begin{figure}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{figures/rest-singular2x.png}\\[0pt]
+\caption{Target singular con zoom 2X}
+\label{rest-singular2x}
+\end{minipage}
+\vspace*{.1cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{figures/rest-plural2x.png}\\[0pt]
+\caption{Target plural con zoom 2X}
+\label{rest-plural2x}
+\end{minipage}
+\end{figure}
+
+
+
+%.....................................
+\subsection{Sobre las personas que completaron el experimento}
+%.....................................
+\label{corpus-voluntarios}
+\textcolor{blue}{decir las restricciones que tenia la pagina, si no escribia nada le decia falta respuesta, etc. 
+Si la persona ponia ``el teatro'' el sistema le respondia ``No se entiende a que teatro se est\'a refiriendo. Por favor sea m\'as espec\'ifico''}
+
+
+Las ER fueron hechas por personas voluntarias a las cuales se les envi\'o una invitaci\'on por correo electr\'onico o redes sociales. La parte en Portugu\'es del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 hombres (69,4 \%) y 26 mujeres (30,6 \%).
+%.....................................
+\subsection{M\'etodo de recolecci\'on de datos}
+%.....................................
+\label{corpus-metodo}
 Se dise\~n\'o un experimento basado en la web para recopilar descripciones en lenguaje natural de ubicaciones de mapa en espa\~nol y en portugu\'es. El conjunto de datos obtenidos constituye un corpus de expresiones referenciales para investigaci\'on en REG y campos relacionados.
 
 
-Las situaciones de referencia en cuesti\'on hacen uso de mapas con dos grados de detalle (representados por los niveles de zoom de alto y bajo)\textcolor{blue}{cerca y lejos?}, se pidieron descripciones en singular y plural, tuvimos en cuenta un gran n\'umero de personas (unos 100 hablantes de cada idioma). Un fragmento de la interfaz experimento se muestra en la Fig.\ref{fig-interface}.
-
-\textcolor{blue}{cambiar imagen}
-
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=8.5cm]{figures/interface.png}\\[0pt]
-\caption{Interface del experimento}
-\label{fig-interface}
-\end{center}
-\end{figure}
-
-\section{Caracter\'{i}sticas del corpus}
-
-Dominio: mapas de streetmaps. Ciudades Lisboa y Madrid.\\
-Idiomas: espa\~nol y portugu\'es.\\
-
-Otras caracter\'{i}sticas: 
-\begin{itemize}
-
-\item Targets singulares y plurales, los plurales tienen 2 lugares del mismo tipo.
-\item Im\'agenes con 2 tipos de zoom.
-
-\end{itemize}
-
-
-\section{M\'etodo de recolecci\'on del corpus}
+Las situaciones de referencia en cuesti\'on hacen uso de mapas con dos grados de detalle (representados por los niveles de zoom X y 2X), se pidieron descripciones en singular y plural, tuvimos en cuenta un gran n\'umero de personas (unos 100 hablantes de cada idioma).
 
 La recolecci\'on se llevo a cabo mediante una p\'agina web en la que registramos 20 ER dichas por cada persona. Cada persona di\'o 22 ER de mapas distintos, los primeros 2 mapas eran solamente para que la persona se acostumbre a usar el sistema, 11 de los cuales ten\'{i}an target singular, es decir s\'olo 1 target y los otros 11 target plural, es decir ten\'{i}an 2 targets.
 
-%.....................................
-\section{A cerca de las personas que completaron el experimento}
-%.....................................
-
-\textcolor{blue}{Esta seccion se llamaba Subjects...}
-
-Las ER fueron hechas por personas voluntarias a las cuales se les envi\'o una invitaci\'on por correo electr\'onico o redes sociales. La parte en Portugues del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 hombres (69,4 \%) y 26 mujeres (30,6 \%).
-%.....................................
-\section{Procedimiento}
-%.....................................
 
 Las personas voluntarias recibieron un link a la interfaz del experimento, como se muestra en la figura~\ref{fig-pagPrincipal} esa p\'agina conten\'{i}a las instrucciones en 3 idiomas: Ingl\'es, Portugues y Espa\~{n}ol, y un link para completar el experimento en el idioma seleccionado, luego de seleccionar el idioma se mostraba la siguiente p\'agina, como en la figura~\ref{fig-nacionalidadGenero} en la que se ped\'{i}a completar, nacionalidad, edad, g\'enero, y los t\'erminos y condiciones ``Acepto de que los datos ingresados en este cuestionario sean usados an\'onimamente para investigaci\'on'', si la persona completaba los datos y aceptaba se comenzaba el emperimento mostrando una imagen similar a la Fig. \ref{fig-interface} que tambi\'en conten\'{i}a las instrucciones, con solo pasar el mouse por la palabra instrucciones se mostraban las mismas, la p\'agina tambi\'en ten\'{i}a una barra indicadora de progreso. Los mapas fueron mostrados en forma aleatoria y al final del experimento se mostraba un mensaje de agradecimiento.
 
-\begin{figure}[ht]
-\begin{center}
-\includegraphics[width=13cm]{images/pagPrincipal.png}\\[0pt]
-\caption{Link del experimento}
-\label{fig-pagPrincipal}
-\end{center}
-\end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=13cm]{images/nacionalidadGenero.png}}\\[0pt]
-\caption{Datos requeridos}
-\label{fig-nacionalidadGenero}
-\end{center}
-\end{figure}
 
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=15cm]{images/primerImagen.png}}\\[0pt]
-\caption{Interface del experimento}
-\label{fig-interface}
-\end{center}
-\end{figure}
 
 Cada mapa mostraba un lugar determinado (por ejemplo, un restaurante, pub, teatro, etc.) se\~nalado por una flecha (o dos, en el caso de los plurales). Para cada escena, se pidi\'o a los voluntarios que imaginen que estaban dando consejos a un amigo y que deb\'{i}an completar la frase ``Ser\'{i}a interesante visitar ...'' con una descripci\'on del lugar se\~nalado por la flecha (o las flechas). Despu\'es de pulsar un bot\'on 'Siguiente', se seleccionaba otro est\'{i}mulo al azar y as\'{i} hasta el final del experimento.
 
@@ -83,9 +88,9 @@ Se descartaron pruebas incompletas y descripciones mal formadas.
 
 
 %.....................................
-\section{Materiales}
+\subsection{Materiales}
 %.....................................
-
+\label{corpus-materiales}
 
 El experimento hizo uso de la interfaz especialmente dise\~nada la cual se muestra en la Fig. \ref{fig-interface} y un conjunto de im\'agenes de mapas obtenido de OpenStreetMap\footnote{\url{openstreetmap.org}}. Estos consist\'{i}an en fragmentos de mapas del centro de la ciudad de Madrid (por la parte espa\~nola del corpus) y Lisboa (para la parte portuguesa).
 
@@ -94,8 +99,8 @@ Para cada ciudad, se utilizaron 10 \textcolor{blue}{localizaciones} mapas. Cada 
 La mitad de las im\'agenes mostraron una sola flecha que apunta a un objeto en el mapa (es decir, requer\'{i}an una sola descripci\'on como ``el restaurante en la calle Baker''), mientras que en la otra mitad mostr\'o dos flechas que apuntaban a dos lugares diferentes (y por lo tanto requieren una referencia a un conjunto, como en ``los dos restaurantes cerca del museo'' o ``el restaurante cerca del museo y el que esta al frente del museo'').
 
 
-\section{Anotaci\'on del corpus}
-
+\subsection{Anotaci\'on del corpus}
+\label{corpus-anotacion}
 \textcolor{blue}{Aca poner imagen, que muestre los id}
 - Cada objeto en el mapa fue marcado con un identificador \'unico (Ej. rest3, pub2 etc.)
 
@@ -270,7 +275,7 @@ El conjunto de im\'agenes, textos descriptivos y sus representaciones XML consti
 %.....................................
 \subsection{Discusi\'on}
 %.....................................
-\label{sec-problems}
+\label{corpus-discusion}
 
 %Previous corpora of referring expressions have been collected in specially designed and highly controlled domains. Collecting corpora from a domain that is directly relevant to real-world applications poses a significant challenge not only to the collection and annotation process itself but also to existing REG algorithms. This is made evident by the large proportion of referring expressions that needed to be manually discarded from our dataset because the did not constitute a referring expression of the intended target. This proportion is 30\% for the Portuguese portion of the dataset and 23\% for the Spanish portion. 
 
@@ -308,7 +313,7 @@ La proporci\'on de expresiones que se refieren falte espacio del corpus Zoom es 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Evaluaci\'on}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\label{sec-eval}
+\label{corpus-evaluacion}
 \textcolor{blue}{decidir si esta parte la dejo o no, mas me gustaria poner evaluacion para la parte en espanol}
 
 In this section we illustrate the use of the Zoom corpus as training and test data for a machine learning approach to REG adapted from \cite{thiago-svm}. The  goal of this evaluation is to provide reference results for future comparison with purpose-built REG algorithms, and not to present a complete REG solution for this or other domains.
