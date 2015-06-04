@@ -499,55 +499,55 @@ ellos son llevados a cabo en el corpus GRE3D7:
 
 \item Para cada escena, defina $\gM$ tal que la interpretaci\'on
  $\interp {\cdot}$ asegura de que todas las ERs en el corpus son ER en
-  el modelo. Por ejemplo, las $\el$ f\'ormulas de el correspondiente a la tabla~\ref{corpus distribuci\'on} debe denotar el target en el
+  el modelo. Por ejemplo, las $\el$ f\'ormulas correspondientes a la tabla~\ref{results-algo-fig3} debe denotar el target en el
   modelo $\gM$ representado en
-  Figura~\ref{GRE3D7-est\'{i}mulo-gr\'afico}.
+  Figura~\ref{GRE3D7-stimulus-graph}.
 
-\item Para cada R$\in \ REL$c\'alculo R.\puse \ utilizando~(\ref{eq1}) si
-  ave muchos RE para cada escena o asignamos 1 a R.\puse \ si R se produce en
+\item Para cada R$\in \REL$ c\'alculo R.\puse \ utilizando~(\ref{eq1}) si
+  hay muchas RE para cada escena o asignamos 1 a R.\puse \ si R se produce en
   el RE, asignamos 0 en caso contrario.
 
 
 \end{enumerate}
 
-Steps 1-5 above are easy to carry out (actually, the tokenization and
-normalization steps were already done in the GRE3D7 corpus).  Starting
-from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding
-corpus shown in Table~\ref{corpus-distribution}, the resulting
-signature and their associated \puse\ are listed in the first three
-columns of Table~\ref{probability-of-use}.
+%Steps 1-5 above are easy to carry out (actually, the tokenization and
+%normalization steps were already done in the GRE3D7 corpus).  Starting
+%from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding
+%corpus shown in Table~\ref{corpus-distribution}, the resulting
+%signature and their associated \puse\ are listed in the first three
+%columns of Table~\ref{probability-of-use}.
 
-Notice that the values R.\puse\ obtained in this way should be
-interpreted as the probability of using R to describe the target in
-model $\gM$, and we could argue that they are correlated to the
-\emph{saliency} of R in the model.  For that reason, for example, the
-value of \emph{ball}.\puse\ is 1, while the value of
-\emph{cube}.\puse\ is 0.178.  These probabilities will not be useful
-to describe different targets in different scenes.  We will see how we
-can use them to obtain values for new targets and scenes using a
-machine learning approach in the next section.  Not surprisingly,
-using these values for R.\puse\ the REs generated most often by the
-algorithm can be found in the corpus.  More interestingly, as we
-discuss in Section~\ref{sec:evaluation} the algorithm generates REs
-with a distribution that matches the one found in the corpus and, as
-Table~\ref{results-algo-fig3} shows, even the generated REs not found
-in the corpus are natural.
+%Notice that the values R.\puse\ obtained in this way should be
+%interpreted as the probability of using R to describe the target in
+%model $\gM$, and we could argue that they are correlated to the
+%\emph{saliency} of R in the model.  For that reason, for example, the
+%value of \emph{ball}.\puse\ is 1, while the value of
+%\emph{cube}.\puse\ is 0.178.  These probabilities will not be useful
+%to describe different targets in different scenes.  We will see how we
+%can use them to obtain values for new targets and scenes using a
+%machine learning approach in the next section.  Not surprisingly,
+%using these values for R.\puse\ the REs generated most often by the
+%algorithm can be found in the corpus.  More interestingly, as we
+%discuss in Section~\ref{sec:evaluation} the algorithm generates REs
+%with a distribution that matches the one found in the corpus and, as
+%Table~\ref{results-algo-fig3} shows, even the generated REs not found
+%in the corpus are natural.
 
 Los pasos 1-5 anteriores son f\'aciles de llevar a cabo (en realidad, la tokenizaci\'on y
 pasos de normalizaci\'on ya se realizaron en el corpus GRE3D7). Comienzo
-de la escena en la figura~\ref{GRE3D7 est\'{i}mulo} y el correspondiente
-corpus muestra en la tabla~\ref{corpus distribuci\'on}, la signatura resultante
+de la escena en la figura~\ref{GRE3D7-stimulus} y el correspondiente
+corpus muestra en la tabla~\ref{corpus-distribution}, la signatura resultante
 y su asociado \puse\ figuran en las tres primeras
-columnas de la tabla~\ref{probabilidad de uso}.
+columnas de la tabla~\ref{probability-of-use}.
 
 Observe que los valores R.\puse\ obtenidos de esta manera debe ser
 interpretados como la probabilidad de utilizar R para describir el target en
 modelo de$\gM $, y podr\'{i}amos argumentar que se correlacionan con la
  prominencia de R en el modelo. Por esa raz\'on, por ejemplo, el
-valor de \emph{pelota}. \puse\ es 1, mientras que el valor de
-\emph{cubo}. \puse\ es 0.178. Estas probabilidades no ser\'an \'utiles
+valor de \emph{pelota}.\puse\ es 1, mientras que el valor de
+\emph{cubo}.\puse\ es 0.178. Estas probabilidades no ser\'an \'utiles
 para describir los diferentes targets en diferentes escenas. Veremos c\'omo se
-pueden utilizarlos para obtener valores para los nuevos targets y escenas utilizando un
+pueden utilizarlas para obtener valores para los nuevos targets y escenas utilizando un
 enfoque de aprendizaje autom\'atico en la siguiente secci\'on. No es de extra\~nar,
 que usando estos valores para R.\puse\ las ER generadas con mayor frecuencia por el
 algoritmo se puedab encontrar en el corpus. Como discutiremos en la Secci\'on~\ref{sec:evaluacion} el algoritmo genera ER
@@ -622,7 +622,7 @@ de la figura 13, el valor estimado para ``grande'' no est\'a cerca de la
 valor calculado a partir de corpus. \textit{En el caso de la TUNA-corpus
   mostramos que no pod\'{i}amos aprender la dependencia de la dimensi\'on-X y
   dimensi\'on-y, es decir, cuando una persona a\~nade dimensi\'on-x es altamente
-  Probablemente que incluye la dimensi\'on-y en su expresi\'on referencial.}
+  probable que incluya la dimensi\'on-y en su expresi\'on referencial.}
 
 \begin{table}[h!]
 \begin{center}
@@ -700,43 +700,43 @@ objetivo compartir una propiedad, esta propiedad es m\'as relevante.
 
 \subsection{Generando descripciones sobreespecificadas}\label{sec:overspecification}
 
-As it stand, Algorithm~\ref{algo:bisim-l} allows very little overspecification in the REs it
-generates.  A relation with a low \puse\ might be enough 
-(by itself or in combination with some of the relations already considered) to 
-identify the target. Once this relation is added, we obtain an RE, but a shorter, 
-more specific RE might be possible, by eliminating some of the previous refinements. 
-Hence, the resulting RE might be overspecified. This is the same kind of overspecification 
-that the original incremental algorithm allows.  But it has been argued~\cite{Engelhardt_Bailey_Ferreira_2006,Arts_Maes_Noordman_Jansen_2011} that 
-a much higher degree of overspecification is usually found in corpora, and this 
-is indeed what can be seen in the GRE3D7 corpus.  As we can see in Table~\ref{corpus-distribution}, 
-the target is described 16.43\% of the times as a ``small green ball'' when ``green 
-ball'' is already an RE.  Using the \puse\ values learnt from the calculus explained
-in the previous section, Algorithm~\ref{algo:bisim-l} cannot simulate this behavior. 
+%As it stand, Algorithm~\ref{algo:bisim-l} allows very little overspecification in the REs it
+%generates.  A relation with a low \puse\ might be enough 
+%(by itself or in combination with some of the relations already considered) to 
+%identify the target. Once this relation is added, we obtain an RE, but a shorter, 
+%more specific RE might be possible, by eliminating some of the previous refinements. 
+%Hence, the resulting RE might be overspecified. This is the same kind of overspecification 
+%that the original incremental algorithm allows.  But it has been argued~\cite{Engelhardt_Bailey_Ferreira_2006,Arts_Maes_Noordman_Jansen_2011} that 
+%a much higher degree of overspecification is usually found in corpora, and this 
+%is indeed what can be seen in the GRE3D7 corpus.  As we can see in Table~\ref{corpus-distribution}, 
+%the target is described 16.43\% of the times as a ``small green ball'' when ``green 
+%ball'' is already an RE.  Using the \puse\ values learnt from the calculus explained
+%in the previous section, Algorithm~\ref{algo:bisim-l} cannot simulate this behavior. 
 
-Because the fundamental idea of the algorithm is semantics, handling overspecification in 
-a natural way is difficult. If two properties have the same interpretation in a given 
-model, then once the first has been considered the second will not refine the classes 
-obtained so far, and hence the algorithm won't include it in the generated descriptions. 
-On the other hand, if we disregard the condition the informativeness constrain (i.e., 
-the fact that the addition of a relation indeed refine the class, eliminating some of 
-the elements it contains), then we run the risk of generating descriptions like ``the green 
-green ball.''
+%Because the fundamental idea of the algorithm is semantics, handling overspecification in 
+%a natural way is difficult. If two properties have the same interpretation in a given 
+%model, then once the first has been considered the second will not refine the classes 
+%obtained so far, and hence the algorithm won't include it in the generated descriptions. 
+%On the other hand, if we disregard the condition the informativeness constrain (i.e., 
+%the fact that the addition of a relation indeed refine the class, eliminating some of 
+%the elements it contains), then we run the risk of generating descriptions like ``the green 
+%green ball.''
 
-As a compromise, we consider the following variation of Algorithm~\ref{algo:bisim-l} were 
-we disregard the informativeness constrain (i.e., we allow the inclusion of new relations 
-in the description, even if they do not refine the associated class) \emph{but only during the 
-first loop of the algorithm}.  That is, during the first loop over the elements in the 
-input list Rs, we will allow the inclusion of all relations that do not trivialize the 
-description (i.e., the associated class is not empty).  Because this is done only during 
-the first loop, we know that repeated properties will not appear in the generated REs.  
-In the remaining loops, additional properties will be added only if they are informative. 
+%As a compromise, we consider the following variation of Algorithm~\ref{algo:bisim-l} were 
+%we disregard the informativeness constrain (i.e., we allow the inclusion of new relations 
+%in the description, even if they do not refine the associated class) \emph{but only during the 
+%first loop of the algorithm}.  That is, during the first loop over the elements in the 
+%input list Rs, we will allow the inclusion of all relations that do not trivialize the 
+%description (i.e., the associated class is not empty).  Because this is done only during 
+%the first loop, we know that repeated properties will not appear in the generated REs.  
+%In the remaining loops, additional properties will be added only if they are informative. 
 
-Como se destaque, Algoritmo~\ref{algo:bisim-l} permite muy poca especificaci\'on excesiva en las ER que
-genera. Una relaci\'on con un \ baja puse \ podr\'{i}a ser suficiente
-(Por s\'{i} mismo o en combinaci\'on con algunas de las relaciones ya consideradas) a
-identificar el objetivo. Una vez que se a\~nade esta relaci\'on, se obtiene un RE, pero una m\'as corta,
-RE m\'as espec\'{i}fica podr\'{i}a ser posible, mediante la eliminaci\'on de algunos de los refinamientos anteriores.
-Por lo tanto, el RE resultante podr\'{i}a ser falte espacio. Este es el mismo tipo de especificaci\'on excesiva
+El algoritmo~\ref{algo:bisim-l} permite muy poca sobreespecificaci\'on en las ER que
+genera. Una relaci\'on con una baja \puse\ podr\'{i}a ser suficiente
+(Por s\'{i} mismo o en combinaci\'on con algunas de las relaciones ya consideradas) para
+identificar el target. Una vez que se a\~nade esta relaci\'on, se obtiene una ER, pero una m\'as corta,
+ER m\'as espec\'{i}fica podr\'{i}a ser posible, mediante la eliminaci\'on de algunos de los refinamientos anteriores.
+Por lo tanto, el ER resultante podr\'{i}a ser falte espacio. Este es el mismo tipo de especificaci\'on excesiva
 que el algoritmo original de incrementales permite. Pero se ha argumentado~\cite{Engelhardt_Bailey_Ferreira_2006, Arts_Maes_Noordman_Jansen_2011} que
 un grado mucho mayor de especificaci\'on excesiva se encuentra generalmente en corpora, y esto
 es de hecho lo que se ve en el corpus GRE3D7. Como podemos ver en la tabla~\ref{corpus distribuci\'on},
