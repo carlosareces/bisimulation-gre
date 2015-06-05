@@ -1,31 +1,53 @@
 \chapter{Selecci\'on de contenido de expresiones referenciales}
 \label{sec:seleccion}
 
+Una propiedad es una caracter\'istica de un objeto. Una relaci\'on es ...
+
 La selecci\'on de cuales propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial, claramente ser\'a muy distinta la expresi\'on si nuestro objetivo es dar la m\'inima expresi\'on referencial que identifique al objeto que si nuestro objetivo es ser colaborativos con nuestro interlocutor.
 
-En una situaci\'on de la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente ya no poseemos esa clase de informaci\'on.
+En una situaci\'on de la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.
 
-En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia siular el comportamiento de la gente, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea los humanos.
+En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento de la gente, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea los humanos.
 
-En este cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales y explicaremos los algoritmos m\'as conocidos en el \'area.
+En este cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales, las propiedades que puede tener o no una expresi\'on referencial y los algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos en el \'area.
 
 
-\textcolor{blue}{me parece que aca podrian ir estas 2 secciones o fusionarlas en una, me gustaria poner un ejmeplo, no se si aca o en el 1}
+\section{Propiedades de una ER: relacional, minimal, sobreespecificada, subespecificada}
 
-\section{Propiedades de las ER}
+%Cuando la ER no es relacional solo contiene propiedades del objeto mismo. Ej.: color, tama\~no. Note que quiz\'as el tama\~no sea con respecto a los dem\'as objetos ``la m\'as peque\~na'', pero al no incluir una descripci\'on de otro objeto no la llamamos relacional.\\
 
-\section{Propiedades de los Algoritmos GER}
+Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces aqu\'{i} se incluye en desaf\'{i}o de describir al siguiente objeto. Ej.: ``La que esta al lado del cubo rojo''.\\
 
+Se dice que una ER es minimal, cuando incluye la m\'inima cantidad de propiedades con la cual puede ser identificada un\'ivocamente en el contexto dado. Notar que puede haber muchas expresiones minimales.\\
+
+En cambio cuando contiene m\'as informaci\'on de la m\'inima necesaria para identificarla un\'ivocamente de los dem\'as objetos en el contexto dado, se dice que la ER es sobreespecificada.\\
+
+Subespecificada es cuando la expresi\'on dada, no alcanza a ser una ER, ya que no se puede identificar al objeto target del resto de los objetos en la imagen. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones.
+
+
+\section{Propiedades de un algoritmo: determin\'{i}stico, no-determin\'{i}stico, referencial, incluye negaciones, identifica plurales, usa disyunciones, conjunciones, genera sobrerespecificaci\'on}
+
+En esta parte definiremos el problema en general, cuando tenemos muchas personas, tenemos muchas ER, que pueden ser distintas. Los algoritmos deber\'ian dar la salida como muchas personas dar\'ian.\\
+
+Un algoritmo es determin\'{i}stico si siempre dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es no-determin\'{i}stico si considera la posibilidad de dar distintas salidas para distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.\\
+
+Un algoritmo es referencial si permite generar ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar una ER para el objeto con el cual el objeto target tiene la relaci\'on. Notar que las relaciones pueden ser con muchos objetos, es decir de una aridad mayor que 1. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on''.\\
+
+En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya negaciones.\\
+
+En los casos de identificaci\'on de plurales, los algoritmos tambi\'en se pueden diferenciar en si usan conjunciones,  disyunciones o ambas.\\
+
+La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Ser\'ia interesante que un algoritmo diera la sobreespecificaci\'on que las personas dan. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on, al frente del correo''.
 
 \section{Generaci\'on autom\'atica de expresiones referenciales}
 
-El desaf\'io de la generaci\'on autom\'atica de contenido para las expresiones referenciales viene dado porque una computadora no sabe cuales son las propiedades m\'as sobresalientes de un objetos
+El desaf\'io de la generaci\'on autom\'atica de contenido para las expresiones referenciales viene dado porque una computadora no sabe cuales son las propiedades m\'as sobresalientes de un objetos.
 
 \section{Algoritmos de REG}
 
 Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. 
 
-Por ejemplo:Que cosa es?(el tipo) Una pelota. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.
+Por ejemplo: Que cosa es? (el tipo) Una pelota. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.
 
 Con esta clase de datos para los objetos de la escena, tenemos una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo:conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.
 
@@ -33,7 +55,7 @@ Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se
 
 El sistema deber\'ia tener una lista del orden de preferencia de los atributos a usar. 
 
-Para una persona identificar ciertos atributos puede ser m\'as f\'acil que identificar ciertos otros, por ejemplo cierto color verde podria ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir ``grande'' y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es ``grande''.
+Para una persona identificar ciertos atributos puede ser m\'as f\'acil que identificar ciertos otros, por ejemplo cierto color verde podria ser m\'as complicado de identificar que el tama\~nno. Notar que cuando decimos el tama\~nno podemos decir ``grande'' y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es ``grande''.
 
 Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
 
@@ -91,7 +113,7 @@ Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
 
 \subsection{Incremental}
 
-Se describe a continuaci\'on el algoritmo Incremental de Dale \& Reiter el cual reduce la complejidad del algoritmo Greedy (el cual hac\'ia una b\'usqueda exaustiva y elegia la propiedad que m\'as distractores eliminaba en paso) cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que la posee al menos un distractor. Este algoritmo es de orden polinomial. Este algoritmo produce expresiones referenciales que pueden estar sobreespecificadas.\\
+Se describe a continuaci\'on el algoritmo Incremental de Dale \& Reiter el cual reduce la complejidad del algoritmo Greedy (el cual hac\'ia una b\'usqueda exaustiva y elegia la propiedad que m\'as distractores eliminaba en cada paso) cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que posee al menos un distractor. Este algoritmo es de orden polinomial. Este algoritmo produce expresiones referenciales que pueden estar sobreespecificadas.\\
 
 \textcolor{blue}{reescribir esto porque no queda tabulado como un algoritmo}
 
@@ -136,12 +158,12 @@ P $\leftarrow$ P -\{$p_{j}$\}\\
 El objeto target que queremos identificar lo llamaremos {\it r},
 D es el conjunto de distractores de r,
 KB es la base de conocimiento que contiene para cada objeto los valores de sus propiedades.
-Tenemos $P_{r}$ propiedad de r que esta inclu\'ido en KB y adem\'as esta ordenado seg\'un preferencia de propiedades.\\
-L inicialmente es la descripci\'on vac\'{i}a al finalizar la ejecusi\'on tendr\'a el conjunto de propiedades con los cuales identificaremos a r.
+Tenemos $P_{r}$ propiedad de r que esta inclu\'ida en KB y adem\'as esta ordenado seg\'un preferencia de propiedades.\\
+L inicialmente es la descripci\'on vac\'{i}a, al finalizar la ejecusi\'on tendr\'a el conjunto de propiedades con los cuales identificaremos a r.\\
 
-\textcolor{blue}{notar que si D es vacio, no hay nada para identificar, porque no hay distractores}
+Si D es vaci\'io, no hay nada para identificar, porque no hay distractores.\\
 
-La idea del algoritmo es ir eliminando distractores, por eso, en {\it Paso 1} si no hay distractores, se devuelve L como el conjunto de propiedades que identifica al target. Si todav\'ia hay distractores pero no quedan propiedades de r ($P_{r}$), falla porque no lo puede identificar un\'ivocamente. Si quedan propiedades de r, va al {\it Paso 2}, en el cual elije la propiedad de r que sigue en el orden de preferencias, pero que tambi\'en es propiedad de algun distractor (algun elemento de D) y va al {\it Paso 3}, en caso de que la propiedad no sea propiedad de algun distractor, se actualiza $P_{r}$ a $P_{r}$ menos la propiedad y se va al principio de nuevo.
+La idea del algoritmo es ir eliminando distractores, por eso, en {\it Paso 1} si no hay distractores, se devuelve L como el conjunto de propiedades que identifica al target. Si todav\'ia hay distractores pero no quedan propiedades de r ($P_{r}$), falla porque no lo puede identificar un\'ivocamente. Si quedan propiedades de r, va al {\it Paso 2}, en el cual elije la propiedad de r que sigue en el orden de preferencias, pero que tambi\'en es propiedad de alg\'un distractor (algun elemento de D) y va al {\it Paso 3}, en caso de que la propiedad no sea propiedad de algun distractor, se actualiza $P_{r}$ a $P_{r}$ menos la propiedad y se va al principio de nuevo.\\
 En el {\it Paso 3} se agrega la propiedad a la descripci\'on actual L, se actualiza $D$ con $D_{j}$, es decir con los elementos de $D$ que tienen la propiedad $_j$, se saca $_j$ de la lista de P y continua en {\it Paso 1}.\\
 
 \textcolor{blue}{Quizas deba poner mas cosas de estas aca...Theune and Krahmer proposed an extension that allows the generation of subsequent reference with the ia taking into account the discourse salience of the target referent (Krahmer and Theune, 1998; Theune, 2000; Krahmer and Theune, 2002), and a second one which allows the ia to produce referring expressions that
@@ -164,46 +186,44 @@ descriptions such as Examples (2.6) or (2.7) rather than Example (2.8) or.. }
 
 \subsection{Graph}
 
-Un grafo (del griego grafos:dibujo, imagen) es un conjunto de objetos llamados v\'ertices o nodos unidos por enlaces llamadas aristas o arcos, que permiten representar relaciones binarias entre elementos de un conjunto. 
+Un grafo (del griego grafos:dibujo, imagen) es un conjunto de objetos llamados v\'ertices o nodos unidos por enlaces llamadas aristas o arcos, que permiten representar relaciones binarias entre elementos de un conjunto. \\
 
-Son objeto de estudio de la teor\'{i}a de grafos. 
+Son objeto de estudio de la teor\'{i}a de grafos. \\
 
-Un grafo G es un par ordenado $G=(V,E)$, donde:
+Un grafo G es un par ordenado $G=(V,E)$, donde:\\
 
     V es un conjunto de v\'ertices o nodos, y
-    E es un conjunto de aristas o arcos, que relacionan estos nodos.
+    E es un conjunto de aristas o arcos, que relacionan estos nodos.\\
 
-Normalmente V suele ser finito. Muchos resultados importantes sobre grafos no son aplicables para grafos infinitos.
+Normalmente V suele ser finito. Muchos resultados importantes sobre grafos no son aplicables para grafos infinitos.\\
 
-Se llama orden del grafo G a su n\'umero de v\'ertices, $|V|$.
+Se llama orden del grafo G a su n\'umero de v\'ertices, $|V|$.\\
 
-El grado de un v\'ertice o nodo $v \in V$ es igual al n\'umero de arcos que lo tienen como extremo.
+El grado de un v\'ertice o nodo $v \in V$ es igual al n\'umero de arcos que lo tienen como extremo.\\
 
-Un bucle es una arista que relaciona al mismo nodo; es decir, una arista donde el nodo inicial y el nodo final coinciden.
+Un bucle es una arista que relaciona al mismo nodo; es decir, una arista donde el nodo inicial y el nodo final coinciden.\\
 
-Dos o m\'as aristas son paralelas si relacionan el mismo par de v\'ertices.
+Dos o m\'as aristas son paralelas si relacionan el mismo par de v\'ertices.\\
 
-Un grafo puede ser dirigido o no, etiquetado o no.
+Un grafo puede ser dirigido o no, etiquetado o no.\\
 
-T\'{i}picamente, un grafo se representa gr\'aficamente como un conjunto de puntos (v\'ertices o nodos) unidos por l\'{i}neas (aristas).
+T\'{i}picamente, un grafo se representa gr\'aficamente como un conjunto de puntos (v\'ertices o nodos) unidos por l\'{i}neas (aristas).\\
 
-Los grafos han sido muy estudiados, pr\'acticamente cualquier problema puede ser expresado como un problema de grafos, y aplicar algoritmos de b\'usqueda ya estudiados.
+Los grafos han sido muy estudiados, pr\'acticamente cualquier problema puede ser expresado como un problema de grafos, y aplicar algoritmos de b\'usqueda ya estudiados.\\
 
-Mirando la obtenci\'on de expresiones referenciales como un problema de grafos, el dominio que incluye al target y los distractores es representado como un grafo dirigido etiquetado. 
+Mirando la obtenci\'on de expresiones referenciales como un problema de grafos, el dominio que incluye al target y los distractores es representado como un grafo dirigido etiquetado. \\
 
-Cada objeto de la escena se modela como un v\'ertice en el grafo. Los atributos at\'omicos como color, tipo o tama\~no se representan como un bucle en el correspondiente nodo. Est\'an etiquetados con los nombres de las propiedades y los valores que el objeto en cuesti\'on tiene para estas propiedades. 
+Cada objeto de la escena se modela como un v\'ertice en el grafo. Los atributos at\'omicos como color, tipo o tama\~nno se representan como un bucle en el correspondiente nodo. Est\'an etiquetados con los nombres de las propiedades y los valores que el objeto en cuesti\'on tiene para estas propiedades. \\
 
-Las relaciones binarias entre objetos, por ejemplo abajo-de, arriba-de se modelan como aristas entre los nodos correspondientes.
+Las relaciones binarias entre objetos, por ejemplo abajo-de, arriba-de se modelan como aristas entre los nodos correspondientes.\\
 
-La base de conocimiento que incluye al target ahora esta expresada como los v\'ertices, las aristas y las etiquedas del grafo.
+La base de conocimiento que incluye al target ahora esta expresada como los v\'ertices, las aristas y las etiquedas del grafo.\\
 
 %Krahmer et al.'s (2003) reformularon la tarea de seleccionar las propiedades y relaciones que contendr\'a una expresi\'on referencial como un problema de teor\'ia de grafos.
 
-Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente, le llama grafo distintivo (distinguishing graph).
+Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente, le llama grafo distintivo (distinguishing graph).\\
 
-\textcolor{blue}{aca podria poner el algoritmo}
-
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda exaustiva, pero comenzando a lo ancho. \textcolor{blue}{aca hay que escribir mucho mas...} Utiliza una heur\'{i}stica basada en el costo (descripto a continuaci\'on) que es capaz de podar el espacio de b\'usqueda.
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda exaustiva, pero comenzando a lo ancho. \textcolor{blue}{aca hay que escribir mucho mas...} Utiliza una heur\'{i}stica basada en el costo (descripto a continuaci\'on) que es capaz de podar el espacio de b\'usqueda.\\
 
 
 %esto no se entiende nada
@@ -212,38 +232,33 @@ Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al tar
 %del objeto target se puede `coloca sobre 'el v\'ertice del objetivo en el gr\'afico de dominio,
 %y cada uno de los bordes marcados en el subgrafo puede ser `coloca sobre 'un correspondiente
 %borde en el gr\'afico de dominio con la misma etiqueta y el mismo sentido. Por otra parte,
-un subgrafo distingue al target un\'ivocamente si y s\'olo si se puede `colocarlo sobre grafo original' y es exactamente el
-v\'ertice target. La noci\'on informal de un gr\'afico que se coloca sobre otro corresponde al concepto te\'orico matem\'atico de isomorfismo de grafos.
+%un subgrafo distingue al target un\'ivocamente si y s\'olo si se puede `colocarlo sobre grafo original' y es exactamente el
+%v\'ertice target. La noci\'on informal de un gr\'afico que se coloca sobre otro corresponde al concepto te\'orico matem\'atico de isomorfismo de grafos.
 
-En teor\'{i}a de grafos, un isomorfismo entre dos grafos G y H es una biyecci\'on f entre los conjuntos de sus v\'ertices $f:V(G) \rightarrow V(H)$ que preserva la relaci\'on de adyacencia. Es decir, cualquier par de v\'ertices u y v de G son adyacentes si y solo si lo son sus im\'agenes, $f(u)$ y $f(v)$, en H.
-
-
-
+En teor\'{i}a de grafos, un isomorfismo entre dos grafos G y H es una biyecci\'on f entre los conjuntos de sus v\'ertices $f:V(G) \rightarrow V(H)$ que preserva la relaci\'on de adyacencia. Es decir, cualquier par de v\'ertices u y v de G son adyacentes si y solo si lo son sus im\'agenes, $f(u)$ y $f(v)$, en H.\\
 
 \textcolor{blue}{aca quiero poner un ejemplo que muestre una imagen y el modelo como grafo}
 
-La funci\'on de costo esta definida sobre las aristas y v\'ertices del grafo dominio. El costo de un subgrafo se define como la suma sobre todas las aristas y v\'ertices que contiene el grafo.
-El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que representa al target.
+La funci\'on de costo esta definida sobre las aristas y v\'ertices del grafo dominio. El costo de un subgrafo se define como la suma sobre todas las aristas y v\'ertices que contiene el grafo.\\
+El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que representa al target.\\
 
 La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cuando estas se hacen m\'as costosas que el grafo de menor costo encontrado hasta el momento. Esta funci\'on hace que se prefieran propiedades sobre otras que tienen mayor costo.
 
 \subsection{Bisimulaci\'on}
 
 
-En este cap\'itulo daremos una introducci\'on a l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) y luego daremos el algoritmo en el cual nos basamos en esta tesis.
+En este cap\'itulo daremos una introducci\'on a las l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) y luego daremos el algoritmo en el cual nos basamos en esta tesis.\\
 
-La idea es transformar el problema de GRE al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets) ya que una f\'ormula describe un conjunto.
+La idea es transformar el problema de GRE al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets, en el caso de querer dar ER para plurales) aprovechando que una f\'ormula describe un conjunto.\\
 
-Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, vamos a explicar \alc y \el.
+Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, vamos a explicar \alc y \el.\\
 
-\textcolor{blue}{Figure sale en ingles, cambiar a espanol, no se como... todavia}
-
-\emph{F\'ormulas} (o \emph{conceptos}) $\varphi$ de $\alc$ son generadas por la siguiente gram\'atica;
+\emph{F\'ormulas} (o \emph{conceptos}) $\varphi$ de $\alc$ son generadas por la siguiente gram\'atica:
 $$
 \varphi,\varphi' ::= \top \mid p \mid \neg \varphi \mid \varphi \sqcap \varphi'
 \mid \exists R. \varphi
 $$
-donde $p$ es el conjunto de los s\'imbolos proposicionales \prop y $R$ es el de los s\'imbolos relacionales \rel. $\el$ es la parte sin negaci\'on de $\alc$.
+donde $p$ es el conjunto de los s\'imbolos proposicionales \prop y $R$ es el de los s\'imbolos relacionales \rel. $\el$ es la parte sin negaci\'on de $\alc$.\\
 
 Las f\'ormulas de ambos $\alc$ y $\el$ son interpretadas en modelos relacionales de primer orden $\gM = (\Delta,\interp{\cdot})$ donde
 $\Delta$ es un conjunto no vac\'io y $\interp{\cdot}$ es una funci\'on de interpretaci\'on tal que:
@@ -273,23 +288,20 @@ $\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$ denota
 $\{f_2\}$; y la f\'ormula $\mathsf{flower} \sqcap \neg
 \exists \mathsf{in}.\mathsf{hat}$ denota $\{f_1\}$.
 
-\textcolor{blue}{no se si dejar este ejemplo, o cambiarlo por uno es espa\~nol}
-
-Diferentes l\'ogicas de descripci\'on difieren en los conectores que permiten; Poe ejemplo \alc\ permite negaci\'on, pero \el\
-no permite. 
+\textcolor{blue}{no se si dejar este ejemplo, o cambiarlo por uno es espa\~nnol}
 
 Hay muchas otras l\'ogicas de descripci\'on en la literatura por ejemplo 
 
 $\mathcal{CL}$ (\el\ sin el cuantificador existencial, es decir solo conjunciones at\'omicas); $\mathcal{PL}$ (\alc\ l\'ogica propocisional); y
-$\mathcal{ELU}_{(\neg)}$ (\el\ m\'as disjunci\'on y negaci\'on at\'omica).
+$\mathcal{ELU}_{(\neg)}$ (\el\ m\'as disjunci\'on y negaci\'on at\'omica).\\
 
 Usaremos una noci\'on de preservaci\'on de f\'ormulas que llamaremos
 \emph{similaridad}. Para cualquier DL $\gL$, diremos que un individual $i$ es \emph{\gL-similar} a $i'$ en un modelo dado $\gM$
 si para cualquier f\'ormula $\varphi \in \gL$ tal que $i \in
-\interp{\varphi}$, tambi\'en tenemos que $i' \in \interp{\varphi}$.
+\interp{\varphi}$, tambi\'en tenemos que $i' \in \interp{\varphi}$.\\
 Equivalentemente, no hay $\gL$-f\'ormula que se mantenga para $i$ pero no para
 $i'$.  Diremos que \emph{\gL-conjunto de similaridad } de alg\'un individual
-$i$ es el conjunto de todos los individuales a los cuales $i$ es \gL-similar.
+$i$ es el conjunto de todos los individuales a los cuales $i$ es \gL-similar.\\
 
 Notar que la similaridad no es necesariamente una relaci\'on sim\'etrica: Por ejemplo:$f_1$ es \el-similar a $f_2$ en
 Fig.~\ref{fig:dale-haddock}b, pero $f_2$ no es \el-similar a $f_1$
@@ -299,7 +311,7 @@ el languaje contiene negaci\'on; y en consecuencia, $f_1$ no es \alc-similar
 a $f_2$ porque este tampoco satisface $\neg \exists
 \mathsf{in}.\mathsf{hat}$.  Porque \alc\ es m\'as expresivo que \el,
 esto es, para alg\'un individual $a$ es posible ser \el-similar pero
-no \alc-similar a alg\'un individual $b$, pero no viceversa.
+no \alc-similar a alg\'un individual $b$, pero no viceversa.\\
 
 
 
@@ -353,17 +365,15 @@ libro sobre la mesa \ldots ''}
 
 
 \cite{arec2:2008:Areces,arec:usin11} han propuesto algoritmos de baja complejidad
- para la generaci\'on de ER relacionales
-% (incluyendo referencias a juegos)
-que eliminan el riesgo de regresi\'on infinita. Estos algoritmos son
+ para la generaci\'on de ER relacionales que eliminan el riesgo de regresi\'on infinita. Estos algoritmos son
 basado en variaciones de los algoritmos de refinamiento partici\'on
 de~\cite{paig:thre87}. La informaci\'on proporcionada por una escena dada
 se interpreta como un modelo relacional cuyos objetos se clasifican en
-juegos que se adapten a la misma descripci\'on. Esta clasificaci\'on es
-sucesivamente \emph{refinado} hasta el blanco es el \'unico elemento
-ajuste de la descripci\'on de su clase. La existencia de un RE depende
-en la informaci\'on disponible en la escena de entrada, y en la expresiva
-poder del lenguaje formal utilizado para describir los elementos de la
+conjuntos que se adapten a la misma descripci\'on. Esta clasificaci\'on es
+sucesivamente \emph{refinada} hasta que el target es el \'unico elemento
+en la clase. La existencia de un ER depende
+de la informaci\'on disponible en la escena de entrada, y en el poder expresivo
+del lenguaje formal utilizado para describir los elementos de la
 diferentes clases en el refinamiento.
 
 %Refinement
@@ -380,7 +390,7 @@ diferentes clases en el refinamiento.
 
 Los algoritmos de refinamiento
 % presenta en~\cite{arec 2:2008:Areces, arec:usin11}
-calcular efectivamente ER para todos los objetos en el dominio, al mismo
+calculan efectivamente ER para todos los objetos en el dominio, al mismo
 tiempo. Los algoritmos siempre terminan devolviendo una f\'ormula del
 lenguaje formal elegido que describe un\'{i}vocamente el objetivo (si el
 lenguaje formal es suficientemente expresiva para identificar el target en el
@@ -402,17 +412,15 @@ modelo de entrada).
 
 Algoritmos de refinamiento para GRE se basan en la siguiente idea b\'asica:
 dada una escena $S$, los objetos que aparecen en $S$ son sucesivamente
-clasificados de acuerdo con sus propiedades en m\'as y m\'as fino
-clases. Una descripci\'on (en alg\'un lenguaje formal de $\mathcal{L}$) de cada
-clase se calcula cada vez que una clase es refinado. El procedimiento siempre
-se detiene cuando el conjunto de clases se estabiliza, es decir, no mayor refinamiento
-que es posible con la informaci\'on disponible en la escena \footnote{De
-   Por supuesto, si s\'olo estamos interesados en una expresi\'on que se refiere a un
-   objetivo dado que puede detener el procedimiento en cuanto el objetivo es la
-   \'unico elemento de algunas de las clases.}. Si el elemento de destino est\'a en
+clasificados de acuerdo con sus propiedades en clases m\'as y m\'as finas. 
+Una descripci\'on (en alg\'un lenguaje formal de $\mathcal{L}$) de cada
+clase se calcula cada vez que una clase es refinada. El procedimiento siempre
+se detiene cuando el conjunto de clases se estabiliza, es decir, no se puede hacer m\'as refinamiento
+con la informaci\'on disponible en la escena \footnote{Por supuesto, si s\'olo estamos interesados en una expresi\'on que se refiere a un objeto dado, se puede detener el procedimiento en cuanto el objetivo es el
+   \'unico elemento de alguna de las clases.}. Si el elemento target est\'a en
 una clase singleton, entonces la descripci\'on formal de esa clase es un
-refiri\'endose expresi\'on; de lo contrario el destino no puede ser inequ\'{i}vocamente
-descrito (en $\mathcal{L}$).
+expresi\'on referencial; de lo contrario el target no puede ser un\'{i}vocamente
+descripto (en $\mathcal{L}$).
 
 %It is clear that a scene can be encoded in different ways as a
 %relational model (for example in \ref{figure22}, we could argue that

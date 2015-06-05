@@ -1,31 +1,6 @@
 \chapter{Definiendo optimalidad de una ER}
 \label{sec:metodologia}
 
-\section{Propiedades de una ER: relacional, minimal, sobreespecificada, underespecificada}
-
-Cuando la ER no es relacional solo contiene propiedades del objeto mismo. Ej.: color, tamaño. Note que quiz\'as el tamaño sea con respecto a los demás objetos ``la más pequeña'', pero al no incluir una descripción de otro objeto no la llamamos relacional.\\
-
-Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces aqu\'{i} se incluye en desaf\'{i}o de describir al siguiente objeto. Ej.: ``La que esta al lado del cubo rojo''.\\
-
-Se dice que una ER es minimal, cuando incluye la m\'inima cantidad de propiedades con la cual puede ser identificada unívocamente en el contexto dado.\\
-
-Una ER es sobreespecificada cuando contiene más información de la mínima necesaria para identificarla unívocamente de los demás objetos en el contexto dado.\\
-
-Underespecificada es cuando la expresión dada, no alcanza a ser una ER, ya que no alcanza para identificar al objeto del resto de los obejetos en la imagen. En estos casos se debe dar otra expresión o corregir la anterior agregando más propiedades o relaciones.
-
-
-\section{Propiedades de un algoritmo: determin\'{i}stico, no-determin\'{i}stico, referencial, incluye negaciones, identifica plurales, usa disyunciones, conjunciones, genera sobrerespecificación}
-
-En esta parte definiremos el problema en general, cuando tenemos muchas personas, tenemos muchas ER, que pueden ser distintas. Los algoritmos deberían dar la salida como muchas personas darían.
-
-Un algoritmo es determin\'{i}stico si siempre dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es no-determin\'{i}stico si considera la posibilidad de dar distintas salidas para distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.
-
-Un algoritmo es referencial si permite generar ER relacionales, en cuyo caso además de generar las relaciones correspondientes deberá generar una ER para el objeto con el cual el objeto target tiene la relación. Notar que las relaciones pueden ser con muchos objetos, es decir de una aridad mayor que 1. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Colón''.
-
-\textcolor{blue}{OBVIO! - Un algoritmo que incluye negaciones es uno que puede incluir negaciones}
-\textcolor{blue}{identifica plurales, usa conjunciones disyunciones}
-
-La sobreespecificación es la característica de dar más atributos o relaciones de las necesarias para identificar al objeto target. Sería interesante que un algoritmo diera la sobreespecificación que las personas dan. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Colón, al frente del correo''.
 
 
 \section{Problemas de corpus existente y/o de anotación}
