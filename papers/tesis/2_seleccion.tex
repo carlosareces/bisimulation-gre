@@ -1,43 +1,52 @@
 \chapter{Selecci\'on de contenido de expresiones referenciales}
 \label{sec:seleccion}
 
-Una propiedad es una caracter\'istica de un objeto. Una relaci\'on es ...
+Una propiedad es una caracter\'istica de un objeto. Una relaci\'on es otra caracter\'istica la cual incluye a otro u otros objetos.\\
 
-La selecci\'on de cuales propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial, claramente ser\'a muy distinta la expresi\'on si nuestro objetivo es dar la m\'inima expresi\'on referencial que identifique al objeto que si nuestro objetivo es ser colaborativos con nuestro interlocutor.
+La selecci\'on de cuales propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial, claramente ser\'a muy distinta la expresi\'on si nuestro objetivo es dar la m\'inima expresi\'on referencial que identifique al objeto que si nuestro objetivo es ser colaborativos con nuestro interlocutor.\\
 
-En una situaci\'on de la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.
+En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.
 
-En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento de la gente, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea los humanos.
+En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.
 
-En este cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales, las propiedades que puede tener o no una expresi\'on referencial y los algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos en el \'area.
+En este Cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales, las propiedades que puede tener o no una expresi\'on referencial y los algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos en el \'area.
 
 
-\section{Propiedades de una ER: relacional, minimal, sobreespecificada, subespecificada}
+\section{Propiedades de una ER}
 
 %Cuando la ER no es relacional solo contiene propiedades del objeto mismo. Ej.: color, tama\~no. Note que quiz\'as el tama\~no sea con respecto a los dem\'as objetos ``la m\'as peque\~na'', pero al no incluir una descripci\'on de otro objeto no la llamamos relacional.\\
+Una ER puede ser relacional o no relacional (tambi\'en llamada proposicional), minimal o sobreespecificada, y subespecificada en cuyo caso es una expresi\'on que no es referencial, la incluimos en nuestras propiedades porque nos va a ser \'util la defici\'on en Cap\'itulo \ref{sec:corpus}.\\
 
-Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces aqu\'{i} se incluye en desaf\'{i}o de describir al siguiente objeto. Ej.: ``La que esta al lado del cubo rojo''.\\
+Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces aqu\'{i} se incluye en desaf\'{i}o de describir al siguiente objeto. Ej.: ``La que esta al lado del cubo rojo''. En este caso, ``al lado del'' es una relaci\'on entre el objeto target y otro objeto cuya ER es el ``cubo rojo''.\\
+
+Una ER proposicional incluye solo propiedades absolutas del objeto target. Ej.: ``La pelota roja con rayas amarillas''. Las caracter\'isticas ser pelota, roja y tener rayas amarillas son propias del objeto a identificar.\\
 
 Se dice que una ER es minimal, cuando incluye la m\'inima cantidad de propiedades con la cual puede ser identificada un\'ivocamente en el contexto dado. Notar que puede haber muchas expresiones minimales.\\
 
 En cambio cuando contiene m\'as informaci\'on de la m\'inima necesaria para identificarla un\'ivocamente de los dem\'as objetos en el contexto dado, se dice que la ER es sobreespecificada.\\
 
-Subespecificada es cuando la expresi\'on dada, no alcanza a ser una ER, ya que no se puede identificar al objeto target del resto de los objetos en la imagen. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones.
+Subespecificada es cuando la expresi\'on dada, no alcanza a ser una ER, ya que no se puede identificar al objeto target del resto de los objetos en la imagen. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Esta expresi\'on identifica a un conjunto, no a un objeto target.\\
 
 
-\section{Propiedades de un algoritmo: determin\'{i}stico, no-determin\'{i}stico, referencial, incluye negaciones, identifica plurales, usa disyunciones, conjunciones, genera sobrerespecificaci\'on}
+\section{Propiedades de un algoritmo}
 
-En esta parte definiremos el problema en general, cuando tenemos muchas personas, tenemos muchas ER, que pueden ser distintas. Los algoritmos deber\'ian dar la salida como muchas personas dar\'ian.\\
+En esta parte definiremos el problema en general, cuando queremos generar las ER autom\'aticamente simulando lo encontrado en un corpus, en un corpus tenemos ER dadas por muchas personas. Los algoritmos para generarlas pueden tener algunas de las siguientes propiedades.\\
 
-Un algoritmo es determin\'{i}stico si siempre dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es no-determin\'{i}stico si considera la posibilidad de dar distintas salidas para distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.\\
+Un algoritmo puede ser: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, identificar plurales o solo singulares, usar disyunciones adem\'as de conjunciones, o solo conjunciones, generar ER sobreespecificadas o minimales. Hacer o no backtraking.\\
 
-Un algoritmo es referencial si permite generar ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar una ER para el objeto con el cual el objeto target tiene la relaci\'on. Notar que las relaciones pueden ser con muchos objetos, es decir de una aridad mayor que 1. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on''.\\
+Un algoritmo es determin\'{i}stico si siempre dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es no-determin\'{i}stico si considera la posibilidad de dar distintas salidas para el mismo input, en distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.\\
+
+Un algoritmo es relacional si permite generar ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar una ER para el objeto con el cual el objeto target tiene la relaci\'on. Notar que las relaciones pueden ser con muchos objetos, es decir de una aridad mayor que 1. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on''.\\
 
 En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya negaciones.\\
 
-En los casos de identificaci\'on de plurales, los algoritmos tambi\'en se pueden diferenciar en si usan conjunciones,  disyunciones o ambas.\\
+Un algoritmo puede generar ER para plurales, es decir dar ER para varios targets de la escena considerada.\\
 
-La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Ser\'ia interesante que un algoritmo diera la sobreespecificaci\'on que las personas dan. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on, al frente del correo''.
+Los algoritmos tambi\'en se pueden diferenciar en si usan conjunciones,  disyunciones o ambas.\\
+
+La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Ser\'ia interesante que un algoritmo diera la sobreespecificaci\'on que las personas dan. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on, al frente del correo''.\\
+
+Un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir luego no incluirla.\\
 
 \section{Generaci\'on autom\'atica de expresiones referenciales}
 
@@ -45,17 +54,17 @@ El desaf\'io de la generaci\'on autom\'atica de contenido para las expresiones r
 
 \section{Algoritmos de REG}
 
-Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. 
+Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. \\
 
-Por ejemplo: Que cosa es? (el tipo) Una pelota. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.
+Por ejemplo: Que cosa es? (el tipo) Una pelota. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.\\
 
-Con esta clase de datos para los objetos de la escena, tenemos una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo:conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.
+Con esta clase de datos para los objetos de la escena, tenemos una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.\\
 
-Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identicar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran segun la cantidad de informaci\'on uqe den, si dan la m\'inima informaci\'on para identificarlas un\'ivocamente seran minimales, si dan m\'as informaci\'on estaran sobreespecificadas, pero en el caso de dar m\'as de la m\'inima informaci\'on... cu\'anta m\'as dar?
+Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identicar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran seg\'un la cantidad de informaci\'on que dan, si dan la m\'inima informaci\'on para identificarlas un\'ivocamente ser\'an minimales, si dan m\'as informaci\'on estar\'an sobreespecificadas, pero en el caso de dar m\'as de la m\'inima informaci\'on... cu\'anta m\'as dar?
 
-El sistema deber\'ia tener una lista del orden de preferencia de los atributos a usar. 
+El sistema deber\'ia tener una lista del orden de preferencia de los atributos a usar.\\ 
 
-Para una persona identificar ciertos atributos puede ser m\'as f\'acil que identificar ciertos otros, por ejemplo cierto color verde podria ser m\'as complicado de identificar que el tama\~nno. Notar que cuando decimos el tama\~nno podemos decir ``grande'' y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es ``grande''.
+Para una persona identificar ciertos atributos puede ser m\'as f\'acil que identificar ciertos otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir ``grande'' y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es ``grande''.\\
 
 Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
 
@@ -286,9 +295,9 @@ Cada f\'ormula de una descripci\'on l\'ogica denota un conjunto de objetos del d
 $\mathsf{flower}$ denota el conjunto $\{f_1,f_2\}$; La f\'ormula
 $\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$ denota
 $\{f_2\}$; y la f\'ormula $\mathsf{flower} \sqcap \neg
-\exists \mathsf{in}.\mathsf{hat}$ denota $\{f_1\}$.
+\exists \mathsf{in}.\mathsf{hat}$ denota $\{f_1\}$.\\
 
-\textcolor{blue}{no se si dejar este ejemplo, o cambiarlo por uno es espa\~nnol}
+\textcolor{blue}{no se si dejar este ejemplo, o cambiarlo por uno es espa\~nol}
 
 Hay muchas otras l\'ogicas de descripci\'on en la literatura por ejemplo 
 
@@ -315,14 +324,14 @@ no \alc-similar a alg\'un individual $b$, pero no viceversa.\\
 
 
 
-\textcolor{blue}{SACAR ESTO... poner quizas en la introduccion o en primer capitulo. Las RE que involucran relaciones han recibido m\'as atenci\'on recientemente;
+\textcolor{blue}{SACAR ESTO... poner quizas en la introduccion o en primer capitulo. Las ER que involucran relaciones han recibido m\'as atenci\'on recientemente;
 especialmente en el contexto de las expresiones referenciales espaciales en 
 generaci\'on (por ejemplo,~\cite{kelleher06:increm}),
 donde es particularmente natural utilizar expresiones que implican 
 relaciones espaciales, tales como ``la pelota en la parte superior del cubo''. Sin embargo, el
 algoritmo cl\'asico
 por~\cite{dale91:gener} ha demostrado ser
-incapaz de generar RE satisfactorias en la pr\'actica (v\'ease el an\'alisis sobre
+incapaz de generar ER satisfactorias en la pr\'actica (v\'ease el an\'alisis sobre
 el~\emph{cabinet corpus}
 en~\cite{viethen06:_algor_for_gener_refer_expres}). Adem\'as, el
 Dale y Haddock algoritmo y muchos de sus sucesores (tales
@@ -358,7 +367,7 @@ libro sobre la mesa \ldots ''}
 %is interpreted as a relational model whose objects are classified into
 %sets that fit the same description.  This classification is
 %successively \emph{refined} till the target is the only element
-%fitting the description of its class.  The existence of an RE depends
+%fitting the description of its class.  The existence of an ER depends
 %on the information available in the input scene, and on the expressive
 %power of the formal language used to describe elements of the
 %different classes in the refinement.
@@ -366,15 +375,15 @@ libro sobre la mesa \ldots ''}
 
 \cite{arec2:2008:Areces,arec:usin11} han propuesto algoritmos de baja complejidad
  para la generaci\'on de ER relacionales que eliminan el riesgo de regresi\'on infinita. Estos algoritmos son
-basado en variaciones de los algoritmos de refinamiento partici\'on
+basado en variaciones de los algoritmos de refinamiento particiones
 de~\cite{paig:thre87}. La informaci\'on proporcionada por una escena dada
 se interpreta como un modelo relacional cuyos objetos se clasifican en
 conjuntos que se adapten a la misma descripci\'on. Esta clasificaci\'on es
 sucesivamente \emph{refinada} hasta que el target es el \'unico elemento
 en la clase. La existencia de un ER depende
 de la informaci\'on disponible en la escena de entrada, y en el poder expresivo
-del lenguaje formal utilizado para describir los elementos de la
-diferentes clases en el refinamiento.
+del lenguaje formal utilizado para describir los elementos de las
+diferentes clases en el refinamiento.\\
 
 %Refinement
 %algorithms %presented in~\cite{arec2:2008:Areces,arec:usin11}
@@ -393,8 +402,8 @@ Los algoritmos de refinamiento
 calculan efectivamente ER para todos los objetos en el dominio, al mismo
 tiempo. Los algoritmos siempre terminan devolviendo una f\'ormula del
 lenguaje formal elegido que describe un\'{i}vocamente el objetivo (si el
-lenguaje formal es suficientemente expresiva para identificar el target en el
-modelo de entrada).
+lenguaje formal es suficientemente expresivo para identificar el target en el
+modelo de entrada).\\
 
 %Refinement algorithms for GRE are based on the following basic idea:
 %given a scene $S$, the objects appearing in $S$ are successively
@@ -420,7 +429,7 @@ con la informaci\'on disponible en la escena \footnote{Por supuesto, si s\'olo e
    \'unico elemento de alguna de las clases.}. Si el elemento target est\'a en
 una clase singleton, entonces la descripci\'on formal de esa clase es un
 expresi\'on referencial; de lo contrario el target no puede ser un\'{i}vocamente
-descripto (en $\mathcal{L}$).
+descripto (en $\mathcal{L}$).\\
 
 %It is clear that a scene can be encoded in different ways as a
 %relational model (for example in \ref{figure22}, we could argue that
@@ -432,15 +441,14 @@ descripto (en $\mathcal{L}$).
 %two (relations of higher arity can be encoded as binary relations via
 %reification, if necessary).
 
-Est\'a claro que una escena puede ser codificado en diferentes formas como una
+Est\'a claro que una escena puede ser codificada en diferentes formas como un
 modelo relacional (por ejemplo, en \ref{figure22}, podr\'{i}amos argumentar que
-$e_1$ es tambi\'en \emph{leftof} $e_2$, no se considera porque hay
-tocando). El algoritmo asume que estas cuestiones se han resuelto
-y que el modelo codifica una representaci\'on adecuada de la escena que
-querer describir. Por otra parte, vamos a suponer que todas las relaciones son
-\emph{binario}. No vamos a considerar las relaciones de aridad mayor que
+$e_1$ es tambi\'en \emph{leftof} $e_2$, no lo consideramos porque no se estan 
+tocando). El algoritmo asume que estas cuestiones se han resuelto y que el modelo codifica una representaci\'on adecuada de la escena que
+queremos describir. Por otra parte, vamos a suponer que todas las relaciones son
+\emph{binarias}. No vamos a considerar las relaciones de aridad mayor que
 dos (relaciones de mayor aridad pueden codificarse como relaciones binarias v\'{i}a
-reificaci\'on, si es necesario).
+reificaci\'on, si es necesario).\\
 
 %On termination, the algorithm computes what are called the
 %$\mathcal{L}$-similarity classes of the input model $\gM$.
@@ -448,63 +456,69 @@ reificaci\'on, si es necesario).
 
 
 Tras la resoluci\'on, el algoritmo calcula lo que se llama la
-$\mathcal{L}$ - clases de semejanza del modelo de entrada de $\gM$.
+$\mathcal{L}$ - clases de semejanza del modelo de entrada de $\gM$.\\
 
 %There is many $\mathcal{L}$, we will name $\alc$ and $\el$
 
 %ACA VOY A PONER gramatica para generar... ALC y EL no quedaria bien aca, hay que ver lo agregamos antes o no hace falta
-In what follows, we use formulas of the $\el$ description logic
-language~\cite{baad:desc03} to describe refinement classes
-\footnote{Notice, though, that the particular formal language used is
-  independent of the main algorithm, and different
-  add$_{\mathcal{L}}$($\varphi$,\RE) functions can be used depending
-  on the language involved.}.  As discussed
-in~\cite{arec2:2008:Areces}, this language is suitable for describing
-conjunctive and relational REs, which are the ones we find in corpora.
+%In what follows, we use formulas of the $\el$ description logic
+%language
+En lo que sigue, se utilizan f\'ormulas de la descripci\'on de la l\'ogica $\el$
+~\cite{baad:desc03} para describir las clases de refinamiendo
+\footnote{N\'otese, sin embargo, que el lenguaje formal particular usado es
+   independiente del algoritmo principal, y diferentes funciones
+  add$_{\mathcal{L}}$($\varphi$,\RE) se pueden utilizar dependiendo
+   de la l\'ogica en cuesti\'on.}. como se discuti\'o 
+en~\cite{arec2:2008:Areces}, 
+este lenguaje es adecuado para describir
+RE conjuntivas y relacionales, que son los que nos encontramos en los corpus.
 
- The input to the algorithm will be a relational model $\mathcal{M} =
- \tup{\Delta, \interp{\cdot}}$, where $\Delta$ is the non-empty domain
- of objects in the scene, and $\interp{\cdot}$ is an interpretation
- function that assigns to all properties in the scene their intended
- extension.  For example, the scene shown in Figure~\ref{figure22}
- could be represented by the model $\gM=\tup{\Delta,\interp{\cdot}}$
- shown in Figure~\ref{GRE3D7-stimulus-graph}; where $\Delta =
- \{e_1,\ldots,e_7\}$, and $\interp{\textsf{red}}$ is $\{e_2, e_4, e_5,
+  La entrada al algoritmo ser\'a un modelo $\mathcal{M} =
+ \tup{\Delta, \interp{\cdot}}$, donde $\Delta$ es el dominio no vac\'io de objetos de la imagen,
+ $\interp{\cdot}$ es una funci\'on de interpretaci\'on que asigna a todas las propiedades de la escena su extensi\'on.
+ Por ejemplo, la escena mostrada en la Figura~\ref{figure22} podr\'ia ser representada por el modelo
+ $\gM=\tup{\Delta,\interp{\cdot}}$ mostrado en la 
+ Figura~\ref{GRE3D7-stimulus-graph}; donde+- $\Delta =
+ \{e_1,\ldots,e_7\}$, e $\interp{\textsf{red}}$ is $\{e_2, e_4, e_5,
  e_7\}$.
 
-$\top$ is a formula that represents the most general description whose
-interpretation includes all elements of the model. It could be realize
-as the RE with the noun ``\textsf{thing}''. We say that a formula is
-\emph{subsumed} by other formulas, if it extension can be cover by the
-union of the extensions of the other formulas. For example, in
-Figure~\ref{figure22}, $\top$ is subsumed by ``\textsf{ball}'' and
-``\textsf{cube}'', because $\interp{\top}$ = $\interp{\textsf{ball}}
+$\top$ es una f\'ormula que representa la descripci\'on m\'as general, cuya
+interpretaci\'on incluye todos los elementos del modelo. Se podr\'ia realizar
+como la ER con el sustantivo
+``\textsf{cosa}''. Decimos que una f\'ormula es
+\emph{subsumed} por otras f\'ormulas, la su extensi\'on puede ser cubierta por la
+union de las extensiones de las otras f\'ormulas. Por ejemplo, en la
+Figura~\ref{figure22}, $\top$ es subsumida por ``\textsf{ball}'' y
+``\textsf{cube}'', porque $\interp{\top}$ = $\interp{\textsf{ball}}
 \cup \interp{\textsf{cube}}$.
 %= $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$. 
-Intuitively the formula ``\textsf{cube}'' or ``\textsf{ball}'' have more information than $\top$, for each element of $\top$, there is a formula that gives more information, say ``\textsf{cube}'' is more informative than say ``\textsf{thing}''.\\
+Intuitivamente la f\'ormula ``\textsf{cube}'' o ``\textsf{ball}'' tienen m\'as informaci\'on que $\top$, para cada elemento de $\top$, hay una f\'ormula que d\'a m\'as informaci\'on, digamos ``\textsf{cube}'' es m\'as informativa que ``\textsf{thing}''.\\
 
-In the following we will explain an example of execusion of the
-algorithm shown in Figure~\ref{algoritmoOriginal} taking into account
-the $\el$ logic language. This algorithm where first presented
-in~\cite{arec2:2008:Areces}.
+%In the following we will explain an example of execusion of the
+%algorithm shown in Figure
+A continuaci\'on vamos a explicar un ejemplo de execusi\'on del
+algoritmo mostrado en la Figura~\ref{algoritmoOriginal} considerando la l\'ogica 
+$\el$ como language. Este algoritmo fue presentado en
+~\cite{arec2:2008:Areces}.
 
 \begin{figure}[h!]
 \begin{center}
 \includegraphics[width=\textwidth]{images/algoritmoOriginal.png}
 \end{center}
 \vspace*{-2em}
-\caption{Algorithms for GRE with Description Logic}
+\caption{Algoritmo para GER con l\'ogicas de descripci\'on}
 \label{algoritmoOriginal}
 \end{figure}
 
-\subsection{An example of execution}
+\subsection{Ejemplo de ejecuci\'on}
 
-We will run the algorithm for the Scene~\ref{figure22}, the algorithm
-start with a fixed list of properties and relations, suppose that
-those lists are the following:
 
-ordered properties (prop):\textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
-ordered relations (rel):\textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
+Vamos a ejecutar el algoritmo para la Escena~\ref{figure22},
+el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
+esas listas son las siguientes:
+
+propiedades ordenadas (prop):\textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
+relaciones ordenadas (rel):\textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
 
 \begin{figure}
 \begin{center}	
@@ -585,21 +599,30 @@ ordered relations (rel):\textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \te
 \end{figure}
 
 
-The algorithm always ends, and return RE, a set of formulas that describes each element in the domain (if that formula exists).\\
+El algoritmo siempre termina, y devuelve ER un conjunto de f\'ormulas que describe cada elemento en el dominio (si existe esa f\'ormula). \\
 
-In the begining RE=$\{\top\}$ and its $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\
-
-The first loop for of the algorithm is in the properties. For each property realize add$_\el$ ($\varphi$, RE),
-
-A formula $\varphi$ will be added to RE if its interpretation has at least one element, then for each formula $\psi$ in RE the conjunction 
-$\varphi  \wedge \psi$ need to be not subsumed in RE, the $\interp{\varphi \cup \psi}$ need to be not empty, and its interpretation need to be distinct of $\interp{\psi}$. Then the subsumed formulas will be clean.
-
-The first property is \textsf{ball}, RE = \{$\top$, \textsf{ball}\}, then the following property is \textsf{cube}, RE = \{$\top$, \textsf{ball}, \textsf{cube}\}, but now the $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, so, we can delete $\top$, because it is subsumed to the two other formulas. The turn is now for the property \textsf{red}, $\interp{\textsf{red}}$ is:$\{e_2, e_4, e_5, e_7\}$, doing the intersection with the $\interp{.}$ of each formula in RE we obtain, $\{e_5\}$ and $\{e_2, e_4, e_7\}$, RE = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, following with \textsf{yellow}, we have, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ and we obtain RE = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. Note than here we already delete the formula \textsf{ball} because it was subsumed, and the formula \textsf{cube} too.
-Doing the same with \textsf{small} we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Next property is \textsf{large} so, we have RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Note that here we cannot add \textsf{large} to a formula $\textsf{red} \wedge \textsf{cube}$ because its interpretation has only one element, and the condition say that it need to have more than one.
-
-Until now RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ and we have the following extensions:$\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectively. There is two formulas that can be refined more, the  $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ and $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because they have more than one element each, so we enter en in the while cicle of Algorithm 1, in line 4. Now is the turn of relations, the first one is \textsf{leftof}, for each formula $\varphi$ in RE will try to add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Note that $\psi$ only can be $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ or $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ because those are the ones that its interpretation have more than one element. There is not $\varphi$ and $\psi$ that can be apply. Continuing with \textsf{rightof} we add $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, and so on with \textsf{topof} we add $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ and the algorithm ends with RE = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, here all elements are in a singleton class and not further refinement can be done.
+En el comienzo ER=$\{\top\}$ and its $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\
 
 
+El primer bucle para del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE),
+
+La f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on tiene al menos un elemento, a continuaci\'on, para cada f\'ormula
+ $\psi$ en ER la conjunci\'on
+$\varphi  \wedge \psi$ no necesita estar subsumida in ER, la $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\psi}$. Luego las f\'ormulas subsumidas se borran.
+
+La primer propiedad es \textsf{ball}, ER = \{$\top$, \textsf{ball}\}, entonces la siguiente propiedad es \textsf{cube}, ER = \{$\top$, \textsf{ball}, \textsf{cube}\}, pero ahora la $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, as\'i, podemos borrar $\top$, porque es subsumida a las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ is:$\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, siguiendo con \textsf{yellow}, tenemos, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos ER = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. 
+Note que aqu\'i ya borramos la f\'ormula \textsf{ball} porque estaba subsumida, y la f\'ormula \textsf{cube} tambi\'en.
+Haciendo lo mismo con \textsf{small} tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. La siguiente propiedad es \textsf{large} as\'i, tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Aqu\'i no podemos agregar \textsf{large} a la f\'ormula $\textsf{red} \wedge \textsf{cube}$ porque su interpretaci\'on tiene un solo elemento, y la condici\'on dice que es necesario tener m\'as de uno.
+
+Hasta ahora ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ 
+y tenemos las siguientes extensiones: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectivamente. 
+Hay dos f\'ormulas que a\'un pueden ser refinadas, $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ y $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ 
+debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo, while del algoritmo 1, en la l\'inea 4. Ahora es el turno de las relaciones, la primera de ellas es \textsf{leftof}, para cada f\'ormula $\varphi$ en ER trataremos de hacer add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Notar que $\psi$ solo puede ser $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ o $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ porque esos son los que su interpretaci\'on tiene m\'as de un elemento. No hay
+%because those are the ones that its interpretation have more than one element. There is not 
+$\varphi$ y $\psi$ que puedan ser aplicadas. Continuando con \textsf{rightof} agregamos $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, y asi con \textsf{topof} agregamos $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ y el algoritmo termina con ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, %here all elements are in a singleton class and not further refinement can be done.
+
+aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer
+ning\'un refinamiento m\'as. 
 %can be applied to $cube \wedge red \wedge small$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
 %its interpretation is $\{e_7\}$ with $\psi$ is $cube \wedge yellow \wedge small$, the others combinations can't be apply because they don't do true the preconditions. The following relation is rightof, 
 

@@ -614,7 +614,7 @@ las propiedades de tama\~no de letra (es decir, peque\~nos y grandes) se utiliza
 m\'as cuando el objetivo no puede ser identificada con taxon\'omica
 S\'olo las propiedades absolutas (verde y azul) (bola y cubo) y. En
 otras palabras, en el corpus GRE3D7 se utiliza el tama\~no m\'as frecuencia (90,2 \%)
-del tiempo cuando el RE resultante no se falte espacio que cuando est\'a
+del tiempo cuando el RE resultante no se sobreespecificada que cuando est\'a
 (34 \%). Puede que no sea posible aprender esta caracter\'{i}stica de los
 datos del GRE3D7 ya que incluso con las funciones que dependen de dominio definidos
 en~\cite[Cap\'{i}tulo 6] {viet:gene11}, no pod\'{i}a ser aprendido por \'arboles decisi\'on. Como resultado podemos ver en la tabla~\ref{probability-of-use} que
@@ -734,32 +734,30 @@ objetivo compartir una propiedad, esta propiedad es m\'as relevante.
 El algoritmo~\ref{algo:bisim-l} permite muy poca sobreespecificaci\'on en las ER que
 genera. Una relaci\'on con una baja \puse\ podr\'{i}a ser suficiente
 (Por s\'{i} mismo o en combinaci\'on con algunas de las relaciones ya consideradas) para
-identificar el target. Una vez que se a\~nade esta relaci\'on, se obtiene una ER, pero una m\'as corta,
-ER m\'as espec\'{i}fica podr\'{i}a ser posible, mediante la eliminaci\'on de algunos de los refinamientos anteriores.
-Por lo tanto, el ER resultante podr\'{i}a ser falte espacio. Este es el mismo tipo de especificaci\'on excesiva
-que el algoritmo original de incrementales permite. Pero se ha argumentado~\cite{Engelhardt_Bailey_Ferreira_2006, Arts_Maes_Noordman_Jansen_2011} que
-un grado mucho mayor de especificaci\'on excesiva se encuentra generalmente en corpora, y esto
-es de hecho lo que se ve en el corpus GRE3D7. Como podemos ver en la tabla~\ref{corpus distribuci\'on},
-el objetivo es descrita 16,43 \% de las veces como un `` peque\~na bola verde '' al `` verde
-bola '' ya es un RE. El uso de los \ \ PUSE valores aprendidos del c\'alculo explic\'o
+identificar el target. Una vez que se a\~nade esta relaci\'on, se obtiene una ER, pero una ER m\'as corta,
+m\'as espec\'{i}fica podr\'{i}a ser encontrada, mediante la eliminaci\'on de algunos de los refinamientos anteriores.
+Por lo tanto, el ER resultante podr\'{i}a ser sobreespecificada. Este es el mismo tipo de sobreespecificaci\'on
+que permite el algoritmo incremental. Pero se ha argumentado~\cite{Engelhardt_Bailey_Ferreira_2006, Arts_Maes_Noordman_Jansen_2011} que
+un grado mucho mayor de sobreespecificaci\'on se encuentra generalmente en corpora, y esto
+es de hecho lo que se ve en el corpus GRE3D7. Como podemos ver en la tabla~\ref{corpus-distribution},
+el objetivo es descripto 16,43 \% de las veces como ``peque\~na bola verde'' cuando ``bola verde'' ya es una ER. El uso de los \ valores aprendidos de \puse del c\'alculo explicado 
 en el apartado anterior, el algoritmo~\ref{algo:bisim-l} no puede simular este comportamiento.
 
-Debido a que la idea fundamental del algoritmo es la sem\'antica, la manipulaci\'on sobrevaloraci\'on en
-una forma natural es dif\'{i}cil. Si dos propiedades tienen la misma interpretaci\'on en un determinado
-modelo, entonces una vez que el primero ha sido considerado el segundo no ser\'a refinar las clases
-obtenido hasta ahora, y por lo tanto, el algoritmo no lo incluir\'a en las descripciones generadas.
-Por otro lado, si hacemos caso omiso de la condici\'on de la restricci\'on informativeness (es decir,
+Debido a que la idea fundamental del algoritmo es la sem\'antica, la manipulaci\'on sobreespecificaci\'on en
+una forma natural es dif\'{i}cil de obtener. Si dos propiedades tienen la misma interpretaci\'on en un determinado
+modelo, entonces una vez que el primero ha sido considerado el segundo no refinar\'a las clases
+obtenidas hasta el momento, y por lo tanto, el algoritmo no la incluir\'a en las descripciones generadas.
+Por otro lado, si hacemos caso omiso de la condici\'on de la restricci\'on informatividad (es decir,
 el hecho de que la adici\'on de una relaci\'on de hecho refinar la clase, eliminando algunos de
-los elementos que contiene), entonces corremos el riesgo de generar descripciones como `` el green
-bola verde ''.
+los elementos que contiene), entonces corremos el riesgo de generar descripciones como ``bola verde verde''.
 
-Como soluci\'on de compromiso, consideramos la siguiente variaci\'on del algoritmo~\ref{algo:bisim-l} est\'abamos
-hacemos caso omiso de la restricci\'on informativeness (es decir, que permiten la inclusi\'on de nuevas relaciones
-en la descripci\'on, incluso si no perfeccionar la clase asociada) \emph{pero s\'olo durante el
+Como soluci\'on de compromiso, consideramos la siguiente variaci\'on del algoritmo~\ref{algo:bisim-l} 
+hacemos caso omiso de la restricci\'on informatividad (es decir, que permite la inclusi\'on de nuevas relaciones
+en la descripci\'on, incluso si no refinan la clase asociada) \emph{pero s\'olo durante el
 primer bucle del algoritmo}. Es decir, durante el primer bucle sobre los elementos de la
-Lista de entrada R, que permitir\'an la inclusi\'on de todas las relaciones que no trivializan la
-descripci\'on (es decir, la clase asociada no est\'a vac\'{i}o). Debido a esto se hace s\'olo durante
-el primer bucle, sabemos que las propiedades repetidas no aparecer\'an en las ER generados.
+Lista de entrada R, se permitir\'a la inclusi\'on de todas las relaciones que no trivializan la
+descripci\'on (es decir, la clase asociada no est\'a vac\'{i}a). Debido a que esto se hace s\'olo durante
+el primer bucle, sabemos que las propiedades repetidas no aparecer\'an en las ER generadas.
 En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son de car\'acter informativo.
 
 
@@ -857,19 +855,19 @@ En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son d
 %\end{minipage}
 %\end{figure}
 
-On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
+%On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
 
-The algorithm we discuss uses formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. 
-For a detailed description of $\el$, we refer to~\cite{baad:desc03}.  
-The interpretation of the $\el$ formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. 
-For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
+%The algorithm we discuss uses formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. 
+%For a detailed description of $\el$, we refer to~\cite{baad:desc03}.  
+%The interpretation of the $\el$ formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. 
+%For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
 
-Tras la resoluci\'on, el algoritmo calcula lo que se llaman los$\mathcal {L}$- clases de semejanza del modelo de entrada de$\gM $. Intuitivamente, si dos elementos en el modelo pertenezcan a la misma$\mathcal {L}$- clase similitud, entonces$\mathcal {L}$no es lo suficientemente expresiva para decirles aparte (es decir, no hay una f\'ormula en$\mathcal {L }$puede distinguirlos).
+Luego de terminar, el algoritmo calcula lo que se llaman las $\mathcal {L}$- clases de semejanza del modelo de entrada de$\gM $. Intuitivamente, si dos elementos en el modelo pertenecen a la misma $\mathcal {L}$- clase similitud, entonces$\mathcal {L}$ no es lo suficientemente expresiva para diferenciarlos (es decir, no hay una f\'ormula en$\mathcal {L }$puede distinguirlos).
 %aca faltaba algoluego de logicas
-El algoritmo discutimos utiliza f\'ormulas del el lenguaje de descripci\'on de la l\'ogica~\cite{baad:desc03} para describir clases de refinamiento \footnote {Note, sin embargo, que el lenguaje formal utilizado en particular es independiente del algoritmo principal, y diferente add$_{\mathcal {L}}$(R,$\varphi $, \RE) funciones se pueden utilizar en funci\'on del idioma en cuesti\'on.}.
+El algoritmo que discutimos utiliza f\'ormulas de $\el$ lenguaje de descripci\'on de la l\'ogica~\cite{baad:desc03} para describir clases de refinamiento \footnote {Note, sin embargo, que el lenguaje formal utilizado en particular es independiente del algoritmo principal, y diferentes add$_{\mathcal {L}}$(R,$\varphi $, \RE) funciones se pueden utilizar en funci\'on del idioma en cuesti\'on.}.
 Para una descripci\'on detallada de $\el$, nos referimos a~\cite{baad:desc03}.
-La interpretaci\'on de las $\el$ f\'ormula$\psi \sqcap \exists $R.$ \varphi$es el conjunto de todos los elementos que satisfagan$\psi$y que est\'an relacionados por relaci\'on R con alg\'un elemento que satisface$\varphi $.
-Por ejemplo, existe la interpretaci\'on de la f\'ormula \emph{pelota}$\sqcap$ \emph{leftof}. \emph{cubo} es el conjunto de todas las bolas que est\'an a la izquierda de alg\'un cubo.
+La interpretaci\'on de las $\el$ f\'ormula$\psi \sqcap \exists $R.$ \varphi$es el conjunto de todos los elementos que satisfagan$\psi$ y que est\'an relacionados por relaci\'on R con alg\'un elemento que satisface $\varphi $.
+Por ejemplo, existe la interpretaci\'on de la f\'ormula \emph{bola}$\sqcap$ \emph{leftof}. \emph{cubo} es el conjunto de todas las bolas que est\'an a la izquierda de alg\'un cubo.
 
 
 %%We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el-over}. 
@@ -939,25 +937,25 @@ Por ejemplo, existe la interpretaci\'on de la f\'ormula \emph{pelota}$\sqcap$ \e
 
 %\end{figure}
 
-Algorithm~\ref{algo:bisim-l} takes as input a model and a list Rs of pairs (R,R.\puse) that links each relation R $\in \REL$, the set of all relation symbols in the model,  to some probability of use R.\puse. 
-I.e., if $\REL$ is the set of all relation symbols in the model then Rs $\in (\REL \times [0,1])^*$. We assume Rs to be ordered by R.\puse. 
+%Algorithm~\ref{algo:bisim-l} takes as input a model and a list Rs of pairs (R,R.\puse) that links each relation R $\in \REL$, the set of all relation symbols in the model,  to some probability of use R.\puse. 
+%I.e., if $\REL$ is the set of all relation symbols in the model then Rs $\in (\REL \times [0,1])^*$. We assume Rs to be ordered by R.\puse. 
 
-The set $\RE$ will contain the formal description of the refinement classes and it is initialized by the most general description $\top$.  
-For each R, we first compute R.\randomuse, a random number in [0,1].  If R.\randomuse $\le$ R.\puse\ then we will use R to refine the set of classes.  The value of R.\puse\ will be incremented by R.$\incuse$ in each main loop, to ensure that all relations are, at some point, considered by the algorithm.  This ensures that a referring expression will be found if it exists; but gives higher probability to expressions using relations with a high R.\puse. 
+%The set $\RE$ will contain the formal description of the refinement classes and it is initialized by the most general description $\top$.  
+%For each R, we first compute R.\randomuse, a random number in [0,1].  If R.\randomuse $\le$ R.\puse\ then we will use R to refine the set of classes.  The value of R.\puse\ will be incremented by R.$\incuse$ in each main loop, to ensure that all relations are, at some point, considered by the algorithm.  This ensures that a referring expression will be found if it exists; but gives higher probability to expressions using relations with a high R.\puse. 
 
-While $\RE$ contains descriptions that can be refined (i.e., classes with at least two elements) we will call the refinement function add$_\mathcal{L}$(R,$\varphi$,$\RE$) successively with each relation in Rs. A change in one of the classes, can trigger changes in others. For that reason, if $\RE$ changes, we exit the \textbf{for} loop to start again with the relations of higher R.\puse. If after trying to refine the set with all relations in Rs, the set $\RE$ has not changed, then we have reached a stable state (i.e., the classes described in $\RE$ cannot be further refined with the current R.\puse\ values). We will then increment all the R.\puse\ values and start the procedure again. 
+%While $\RE$ contains descriptions that can be refined (i.e., classes with at least two elements) we will call the refinement function add$_\mathcal{L}$(R,$\varphi$,$\RE$) successively with each relation in Rs. A change in one of the classes, can trigger changes in others. For that reason, if $\RE$ changes, we exit the \textbf{for} loop to start again with the relations of higher R.\puse. If after trying to refine the set with all relations in Rs, the set $\RE$ has not changed, then we have reached a stable state (i.e., the classes described in $\RE$ cannot be further refined with the current R.\puse\ values). We will then increment all the R.\puse\ values and start the procedure again. 
 
-Algorithm~\ref{fig:algo1} almost coincides with the one in~\cite{arec2:2008:Areces}.  The \textbf{for} loop will refine each descriptions in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (it cannot be obtained from classes already in $\RE$), \emph{non-trivial} (it is not empty), and \emph{informative} (it does not coincide with the original class).  If these conditions are met, the new description is added to $\RE$, and redundant descriptions created by the new description are eliminated. The \textbf{if} statement at the beginning of Algorithm in Figure~\ref{fig:algo2} disregards the informativity test during the first loop of the algorithm allowing overspecification.    
+%Algorithm~\ref{fig:algo1} almost coincides with the one in~\cite{arec2:2008:Areces}.  The \textbf{for} loop will refine each descriptions in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (it cannot be obtained from classes already in $\RE$), \emph{non-trivial} (it is not empty), and \emph{informative} (it does not coincide with the original class).  If these conditions are met, the new description is added to $\RE$, and redundant descriptions created by the new description are eliminated. The \textbf{if} statement at the beginning of Algorithm in Figure~\ref{fig:algo2} disregards the informativity test during the first loop of the algorithm allowing overspecification.    
 
-Suppose fixed an input model $\gM$ and values for Rs, and fix also some target element $t$.  Assume also that $t$ indeed has an $\el$-referring expression.  Upon termination, Algorithm~\ref{fig:algo1} will compute an $\el$ formula $\varphi$ such that $\interp{\varphi} = \{t\}$, but $\varphi$ might be different in each run of the algorithm (even though $\gM$ and Rs are fixed).  If we repeat this experiment a statistically significant number of times, we can define an estimate of the probability distribution of the REs generated by the algorithm for $t$, given $\gM$ and Rs. In Section~\ref{sec:evaluation} we will show that given a corpus of REs for $\gM$, it is possible to define R.\puse\ values so that this probability distribution matches with good accuracy the probability distribution of REs found in the corpus.  
+%Suppose fixed an input model $\gM$ and values for Rs, and fix also some target element $t$.  Assume also that $t$ indeed has an $\el$-referring expression.  Upon termination, Algorithm~\ref{fig:algo1} will compute an $\el$ formula $\varphi$ such that $\interp{\varphi} = \{t\}$, but $\varphi$ might be different in each run of the algorithm (even though $\gM$ and Rs are fixed).  If we repeat this experiment a statistically significant number of times, we can define an estimate of the probability distribution of the REs generated by the algorithm for $t$, given $\gM$ and Rs. In Section~\ref{sec:evaluation} we will show that given a corpus of REs for $\gM$, it is possible to define R.\puse\ values so that this probability distribution matches with good accuracy the probability distribution of REs found in the corpus.  
 
 
-Algoritmo~\ref{algo:bisim-l} toma como entrada un modelo y una lista de pares de rupias (R, R \puse.) Que une cada relaci\'on R$\in \REL $, el conjunto de todos los s\'{i}mbolos de relaci\'on en el modelo, en cierta probabilidad de uso R.\puse.
-Es decir, si $\REL$ es el conjunto de todos los s\'{i}mbolos de relaci\'on en el modelo a continuaci\'on, R$\in (\REL \ \times [0,1]) ^ * $. Suponemos Rs se piden por R.\puse.
+Algoritmo~\ref{algo:bisim-l} toma como entrada un modelo y una lista de pares (R, R \puse.) Que une cada relaci\'on R$\in \REL $, el conjunto de todos los s\'{i}mbolos de relaci\'on en el modelo, en cierta probabilidad de uso R.\puse.
+Es decir, si $\REL$ es el conjunto de todos los s\'{i}mbolos de relaci\'on en el modelo a continuaci\'on, R$\in (\REL \ \times [0,1]) ^ * $. Suponemos Rs estan ordenados de mayor a menor por R.\puse.
 
-El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento y es inicializado por el m\'as general 
+El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento y es inicializado por el m\'as general $\top$. 
 %Descripci\'on$\mayor de $.
-Para cada R, primero calculamos R. \ randomuse, un n\'umero aleatorio en [0,1]. Si R. \ randomuse$\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de clases. El valor de R.\puse \ se incrementar\'a en R.$\incuse$ en cada bucle principal, para asegurar que todas las relaciones son, en alg\'un momento, considerado por el algoritmo. Esto asegura que una expresi\'on que se refiere se encontrar\'a si existe; pero da mayor probabilidad a las expresiones que utilizan las relaciones con un alto R.\puse.
+Para cada R, primero calculamos R.\randomuse, un n\'umero aleatorio en [0,1]. Si R.\randomuse$\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de clases. El valor de R.\puse \ se incrementar\'a en R.$\incuse$ en cada bucle principal, para asegurar que todas las relaciones son, en alg\'un momento, considerado por el algoritmo. Esto asegura que una expresi\'on que se refiere se encontrar\'a si existe; pero da mayor probabilidad a las expresiones que utilizan las relaciones con un alto R.\puse.
 
 Mientras que$\RE$contiene descripciones que pueden ser refinados (es decir, las clases con al menos dos elementos) vamos a llamar a la funci\'on refinamiento agregar$_\mathcal {L}$(R,$\varphi $,$\RE$) sucesivamente con cada relaci\'on en Rs. Un cambio en una de las clases, puede desencadenar cambios en los dem\'as. Por esa raz\'on, si $\RE$ cambios, salimos del \textbf {for} bucle para empezar de nuevo con las relaciones de alto R.\puse. Si despu\'es de tratar de perfeccionar el conjunto de todas las relaciones en R, el conjunto $\RE$ no ha cambiado, entonces hemos llegado a un estado estable (es decir, las clases descritas en$\RE$ no puede ser refinado con la corriente R.\puse valores). A continuaci\'on, se incrementar\'a todos los R.\puse valores e iniciar el procedimiento de nuevo.
 
