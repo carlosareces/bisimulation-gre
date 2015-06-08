@@ -5,9 +5,9 @@ Una propiedad es una caracter\'istica de un objeto. Una relaci\'on es otra carac
 
 La selecci\'on de cuales propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial, claramente ser\'a muy distinta la expresi\'on si nuestro objetivo es dar la m\'inima expresi\'on referencial que identifique al objeto que si nuestro objetivo es ser colaborativos con nuestro interlocutor.\\
 
-En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.
+En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.\\
 
-En esta tesis nos vamos a enfocar la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.
+En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.\\
 
 En este Cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales, las propiedades que puede tener o no una expresi\'on referencial y los algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos en el \'area.
 
@@ -15,17 +15,17 @@ En este Cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de 
 \section{Propiedades de una ER}
 
 %Cuando la ER no es relacional solo contiene propiedades del objeto mismo. Ej.: color, tama\~no. Note que quiz\'as el tama\~no sea con respecto a los dem\'as objetos ``la m\'as peque\~na'', pero al no incluir una descripci\'on de otro objeto no la llamamos relacional.\\
-Una ER puede ser relacional o no relacional (tambi\'en llamada proposicional), minimal o sobreespecificada, y subespecificada en cuyo caso es una expresi\'on que no es referencial, la incluimos en nuestras propiedades porque nos va a ser \'util la defici\'on en Cap\'itulo \ref{sec:corpus}.\\
+Una ER puede ser relacional o no relacional (tambi\'en llamada proposicional), minimal o sobreespecificada, y subespecificada en cuyo caso es una expresi\'on que no es referencial, la incluimos en nuestras propiedades porque nos va a ser \'util la defici\'on en el Cap\'itulo \ref{sec:corpus}.\\
 
 Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces aqu\'{i} se incluye en desaf\'{i}o de describir al siguiente objeto. Ej.: ``La que esta al lado del cubo rojo''. En este caso, ``al lado del'' es una relaci\'on entre el objeto target y otro objeto cuya ER es el ``cubo rojo''.\\
 
-Una ER proposicional incluye solo propiedades absolutas del objeto target. Ej.: ``La pelota roja con rayas amarillas''. Las caracter\'isticas ser pelota, roja y tener rayas amarillas son propias del objeto a identificar.\\
+Una ER {\it proposicional} incluye solo propiedades absolutas del objeto target. Ej.: ``La pelota roja con rayas amarillas''. Las caracter\'isticas ser pelota, roja y tener rayas amarillas son propias del objeto a identificar.\\
 
-Se dice que una ER es minimal, cuando incluye la m\'inima cantidad de propiedades con la cual puede ser identificada un\'ivocamente en el contexto dado. Notar que puede haber muchas expresiones minimales.\\
+Se dice que una ER es {\it minimal}, cuando incluye la m\'inima cantidad de propiedades con la cual puede ser identificada un\'ivocamente en el contexto dado. Notar que puede haber muchas expresiones minimales.\\
 
-En cambio cuando contiene m\'as informaci\'on de la m\'inima necesaria para identificarla un\'ivocamente de los dem\'as objetos en el contexto dado, se dice que la ER es sobreespecificada.\\
+En cambio cuando contiene m\'as informaci\'on de la m\'inima necesaria para identificarla un\'ivocamente de los dem\'as objetos en el contexto dado, se dice que la ER es {\it sobreespecificada}.\\
 
-Subespecificada es cuando la expresi\'on dada, no alcanza a ser una ER, ya que no se puede identificar al objeto target del resto de los objetos en la imagen. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Esta expresi\'on identifica a un conjunto, no a un objeto target.\\
+{\it Subespecificada} es cuando la expresi\'on dada, no alcanza a ser una ER, ya que no se puede identificar al objeto target del resto de los objetos en la imagen. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Esta expresi\'on identifica a un conjunto, no a un objeto \'unico.
 
 
 \section{Propiedades de un algoritmo}
@@ -34,15 +34,15 @@ En esta parte definiremos el problema en general, cuando queremos generar las ER
 
 Un algoritmo puede ser: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, identificar plurales o solo singulares, usar disyunciones adem\'as de conjunciones, o solo conjunciones, generar ER sobreespecificadas o minimales. Hacer o no backtraking.\\
 
-Un algoritmo es determin\'{i}stico si siempre dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es no-determin\'{i}stico si considera la posibilidad de dar distintas salidas para el mismo input, en distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.\\
+Un algoritmo es {\it determin\'{i}stico} si dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es {\it no-determin\'{i}stico} si considera la posibilidad de dar distintas salidas para el mismo input, en distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.\\
 
-Un algoritmo es relacional si permite generar ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar una ER para el objeto con el cual el objeto target tiene la relaci\'on. Notar que las relaciones pueden ser con muchos objetos, es decir de una aridad mayor que 1. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on''.\\
+Un algoritmo es {\it relacional} si permite generar ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar una ER para el objeto con el cual el objeto target tiene la relaci\'on. Notar que las relaciones pueden ser con muchos objetos, es decir de una aridad mayor que 1. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on''.\\
 
-En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya negaciones.\\
+En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya {\it negaciones}.\\
 
-Un algoritmo puede generar ER para plurales, es decir dar ER para varios targets de la escena considerada.\\
+Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets de la escena considerada.\\
 
-Los algoritmos tambi\'en se pueden diferenciar en si usan conjunciones,  disyunciones o ambas.\\
+Los algoritmos tambi\'en se pueden diferenciar en si usan conjunciones, disyunciones o ambas.\\
 
 La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Ser\'ia interesante que un algoritmo diera la sobreespecificaci\'on que las personas dan. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on, al frente del correo''.\\
 
