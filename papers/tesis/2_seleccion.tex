@@ -299,7 +299,7 @@ $\{f_2\}$; y la f\'ormula $\mathsf{flower} \sqcap \neg
 
 \textcolor{blue}{no se si dejar este ejemplo, o cambiarlo por uno es espa\~nol}
 
-Hay muchas otras l\'ogicas de descripci\'on en la literatura por ejemplo 
+Hay muchas otras l\'ogicas de descripci\'on (DL) en la literatura por ejemplo 
 
 $\mathcal{CL}$ (\el\ sin el cuantificador existencial, es decir solo conjunciones at\'omicas); $\mathcal{PL}$ (\alc\ l\'ogica propocisional); y
 $\mathcal{ELU}_{(\neg)}$ (\el\ m\'as disjunci\'on y negaci\'on at\'omica).\\
@@ -309,11 +309,11 @@ Usaremos una noci\'on de preservaci\'on de f\'ormulas que llamaremos
 si para cualquier f\'ormula $\varphi \in \gL$ tal que $i \in
 \interp{\varphi}$, tambi\'en tenemos que $i' \in \interp{\varphi}$.\\
 Equivalentemente, no hay $\gL$-f\'ormula que se mantenga para $i$ pero no para
-$i'$.  Diremos que \emph{\gL-conjunto de similaridad } de alg\'un individual
+$i'$.  Diremos que el \emph{\gL-conjunto de similaridad} de alg\'un individual
 $i$ es el conjunto de todos los individuales a los cuales $i$ es \gL-similar.\\
 
 Notar que la similaridad no es necesariamente una relaci\'on sim\'etrica: Por ejemplo:$f_1$ es \el-similar a $f_2$ en
-Fig.~\ref{fig:dale-haddock}b, pero $f_2$ no es \el-similar a $f_1$
+Figura~\ref{fig:dale-haddock}b, pero $f_2$ no es \el-similar a $f_1$
 (satisface la f\'ormula $\exists \mathsf{in}.\mathsf{hat}$ y $f_1$
 no la satisface).  De todas maneras, \alc-similaridad es una relaci\'on sim\'etrica porque
 el languaje contiene negaci\'on; y en consecuencia, $f_1$ no es \alc-similar
@@ -378,7 +378,8 @@ libro sobre la mesa \ldots ''}
 basado en variaciones de los algoritmos de refinamiento particiones
 de~\cite{paig:thre87}. La informaci\'on proporcionada por una escena dada
 se interpreta como un modelo relacional cuyos objetos se clasifican en
-conjuntos que se adapten a la misma descripci\'on. Esta clasificaci\'on es
+conjuntos que se adaptan a la misma descripci\'on. Esta clasificaci\'on es
+conjuntos que se adaptan a la misma descripci\'on. Esta clasificaci\'on es
 sucesivamente \emph{refinada} hasta que el target es el \'unico elemento
 en la clase. La existencia de un ER depende
 de la informaci\'on disponible en la escena de entrada, y en el poder expresivo
@@ -425,7 +426,7 @@ clasificados de acuerdo con sus propiedades en clases m\'as y m\'as finas.
 Una descripci\'on (en alg\'un lenguaje formal de $\mathcal{L}$) de cada
 clase se calcula cada vez que una clase es refinada. El procedimiento siempre
 se detiene cuando el conjunto de clases se estabiliza, es decir, no se puede hacer m\'as refinamiento
-con la informaci\'on disponible en la escena \footnote{Por supuesto, si s\'olo estamos interesados en una expresi\'on que se refiere a un objeto dado, se puede detener el procedimiento en cuanto el objetivo es el
+con la informaci\'on disponible en la escena \footnote{Por supuesto, si s\'olo estamos interesados en una expresi\'on referencial de un objeto dado, se puede detener el procedimiento en cuanto el objetivo es el
    \'unico elemento de alguna de las clases.}. Si el elemento target est\'a en
 una clase singleton, entonces la descripci\'on formal de esa clase es un
 expresi\'on referencial; de lo contrario el target no puede ser un\'{i}vocamente
@@ -443,7 +444,7 @@ descripto (en $\mathcal{L}$).\\
 
 Est\'a claro que una escena puede ser codificada en diferentes formas como un
 modelo relacional (por ejemplo, en \ref{figure22}, podr\'{i}amos argumentar que
-$e_1$ es tambi\'en \emph{leftof} $e_2$, no lo consideramos porque no se estan 
+$e_1$ es tambi\'en \emph{leftof} $e_2$, pero no lo consideramos porque no se estan 
 tocando). El algoritmo asume que estas cuestiones se han resuelto y que el modelo codifica una representaci\'on adecuada de la escena que
 queremos describir. Por otra parte, vamos a suponer que todas las relaciones son
 \emph{binarias}. No vamos a considerar las relaciones de aridad mayor que
@@ -471,7 +472,7 @@ En lo que sigue, se utilizan f\'ormulas de la descripci\'on de la l\'ogica $\el$
    de la l\'ogica en cuesti\'on.}. como se discuti\'o 
 en~\cite{arec2:2008:Areces}, 
 este lenguaje es adecuado para describir
-RE conjuntivas y relacionales, que son los que nos encontramos en los corpus.
+RE conjuntivas y relacionales, que son lo que encontramos en los corpus.
 
   La entrada al algoritmo ser\'a un modelo $\mathcal{M} =
  \tup{\Delta, \interp{\cdot}}$, donde $\Delta$ es el dominio no vac\'io de objetos de la imagen,
@@ -496,7 +497,7 @@ Intuitivamente la f\'ormula ``\textsf{cube}'' o ``\textsf{ball}'' tienen m\'as i
 
 %In the following we will explain an example of execusion of the
 %algorithm shown in Figure
-A continuaci\'on vamos a explicar un ejemplo de execusi\'on del
+A continuaci\'on vamos a explicar un ejemplo de ejecusi\'on del
 algoritmo mostrado en la Figura~\ref{algoritmoOriginal} considerando la l\'ogica 
 $\el$ como language. Este algoritmo fue presentado en
 ~\cite{arec2:2008:Areces}.
@@ -517,8 +518,8 @@ Vamos a ejecutar el algoritmo para la Escena~\ref{figure22},
 el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
 esas listas son las siguientes:
 
-propiedades ordenadas (prop):\textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
-relaciones ordenadas (rel):\textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
+propiedades ordenadas (prop): \textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
+relaciones ordenadas (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
 
 \begin{figure}
 \begin{center}	
@@ -601,23 +602,93 @@ relaciones ordenadas (rel):\textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, 
 
 El algoritmo siempre termina, y devuelve ER un conjunto de f\'ormulas que describe cada elemento en el dominio (si existe esa f\'ormula). \\
 
-En el comienzo ER=$\{\top\}$ and its $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\
+En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\
 
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo.png}}\\[0pt]
+\caption{Modelo de la Figura \ref{figure22}}
+\label{fig-modelo}
+\end{center}
+\end{figure}
+El primer bucle del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE),
 
-El primer bucle para del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE),
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo2.png}}\\[0pt]
+\caption{Propiedades proposicionales en cuadro rojo, las del primer ciclo del algoritmo}
+\label{fig-modelo2}
+\end{center}
+\end{figure}
 
 La f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on tiene al menos un elemento, a continuaci\'on, para cada f\'ormula
  $\psi$ en ER la conjunci\'on
 $\varphi  \wedge \psi$ no necesita estar subsumida in ER, la $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\psi}$. Luego las f\'ormulas subsumidas se borran.
 
-La primer propiedad es \textsf{ball}, ER = \{$\top$, \textsf{ball}\}, entonces la siguiente propiedad es \textsf{cube}, ER = \{$\top$, \textsf{ball}, \textsf{cube}\}, pero ahora la $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, as\'i, podemos borrar $\top$, porque es subsumida a las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ is:$\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, siguiendo con \textsf{yellow}, tenemos, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos ER = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. 
+La primer propiedad es \textsf{ball}, ER = \{$\top$, \textsf{ball}\}, 
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo3.png}}\\[0pt]
+\caption{El cuadro indica cuales son ``ball''}
+\label{fig-modelo3}
+\end{center}
+\end{figure}
+
+La siguiente propiedad es \textsf{cube}, ER = \{$\top$, \textsf{ball}, \textsf{cube}\}, pero ahora la $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$,
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo4.png}}\\[0pt]
+\caption{Cuadros indicando ``ball'' y ``cube''}
+\label{fig-modelo4}
+\end{center}
+\end{figure}
+Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) a las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo9.png}}\\[0pt]
+\caption{Cuadros indicando ``ball'', ``cube'' y ``red''}
+\label{fig-modelo9}
+\end{center}
+\end{figure}
+
+Siguiendo con \textsf{yellow}, tenemos, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos ER = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. 
 Note que aqu\'i ya borramos la f\'ormula \textsf{ball} porque estaba subsumida, y la f\'ormula \textsf{cube} tambi\'en.
-Haciendo lo mismo con \textsf{small} tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. La siguiente propiedad es \textsf{large} as\'i, tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Aqu\'i no podemos agregar \textsf{large} a la f\'ormula $\textsf{red} \wedge \textsf{cube}$ porque su interpretaci\'on tiene un solo elemento, y la condici\'on dice que es necesario tener m\'as de uno.
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo10.png}}\\[0pt]
+\caption{Cuadros indicando ``ball'', ``cube'', ``red'' y ``yellow''}
+\label{fig-modelo10}
+\end{center}
+\end{figure}
+
+Haciendo lo mismo con \textsf{small} tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. 
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo11.png}}\\[0pt]
+\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow'', ``small'' y ``large''}
+\label{fig-modelo11}
+\end{center}
+\end{figure}
+
+La siguiente propiedad es \textsf{large} as\'i, tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Aqu\'i no podemos agregar \textsf{large} a la f\'ormula $\textsf{red} \wedge \textsf{cube}$ porque su interpretaci\'on tiene un solo elemento, y la condici\'on dice que es necesario tener m\'as de uno.
 
 Hasta ahora ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ 
 y tenemos las siguientes extensiones: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectivamente. 
 Hay dos f\'ormulas que a\'un pueden ser refinadas, $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ y $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ 
-debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo, while del algoritmo 1, en la l\'inea 4. Ahora es el turno de las relaciones, la primera de ellas es \textsf{leftof}, para cada f\'ormula $\varphi$ en ER trataremos de hacer add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Notar que $\psi$ solo puede ser $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ o $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ porque esos son los que su interpretaci\'on tiene m\'as de un elemento. No hay
+debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo, while del algoritmo 1, en la l\'inea 4. Ahora es el turno de las relaciones, la primera de ellas es \textsf{leftof}, para cada f\'ormula $\varphi$ en ER trataremos de hacer add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Notar que $\psi$ solo puede ser $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ o $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ porque esos son los que su interpretaci\'on tiene m\'as de un elemento. 
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo15.png}}\\[0pt]
+\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
+\label{fig-modelo15}
+\end{center}
+\end{figure}
+
+
+No hay
 %because those are the ones that its interpretation have more than one element. There is not 
 $\varphi$ y $\psi$ que puedan ser aplicadas. Continuando con \textsf{rightof} agregamos $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, y asi con \textsf{topof} agregamos $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ y el algoritmo termina con ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, %here all elements are in a singleton class and not further refinement can be done.
 
@@ -630,9 +701,21 @@ ning\'un refinamiento m\'as.
 
 %At this point we already have the target in a singleton set. So the formula for it is ``red and ball'', and also for s6 which formula is ``yellow cube''.\\
 %As we show this algorithm depends of the order of properties and relations.\\
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo16.png}}\\[0pt]
+\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
+\label{fig-modelo16}
+\end{center}
+\end{figure}
 
-
-
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=13cm]{images/modelo17.png}}\\[0pt]
+\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
+\label{fig-modelo17}
+\end{center}
+\end{figure}
 
 \section{Aproximaciones emp\'iricas a la soluci\'on de REG}
 
