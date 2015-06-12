@@ -175,7 +175,7 @@ Si D es vaci\'io, no hay nada para identificar, porque no hay distractores.\\
 La idea del algoritmo es ir eliminando distractores, por eso, en {\it Paso 1} si no hay distractores, se devuelve L como el conjunto de propiedades que identifica al target. Si todav\'ia hay distractores pero no quedan propiedades de r ($P_{r}$), falla porque no lo puede identificar un\'ivocamente. Si quedan propiedades de r, va al {\it Paso 2}, en el cual elije la propiedad de r que sigue en el orden de preferencias, pero que tambi\'en es propiedad de alg\'un distractor (algun elemento de D) y va al {\it Paso 3}, en caso de que la propiedad no sea propiedad de algun distractor, se actualiza $P_{r}$ a $P_{r}$ menos la propiedad y se va al principio de nuevo.\\
 En el {\it Paso 3} se agrega la propiedad a la descripci\'on actual L, se actualiza $D$ con $D_{j}$, es decir con los elementos de $D$ que tienen la propiedad $_j$, se saca $_j$ de la lista de P y continua en {\it Paso 1}.\\
 
-\textcolor{blue}{Quizas deba poner mas cosas de estas aca...Theune and Krahmer proposed an extension that allows the generation of subsequent reference with the ia taking into account the discourse salience of the target referent (Krahmer and Theune, 1998; Theune, 2000; Krahmer and Theune, 2002), and a second one which allows the ia to produce referring expressions that
+\textcolor{blue}{Un poco mas de historia, no se a donde poner...Theune and Krahmer proposed an extension that allows the generation of subsequent reference with the ia taking into account the discourse salience of the target referent (Krahmer and Theune, 1998; Theune, 2000; Krahmer and Theune, 2002), and a second one which allows the ia to produce referring expressions that
 contain binary relations to other objects (Theune, 2000; Krahmer and Theune, 2002). I will return to their relational extension in Section 2.3. Theune and Krahmer's approach works by assigning a salience score to all objects according to the
 focus/topic distinction by Hajicova (1993) and Centering Theory (Grosz et al., 1995). They alter the success criterion of the algorithm and only let it stop when here is no distractor left that is as or more salient than the target referent.
 Not all properties are the same. The qualitative diferences that exist between diferent properties were first discussed in the
@@ -513,109 +513,109 @@ $\el$ como language. Este algoritmo fue presentado en
 
 \subsection{Ejemplo de ejecuci\'on}
 
-
-Vamos a ejecutar el algoritmo para la Escena~\ref{figure22},
+\textcolor{blue}{no se si poner aca un ejemplo, si poner el texto y las im\'agenes en otro apendice... o ponerlas mas chiquitas en varias columnas, asi queda feo}
+Vamos a ejecutar el algoritmo para la Figura~\ref{figure22},
 el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
 esas listas son las siguientes:
 
 propiedades ordenadas (prop): \textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
 relaciones ordenadas (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
 
-\begin{figure}
-\begin{center}	
-\includegraphics[width=.5\textwidth]{images/22.jpg}
-\end{center}
-\vspace*{-1.5em}
-\caption{Escena 3D de figuras geom\'etricas}\label{figure22}
-\end{figure}
+%\begin{figure}
+%\begin{center}	
+%\includegraphics[width=.5\textwidth]{images/22.jpg}
+%\end{center}
+%\vspace*{-1.5em}
+%\caption{Escena 3D de figuras geom\'etricas}\label{figure22}
+%\end{figure}
 
-\begin{figure}
-\begin{minipage}[b]{0.6\linewidth}
-\centering
-\begin{tikzpicture}
-  [
-    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
-    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
-  ]
- \node[n,label=above:$e_1$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLeft\\[-2pt]
-      \nSmall\\[-2pt] 
-      \nYellow \\[-2pt] 
-      \nBall\end{array}$}] (a) {};
+%\begin{figure}
+%\begin{minipage}[b]{0.6\linewidth}
+%\centering
+%\begin{tikzpicture}
+%  [
+%    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+%    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
+%  ]
+% \node[n,label=above:$e_1$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nLeft\\[-2pt]
+%      \nSmall\\[-2pt] 
+%      \nYellow \\[-2pt] 
+%      \nBall\end{array}$}] (a) {};
 
- \node[n,label=above:$e_2$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLeft\\[-2pt]
-      \nSmall\\[-2pt] 
-      \nRed\\[-2pt] 
-      \nCube\end{array}$}, right of=a] (b) {};
+% \node[n,label=above:$e_2$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nLeft\\[-2pt]
+%      \nSmall\\[-2pt] 
+%      \nRed\\[-2pt] 
+%      \nCube\end{array}$}, right of=a] (b) {};
 
- \node[n,label=below:$e_3$,label=above:{
-    \relsize{-1}$\begin{array}{c}
-      \nTop\\[-2pt]
-      \nLeft\\[-2pt]
-      \nSmall\\[-2pt] 
-      \nYellow\\[-2pt] 
-      \nBall\end{array}$}, above of=b] (c) {};
+% \node[n,label=below:$e_3$,label=above:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nTop\\[-2pt]
+%      \nLeft\\[-2pt]
+%      \nSmall\\[-2pt] 
+%      \nYellow\\[-2pt] 
+%      \nBall\end{array}$}, above of=b] (c) {};
 
- \node[n,label=above:$e_4$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nBig\\[-2pt] 
-      \nRed\\[-2pt] 
-      \nCube\end{array}$}, right of=b] (d) {};
+% \node[n,label=above:$e_4$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nBig\\[-2pt] 
+%      \nRed\\[-2pt] 
+%      \nCube\end{array}$}, right of=b] (d) {};
 
- \node[n,label=above:$e_5$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nBig\\[-2pt] 
-      \nRed\\[-2pt] 
-      \nBall\end{array}$}, right of=d] (e) {};
+% \node[n,label=above:$e_5$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nBig\\[-2pt] 
+%      \nRed\\[-2pt] 
+%      \nBall\end{array}$}, right of=d] (e) {};
 
- \node[n,label=above:$e_6$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nSmall\\[-2pt] 
-      \nYellow\\[-2pt] 
-      \nCube\end{array}$}, right of=e] (f) {};
+% \node[n,label=above:$e_6$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nSmall\\[-2pt] 
+%      \nYellow\\[-2pt] 
+%      \nCube\end{array}$}, right of=e] (f) {};
 
- \node[n,label=above:$e_7$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nSmall\\[-2pt] 
-      \nRed\\[-2pt] 
-      \nCube\end{array}$}, right of=f] (g) {};
+% \node[n,label=above:$e_7$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nSmall\\[-2pt] 
+%      \nRed\\[-2pt] 
+%      \nCube\end{array}$}, right of=f] (g) {};
 
- \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
- \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+% \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
+% \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
 
- \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
- \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+% \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
+% \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
 
- \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
- \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
+% \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
+% \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
 
- \draw[dotted] (-.4,-1.7) rectangle (7.5,3.3);
+% \draw[dotted] (-.4,-1.7) rectangle (7.5,3.3);
 
- \end{tikzpicture}
-\caption{La escena como modelo relacional}\label{GRE3D7-stimulus-graph}
-\end{minipage}
-\end{figure}
+% \end{tikzpicture}
+%\caption{La escena como modelo relacional}\label{GRE3D7-stimulus-graph}
+%\end{minipage}
+%\end{figure}
 
 
 El algoritmo siempre termina, y devuelve ER un conjunto de f\'ormulas que describe cada elemento en el dominio (si existe esa f\'ormula). \\
 
-En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$\\
+En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo.png}}\\[0pt]
 \caption{Modelo de la Figura \ref{figure22}}
 \label{fig-modelo}
 \end{center}
 \end{figure}
-El primer bucle del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE),
+El primer bucle del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE), las propiedades at\'omicas se muestran en la Figura~\ref{fig-modelo2}.
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo2.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo2.png}}\\[0pt]
 \caption{Propiedades proposicionales en cuadro rojo, las del primer ciclo del algoritmo}
 \label{fig-modelo2}
 \end{center}
@@ -625,49 +625,48 @@ La f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on tiene al menos
  $\psi$ en ER la conjunci\'on
 $\varphi  \wedge \psi$ no necesita estar subsumida in ER, la $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\psi}$. Luego las f\'ormulas subsumidas se borran.
 
-La primer propiedad es \textsf{ball}, ER = \{$\top$, \textsf{ball}\}, 
+La primer propiedad es \textsf{ball}, ER = \{$\top$, \textsf{ball}\}, se ven los elementos de ``ball'' en un recuadro en la Figura~\ref{fig-modelo3}.
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo3.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo3.png}}\\[0pt]
 \caption{El cuadro indica cuales son ``ball''}
 \label{fig-modelo3}
 \end{center}
 \end{figure}
 
-La siguiente propiedad es \textsf{cube}, ER = \{$\top$, \textsf{ball}, \textsf{cube}\}, pero ahora la $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$,
+La siguiente propiedad es \textsf{cube}, ER = \{$\top$, \textsf{ball}, \textsf{cube}\}, pero ahora la $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, quedando las particiones como se muestra en la Figura~\ref{fig-modelo4}
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo4.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo4.png}}\\[0pt]
 \caption{Cuadros indicando ``ball'' y ``cube''}
 \label{fig-modelo4}
 \end{center}
 \end{figure}
-Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) a las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$
-
+Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) a las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo9.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo9.png}}\\[0pt]
 \caption{Cuadros indicando ``ball'', ``cube'' y ``red''}
 \label{fig-modelo9}
 \end{center}
 \end{figure}
 
 Siguiendo con \textsf{yellow}, tenemos, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos ER = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. 
-Note que aqu\'i ya borramos la f\'ormula \textsf{ball} porque estaba subsumida, y la f\'ormula \textsf{cube} tambi\'en.
+Note que aqu\'i ya borramos la f\'ormula \textsf{ball} porque estaba subsumida, y la f\'ormula \textsf{cube} tambi\'en. Se muestran particiones en Figura~\ref{fig-modelo10}.
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo10.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo10.png}}\\[0pt]
 \caption{Cuadros indicando ``ball'', ``cube'', ``red'' y ``yellow''}
 \label{fig-modelo10}
 \end{center}
 \end{figure}
 
-Haciendo lo mismo con \textsf{small} tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. 
+Haciendo lo mismo con \textsf{small} tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$, como se puede ver en Figura~\ref{fig-modelo11}.
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo11.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo11.png}}\\[0pt]
 \caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow'', ``small'' y ``large''}
 \label{fig-modelo11}
 \end{center}
@@ -681,7 +680,7 @@ Hay dos f\'ormulas que a\'un pueden ser refinadas, $\textsf{ball} \wedge \textsf
 debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo, while del algoritmo 1, en la l\'inea 4. Ahora es el turno de las relaciones, la primera de ellas es \textsf{leftof}, para cada f\'ormula $\varphi$ en ER trataremos de hacer add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Notar que $\psi$ solo puede ser $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ o $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ porque esos son los que su interpretaci\'on tiene m\'as de un elemento. 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo15.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo15.png}}\\[0pt]
 \caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
 \label{fig-modelo15}
 \end{center}
@@ -690,10 +689,8 @@ debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo
 
 No hay
 %because those are the ones that its interpretation have more than one element. There is not 
-$\varphi$ y $\psi$ que puedan ser aplicadas. Continuando con \textsf{rightof} agregamos $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, y asi con \textsf{topof} agregamos $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ y el algoritmo termina con ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, %here all elements are in a singleton class and not further refinement can be done.
-
-aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer
-ning\'un refinamiento m\'as. 
+$\varphi$ y $\psi$ que puedan ser aplicadas. Continuando con \textsf{rightof} agregamos $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, y asi con \textsf{topof} agregamos $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ y el algoritmo termina con ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, 
+aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer ning\'un refinamiento m\'as. 
 %can be applied to $cube \wedge red \wedge small$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
 %its interpretation is $\{e_7\}$ with $\psi$ is $cube \wedge yellow \wedge small$, the others combinations can't be apply because they don't do true the preconditions. The following relation is rightof, 
 
@@ -703,7 +700,7 @@ ning\'un refinamiento m\'as.
 %As we show this algorithm depends of the order of properties and relations.\\
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo16.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo16.png}}\\[0pt]
 \caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
 \label{fig-modelo16}
 \end{center}
@@ -711,7 +708,7 @@ ning\'un refinamiento m\'as.
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=13cm]{images/modelo17.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/modelo17.png}}\\[0pt]
 \caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
 \label{fig-modelo17}
 \end{center}
@@ -728,13 +725,13 @@ ning\'un refinamiento m\'as.
 TUNA \cite{tuna-corpus} fue el primer corpus prominente para GER disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2.280 descripciones producidas por 60 personas en dos dominios (1.200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una imagen). TUNA no contiene descripciones relacionales, y es posiblemente el \'unico recurso de este tipo para incluir situaciones de referencia a conjuntos. El corpus TUNA se ha utilizado ampliamente en una serie de desaf\'ios \cite{reg2009}. Se muestran ejemplos de im\'agenes en Figuras \ref{fig-TUNA-furniture} y \ref{fig-TUNA-people}
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{images/largeGreyChair.jpg}\\[0pt]
+\includegraphics[width=8cm]{images/largeGreyChair.jpg}\\[0pt]
 \caption{Imagen del TUNA corpus (muebles)}
 \label{fig-TUNA-furniture}
 \end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{images/tuna-people.jpg}\\[0pt]
+\includegraphics[width=8cm]{images/tuna-people.jpg}\\[0pt]
 \caption{Imagen del TUNA corpus (personas)}
 \label{fig-TUNA-people}
 \end{figure}
@@ -743,6 +740,7 @@ TUNA \cite{tuna-corpus} fue el primer corpus prominente para GER disponible p\'u
 \label{sec:corpusGRE}
 %were developed in a series of web-based experiments primarily focussed on the study of relational descriptions. GRE3D3 contains 630 descriptions produced by 63 speakers, and GRE3D7 contains 4480 descriptions produced by 287 speakers, making it the largest of its kind to date. The GRE3D domain consists of simple visual scenes containing only two kinds of objects (boxes and spheres) with limited variation in colour and size. In each scene, there is only one possible spatial relation between target and the nearest landmark. Both corpora contain atomic and relational descriptions.
 GRE3D3 y su extensi\'on GRE3D7 \cite{gre3d3,gre3d7} se desarrollaron en una serie de experimentos basados en la web se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 personas y GRE3D7 contiene 4.480 descripciones producidas por 287 personas, y es el corpus m\'as grande de este tipo hasta la fecha. El dominio GRE3D consta de escenas visuales simples que contienen s\'olo dos tipos de objetos (cubos y esferas) con variaci\'on limitada en color y tama\~o. En cada escena, s\'olo hay una posible relaci\'on espacial entre el target y el landmark m\'as cercano. Ambos corpus contienen descripciones at\'omicas y relacionales. Ejemplo de im\'agenes del GRE3D3 y GRE3D7 se muestran en las Figuras \ref{fig-GRE3D3} y \ref{fig-GRE3D7}
+%\begin{minipage}[b]{0.45\linewidth}
 
 \begin{figure}
 \centering
@@ -750,14 +748,15 @@ GRE3D3 y su extensi\'on GRE3D7 \cite{gre3d3,gre3d7} se desarrollaron en una seri
 \caption{Imagen del GRE3D3}
 \label{fig-GRE3D3}
 \end{figure}
-
+%\end{minipage}
+%\begin{minipage}[b]{0.45\linewidth}
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/3.jpg}\\[0pt]
 \caption{Imagen del GRE3D7}
 \label{fig-GRE3D7}
 \end{figure}
-
+%\end{minipage}
 
 
 \label{sec:corpusSTARS}
@@ -767,13 +766,13 @@ Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se colectaron para el e
 
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{images/STARS.png}\\[0pt]
+\includegraphics[width=8cm]{images/STARS.png}\\[0pt]
 \caption{Imagen de STARS corpus}
 \label{fig-STARS}
 \end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{images/STARS2.png}\\[0pt]
+\includegraphics[width=8cm]{images/STARS2.png}\\[0pt]
 \caption{Imagen de STARS2 corpus}
 \label{fig-STARS2}
 \end{figure}
