@@ -4,7 +4,7 @@
 \usepackage{url}
 \usepackage{latexsym}
 \usepackage{graphicx}
-
+\usepackage{color}
 %\setlength\titlebox{5cm}
 
 % You can expand the titlebox if you need extra space
@@ -79,7 +79,7 @@ A possible explanation for the small interest in ML for REG may be the relativel
 
 Examples of REG corpora include TUNA \cite{tuna-corpus}, GRE3D3 \cite{gre3d3}, and Stars \cite{stars-mutual-disamb}. Despite the usefulness of these resources for a large body of work, however, the available descriptions are still at some distance from those normally observed in more realistic applications, and in any case further research questions will usually require new data. 
 
-In this paper we present the Zoom corpus of referring expressions. Zoom addresses a domain that is considerably closer to real-world applications (namely, city maps in different degrees of detail represented by zoom levels), involving both singular and plural reference, and making extensive use of relational properties. Moreover, Zoom descriptions were produced by both Spanish and Portuguese speakers, which will allow (to the best of our knowledge, for the first time) a comprehensive study of the REG surface realisation subtask in these languages, and enable research on the issues of human variation in REG \cite{trainable-speaker,romina-coling,non-det}. 
+In this paper we present the Zoom corpus of referring expressions. Zoom addresses a domain that is considerably closer to real-world applications \textcolor{blue}{than existing work}(namely, city maps in different degrees of detail represented by zoom levels), involving both singular and plural reference, and making extensive use of relational properties. Moreover, Zoom descriptions were produced by both Spanish and Portuguese speakers, which will allow (to the best of our knowledge, for the first time) a comprehensive study of the REG surface realisation subtask in these languages, and enable research on the issues of human variation in REG \cite{trainable-speaker,romina-coling,non-det}. 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
@@ -114,18 +114,45 @@ We designed a web-based experiment to collect natural language descriptions of m
 
 {\bf Procedure:} Subjects received a web link to the on-line experiment interface (cf. Fig. \ref{fig-interface}) with self-contained instructions. Age and gender details were collected for statistical purposes. The experiment consisted of a series of map images presented in random order, one by one. Each map scene showed a particular location (e.g., a restaurant, pub, theatre etc.) pointed by an arrow. For each scene, subjects were required to imagine that they were giving travel advice to a friend, and to complete the sentence `It would be interesting to visit...' with a description of the location pointed by the arrow. After pressing a `Next' button, another stimulus was selected at random until the end of the experiment. The first two images were fillers solely intended to make subjects familiar with the experiment setting, and the corresponding responses were not recorded. Incomplete trials, and ill-formed descriptions, were also discarded. 
 
-{\bf Materials:} The experiment made use of the purpose-built interface illustrated in Fig. \ref{fig-interface}, and a set of map images obtained from OpenStreetMap\footnote{\url{openstreetmap.org}}, which consisted of selected portions of maps of Madrid and Lisbon. For each city, 10 map locations were used. Each location was shown in low and high zoom levels, making 20 images in total. In both cases, the intended target was kept the same, but the more detailed version would display a larger number of distractors and additional details in general. In addition to that, certain street and landmark names might not be depicted at different zoom levels. Half images showed a single arrow pointing to one map location (i.e., requiring a single description as `the restaurant on Baker street'), whereas the other half showed two arrows pointed to two different locations (and hence requiring a reference to a set, as in `the two restaurants near the museum'). 
+{\bf Materials:} The experiment made use of the purpose-built interface illustrated in Fig. \ref{fig-interface}, and a set of map images obtained from OpenStreetMap\footnote{\url{openstreetmap.org}}, which consisted of selected portions of maps of Madrid and Lisbon,  \textcolor{blue}{we select those cities because the most of participants it suppose to live in Argentina or Brazil, and we want to select a city with the same language but unknown places for the participants, in order to not receive things as... ``The bar we went last night''} . For each city, 10 map locations were used. Each location was shown in low and high zoom levels, making 20 images in total. In both cases, the intended target was kept the same, but the more detailed version would display a larger number of distractors and additional details in general. In addition to that, certain street and landmark names might not be depicted at different zoom levels. Half images showed a single arrow pointing to one map location (i.e., requiring a single description as `the restaurant on Baker street'), whereas the other half showed two arrows pointed to two different locations (and hence requiring a reference to a set, as in `the two restaurants near the museum'\textcolor{blue}{ or `The restaurante near to museum and the restaurante in front to the Bank'}). 
 
 {\bf Data collection:} Upon manual verification, 602 ill-formed Portuguese descriptions and 366 Spanish descriptions were discarded. Thus, the Portuguese subcorpus consists of 1358 descriptions, and the Spanish subcorpus consists of 1234 descriptions. In the Portuguese subcorpus, 78.6\% of the descriptions include relational properties. In addition to that, 36.4\% were minimally distinguishing, 44.3\% were overspecified, and  19.3\% were underspecified. In the Spanish subcorpus, 70\% of the descriptions include relational properties, 35\% were minimally distinguishing, 40\% were overspecified, and 25\% were underspecified. Underspecified descriptions are not common in existing REG corpora (certainly not in this proportion), which may reflect the complexity of the domain.
 
 {\bf Annotation:} Each referring expression was modelled \textcolor{blue}{as maximum with} a set of 26 attributes \textcolor{blue}{wich are 10 for the target object and 4 for each of the landmaks objects considering 4 landmarks (maybe we should to justify here why)}. In the case of plural descriptions (i.e., those involving two target objects), this attribute set was doubled. Every object was annotated with the atomic attributes {\em type}, {\em name} and {\em others} and, in the case of landmark objects, also with their {\em id}. In addition to that, seven relational properties were considered: {\em in/on/at}, {\em next-to}, {\em right-of}, {\em left-of}, {\em in-front-of}, {\em behind-of}, and the multivalue relation {\em between}. The collected descriptions were fully annotated by two independent annotators. After completion, a third annotator assumed the role of judge and provided the final annotation. Since the annotation scheme was fairly straightforward (i.e., largely because all non-standard responses were simply assigned to the {\em others} attribute), agreement between judges as measured by Kappa \cite{kappa} was 84\% at the attribute level. Both referential contexts and referring expressions were represented in XML format using a relational version of the XML format adopted in the TUNA corpus \cite{tuna-corpus}. 
 
-{\bf Comparison with previous work:} Table \ref{tab-comparison} presents a comparison between the collected data and existing REG corpora\footnote{The information on TUNA and Zoom descriptions is based on the singular portion of each corpus only}: the number of possible atomic attributes (Attrib.), the number of possible landmarks (LMs) in a  description, the average description size (in number of annotated properties), and the proportion of property usage, which is taken to be the proportion of properties that appear in the description over the total number of possible attributes and landmarks. From a REG perspective, larger description sizes and lower usage rates are likely to represent more complex situations of reference. \textcolor{blue}{Also all cited corpus are in English language, and our ZOOM corpus is of Spanish and Portuguese languages.}
+{\bf Comparison with previous work:} Table \textcolor{blue}{\ref{tab-comparison-f} and }\ref{tab-comparison} presents a comparison between the collected data and existing REG corpora. \textcolor{blue}{\ref{tab-comparison-f} shows the principal features comparison, those are, count of RE, count of participants, language selected, if has references to plurals, and if has zoom levels of details into account\footnote{En. for English, Pt. for Portuguese, Sp. for Spanish. TUNA-F. for TUNA-Furniture, and TUNA-P. for TUNA-people} and \ref{tab-comparison}}\footnote{The information on TUNA and Zoom descriptions is based on the singular portion of each corpus only}: the number of possible atomic attributes (Attrib.), the number of possible landmarks (LMs) in a  description, the average description size (in number of annotated properties), and the proportion of property usage, which is taken to be the proportion of properties that appear in the description over the total number of possible attributes and landmarks. From a REG perspective, larger description sizes and lower usage rates are likely to represent more complex situations of reference. \textcolor{blue}{Also all cited corpus are in English language, and our ZOOM corpus is of Spanish and Portuguese languages.}
+
 
 \begin{table}[ht]
 \begin{center}
 \footnotesize{
-\caption{Comparison with existing REG corpora}
+\caption{Comparison features corpus with existing REG corpora}
+\label{tab-comparison-f}
+\begin{tabular} {  l c c c c c}
+\hline
+Corpus			& RE    & Partici-& Lan-  & Plural & Zoom \\
+						&count  &pants    & guage &ref.    &      \\
+\hline
+TUNA-F.			& 1200	& 60	&	En.	& si  & no \\
+TUNA-P.			& 1080	& 60	& En.	& si  & no \\
+GRE3D3			&	630		& 63	& En.	& no  & no \\
+GRE3D7			&	4480	& 287	& En.	& no  & no \\
+Stars				&	704		& 64	& En.	& no  & no \\
+Stars2			& 884		& 56	& En.	& no  & no \\
+Zoom-Pt.		& 1358	& 93	& Pt.	& si  & si \\
+Zoom-Sp.		& 1234	& 80	& Sp.	& si  & si \\
+\hline
+\end{tabular}
+}
+\end{center}
+\end{table}
+
+
+
+\begin{table}[ht]
+\begin{center}
+\footnotesize{
+\caption{Comparison \textcolor{blue}{annotations} with existing REG corpora}
 \label{tab-comparison}
 \begin{tabular} {  l c c c c}
 \hline
