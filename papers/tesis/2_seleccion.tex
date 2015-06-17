@@ -809,7 +809,144 @@ Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se colectaron para el e
 
 %http://link.springer.com/chapter/10.1007/978-3-642-15573-4_9
 %http://www.jetteviethen.net/papers/DaleViethen2010chapter.pdf
+
+La investigaci\'on presentada en \ref{viethen-phd} se basa en dos premisas fundamentales: que la investigaci\'on
+en la generaci\'on de c\'omputo de expresiones referenciales deben esforzarse por lograr
+salida del sistema que sea tan similar a la humana como sea posible; y que, para ello, debemos
+esforzarnos para modelar el comportamiento humano como se puede observar en corpora.
+La adopci\'on de estas premisas sirve para dos fines: en primer lugar, mejora la adecuaci\'on
+de la salida de algoritmos de GER para el objeto target imitando la capacidad humana
+de producir referencias adecuadas; y en segundo lugar, el estudio de corpus de datos producidos por humanos
+ y algoritmos en desarrollo que pueden replicar estos datos podr\'ian
+acercarnos a la comprensi\'on de que es lo que hacen los humanos cuando dan una ER.
+Se\~nala que el cl\'asico algoritmos de GER y la mayor parte de sus descendientes no se basaron ni evaluaron contra datos producidos por humanos. Ellos se basaron en una visi\'on bastante minimalista de lo que se necesita
+para que una expresi\'on referencial sea \'optima, concentr\'andose en la eficiencia computacional 
+ y descripciones breves como sus principales preocupaciones. Un peque\~no n\'umero de enfoques existentes que 
+ se basaron en observaciones sobre el comportamiento de referencia general humana
+que obtuvieron a partir de experimentos psicoling\"u\'isticos, pero de nuevo no fueron evaluados
+contra datos humanos.
+Los algoritmos que se presentaron a los desaf\'ios de evaluaci\'on \cite{gatt-balz-kow:2008:ENLG} y \ref{reg2009}
+fueron probados en el TUNA-Corpus, y algunos de ellos
+tambi\'en se tuvieron en cuenta los patrones que se encuentran en el conjunto del desarrollo. Pero hay una serie de preocupaciones en torno a la pregunta de si el TUNA-Corpus, y la forma de salida de los sistemas que se compar\'o 
+en los desaf\'ios eran ideales para una evaluaci\'on de la adecuaci\'on descriptiva de GER.
+A partir de los desaf\'ios que se describen en m\'as detalle y para evaluarlos en una serie de datos m\'as grande
+que contiene m\'as de una expresi\'on referencial para cada elemento est\'imulo.
+Aborda tres \'areas principales en las que los corpus se puede utilizar para
+promover el objetivo de la semejanza humana en la investigaci\'on sobre generaci\'on de expresiones referenciales:
+evaluaci\'on, la recolecci\'on basada en corpus y an\'alisis y modelizaci\'on estad\'istica de
+datos de corpus. Comenz\'o con el an\'alisis del estado del arte de la investigaci\'on en
+la generaci\'on de descripciones distintivas, trabaj\'o con las relaciones espaciales y en el trabajo ha hecho uso de corpus. Examin\'o una serie de opciones metodol\'ogicas que tienen que hacerse cuando se trabaja con los corpus de GER. Aqu\'i, explor\'diferentes opciones para los desaf\'ios de recopilaci\'on de corpus, que se centran en torno al equilibrio que se necesita
+entre el control de los par\'ametros experimentales tanto como sea necesario
+y mantener la configuraci\'on de lo m\'as natural posible. Discut\'i una serie de conceptos
+que son de importancia para el an\'alisis de GER corpora, tales como la naturalidad de diferentes
+propiedades de los objetos, y las nociones de minimalidad y cuestiones de sobre-especificaci\'on de expresiones referenciales. Por \'ultimo, analiz\'o diferentes maneras en que la salida de un sistema se puede
+comparar con los datos corpus, bajo la premisa de que el objetivo de la comparaci\'on es
+para evaluar si el sistema podr\'ia tener un modelo adecuado del comportamiento humano para la generaci\'on de expresiones referenciales.
+Realiz\'o una investigaci\'on en las tres \'areas donde corpora se pueden emplear en GER: Evaluaci\'on de humanidad
+semejanza, recopilaci\'on y an\'alisis de corpus, y modelado de datos de corpus. El primero de los tres principales cap\'itulos de contenido presenta un experimento de evaluaci\'on en
+que tres de los algoritmos cl\'asicos, (1989) Algoritmo Greedy de Dale (codicioso),
+Dale y de eglefino (1991b) Relacional Algoritmo (ra) Y Dale y Reiter
+(1995) Algoritmo incremental (Iowa), Se pusieron a prueba en cuanto a su capacidad de
+replicar las expresiones que se refieren se encuentran en un grupo relativamente peque\~no corpus de referencia
+expresiones en un dominio visual de rejilla de cajones de armarios ling. el analisis
+de este experimento tuvo dos resultados principales: (1) que identi cado tres en particular
+fen\'omenos que todav\'ia plantean importantes retos para GER
+algoritmos con el objetivo de replicar
+el comportamiento humano, y (2) que proporciona una plataforma para la discusi\'on de una serie de
+dificultades que se presentan para la evaluaci\'on basada en corpus en GER. Esto result\'o en una serie
+de criterios para el dise\~no de los dos corpus que el trabajo en el resto de la tesis se basa en.
+Los tres fen\'omenos en las expresiones referenciales producidos por humano que la
+algoritmos probados no fueron capaces de replicar satisfactoriamente eran demasiado espec\'ifica,
+relaciones espaciales, y el comportamiento de voluntarios espec\'ificos. Ambos
+codicioso y la Iowa fueron capaz de generar algo de la redundancia que se encontr\'o en el corpus, sino un
+n\'umero de las expresiones refierenciales conten\'ia informaci\'on m\'as redundante que
+ya sea algoritmo podr\'ia producir bajo cualquier ajuste de par\'ametros, gobernando a cabo como
+modelos precisos de referencia comportamiento humano. Ni codicioso ni el Iowa estaban destinados a ser capaz de generar refiri\'endose expresiones que contienen las relaciones entre entidades, pero esto es exactamente lo que el
+ra fue dise\~nado. Sorprendentemente, la
+ra no s\'olo no para generar cualquiera de las
+descripciones contenidas en el corpus de evaluaci\'on; las descripciones que se generan
+parec\'ia m\'as como enigmas cuyo objetivo era confundir a un oyente, m\'as que \'util
+los intentos de se\~nalar el referente objetivo. Una valoraci\'on te\'orica de otro AP
+enfoques dise\~nados para manejar las relaciones establecieron que ninguno de ellos incluir\'ia
+una relaci\'on en el dominio de prueba, porque una relaci\'on nunca fue absolutamente necesario
+distinguir cualquiera de los cajones.
+La tercera \'area de preocupaci\'on que el experimento puso de relieve fue la observaci\'on
+que la gente no todos hacen lo mismo en la misma situaci\'on. De hecho, incluso
+la misma persona podr\'ia describir el mismo caj\'on de di? erently bajo di? cir- Erent
+cunstancias. Ninguno de los algoritmos de prueba se pretende tomar las inter e
+variaci\'on intra-hablante en cuenta, y s\'olo muy recientemente han implementaciones
+del Iowa comenzado a modelo de altavoz-preferencias en alg\'un grado.
+Los temas generales con evaluaci\'on basada en corpus que esta experiencia de evaluaci\'on
+ci\'on al descubierto fueron (1) la interdependencia estrecha entre algoritmos y la
+representaci\'on subyacente de conocimientos que utilizan, (2) la no-determinismo de natu-
+generaci\'on ral lenguaje, (3) la cuesti\'on de c\'omo comparar la salida algoritmos '
+a muchas normas de oro, y (4) la ciudad-dominio espec\'ifico de GER algoritmos. La
+discusi\'on de estos temas ha dado lugar a la siguiente desiderata de corpus basa-
+Evaluaci\'on en GER:
+
+1. Si corpora est\'an destinados para ser reutilizado para la evaluaci\'on comparativa de diferentes
+algoritmos, una representaci\'on subyacente del dominio debe ser proporcionado
+junto a ellos.
+2. Si queremos ser mella acondicionado en ning\'un resultado de la evaluaci\'on basada en un GER
+corpus, este corpus debe contener tantos casos como sea posible de tantos direntes altavoces como sea posible para cada escenario referencial. Esto es cierto si
+un algoritmo es evaluado en t\'erminos de ser capaz de generar una natural
+sonando refiri\'endose expresi\'on, o si est\'a probado por su probabilidad de BE-
+ing un modelo preciso de la conducta humana de referencia mediante la comprobaci\'on de si se puede
+generar todas las descripciones en un corpus.
+3. Si la probabilidad de un algoritmo de ser un modelo de conducta humana de referencia
+se eval\'ua, deben utilizarse m\'etricas basadas en recuerdo y la precisi\'on. En esto
+caso, el conjunto completo de las descripciones que el algoritmo proporciona para cada
+escenario de referencia en virtud de cualquier ajuste de par\'ametro debe ser comparado con el
+conjunto de las descripciones contenidas en el corpus para el mismo escenario referencial.
+Si la capacidad m\'as orientado a la aplicaci\'on para generar una referencia similar a la humana
+se ha de evaluar, s\'olo una descripci\'on por escenario debe ser evaluado.
+Esto debe hacerse utilizando una m\'etrica basada en la precisi\'on para probar c\'omo muchos de los
+descripciones algoritmos 'est\'an contenidos en el corpus.
+4. Algoritmos que son juzgados en un dominio espec\'ifico c no deben ser asumidas como
+f\'acilmente adaptable a otros dominios. Idealmente, los corpus que abarca muchos diferentes
+deben estar disponibles para las reclamaciones de los algoritmos de prueba tipos de dominios
+generalizaci\'on
 \subsection{M\'etricas de evaluaci\'on/comparaci\'on con corpus}
 
-Hay m\'etricas autom\'aticas y m\'etricas manuales.
+Para medir la performance de los algoritmos podemos usar m\'etricas autom\'aticas o m\'etricas manuales, las m\'etricas autom\'aticas son aquellas que se calculan mediante un algoritmo y las manuales en las cuales les requerimos a personas que evaluen las expresiones referenciales.
 
+
+\subsubsection{M\'etricas autom\'aticas}
+
+
+La exactitud (Accuracy) se define como el porcentaje de coincidencias exactas entre cada RE producidas por un ser humano y las ERs producidas por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta.\\
+
+
+El coheficiente Dice es una m\'etrica de comparaci\'on de conjuntos, el valor va entre 0 y 1, 1 indica un perfecto match entre los conjuntos. Para dos conjuntos A y B, Dice se calcula como sigue:\\
+
+$Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
+
+\textsc{masi} de \cite{Passonneau06measuringagreement}~es una adaptaci\'on de el coheficiente Jaccard el cual varia en favor de la similaridad cuando un conjunto es un subconjunto de otro, como Dice varia entre 0 y 1, 1 indica match perfecto. Se calcula como sigue:\\
+%which biases it in favor of similarity where one set
+%is a subset of the other. Like Dice, it ranges between
+%0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
+
+$\textsc{masi}(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
+
+
+donde $\delta$ es un coheficiente \textcolor{blue}{``monotonicity'' (NO SE QUE ES)} definido como sigue:\\
+
+
+ \begin{equation}
+     \delta  = \left\{
+	       \begin{array}{ll}
+		 0      & if A \cap B = \emptyset \\
+		 1 & if A = B  \\
+		 \frac{2}{3}     & if A \subset B ~or~ B \subset A\\
+		 \frac{1}{3}     & otherwise
+	       \end{array}
+	     \right.
+ \end{equation}
+
+Intuitivamente significa que se prefieren aquellas descripciones producidas por el sistema las cuales no incluyen atributos que los humanos no incluyeron.
+%Intuitively, this
+%means that those system-produced descriptions are
+%preferred which do not include attributes that are
+%omitted by a human.  
+
+\subsubsection{M\'etricas manuales}
