@@ -442,8 +442,88 @@ descripto (en $\mathcal{L}$).\\
 %two (relations of higher arity can be encoded as binary relations via
 %reification, if necessary).
 
+\begin{figure}[ht]
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/3.jpg}
+\vspace*{1cm}
+%\caption{Input scene}
+\label{GRE3D7-stimulus}
+\end{minipage}
+%\hspace*{-0.35cm}
+\begin{minipage}[b]{0.6\linewidth}
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
+  ]
+ \node[n,label=above:$e_1$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-2pt]
+      \nSmall\\[-2pt] 
+      \nBlue \\[-2pt] 
+      \nBall\end{array}$}] (a) {};
+
+ \node[n,label=above:$e_2$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-2pt]
+      \nBig\\[-2pt] 
+      \nBlue\\[-2pt] 
+      \nCube\end{array}$}, right of=a] (b) {};
+
+ \node[n,label=below:$e_3$,label=above:{
+    \relsize{-1}$\begin{array}{c}
+      \nTop\\[-2pt]
+      \nLeft\\[-2pt]
+      \nSmall\\[-2pt] 
+      \nGreen\\[-2pt] 
+      \nBall\end{array}$}, above of=b] (c) {};
+
+ \node[n,label=above:$e_4$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nSmall\\[-2pt] 
+      \nGreen\\[-2pt] 
+      \nCube\end{array}$}, right of=b] (d) {};
+
+ \node[n,label=above:$e_5$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nBlue\\[-2pt] 
+      \nBall\end{array}$}, right of=d] (e) {};
+
+ \node[n,label=above:$e_6$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nGreen\\[-2pt] 
+      \nCube\end{array}$}, right of=e] (f) {};
+
+ \node[n,label=below:$e_7$,label=above:{
+    \relsize{-1}$\begin{array}{c}
+      \nTop\\[-2pt]
+      \nSmall\\[-2pt] 
+      \nBlue\\[-2pt] 
+      \nCube\end{array}$}, above of=f] (g) {};
+
+ \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
+ \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+
+ \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
+ \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+
+ \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
+ \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
+
+ \draw[dotted] (-.5,-1.4) rectangle (7.1,3.1);
+
+ \end{tikzpicture}
+\caption{Escena como un modelo relacional}
+\label{GRE3D7-stimulus-graph}
+\end{minipage}
+\end{figure}
+
 Est\'a claro que una escena puede ser codificada en diferentes formas como un
-modelo relacional (por ejemplo, en \ref{figure22}, podr\'{i}amos argumentar que
+modelo relacional (por ejemplo, en \ref{GRE3D7-stimulus}, podr\'{i}amos argumentar que
 $e_1$ es tambi\'en \emph{leftof} $e_2$, pero no lo consideramos porque no se estan 
 tocando). El algoritmo asume que estas cuestiones se han resuelto y que el modelo codifica una representaci\'on adecuada de la escena que
 queremos describir. Por otra parte, vamos a suponer que todas las relaciones son
@@ -477,7 +557,7 @@ RE conjuntivas y relacionales, que son lo que encontramos en los corpus.
   La entrada al algoritmo ser\'a un modelo $\mathcal{M} =
  \tup{\Delta, \interp{\cdot}}$, donde $\Delta$ es el dominio no vac\'io de objetos de la imagen,
  $\interp{\cdot}$ es una funci\'on de interpretaci\'on que asigna a todas las propiedades de la escena su extensi\'on.
- Por ejemplo, la escena mostrada en la Figura~\ref{figure22} podr\'ia ser representada por el modelo
+ Por ejemplo, la escena mostrada en la Figura~\ref{GRE3D7-stimulus} podr\'ia ser representada por el modelo
  $\gM=\tup{\Delta,\interp{\cdot}}$ mostrado en la 
  Figura~\ref{GRE3D7-stimulus-graph}; donde+- $\Delta =
  \{e_1,\ldots,e_7\}$, e $\interp{\textsf{red}}$ is $\{e_2, e_4, e_5,
@@ -489,7 +569,7 @@ como la ER con el sustantivo
 ``\textsf{cosa}''. Decimos que una f\'ormula es
 \emph{subsumed} por otras f\'ormulas, la su extensi\'on puede ser cubierta por la
 union de las extensiones de las otras f\'ormulas. Por ejemplo, en la
-Figura~\ref{figure22}, $\top$ es subsumida por ``\textsf{ball}'' y
+Figura~\ref{GRE3D7-stimulus}, $\top$ es subsumida por ``\textsf{ball}'' y
 ``\textsf{cube}'', porque $\interp{\top}$ = $\interp{\textsf{ball}}
 \cup \interp{\textsf{cube}}$.
 %= $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$. 
@@ -514,7 +594,7 @@ $\el$ como language. Este algoritmo fue presentado en
 \subsection{Ejemplo de ejecuci\'on}
 
 \textcolor{blue}{no se si poner aca un ejemplo, si poner el texto y las im\'agenes en otro apendice... o ponerlas mas chiquitas en varias columnas, asi queda feo}
-Vamos a ejecutar el algoritmo para la Figura~\ref{figure22},
+Vamos a ejecutar el algoritmo para la Figura~\ref{GRE3D7-stimulus},
 el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
 esas listas son las siguientes:
 
@@ -607,7 +687,7 @@ En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/modelo.png}}\\[0pt]
-\caption{Modelo de la Figura \ref{figure22}}
+\caption{Modelo de la Figura \ref{GRE3D7-stimulus}}
 \label{fig-modelo}
 \end{center}
 \end{figure}
@@ -725,7 +805,7 @@ aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer ni
 TUNA \cite{tuna-corpus} fue el primer corpus prominente para GER disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2.280 descripciones producidas por 60 personas en dos dominios (1.200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una imagen). TUNA no contiene descripciones relacionales, y es posiblemente el \'unico recurso de este tipo para incluir situaciones de referencia a conjuntos. El corpus TUNA se ha utilizado ampliamente en una serie de desaf\'ios \cite{reg2009}. Se muestran ejemplos de im\'agenes en Figuras \ref{fig-TUNA-furniture} y \ref{fig-TUNA-people}
 
 \begin{figure}
-\begin{minipage}[b]{0.5\linewidth}
+\begin{minipage}[t]{0.5\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/largeGreyChair.jpg}\\[0pt]
 \caption{Imagen del TUNA corpus (muebles)}
@@ -733,7 +813,7 @@ TUNA \cite{tuna-corpus} fue el primer corpus prominente para GER disponible p\'u
 \vspace*{.1cm}
 \end{minipage}
 \hspace*{0cm}
-\begin{minipage}[b]{0.5\linewidth}
+\begin{minipage}[t]{0.5\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/tuna-people.jpg}\\[0pt]
 \caption{Imagen del TUNA corpus (personas)}
@@ -753,7 +833,7 @@ GRE3D3 y su extensi\'on GRE3D7 \cite{gre3d3,gre3d7} se desarrollaron en una seri
 \includegraphics[width=\textwidth]{images/GRE3D3.png}\\[0pt]
 \caption{Imagen del GRE3D3}
 \label{fig-GRE3D3}
-\vspace*{.1cm}
+\vspace*{-0.7cm}
 \end{minipage}
 \hspace*{0cm}
 \begin{minipage}[b]{0.5\linewidth}
@@ -764,7 +844,7 @@ GRE3D3 y su extensi\'on GRE3D7 \cite{gre3d3,gre3d7} se desarrollaron en una seri
 \end{minipage}
 \end{figure}
 
-
+\vspace*{3cm}
 
 \label{sec:corpusSTARS}
 %and its extension Stars2 were collected for the study of referential overspecification (particularly in the case of relational descriptions). Stars was developed in a pilot web-based experiment, containing 704 descriptions produced by 64 speakers.  The more comprehensive Stars2 data set was produced in dialogue situations involving subject pairs, and it contains 884 descriptions produced by 56 speakers. Both domains make use of simple visual scenes containing up to four object types (e.g., stars, boxes, cones and spheres) with limited variation in colour and size. Differently from other REG corpora, however, Stars/2 includes a considerable number of complex situations of reference involving up to three objects, as in `the box near the sphere, next to the cone'.http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-002_2014.pdf y http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-001_2015.pdf
@@ -775,15 +855,15 @@ Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se colectaron para el e
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/STARS.png}\\[0pt]
-\caption{Imagen de STARS corpus}
+\caption{Imagen de Stars corpus}
 \label{fig-STARS}
-\vspace*{.1cm}
+%\vspace*{1cm}
 \end{minipage}
 \hspace*{0cm}
 \begin{minipage}[b]{0.5\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/STARS2.png}\\[0pt]
-\caption{Imagen de STARS2 corpus}
+\caption{Imagen de Stars2 corpus}
 \label{fig-STARS2}
 \end{minipage}
 \end{figure}
@@ -817,56 +897,60 @@ Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se colectaron para el e
 %http://link.springer.com/chapter/10.1007/978-3-642-15573-4_9
 %http://www.jetteviethen.net/papers/DaleViethen2010chapter.pdf
 
-La investigaci\'on presentada en \ref{viethen-phd} se basa en dos premisas fundamentales: que la investigaci\'on
-en la generaci\'on de c\'omputo de expresiones referenciales deben esforzarse por lograr
-salida del sistema que sea tan similar a la humana como sea posible; y que, para ello, debemos
+La investigaci\'on presentada en \cite{viethen-phd} se basa en dos premisas fundamentales: que la investigaci\'on
+en la generaci\'on autom\'atica de expresiones referenciales debe esforzarse por lograr
+sistemas que den salidas tan similar a la humana como sea posible; y que, para ello, debemos
 esforzarnos para modelar el comportamiento humano como se puede observar en corpora.
+
 La adopci\'on de estas premisas sirve para dos fines: en primer lugar, mejora la adecuaci\'on
 de la salida de algoritmos de GER para el objeto target imitando la capacidad humana
 de producir referencias adecuadas; y en segundo lugar, el estudio de corpus de datos producidos por humanos
  y algoritmos en desarrollo que pueden replicar estos datos podr\'ian
-acercarnos a la comprensi\'on de que es lo que hacen los humanos cuando dan una ER.
+acercarnos a la comprensi\'on de que es lo que hacen los humanos cuando dan una ER.\\
+
 Se\~nala que el cl\'asico algoritmos de GER y la mayor parte de sus descendientes no se basaron ni evaluaron contra datos producidos por humanos. Ellos se basaron en una visi\'on bastante minimalista de lo que se necesita
 para que una expresi\'on referencial sea \'optima, concentr\'andose en la eficiencia computacional 
- y descripciones breves como sus principales preocupaciones. Un peque\~no n\'umero de enfoques existentes que 
- se basaron en observaciones sobre el comportamiento de referencia general humana
+ y descripciones breves como sus principales preocupaciones.\\
+
+ Existe un peque\~no n\'umero de enfoques que 
+ se basaron en observaciones del comportamiento de referencia general humana
 que obtuvieron a partir de experimentos psicoling\"u\'isticos, pero de nuevo no fueron evaluados
-contra datos humanos.
-Los algoritmos que se presentaron a los desaf\'ios de evaluaci\'on \cite{gatt-balz-kow:2008:ENLG} y \ref{reg2009}
+contra datos humanos.\\
+
+Los algoritmos que se presentaron a los desaf\'ios de evaluaci\'on \cite{gatt-balz-kow:2008:ENLG} y \cite{reg2009}
 fueron probados en el TUNA-Corpus, y algunos de ellos
-tambi\'en se tuvieron en cuenta los patrones que se encuentran en el conjunto del desarrollo. Pero hay una serie de preocupaciones en torno a la pregunta de si el TUNA-Corpus, y la forma de salida de los sistemas que se compar\'o 
-en los desaf\'ios eran ideales para una evaluaci\'on de la adecuaci\'on descriptiva de GER.
-A partir de los desaf\'ios que se describen en m\'as detalle y para evaluarlos en una serie de datos m\'as grande
-que contiene m\'as de una expresi\'on referencial para cada elemento est\'imulo.
+tambi\'en tuvieron en cuenta los patrones que se encontraban en el conjunto del desarrollo. Pero hay una serie de preocupaciones en torno a la pregunta de si el TUNA-Corpus, y la forma de salida de los sistemas que se compar\'o 
+en los desaf\'ios eran ideales para una evaluaci\'on de la adecuaci\'on descriptiva de GER.\\
+%saque esto porque no se entiende
+%A partir de los desaf\'ios que se describen en m\'as detalle y para evaluarlos en una serie de datos m\'as grande
+%que contiene m\'as de una expresi\'on referencial para cada elemento est\'imulo.
 Aborda tres \'areas principales en las que los corpus se puede utilizar para
 promover el objetivo de la semejanza humana en la investigaci\'on sobre generaci\'on de expresiones referenciales:
-evaluaci\'on, la recolecci\'on basada en corpus y an\'alisis y modelizaci\'on estad\'istica de
-datos de corpus. Comenz\'o con el an\'alisis del estado del arte de la investigaci\'on en
-la generaci\'on de descripciones distintivas, trabaj\'o con las relaciones espaciales y en el trabajo ha hecho uso de corpus. Examin\'o una serie de opciones metodol\'ogicas que tienen que hacerse cuando se trabaja con los corpus de GER. Aqu\'i, explor\'diferentes opciones para los desaf\'ios de recopilaci\'on de corpus, que se centran en torno al equilibrio que se necesita
+evaluaci\'on, la recolecci\'on de corpus y an\'alisis y modelizaci\'on estad\'istica de
+datos de corpus.\\
+Comenz\'o con el an\'alisis del estado del arte de la investigaci\'on en
+la generaci\'on de descripciones distintivas, trabaj\'o con las relaciones espaciales y en el trabajo us\'o datos de corpus. Examin\'o una serie de opciones metodol\'ogicas que tienen que hacerse cuando se trabaja con los corpus de GER. Aqu\'i, explor\'o diferentes opciones para los desaf\'ios de recopilaci\'on de corpus, que se centran en torno al equilibrio que se necesita
 entre el control de los par\'ametros experimentales tanto como sea necesario
-y mantener la configuraci\'on de lo m\'as natural posible. Discut\'i una serie de conceptos
-que son de importancia para el an\'alisis de GER corpora, tales como la naturalidad de diferentes
+y mantener la configuraci\'on de lo m\'as natural posible. Discuti\'o una serie de conceptos
+que son de importancia para el an\'alisis de corpora de GER, tales como la naturalidad de diferentes
 propiedades de los objetos, y las nociones de minimalidad y cuestiones de sobre-especificaci\'on de expresiones referenciales. Por \'ultimo, analiz\'o diferentes maneras en que la salida de un sistema se puede
 comparar con los datos corpus, bajo la premisa de que el objetivo de la comparaci\'on es
 para evaluar si el sistema podr\'ia tener un modelo adecuado del comportamiento humano para la generaci\'on de expresiones referenciales.
-Realiz\'o una investigaci\'on en las tres \'areas donde corpora se pueden emplear en GER: Evaluaci\'on de humanidad
-semejanza, recopilaci\'on y an\'alisis de corpus, y modelado de datos de corpus. El primero de los tres principales cap\'itulos de contenido presenta un experimento de evaluaci\'on en
-que tres de los algoritmos cl\'asicos, (1989) Algoritmo Greedy de Dale (codicioso),
-Dale y de eglefino (1991b) Relacional Algoritmo (ra) Y Dale y Reiter
-(1995) Algoritmo incremental (Iowa), Se pusieron a prueba en cuanto a su capacidad de
-replicar las expresiones que se refieren se encuentran en un grupo relativamente peque\~no corpus de referencia
-expresiones en un dominio visual de rejilla de cajones de armarios ling. el analisis
-de este experimento tuvo dos resultados principales: (1) que identi cado tres en particular
-fen\'omenos que todav\'ia plantean importantes retos para GER
-algoritmos con el objetivo de replicar
+Realiz\'o una investigaci\'on en las tres \'areas donde corpora se pueden emplear en GER: Evaluaci\'on de semejanza humana, recopilaci\'on y an\'alisis de corpus, y modelado de datos de corpus. Realiz\'o un experimento de evaluaci\'on en
+que tres de los algoritmos cl\'asicos, (1989) Algoritmo Greedy de Dale (Greedy), Dale y Haddock (1991b), Relacional Algoritmo (ra) Y Dale y Reiter (1995) Algoritmo incremental (IA), Se pusieron a prueba en cuanto a su capacidad de
+replicar las expresiones referenciales se encuentran en un grupo relativamente peque\~no de corpus de expresiones referenciales
+en un dominio visual de im\'agenes puestas en una grilla.
+%de rejilla de cajones de armarios ling. 
+En el analisis de este experimento tuvo dos resultados principales: (1) que identic\'o en particular tres 
+fen\'omenos que todav\'ia plantean importantes retos para los algoritmos GER con el objetivo de replicar
 el comportamiento humano, y (2) que proporciona una plataforma para la discusi\'on de una serie de
-dificultades que se presentan para la evaluaci\'on basada en corpus en GER. Esto result\'o en una serie
-de criterios para el dise\~no de los dos corpus que el trabajo en el resto de la tesis se basa en.
-Los tres fen\'omenos en las expresiones referenciales producidos por humano que la
-algoritmos probados no fueron capaces de replicar satisfactoriamente eran demasiado espec\'ifica,
+dificultades que se presentan para la evaluaci\'on basada en corpus de GER. Esto result\'o en una serie
+de criterios para el dise\~no de los dos corpus que el trabajo en el resto de la tesis.
+Los tres fen\'omenos en las expresiones referenciales producidas por humanos que los
+algoritmos probados no fueron capaces de replicar satisfactoriamente eran demasiado espec\'ificas,
 relaciones espaciales, y el comportamiento de voluntarios espec\'ificos. Ambos
-codicioso y la Iowa fueron capaz de generar algo de la redundancia que se encontr\'o en el corpus, sino un
-n\'umero de las expresiones refierenciales conten\'ia informaci\'on m\'as redundante que
+Greddy y la IA fueron capaz de generar algo de la redundancia que se encontr\'o en el corpus, sino un
+n\'umero de las expresiones referenciales conten\'ia informaci\'on m\'as redundante que
 ya sea algoritmo podr\'ia producir bajo cualquier ajuste de par\'ametros, gobernando a cabo como
 modelos precisos de referencia comportamiento humano. Ni codicioso ni el Iowa estaban destinados a ser capaz de generar refiri\'endose expresiones que contienen las relaciones entre entidades, pero esto es exactamente lo que el
 ra fue dise\~nado. Sorprendentemente, la
@@ -921,7 +1005,7 @@ Para medir la performance de los algoritmos podemos usar m\'etricas autom\'atica
 \subsubsection{M\'etricas autom\'aticas}
 
 
-La exactitud (Accuracy) se define como el porcentaje de coincidencias exactas entre cada RE producidas por un ser humano y las ERs producidas por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta.\\
+La exactitud (Accuracy) se define como el porcentaje de coincidencias exactas entre cada RE producida por un ser humano y la producida por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta.\\
 
 
 El coheficiente Dice es una m\'etrica de comparaci\'on de conjuntos, el valor va entre 0 y 1, 1 indica un perfecto match entre los conjuntos. Para dos conjuntos A y B, Dice se calcula como sigue:\\
