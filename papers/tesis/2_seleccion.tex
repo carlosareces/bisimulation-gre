@@ -50,7 +50,7 @@ La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relacio
 
 Un algoritmo incluir\'ia propiedades o relaciones en cada paso, un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir no incluirla.\\
 
-\sebsection{Algoritmos de REG}
+\subsection{Algoritmos de REG}
 
 Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. \\
 
@@ -229,13 +229,13 @@ Cada objeto de la escena se modela como un v\'ertice en el grafo. Los atributos 
 
 Las relaciones binarias entre objetos, por ejemplo abajo-de, arriba-de se modelan como aristas entre los nodos correspondientes.\\
 
-La base de conocimiento que incluye al target ahora esta expresada como los v\'ertices, las aristas y las etiquedas del grafo.\\
+%La base de conocimiento que incluye al target ahora esta expresada como los v\'ertices, las aristas y las etiquetas del grafo.\\
 
 %Krahmer et al.'s (2003) reformularon la tarea de seleccionar las propiedades y relaciones que contendr\'a una expresi\'on referencial como un problema de teor\'ia de grafos.
 
 Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente, le llama grafo distintivo (distinguishing graph).\\
 
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda exaustiva, pero comenzando a lo ancho. \textcolor{blue}{aca hay que escribir mucho mas...} Utiliza una heur\'{i}stica basada en el costo (descripto a continuaci\'on) que es capaz de podar el espacio de b\'usqueda.\\
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda exaustiva, pero comenzando a lo ancho. Utiliza una heur\'{i}stica basada en el costo (costo de incluir propiedades, relaciones) para podar el espacio de b\'usqueda. Y da el grafo de menor costo. \\
 
 
 %esto no se entiende nada
@@ -249,7 +249,7 @@ Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al tar
 
 En teor\'{i}a de grafos, un isomorfismo entre dos grafos G y H es una biyecci\'on f entre los conjuntos de sus v\'ertices $f:V(G) \rightarrow V(H)$ que preserva la relaci\'on de adyacencia. Es decir, cualquier par de v\'ertices u y v de G son adyacentes si y solo si lo son sus im\'agenes, $f(u)$ y $f(v)$, en H.\\
 
-\textcolor{blue}{aca quiero poner un ejemplo que muestre una imagen y el modelo como grafo}
+%\textcolor{blue}{aca quiero poner un ejemplo que muestre una imagen y el modelo como grafo}
 
 La funci\'on de costo esta definida sobre las aristas y v\'ertices del grafo dominio. El costo de un subgrafo se define como la suma sobre todas las aristas y v\'ertices que contiene el grafo.\\
 El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que representa al target.\\
@@ -259,9 +259,9 @@ La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cu
 \subsubsection{Bisimulaci\'on}
 
 
-En este cap\'itulo daremos una introducci\'on a las l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) y luego daremos el algoritmo en el cual nos basamos en esta tesis.\\
+En este cap\'itulo daremos una introducci\'on a las l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) %y luego daremos el algoritmo en el cual nos basamos en esta tesis.\\ el algoritmo en el cap 4
 
-La idea es transformar el problema de GER al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets, en el caso de querer dar ER para plurales) aprovechando que una f\'ormula describe un conjunto.\\
+La idea es transformar el problema de GER al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets, en el caso de querer dar ER para plurales) aprovechando que una f\'ormula describe un conjunto que puede contener m\'as de un elemento.\\
 
 Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, vamos a explicar \alc y \el.\\
 
@@ -327,22 +327,8 @@ no \alc-similar a alg\'un individual $b$, pero no viceversa.\\
 
 
 
-\textcolor{blue}{SACAR ESTO... poner quizas en la introduccion o en primer capitulo. Las ER que involucran relaciones han recibido m\'as atenci\'on recientemente;
-especialmente en el contexto de las expresiones referenciales espaciales en 
-generaci\'on (por ejemplo,~\cite{kelleher06:increm}),
-donde es particularmente natural utilizar expresiones que implican 
-relaciones espaciales, tales como ``la pelota en la parte superior del cubo''. Sin embargo, el
-algoritmo cl\'asico
-por~\cite{dale91:gener} ha demostrado ser
-incapaz de generar ER satisfactorias en la pr\'actica (v\'ease el an\'alisis sobre
-el~\emph{cabinet corpus}
-en~\cite{viethen06:_algor_for_gener_refer_expres}). Adem\'as, el
-Dale y Haddock algoritmo y muchos de sus sucesores (tales
-como~\cite{kelleher06:increm}) son vulnerables a
-el problema de la \emph{regresi\'on infinita}, donde el algoritmo entra en un
-bucle infinito, saltando hacia atr\'as y hacia adelante entre las descripciones para dos
-individuos emparentados, como en `` el libro sobre la mesa que soporta una
-libro sobre la mesa \ldots ''}
+%\textcolor{blue}{SACAR ESTO... poner quizas en la introduccion o en primer capitulo. Las ER que involucran relaciones han recibido m\'as atenci\'on recientemente;
+%especialmente en el contexto de las expresiones referenciales espaciales en generaci\'on (por ejemplo,~\cite{kelleher06:increm}), donde es particularmente natural utilizar expresiones que implican relaciones espaciales, tales como ``la pelota en la parte superior del cubo''. Sin embargo, el algoritmo cl\'asico por~\cite{dale91:gener} ha demostrado ser incapaz de generar ER satisfactorias en la pr\'actica (v\'ease el an\'alisis sobre el~\emph{cabinet corpus} en~\cite{viethen06:_algor_for_gener_refer_expres}). Adem\'as, el Dale y Haddock algoritmo y muchos de sus sucesores (tales como~\cite{kelleher06:increm}) son vulnerables a el problema de la \emph{regresi\'on infinita}, donde el algoritmo entra en un bucle infinito, saltando hacia atr\'as y hacia adelante entre las descripciones para dos individuos emparentados, como en `` el libro sobre la mesa que soporta una libro sobre la mesa \ldots ''}
 
 %REs involving relations have received increasing attention recently;
 %especially in the context of spatial referring expressions in situated
@@ -382,9 +368,8 @@ basado en variaciones de los algoritmos de refinamiento particiones
 de~\cite{paig:thre87}. La informaci\'on proporcionada por una escena dada
 se interpreta como un modelo relacional cuyos objetos se clasifican en
 conjuntos que se adaptan a la misma descripci\'on. Esta clasificaci\'on es
-conjuntos que se adaptan a la misma descripci\'on. Esta clasificaci\'on es
 sucesivamente \emph{refinada} hasta que el target es el \'unico elemento
-en la clase. La existencia de un ER depende
+en la clase. La existencia de una ER depende
 de la informaci\'on disponible en la escena de entrada, y en el poder expresivo
 del lenguaje formal utilizado para describir los elementos de las
 diferentes clases en el refinamiento.\\
@@ -405,7 +390,7 @@ Los algoritmos de refinamiento
 % presenta en~\cite{arec 2:2008:Areces, arec:usin11}
 calculan efectivamente ER para todos los objetos en el dominio, al mismo
 tiempo. Los algoritmos siempre terminan devolviendo una f\'ormula del
-lenguaje formal elegido que describe un\'{i}vocamente el objetivo (si el
+lenguaje formal elegido que describe un\'{i}vocamente el target (si el
 lenguaje formal es suficientemente expresivo para identificar el target en el
 modelo de entrada).\\
 
@@ -448,10 +433,10 @@ descripto (en $\mathcal{L}$).\\
 \begin{figure}[ht]
 \begin{minipage}[b]{0.45\linewidth}
 \centering
-\includegraphics[width=\textwidth]{images/3.jpg}
+\includegraphics[width=\textwidth]{images/3b.png}
 \vspace*{1cm}
 %\caption{Input scene}
-\label{GRE3D7-stimulus}
+\label{GRE3D7-stimulus-cap2}
 \end{minipage}
 %\hspace*{-0.35cm}
 \begin{minipage}[b]{0.6\linewidth}
@@ -526,7 +511,7 @@ descripto (en $\mathcal{L}$).\\
 \end{figure}
 
 Est\'a claro que una escena puede ser codificada en diferentes formas como un
-modelo relacional (por ejemplo, en \ref{GRE3D7-stimulus}, podr\'{i}amos argumentar que
+modelo relacional (por ejemplo, en \ref{GRE3D7-stimulus-cap2}, podr\'{i}amos argumentar que
 $e_1$ es tambi\'en \emph{leftof} $e_2$, pero no lo consideramos porque no se estan 
 tocando). El algoritmo asume que estas cuestiones se han resuelto y que el modelo codifica una representaci\'on adecuada de la escena que
 queremos describir. Por otra parte, vamos a suponer que todas las relaciones son
@@ -560,23 +545,25 @@ RE conjuntivas y relacionales, que son lo que encontramos en los corpus.
   La entrada al algoritmo ser\'a un modelo $\mathcal{M} =
  \tup{\Delta, \interp{\cdot}}$, donde $\Delta$ es el dominio no vac\'io de objetos de la imagen,
  $\interp{\cdot}$ es una funci\'on de interpretaci\'on que asigna a todas las propiedades de la escena su extensi\'on.
- Por ejemplo, la escena mostrada en la Figura~\ref{GRE3D7-stimulus} podr\'ia ser representada por el modelo
+ Por ejemplo, la escena mostrada en la Figura~\ref{GRE3D7-stimulus-cap2} podr\'ia ser representada por el modelo
  $\gM=\tup{\Delta,\interp{\cdot}}$ mostrado en la 
  Figura~\ref{GRE3D7-stimulus-graph}; donde+- $\Delta =
  \{e_1,\ldots,e_7\}$, e $\interp{\textsf{red}}$ is $\{e_2, e_4, e_5,
  e_7\}$.
 
+Se llama extensi\'on de una f\'ormula al conjunto de objetos que la hacen v\'alida.
+
 $\top$ es una f\'ormula que representa la descripci\'on m\'as general, cuya
 interpretaci\'on incluye todos los elementos del modelo. Se podr\'ia realizar
 como la ER con el sustantivo
 ``\textsf{cosa}''. Decimos que una f\'ormula es
-\emph{subsumed} por otras f\'ormulas, la su extensi\'on puede ser cubierta por la
+\emph{subsumida} por otras f\'ormulas, cuando su extensi\'on puede ser cubierta por la
 union de las extensiones de las otras f\'ormulas. Por ejemplo, en la
-Figura~\ref{GRE3D7-stimulus}, $\top$ es subsumida por ``\textsf{ball}'' y
+Figura~\ref{GRE3D7-stimulus-cap2}, $\top$ es subsumida por ``\textsf{ball}'' y
 ``\textsf{cube}'', porque $\interp{\top}$ = $\interp{\textsf{ball}}
 \cup \interp{\textsf{cube}}$.
 %= $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$. 
-Intuitivamente la f\'ormula ``\textsf{cube}'' o ``\textsf{ball}'' tienen m\'as informaci\'on que $\top$, para cada elemento de $\top$, hay una f\'ormula que d\'a m\'as informaci\'on, digamos ``\textsf{cube}'' es m\'as informativa que ``\textsf{thing}''.\\
+Intuitivamente la f\'ormula ``\textsf{cube}'' o ``\textsf{ball}'' tienen m\'as informaci\'on que $\top$, para cada elemento de $\top$, hay una f\'ormula que d\'a m\'as informaci\'on, digamos ``\textsf{cube}'' es m\'as informativa que ``\textsf{cosa}''.\\
 
 %In the following we will explain an example of execusion of the
 %algorithm shown in Figure
@@ -596,8 +583,8 @@ $\el$ como language. Este algoritmo fue presentado en
 
 \subsection{Ejemplo de ejecuci\'on}
 
-\textcolor{blue}{no se si poner aca un ejemplo, si poner el texto y las im\'agenes en otro apendice... o ponerlas mas chiquitas en varias columnas, asi queda feo}
-Vamos a ejecutar el algoritmo para la Figura~\ref{GRE3D7-stimulus},
+\textcolor{blue}{no se si poner aca un ejemplo, si poner el texto y las im\'agenes en otro apendice... o ponerlas mas chiquitas en varias columnas, asi queda feo}\\
+Vamos a ejecutar el algoritmo para la Figura~\ref{GRE3D7-stimulus-cap2},
 el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
 esas listas son las siguientes:
 
@@ -687,12 +674,24 @@ El algoritmo siempre termina, y devuelve ER un conjunto de f\'ormulas que descri
 
 En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
 
+ACA
 \begin{figure}[ht]
-\begin{center}
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/22.jpg}
+\vspace*{1cm}
+%\caption{Input scene}
+\label{GRE3D7-stimulus-22}
+\end{minipage}
+%\hspace*{-0.35cm}
+\begin{minipage}[b]{0.6\linewidth}
+\centering
+%\begin{figure}[ht]
+%\begin{center}
 \frame{\includegraphics[width=8cm]{images/modelo.png}}\\[0pt]
-\caption{Modelo de la Figura \ref{GRE3D7-stimulus}}
+\caption{Modelo de la Figura \ref{GRE3D7-stimulus-22}}
 \label{fig-modelo}
-\end{center}
+\end{minipage}
 \end{figure}
 El primer bucle del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE), las propiedades at\'omicas se muestran en la Figura~\ref{fig-modelo2}.
 
@@ -726,7 +725,7 @@ La siguiente propiedad es \textsf{cube}, ER = \{$\top$, \textsf{ball}, \textsf{c
 \label{fig-modelo4}
 \end{center}
 \end{figure}
-Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) a las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
+Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/modelo9.png}}\\[0pt]
@@ -796,6 +795,19 @@ aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer ni
 \label{fig-modelo17}
 \end{center}
 \end{figure}
+
+Las expresiones referenciales encontradas son:\\
+
+$\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ representa $e_1$ \\
+$\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}$ representa $e_6$ \\
+$\textsf{ball} \wedge \textsf{red}$ representa $e_5$ \\
+$\textsf{cube} \wedge \textsf{red} \wedge \textsf{large}$ representa $e_4$ \\
+$\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ representa $\{e_2,e_7\}$  \\
+$\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ representa $e_6$ \\
+$\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ representa $e_2$ \\
+
+
+
 
 \section{Aproximaciones emp\'iricas a la soluci\'on de REG}
 
