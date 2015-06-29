@@ -812,12 +812,12 @@ $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{
 \section{Aproximaciones emp\'iricas a la soluci\'on de REG}
 
 \subsection{Corpus existente}
-
+\label{sec:corpus2}
 \label{sec:corpusTUNA}
 
 %was the first prominent REG corpus to be made publicly available for research purposes. The corpus was developed in a series of general-purpose controlled experiments, containing 2280 descriptions produced by 60 speakers in two domains (1200 descriptions of furniture items and 1080 descriptions of people's photographs). TUNA does not contain relational descriptions, and it is possibly the only resource of this kind to include situations of reference to sets. The TUNA corpus has been extensively used in a series of shared tasks
 
-TUNA \cite{tuna-corpus} fue el primer corpus prominente para GER disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2.280 descripciones producidas por 60 personas en dos dominios (1.200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una imagen). TUNA no contiene descripciones relacionales, y es posiblemente el \'unico recurso de este tipo para incluir situaciones de referencia a conjuntos. El corpus TUNA se ha utilizado ampliamente en una serie de desaf\'ios \cite{reg2009}. Se muestran ejemplos de im\'agenes en Figuras \ref{fig-TUNA-furniture} y \ref{fig-TUNA-people}
+TUNA \cite{tuna-corpus} fue el primer corpus prominente para GER disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2.280 descripciones producidas por 60 personas en dos dominios (1.200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una grilla). TUNA no contiene descripciones relacionales, y es posiblemente el \'unico recurso de este tipo que incluye situaciones de referencia a conjuntos. El corpus TUNA se ha utilizado ampliamente en una serie de desaf\'ios \cite{reg2009}. Se muestran ejemplos de im\'agenes en Figuras \ref{fig-TUNA-furniture} y \ref{fig-TUNA-people}
 
 \begin{figure}
 \begin{minipage}[t]{0.5\linewidth}
@@ -839,7 +839,7 @@ TUNA \cite{tuna-corpus} fue el primer corpus prominente para GER disponible p\'u
 
 \label{sec:corpusGRE}
 %were developed in a series of web-based experiments primarily focussed on the study of relational descriptions. GRE3D3 contains 630 descriptions produced by 63 speakers, and GRE3D7 contains 4480 descriptions produced by 287 speakers, making it the largest of its kind to date. The GRE3D domain consists of simple visual scenes containing only two kinds of objects (boxes and spheres) with limited variation in colour and size. In each scene, there is only one possible spatial relation between target and the nearest landmark. Both corpora contain atomic and relational descriptions.
-GRE3D3 y su extensi\'on GRE3D7 \cite{gre3d3,gre3d7} se desarrollaron en una serie de experimentos basados en la web se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 personas y GRE3D7 contiene 4.480 descripciones producidas por 287 personas, y es el corpus m\'as grande de este tipo hasta la fecha. El dominio GRE3D consta de escenas visuales simples que contienen s\'olo dos tipos de objetos (cubos y esferas) con variaci\'on limitada en color y tama\~o. En cada escena, s\'olo hay una posible relaci\'on espacial entre el target y el landmark m\'as cercano. Ambos corpus contienen descripciones at\'omicas y relacionales. Ejemplo de im\'agenes del GRE3D3 y GRE3D7 se muestran en las Figuras \ref{fig-GRE3D3} y \ref{fig-GRE3D7}
+GRE3D3 y su extensi\'on GRE3D7 \cite{gre3d3,gre3d7} se desarrollaron en una serie de experimentos basados en la web, se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 personas y GRE3D7 contiene 4.480 descripciones producidas por 287 personas, y es el corpus m\'as grande de este tipo hasta la fecha. El dominio del GRE3D3 consta de escenas visuales simples que contienen s\'olo dos tipos de objetos (cubos y esferas) con variaci\'on limitada en color y tama\~no. En cada escena, s\'olo hay una posible relaci\'on espacial entre el target y el landmark m\'as cercano. Ambos corpus contienen descripciones at\'omicas y relacionales. Ejemplo de im\'agenes del GRE3D3 y GRE3D7 se muestran en las Figuras \ref{fig-GRE3D3} y \ref{fig-GRE3D7}
 %\begin{minipage}[b]{0.45\linewidth}
 
 \begin{figure}
@@ -859,11 +859,11 @@ GRE3D3 y su extensi\'on GRE3D7 \cite{gre3d3,gre3d7} se desarrollaron en una seri
 \end{minipage}
 \end{figure}
 
-\vspace*{3cm}
+%\vspace*{3cm}
 
 \label{sec:corpusSTARS}
 %and its extension Stars2 were collected for the study of referential overspecification (particularly in the case of relational descriptions). Stars was developed in a pilot web-based experiment, containing 704 descriptions produced by 64 speakers.  The more comprehensive Stars2 data set was produced in dialogue situations involving subject pairs, and it contains 884 descriptions produced by 56 speakers. Both domains make use of simple visual scenes containing up to four object types (e.g., stars, boxes, cones and spheres) with limited variation in colour and size. Differently from other REG corpora, however, Stars/2 includes a considerable number of complex situations of reference involving up to three objects, as in `the box near the sphere, next to the cone'.http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-002_2014.pdf y http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-001_2015.pdf
-Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se colectaron para el estudio de la sobre-especificaci\'on (particularmente en el caso de las descripciones relacionales). Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 es m\'as completo y se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen hasta cuatro tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~o. A diferencia de otros corpus para GER, Stars/2 incluye un n\'umero considerable de situaciones complejas de referencia en que participan hasta tres objetos, como en ``el cubo cerca de la esfera, al lado del cono''. Ejemplos de imagenes se muestran en las Figuras \ref{fig-STARS} y \ref{fig-STARS2}
+Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se colectaron para el estudio de la sobre-especificaci\'on (particularmente en el caso de las descripciones relacionales). Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 es m\'as completo y se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen tres tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~no. A diferencia de otros corpus para GER, Stars/2 incluyen un n\'umero considerable de situaciones complejas de referencia en que participan hasta tres objetos, como en ``el cubo cerca de la esfera, al lado del cono''. Ejemplos de imagenes se muestran en las Figuras \ref{fig-STARS} y \ref{fig-STARS2}
 
 
 \begin{figure}
@@ -907,7 +907,7 @@ Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se colectaron para el e
 
 
 
-\subsection{Jette y otros trabajos emp\'iricos}
+\subsection{Trabajos emp\'iricos en el \'area}
 
 %http://link.springer.com/chapter/10.1007/978-3-642-15573-4_9
 %http://www.jetteviethen.net/papers/DaleViethen2010chapter.pdf
@@ -923,7 +923,7 @@ de producir referencias adecuadas; y en segundo lugar, el estudio de corpus de d
  y algoritmos en desarrollo que pueden replicar estos datos podr\'ian
 acercarnos a la comprensi\'on de que es lo que hacen los humanos cuando dan una ER.\\
 
-Se\~nala que el cl\'asico algoritmos de GER y la mayor parte de sus descendientes no se basaron ni evaluaron contra datos producidos por humanos. Ellos se basaron en una visi\'on bastante minimalista de lo que se necesita
+Se\~nala que el cl\'asico algoritmo de GER y la mayor parte de sus descendientes no se basaron ni evaluaron contra datos producidos por humanos. Ellos se basaron en una visi\'on bastante minimalista de lo que se necesita
 para que una expresi\'on referencial sea \'optima, concentr\'andose en la eficiencia computacional 
  y descripciones breves como sus principales preocupaciones.\\
 
@@ -944,74 +944,72 @@ promover el objetivo de la semejanza humana en la investigaci\'on sobre generaci
 evaluaci\'on, la recolecci\'on de corpus y an\'alisis y modelizaci\'on estad\'istica de
 datos de corpus.\\
 Comenz\'o con el an\'alisis del estado del arte de la investigaci\'on en
-la generaci\'on de descripciones distintivas, trabaj\'o con las relaciones espaciales y en el trabajo us\'o datos de corpus. Examin\'o una serie de opciones metodol\'ogicas que tienen que hacerse cuando se trabaja con los corpus de GER. Aqu\'i, explor\'o diferentes opciones para los desaf\'ios de recopilaci\'on de corpus, que se centran en torno al equilibrio que se necesita
+la generaci\'on de descripciones distintivas, trabaj\'o con relaciones espaciales y en el trabajo us\'o datos de corpus. Examin\'o una serie de opciones metodol\'ogicas que tienen que hacerse cuando se trabaja con los corpus de GER. Aqu\'i, explor\'o diferentes opciones para los desaf\'ios de recopilaci\'on de corpus, que se centran en torno al equilibrio que se necesita
 entre el control de los par\'ametros experimentales tanto como sea necesario
 y mantener la configuraci\'on de lo m\'as natural posible. Discuti\'o una serie de conceptos
 que son de importancia para el an\'alisis de corpora de GER, tales como la naturalidad de diferentes
 propiedades de los objetos, y las nociones de minimalidad y cuestiones de sobre-especificaci\'on de expresiones referenciales. Por \'ultimo, analiz\'o diferentes maneras en que la salida de un sistema se puede
-comparar con los datos corpus, bajo la premisa de que el objetivo de la comparaci\'on es
+comparar con los datos de corpora, bajo la premisa de que el objetivo de la comparaci\'on es
 para evaluar si el sistema podr\'ia tener un modelo adecuado del comportamiento humano para la generaci\'on de expresiones referenciales.
-Realiz\'o una investigaci\'on en las tres \'areas donde corpora se pueden emplear en GER: Evaluaci\'on de semejanza humana, recopilaci\'on y an\'alisis de corpus, y modelado de datos de corpus. Realiz\'o un experimento de evaluaci\'on en
-que tres de los algoritmos cl\'asicos, (1989) Algoritmo Greedy de Dale (Greedy), Dale y Haddock (1991b), Relacional Algoritmo (ra) Y Dale y Reiter (1995) Algoritmo incremental (IA), Se pusieron a prueba en cuanto a su capacidad de
+Realiz\'o una investigaci\'on en las tres \'areas donde se puede emplear corpora en GER: Evaluaci\'on de semejanza humana, recopilaci\'on y an\'alisis de corpus, y modelado de datos de corpus. Realiz\'o un experimento de evaluaci\'on con tres de los algoritmos cl\'asicos, (1989) Algoritmo Greedy de Dale (Greedy), Dale y Haddock (1991b), Algoritmo Relacional (ra) Y Dale y Reiter (1995) Algoritmo Incremental (IA), Se pusieron a prueba en cuanto a su capacidad de
 replicar las expresiones referenciales se encuentran en un grupo relativamente peque\~no de corpus de expresiones referenciales
 en un dominio visual de im\'agenes puestas en una grilla.
 %de rejilla de cajones de armarios ling. 
-En el analisis de este experimento tuvo dos resultados principales: (1) que identic\'o en particular tres 
+En el an\'alisis de este experimento tuvo dos resultados principales: (1) que identic\'o en particular tres 
 fen\'omenos que todav\'ia plantean importantes retos para los algoritmos GER con el objetivo de replicar
 el comportamiento humano, y (2) que proporciona una plataforma para la discusi\'on de una serie de
 dificultades que se presentan para la evaluaci\'on basada en corpus de GER. Esto result\'o en una serie
 de criterios para el dise\~no de los dos corpus que el trabajo en el resto de la tesis.
 Los tres fen\'omenos en las expresiones referenciales producidas por humanos que los
-algoritmos probados no fueron capaces de replicar satisfactoriamente eran demasiado espec\'ificas,
-relaciones espaciales, y el comportamiento de voluntarios espec\'ificos. Ambos
-Greddy y la IA fueron capaz de generar algo de la redundancia que se encontr\'o en el corpus, sino un
-n\'umero de las expresiones referenciales conten\'ia informaci\'on m\'as redundante que
-ya sea algoritmo podr\'ia producir bajo cualquier ajuste de par\'ametros, gobernando a cabo como
-modelos precisos de referencia comportamiento humano. Ni codicioso ni el Iowa estaban destinados a ser capaz de generar refiri\'endose expresiones que contienen las relaciones entre entidades, pero esto es exactamente lo que el
-ra fue dise\~nado. Sorprendentemente, la
-ra no s\'olo no para generar cualquiera de las
-descripciones contenidas en el corpus de evaluaci\'on; las descripciones que se generan
-parec\'ia m\'as como enigmas cuyo objetivo era confundir a un oyente, m\'as que \'util
-los intentos de se\~nalar el referente objetivo. Una valoraci\'on te\'orica de otro AP
-enfoques dise\~nados para manejar las relaciones establecieron que ninguno de ellos incluir\'ia
-una relaci\'on en el dominio de prueba, porque una relaci\'on nunca fue absolutamente necesario
-distinguir cualquiera de los cajones.
-La tercera \'area de preocupaci\'on que el experimento puso de relieve fue la observaci\'on
-que la gente no todos hacen lo mismo en la misma situaci\'on. De hecho, incluso
-la misma persona podr\'ia describir el mismo caj\'on de di? erently bajo di? cir- Erent
-cunstancias. Ninguno de los algoritmos de prueba se pretende tomar las inter e
-variaci\'on intra-hablante en cuenta, y s\'olo muy recientemente han implementaciones
-del Iowa comenzado a modelo de altavoz-preferencias en alg\'un grado.
-Los temas generales con evaluaci\'on basada en corpus que esta experiencia de evaluaci\'on
-ci\'on al descubierto fueron (1) la interdependencia estrecha entre algoritmos y la
-representaci\'on subyacente de conocimientos que utilizan, (2) la no-determinismo de natu-
-generaci\'on ral lenguaje, (3) la cuesti\'on de c\'omo comparar la salida algoritmos '
-a muchas normas de oro, y (4) la ciudad-dominio espec\'ifico de GER algoritmos. La
-discusi\'on de estos temas ha dado lugar a la siguiente desiderata de corpus basa-
-Evaluaci\'on en GER:
+algoritmos probados no fueron capaces de replicar satisfactoriamente sobre-especificaci\'on,
+relaciones espaciales, y comportamiento de voluntarios espec\'ificos. Ambos
+Greddy y la IA fueron capaces de generar algo de la redundancia que se encontr\'o en el corpus.
+ Ni Greedy ni el IA estaban dise\~nados para ser capaz de generar expresiones referenciales que contengan relaciones entre entidades, pero el ra fue dise\~nado para incluirlas. Sorprendentemente, el
+ra no s\'olo fallo en generar cualquiera de las descripciones contenidas en el corpus de evaluaci\'on; sino tambi\'en que las descripciones que se gener\'o parec\'ian m\'as como enigmas cuyo objetivo era confundir a un oyente, m\'as que ayudar en
+los intentos de se\~nalar el objetivo referente. 
 
-1. Si corpora est\'an destinados para ser reutilizado para la evaluaci\'on comparativa de diferentes
-algoritmos, una representaci\'on subyacente del dominio debe ser proporcionado
-junto a ellos.
-2. Si queremos ser mella acondicionado en ning\'un resultado de la evaluaci\'on basada en un GER
-corpus, este corpus debe contener tantos casos como sea posible de tantos direntes altavoces como sea posible para cada escenario referencial. Esto es cierto si
-un algoritmo es evaluado en t\'erminos de ser capaz de generar una natural
-sonando refiri\'endose expresi\'on, o si est\'a probado por su probabilidad de BE-
-ing un modelo preciso de la conducta humana de referencia mediante la comprobaci\'on de si se puede
-generar todas las descripciones en un corpus.
-3. Si la probabilidad de un algoritmo de ser un modelo de conducta humana de referencia
-se eval\'ua, deben utilizarse m\'etricas basadas en recuerdo y la precisi\'on. En esto
+Una valoraci\'on te\'orica de otras aproximaciones dise\~nados para manejar las relaciones estableci\'o que ninguno de ellos incluir\'ia una relaci\'on, si no es absolutamente necesaria para distinguir el target.
+La tercera observaci\'on que el experimento dejo a la vista fue que la gente no siempre hace lo mismo en la misma situaci\'on. De hecho, incluso la misma persona podr\'ia describir el mismo target de diferente manera en distintas
+circunstancias. 
+
+ None of the algorithms tested were intended to take such inter- and
+intra-speaker variation into account, and only very recently have implementations
+of the
+ia
+begun to model speaker-preferences to some degree.
+
+No se pretend\'ia que ninguno de los algoritmos de la prueba tomara en cuenta las variaciones entre-hablantes, ni del mismo hablante. Hay implementaciones del IA que han comenzado a agregar modelo de preferencias de hablante en alg\'un grado.
+
+Los temas generales con evaluaci\'on basada en corpus que esta experiencia de evaluaci\'on dej\'o
+al descubierto fueron (1) la interdependencia estrecha entre algoritmos y la
+representaci\'on subyacente de conocimiento que utilizan, (2) el no-determinismo de la generaci\'on del lenguaje natural, (3) la cuesti\'on de c\'omo comparar la salida algoritmos con gold-standar, y (4) el dominio espec\'ifico de los algoritmos de GER.\\
+La discusi\'on de estos temas ha dado lugar a la siguiente lista de Evaluaci\'on en GER basado en corpus:
+
+1. Si el corpora est\'a destinado para ser reutilizado para la evaluaci\'on comparativa de diferentes
+algoritmos, una representaci\'on subyacente del dominio debe ser proporcionada para ser usada por todos los algoritmos.
+
+2. Si queremos confiar en los resultados, el corpus debe contener tantos casos como sea posible de tantos direntes hablantes como sea posible para cada escenario referencial. 
+Esto es cierto si un algoritmo es evaluado en t\'erminos de ser capaz de generar una expresi\'on referencial que suene natural, o si est\'a probado por su probabilidad de pertenecer a un modelo espec\'ifico de conducta humana de referencia, mediante la comprobaci\'on de si se puede generar todas las descripciones en un corpus.
+
+3. Si la probabilidad de un algoritmo de ser un modelo de la conducta humana de referencia
+se eval\'ua, deben utilizarse m\'etricas basadas en recuento (RECALL) y precisi\'on (PRESITION). En este
 caso, el conjunto completo de las descripciones que el algoritmo proporciona para cada
 escenario de referencia en virtud de cualquier ajuste de par\'ametro debe ser comparado con el
 conjunto de las descripciones contenidas en el corpus para el mismo escenario referencial.
-Si la capacidad m\'as orientado a la aplicaci\'on para generar una referencia similar a la humana
-se ha de evaluar, s\'olo una descripci\'on por escenario debe ser evaluado.
-Esto debe hacerse utilizando una m\'etrica basada en la precisi\'on para probar c\'omo muchos de los
-descripciones algoritmos 'est\'an contenidos en el corpus.
-4. Algoritmos que son juzgados en un dominio espec\'ifico c no deben ser asumidas como
-f\'acilmente adaptable a otros dominios. Idealmente, los corpus que abarca muchos diferentes
-deben estar disponibles para las reclamaciones de los algoritmos de prueba tipos de dominios
-generalizaci\'on
+Si la capacidad m\'as orientada a la aplicaci\'on para generar una referencia es similar a la humana
+se ha de evaluar, s\'olo una descripci\'on por escenario.
+Esto debe hacerse utilizando m\'etricas basadas en la precisi\'on para probar c\'omo muchos de las
+descripciones dadas por los algoritmos est\'an contenidas en el corpus.
+4. Algoritmos que son juzgados en un dominio espec\'ifico c, no se debe asumir como
+f\'acilmente adaptable a otros dominios. Idealmente, los corpus que abarcan muchos diferentes
+deben estar disponibles para las pruebas de los algoritmos que generalizan en distintos tipos de dominios.
+Realiz\'o 2 corpus el GRE3D3 y el GRE3D7 descriptos en \ref{sec:corpus2}
+
+\textcolor{blue}{Aca agregar otras personas que usaron corpus para generacion de ER, Ivandre... }
+
+%http://www.lrec-conf.org/proceedings/lrec2012/pdf/152_Paper.pdf
+
+
 \subsection{M\'etricas de evaluaci\'on/comparaci\'on con corpus}
 
 Para medir la performance de los algoritmos podemos usar m\'etricas autom\'aticas o m\'etricas manuales, las m\'etricas autom\'aticas son aquellas que se calculan mediante un algoritmo y las manuales en las cuales les requerimos a personas que evaluen las expresiones referenciales.
@@ -1035,7 +1033,7 @@ $Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
 $\textsc{masi}(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
 
 
-donde $\delta$ es un coheficiente \textcolor{blue}{``monotonicity'' (NO SE QUE ES)} definido como sigue:\\
+donde $\delta$ es un coheficiente definido como sigue:\\
 
 
  \begin{equation}
@@ -1056,3 +1054,4 @@ Intuitivamente significa que se prefieren aquellas descripciones producidas por 
 %omitted by a human.  
 
 \subsubsection{M\'etricas manuales}
+\textcolor{blue}{aca me falta escribir, aunque no se si no poner todo esto en parte evaluacion}
