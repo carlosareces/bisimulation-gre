@@ -283,7 +283,7 @@ La p\'agina web del experimento se mantuvo en l\'{i}nea hasta que se obtuvieron 
 
 En la parte portuguesa de los datos, el 78,6\% de las descripciones incluyen propiedades relacionales. Adem\'as de eso, el 36,4\% eran minimales un 44,3\% eran sobreespecificadas, y el 19,3\% eran subespecificadas. En la parte espa\~nola de los datos, 70\% de las descripciones incluyeron propiedades relacionales. Por otra parte, el 35\% eran minimales, el 40\% eran sobreespecificadas, y el 25\% eran subespecificadas.\\
 
-Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como descripciones relacionales no son comunes en corpora GER existente. En la Tabla~\ref{tab-comparison} se presenta una comparaci\'on entre el corpus recolectado y otros corpus de RE existentes nombrados en~\ref{sec:corpus-existente}. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos y el n\'umero de relaciones en cada descripci\'on. La informaci\'on sobre el TUNA-corpus y las descripciones de ZOOM se basan s\'olo en la parte singular de cada corpus. Esto representa el tama\~no medio de la descripci\'on (en n\'umero de propiedades anotadas) y la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia.\textcolor{blue}{reescribir- Desde una perspectiva de REG, las ER de mayor tama\~no y las puntuaciones m\'as bajas de uso es probable que representen las situaciones m\'as complejas de referencia.}
+Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como descripciones relacionales no son comunes en corpora GER existente. En la Tabla~\ref{tab-comparison} se presenta una comparaci\'on entre el corpus recolectado y otros corpus de RE existentes nombrados en~\ref{sec:corpus-existente}. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos y el n\'umero de relaciones en cada descripci\'on. La informaci\'on sobre el TUNA-corpus y las descripciones de ZOOM se basan s\'olo en la parte singular de cada corpus. Esto representa el tama\~no medio de la descripci\'on (en n\'umero de propiedades anotadas) y la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia.\textcolor{blue}{reescribir- Desde una perspectiva de GER, las ER de mayor tama\~no y las puntuaciones m\'as bajas de uso es probable que representen las situaciones m\'as complejas de referencia.}
 
 
 \begin{table}[ht]
@@ -362,9 +362,9 @@ Calle de las Postas'', la anotaci\'on ser\'ia la siguiente.
 
 %The set of images, text descriptions and their XML representations constitutes the Zoom corpus of referring expressions, to be made publicly available for research purposes. As a first step in this direction, the following sections present the results of a machine learning approach to GER based on the Portuguese portion of the data.
 
-En cada descripci\'on, el nombre para el primer landmark es el VALUE del ATTRIBUTE con NAME `landmark-name' como en el ejemplo anterior. Los landmarks siguientes fueron etiquetados como ``second-landmark'' y as\'{i} sucesivamente. Esto fue motivado por la necesidad de proporcionar nombres de atributos \'unicos para el beneficio de los algoritmos REG.\\
+En cada descripci\'on, el nombre para el primer landmark es el VALUE del ATTRIBUTE con NAME `landmark-name' como en el ejemplo anterior. Los landmarks siguientes fueron etiquetados como ``second-landmark'' y as\'{i} sucesivamente. Esto fue motivado por la necesidad de proporcionar nombres de atributos \'unicos para el beneficio de los algoritmos GER.\\
 
-El conjunto de im\'agenes, textos descriptivos y sus representaciones XML constituye el corpus ZOOM de ER, el cual ser\'a p\'ublico para fines de investigaci\'on. Como primer paso en esta direcci\'on, las siguientes secciones se presentan los resultados de un enfoque de aprendizaje autom\'atico para REG, los cuales se basan en la parte portuguesa del corpus.
+El conjunto de im\'agenes, textos descriptivos y sus representaciones XML constituye el corpus ZOOM de ER, el cual ser\'a p\'ublico para fines de investigaci\'on. Como primer paso en esta direcci\'on, las siguientes secciones se presentan los resultados de un enfoque de aprendizaje autom\'atico para GER, los cuales se basan en la parte portuguesa del corpus.
 
 
 %.....................................
@@ -445,7 +445,7 @@ Se utiliz\'o un subconjunto de descripciones singulares de la parte portuguesa d
 
 Siguiendo \cite{thiago-svm}, construimos un modelo GER uso de m\'aquinas de vectores soporte con radial kernel de funci\'on de base. Los clasificadores se capacit\'o y sometieron a pruebas de 6 veces la validaci\'on cruzada. Los par\'ametros \'optimos fueron seleccionados mediante b\'usqueda en la red de la siguiente manera:para cada paso en el principal validaci\'on cruzada veces, un solo reba\~no est\'a reservado para las pruebas, y los restantes $k-1$ carpetas est\'an sujetas a un segundo procedimiento de validaci\'on cruzada en la que diferentes par\'ametros combinaciones se intentan. El par\'ametro $C$ se le asignan los valores de 1, 10, 100 y 1000, y $\gamma$ es asignado en 1, 0,1, 0,001 y 0,0001. El conjunto de par\'ametros de mejor desempe\~no es seleccionada para construir un clasificador entrenado desde las carpetas $k-1$, y probado en los datos de prueba. Este procedimiento se repite para cada iteraci\'on del procedimiento principal de validaci\'on cruzada.
 %......................
-\subsection{REG Results}
+\subsection{GER Resultados}
 %......................
 
 %Table \ref{tab-reg-results} summarizes the results obtained by the GER algorithm built from SVM classifiers, those obtained by a baseline system representing a relational extension of the Dale \& Reiter Incremental Algorithm, and by a Random selection strategy.  
@@ -454,7 +454,7 @@ Tabla \ref{tab-reg-resultados} resume los resultados obtenidos por el algoritmo 
 % these results are for SVM.All.VAR-   compared to the AEI- baseline
 \begin{table}[ht]
 \begin{center}
-\caption{REG results}
+\caption{GER resultados}
 \label{tab-reg-results}
 \begin{tabular} {  l c c c }
 \hline
@@ -530,11 +530,11 @@ A partir de estos resultados nos damos cuenta de que los atributos muy frecuente
 
 En este trabajo se ha presentado el corpus de zoom de las descripciones en lenguaje natural de localizaciones en el mapa. El corpus tiene en cuenta un dominio que es significativamente m\'as cerca de aplicaciones del mundo real, y aborda las situaciones m\'as complejas de referencia de los recursos existentes de este tipo. En particular, el dominio de zoom hace uso de contextos con diferentes niveles de detalle, y contiene ejemplos de referencia singular y plural producido por un n\'umero relativamente grande de hablantes en ambos idiomas espa\~nol y portugu\'es.
 
-Los resultados preliminares de un enfoque basado en SVM a REG - que fueron \'unicamente presenta para la futura evaluaci\'on de algoritmos GER basados en datos Zoom - alusi\'on a la complejidad real de la tarea GER en este dominio en un n\'umero de maneras.
+Los resultados preliminares de un enfoque basado en SVM a GER - que fueron \'unicamente presenta para la futura evaluaci\'on de algoritmos GER basados en datos Zoom - alusi\'on a la complejidad real de la tarea GER en este dominio en un n\'umero de maneras.
 
 En primer lugar, nos damos cuenta de que un enfoque basado en SVM similar en~\cite{thiago-svm} en GRE3D3 y GRE3D7 datos ha obtenido considerablemente mayor precisi\'on media (0,46 y 0,64 respectivamente) y una mayor media de las puntuaciones de los dados (0,78 y 0,89 respectivamente). Esto es, por supuesto, se explica por el aumento de la complejidad del dominio Zoom (por ejemplo, en el n\'umero de posibles objetos y propiedades at\'omicas y relacionales etc.). Sin embargo, nos damos cuenta tambi\'en que el esquema de anotaci\'on Zoom \- aunque teniendo en cuenta la ya gran n\'umero de posibles atributos - sigue siendo demasiado simple. En particular, el atributo {\em dem\'as} ha sido usado en exceso y, como consecuencia, las posibilidades de reproducci\'on de las descripciones corpus es estrecho. Es evidente que a\'un queda trabajo por hacer para ampliar el esquema de anotaci\'on y dividida {\em otros} en un mayor n\'umero de atributos.
 
 En segundo lugar, las descripciones de zoom son propensos a transmitir las relaciones entre un solo objetivo y varios objetos emblem\'aticos, como en `el restaurante en la calle 5, cerca de la biblioteca '. Aunque es com\'un en el uso del lenguaje, el uso de m\'ultiples propiedades relacionales de esta manera ha sido poco investigado, tal vez debido a que puede dar lugar a descripciones ambiguas, como en `el restaurante cerca de la iglesia en la calle Jackson y el bar en la calle 5 'para un restaurante situado cerca del cruce de estas dos calles.
 
-Como trabajo futuro, tenemos la intenci\'on de hacer que el corpus a disposici\'on del p\'ublico para la investigaci\'on sobre m\'ultiples aspectos de la selecci\'on de contenidos y la realizaci\'on de superficie en REG. En particular, prevemos el uso del corpus zoom como datos de entrenamiento y prueba de modelos de aprendizaje autom\'atico de REG, y tambi\'en para abordar otras cuestiones que no se han abordado en el presente trabajo. Estos incluyen la generaci\'on de expresiones referenciales de bases de conocimiento con diferentes grados de detalle, y las cuestiones de la variaci\'on entre los altavoces y dentro-hablantes en REG.
+Como trabajo futuro, tenemos la intenci\'on de hacer que el corpus a disposici\'on del p\'ublico para la investigaci\'on sobre m\'ultiples aspectos de la selecci\'on de contenidos y la realizaci\'on de superficie en GER. En particular, prevemos el uso del corpus zoom como datos de entrenamiento y prueba de modelos de aprendizaje autom\'atico de GER, y tambi\'en para abordar otras cuestiones que no se han abordado en el presente trabajo. Estos incluyen la generaci\'on de expresiones referenciales de bases de conocimiento con diferentes grados de detalle, y las cuestiones de la variaci\'on entre los altavoces y dentro-hablantes en GER.
 
