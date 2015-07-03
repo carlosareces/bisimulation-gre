@@ -1,25 +1,21 @@
-\chapter{Selecci\'on de contenido de expresiones referenciales}
+\chapter{Generaci\'on de expresiones referenciales}
 \label{sec:seleccion}
 
-Una propiedad es una caracter\'istica de un objeto. Una relaci\'on es otra caracter\'istica la cual incluye a otro u otros objetos.\\
-
-La selecci\'on de cuales propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial, claramente ser\'a muy distinta la expresi\'on si nuestro objetivo es dar la m\'inima expresi\'on referencial que identifique al objeto que si nuestro objetivo es ser colaborativos con nuestro interlocutor.\\
-
-En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.\\
-
-En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.\\
-
-En este Cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales, las propiedades que puede tener o no una expresi\'on referencial y los algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos en el \'area.
+Una propiedad es una caracter\'istica propia de un objeto. Por ejemplo el color rojo de la bola en la Figura \ref{ejemplo}. Una relaci\'on  caracteriza a un objeto describiendo caracter\'isticas de otro u otros objetos.\\
 
 
-\section{Propiedades de una ER}
+En este cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales, las propiedades que puede tener o no una expresi\'on referencial y los algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos en el \'area.
+
+
+\section{Tipos de ER}
 
 %Cuando la ER no es relacional solo contiene propiedades del objeto mismo. Ej.: color, tama\~no. Note que quiz\'as el tama\~no sea con respecto a los dem\'as objetos ``la m\'as peque\~na'', pero al no incluir una descripci\'on de otro objeto no la llamamos relacional.\\
-Una ER puede ser relacional o no relacional (tambi\'en llamada proposicional), minimal o sobreespecificada, y subespecificada en cuyo caso es una expresi\'on que no es referencial, la incluimos en nuestras propiedades porque nos va a ser \'util la definici\'on en el Cap\'itulo \ref{sec:corpus}.\\
+Una expresi\'on referencial (ER) puede ser relacional o no relacional (tambi\'en llamada proposicional), m\'inima, sobreespecificada, o subespecificada.
+% en cuyo caso es una expresi\'on que no es referencial, la incluimos en nuestras propiedades porque nos va a ser \'util la definici\'on en el Cap\'itulo \ref{sec:corpus}.\\
 
-Una ER {\it proposicional} incluye solo propiedades absolutas del objeto target. Ej.: ``La pelota roja con rayas amarillas''. Las caracter\'isticas ser pelota, roja y tener rayas amarillas son propias del objeto a identificar.\\
+Una ER {\it proposicional} incluye s\'olo propiedades intr\'insecas del objeto target. Ej.: ``La pelota roja con rayas amarillas''. Las caracter\'isticas de ser pelota, ser roja y tener rayas amarillas son propias del objeto a identificar.\\
 
-Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces aqu\'{i} se incluye el desaf\'{i}o de describir al siguiente objeto. Ej.: ``La que esta al lado del cubo rojo''. En este caso, ``al lado del'' es una relaci\'on entre el objeto target y otro objeto cuya ER es el ``cubo rojo''.\\
+Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces la ER incluye las ERs de los otros objeto. Ej.: ``La pelota que esta al lado del cubo rojo''. En este caso, ``al lado del'' es una relaci\'on entre el objeto target y otro objeto cuya ER es el ``cubo rojo''.\\
 
 Se dice que una ER es {\it minimal}, cuando incluye la m\'inima cantidad de propiedades con la cual puede ser identificada un\'ivocamente en el contexto dado. Notar que puede haber muchas expresiones minimales.\\
 
