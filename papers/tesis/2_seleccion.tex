@@ -4,7 +4,7 @@
 Una propiedad es una caracter\'istica propia de un objeto. Por ejemplo el color rojo de la bola en la Figura \ref{ejemplo}. Una relaci\'on  caracteriza a un objeto describiendo caracter\'isticas de otro u otros objetos.\\
 
 
-En este cap\'itulo daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales, las propiedades que puede tener o no una expresi\'on referencial y los algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos en el \'area.
+En este cap\'itulo emplicaremos los tipos de expresiones referenciales, daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales y a los tipos de algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos del \'area. 
 
 
 \section{Tipos de ER}
@@ -24,29 +24,14 @@ En cambio cuando contiene m\'as informaci\'on de la m\'inima necesaria para iden
 {\it Subespecificada} es cuando la expresi\'on dada, no alcanza a ser una ER, ya que no se puede identificar al objeto target del resto de los objetos en la imagen. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Esta expresi\'on identifica a un conjunto, no a un objeto \'unico.
 
 
-\section{Generaci\'on autom\'atica de expresiones referenciales}
 
-Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales, es un algoritmo que dado alg\'un tipo de input, dar\'a como resultado una expresi\'on referencial.
+\section{Tipos de algoritmo de GER}
 
-\subsection{Propiedades de un algoritmo de GER}
 
-Si pensamos ahora como generar autom\'aticamente ER, hay distintas clases de algoritmos para generarlas, ellos pueden tener las siguientes propiedades: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, identificar plurales o solo singulares, usar disyunciones adem\'as de conjunciones, o solo conjunciones, generar ER sobreespecificadas o minimales. Hacer o no backtraking.\\
+concerned with the process of automatically converting non-linguistic information (e.g.,
+from a database) into natural language text, 
+Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales (GER), es un procedimiento que tomar\'a alg\'un tipo de input y dar\'a como resultado una expresi\'on referencial.
 
-Un algoritmo es {\it determin\'{i}stico} si dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es {\it no-determin\'{i}stico} si considera la posibilidad de dar distintas salidas para el mismo input, en distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.\\
-
-Un algoritmo es {\it relacional} si permite generar ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar ERs para el o los objetos con el cual el objeto target tiene las relaciones que quiere nombrar. La {\it aridad} de una relaci\'on es la cantidad de par\'ametros que dicha relaci\'on toma. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on'', la relaci\'on esquina tiene aridad 2 ya que tiene 2 calles como par\'ametros.\\
-
-En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya {\it negaciones}. Supongamos que en la im\'agen hay un conjunto de ovejas, y solo una es de otro color que no es blanco. Un algormitmo que incluye negaciones podr\'ia decir ``La que no es blanca''.\\
-
-Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets de la escena considerada. ``Los dos restaurantes de la calle principal''. \\
-
-Los algoritmos tambi\'en se pueden diferenciar en los conectores que permiten si usan conjunciones, disyunciones o ambas.\\
-
-La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Ser\'ia interesante que un algoritmo diera la sobreespecificaci\'on que las personas dan. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on, al frente del correo''.\\
-
-Un algoritmo incluir\'ia propiedades o relaciones en cada paso, un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir no incluirla.\\
-
-\subsection{Algoritmos de GER}
 
 Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. \\
 
@@ -70,11 +55,68 @@ Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
  \item Incluir o no negaciones?
 \end{itemize}
 
-\subsection{Algoritmos del estado del arte en el \'area}
+Si pensamos ahora como generar autom\'aticamente ER, hay distintas tipos de algoritmos para generarlas, ellos pueden tener las siguientes propiedades: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, identificar plurales o solo singulares, usar disyunciones adem\'as de conjunciones, o solo conjunciones, generar ER sobreespecificadas o minimales. Hacer o no backtraking.\\
+
+Un algoritmo es {\it determin\'{i}stico} si dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es {\it no-determin\'{i}stico} si considera la posibilidad de dar distintas salidas para el mismo input, en distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.\\
+
+Un algoritmo es {\it relacional} si permite generar ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar ERs para el o los objetos con el cual el objeto target tiene las relaciones que quiere nombrar. La {\it aridad} de una relaci\'on es la cantidad de par\'ametros que dicha relaci\'on toma. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on'', la relaci\'on esquina tiene aridad 2 ya que tiene 2 calles como par\'ametros.\\
+
+En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya {\it negaciones}. Supongamos que en la im\'agen hay un conjunto de ovejas, y solo una es de otro color que no es blanco. Un algormitmo que incluye negaciones podr\'ia decir ``La que no es blanca''.\\
+
+Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets de la escena considerada. ``Los dos restaurantes de la calle principal''. \\
+
+Los algoritmos tambi\'en se pueden diferenciar en los conectores que permiten si usan conjunciones, disyunciones o ambas.\\
+
+La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Ser\'ia interesante que un algoritmo diera la sobreespecificaci\'on que las personas dan. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on, al frente del correo''.\\
+
+Un algoritmo incluir\'ia propiedades o relaciones en cada paso, un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir no incluirla.\\
+
+El input de un algoritmo de GER es en general el contexto, y el target. El contexto puede venir dado en distintos lenguajes, por ejemplo: el contexto que toma como input el algoritmo GRAFH es un grafo etiquetado, el cual contiene la informac\'on de las propiedades y relaciones de los objetos, y el contexto para el algoritmo de bisimulaci\'on es un XML con la misma informaci\'on.
+
+
+
+\section{Algoritmos del estado del arte en el \'area}
+
+En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, GRAPH, algoritmo relacional y por \'ultimo bisimulaci\'on.  
+
+%http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.227.8284&rep=rep1&type=pdf
+
+%REG can be traced back to the earliest days of Natural Language Processing; Winograd
+%(1972)  (Section  8.3.3,  Naming  Objects  and  Events),  for  example,  sketches  a  primitive
+%“incremental” REG algorithm, used in his SHRDLU program. In the 1980s, researchers
+%such as Appelt and Kronfeld set themselves the ambitious task of modelling the human
+%capacity for producing and understanding referring expressions in programs such as
+%KAMP and BERTRAND (Appelt 1985; Appelt and Kronfeld 1987; Kronfeld 1990). They
+%argued that referring expressions should be studied as part of a larger speech act. KAMP
+%(Appelt  1985),  for  example,  was  conceived  as  a  general  utterance  planning  system,
+%building  on  Cohen  and  Levesque’s  (1985)  formal  speech  act  theory.
+
+%REG  task  is  now  defined  by  Dale  and  Reiter  (1995)  through  what  may  be
+%called identification of the target: given a target (or referent) object r 2 D , find a set of attribute–value  pairs L
+%whose  conjunction  is  true  of  the  target  but  not  of  any  of  the
+%distractors (i.e., D
+
+%Full  Brevity  and  Greedy  Heuristic.
+El algoritmo {\it Full Brevity} (Dale 1989) genera la m\'as corta descripci\'on que identifica al target. Para hacerlo, 
+busca si hay una propiedad del target que no sea propiedad de ning\'un distractor. Si no hay chequea todas las posibles combinaciones de 2 propiedades, si no la hay, busca de a 3 y as\'i sucesivamente.\\
+
+El problema es que encontrar la descripci\'on m\'as corta es de alta complejidad, y Dale and Reiter observaron que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos (Olson  1970;  Sonnenschein  1984; Pechmann 1989; Engelhardt, Bailey, y Ferreira 2006).\\
+
+Una aproximaci\'on a Full Brevity es el algoritmo de heur\'istica {\it Greedy} (Dale  1989, 1992), el cual iterativamente selecciona la propiedad que elimina m\'as distractores y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado no siempre genera expresiones referenciales m\'inimas.\\
+%which  iteratively  selects  the  property  which  rules  out  most  of  the  distractors
+%not  previously  ruled  out,  incrementally  augmenting  the  description  based  on  what
+%property has most discriminatory power at each stage (as a result, it does not always
+%generate  descriptions  of  minimal  size). 
+El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fueron superados por el algoritmo {\it Incremental} (Reiter  and  Dale  1992;  Dale  and  Reiter  1995), que fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, el cual se explica a continuaci\'on. 
+% The  Greedy  Heuristic  algorithm  is  a  more
+%efficient  algorithm  than  the  Full  Brevity  one,  but  it  was  soon  eclipsed  by  another
+%algorithm    which  turned  out  to  be  the
+%most influential algorithm of the pre-2000 era. It is this later algorithm that came to be
+%known as``the'' Incremental Algorithm (IA).
 
 %\subsection{GREEDY}
 
-%Este algoritmo de Dale~\cite{dale89} busca sobre todo el conjunto de propiedades del target y elije el subconjunto m\'as chico posible que identifica un\'{i}vocamente al objeto target entre los distractores en la escena considerada como se muestra en el siguiente algoritmo.\\
+%El algoritmo GREEDY de Dale~\cite{dale89} busca sobre todo el conjunto de propiedades del target y elije el subconjunto m\'as chico posible que identifica un\'{i}vocamente al objeto target entre los distractores en la escena considerada como se muestra en el siguiente algoritmo.\\
 
 %\begin{figure}[ht]
 %\begin{center}
@@ -114,11 +156,11 @@ Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
 
 %Este algoritmo es de orden NP-complete
 
-\subsubsection{Incremental}
+\subsection{Incremental}
 
-A continuaci\'on se describe el algoritmo Incremental de Dale \& Reiter el cual esta basado en el algoritmo GREEDY (el cual hac\'ia una b\'usqueda exaustiva y eleg\'ia la propiedad que m\'as distractores eliminaba en cada paso) pero \'este reduce la complejidad del algoritmo Greedy cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que elimina al menos un distractor. Este algoritmo es de orden polinomial. Este algoritmo produce expresiones referenciales que pueden estar sobreespecificadas.\\
+%A continuaci\'on se describe el algoritmo Incremental de Dale \& Reiter el cual esta basado en el algoritmo GREEDY (el cual hac\'ia una b\'usqueda exaustiva y eleg\'ia la propiedad que m\'as distractores eliminaba en cada paso) pero \'este reduce la complejidad del algoritmo Greedy cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que elimina al menos un distractor. Este algoritmo es de orden polinomial. Este algoritmo produce expresiones referenciales que pueden estar sobreespecificadas.\\
 
-\textcolor{blue}{reescribir esto porque no queda tabulado como un algoritmo}
+%\textcolor{blue}{reescribir esto porque no queda tabulado como un algoritmo}
 
 
 \fbox{ \begin{minipage}{150mm}
@@ -158,6 +200,28 @@ P $\leftarrow$ P -\{$p_{j}$\}\\
 %\end{figure}
 
 
+\begin{figure}[!t]
+\small
+\centering
+\begin{algorithm}[H]
+\dontprintsemicolon
+\caption{Incremental}\label{algo:incremental}
+\KwIn{\footnotesize \{r\}, D, Pref}
+\KwOut{\footnotesize L}
+
+$\ L \leftarrow \emptyset $\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}\\
+$\ C \leftarrow D - \{r\} $\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}\\
+\For{\em (A_{i}) $\in$ Pref}{
+	$\ V = Value(r,A_{i}) $\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
+       
+%     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \C $\cap$ \RulesOut(\[A_{i}\],V) $=$ \emptyset}
+	%		{then\tcp*[f]{$\ L \leftarrow \emptyset $\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}}}
+		%	{else\tcp*[f]{$\ C \leftarrow \C $-$ \RulesOut(\[A_{i}\],V) }}
+		%	\If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \C $=$ \emptyset}{then\tcp*[f]{$\ Return L {\footnotesize the most general description $\top$ applies to all elements in the scene}}}
+}
+\end{algorithm}
+\end{figure}
+
 El objeto target que queremos identificar lo llamaremos {\it r},
 D es el conjunto de distractores de r,
 KB es la base de conocimiento que contiene para cada objeto los valores de sus propiedades.
@@ -169,30 +233,42 @@ Si D es vac\'io, no hay nada para identificar, porque no hay distractores.\\
 La idea del algoritmo es ir eliminando distractores, por eso, en {\it Paso 1} si no hay distractores, se devuelve L como el conjunto de propiedades que identifica al target. Si todav\'ia hay distractores pero no quedan propiedades de r ($P_{r}$), falla porque no lo puede identificar un\'ivocamente a r. Si quedan propiedades de r, va al {\it Paso 2}, en el cual elije la propiedad de r que sigue en el orden de preferencias, pero que tambi\'en es propiedad de alg\'un distractor (algun elemento de D) y va al {\it Paso 3}, en caso de que la propiedad no sea propiedad de algun distractor, se actualiza $P_{r}$ a $P_{r}$ menos la propiedad y se va al principio de nuevo.\\
 En el {\it Paso 3} se agrega la propiedad a la descripci\'on actual L, se actualiza $D$ con $D_{j}$, es decir con los elementos de $D$ que tienen la propiedad $_j$, se saca $_j$ de la lista de P y continua en {\it Paso 1}.\\
 
-\textcolor{blue}{Un poco mas de historia, no se a donde poner...Theune and Krahmer proposed an extension that allows the generation of subsequent reference with the ia taking into account the discourse salience of the target referent (Krahmer and Theune, 1998; Theune, 2000; Krahmer and Theune, 2002), and a second one which allows the ia to produce referring expressions that
-contain binary relations to other objects (Theune, 2000; Krahmer and Theune, 2002). I will return to their relational extension in Section 2.3. Theune and Krahmer's approach works by assigning a salience score to all objects according to the
-focus/topic distinction by Hajicova (1993) and Centering Theory (Grosz et al., 1995). They alter the success criterion of the algorithm and only let it stop when here is no distractor left that is as or more salient than the target referent.
-Not all properties are the same. The qualitative diferences that exist between diferent properties were first discussed in the
-reg literature by van Deemter (2000, 2006). He pointed out that the appropriateness of
-vague orgradable properties such as small and large is dependent on the context in which they are used, while,
-for example, the colour of an object is absolute. Consider two descriptions in a domain of animals... (van Deemter, 2002), van Deemter considered the ia's logical completeness in terms of the Boolean operators of negation and disjunction. He extended it to
-be able to generate referring expressions that contain negated properties, such as Example (2.3), and descriptions of sets of objects, such as Example (2.4), or even (2.5), which contains a logical disjunction of properties. His algorithm proceeds
-in stages, trying longer and longer disjunctions of properties, if atomic properties
-and shorter disjunctions did not suffice to distinguish the target set.. he work on reference to sets was taken further by Gatt and van Deemter (2005, 2006), who have presented the most mature algorithms in this space to
-date. They used a similar procedure to the ia in that their algorithms are based
-on incremental processing of a preference order of properties. Their algorithms
-add a lot of complex machinery to the basic procedure to ensure that properties
-are chosen in a way that maximises coherence within the set of objects described
-by the referring expressions. For example, their approach will attempt to use
-properties of the same type for all the referents of a set. So, it would produce
-descriptions such as Examples (2.6) or (2.7) rather than Example (2.8) or.. }
+%\textcolor{blue}{Un poco mas de historia, no se a donde poner...Theune and Krahmer proposed an extension that allows the generation of subsequent reference with the ia taking into account the discourse salience of the target referent (Krahmer and Theune, 1998; Theune, 2000; Krahmer and Theune, 2002), and a second one which allows the ia to produce referring expressions that
+%contain binary relations to other objects (Theune, 2000; Krahmer and Theune, 2002). I will return to their relational extension in Section 2.3. Theune and Krahmer's approach works by assigning a salience score to all objects according to the
+%focus/topic distinction by Hajicova (1993) and Centering Theory (Grosz et al., 1995). They alter the success criterion of the algorithm and only let it stop when here is no distractor left that is as or more salient than the target referent.
+%Not all properties are the same. The qualitative diferences that exist between diferent properties were first discussed in the
+%reg literature by van Deemter (2000, 2006). He pointed out that the appropriateness of
+%vague orgradable properties such as small and large is dependent on the context in which they are used, while,
+%for example, the colour of an object is absolute. Consider two descriptions in a domain of animals... (van Deemter, 2002), van Deemter considered the ia's logical completeness in terms of the Boolean operators of negation and disjunction. He extended it to
+%be able to generate referring expressions that contain negated properties, such as Example (2.3), and descriptions of sets of objects, such as Example (2.4), or even (2.5), which contains a logical disjunction of properties. His algorithm proceeds
+%in stages, trying longer and longer disjunctions of properties, if atomic properties
+%and shorter disjunctions did not suffice to distinguish the target set.. he work on reference to sets was taken further by Gatt and van Deemter (2005, 2006), who have presented the most mature algorithms in this space to
+%date. They used a similar procedure to the ia in that their algorithms are based
+%on incremental processing of a preference order of properties. Their algorithms
+%add a lot of complex machinery to the basic procedure to ensure that properties
+%are chosen in a way that maximises coherence within the set of objects described
+%by the referring expressions. For example, their approach will attempt to use
+%properties of the same type for all the referents of a set. So, it would produce
+%descriptions such as Examples 
+
+Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia con la subsiguiente ia teniendo en cuenta la prominencia discurso del referente objetivo (Krahmer y Theune, 1998; Theune, 2000; Krahmer y Theune, 2002), y un segundo uno que permite la IA para producir expresiones referenciales que
+contienen relaciones binarias a otros objetos (Theune, 2000; Krahmer y Theune, 2002). Enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con el enfoque / tema distinci\'on por Hajicova (1993) y el centrado Theory (Grosz et al., 1995). Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando aqu\'i hay izquierda distractor que es tan o m\'as relevante que el referente de destino.
+No todas las propiedades son las mismas. Las Diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura reg por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de
+propiedades vagas como peque\~no y grande depende del contexto en el que se utilizan, mientras que,
+por ejemplo, el color de un objeto es absoluta. Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad l\'ogica del ia en t\'erminos de los operadores booleanos de negaci\'on y disyunci\'on. \'el la extendi\'o a
+ser capaz de generar expresiones referenciales que contienen propiedades, tales como Ejemplo (2.3) negado, y las descripciones de conjuntos de objetos, tales como Ejemplo (2.4), o incluso (2,5), que contiene una disyunci\'on l\'ogica de propiedades. Sus algoritmo procede
+en etapas, tratando m\'as y disyunciones m\'as largos de propiedades, si las propiedades at\'omicas
+y disyunciones m\'as cortos no son suficientes para distinguir el conjunto target .. que funciona en referencia a conjuntos fue tomada adem\'as por Gatt y van Deemter (2005, 2006), que han presentado los algoritmos m\'as maduros a la fecha. Utilizaron un procedimiento similar al de las otras cosas en que sus algoritmos se basan en el procesamiento incremental de un orden de preferencia de las propiedades. Sus algoritmos agregan una gran cantidad de maquinaria compleja para el procedimiento b\'asico para asegurar que las propiedades
+se eligen de manera que maximiza la coherencia dentro del conjunto de objetos descritos por las expresiones referenciales. Por ejemplo, su enfoque intentar\'a utilizar propiedades del mismo tipo para todos los referentes de un conjunto. As\'i, ser\'ia producir
+descripciones tales como ejemplos
+(2.6) or (2.7) rather than Example (2.8) or.. 
 
 
-%Theune y Krahmer propusieron una extensión que permite la generación de referencia con la subsiguiente ia teniendo en cuenta la prominencia discurso del referente objetivo (Krahmer y Theune, 1998; Theune, 2000; Krahmer y Theune, 2002), y un segundo uno que permite la IA para producir expresiones referenciales que contener relaciones binarias a otros objetos (Theune, 2000; Krahmer y Theune, 2002). Voy a volver a su extensión relacional en la Sección 2.3. Enfoque Theune y de Krahmer funciona asignando una puntuación de relevancia a todos los objetos de acuerdo con la enfoque / tema distinción por Hajicova (1993) y el centrado Theory (Grosz et al., 1995). Alteran el criterio de éxito del algoritmo y sólo permiten que se detenga cuando aquí hay izquierda distractor que es tan o más relevante que el referente de destino.
-%No todas las propiedades son las mismas. Las Diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura reg por van Deemter (2000, 2006). Señaló que la conveniencia de propiedades orgradable vagos como pequeños y grandes depende del contexto en el que se utilizan, mientras que, Por ejemplo, el color de un objeto es absoluta. Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad lógica del ia en términos de los operadores booleanos de negación y disyunción. Él la extendió a ser capaz de generar expresiones que se refieren que contienen propiedades, tales como Ejemplo (2.3) negado, y las descripciones de conjuntos de objetos, tales como Ejemplo (2.4), o incluso (2,5), que contiene una disyunción lógica de propiedades. Sus algoritmo procede en etapas, tratando más y disyunciones más largos de propiedades, si las propiedades atómicas y disyunciones más cortos no son suficientes para distinguir el conjunto de destino .. que funciona en referencia a conjuntos fue tomada además por Gatt y van Deemter (2005, 2006), que han presentado los algoritmos más maduros en este espacio para la fecha. Utilizaron un procedimiento similar al de las otras cosas en que sus algoritmos se basan en el procesamiento incremental de un orden de preferencia de las propiedades. Sus algoritmos agregar una gran cantidad de maquinaria compleja para el procedimiento básico para asegurar que las propiedades se eligen de manera que maximiza la coherencia dentro del conjunto de objetos descritos por las expresiones que se refieren. Por ejemplo, su enfoque intentará utilizar propiedades del mismo tipo para todos los referentes de un conjunto. Así, sería producir Ejemplos descripciones tales como (2,6) o (2,7) en lugar de Ejemplo (2.8) o ..
+%Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia con la subsiguiente ia teniendo en cuenta la prominencia discurso del referente objetivo (Krahmer y Theune, 1998; Theune, 2000; Krahmer y Theune, 2002), y un segundo uno que permite la IA para producir expresiones referenciales que contener relaciones binarias a otros objetos (Theune, 2000; Krahmer y Theune, 2002). Voy a volver a su extensi\'on relacional en la Secci\'on 2.3. Enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con la enfoque / tema distinci\'on por Hajicova (1993) y el centrado Theory (Grosz et al., 1995). Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando aqu\'i hay izquierda distractor que es tan o m\'as relevante que el referente de destino.
+%No todas las propiedades son las mismas. Las Diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura reg por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de propiedades orgradable vagos como peque\~nos y grandes depende del contexto en el que se utilizan, mientras que, Por ejemplo, el color de un objeto es absoluta. Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad l\'ogica del ia en t\'erminos de los operadores booleanos de negaci\'on y disyunci\'on. \'el la extendi\'o a ser capaz de generar expresiones que se refieren que contienen propiedades, tales como Ejemplo (2.3) negado, y las descripciones de conjuntos de objetos, tales como Ejemplo (2.4), o incluso (2,5), que contiene una disyunci\'on l\'ogica de propiedades. Sus algoritmo procede en etapas, tratando m\'as y disyunciones m\'as largos de propiedades, si las propiedades at\'omicas y disyunciones m\'as cortos no son suficientes para distinguir el conjunto de destino .. que funciona en referencia a conjuntos fue tomada adem\'as por Gatt y van Deemter (2005, 2006), que han presentado los algoritmos m\'as maduros en este espacio para la fecha. Utilizaron un procedimiento similar al de las otras cosas en que sus algoritmos se basan en el procesamiento incremental de un orden de preferencia de las propiedades. Sus algoritmos agregar una gran cantidad de maquinaria compleja para el procedimiento b\'asico para asegurar que las propiedades se eligen de manera que maximiza la coherencia dentro del conjunto de objetos descritos por las expresiones que se refieren. Por ejemplo, su enfoque intentar\'a utilizar propiedades del mismo tipo para todos los referentes de un conjunto. As\'i, ser\'ia producir Ejemplos descripciones tales como (2,6) o (2,7) en lugar de Ejemplo (2.8) o ..
 
 
-\subsubsection{Graph}
+\subsection{Graph}
 
 Un grafo (del griego grafos:dibujo, imagen) es un conjunto de objetos llamados v\'ertices o nodos unidos por enlaces llamadas aristas o arcos, que permiten representar relaciones binarias entre elementos de un conjunto. \\
 
@@ -252,7 +328,7 @@ El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que re
 
 La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cuando estas se hacen m\'as costosas que el grafo de menor costo encontrado hasta el momento. Esta funci\'on hace que se prefieran propiedades sobre otras que tienen mayor costo.
 
-\subsubsection{Bisimulaci\'on}
+\subsection{Bisimulaci\'on}
 
 
 En este cap\'itulo daremos una introducci\'on a las l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) %y luego daremos el algoritmo en el cual nos basamos en esta tesis.\\ el algoritmo en el cap 4
@@ -578,6 +654,8 @@ $\el$ como language. Este algoritmo fue presentado en
 \end{figure}
 
 \subsection{Ejemplo de ejecuci\'on}
+
+
 
 \textcolor{blue}{no se si poner aca un ejemplo, si poner el texto y las im\'agenes en otro apendice... o ponerlas mas chiquitas en varias columnas, asi queda feo}\\
 Vamos a ejecutar el algoritmo para la Figura~\ref{GRE3D7-stimulus-cap2},

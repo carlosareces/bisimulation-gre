@@ -223,6 +223,41 @@ Las expresiones referenciales ocupan un papel central en la comunicaci\'on, popr
 
 En el cap\'itulo 1 se da la introducci\'on al problema, luego se analizan los distintos algoritmos existentes
 
+which is useful for practical applications
+ranging from generating weather forecasts to summarizing medical information (Reiter
+and Dale 2000). Of all the subtasks of NLG, Referring Expression Generation (REG) is
+among the ones that have received most scholarly attention. A survey of implemented,
+practical  NLG  systems  shows  that  virtually  all  of  them,  regardless  of  their  purpose,
+contain a REG module of some sort (Mellish et al. 2006). This is hardly surprising in
+view  of  the  central  role  that  reference  plays  in  communication.  A  system  providing
+advice about air travel (White, Clark, and Moore 2010), needs to refer to flights (``the
+cheapest  flight'',  ``the  KLM  direct  flight'');  a  Pollen  forecast  system  (Turner  et  al.
+2008)  needs  to  generate  spatial  descriptions  for  areas  with  low  or  high  pollen  levels
+(``the  central  belt  and  further  North''),  and  a  robot  dialogue  system  that  assembles
+construction toys together with a human user (Giuliani et al. 2010), needs to refer to the
+components (``insert the green bolt through the end of this red cube'').
+REG ``is concerned with how we produce a description of an entity that enables
+the hearer to identify that entity in a given context'' (Reiter and Dale 2000, page 55).
+Since this can often be done in many different ways, a REG algorithm needs to make a
+number of choices. According to Reiter and Dale (2000), the first choice concerns what
+form
+of referring expression is to be used; should the target be referred to, for instance,
+using  its  proper  name,  a  pronoun  (``he'')  or  a  description  (``the  man  with  the  tie'').
+Proper  names  have  limited  applicability  because  many  domain  objects  do  not  have
+a name that is in common usage. For pronoun generation, a simple but conservative
+rule  is  discussed  by  Reiter  and  Dale  (2000),  similar  to  one  proposed  by  Dale  (1989,
+pages 150-151): use a pronoun if the target was mentioned in the previous sentence,
+and  if  this  sentence  contained  no  reference  to  any  other  entity  of  the  same  gender.
+Reiter  and  Dale  (2000)  concentrate  mostly  on  the  generation  of  descriptions.  If  the
+NLG  system  decides  to  generate  a  description,  two  choices  need  to  be  made:  which
+set of properties distinguishes the target (content selection), and how can the selected
+properties be turned into natural language (linguistic realisation). Content selection is a
+complex balancing act: we need to say enough to enable identification of the intended
+referent, but not too much. A selection of information needs to be made, and this needs
+to be done quickly. Reiter and Dale discuss various strategies that try to manage this
+balancing act, based on Dale and Reiter (1995), an early survey article that summarises
+and compares various influential algorithms for the generation of descriptions.
+
 \textcolor{blue}{traje esto...}
 La selecci\'on de qu\'e propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial. Una expresi\'on referencial ser\'a muy distinta si nuestro objetivo es dar la m\'inima informaci\'on que identifique al objeto que si nuestro objetivo es ayudar al interlocutor a que identifique el objeto.\\
 
