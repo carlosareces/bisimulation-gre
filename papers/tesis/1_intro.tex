@@ -265,3 +265,29 @@ En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro inter
 
 En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.\\
 
+concerned with the process of automatically converting non-linguistic information (e.g.,
+from a database) into natural language text, 
+Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales (GER), es un procedimiento que tomar\'a alg\'un tipo de input y dar\'a como resultado una expresi\'on referencial.
+
+
+Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. \\
+
+Por ejemplo: Que cosa es? (el tipo) Una pelota. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.\\
+
+Con esta clase de datos para los objetos de la escena, tenemos una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.\\
+
+Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identicar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran seg\'un la cantidad de informaci\'on que dan, si dan la m\'inima informaci\'on para identificarlas un\'ivocamente ser\'an minimales, si dan m\'as informaci\'on estar\'an sobreespecificadas, pero en el caso de dar m\'as de la m\'inima informaci\'on... cu\'anta m\'as dar?
+
+El sistema deber\'ia tener una lista del orden de preferencia de los atributos a usar.\\ 
+
+Para una persona identificar ciertos atributos puede ser m\'as f\'acil que identificar ciertos otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir ``grande'' y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es ``grande''.\\
+
+Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
+
+\begin{itemize}
+ \item Que propiedades o relaciones incluir?
+ \item Cuando terminar (dar la expresi\'on minimal? o dar una expresi\'on sobreespecificada, si es sobreespecifica, que tan sobreespecificada?)
+ \item Seguir un orden preferencias fijo para las propiedades? y luego otro para las relaciones?
+ \item Hacer o no backtraking?
+ \item Incluir o no negaciones?
+\end{itemize}
