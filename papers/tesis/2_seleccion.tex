@@ -7,52 +7,44 @@ En este cap\'itulo emplicaremos los tipos de expresiones referenciales, daremos 
 
 \begin{figure}[ht]
 \centering
-\includegraphics[width=0.8\textwidth]{images/22sinletras.jpg}
+\includegraphics[width=0.6\textwidth]{images/22sinletras.jpg}
 \caption{Ejemplo de contexto}
 \label{GRE3D7-stimulus}
 \end{figure}
 
-Una propiedad es una caracter\'istica propia de un objeto. Por ejemplo en el contexto \ref{GRE3D7-stimulus} el objeto se\~nalado con la flecha tiene la propiedad color con valor rojo. Una relaci\'on caracteriza a un objeto describiendo caracter\'isticas de otro u otros objetos.\\
+Una propiedad es una caracter\'istica propia de un objeto. Por ejemplo en el contexto \ref{GRE3D7-stimulus} el objeto se\~nalado con la flecha tiene la propiedad {\it color} con valor {\it rojo}. Una relaci\'on caracteriza a un objeto describiendo caracter\'isticas de otro u otros objetos. Por simplicidad, en el resto de la tesis vamos a dirigirnos a la propiedad {\it rojo}, para decir que el objeto tiene la propiedad color con valor rojo.\\
 
 %Cuando la ER no es relacional solo contiene propiedades del objeto mismo. Ej.: color, tama\~no. Note que quiz\'as el tama\~no sea con respecto a los dem\'as objetos ``la m\'as peque\~na'', pero al no incluir una descripci\'on de otro objeto no la llamamos relacional.\\
-De acuerdo a las propiedades o relaciones que una expresi\'on referencial (ER) incluya, se clasifican en distintos tipos, relacional o no relacional (tambi\'en llamada proposicional), m\'inima, sobreespecificada, o subespecificada. A continuaci\'on describimos cada uno de estos tipos.
+De acuerdo a las propiedades o relaciones que una expresi\'on referencial (ER) incluya, se clasifican en distintos tipos: relacional o no relacional (tambi\'en llamada proposicional), m\'inima, sobreespecificada, o subespecificada. A continuaci\'on describimos cada uno de estos tipos.
 % en cuyo caso es una expresi\'on que no es referencial, la incluimos en nuestras propiedades porque nos va a ser \'util la definici\'on en el Cap\'itulo \ref{sec:corpus}.\\
-Una ER {\it proposicional} incluye s\'olo propiedades intr\'insecas del objeto target. Por ejemplo en el contexto de la imagen \ref{GRE3D7-stimulus}: ``La pelota roja''. Las caracter\'isticas de ser pelota, ser roja son propias del objeto identificado.\\
+Una ER {\it proposicional} incluye s\'olo propiedades intr\'insecas del objeto target. Por ejemplo en el contexto \ref{GRE3D7-stimulus}: ``La pelota roja''. Las caracter\'isticas de ser pelota, ser roja son propias del objeto identificado.\\
 
-Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces la ER incluye las ERs de los otros objeto.  Por ejemplo: ``La pelota que esta a la derecha del cubo grande.'' ``a la derecha de'' es una relaci\'on que necesita describir en este caso al ``el cubo grande''.\\
+Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces la ER incluye las ERs de los otros objeto.  Por ejemplo: ``La pelota que esta a la derecha del cubo grande.'' ``a la derecha de'' es una relaci\'on que necesita describir otro objeto, en este caso al ``el cubo grande''.\\
 
-Se dice que una ER es {\it minimal}, cuando incluye la m\'inima cantidad de propiedades con las cuales el objeto puede ser identificado un\'ivocamente en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo en el contexto de la imagen \ref{GRE3D7-stimulus} ``La pelota roja'' es una ER minimal, como asi tambi\'en lo es ``La pelota grande'', ya que ambas tienen 2 propiedades del objeto target.\\
+Se dice que una ER es {\it minimal}, cuando incluye la m\'inima cantidad de propiedades con las cuales el objeto puede ser identificado un\'ivocamente en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo en el contexto \ref{GRE3D7-stimulus} ``La pelota roja'' es una ER minimal, como as\'i tambi\'en lo es ``La pelota grande'', ya que ambas tienen 2 propiedades, y 2 es la m\'inima cantidad de propiedades que puede tener una ER de ese objeto, para distinguirlo en ese contexto.\\
 
-Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguirla de los dem\'as objetos en el contexto dado, se dice que la ER es {\it sobreespecificada}. Por ejemplo: ``La pelota roja grande'' en el contexto de la imagen \ref{GRE3D7-stimulus}.\\
+Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguirlo de los dem\'as objetos en el contexto dado, se dice que la ER es {\it sobreespecificada}. Por ejemplo: ``La pelota roja grande'' en el contexto de la imagen \ref{GRE3D7-stimulus}.\\
 
-Un expresi\'on es {\it subespecificada} cuando no alcanza a ser una ER, ya que no se puede distinguir al objeto target de todos los objetos en el contexto. Por ejemplo: ``La pelota'' en el contexto \ref{GRE3D7-stimulus}. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Esta expresi\'on identifica a un conjunto, no a un objeto \'unico.
+Un expresi\'on es {\it subespecificada} cuando no alcanza a ser una ER, ya que no se puede distinguir al objeto target de todos los objetos en el contexto. Por ejemplo: ``La pelota'' en el contexto \ref{GRE3D7-stimulus} no alcanza para distinguir el objeto apuntado por la flecha, ya que hay otras 2. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Esta expresi\'on identifica a un conjunto, no a un objeto \'unico.
 
 \section{La tarea de generaci\'on autom\'atica de expresiones referenciales}
-quizas mover a la introduccion..
 
-La generaci\'on autom\'atica de expresiones referenciales (GER), es la tarea de definir cuales pasos se deben seguir para conseguir una ER en un contexto dado.\\
+La generaci\'on autom\'atica de expresiones referenciales (GER), es la tarea de definir cuales pasos se deben seguir para conseguir una ER de un objeto espec\'ifico, en un contexto dado. Estos pasos definen un algoritmo de GER. \\
 
+Los algoritmos se pueden diferenciar por la forma en que toman el input, es decir el modo en que toman el contexto y el target para el cual se espera que den una expresi\'on referencial. 
 
+En todos los casos, la computadora necesita tener identificado cual objeto tiene que propiedades, para ello vamos a etiquetar los objetos con $e_1$, $e_2$, etc. como se muestra en la Figura \ref{GRE3D7-stimulus-conLetras}. En la imagen tambi\'en podemos ver que el objeto se\~nalado por la flecha es el $e_5$, es el objeto target, para el cual queremos generar autom\'aticamente una expresi\'on referencial.
 
-\section{Tipos de algoritmos de GER}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{images/22.jpg}
+\caption{Ejemplo de contexto}
+\label{GRE3D7-stimulus-conLetras}
+\end{figure}
 
-Si pensamos como generar autom\'aticamente ERs, hay distintas tipos de algoritmos para generarlas, un algoritmo pueden ser: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, identificar plurales o s\'olo singulares, usar disyunciones y conjunciones, o s\'olo conjunciones, generar ER sobreespecificadas o minimales. Hacer o no backtraking. Los algoritmos adem\'as se pueden diferenciar por el input que toman, es decir el modo en que toman el contexto y el target para el cual se espera que den una expresi\'on referencial. A continuaci\'on se describen cada uno de esos tipos.\\
+Acontinuaci\'on damos 2 ejemplos de diferentes maneras de modelar el contexto.\\
 
-Un algoritmo es {\it determin\'{i}stico} si dado un input (una escena, con un objeto target), da siempre la misma ER de salida. En cambio es {\it no-determin\'{i}stico} si considera la posibilidad de dar distintas salidas para el mismo input, en distintas ejecusiones simulando el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos.\\
-
-Un algoritmo es {\it relacional} si permite generar ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar ERs para el o los objetos con el cual el objeto target tiene las relaciones que quiere nombrar. La {\it aridad} de una relaci\'on es la cantidad de par\'ametros que dicha relaci\'on toma. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on'', la relaci\'on esquina tiene aridad 2 ya que tiene 2 calles como par\'ametros.\\
-
-En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya {\it negaciones}. Supongamos que en la im\'agen hay un conjunto de ovejas, y solo una es de otro color que no es blanco. Un algormitmo que incluye negaciones podr\'ia decir ``La que no es blanca''.\\
-
-Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets de la escena considerada. ``Los dos restaurantes de la calle principal''. \\
-
-Los algoritmos tambi\'en se pueden diferenciar en los conectores que permiten si usan conjunciones, disyunciones o ambas.\\
-
-La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Ser\'ia interesante que un algoritmo diera la sobreespecificaci\'on que las personas dan. Ej.: ``el restaurante que esta en la esquina de Gral. Paz y Col\'on, al frente del correo''.\\
-
-Un algoritmo incluir\'ia propiedades o relaciones en cada paso, un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir no incluirla.\\
-
-Con respecto al input de una algoritmo de GER, el contexto puede venir dado en distintos lenguajes, por ejemplo: el contexto que toma como input el algoritmo GRAPH para la imagen \ref{GRE3D7-stimulus} es un grafo etiquetado como se muestra en \ref{grafo-GRE3D7-stimulus}, el cual contiene la informac\'on de las propiedades y relaciones de los objetos, y el contexto para el algoritmo de bisimulaci\'on es un XML con la misma informaci\'on como se muestra en \ref{input-bisimulacion}.
+El contexto que toma como input el algoritmo GRAPH \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en \ref{grafo-GRE3D7-stimulus}, el cual contiene la informac\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto target $e_5$, tiene propiedades large, red, ball y una flecha con la etiqueta rightof $e_4$, y $e_4$ tiene propiedades large, red, cube, y una flecha hacia $e_5$ con etiqueta leftof.\\
 
 \begin{figure}[ht]
 \centering
@@ -63,119 +55,140 @@ Con respecto al input de una algoritmo de GER, el contexto puede venir dado en d
   ]
  \node[n,label=above:$e_1$,label=below:{
     \relsize{-1}$\begin{array}{c}
-      \nLeft\\[-2pt]
       \nSmall\\[-2pt] 
       \nYellow \\[-2pt] 
       \nBall\end{array}$}] (a) {};
-
  \node[n,label=above:$e_2$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLeft\\[-2pt]
+    \relsize{-1}$\begin{array}{c}     
       \nSmall\\[-2pt] 
       \nRed\\[-2pt] 
       \nCube\end{array}$}, right of=a] (b) {};
-
  \node[n,label=below:$e_3$,label=above:{
     \relsize{-1}$\begin{array}{c}
-      \nTop\\[-2pt]
-      \nLeft\\[-2pt]
+      \nTop\\[-2pt]      
       \nSmall\\[-2pt] 
       \nYellow\\[-2pt] 
       \nBall\end{array}$}, above of=b] (c) {};
-
  \node[n,label=above:$e_4$,label=below:{
     \relsize{-1}$\begin{array}{c}
-      \nBig\\[-2pt] 
+      \nLarge\\[-2pt] 
       \nRed\\[-2pt] 
       \nCube\end{array}$}, right of=b] (d) {};
-
  \node[n,label=above:$e_5$,label=below:{
     \relsize{-1}$\begin{array}{c}
-      \nBig\\[-2pt] 
+      \nLarge\\[-2pt] 
       \nRed\\[-2pt] 
       \nBall\end{array}$}, right of=d] (e) {};
-
  \node[n,label=above:$e_6$,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nSmall\\[-2pt] 
       \nYellow\\[-2pt] 
       \nCube\end{array}$}, right of=e] (f) {};
-
- \node[n,label=below:$e_7$,label=below:{
+ \node[n,label=above:$e_7$,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nSmall\\[-2pt]
       \nRed\\[-2pt] 
       \nCube\end{array}$},  right of=f] (g) {};
-
  \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
  \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
-
  \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
  \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
-
- \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
- \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
-
- \draw[dotted] (-.5,-1.4) rectangle (7.1,3.1);
+ \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
+ \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
+ \draw[dotted] (-.5,-1.4) rectangle (7.5,3.1);
 
  \end{tikzpicture}
 \caption{Grafo del contexto \ref{GRE3D7-stimulus}}
 \label{grafo-GRE3D7-stimulus}
 \end{figure}
 
+Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de bisimulaci\'on el cual explicaremos en \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on como se muestra en \ref{input-bisimulacion}. En este caso se estan representando las propiedades como relaciones a un objeto ficticio {\it c}, creado para modelar todas tanto propiedades como relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}, es el objeto al cual queremos referirnos, el target. \'Este tiene las relaciones con c (large, red, ball) y con $e_4$ rightof.  
+
 \begin{verbatim}
 <?xml version="1.0"?>
-
-<problem refer-to="s1">c
-  <individual id="s1">
+<problem id="e1">c
+  <individual id="e1">
     <related rel="small" to="c" />
     <related rel="yellow" to="c" />
     <related rel="ball" to="c" />
   </individual>
-  <individual id="s2">
+  <individual id="e2">
     <related rel="cube" to="c" />
     <related rel="red" to="c" />
     <related rel="small" to="c" />
-    <related rel="above-of" to="s3" />
+    <related rel="bellow" to="e3" />
   </individual>
-  <individual id="s3">
-    <related rel="left" to="c" />
+  <individual id="e3">
     <related rel="ball" to="c" />
     <related rel="yellow" to="c" />
     <related rel="small" to="c" />
-    <related rel="on-top" to="s2" />
+    <related rel="on-top" to="e2" />
   </individual>
-  <individual id="s4">
+  <individual id="e4">
     <related rel="cube" to="c" />
     <related rel="red" to="c" />
     <related rel="large" to="c" />
-    <related rel="left-of" to="s5" />
+    <related rel="left-of" to="e5" />
   </individual>
-  <individual id="s5">
+  <individual refer-to="e5">
     <related rel="large" to="c"/>
     <related rel="ball" to="c" />
     <related rel="red" to="c" />
-    <related rel="right-of" to="s4" />
+    <related rel="right-of" to="e4" />
   </individual>
-  <individual id="s6">
-    <related rel="small" to="c" />
-    <related rel="cube" to="c" />
-    <related rel="yellow" to="c" />
-    <related rel="left-of" to="s7" />
-  </individual>
-  <individual id="s7">
-    <related rel="small" to="c" />
-    <related rel="cube" to="c" />
-    <related rel="red" to="c" />
-    <related rel="right-of" to="s6" />
-  </individual>
+  ...
   <individual id="c">
     <related rel="terminal" to="c" />
   </individual> 
 </problem>
 \end{verbatim}
+%Saque para que no quede tan largo
+%<individual id="e6">
+    %<related rel="small" to="c" />
+    %<related rel="cube" to="c" />
+    %<related rel="yellow" to="c" />
+    %<related rel="left-of" to="e7" />
+  %</individual>
+  %<individual id="e7">
+    %<related rel="small" to="c" />
+    %<related rel="cube" to="c" />
+    %<related rel="red" to="c" />
+    %<related rel="right-of" to="e6" />
+  %</individual>
 
-\section{Algoritmos del estado del arte en el \'area}
+Los algoritmos tambi\'en se pueden diferenciar por la clase de ER que pueden generar, a continuaci\'on explicaremos los distintos tipos de algoritmos de GER. 
+
+\section{Tipos de algoritmos de GER}
+
+Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales  puede ser: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, identificar plurales o s\'olo singulares,
+ %usar disyunciones y conjunciones, o s\'olo conjunciones, 
+generar ER sobreespecificadas o minimales. Hacer o no backtraking.  A continuaci\'on se describen cada uno de esos tipos.\\
+
+Un algoritmo es {\it determin\'{i}stico} si dado un input (un contexto y un objeto target), da siempre la misma ER de salida. En cambio un algoritmo es {\it no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, por lo tanto los algoritmos no determin\'isticos simulan el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos. Por ejemplo ser\'ia no determin\'istico si para el Contexto \ref{GRE3D7-stimulus-conLetras} una vez da ``La pelota roja'' y otra vez ``La pelota grande''.\\
+
+Un algoritmo es {\it relacional} si adem\'as de generar ER proposicionales genera ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar ERs para el o los objetos relacionados. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} la ER ``La pelota roja a la derecha del cubo grande''. En este caso ``el cubo grande'' es una expresi\'on referencial que se tuvo que dar como consecuencia de incluir la relaci\'on ``a la derecha de''.\\
+
+En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya {\it negaciones}. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras}, ``La \'unica pelota que no es peque\~na''.\\
+
+Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets de la escena considerada. Por ejemplo para el Contexto \ref{plurales},``Los objetos grandes''. En este caso el target no es \'unico, sino un conjunto de objetos. \\
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{images/22-plural.jpg}
+\caption{Ejemplo de contexto con 2 targets}
+\label{plurales}
+\end{figure}
+%esto lo saque porque confunde aca... me parece que todavia no hay que hablar de esto, es muy de logica
+%Los algoritmos tambi\'en se pueden diferenciar en los conectores que permiten si usan conjunciones, disyunciones o ambas.\\
+
+La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} la ER ``La pelota roja, grande que esta a la derecha del cubo rojo grande''.\\
+
+%no se si dejar esto...
+Un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir no incluirla.\\
+
+
+
+\section{Algoritmos importantes en el \'area}
 
 En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, GRAPH, algoritmo relacional y por \'ultimo bisimulaci\'on.  
 
@@ -325,10 +338,8 @@ $\ C \leftarrow D - \{r\} $\tcp*[f]{\footnotesize the most general description $
 El objeto target que queremos identificar lo llamaremos {\it r},
 D es el conjunto de distractores de r,
 KB es la base de conocimiento que contiene para cada objeto los valores de sus propiedades.
-Tenemos $P_{r}$ propiedad de r que esta inclu\'ida en KB y adem\'as esta ordenado seg\'un preferencia de propiedades.\\
-L inicialmente es la descripci\'on vac\'{i}a, al finalizar la ejecusi\'on tendr\'a el conjunto de propiedades con los cuales identificaremos a r.\\
-
-Si D es vac\'io, no hay nada para identificar, porque no hay distractores.\\
+Tenemos $P_{r}$ propiedad de r que esta inclu\'ida en KB y adem\'as esta ordenado seg\'un preferencia de propiedades.
+L inicialmente es la descripci\'on vac\'{i}a, al finalizar la ejecusi\'on tendr\'a el conjunto de propiedades con los cuales identificaremos a r, es decir una expresi\'on referencial de r.\\
 
 La idea del algoritmo es ir eliminando distractores, por eso, en {\it Paso 1} si no hay distractores, se devuelve L como el conjunto de propiedades que identifica al target. Si todav\'ia hay distractores pero no quedan propiedades de r ($P_{r}$), falla porque no lo puede identificar un\'ivocamente a r. Si quedan propiedades de r, va al {\it Paso 2}, en el cual elije la propiedad de r que sigue en el orden de preferencias, pero que tambi\'en es propiedad de alg\'un distractor (algun elemento de D) y va al {\it Paso 3}, en caso de que la propiedad no sea propiedad de algun distractor, se actualiza $P_{r}$ a $P_{r}$ menos la propiedad y se va al principio de nuevo.\\
 En el {\it Paso 3} se agrega la propiedad a la descripci\'on actual L, se actualiza $D$ con $D_{j}$, es decir con los elementos de $D$ que tienen la propiedad $_j$, se saca $_j$ de la lista de P y continua en {\it Paso 1}.\\
@@ -369,33 +380,32 @@ descripciones tales como ejemplos
 
 
 \subsection{Graph}
+\label{graph}
+Un grafo es un conjunto de objetos llamados v\'ertices o nodos unidos por enlaces llamadas aristas o arcos, que permiten representar relaciones binarias entre elementos de un conjunto. \\
 
-Un grafo (del griego grafos:dibujo, imagen) es un conjunto de objetos llamados v\'ertices o nodos unidos por enlaces llamadas aristas o arcos, que permiten representar relaciones binarias entre elementos de un conjunto. \\
-
-Son objeto de estudio de la teor\'{i}a de grafos. \\
 
 Un grafo G es un par ordenado $G=(V,E)$, donde:\\
+\begin{itemize}
+   \item V es un conjunto de v\'ertices o nodos, y
+    \item E es un conjunto de aristas o arcos, que relacionan estos nodos.
 
-    V es un conjunto de v\'ertices o nodos, y
-    E es un conjunto de aristas o arcos, que relacionan estos nodos.\\
+Normalmente V suele ser finito. Muchos resultados importantes sobre grafos no son aplicables para grafos infinitos.
 
-Normalmente V suele ser finito. Muchos resultados importantes sobre grafos no son aplicables para grafos infinitos.\\
+\item Se llama orden del grafo G a su n\'umero de v\'ertices, $|V|$.
 
-Se llama orden del grafo G a su n\'umero de v\'ertices, $|V|$.\\
+\item El grado de un v\'ertice o nodo $v \in V$ es igual al n\'umero de arcos que lo tienen como extremo.
 
-El grado de un v\'ertice o nodo $v \in V$ es igual al n\'umero de arcos que lo tienen como extremo.\\
+\item Un bucle es una arista que relaciona al mismo nodo; es decir, una arista donde el nodo inicial y el nodo final coinciden.
 
-Un bucle es una arista que relaciona al mismo nodo; es decir, una arista donde el nodo inicial y el nodo final coinciden.\\
+\item Dos o m\'as aristas son paralelas si relacionan el mismo par de v\'ertices.
 
-Dos o m\'as aristas son paralelas si relacionan el mismo par de v\'ertices.\\
+\item Un grafo puede ser dirigido o no, etiquetado o no.
+\end{itemize}
+T\'{i}picamente, un grafo se representa gr\'aficamente como un conjunto de puntos (v\'ertices o nodos) unidos por l\'{i}neas (aristas).
 
-Un grafo puede ser dirigido o no, etiquetado o no.\\
+Los grafos han sido muy estudiados, pr\'acticamente cualquier problema puede ser expresado como un problema de grafos, y aplicar algoritmos de b\'usqueda ya estudiados.
 
-T\'{i}picamente, un grafo se representa gr\'aficamente como un conjunto de puntos (v\'ertices o nodos) unidos por l\'{i}neas (aristas).\\
-
-Los grafos han sido muy estudiados, pr\'acticamente cualquier problema puede ser expresado como un problema de grafos, y aplicar algoritmos de b\'usqueda ya estudiados.\\
-
-Mirando la obtenci\'on de expresiones referenciales como un problema de grafos, el dominio que incluye al target y los distractores es representado como un grafo dirigido etiquetado. \\
+El algoritmo Graph la obtenci\'on de expresiones referenciales como un problema de grafos, el contexto que incluye al target y los distractores es representado como un grafo dirigido etiquetado. \\
 
 Cada objeto de la escena se modela como un v\'ertice en el grafo. Los atributos at\'omicos como color, tipo o tama\~no se representan como un bucle en el correspondiente nodo. Est\'an etiquetados con los nombres de las propiedades y los valores que el objeto en cuesti\'on tiene para estas propiedades. \\
 
@@ -429,13 +439,13 @@ El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que re
 La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cuando estas se hacen m\'as costosas que el grafo de menor costo encontrado hasta el momento. Esta funci\'on hace que se prefieran propiedades sobre otras que tienen mayor costo.
 
 \subsection{Bisimulaci\'on}
+\label{bisimulacion}
 
+Este algoritmo fue propuesto por %\cite{}
 
-En este cap\'itulo daremos una introducci\'on a las l\'ogicas de descripci\'on (DL del acr\'onimo en ingl\'es description logic) %y luego daremos el algoritmo en el cual nos basamos en esta tesis.\\ el algoritmo en el cap 4
+La idea es transformar el problema de GER al problema de computar una f\'ormula de l\'ogicas para la descripci\'on (DL) cuya extensi\'on sea el elemento target (o los elementos targets, en el caso de querer dar una ER para plurales aprovechando que una f\'ormula describe un conjunto que puede contener m\'as de un elemento).\\
 
-La idea es transformar el problema de GER al problema de computar una f\'ormula de DL cuya extensi\'on es el elemento target (o los elementos targets, en el caso de querer dar ER para plurales) aprovechando que una f\'ormula describe un conjunto que puede contener m\'as de un elemento.\\
-
-Hay distintas l\'ogicas, y entre ellas se diferencian por como se generan, vamos a explicar \alc y \el.\\
+A continuaci\'on daremos una introducci\'on a las l\'ogicas para la descripci\'on \alc y \el.\\
 
 \emph{F\'ormulas} (o \emph{conceptos}) $\varphi$ de $\alc$ son generadas por la siguiente gram\'atica:
 $$
