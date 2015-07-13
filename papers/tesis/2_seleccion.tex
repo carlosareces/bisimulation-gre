@@ -19,30 +19,30 @@ De acuerdo a las propiedades o relaciones que una expresi\'on referencial (ER) i
 % en cuyo caso es una expresi\'on que no es referencial, la incluimos en nuestras propiedades porque nos va a ser \'util la definici\'on en el Cap\'itulo \ref{sec:corpus}.\\
 Una ER {\it proposicional} incluye s\'olo propiedades intr\'insecas del objeto target. Por ejemplo en el contexto \ref{GRE3D7-stimulus}: ``La pelota roja''. Las caracter\'isticas de ser pelota, ser roja son propias del objeto identificado.\\
 
-Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces la ER incluye las ERs de los otros objeto.  Por ejemplo: ``La pelota que esta a la derecha del cubo grande.'' ``a la derecha de'' es una relaci\'on que necesita describir otro objeto, en este caso al ``el cubo grande''.\\
+Una ER es {\it relacional}, cuando contiene relaciones con otros objetos, entonces la ER incluye las ERs de los otros objetos.  Por ejemplo: ``La pelota que esta a la derecha del cubo grande.'' ``a la derecha de'' es una relaci\'on que necesita describir otro objeto, en este caso ``el cubo grande''.\\
 
 Se dice que una ER es {\it minimal}, cuando incluye la m\'inima cantidad de propiedades con las cuales el objeto puede ser identificado un\'ivocamente en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo en el contexto \ref{GRE3D7-stimulus} ``La pelota roja'' es una ER minimal, como as\'i tambi\'en lo es ``La pelota grande'', ya que ambas tienen 2 propiedades, y 2 es la m\'inima cantidad de propiedades que puede tener una ER de ese objeto, para distinguirlo en ese contexto.\\
 
 Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguirlo de los dem\'as objetos en el contexto dado, se dice que la ER es {\it sobreespecificada}. Por ejemplo: ``La pelota roja grande'' en el contexto de la imagen \ref{GRE3D7-stimulus}.\\
 
-Un expresi\'on es {\it subespecificada} cuando no alcanza a ser una ER, ya que no se puede distinguir al objeto target de todos los objetos en el contexto. Por ejemplo: ``La pelota'' en el contexto \ref{GRE3D7-stimulus} no alcanza para distinguir el objeto apuntado por la flecha, ya que hay otras 2. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Esta expresi\'on identifica a un conjunto, no a un objeto \'unico.
+Un expresi\'on es {\it subespecificada} cuando no alcanza a ser una ER, ya que no se puede distinguir al objeto target de todos los objetos en el contexto. Por ejemplo: ``La pelota'' en el contexto \ref{GRE3D7-stimulus} no alcanza para distinguir el objeto apuntado por la flecha, ya que hay otras 2 pelotas. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Esta expresi\'on identifica a un conjunto, no a un objeto \'unico.
 
 \section{La tarea de generaci\'on autom\'atica de expresiones referenciales}
 
 La generaci\'on autom\'atica de expresiones referenciales (GER), es la tarea de definir cuales pasos se deben seguir para conseguir una ER de un objeto espec\'ifico, en un contexto dado. Estos pasos definen un algoritmo de GER. \\
 
-Los algoritmos se pueden diferenciar por la forma en que toman el input, es decir el modo en que toman el contexto y el target para el cual se espera que den una expresi\'on referencial. 
+Los algoritmos se pueden diferenciar por la forma en que toman el input, es decir el modo en que toman el contexto y el target para el cual se espera que den una expresi\'on referencial. \\
 
-En todos los casos, la computadora necesita tener identificado cual objeto tiene que propiedades, para ello vamos a etiquetar los objetos con $e_1$, $e_2$, etc. como se muestra en la Figura \ref{GRE3D7-stimulus-conLetras}. En la imagen tambi\'en podemos ver que el objeto se\~nalado por la flecha es el $e_5$, es el objeto target, para el cual queremos generar autom\'aticamente una expresi\'on referencial.
+En todos los casos, la computadora necesita tener un conjunto de propiedades/relaciones para cada objeto, para ello vamos a etiquetar los objetos con $e_1$, $e_2$, etc. como se muestra en la Figura \ref{GRE3D7-stimulus-conLetras}. En la imagen tambi\'en podemos ver que el objeto se\~nalado por la flecha es el $e_5$, es el objeto target, para el cual queremos generar autom\'aticamente una expresi\'on referencial.
 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.6\textwidth]{images/22.jpg}
-\caption{Ejemplo de contexto}
+\caption{Ejemplo de contexto con objetos etiquetados}
 \label{GRE3D7-stimulus-conLetras}
 \end{figure}
 
-Acontinuaci\'on damos 2 ejemplos de diferentes maneras de modelar el contexto.\\
+Acontinuaci\'on daremos 2 ejemplos de diferentes maneras de modelar el contexto, uno para el algoritmo Graph y otro para algoritmo de bisimulaci\'on.\\
 
 El contexto que toma como input el algoritmo GRAPH \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en \ref{grafo-GRE3D7-stimulus}, el cual contiene la informac\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto target $e_5$, tiene propiedades large, red, ball y una flecha con la etiqueta rightof $e_4$, y $e_4$ tiene propiedades large, red, cube, y una flecha hacia $e_5$ con etiqueta leftof.\\
 
@@ -102,8 +102,9 @@ El contexto que toma como input el algoritmo GRAPH \cite{graph08} el cual explic
 \label{grafo-GRE3D7-stimulus}
 \end{figure}
 
-Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de bisimulaci\'on el cual explicaremos en \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on como se muestra en \ref{input-bisimulacion}. En este caso se estan representando las propiedades como relaciones a un objeto ficticio {\it c}, creado para modelar todas tanto propiedades como relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}, es el objeto al cual queremos referirnos, el target. \'Este tiene las relaciones con c (large, red, ball) y con $e_4$ rightof.  
+Para el mismo contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de bisimulaci\'on el cual explicaremos en \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on como se muestra en \ref{input-bisimulacion}. En este caso se representan las propiedades como relaciones a un objeto ficticio {\it c}, creado para modelar todas tanto propiedades y relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}, es el objeto al cual queremos referirnos, el target. \'Este tiene las relaciones con c (large, red, ball) y con $e_4$ rightof.  
 
+\label{input-bisimulacion}
 \begin{verbatim}
 <?xml version="1.0"?>
 <problem id="e1">c
@@ -112,18 +113,7 @@ Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo d
     <related rel="yellow" to="c" />
     <related rel="ball" to="c" />
   </individual>
-  <individual id="e2">
-    <related rel="cube" to="c" />
-    <related rel="red" to="c" />
-    <related rel="small" to="c" />
-    <related rel="bellow" to="e3" />
-  </individual>
-  <individual id="e3">
-    <related rel="ball" to="c" />
-    <related rel="yellow" to="c" />
-    <related rel="small" to="c" />
-    <related rel="on-top" to="e2" />
-  </individual>
+  ...
   <individual id="e4">
     <related rel="cube" to="c" />
     <related rel="red" to="c" />
@@ -142,6 +132,7 @@ Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo d
   </individual> 
 </problem>
 \end{verbatim}
+
 %Saque para que no quede tan largo
 %<individual id="e6">
     %<related rel="small" to="c" />
@@ -156,13 +147,25 @@ Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo d
     %<related rel="right-of" to="e6" />
   %</individual>
 
+%<individual id="e2">
+%    <related rel="cube" to="c" />
+%    <related rel="red" to="c" />
+%    <related rel="small" to="c" />
+%    <related rel="bellow" to="e3" />
+%  </individual>
+%  <individual id="e3">
+%    <related rel="ball" to="c" />
+%    <related rel="yellow" to="c" />
+%    <related rel="small" to="c" />
+%    <related rel="on-top" to="e2" />
+%  </individual>
 Los algoritmos tambi\'en se pueden diferenciar por la clase de ER que pueden generar, a continuaci\'on explicaremos los distintos tipos de algoritmos de GER. 
 
 \section{Tipos de algoritmos de GER}
 
 Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales  puede ser: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, identificar plurales o s\'olo singulares,
  %usar disyunciones y conjunciones, o s\'olo conjunciones, 
-generar ER sobreespecificadas o minimales. Hacer o no backtraking.  A continuaci\'on se describen cada uno de esos tipos.\\
+generar ER sobreespecificadas o minimales.  A continuaci\'on se describen cada uno de esos tipos.\\
 
 Un algoritmo es {\it determin\'{i}stico} si dado un input (un contexto y un objeto target), da siempre la misma ER de salida. En cambio un algoritmo es {\it no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, por lo tanto los algoritmos no determin\'isticos simulan el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos. Por ejemplo ser\'ia no determin\'istico si para el Contexto \ref{GRE3D7-stimulus-conLetras} una vez da ``La pelota roja'' y otra vez ``La pelota grande''.\\
 
@@ -170,7 +173,7 @@ Un algoritmo es {\it relacional} si adem\'as de generar ER proposicionales gener
 
 En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya {\it negaciones}. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras}, ``La \'unica pelota que no es peque\~na''.\\
 
-Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets de la escena considerada. Por ejemplo para el Contexto \ref{plurales},``Los objetos grandes''. En este caso el target no es \'unico, sino un conjunto de objetos. \\
+Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets en el contexto considerado. Por ejemplo para el Contexto \ref{plurales},``Los objetos grandes''. En este caso el target no es \'unico, sino un conjunto de objetos. \\
 
 \begin{figure}[ht]
 \centering
@@ -181,16 +184,14 @@ Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios t
 %esto lo saque porque confunde aca... me parece que todavia no hay que hablar de esto, es muy de logica
 %Los algoritmos tambi\'en se pueden diferenciar en los conectores que permiten si usan conjunciones, disyunciones o ambas.\\
 
-La sobreespecificaci\'on es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} la ER ``La pelota roja, grande que esta a la derecha del cubo rojo grande''.\\
+La {\it sobreespecificaci\'on} es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} la ER ``La pelota roja, grande que esta a la derecha del cubo rojo grande'' es una ER sobreespecificada.\\
 
 %no se si dejar esto...
-Un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir no incluirla.\\
-
-
+%Un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir no incluirla.\\
 
 \section{Algoritmos importantes en el \'area}
 
-En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, GRAPH, algoritmo relacional y por \'ultimo bisimulaci\'on.  
+En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, GRAPH, algoritmo relacional y por \'ultimo bisimulaci\'on.  \\
 
 %http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.227.8284&rep=rep1&type=pdf
 
@@ -210,7 +211,7 @@ En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica 
 %distractors (i.e., D
 
 %Full  Brevity  and  Greedy  Heuristic.
-El algoritmo {\it Full Brevity} (Dale 1989) genera la m\'as corta descripci\'on que identifica al target. Para hacerlo, 
+El algoritmo {\it Full Brevity} (Dale 1989) genera la descripci\'on m\'as corta que identifica al target. Para hacerlo, 
 busca si hay una propiedad del target que no sea propiedad de ning\'un distractor. Si no hay chequea todas las posibles combinaciones de 2 propiedades, si no la hay, busca de a 3 y as\'i sucesivamente.\\
 
 El problema es que encontrar la descripci\'on m\'as corta es de alta complejidad, y Dale and Reiter observaron que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos (Olson  1970;  Sonnenschein  1984; Pechmann 1989; Engelhardt, Bailey, y Ferreira 2006).\\
@@ -220,7 +221,7 @@ Una aproximaci\'on a Full Brevity es el algoritmo de heur\'istica {\it Greedy} (
 %not  previously  ruled  out,  incrementally  augmenting  the  description  based  on  what
 %property has most discriminatory power at each stage (as a result, it does not always
 %generate  descriptions  of  minimal  size). 
-El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fueron superados por el algoritmo {\it Incremental} (Reiter  and  Dale  1992;  Dale  and  Reiter  1995), que fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, el cual se explica a continuaci\'on. 
+El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fue superado por el algoritmo {\it Incremental} (Reiter  and  Dale  1992;  Dale  and  Reiter  1995), que fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, el cual se explica a continuaci\'on. 
 % The  Greedy  Heuristic  algorithm  is  a  more
 %efficient  algorithm  than  the  Full  Brevity  one,  but  it  was  soon  eclipsed  by  another
 %algorithm    which  turned  out  to  be  the
@@ -276,73 +277,54 @@ El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero
 %\textcolor{blue}{reescribir esto porque no queda tabulado como un algoritmo}
 
 
-\fbox{ \begin{minipage}{150mm}
-
-r - el objeto target que queremos identificar\\
-D = \{d|d es un distractor de r\}\\
-KB - la base de conocimiento que contiene las propiedades de todos los objetos\\
-$P_{r}$ = $\{p|p(r) \in KB\}$ ordenado seg\'un preferencia de propiedades\\
-L = $\{\}$ - la descripci\'on vac\'{i}a\\
-
-1. Chequea \'exito:\\
-    \textbf{if} D = $\emptyset$ \textbf{then} return L como una ER que distingue al target r
-    \textbf{elseif} $P_{r}$ = $\emptyset$ \textbf{then} fail\\
-\textbf{else goto} Paso 2 \\
-\\
-2. Seleccionar Propiedad:\\
- \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:\\
- \textbf{if} \{x|x $\in$ $D_{i}$ and $p_{i}$ (x) $\in$ KB\} $\neq$ $\emptyset$\\
- \textbf{then} elegir $p_{j}$ e \textbf{goto} Paso 3\\
- %(la primer propiedad en el orden que elimima\\ al menos un distractor) 
- 
- \textbf{else} $P_{r}$ =$P_{r}$ -$p_{j}$\\
- \textbf{goto} Paso 1\\
-      \\    
-3. Agregar $p_{j}$ a la descripci\'on actual\\
-L $\leftarrow$ L $\cup$ \{$p_{j}$\}\\
-D $\leftarrow$ $D_{j}$\\
-P $\leftarrow$ P -\{$p_{j}$\}\\
-\textbf{goto} Paso 1\\
-\end{minipage}}
-%\begin{figure}[ht]
-%\begin{center}
-%\includegraphics[width=8.5cm]{figures/incremental.png}\\[0pt]
-%%\caption{Interface del experimento}
-%\label{fig-incremental}
-%\end{center}
-%\end{figure}
-
-
-\begin{figure}[!t]
+\begin{figure}
 \small
 \centering
 \begin{algorithm}[H]
 \dontprintsemicolon
 \caption{Incremental}\label{algo:incremental}
-\KwIn{\footnotesize \{r\}, D, Pref}
-\KwOut{\footnotesize L}
+\KwIn{\footnotesize \{r, D, Pref\} r es el target, D es el dominio, Pref lista de preferencia de atributos ordenadas}
+\KwOut{\footnotesize L Descripci\'on de salida}
 
-$\ L \leftarrow \emptyset $\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}\\
-$\ C \leftarrow D - \{r\} $\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}\\
-\For{\em (A_{i}) $\in$ Pref}{
-	$\ V = Value(r,A_{i}) $\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
-       
-%     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \C $\cap$ \RulesOut(\[A_{i}\],V) $=$ \emptyset}
-	%		{then\tcp*[f]{$\ L \leftarrow \emptyset $\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}}}
-		%	{else\tcp*[f]{$\ C \leftarrow \C $-$ \RulesOut(\[A_{i}\],V) }}
-		%	\If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \C $=$ \emptyset}{then\tcp*[f]{$\ Return L {\footnotesize the most general description $\top$ applies to all elements in the scene}}}
-}
+$\ L \leftarrow \emptyset $ \tcp*[f]{\footnotesize Inicialmente es vac\'io}\\
+$\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los objetos menos r }\\
+
+
+\For{\em $A_{i} \in Pref$}{
+	$V = Value(r,A_{i})$ \tcp*[f]{\footnotesize V es el valor del atributo $A_{i}$ para r }\\
+	\If(\tcp*[f]{\footnotesize Si elimina alg\'un distractor}){\em $C \cap RulesOut(\[A_{i}\],V) \neq \emptyset $}
+	{
+    $\ L \leftarrow L \cup \{A_{i},V\} $  \tcp*[f]{\footnotesize Agrega el atributo $A_{i}$ a L }\\
+    $\ C \leftarrow C - RulesOut(\[A_{i}\],V) $  \tcp*[f]{\footnotesize Actualiza C sacando los objetos que no tienen V en $A_{i}$} 
+    }
+    \If(\tcp*[f]{\footnotesize Si no quedan distractores}){\em $C = \emptyset $}
+	{
+     Return L  
+    }
+  }
+Return Failure 
 \end{algorithm}
 \end{figure}
 
-El objeto target que queremos identificar lo llamaremos {\it r},
-D es el conjunto de distractores de r,
-KB es la base de conocimiento que contiene para cada objeto los valores de sus propiedades.
-Tenemos $P_{r}$ propiedad de r que esta inclu\'ida en KB y adem\'as esta ordenado seg\'un preferencia de propiedades.
-L inicialmente es la descripci\'on vac\'{i}a, al finalizar la ejecusi\'on tendr\'a el conjunto de propiedades con los cuales identificaremos a r, es decir una expresi\'on referencial de r.\\
+El input de este algoritmo es el objeto target que queremos identificar {\it r}, D es el conjunto de distractores de r,
+y Pref una lista ordenada de preferencia de atributos.
+L inicialmente es la descripci\'on vac\'{i}a {\it Paso 1}, al finalizar la ejecuci\'on tendr\'a el conjunto de propiedades con los cuales identificaremos a r, es decir una expresi\'on referencial de r. C es el conjunto de distractores de r, se inicializa en {\it Paso 2}.\\
 
-La idea del algoritmo es ir eliminando distractores, por eso, en {\it Paso 1} si no hay distractores, se devuelve L como el conjunto de propiedades que identifica al target. Si todav\'ia hay distractores pero no quedan propiedades de r ($P_{r}$), falla porque no lo puede identificar un\'ivocamente a r. Si quedan propiedades de r, va al {\it Paso 2}, en el cual elije la propiedad de r que sigue en el orden de preferencias, pero que tambi\'en es propiedad de alg\'un distractor (algun elemento de D) y va al {\it Paso 3}, en caso de que la propiedad no sea propiedad de algun distractor, se actualiza $P_{r}$ a $P_{r}$ menos la propiedad y se va al principio de nuevo.\\
-En el {\it Paso 3} se agrega la propiedad a la descripci\'on actual L, se actualiza $D$ con $D_{j}$, es decir con los elementos de $D$ que tienen la propiedad $_j$, se saca $_j$ de la lista de P y continua en {\it Paso 1}.\\
+La idea del algoritmo es ir eliminando distractores, por eso, en el {\it Paso 3} recorre las propiedades de r. En {\it Paso 4} le asigna a V le valor que tiene el target para el atributo $A_{i}$
+
+$RulesOut(A_{i},V)$ devuelve el conjunto de objetos que tienen diferente valor para el atributo $A_{i}$ que el que tiene el objeto target.
+
+Si hay objetos en C que tengan diferente valor de $A_{i}$ que el target, se agrega la propiedad a la descripci\'on actual L en {\it Paso 6}, y se actualiza $C$ sacando los objetos que no tienen V en $A_{i}$. 
+
+Luego en  {\it Paso 8} si C es $\emptyset$ devolvemos L, como el conjunto de los atributos que identifican a r.
+
+Vamos a ejemplificar la corrida del algoritmo con el ejemplo de Contexto \ref{GRE3D7-stimulus-conLetras}, y supongamos que la lista ordenada de atributos es esta \[tipo, color, tama\~no\]. D inicialmente es \{ $e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}
+Al iniciar a L le asigna $\emptyset$ y a C \{ $e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, luego comienza a recorrer la lista de atributos, el primer atributo es ``tipo'', el valor del target para tipo es {\it pelota}, entonces en {\it Paso 6}, pregunta si hay objetos que tengan tipo con valor distinto de pelota, y hay, ellos son \{ $e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, entonces le asigna a C \{ $e_{1}$,$e_{3}$\}, es decir solo las pelotas. En {\it Paso 10} pregunta si C es vac\'io, no lo es, por lo tanto continua con la siguiente propiedad, en este caso ``color'', el valor de color para el target es {\it rojo}
+
+
+
+
+Intuitivamente, si la primer propiedad tipo y el valor de tipo para el target es ``pelota'', nos quedamos con todos los objetos pelota.\\
 
 %\textcolor{blue}{Un poco mas de historia, no se a donde poner...Theune and Krahmer proposed an extension that allows the generation of subsequent reference with the ia taking into account the discourse salience of the target referent (Krahmer and Theune, 1998; Theune, 2000; Krahmer and Theune, 2002), and a second one which allows the ia to produce referring expressions that
 %contain binary relations to other objects (Theune, 2000; Krahmer and Theune, 2002). I will return to their relational extension in Section 2.3. Theune and Krahmer's approach works by assigning a salience score to all objects according to the
