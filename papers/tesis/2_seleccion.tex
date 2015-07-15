@@ -197,7 +197,7 @@ La {\it sobreespecificaci\'on} es la caracter\'istica de dar m\'as atributos o r
 %interesante...
 %https://www.abdn.ac.uk/ncs/departments/computing-science/tunabibl-495.php
 
-En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, GRAPH, algoritmo relacional y por \'ultimo bisimulaci\'on.  \\
+En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, Graph, algoritmo Relacional y por \'ultimo Bisimulaci\'on.  \\
 
 %http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.227.8284&rep=rep1&type=pdf
 
@@ -223,6 +223,7 @@ busca si hay una propiedad del target que no sea propiedad de ning\'un distracto
 El problema es que encontrar la descripci\'on m\'as corta es de alta complejidad, y Dale and Reiter observaron que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos (\cite{Olson1970LangAndThought};  \cite{Sonnenschein1984}; \cite{Pechmann1989}; \cite{Engelhardt2006}).\\
 
 Una aproximaci\'on a Full Brevity es el algoritmo de heur\'istica {\it Greedy}, el cual iterativamente selecciona la propiedad que elimina m\'as distractores y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado no siempre genera expresiones referenciales m\'inimas.\\
+
 %which  iteratively  selects  the  property  which  rules  out  most  of  the  distractors
 %not  previously  ruled  out,  incrementally  augmenting  the  description  based  on  what
 %property has most discriminatory power at each stage (as a result, it does not always
@@ -312,9 +313,9 @@ Return Failure
 \end{algorithm}
 \end{figure}
 
-El input de este algoritmo es el objeto target que queremos identificar {\it r}, D es el conjunto de distractores de r,
+El input de este algoritmo es el objeto target que queremos identificar {\it r}, D es el dominio,
 y Pref una lista ordenada de preferencia de atributos.
-L inicialmente es la descripci\'on vac\'{i}a {\it Paso 1}, al finalizar la ejecuci\'on tendr\'a el conjunto de propiedades con los cuales identificaremos a r, es decir una expresi\'on referencial de r. C es el conjunto de distractores de r, se inicializa en {\it Paso 2}.\\
+L inicialmente es la descripci\'on vac\'{i}a {\it Paso 1}, al finalizar la ejecuci\'on, L tendr\'a el conjunto de propiedades con los cuales identificaremos a r, es decir una expresi\'on referencial de r. C es el conjunto de distractores de r (todos los objetos menos r), se inicializa en {\it Paso 2}.\\
 
 La idea del algoritmo es ir eliminando distractores, por eso, en el {\it Paso 3} recorre las propiedades de r. En {\it Paso 4} le asigna a V le valor que tiene el target para el atributo $A_{i}$
 
@@ -322,12 +323,10 @@ $RulesOut(A_{i},V)$ devuelve el conjunto de objetos que tienen diferente valor p
 
 Si hay objetos en C que tengan diferente valor de $A_{i}$ que el target, se agrega la propiedad a la descripci\'on actual L en {\it Paso 6}, y se actualiza $C$ sacando los objetos que no tienen V en $A_{i}$. 
 
-Luego en  {\it Paso 8} si C es $\emptyset$ devolvemos L, como el conjunto de los atributos que identifican a r.
+Luego en  {\it Paso 8} si C es $\emptyset$ (si no hay m\'as distractores) devolvemos L, como el conjunto de los atributos que identifican a r.
 
-Vamos a ejemplificar la corrida del algoritmo con el ejemplo de Contexto \ref{GRE3D7-stimulus-conLetras}, y supongamos que la lista ordenada de atributos es esta \[tipo, color, tama\~no\]. D inicialmente es \{ $e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}
-Al iniciar a L le asigna $\emptyset$ y a C \{ $e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, luego comienza a recorrer la lista de atributos, el primer atributo es ``tipo'', el valor del target para tipo es {\it pelota}, entonces en {\it Paso 6}, pregunta si hay objetos que tengan tipo con valor distinto de pelota, y hay, ellos son \{ $e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, entonces le asigna a C \{ $e_{1}$,$e_{3}$\}, es decir solo las pelotas. En {\it Paso 10} pregunta si C es vac\'io, no lo es, por lo tanto continua con la siguiente propiedad, en este caso ``color'', el valor de color para el target es {\it rojo}
-
-
+Vamos a ejemplificar la corrida del algoritmo con el ejemplo de Contexto \ref{GRE3D7-stimulus-conLetras}, y supongamos que la lista ordenada de atributos es esta [ tipo, color, tama\~no ]. D inicialmente es \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}
+Al iniciar a L le asigna $\emptyset$ y a C \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, luego comienza a recorrer la lista de atributos, el primer atributo es ``tipo'', el valor del target para tipo es {\it pelota}, entonces en {\it Paso 6}, pregunta si hay objetos que tengan tipo con valor distinto de pelota, y hay, ellos son \{$e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, entonces le asigna a C \{$e_{1}$,$e_{3}$\}, es decir solo las pelotas. En {\it Paso 10} pregunta si C es vac\'io, no lo es, por lo tanto continua con la siguiente propiedad, en este caso ``color'', el valor de color para el target es {\it rojo}, agrega {\it rojo} a L, y actualiza C con $\emptyset$ porque tanto $e_{1}$ como $e_{3}$ son amatillos, en {\it Paso 10} pregunta si C es vac\'io, y si lo es, por lo tanto devuelve \{pelota, rojo\}.
 
 
 Intuitivamente, si la primer propiedad tipo y el valor de tipo para el target es ``pelota'', nos quedamos con todos los objetos pelota.\\
@@ -350,8 +349,8 @@ Intuitivamente, si la primer propiedad tipo y el valor de tipo para el target es
 %properties of the same type for all the referents of a set. So, it would produce
 %descriptions such as Examples 
 
-Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia con la subsiguiente ia teniendo en cuenta la prominencia discurso del referente objetivo (Krahmer y Theune, 1998; Theune, 2000; Krahmer y Theune, 2002), y un segundo uno que permite la IA para producir expresiones referenciales que
-contienen relaciones binarias a otros objetos (Theune, 2000; Krahmer y Theune, 2002). Enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con el enfoque / tema distinci\'on por Hajicova (1993) y el centrado Theory (Grosz et al., 1995). Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando aqu\'i hay izquierda distractor que es tan o m\'as relevante que el referente de destino.
+Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia con la subsiguiente ia teniendo en cuenta la prominencia discurso del referente objetivo (\cite{Krahmer:2010:EMN:1880370}; \cite{krahmer-theune:2002a};), y un segundo uno que permite la IA para producir expresiones referenciales que
+contienen relaciones binarias a otros objetos. Enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con el enfoque / tema distinci\'on por Hajicova (1993) y el centrado Theory (Grosz et al., 1995). Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando aqu\'i hay izquierda distractor que es tan o m\'as relevante que el referente de destino.
 No todas las propiedades son las mismas. Las Diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura reg por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de
 propiedades vagas como peque\~no y grande depende del contexto en el que se utilizan, mientras que,
 por ejemplo, el color de un objeto es absoluta. Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad l\'ogica del ia en t\'erminos de los operadores booleanos de negaci\'on y disyunci\'on. \'el la extendi\'o a
