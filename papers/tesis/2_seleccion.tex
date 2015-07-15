@@ -50,52 +50,52 @@ El contexto que toma como input el algoritmo GRAPH \cite{graph08} el cual explic
 \centering
 \begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
-    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
+    n/.style={circle,fill,draw,inner sep=3pt,node distance=2cm},
+    aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
   ]
  \node[n,label=above:$e_1$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nSmall\\[-2pt] 
-      \nYellow \\[-2pt] 
+    \relsize{-2}$\begin{array}{c}
+      \nSmall\\[-3pt] 
+      \nYellow \\[-3pt] 
       \nBall\end{array}$}] (a) {};
  \node[n,label=above:$e_2$,label=below:{
-    \relsize{-1}$\begin{array}{c}     
-      \nSmall\\[-2pt] 
-      \nRed\\[-2pt] 
+    \relsize{-2}$\begin{array}{c}     
+      \nSmall\\[-3pt] 
+      \nRed\\[-3pt] 
       \nCube\end{array}$}, right of=a] (b) {};
  \node[n,label=below:$e_3$,label=above:{
-    \relsize{-1}$\begin{array}{c}
-      \nTop\\[-2pt]      
-      \nSmall\\[-2pt] 
-      \nYellow\\[-2pt] 
+    \relsize{-2}$\begin{array}{c}
+      \nTop\\[-3pt]      
+      \nSmall\\[-3pt] 
+      \nYellow\\[-3pt] 
       \nBall\end{array}$}, above of=b] (c) {};
- \node[n,label=above:$e_4$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLarge\\[-2pt] 
-      \nRed\\[-2pt] 
+ \node[n,label=right:$e_4$,label=left:{
+    \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt] 
+      \nRed\\[-3pt] 
       \nCube\end{array}$}, right of=b] (d) {};
- \node[n,label=above:$e_5$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLarge\\[-2pt] 
-      \nRed\\[-2pt] 
+ \node[n,label=left:$e_5$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt] 
+      \nRed\\[-3pt] 
       \nBall\end{array}$}, right of=d] (e) {};
- \node[n,label=above:$e_6$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nSmall\\[-2pt] 
-      \nYellow\\[-2pt] 
+ \node[n,label=right:$e_6$,label=left:{
+    \relsize{-2}$\begin{array}{c}
+      \nSmall\\[-3pt] 
+      \nYellow\\[-3pt] 
       \nCube\end{array}$}, right of=e] (f) {};
- \node[n,label=above:$e_7$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nSmall\\[-2pt]
-      \nRed\\[-2pt] 
+ \node[n,label=left:$e_7$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nSmall\\[-3pt]
+      \nRed\\[-3pt] 
       \nCube\end{array}$},  right of=f] (g) {};
- \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
- \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
- \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
- \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
- \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
- \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
- \draw[dotted] (-.5,-1.4) rectangle (7.5,3.1);
+ \draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
+ \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
+ \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
+ \draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
 
  \end{tikzpicture}
 \caption{Grafo del contexto \ref{GRE3D7-stimulus}}
@@ -175,7 +175,7 @@ Un algoritmo es {\it relacional} si adem\'as de generar ER proposicionales gener
 
 En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya {\it negaciones}. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras}, ``La \'unica pelota que no es peque\~na''.\\
 
-Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets en el contexto considerado. Por ejemplo para el Contexto \ref{plurales},``Los objetos grandes''. En este caso el target no es \'unico, sino un conjunto de objetos. \\
+Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios targets en el contexto considerado. Por ejemplo para el Contexto \ref{plurales}, ``Los objetos grandes''. En este caso el target no es \'unico, sino un conjunto de objetos. \\
 
 \begin{figure}[ht]
 \centering
@@ -194,6 +194,8 @@ La {\it sobreespecificaci\'on} es la caracter\'istica de dar m\'as atributos o r
 %Un algoritmo que hace backtraking, es el que luego de incluir una propiedad o relaci\'on puede deshacer esa inclusi\'on volviendo a un estado anterior, es decir, decidir no incluirla.\\
 
 \section{Algoritmos importantes en el \'area}
+%interesante...
+%https://www.abdn.ac.uk/ncs/departments/computing-science/tunabibl-495.php
 
 En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, GRAPH, algoritmo relacional y por \'ultimo bisimulaci\'on.  \\
 
@@ -215,17 +217,17 @@ En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica 
 %distractors (i.e., D
 
 %Full  Brevity  and  Greedy  Heuristic.
-El algoritmo {\it Full Brevity} (Dale 1989) genera la descripci\'on m\'as corta que identifica al target. Para hacerlo, 
+El algoritmo {\it Full Brevity} \cite{Dale:1989:CUR:981623.981632} genera la descripci\'on m\'as corta que identifica al target. Para hacerlo, 
 busca si hay una propiedad del target que no sea propiedad de ning\'un distractor. Si no hay chequea todas las posibles combinaciones de 2 propiedades, si no la hay, busca de a 3 y as\'i sucesivamente.\\
 
-El problema es que encontrar la descripci\'on m\'as corta es de alta complejidad, y Dale and Reiter observaron que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos (Olson  1970;  Sonnenschein  1984; Pechmann 1989; Engelhardt, Bailey, y Ferreira 2006).\\
+El problema es que encontrar la descripci\'on m\'as corta es de alta complejidad, y Dale and Reiter observaron que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos (\cite{Olson1970LangAndThought};  \cite{Sonnenschein1984}; \cite{Pechmann1989}; \cite{Engelhardt2006}).\\
 
-Una aproximaci\'on a Full Brevity es el algoritmo de heur\'istica {\it Greedy} (Dale  1989, 1992), el cual iterativamente selecciona la propiedad que elimina m\'as distractores y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado no siempre genera expresiones referenciales m\'inimas.\\
+Una aproximaci\'on a Full Brevity es el algoritmo de heur\'istica {\it Greedy}, el cual iterativamente selecciona la propiedad que elimina m\'as distractores y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado no siempre genera expresiones referenciales m\'inimas.\\
 %which  iteratively  selects  the  property  which  rules  out  most  of  the  distractors
 %not  previously  ruled  out,  incrementally  augmenting  the  description  based  on  what
 %property has most discriminatory power at each stage (as a result, it does not always
 %generate  descriptions  of  minimal  size). 
-El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fue superado por el algoritmo {\it Incremental} (Reiter  and  Dale  1992;  Dale  and  Reiter  1995), que fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, el cual se explica a continuaci\'on. 
+El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fue superado por el algoritmo {\it Incremental} \cite{C92-1038}; \cite{Dale95computationalinterpretations}), que fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, el cual se explica a continuaci\'on. 
 % The  Greedy  Heuristic  algorithm  is  a  more
 %efficient  algorithm  than  the  Full  Brevity  one,  but  it  was  soon  eclipsed  by  another
 %algorithm    which  turned  out  to  be  the
@@ -287,8 +289,8 @@ El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero
 \begin{algorithm}[H]
 \dontprintsemicolon
 \caption{Incremental}\label{algo:incremental}
-\KwIn{\footnotesize \{r, D, Pref\} r es el target, D es el dominio, Pref lista de preferencia de atributos ordenadas}
-\KwOut{\footnotesize L Descripci\'on de salida}
+\KwIn{\footnotesize \{r, D, Pref\} r es el target, D es el dominio, Pref lista de preferencia de atributos ordenados}
+\KwOut{\footnotesize L  - Descripci\'on de salida}
 
 $\ L \leftarrow \emptyset $ \tcp*[f]{\footnotesize Inicialmente es vac\'io}\\
 $\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los objetos menos r }\\
