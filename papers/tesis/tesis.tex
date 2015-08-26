@@ -27,11 +27,13 @@
 \usepackage{xspace}
 \usepackage{ifthen}
 \usepackage{pdfpages}
-
+\usepackage{caption}
+\usepackage{titling}
 \renewcommand{\listtablename}{Indice de Tablas}
 \renewcommand{\tablename}{Tabla}
 \hyphenation{a-tri-bu-tos}
 \hyphenation{con-ti-nuan-do}
+\hyphenation{des-cri-bir}
 \hyphenation{des-crip-ci\'on}
 \hyphenation{e-va-lua-ci\'on}
 \hyphenation{ex-pe-ri-men-to}
@@ -51,6 +53,7 @@
 \hyphenation{nues-tro} 
 \hyphenation{pro-ba-bi-li-da-des} 
 \hyphenation{pro-ba-bi-li-dad} 
+\hyphenation{re-co-rrer}
 \hyphenation{re-fe-ren-cial}
 \hyphenation{re-fe-ren-cia-les}
 \hyphenation{res-pec-ti-va-men-te}
@@ -61,6 +64,8 @@
 \hyphenation{si-guien-tes} 
 \hyphenation{so-bre-es-pe-ci-fi-ca-ci\'on}
 \hyphenation{so-bre-es-pe-ci-fi-ca-da}
+\hyphenation{su-pon-ga-mos}
+\hyphenation{su-pe-ra-do}
 % Sin sangria
 %\parindent=0mm  
 
@@ -96,22 +101,22 @@
 %\newcommand{\interp}[1]{|\!|#1|\!|}
 
 
-\newcommand{\nBlue}{\textsf{blue}\xspace}
-\newcommand{\nGreen}{\textsf{green}\xspace}
-\newcommand{\nSmall}{\textsf{small}\xspace}
-\newcommand{\nBig}{\textsf{big}\xspace}
-\newcommand{\nLarge}{\textsf{large}\xspace}
-\newcommand{\nRed}{\textsf{red}\xspace}
-\newcommand{\nYellow}{\textsf{yellow}\xspace}
-\newcommand{\nBall}{\textsf{ball}\xspace}
-\newcommand{\nCube}{\textsf{cube}\xspace}
-\newcommand{\nOntop}{\textsf{ontop}\xspace}
-\newcommand{\nTop}{\textsf{top}\xspace}
-\newcommand{\nBelow}{\textsf{below}\xspace}
-\newcommand{\nRightof}{\textsf{rightof}\xspace}
-\newcommand{\nLeftof}{\textsf{leftof}\xspace}
-\newcommand{\nLeft}{\textsf{left}\xspace}
-
+\newcommand{\nBlue}{\textsf{azul}\xspace}
+\newcommand{\nGreen}{\textsf{verde}\xspace}
+\newcommand{\nSmall}{\textsf{peque\~no}\xspace}
+\newcommand{\nBig}{\textsf{grande}\xspace}
+\newcommand{\nLarge}{\textsf{grande}\xspace}
+\newcommand{\nRed}{\textsf{rojo}\xspace}
+\newcommand{\nYellow}{\textsf{amarillo}\xspace}
+\newcommand{\nBall}{\textsf{pelota}\xspace}
+\newcommand{\nCube}{\textsf{cubo}\xspace}
+\newcommand{\nOntop}{\textsf{arriba-de}\xspace}
+\newcommand{\nTop}{\textsf{arriba}\xspace}
+\newcommand{\nBelow}{\textsf{abajo-de}\xspace}
+\newcommand{\nRightof}{\textsf{a-la-derecha-de}\xspace}
+\newcommand{\nLeftof}{\textsf{a-la-izquierda-de}\xspace}
+\newcommand{\nLeft}{\textsf{izquierda}\xspace}
+\newcommand{\nAlgorithm}{Algoritmo}
 \usepackage[algoruled, linesnumbered,noend]{algorithm2e}
 
 \newcommand{\gM}{\ensuremath{\mathcal{M}}}
@@ -121,8 +126,8 @@
 \newcommand{\M}{\ensuremath{\mathcal{M}}\xspace}
 %\newcommand{\RE}{\ensuremath{\mathit{RE}}\xspace}
 
-\newtheorem{definition}{Definition}[section]
-\newtheorem{theorem}{Theorem}[section]
+\newtheorem{definition}{Definic\'on}[section]
+\newtheorem{theorem}{Teorema}[section]
 
 %\newcommand{\todo}[1]{\textbf{(#1)}}
 \newcommand{\ignore}[1]{}
@@ -139,7 +144,7 @@
 
 
 \begin{document}
-
+\date{\today}
 % PARTE PRELIMINAR
 %\input{preliminar/preliminar}
 
@@ -170,6 +175,7 @@
 \renewcommand{\appendixname}{Ap\'endice}
 \renewcommand{\figurename}{Figura}
 \renewcommand{\bibname}{Bibliograf{\'\i}a}
+%\renewcommand{\algorithmname}{Algoritmo}
 %\renewcommand{\refname}{Bibliograf{\'\i}a}
 \include{1_intro} %trabajo previo
 

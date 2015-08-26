@@ -1,7 +1,7 @@
 \chapter{Generaci\'on de expresiones referenciales}
 \label{sec:seleccion}
 
-En este cap\'itulo emplicaremos los tipos de expresiones referenciales, daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales y a los tipos de algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos del \'area. (ver si los divido por secciones a los algoritmos...)
+En este cap\'itulo emplicaremos los tipos de expresiones referenciales, daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales y a los tipos de algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos del \'area. %(ver si los divido por secciones a los algoritmos...)
 
 \section{Tipos de ER}
 
@@ -12,7 +12,7 @@ En este cap\'itulo emplicaremos los tipos de expresiones referenciales, daremos 
 \label{GRE3D7-stimulus}
 \end{figure}
 
-Una propiedad es una caracter\'istica propia de un objeto. Por ejemplo en el Contexto \ref{GRE3D7-stimulus} el objeto se\~nalado con la flecha tiene la propiedad {\it color} con valor {\it rojo}. Por simplicidad, en el resto de la tesis vamos a dirigirnos a la propiedad {\it rojo}, para decir que el objeto tiene la propiedad color con valor rojo. Una relaci\'on caracteriza a un objeto describiendo caracter\'isticas de otro u otros objetos.\\
+Una propiedad es una caracter\'istica propia de un objeto. Por ejemplo en el Contexto \ref{GRE3D7-stimulus} el objeto se\~nalado con la flecha tiene la propiedad {\it color} con valor {\it rojo}. Por simplicidad, en el resto de la tesis vamos a decir ``tiene propiedad {\it rojo}'', cuando queremos decir que el objeto tiene la propiedad color con valor rojo. Una relaci\'on caracteriza a un objeto describiendo caracter\'isticas de otro u otros objetos.\\
 
 %Cuando la ER no es relacional solo contiene propiedades del objeto mismo. Ej.: color, tama\~no. Note que quiz\'as el tama\~no sea con respecto a los dem\'as objetos ``la m\'as peque\~na'', pero al no incluir una descripci\'on de otro objeto no la llamamos relacional.\\
 De acuerdo a las propiedades o relaciones que una expresi\'on referencial (ER) incluya, se clasifican en distintos tipos: relacional o no relacional (tambi\'en llamada proposicional), m\'inima, sobreespecificada, o subespecificada. A continuaci\'on describimos cada uno de estos tipos.\\
@@ -20,21 +20,21 @@ De acuerdo a las propiedades o relaciones que una expresi\'on referencial (ER) i
 % en cuyo caso es una expresi\'on que no es referencial, la incluimos en nuestras propiedades porque nos va a ser \'util la definici\'on en el Cap\'itulo \ref{sec:corpus}.\\
 Una ER {\it proposicional} o no relacional, incluye s\'olo propiedades intr\'insecas del objeto target. Por ejemplo en el Contexto \ref{GRE3D7-stimulus}: ``La pelota roja''. Las caracter\'isticas de ser pelota, ser roja son propias del objeto identificado.\\
 
-Una ER es {\it relacional}, cuando adem\'as de ser proposicional, contiene relaciones con otros objetos, entonces la ER incluye las ERs de los otros objetos.  Por ejemplo en el Contexto \ref{GRE3D7-stimulus}: ``La pelota que esta a la derecha del cubo grande.'' ``a la derecha de'' es una relaci\'on que necesita describir otro objeto adem\'as del target, en este caso ``el cubo grande''.\\
+Una ER es {\it relacional}, cuando adem\'as de ser proposicional, contiene relaciones con otros objetos, entonces la ER incluye las ERs de los otros objetos.  Por ejemplo en el Contexto \ref{GRE3D7-stimulus}: ``La pelota que esta a la derecha del cubo grande'', ``a la derecha de'' es una relaci\'on que necesita describir otro objeto adem\'as del target, en este caso ``el cubo grande''.\\
 
 Se dice que una ER es {\it minimal}, cuando incluye la m\'inima cantidad de propiedades con las cuales el objeto puede ser distinguido en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo en el Contexto \ref{GRE3D7-stimulus} ``La pelota roja'' es una ER minimal, como as\'i tambi\'en lo es ``La pelota grande'', ya que ambas tienen 2 propiedades, y 2 es la m\'inima cantidad de propiedades que puede tener una ER de ese objeto, para distinguirlo en ese contexto.\\
 
 Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguirlo de los dem\'as objetos en el contexto dado, se dice que la ER es {\it sobreespecificada}. Por ejemplo: ``La pelota roja grande'' en el Contexto \ref{GRE3D7-stimulus}.\\
 
-Un expresi\'on es {\it subespecificada} cuando no alcanza a ser una ER, ya que no se puede distinguir al objeto target de todos los objetos en el contexto. Por ejemplo: ``La pelota'' en el Contexto \ref{GRE3D7-stimulus} no alcanza para distinguir el objeto apuntado por la flecha, ya que hay otras 2 pelotas. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Una expresi\'onsubespecificada identifica a un conjunto, no a un objeto \'unico.
+Una expresi\'on es {\it subespecificada} cuando no alcanza a ser una ER, ya que no se puede distinguir al objeto target de todos los objetos en el contexto. Por ejemplo: ``La pelota'' en el Contexto \ref{GRE3D7-stimulus} no alcanza para distinguir el objeto apuntado por la flecha, ya que hay otras 2 pelotas. En estos casos se debe dar otra expresi\'on o corregir la anterior agregando m\'as propiedades o relaciones. Una expresi\'on subespecificada identifica a un conjunto, no a un objeto \'unico.
 
 \section{La tarea de generaci\'on autom\'atica de expresiones referenciales}
 
 La generaci\'on autom\'atica de expresiones referenciales (GER), es la tarea de definir cuales pasos se deben seguir para conseguir una ER de un objeto espec\'ifico, en un contexto dado. Estos pasos definen un algoritmo de GER. \\
 
-Los algoritmos se pueden diferenciar por el input que toman, por la forma en que toman el input, es decir el modo en que toman por ejemplo el contexto para el cual se espera que den una expresi\'on referencial. \\
+Los algoritmos se pueden diferenciar por la cantidad y forma de los par\'ametros que toman como input, es decir el modo en que toman por ejemplo el contexto para el cual se espera que den una expresi\'on referencial. \\
 
-En todos los casos, la computadora necesita tener un conjunto de propiedades/relaciones para cada objeto, para ello vamos a etiquetar los objetos con $e_1$, $e_2$, etc. como se muestra en la Figura \ref{GRE3D7-stimulus-conLetras}. En la imagen tambi\'en podemos ver que el objeto se\~nalado por la flecha es $e_5$, es el objeto target, para el cual queremos generar autom\'aticamente una expresi\'on referencial.
+En todos los casos, la computadora necesita tener un conjunto de propiedades/relaciones para cada objeto y poder identificarlos, para ello vamos a etiquetar a los objetos con $e_1$, $e_2$, etc. como se muestra en la Figura \ref{GRE3D7-stimulus-conLetras}. En la imagen tambi\'en podemos ver que el objeto se\~nalado con la flecha es $e_5$, es el objeto target, para el cual queremos generar autom\'aticamente una expresi\'on referencial.
 
 \begin{figure}[ht]
 \centering
@@ -43,11 +43,11 @@ En todos los casos, la computadora necesita tener un conjunto de propiedades/rel
 \label{GRE3D7-stimulus-conLetras}
 \end{figure}
 
-A continuaci\'on daremos 2 ejemplos de diferentes maneras de modelar el contexto que toman como input, uno para el algoritmo Graph y otro para algoritmo de bisimulaci\'on.\\
+A continuaci\'on daremos 2 ejemplos de diferentes maneras de modelar el contexto que toman como input, uno para el algoritmo Graph y otro para algoritmo de Bisimulaci\'on.\\
 
 %El contexto que toma como input el algoritmo GRAPH \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto target que es el $e_5$, tiene propiedades large, red, ball y una flecha con la etiqueta rightof $e_4$, y $e_4$ tiene propiedades large, red, cube, y una flecha hacia $e_5$ con etiqueta leftof.\\
 
-El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto target que es el $e_5$, tiene propiedades grande, rojo, pelota y una flecha con la etiqueta a-la-derecha-de hacia $e_4$, y $e_4$ tiene propiedades grande, rojo, cubo, y una flecha hacia $e_5$ con etiqueta a-la-izquierda-de.\\
+El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto $e_5$, tiene propiedades grande, rojo, pelota y una flecha con la etiqueta a-la-derecha-de hacia $e_4$, y $e_4$ tiene propiedades grande, rojo, cubo, y una flecha hacia $e_5$ con etiqueta a-la-izquierda-de.\\
 
 \begin{figure}[ht]
 \centering
@@ -105,15 +105,18 @@ El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explic
 \label{grafo-GRE3D7-stimulus}
 \end{figure}
 
-Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de bisimulaci\'on el cual explicaremos en Secci\'on \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on del Contexto \ref{input-bisimulacion}. En este caso se representan las propiedades como relaciones a un objeto ficticio, terminal {\it c}, creado para modelar todas tanto propiedades y relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}, es el objeto al cual queremos referirnos, el target. \'Este tiene las relaciones con c (grande, rojo, pelota) y con $e_4$ a-la-derecha-de.  
+Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de Bisimulaci\'on el cual explicaremos en Secci\'on \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on del Contexto \ref{input-bisimulacion}. En este caso se representan las propiedades como relaciones a un objeto ficticio, terminal {\it c}, creado para modelar propiedades y relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que todos los objetos tienen ``id'' que es el identificador, salvo el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}. Con la etiqueta ``rel'', identificamos las relaciones y con la etiqueta ``to'' con que objeto esta relacionado. El target tiene relaciones con c (grande, rojo, pelota) y con $e_4$ a-la-derecha-de.  
 %\'Este tiene las relaciones con c (large, red, ball) y con $e_4$ rightof.  
-
+\textcolor{blue}{aca tengo problemas en verbatim para escribir la enie de pequeino}
 \label{input-bisimulacion}
+
+%\include{xml}
+
 \begin{verbatim}
 <?xml version="1.0"?>
 <problem id="e1">c
   <individual id="e1">
-    <related rel="pequeño" to="c" />
+    <related rel="pequeno" to="c" />
     <related rel="amarillo" to="c" />
     <related rel="pelota" to="c" />
   </individual>
@@ -198,7 +201,7 @@ Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales  pue
  %usar disyunciones y conjunciones, o s\'olo conjunciones, 
 generar ER sobreespecificadas o minimales.  A continuaci\'on se describen cada uno de esos tipos.\\
 
-Un algoritmo es {\it determin\'{i}stico} si dado un input (un contexto y un objeto target), da siempre la misma ER de salida. En cambio un algoritmo es {\it no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, por lo tanto los algoritmos no determin\'isticos simulan el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos. Por ejemplo ser\'ia no determin\'istico si para el Contexto \ref{GRE3D7-stimulus-conLetras} una vez da ``La pelota roja'' y otra vez ``La pelota grande''.\\
+Un algoritmo es {\it determin\'{i}stico} si dado un input (un contexto y un objeto target), da siempre la misma ER de salida. En cambio un algoritmo es {\it no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, por lo tanto los algoritmos no determin\'isticos simulan el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos. Por ejemplo ser\'ia no determin\'istico si para el Contexto \ref{GRE3D7-stimulus-conLetras} una vez da ``La pelota roja'' y en otra ejecuci\'on ``La pelota grande''.\\
 
 Un algoritmo es {\it proposicional}, cuando las ER que genera contienen solo atributos del target, es decir no contiene relaciones con otros atributos ni ER de otros objetos.  Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} una vez da ``La pelota roja''.\\
 
@@ -217,7 +220,7 @@ Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios t
 %esto lo saque porque confunde aca... me parece que todavia no hay que hablar de esto, es muy de logica
 %Los algoritmos tambi\'en se pueden diferenciar en los conectores que permiten si usan conjunciones, disyunciones o ambas.\\
 
-Un algoritmo que genera ER {\it minimales}, es un algoritmo que da ER que contienen la m\'inima cantidad de atributos o relaciones para distinguir al target.  Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} una vez da ``La pelota grande''.\\
+Un algoritmo que genera ER {\it minimales}, es un algoritmo que da ER que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target.  Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} ``La pelota grande''.\\
 
 La {\it sobreespecificaci\'on} es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} la ER ``La pelota roja, grande que esta a la derecha del cubo rojo grande'' es una ER sobreespecificada.\\
 
@@ -251,7 +254,7 @@ En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica 
 El algoritmo {\it Full Brevity} \cite{Dale:1989:CUR:981623.981632} genera la descripci\'on m\'as corta que identifica al target. Para hacerlo, 
 busca si hay una propiedad del target que no sea propiedad de ning\'un distractor. Si no hay chequea todas las posibles combinaciones de 2 propiedades, si no la hay, busca de a 3 y as\'i sucesivamente.\\
 
-El problema es que encontrar la descripci\'on m\'as corta es de alta complejidad, y Dale and Reiter observaron que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos (\cite{Olson1970LangAndThought};  \cite{Sonnenschein1984}; \cite{Pechmann1989}; \cite{Engelhardt2006}).\\
+El problema es que encontrar la descripci\'on m\'as corta es de alta complejidad, se observ\'o que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos (\cite{Olson1970LangAndThought};  \cite{Sonnenschein1984}; \cite{Pechmann1989}; \cite{Engelhardt2006}).\\
 
 Una aproximaci\'on a Full Brevity es el algoritmo de heur\'istica {\it Greedy}, el cual iterativamente selecciona la propiedad que elimina m\'as distractores y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado no siempre genera expresiones referenciales m\'inimas.\\
 
@@ -259,7 +262,7 @@ Una aproximaci\'on a Full Brevity es el algoritmo de heur\'istica {\it Greedy}, 
 %not  previously  ruled  out,  incrementally  augmenting  the  description  based  on  what
 %property has most discriminatory power at each stage (as a result, it does not always
 %generate  descriptions  of  minimal  size). 
-El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fue superado por el algoritmo {\it Incremental} y sus sucesores \cite{C92-1038}; \cite{Dale95computationalinterpretations}, el algoritmo Incremental fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, lo explicamos a continuaci\'on. 
+El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fue superado por el algoritmo {\it Incremental} y sus sucesores \cite{C92-1038}; \cite{Dale95computationalinterpretations}. El algoritmo Incremental fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, lo explicamos a continuaci\'on. 
 % The  Greedy  Heuristic  algorithm  is  a  more
 %efficient  algorithm  than  the  Full  Brevity  one,  but  it  was  soon  eclipsed  by  another
 %algorithm    which  turned  out  to  be  the
@@ -312,16 +315,20 @@ El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero
 
 %A continuaci\'on se describe el algoritmo Incremental de Dale \& Reiter el cual esta basado en el algoritmo GREEDY (el cual hac\'ia una b\'usqueda exaustiva y eleg\'ia la propiedad que m\'as distractores eliminaba en cada paso) pero \'este reduce la complejidad del algoritmo Greedy cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que elimina al menos un distractor. Este algoritmo es de orden polinomial. Este algoritmo produce expresiones referenciales que pueden estar sobreespecificadas.\\
 
-%\textcolor{blue}{reescribir esto porque no queda tabulado como un algoritmo}
+\textcolor{blue}{error entorno matematico, pero no entiendo porque, y no puedo hacer que diga algoritmo en vez de algorithm}
 
-
-\begin{figure}
+%\begin{figure}
 \small
-\centering
+\begin{center}
+%\centering
 \begin{algorithm}[H]
+
 \dontprintsemicolon
-\caption{Incremental}\label{algo:incremental}
-\KwIn{\footnotesize \{r, D, Pref\} r es el target, D es el dominio, Pref lista de preferencia de atributos ordenados}
+
+\captionsetup[algorithm]{name=Algoritmo}
+\caption{Incremental\label{algo:incremental}}
+%\caption{Incremental}\label{algo:incremental}
+\KwIn{\footnotesize \{r, D, Pref\} r es el target, D es el dominio, Pref lista de preferencia de propiedades ordenadas}
 \KwOut{\footnotesize L  - Descripci\'on de salida}
 
 $\ L \leftarrow \emptyset $ \tcp*[f]{\footnotesize Inicialmente es vac\'io}\\
@@ -329,10 +336,10 @@ $\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los
 
 
 \For{\em $A_{i} \in Pref$}{
-	$V = Value(r,A_{i})$ \tcp*[f]{\footnotesize V es el valor del atributo $A_{i}$ para r }\\
+	$V = Value(r,A_{i})$ \tcp*[f]{\footnotesize V es el valor de la propiedad $A_{i}$ para r }\\
 	\If(\tcp*[f]{\footnotesize Si elimina alg\'un distractor}){\em $C \cap RulesOut(\[A_{i}\],V) \neq \emptyset $}
 	{
-    $\ L \leftarrow L \cup \{A_{i},V\} $  \tcp*[f]{\footnotesize Agrega el atributo $A_{i}$ a L }\\
+    $\ L \leftarrow L \cup \{A_{i},V\} $  \tcp*[f]{\footnotesize Agrega la propiedad $A_{i}$ a L }\\
     $\ C \leftarrow C - RulesOut(\[A_{i}\],V) $  \tcp*[f]{\footnotesize Actualiza C sacando los objetos que no tienen V en $A_{i}$} 
     }
     \If(\tcp*[f]{\footnotesize Si no quedan distractores}){\em $C = \emptyset $}
@@ -342,22 +349,25 @@ $\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los
   }
 Return Failure 
 \end{algorithm}
-\end{figure}
+\end{center}
+%\end{figure}
 
-Como podemos ver en \ref{{algo:incremental}} el input de este algoritmo es el objeto target que queremos identificar {\it r}, D, el dominio, y Pref una lista ordenada de preferencia de atributos.\\
+
+
+Como podemos ver en \ref{algo:incremental} el input de este algoritmo es el objeto target que queremos identificar {\it r}, D, el dominio, y Pref una lista ordenada de preferencia de propiedades.\\
 En {\it Paso 1} se asigna a L la descripci\'on vac\'{i}a, al finalizar la ejecuci\'on, L tendr\'a el conjunto de propiedades con los cuales identificaremos a r, es decir una expresi\'on referencial de r. 
 Se le asigna a C el conjunto de distractores de r (todos los objetos menos r), en {\it Paso 2}.\\
 
-La idea del algoritmo es ir eliminando distractores, por eso, en el {\it Paso 3} recorre las propiedades de r. En {\it Paso 4} le asigna a V le valor que tiene el target para el atributo $A_{i}$
+La idea del algoritmo es ir eliminando distractores, por eso, en el {\it Paso 3} recorre las propiedades de r. En {\it Paso 4} le asigna a V el valor que tiene el target para la propiedad $A_{i}$
 
-$RulesOut(A_{i},V)$ devuelve el conjunto de objetos que tienen diferente valor para el atributo $A_{i}$ que el que tiene el objeto target.
+$RulesOut(A_{i},V)$ devuelve el conjunto de objetos que tienen diferente valor para la propiedad $A_{i}$ que el que tiene el objeto target.
 
 Si hay objetos en C que tengan diferente valor de $A_{i}$ que el target, se agrega la propiedad a la descripci\'on actual L en {\it Paso 6}, y se actualiza $C$ sacando los objetos que no tienen V en $A_{i}$. 
 
-Luego en  {\it Paso 8} si C es $\emptyset$ (si no hay m\'as distractores) devolvemos L, como el conjunto de los atributos que identifican a r.
+Luego en {\it Paso 8} si C es $\emptyset$ (si no hay m\'as distractores) devolvemos L, como el conjunto de propiedades que identifican a r.
 
-Vamos a ejemplificar la corrida del algoritmo con el ejemplo de Contexto \ref{GRE3D7-stimulus-conLetras}, y supongamos que la lista ordenada de atributos es esta [ tipo, color, tama\~no ]. D inicialmente es \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}
-Al iniciar a L le asigna $\emptyset$ y a C \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, luego comienza a recorrer la lista de atributos, el primer atributo es ``tipo'', el valor del target para tipo es {\it pelota}, entonces en {\it Paso 6}, pregunta si hay objetos que tengan tipo con valor distinto de pelota, y hay, ellos son \{$e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, entonces le asigna a C \{$e_{1}$,$e_{3}$\}, es decir solo las pelotas. En {\it Paso 10} pregunta si C es vac\'io, no lo es, por lo tanto continua con la siguiente propiedad, en este caso ``color'', el valor de color para el target es {\it rojo}, agrega {\it rojo} a L, y actualiza C con $\emptyset$ porque tanto $e_{1}$ como $e_{3}$ son amarillos, en {\it Paso 10} pregunta si C es vac\'io, y si lo es, por lo tanto devuelve \{pelota, rojo\}.
+Vamos a ejemplificar la corrida del algoritmo con el ejemplo de Contexto \ref{GRE3D7-stimulus-conLetras}, y supongamos que la lista ordenada de propiedades es esta [ tipo, color, tama\~no ]. D inicialmente es \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}
+Al iniciar a L le asigna $\emptyset$ y a C \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, luego comienza a recorrer la lista de propiedades, la primer propiedad es ``tipo'', el valor del target para tipo es {\it pelota}, entonces en {\it Paso 6}, pregunta si hay objetos que tengan tipo con valor distinto de pelota, y hay, ellos son \{$e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, entonces le asigna a C \{$e_{1}$,$e_{3}$\}, es decir solo las pelotas. En {\it Paso 10} pregunta si C es vac\'io, no lo es, por lo tanto continua con la siguiente propiedad, en este caso ``color'', el valor de color para el target es {\it rojo}, agrega {\it rojo} a L, y actualiza C con $\emptyset$ porque tanto $e_{1}$ como $e_{3}$ son amarillos, en {\it Paso 10} pregunta si C es vac\'io, y si lo es, por lo tanto devuelve \{pelota, rojo\}.
 
 
 %Intuitivamente, si la primer propiedad tipo y el valor de tipo para el target es ``pelota'', nos quedamos con todos los objetos pelota.\\
@@ -380,8 +390,8 @@ Al iniciar a L le asigna $\emptyset$ y a C \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_
 %properties of the same type for all the referents of a set. So, it would produce
 %descriptions such as Examples 
 Luego se propusieron extensiones del algoritmo Incremental, por ejemplo 
-Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia  teniendo en cuenta la prominencia discurso del target (\cite{Krahmer:2010:EMN:1880370}; \cite{krahmer-theune:2002a};), y un segundo algoritmo que permite producir expresiones referenciales que contienen relaciones con otros objetos. El enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con el enfoque / tema distinci\'on por \cite{hajicova-1993} y la teor\'ia de centrado \cite{Grosz:1995:CFM:211190.211198}. Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando hay un distractor que es tanto o m\'as relevante que el target.
-No todas las propiedades tienen la misma relevancia. Las diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura reg por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de otras propiedades sobre las
+Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia teniendo en cuenta la prominencia discurso del target (\cite{Krahmer:2010:EMN:1880370}; \cite{krahmer-theune:2002a};), y un segundo algoritmo que permite producir expresiones referenciales que contienen relaciones con otros objetos. El enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con el enfoque / tema distinci\'on por \cite{hajicova-1993} y la teor\'ia de centrado \cite{Grosz:1995:CFM:211190.211198}. Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando hay un distractor que es tanto o m\'as relevante que el target.
+No todas las propiedades tienen la misma relevancia. Las diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura GER por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de otras propiedades sobre las
 propiedades vagas como peque\~no y grande dependen del contexto en el que se utilizan, mientras que, por ejemplo, el color de un objeto es absoluta. 
 %Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad l\'ogica del ia en t\'erminos de los operadores booleanos de negaci\'on y disyunci\'on. \'el la extendi\'o a
 %ser capaz de generar expresiones referenciales que contienen propiedades, tales como Ejemplo (2.3) negado, y las descripciones de conjuntos de objetos, tales como Ejemplo (2.4), o incluso (2,5), que contiene una disyunci\'on l\'ogica de propiedades. Sus algoritmo procede
@@ -396,12 +406,11 @@ propiedades vagas como peque\~no y grande dependen del contexto en el que se uti
 %No todas las propiedades son las mismas. Las Diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura reg por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de propiedades orgradable vagos como peque\~nos y grandes depende del contexto en el que se utilizan, mientras que, Por ejemplo, el color de un objeto es absoluta. Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad l\'ogica del ia en t\'erminos de los operadores booleanos de negaci\'on y disyunci\'on. \'el la extendi\'o a ser capaz de generar expresiones que se refieren que contienen propiedades, tales como Ejemplo (2.3) negado, y las descripciones de conjuntos de objetos, tales como Ejemplo (2.4), o incluso (2,5), que contiene una disyunci\'on l\'ogica de propiedades. Sus algoritmo procede en etapas, tratando m\'as y disyunciones m\'as largos de propiedades, si las propiedades at\'omicas y disyunciones m\'as cortos no son suficientes para distinguir el conjunto de destino .. que funciona en referencia a conjuntos fue tomada adem\'as por Gatt y van Deemter (2005, 2006), que han presentado los algoritmos m\'as maduros en este espacio para la fecha. Utilizaron un procedimiento similar al de las otras cosas en que sus algoritmos se basan en el procesamiento incremental de un orden de preferencia de las propiedades. Sus algoritmos agregar una gran cantidad de maquinaria compleja para el procedimiento b\'asico para asegurar que las propiedades se eligen de manera que maximiza la coherencia dentro del conjunto de objetos descritos por las expresiones que se refieren. Por ejemplo, su enfoque intentar\'a utilizar propiedades del mismo tipo para todos los referentes de un conjunto. As\'i, ser\'ia producir Ejemplos descripciones tales como (2,6) o (2,7) en lugar de Ejemplo (2.8) o ..
 
 
-\subsection{Búsqueda en Grafo}
+\subsection{Algoritmo de b\'usqueda en Grafo}
 \label{graph}
-Un grafo es un conjunto de objetos llamados v\'ertices o nodos unidos por enlaces llamadas aristas o arcos, que permiten representar relaciones binarias entre elementos de un conjunto. \\
+%Un grafo es un conjunto de objetos llamados v\'ertices o nodos unidos por enlaces llamadas aristas o arcos, que permiten representar relaciones binarias entre elementos de un conjunto. \\
 
-
-Un grafo G es un par ordenado $G=(V,E)$, donde:\\
+Un grafo G es un par ordenado $G=(V,E)$, donde:
 \begin{itemize}
    \item V es un conjunto de v\'ertices o nodos, y
     \item E es un conjunto de aristas o arcos, que relacionan estos nodos.
@@ -416,13 +425,13 @@ Un grafo G es un par ordenado $G=(V,E)$, donde:\\
 
 %\item Un grafo puede ser dirigido o no, etiquetado o no.
 \end{itemize}
-T\'{i}picamente, un grafo se representa gr\'aficamente como un conjunto de puntos (v\'ertices o nodos) unidos por l\'{i}neas (aristas).
+%T\'{i}picamente, un grafo se representa gr\'aficamente como un conjunto de puntos (v\'ertices o nodos) unidos por l\'{i}neas (aristas).
 
 Los grafos han sido muy estudiados, pr\'acticamente cualquier problema puede ser expresado como un problema de grafos, y aplicar algoritmos de b\'usqueda ya estudiados.
 
 El algoritmo Graph de \cite{Krahmer:2003} propone ver la obtenci\'on de expresiones referenciales como un problema de grafos, el contexto que incluye al target y los distractores es representado como un grafo. \\
 
-Cada objeto de la escena se modela como un v\'ertice en el grafo. Los atributos at\'omicos como color, tipo o tama\~no se representan como un bucle en el correspondiente nodo. Est\'an etiquetados con los nombres de las propiedades y los valores que el objeto en cuesti\'on tiene para estas propiedades. \\
+Cada objeto de la escena se modela como un v\'ertice en el grafo. Las propiedades at\'omicas como color, tipo o tama\~no se representan como un bucle en el correspondiente nodo. Est\'an etiquetados con los nombres de las propiedades y los valores que el objeto en cuesti\'on tiene para estas propiedades. \\
 
 Las relaciones binarias entre objetos, por ejemplo abajo-de, arriba-de se modelan como aristas entre los nodos correspondientes.\\
 
@@ -430,9 +439,9 @@ Las relaciones binarias entre objetos, por ejemplo abajo-de, arriba-de se modela
 
 %Krahmer et al.'s (2003) reformularon la tarea de seleccionar las propiedades y relaciones que contendr\'a una expresi\'on referencial como un problema de teor\'ia de grafos.
 
-Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente, le llama grafo distintivo (distinguishing graph).\\
+Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente, le llama grafo distintivo.\\% (distinguishing graph).\\
 
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda exaustiva, pero comenzando a lo ancho. Utiliza una heur\'{i}stica basada en el costo (costo de incluir propiedades, relaciones) para podar el espacio de b\'usqueda. Y da el grafo de menor costo. \\
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda exhaustiva, pero comenzando a lo ancho. Utiliza una heur\'{i}stica basada en el costo (costo de incluir propiedades, relaciones) para podar el espacio de b\'usqueda. Y da el grafo de menor costo. \\
 
 
 %esto no se entiende nada
@@ -453,10 +462,13 @@ El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que re
 
 La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cuando estas se hacen m\'as costosas que el grafo de menor costo encontrado hasta el momento. Esta funci\'on hace que se prefieran propiedades sobre otras que tienen mayor costo.
 
+\textcolor{blue}{aca quiero agregar ejemplo, no me gusta como quedo esta parte}
+
+
 \subsection{Bisimulaci\'on}
 \label{bisimulacion}
 
-Este algoritmo fue propuesto por %\cite{}
+%Este algoritmo fue propuesto por %\cite{}
 
 La idea es transformar el problema de GER al problema de computar una f\'ormula de l\'ogicas para la descripci\'on (DL) cuya extensi\'on sea el elemento target (o los elementos targets, en el caso de querer dar una ER para plurales aprovechando que una f\'ormula describe un conjunto que puede contener m\'as de un elemento).\\
 
@@ -561,13 +573,13 @@ no \alc-similar a alg\'un individual $b$, pero no viceversa.\\
 
 \cite{arec2:2008:Areces,arec:usin11} han propuesto algoritmos de baja complejidad
  para la generaci\'on de ER relacionales que eliminan el riesgo de regresi\'on infinita. Estos algoritmos son
-basado en variaciones de los algoritmos de refinamiento particiones
+basados en variaciones de los algoritmos de refinamiento de particiones
 de~\cite{paig:thre87}. La informaci\'on proporcionada por una escena dada
 se interpreta como un modelo relacional cuyos objetos se clasifican en
 conjuntos que se adaptan a la misma descripci\'on. Esta clasificaci\'on es
 sucesivamente \emph{refinada} hasta que el target es el \'unico elemento
 en la clase. La existencia de una ER depende
-de la informaci\'on disponible en la escena de entrada, y en el poder expresivo
+de la informaci\'on disponible en la escena de entrada, y del poder expresivo
 del lenguaje formal utilizado para describir los elementos de las
 diferentes clases en el refinamiento.\\
 
@@ -583,13 +595,13 @@ diferentes clases en el refinamiento.\\
 %the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
 %done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
 
-Los algoritmos de refinamiento
+%Los algoritmos de refinamiento
 % presenta en~\cite{arec 2:2008:Areces, arec:usin11}
-calculan efectivamente ER para todos los objetos en el dominio, al mismo
-tiempo. Los algoritmos siempre terminan devolviendo una f\'ormula del
-lenguaje formal elegido que describe un\'{i}vocamente el target (si el
-lenguaje formal es suficientemente expresivo para identificar el target en el
-modelo de entrada).\\
+%calculan efectivamente ER para todos los objetos en el dominio, al mismo
+%tiempo. Los algoritmos siempre terminan devolviendo una f\'ormula del
+%lenguaje formal elegido que describe un\'{i}vocamente el target (si el
+%lenguaje formal es suficientemente expresivo para identificar el target en el
+%modelo de entrada).\\
 
 %Refinement algorithms for GER are based on the following basic idea:
 %given a scene $S$, the objects appearing in $S$ are successively
@@ -605,17 +617,6 @@ modelo de entrada).\\
 %referring expression; otherwise the target cannot be unequivocally
 %described (in 
 
-Algoritmos de refinamiento para GER se basan en la siguiente idea b\'asica:
-dada una escena $S$, los objetos que aparecen en $S$ son sucesivamente
-clasificados de acuerdo con sus propiedades en clases m\'as y m\'as finas. 
-Una descripci\'on (en alg\'un lenguaje formal de $\mathcal{L}$) de cada
-clase se calcula cada vez que una clase es refinada. El procedimiento siempre
-se detiene cuando el conjunto de clases se estabiliza, es decir, no se puede hacer m\'as refinamiento
-con la informaci\'on disponible en la escena \footnote{Por supuesto, si s\'olo estamos interesados en una expresi\'on referencial de un objeto dado, se puede detener el procedimiento en cuanto el objetivo es el
-   \'unico elemento de alguna de las clases.}. Si el elemento target est\'a en
-una clase singleton, entonces la descripci\'on formal de esa clase es un
-expresi\'on referencial; de lo contrario el target no puede ser un\'{i}vocamente
-descripto (en $\mathcal{L}$).\\
 
 %It is clear that a scene can be encoded in different ways as a
 %relational model (for example in \ref{figure22}, we could argue that
@@ -628,19 +629,24 @@ descripto (en $\mathcal{L}$).\\
 %reification, if necessary).
 
 \begin{figure}[ht]
-\begin{minipage}[b]{0.45\linewidth}
-\centering
-\includegraphics[width=\textwidth]{images/3b.png}
-\vspace*{1cm}
-%\caption{Input scene}
-\label{GRE3D7-stimulus-cap2}
-\end{minipage}
+%\begin{minipage}[b]{0.45\linewidth}
+%\centering
+\begin{center}
+\includegraphics[width=0.5\textwidth]{images/3b.png}
+\caption{Contexto de ejemplo}\label{GRE3D7-stimulus-cap2}
+%\end{minipage}
+\end{center}
+\end{figure}
+
+%\textcolor{blue}{hice mas grande la figura porque no se leian, como la pase a espaniol y se me fue al pie, no se porque}
 %\hspace*{-0.35cm}
-\begin{minipage}[b]{0.6\linewidth}
-\centering
+\begin{figure}[ht]
+\begin{center}
+%\begin{minipage}[b]{0.5\linewidth}
+%\centering
 \begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+    n/.style={circle,fill,draw,inner sep=3pt,node distance=2.6cm},
     aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
   ]
  \node[n,label=above:$e_1$,label=below:{
@@ -693,24 +699,39 @@ descripto (en $\mathcal{L}$).\\
  \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
  \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
 
- \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
- \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+ \draw [aArrow,bend right=70] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
+ \draw [aArrow,bend right=70] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
 
  \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
  \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
 
- \draw[dotted] (-.5,-1.4) rectangle (7.1,3.1);
+ \draw[dotted] (-.6,-1.4) rectangle (12.5,4.5);
 
  \end{tikzpicture}
-\caption{Escena como un modelo relacional}
+\caption{Modelo relacional del Contexto \ref{GRE3D7-stimulus-cap2}}
 \label{GRE3D7-stimulus-graph}
-\end{minipage}
+%\end{minipage}
+\end{center}
 \end{figure}
+
+Algoritmos de refinamiento para GER se basan en la siguiente idea b\'asica:
+dada una escena $S$, los objetos que aparecen en $S$ son sucesivamente
+clasificados de acuerdo con sus propiedades en clases m\'as y m\'as finas. 
+Una descripci\'on (en alg\'un lenguaje formal de $\mathcal{L}$) de cada
+clase se calcula cada vez que una clase es refinada. El procedimiento siempre
+se detiene cuando el conjunto de clases se estabiliza, es decir, no se puede hacer m\'as refinamiento
+con la informaci\'on disponible en la escena \footnote{Por supuesto, si s\'olo estamos interesados en una expresi\'on referencial de un objeto dado, se puede detener el procedimiento en cuanto el objetivo es el
+   \'unico elemento de alguna de las clases.}
+
+Si el elemento target est\'a en
+una clase singleton, entonces la descripci\'on formal de esa clase es un
+expresi\'on referencial; de lo contrario el target no puede ser un\'{i}vocamente
+descripto (en $\mathcal{L}$).\\
 
 Est\'a claro que una escena puede ser codificada en diferentes formas como un
 modelo relacional (por ejemplo, en \ref{GRE3D7-stimulus-cap2}, podr\'{i}amos argumentar que
 $e_1$ es tambi\'en \emph{leftof} $e_2$, pero no lo consideramos porque no se estan 
-tocando). El algoritmo asume que estas cuestiones se han resuelto y que el modelo codifica una representaci\'on adecuada de la escena que
+tocando en la imagen). El algoritmo asume que estas cuestiones se han resuelto y que el modelo codifica una representaci\'on adecuada de la escena que
 queremos describir. Por otra parte, vamos a suponer que todas las relaciones son
 \emph{binarias}. No vamos a considerar las relaciones de aridad mayor que
 dos (relaciones de mayor aridad pueden codificarse como relaciones binarias v\'{i}a
@@ -778,233 +799,233 @@ $\el$ como language. Este algoritmo fue presentado en
 \label{algoritmoOriginal}
 \end{figure}
 
-\subsection{Ejemplo de ejecuci\'on}
-
-
-
-\textcolor{blue}{no se si poner aca un ejemplo, si poner el texto y las im\'agenes en otro apendice... o ponerlas mas chiquitas en varias columnas, asi queda feo}\\
-Vamos a ejecutar el algoritmo para la Figura~\ref{GRE3D7-stimulus-cap2},
-el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
-esas listas son las siguientes:
-
-propiedades ordenadas (prop): \textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
-relaciones ordenadas (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
-
-%\begin{figure}
-%\begin{center}	
-%\includegraphics[width=.5\textwidth]{images/22.jpg}
-%\end{center}
-%\vspace*{-1.5em}
-%\caption{Escena 3D de figuras geom\'etricas}\label{figure22}
-%\end{figure}
-
-%\begin{figure}
+%\subsection{Ejemplo de ejecuci\'on}
+%
+%
+%
+%\textcolor{blue}{no se si poner aca un ejemplo, si poner el texto y las im\'agenes en otro apendice... o ponerlas mas chiquitas en varias columnas, asi queda feo}\\
+%Vamos a ejecutar el algoritmo para la Figura~\ref{GRE3D7-stimulus-cap2},
+%el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
+%esas listas son las siguientes:
+%
+%propiedades ordenadas (prop): \textsf{ball}, \textsf{cube}, \textsf{red}, \textsf{yellow}, \textsf{small}, \textsf{large}.\\
+%relaciones ordenadas (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
+%
+%%\begin{figure}
+%%\begin{center}	
+%%\includegraphics[width=.5\textwidth]{images/22.jpg}
+%%\end{center}
+%%\vspace*{-1.5em}
+%%\caption{Escena 3D de figuras geom\'etricas}\label{figure22}
+%%\end{figure}
+%
+%%\begin{figure}
+%%\begin{minipage}[b]{0.6\linewidth}
+%%\centering
+%%\begin{tikzpicture}
+%%  [
+%%    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+%%    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
+%%  ]
+%% \node[n,label=above:$e_1$,label=below:{
+%%    \relsize{-1}$\begin{array}{c}
+%%      \nLeft\\[-2pt]
+%%      \nSmall\\[-2pt] 
+%%      \nYellow \\[-2pt] 
+%%      \nBall\end{array}$}] (a) {};
+%
+%% \node[n,label=above:$e_2$,label=below:{
+%%    \relsize{-1}$\begin{array}{c}
+%%      \nLeft\\[-2pt]
+%%      \nSmall\\[-2pt] 
+%%      \nRed\\[-2pt] 
+%%      \nCube\end{array}$}, right of=a] (b) {};
+%
+%% \node[n,label=below:$e_3$,label=above:{
+%%    \relsize{-1}$\begin{array}{c}
+%%      \nTop\\[-2pt]
+%%      \nLeft\\[-2pt]
+%%      \nSmall\\[-2pt] 
+%%      \nYellow\\[-2pt] 
+%%      \nBall\end{array}$}, above of=b] (c) {};
+%
+%% \node[n,label=above:$e_4$,label=below:{
+%%    \relsize{-1}$\begin{array}{c}
+%%      \nBig\\[-2pt] 
+%%      \nRed\\[-2pt] 
+%%      \nCube\end{array}$}, right of=b] (d) {};
+%
+%% \node[n,label=above:$e_5$,label=below:{
+%%    \relsize{-1}$\begin{array}{c}
+%%      \nBig\\[-2pt] 
+%%      \nRed\\[-2pt] 
+%%      \nBall\end{array}$}, right of=d] (e) {};
+%
+%% \node[n,label=above:$e_6$,label=below:{
+%%    \relsize{-1}$\begin{array}{c}
+%%      \nSmall\\[-2pt] 
+%%      \nYellow\\[-2pt] 
+%%      \nCube\end{array}$}, right of=e] (f) {};
+%
+%% \node[n,label=above:$e_7$,label=below:{
+%%    \relsize{-1}$\begin{array}{c}
+%%      \nSmall\\[-2pt] 
+%%      \nRed\\[-2pt] 
+%%      \nCube\end{array}$}, right of=f] (g) {};
+%
+%% \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
+%% \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+%
+%% \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
+%% \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+%
+%% \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
+%% \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
+%
+%% \draw[dotted] (-.4,-1.7) rectangle (7.5,3.3);
+%
+%% \end{tikzpicture}
+%%\caption{La escena como modelo relacional}\label{GRE3D7-stimulus-graph}
+%%\end{minipage}
+%%\end{figure}
+%
+%
+%El algoritmo siempre termina, y devuelve ER un conjunto de f\'ormulas que describe cada elemento en el dominio (si existe esa f\'ormula). \\
+%
+%En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
+%
+%ACA
+%\begin{figure}[ht]
+%\begin{minipage}[b]{0.45\linewidth}
+%\centering
+%\includegraphics[width=\textwidth]{images/22.jpg}
+%\vspace*{1cm}
+%%\caption{Input scene}
+%\label{GRE3D7-stimulus-22}
+%\end{minipage}
+%%\hspace*{-0.35cm}
 %\begin{minipage}[b]{0.6\linewidth}
 %\centering
-%\begin{tikzpicture}
-%  [
-%    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
-%    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
-%  ]
-% \node[n,label=above:$e_1$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nLeft\\[-2pt]
-%      \nSmall\\[-2pt] 
-%      \nYellow \\[-2pt] 
-%      \nBall\end{array}$}] (a) {};
-
-% \node[n,label=above:$e_2$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nLeft\\[-2pt]
-%      \nSmall\\[-2pt] 
-%      \nRed\\[-2pt] 
-%      \nCube\end{array}$}, right of=a] (b) {};
-
-% \node[n,label=below:$e_3$,label=above:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nTop\\[-2pt]
-%      \nLeft\\[-2pt]
-%      \nSmall\\[-2pt] 
-%      \nYellow\\[-2pt] 
-%      \nBall\end{array}$}, above of=b] (c) {};
-
-% \node[n,label=above:$e_4$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nBig\\[-2pt] 
-%      \nRed\\[-2pt] 
-%      \nCube\end{array}$}, right of=b] (d) {};
-
-% \node[n,label=above:$e_5$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nBig\\[-2pt] 
-%      \nRed\\[-2pt] 
-%      \nBall\end{array}$}, right of=d] (e) {};
-
-% \node[n,label=above:$e_6$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nSmall\\[-2pt] 
-%      \nYellow\\[-2pt] 
-%      \nCube\end{array}$}, right of=e] (f) {};
-
-% \node[n,label=above:$e_7$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nSmall\\[-2pt] 
-%      \nRed\\[-2pt] 
-%      \nCube\end{array}$}, right of=f] (g) {};
-
-% \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
-% \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
-
-% \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
-% \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
-
-% \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
-% \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
-
-% \draw[dotted] (-.4,-1.7) rectangle (7.5,3.3);
-
-% \end{tikzpicture}
-%\caption{La escena como modelo relacional}\label{GRE3D7-stimulus-graph}
+%%\begin{figure}[ht]
+%%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo.png}}\\[0pt]
+%\caption{Modelo de la Figura \ref{GRE3D7-stimulus-22}}
+%\label{fig-modelo}
 %\end{minipage}
 %\end{figure}
-
-
-El algoritmo siempre termina, y devuelve ER un conjunto de f\'ormulas que describe cada elemento en el dominio (si existe esa f\'ormula). \\
-
-En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
-
-ACA
-\begin{figure}[ht]
-\begin{minipage}[b]{0.45\linewidth}
-\centering
-\includegraphics[width=\textwidth]{images/22.jpg}
-\vspace*{1cm}
-%\caption{Input scene}
-\label{GRE3D7-stimulus-22}
-\end{minipage}
-%\hspace*{-0.35cm}
-\begin{minipage}[b]{0.6\linewidth}
-\centering
+%El primer bucle del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE), las propiedades at\'omicas se muestran en la Figura~\ref{fig-modelo2}.
+%
 %\begin{figure}[ht]
 %\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo.png}}\\[0pt]
-\caption{Modelo de la Figura \ref{GRE3D7-stimulus-22}}
-\label{fig-modelo}
-\end{minipage}
-\end{figure}
-El primer bucle del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE), las propiedades at\'omicas se muestran en la Figura~\ref{fig-modelo2}.
-
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo2.png}}\\[0pt]
-\caption{Propiedades proposicionales en cuadro rojo, las del primer ciclo del algoritmo}
-\label{fig-modelo2}
-\end{center}
-\end{figure}
-
-La f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on tiene al menos un elemento, a continuaci\'on, para cada f\'ormula
- $\psi$ en ER la conjunci\'on
-$\varphi  \wedge \psi$ no necesita estar subsumida in ER, la $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\psi}$. Luego las f\'ormulas subsumidas se borran.
-
-La primer propiedad es \textsf{ball}, ER = \{$\top$, \textsf{ball}\}, se ven los elementos de ``ball'' en un recuadro en la Figura~\ref{fig-modelo3}.
-
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo3.png}}\\[0pt]
-\caption{El cuadro indica cuales son ``ball''}
-\label{fig-modelo3}
-\end{center}
-\end{figure}
-
-La siguiente propiedad es \textsf{cube}, ER = \{$\top$, \textsf{ball}, \textsf{cube}\}, pero ahora la $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, quedando las particiones como se muestra en la Figura~\ref{fig-modelo4}
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo4.png}}\\[0pt]
-\caption{Cuadros indicando ``ball'' y ``cube''}
-\label{fig-modelo4}
-\end{center}
-\end{figure}
-Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo9.png}}\\[0pt]
-\caption{Cuadros indicando ``ball'', ``cube'' y ``red''}
-\label{fig-modelo9}
-\end{center}
-\end{figure}
-
-Siguiendo con \textsf{yellow}, tenemos, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos ER = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. 
-Note que aqu\'i ya borramos la f\'ormula \textsf{ball} porque estaba subsumida, y la f\'ormula \textsf{cube} tambi\'en. Se muestran particiones en Figura~\ref{fig-modelo10}.
-
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo10.png}}\\[0pt]
-\caption{Cuadros indicando ``ball'', ``cube'', ``red'' y ``yellow''}
-\label{fig-modelo10}
-\end{center}
-\end{figure}
-
-Haciendo lo mismo con \textsf{small} tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$, como se puede ver en Figura~\ref{fig-modelo11}.
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo11.png}}\\[0pt]
-\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow'', ``small'' y ``large''}
-\label{fig-modelo11}
-\end{center}
-\end{figure}
-
-La siguiente propiedad es \textsf{large} as\'i, tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Aqu\'i no podemos agregar \textsf{large} a la f\'ormula $\textsf{red} \wedge \textsf{cube}$ porque su interpretaci\'on tiene un solo elemento, y la condici\'on dice que es necesario tener m\'as de uno.
-
-Hasta ahora ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ 
-y tenemos las siguientes extensiones: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectivamente. 
-Hay dos f\'ormulas que a\'un pueden ser refinadas, $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ y $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ 
-debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo, while del algoritmo 1, en la l\'inea 4. Ahora es el turno de las relaciones, la primera de ellas es \textsf{leftof}, para cada f\'ormula $\varphi$ en ER trataremos de hacer add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Notar que $\psi$ solo puede ser $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ o $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ porque esos son los que su interpretaci\'on tiene m\'as de un elemento. 
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo15.png}}\\[0pt]
-\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
-\label{fig-modelo15}
-\end{center}
-\end{figure}
-
-
-No hay
-%because those are the ones that its interpretation have more than one element. There is not 
-$\varphi$ y $\psi$ que puedan ser aplicadas. Continuando con \textsf{rightof} agregamos $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, y asi con \textsf{topof} agregamos $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ y el algoritmo termina con ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, 
-aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer ning\'un refinamiento m\'as. 
-%can be applied to $cube \wedge red \wedge small$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
-%its interpretation is $\{e_7\}$ with $\psi$ is $cube \wedge yellow \wedge small$, the others combinations can't be apply because they don't do true the preconditions. The following relation is rightof, 
-
-%leftof, rightof, ontopof, bellowof
-
-%At this point we already have the target in a singleton set. So the formula for it is ``red and ball'', and also for s6 which formula is ``yellow cube''.\\
-%As we show this algorithm depends of the order of properties and relations.\\
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo16.png}}\\[0pt]
-\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
-\label{fig-modelo16}
-\end{center}
-\end{figure}
-
-\begin{figure}[ht]
-\begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo17.png}}\\[0pt]
-\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
-\label{fig-modelo17}
-\end{center}
-\end{figure}
-
-Las expresiones referenciales encontradas son:\\
-
-$\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ representa $e_1$ \\
-$\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}$ representa $e_6$ \\
-$\textsf{ball} \wedge \textsf{red}$ representa $e_5$ \\
-$\textsf{cube} \wedge \textsf{red} \wedge \textsf{large}$ representa $e_4$ \\
-$\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ representa $\{e_2,e_7\}$  \\
-$\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ representa $e_6$ \\
-$\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ representa $e_2$ \\
-
+%\frame{\includegraphics[width=8cm]{images/modelo2.png}}\\[0pt]
+%\caption{Propiedades proposicionales en cuadro rojo, las del primer ciclo del algoritmo}
+%\label{fig-modelo2}
+%\end{center}
+%\end{figure}
+%
+%La f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on tiene al menos un elemento, a continuaci\'on, para cada f\'ormula
+ %$\psi$ en ER la conjunci\'on
+%$\varphi  \wedge \psi$ no necesita estar subsumida in ER, la $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\psi}$. Luego las f\'ormulas subsumidas se borran.
+%
+%La primer propiedad es \textsf{ball}, ER = \{$\top$, \textsf{ball}\}, se ven los elementos de ``ball'' en un recuadro en la Figura~\ref{fig-modelo3}.
+%
+%\begin{figure}[ht]
+%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo3.png}}\\[0pt]
+%\caption{El cuadro indica cuales son ``ball''}
+%\label{fig-modelo3}
+%\end{center}
+%\end{figure}
+%
+%La siguiente propiedad es \textsf{cube}, ER = \{$\top$, \textsf{ball}, \textsf{cube}\}, pero ahora la $\interp{\textsf{ball}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, quedando las particiones como se muestra en la Figura~\ref{fig-modelo4}
+%\begin{figure}[ht]
+%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo4.png}}\\[0pt]
+%\caption{Cuadros indicando ``ball'' y ``cube''}
+%\label{fig-modelo4}
+%\end{center}
+%\end{figure}
+%Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) las otras dos f\'ormulas. La siguiente propiedad es  \textsf{red}, $\interp{\textsf{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{ball}, \textsf{cube}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$, las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
+%\begin{figure}[ht]
+%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo9.png}}\\[0pt]
+%\caption{Cuadros indicando ``ball'', ``cube'' y ``red''}
+%\label{fig-modelo9}
+%\end{center}
+%\end{figure}
+%
+%Siguiendo con \textsf{yellow}, tenemos, $\interp{\textsf{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos ER = $\{\textsf{ball} \wedge \textsf{yellow}, \textsf{cube} \wedge \textsf{yellow}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}\}$. 
+%Note que aqu\'i ya borramos la f\'ormula \textsf{ball} porque estaba subsumida, y la f\'ormula \textsf{cube} tambi\'en. Se muestran particiones en Figura~\ref{fig-modelo10}.
+%
+%\begin{figure}[ht]
+%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo10.png}}\\[0pt]
+%\caption{Cuadros indicando ``ball'', ``cube'', ``red'' y ``yellow''}
+%\label{fig-modelo10}
+%\end{center}
+%\end{figure}
+%
+%Haciendo lo mismo con \textsf{small} tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$, como se puede ver en Figura~\ref{fig-modelo11}.
+%\begin{figure}[ht]
+%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo11.png}}\\[0pt]
+%\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow'', ``small'' y ``large''}
+%\label{fig-modelo11}
+%\end{center}
+%\end{figure}
+%
+%La siguiente propiedad es \textsf{large} as\'i, tenemos ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$. Aqu\'i no podemos agregar \textsf{large} a la f\'ormula $\textsf{red} \wedge \textsf{cube}$ porque su interpretaci\'on tiene un solo elemento, y la condici\'on dice que es necesario tener m\'as de uno.
+%
+%Hasta ahora ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}\}$ 
+%y tenemos las siguientes extensiones: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectivamente. 
+%Hay dos f\'ormulas que a\'un pueden ser refinadas, $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ y $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ 
+%debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo, while del algoritmo 1, en la l\'inea 4. Ahora es el turno de las relaciones, la primera de ellas es \textsf{leftof}, para cada f\'ormula $\varphi$ en ER trataremos de hacer add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Notar que $\psi$ solo puede ser $\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ o $\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ porque esos son los que su interpretaci\'on tiene m\'as de un elemento. 
+%\begin{figure}[ht]
+%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo15.png}}\\[0pt]
+%\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
+%\label{fig-modelo15}
+%\end{center}
+%\end{figure}
+%
+%
+%No hay
+%%because those are the ones that its interpretation have more than one element. There is not 
+%$\varphi$ y $\psi$ que puedan ser aplicadas. Continuando con \textsf{rightof} agregamos $\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$, y asi con \textsf{topof} agregamos $\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ y el algoritmo termina con ER = $\{\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}, \textsf{ball} \wedge \textsf{red}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{large}, \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}, \textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}\}$, 
+%aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer ning\'un refinamiento m\'as. 
+%%can be applied to $cube \wedge red \wedge small$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
+%%its interpretation is $\{e_7\}$ with $\psi$ is $cube \wedge yellow \wedge small$, the others combinations can't be apply because they don't do true the preconditions. The following relation is rightof, 
+%
+%%leftof, rightof, ontopof, bellowof
+%
+%%At this point we already have the target in a singleton set. So the formula for it is ``red and ball'', and also for s6 which formula is ``yellow cube''.\\
+%%As we show this algorithm depends of the order of properties and relations.\\
+%\begin{figure}[ht]
+%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo16.png}}\\[0pt]
+%\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
+%\label{fig-modelo16}
+%\end{center}
+%\end{figure}
+%
+%\begin{figure}[ht]
+%\begin{center}
+%\frame{\includegraphics[width=8cm]{images/modelo17.png}}\\[0pt]
+%\caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
+%\label{fig-modelo17}
+%\end{center}
+%\end{figure}
+%
+%Las expresiones referenciales encontradas son:\\
+%
+%$\textsf{ball} \wedge \textsf{yellow} \wedge \textsf{small}$ representa $e_1$ \\
+%$\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small}$ representa $e_6$ \\
+%$\textsf{ball} \wedge \textsf{red}$ representa $e_5$ \\
+%$\textsf{cube} \wedge \textsf{red} \wedge \textsf{large}$ representa $e_4$ \\
+%$\textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ representa $\{e_2,e_7\}$  \\
+%$\textsf{cube} \wedge \textsf{yellow} \wedge \textsf{small} \wedge \exists \textsf{rightof}. \textsf{cube} \wedge \textsf{red} \wedge \textsf{small}$ representa $e_6$ \\
+%$\textsf{small} \wedge \textsf{red} \wedge \textsf{cube} \wedge \exists \textsf{ontop}. \textsf{small} \wedge \textsf{yellow} \wedge \textsf{ball}$ representa $e_2$ \\
+%
 
 
 
