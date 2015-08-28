@@ -27,95 +27,75 @@ la distribuci\'on de probabilidad de las REs generadas por el modelo
 simule la que se encuentra en el corpus.\\
 \end{itemize}
 
-Vamos a codificar a las propiedades unarias como relaciones binarias con un
-elemento adicional `dummy' en el modelo (por ejemplo, que codifica el hecho de que
-$e_1$ es \emph{azul} diciendo que est\'a relacionado con ese elemento ficticio por
-la relaci\'on binaria \emph{azul}).
-\textcolor{blue}{deberia cambiar el modelo, para mostrar ese elemento dummy del cual se habla, o sacar esa parte, me parece que se entiende mejor sin eso...}
+En las siguientes secciones explicaremos el algoritmo en detalle
 
-Usaremos la siguiente imagen \ref{GRE3D7-stimulus} como ejemplo para mostrar los pasos a seguir para la ejecuci\'on del algoritmo.
+\section{Input/Output del algoritmo}
+\label{input_algo}
+El sistema toma como input el contexto tambi\'en llamado modelo y una lista de probabilidades de las propiedades o relaciones de la signatura del modelo.
 
-Como los algoritmos nombrados anteriormente, nuestro algoritmo toma como input un modelo de la imagen considerada (un XML con cierta informaci\'on de la imagen), que a modo pr\'actico para que sea visualizable vamos a graficar, como se muestra en la Figura  \ref{GRE3D7-stimulus-graph}. 
+El contexto lo toma en un archivo XML codificado de la siguiente manera: tanto las relaciones como propiedades aparecen como relaciones, pero en el caso de las propiedades se van a relacionar con un elemento adicional ficticio agregado al contexto, por ejemplo, que codifica el hecho de que $e_1$ es \emph{amarillo} diciendo que est\'a relacionado con ese elemento ficticio por la relaci\'on binaria \emph{amarillo}. 
 
-\begin{figure}[ht]
-\begin{minipage}[b]{0.45\linewidth}
-\centering
-\includegraphics[width=\textwidth]{images/3.jpg}
-\vspace*{1cm}
-\caption{Escena del GRE3D7}
-\label{GRE3D7-stimulus}
-\end{minipage}
-\hspace*{-0.35cm}
-\begin{minipage}[b]{0.6\linewidth}
-\centering
-\begin{tikzpicture}
-  [
-    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
-    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
-  ]
- \node[n,label=above:$e_1$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLeft\\[-2pt]
-      \nSmall\\[-2pt] 
-      \nBlue \\[-2pt] 
-      \nBall\end{array}$}] (a) {};
+Las relaciones ternarias o de mayor orden se pueden codificar como relaciones binarias de la siguiente manera, con una relaci\'on a cada elemento que forme parte de la relaci\'on. 
 
- \node[n,label=above:$e_2$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nLeft\\[-2pt]
-      \nBig\\[-2pt] 
-      \nBlue\\[-2pt] 
-      \nCube\end{array}$}, right of=a] (b) {};
+ACA: Quizas deba poner un ejemplo 
 
- \node[n,label=below:$e_3$,label=above:{
-    \relsize{-1}$\begin{array}{c}
-      \nTop\\[-2pt]
-      \nLeft\\[-2pt]
-      \nSmall\\[-2pt] 
-      \nGreen\\[-2pt] 
-      \nBall\end{array}$}, above of=b] (c) {};
+\begin{verbatim}
+<?xml version="1.0"?>
+<problem id="e1">c
+  <individual id="e1">
+    <related rel="small" to="c" />
+    <related rel="yellow" to="c" />
+    <related rel="ball" to="c" />
+  </individual>
+  <individual id="e2">
+    <related rel="cube" to="c" />
+    <related rel="red" to="c" />
+    <related rel="small" to="c" />
+    <related rel="bellow" to="e3" />
+  </individual>
+  <individual id="e3">
+    <related rel="ball" to="c" />
+    <related rel="yellow" to="c" />
+    <related rel="small" to="c" />
+    <related rel="on-top" to="e2" />
+  </individual>
+  <individual id="e4">
+    <related rel="cube" to="c" />
+    <related rel="red" to="c" />
+    <related rel="large" to="c" />
+    <related rel="left-of" to="e5" />
+  </individual>
+  <individual refer-to="e5">
+    <related rel="large" to="c"/>
+    <related rel="ball" to="c" />
+    <related rel="red" to="c" />
+    <related rel="right-of" to="e4" />
+  </individual>
+  <individual id="e6">
+    <related rel="small" to="c" />
+    <related rel="cube" to="c" />
+    <related rel="yellow" to="c" />
+    <related rel="left-of" to="e7" />
+  </individual>
+  <individual id="e7">
+    <related rel="small" to="c" />
+    <related rel="cube" to="c" />
+    <related rel="red" to="c" />
+    <related rel="right-of" to="e6" />
+  </individual>
+  <individual id="c">
+    <related rel="terminal" to="c" />
+  </individual> 
+</problem>
+\end{verbatim}
 
- \node[n,label=above:$e_4$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nSmall\\[-2pt] 
-      \nGreen\\[-2pt] 
-      \nCube\end{array}$}, right of=b] (d) {};
+y una lista de probabilidades ordenadas de mayor a menor con el orden de preferencia de las propiedades y relaciones. 
 
- \node[n,label=above:$e_5$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nBig\\[-2pt] 
-      \nBlue\\[-2pt] 
-      \nBall\end{array}$}, right of=d] (e) {};
+ 
+ACA puedo poner lista de probabilidades real
+En la Secci\'on \ref{sec:learning} explicaremos de donde sacar estas probabilidades que el algoritmo toma como input.
 
- \node[n,label=above:$e_6$,label=below:{
-    \relsize{-1}$\begin{array}{c}
-      \nBig\\[-2pt] 
-      \nGreen\\[-2pt] 
-      \nCube\end{array}$}, right of=e] (f) {};
-
- \node[n,label=below:$e_7$,label=above:{
-    \relsize{-1}$\begin{array}{c}
-      \nTop\\[-2pt]
-      \nSmall\\[-2pt] 
-      \nBlue\\[-2pt] 
-      \nCube\end{array}$}, above of=f] (g) {};
-
- \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
- \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
-
- \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
- \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
-
- \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
- \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
-
- \draw[dotted] (-.5,-1.4) rectangle (7.1,3.1);
-
- \end{tikzpicture}
-\caption{Escena como un modelo relacional}
-\label{GRE3D7-stimulus-graph}
-\end{minipage}
-\end{figure}
+Usaremos el contexto \ref{grafo-GRE3D7-stimulus} como ejemplo para mostrar los pasos a seguir para la ejecuci\'on del algoritmo.
 
 %It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary), and unary
 %properties can be encoded as binary relations including one additional `dummy' element in the model (e.g., we encode the fact that $e_1$ is \emph{blue} saying that it is related to the dummy element by the \emph{blue} binary relation).
@@ -132,39 +112,58 @@ Como los algoritmos nombrados anteriormente, nuestro algoritmo toma como input u
 %of the model) then Rs $\in (\REL \times [0,1])^*$. Moreover, we assume
 %Rs to be ordered by R.\puse.
 
+
+La salida del algoritmo es un conjunto de f\'ormulas (que ser\'an expresiones referenciales si la clase de la f\'ormula contiene s\'olo 1 objeto) de los elementos del modelo. 
+
+\section{Procedimiento}
+
+Antes de empezar explicando el algoritmo, daremos algunos conceptos necesarios para entenderlo.
+
+Desde ahora hablaremos de f\'ormulas (una f\'ormula corresponde a una descripci\'on) por ejemplo usaremos la f\'ormula ``pelota'' para referirnos a todas las pelotas del contexto, por ejemplo en el contexto \ref{grafo-GRE3D7-stimulus} ser\'ian: $e_1$, $e_3$ y $e_5$  asi como ``pelota y amarillo'' ser\'ian: $e_1$ y $e_3$, para todas las pelotas amarillas del contexto.
+
+Una clase es un conjunto de objetos que satisface la misma f\'ormula (descripci\'on), por ejemplo ``pelota'' ser\'an todas las pelotas del modelo.
+
+Una f\'ormula es Informativa cuando tiene m\'as informaci\'on que las f\'ormulas que hay hasta el momento, es decir, el subgrupo de objetos que la satisfacen esta inclu\'ido en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas ``pelota'' y ``cubo'' y queremos saber si ``pelota roja'' es informativa, si lo es ya que $e_5$ es una ``pelota roja'' y existen otras que no son rojas, es decir divide el conjunto de pelotas. 
+
+Una f\'ormula es subsumida si ya existen subf\'ormulas con m\'as informaci\'on que cubren todo el conjunto de objetos que la formula cubr\'ia. Por ejemplo, T que es la f\'ormula en la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen las f\'ormulas ``pelota'' y ``cubo'' ya que todos los elementos del contexto \ref{grafo-GRE3D7-stimulus} son o pelotas o cubos, es decir ya tenemos informaci\'on m\'as precisa de los objetos.
+
+Redundante es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el contexto \ref{grafo-GRE3D7-stimulus} si ya tenemos la f\'ormula ``pelota roja'', la f\'ormula ``pelota roja grande'' es redundante ya que no agrega informaci\'on porque el conjunto de objetos pelotas rojas es solamente 1 objeto.
+
+Trivial es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el Contexto \ref{grafo-GRE3D7-stimulus} ``pelota amarilla grande'' es trivial ya que no hay pelotas amarillas grandes en el contexto considerado.
+
 \begin{figure}[!t]
 \small
 \centering
 \begin{algorithm}[H]
 \dontprintsemicolon
-\caption{Computing $\mathcal{L}$-similarity classes}\label{algo:bisim-l}
-\KwIn{\footnotesize A model $\gM$ and a list Rs $\in (\REL \times [0,1])^*$
- of relation symbols with their \puse\ values, ordered by \puse}
-\KwOut{\footnotesize A set of formulas \RE such that
-$\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
-$\mathcal{L}$-similarity classes of $\gM$}
+\caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
+\KwIn{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
+ de relaciones con sus valores de \puse\, odenados por \puse}
+\KwOut{\footnotesize Un conjunto de f\'ormulas \RE tal que
+$\{\interp{\varphi} \mid \varphi \in \RE\}$ es el conjunto de clases de
+$\mathcal{L}$-similaridad de $\gM$}
 
-$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}
+$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\top$ aplica a todos los elementos del contexto}
 
 \For{\em (R,R.\puse) $\in$ Rs}{
-	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
-        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ are incremented by R.\incuse in each loop}
+	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es la probabilidad de usar R} \;
+        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ son incrementadas por R.\incuse en cada ciclo}
 }
 
-\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are incremented until they reach 1}}{
-  \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
-      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
+\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ son incrementadas hasta que alcanzan 1}}{
+  \While(\tcp*[f]{\footnotesize mientras alguna clase tenga al menos 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
+      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize hacer una copia para futura comparaci\'on} \;
       \For{\em (R, R.\puse) $\in$ Rs}{
-          \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
+          \If(\tcp*[f]{\footnotesize R ser\'a usada en la expresi\'on}){\em R.\randomuse $\le$ R.\puse}{
               \lFor{\em $\varphi \in$ \RE}{
-                  add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
+                  add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine todas las clases usando R}}
                   }\;
-              \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
+              \If(\tcp*[f]{\footnotesize la clasificaci\'on cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo for para tratar de nuevo con la m\'as alta R.\puse}}
               }
-     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}
+     \If(\tcp*[f]{\footnotesize la clasificaci\'on se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse}}
   }
   \lFor{\em (R,R.\puse) $\in$ Rs}{
-    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize increase R.\puse}
+    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\puse}
   }
 }
 \end{algorithm}
@@ -173,29 +172,28 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\t
 \dontprintsemicolon
 \caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el-over}
 
-\If(\tcp*[f]{\footnotesize are we in the first loop?}){\em FirstLoop?}{
-    Informative $\leftarrow$ TRUE \tcp*[f]{\footnotesize allow overspecification}}
-\lElse(\tcp*[f]{\footnotesize informative: smaller than the original?}) {Informative $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
-\For{\em $\psi \in$ \RE with $\#\interp{\psi} > 1$}{
-  \If{\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant: can't be obtained from \RE?}\\
-    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial: has elements?}\\
-     \ \ \  \emph{Informative}}{
-    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
-    remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
+\If(\tcp*[f]{\footnotesize primera iteraci\'on?}){\em FirstLoop?}{
+    Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
+\lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
+\For{\em $\psi \in$ \RE con $\#\interp{\psi} > 1$}{
+  \If{\em $\psi \sqcap \exists$R.$\varphi$ no esta subsumida en \RE\ {\bf y} \tcp*[f]{\footnotesize es no-redundante: no puede ser obtenida desde \RE?}\\
+    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf y} \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}\\
+     \ \ \  \emph{Informativa}}{
+    y $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a la clasificaci\'on} \;
+    borrar f\'ormulas subsumidas de $\RE$ \tcp*[f]{\footnotesize borrar clases redundantes}
   }
 }
 \end{algorithm}
-\vspace*{-.5cm}\caption{Algoritmos de refinamiento con probabilidades y sobrespecificacion para el \el-language}\label{fig:algo3}
+\vspace*{-.5cm}\caption{Algoritmos de refinamiento con probabilidades y sobreespecificaci\'on para el \el-language}\label{fig:algo3}
 
 \end{figure}
 
 
-Ahora estamos listos para describir los algoritmos~\ref{algo:bisim-l}
-y~\ref{algo:bisim-add-el-over}. El algoritmo~\ref{algo:bisim-l} toma como
-entrada un modelo $\gM$ y una lista de pares de tuplas (R, R.\puse) que vinculan a cada
-relaci\'on R a una cierta probabilidad de uso R.\puse. Es decir, si $\REL$ es el
-conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura}
-del modelo), recordemos que tomamos las unarias como relaciones, entonces R $\in (\REL \times [0,1])^*$. Por otra parte, asumimos que R esta ordenada por R.\puse\ de mayor a menor.
+Tenemos 2 algoritmos~\ref{algo:bisim-l} y~\ref{algo:bisim-add-el-over}. 
+
+El algoritmo~\ref{algo:bisim-l} toma como entrada un modelo $\gM$ y una lista de pares de tuplas (R, R.\puse) que vinculan a cada
+relaci\'on R a una cierta probabilidad de uso R.\puse (nombrada en \ref{input_algo}). Es decir, si $\REL$ es el
+conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura} del modelo), recordemos que tomamos las unarias como relaciones, entonces R $\in (\REL \times [0,1])^*$. Por otra parte, asumimos que R esta ordenada por R.\puse\ de mayor a menor.
 \textcolor{blue}{deberia reemplazar aca que R es un conjunto por una lista ordenada...}
 
 %\begin{figure}[t]
@@ -327,7 +325,7 @@ en $\RE$ no puede ser refinadas, utilizando los valores de R.\puse\ ).
 A continuaci\'on, se incrementar\'an todos los valores de R.\puse\ y se iniciar\'a el
 procedimiento de nuevo.
 
-El algoritmo~\ref{algo:bisim-add-el} coincide con el descripto
+El algoritmo~\ref{algo:bisim-add-el-over} coincide con el descripto
 en~\cite{arec2:2008:Areces}. Se refinar\'a cada una de las descripciones
 en $\RE$ utilizando la relaci\'on R y las otras descripciones que ya est\'an en
 $\RE$, bajo ciertas condiciones. La nueva descripci\'on debe ser
@@ -482,7 +480,7 @@ ellos son llevados a cabo en el corpus GRE3D7:
  $\interp {\cdot}$ asegure de que todas las ERs encontradas en el corpus sean ER en
   el modelo. Por ejemplo, las $\el$ f\'ormulas correspondientes a la tabla~\ref{results-algo-fig3} deben denotar el target en el
   modelo $\gM$ representado en
-  Figura~\ref{GRE3D7-stimulus}.
+  Figura~\ref{GRE3D7-stimulus-4}.
 
 \item Para cada R$\in \REL$ c\'alculo R.\puse \ utilizando~(\ref{eq1}) si
   hay muchas RE para cada escena o asignamos 1 a R.\puse \ si R se produce en
@@ -518,7 +516,7 @@ Los pasos 1-5 anteriores son f\'aciles de llevar a cabo (en realidad, la tokeniz
 pasos de normalizaci\'on ya se realizaron en el corpus GRE3D7). 
 %no se entiende
 Comienzo
-de la escena en la Figura~\ref{GRE3D7-stimulus} y el correspondiente
+de la escena en la Figura~\ref{GRE3D7-stimulus-4} y el correspondiente
 corpus muestra en la tabla~\ref{corpus-distribution}, la signatura resultante
 y su asociado \puse\ figuran en las tres primeras
 columnas de la tabla~\ref{probability-of-use}.
@@ -544,7 +542,7 @@ small ball on top of small cube & 1 & 0.71\% \\
 green ball on top of cube & 1 & 0.71\% \\
 \hline
 \end{tabular}
-\caption{Expresiones Referenciales producidas por las personas para la Figura~\ref{GRE3D7-stimulus}}\label{corpus-distribution}
+\caption{Expresiones Referenciales producidas por las personas para la Figura~\ref{GRE3D7-stimulus-4}}\label{corpus-distribution}
 \end{center}
 \end{table}
 
@@ -656,7 +654,7 @@ right-of & 0 & 0 & 0.064 & 0.1023 \\
 below-of & 0 & 0 & 0 & 0 \\
 \hline
 \end{tabular}
-\caption{Probabilidades de uso de las palabras del corpus en Table~\ref{GRE3D7-stimulus} para las Figuras 3 y 13 del \textit{(GRE3D7)} 
+\caption{Probabilidades de uso de las palabras del corpus en Table~\ref{GRE3D7-stimulus-4} para las Figuras 3 y 13 del \textit{(GRE3D7)} 
 \label{probability-of-use}}
 \end{center}
 \end{table}
@@ -974,3 +972,4 @@ Supongamos que fija un modelo de entrada de $\gM$ y los valores de R, y alg\'un 
 %\section{Aprendizaje autom\E1tico}
 
 %\section{Agregando sobreespecificaci\F3n}
+\section{Ejemplo de ejecuci\'on}
