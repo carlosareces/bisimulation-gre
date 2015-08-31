@@ -23,7 +23,7 @@ el mismo input. Como vamos a mostrar emp\'{i}ricamente en
 Secci\'on~\ref{sec:evaluacion}, dado un corpus de ER para una escena determinada,
 es posible calcular una distribuci\'on de probabilidad adecuada para la
 probabilidad de uso de las propiedades y relaciones en la escena, de tal manera que
-la distribuci\'on de probabilidad de las REs generadas por el modelo
+la distribuci\'on de probabilidad de las REs generadas para el modelo
 simule la que se encuentra en el corpus.\\
 \end{itemize}
 
@@ -31,7 +31,7 @@ En las siguientes secciones explicaremos el algoritmo en detalle
 
 \section{Input/Output del algoritmo}
 \label{input_algo}
-El sistema toma como input el contexto tambi\'en llamado modelo y una lista de probabilidades de las propiedades o relaciones de la signatura del modelo.
+El sistema toma como input el contexto tambi\'en llamado modelo y una lista de probabilidades de las propiedades y relaciones de la signatura del modelo.
 
 El contexto lo toma en un archivo XML codificado de la siguiente manera: tanto las relaciones como propiedades aparecen como relaciones, pero en el caso de las propiedades se van a relacionar con un elemento adicional ficticio agregado al contexto, por ejemplo, que codifica el hecho de que $e_1$ es \emph{amarillo} diciendo que est\'a relacionado con ese elemento ficticio por la relaci\'on binaria \emph{amarillo}. 
 
@@ -119,17 +119,17 @@ La salida del algoritmo es un conjunto de f\'ormulas (que ser\'an expresiones re
 
 Antes de empezar explicando el algoritmo, daremos algunos conceptos necesarios para entenderlo.
 
-Desde ahora hablaremos de f\'ormulas (una f\'ormula corresponde a una descripci\'on) por ejemplo usaremos la f\'ormula ``pelota'' para referirnos a todas las pelotas del contexto, por ejemplo en el contexto \ref{grafo-GRE3D7-stimulus} ser\'ian: $e_1$, $e_3$ y $e_5$  asi como ``pelota y amarillo'' ser\'ian: $e_1$ y $e_3$, para todas las pelotas amarillas del contexto.
+Desde ahora hablaremos de {\it f\'ormulas} (una f\'ormula corresponde a una descripci\'on) por ejemplo usaremos la f\'ormula ``pelota'' para referirnos a todas las pelotas del contexto, en el contexto \ref{grafo-GRE3D7-stimulus} ser\'ian: $e_1$, $e_3$ y $e_5$  asi como ``pelota y amarillo'' ser\'ian: $e_1$ y $e_3$.
 
 Una clase es un conjunto de objetos que satisface la misma f\'ormula (descripci\'on), por ejemplo ``pelota'' ser\'an todas las pelotas del modelo.
 
-Una f\'ormula es Informativa cuando tiene m\'as informaci\'on que las f\'ormulas que hay hasta el momento, es decir, el subgrupo de objetos que la satisfacen esta inclu\'ido en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas ``pelota'' y ``cubo'' y queremos saber si ``pelota roja'' es informativa, si lo es ya que $e_5$ es una ``pelota roja'' y existen otras que no son rojas, es decir divide el conjunto de pelotas. 
+Una f\'ormula es {\it Informativa} cuando tiene m\'as informaci\'on que las f\'ormulas que hay hasta el momento, es decir, el subgrupo de objetos que la satisfacen esta inclu\'ido en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas ``pelota'' y ``cubo'' y queremos saber si ``pelota roja'' es informativa, si lo es ya que $e_5$ es una ``pelota roja'' y existen otras que no son rojas, es decir divide el conjunto de pelotas. 
 
-Una f\'ormula es subsumida si ya existen subf\'ormulas con m\'as informaci\'on que cubren todo el conjunto de objetos que la formula cubr\'ia. Por ejemplo, T que es la f\'ormula en la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen las f\'ormulas ``pelota'' y ``cubo'' ya que todos los elementos del contexto \ref{grafo-GRE3D7-stimulus} son o pelotas o cubos, es decir ya tenemos informaci\'on m\'as precisa de los objetos.
+Una f\'ormula es {\it subsumida} si ya existen subf\'ormulas con m\'as informaci\'on que cubren todo el conjunto de objetos que la formula cubr\'ia. Por ejemplo, T que es la f\'ormula en la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen las f\'ormulas ``pelota'' y ``cubo'' ya que todos los elementos del contexto \ref{grafo-GRE3D7-stimulus} son o pelotas o cubos, es decir ya tenemos informaci\'on m\'as precisa de los objetos.
 
-Redundante es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el contexto \ref{grafo-GRE3D7-stimulus} si ya tenemos la f\'ormula ``pelota roja'', la f\'ormula ``pelota roja grande'' es redundante ya que no agrega informaci\'on porque el conjunto de objetos pelotas rojas es solamente 1 objeto.
+{\it Redundanteç es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el contexto \ref{grafo-GRE3D7-stimulus} si ya tenemos la f\'ormula ``pelota roja'', la f\'ormula ``pelota roja grande'' es redundante ya que no agrega informaci\'on porque el conjunto de objetos pelotas rojas es solamente 1 objeto.
 
-Trivial es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el Contexto \ref{grafo-GRE3D7-stimulus} ``pelota amarilla grande'' es trivial ya que no hay pelotas amarillas grandes en el contexto considerado.
+{\it Trivial} es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el Contexto \ref{grafo-GRE3D7-stimulus} ``pelota amarilla grande'' es trivial ya que no hay pelotas amarillas grandes en el contexto considerado.
 
 \begin{figure}[!t]
 \small
@@ -147,10 +147,10 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 
 \For{\em (R,R.\puse) $\in$ Rs}{
 	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es la probabilidad de usar R} \;
-        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ son incrementadas por R.\incuse en cada ciclo}
+        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ incrementadas por R.\incuse en cada ciclo}
 }
 
-\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ son incrementadas hasta que alcanzan 1}}{
+\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ incrementadas hasta que alcanzan 1}}{
   \While(\tcp*[f]{\footnotesize mientras alguna clase tenga al menos 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
       \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize hacer una copia para futura comparaci\'on} \;
       \For{\em (R, R.\puse) $\in$ Rs}{
@@ -176,7 +176,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
     Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
 \lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
 \For{\em $\psi \in$ \RE con $\#\interp{\psi} > 1$}{
-  \If{\em $\psi \sqcap \exists$R.$\varphi$ no esta subsumida en \RE\ {\bf y} \tcp*[f]{\footnotesize es no-redundante: no puede ser obtenida desde \RE?}\\
+  \If{\em $\psi \sqcap \exists$R.$\varphi$ no esta subsumida en \RE\ {\bf y} \tcp*[f]{\footnotesize no-redundante: no puede ser obtenida desde \RE?}\\
     \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf y} \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}\\
      \ \ \  \emph{Informativa}}{
     y $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a la clasificaci\'on} \;
@@ -194,7 +194,7 @@ Tenemos 2 algoritmos~\ref{algo:bisim-l} y~\ref{algo:bisim-add-el-over}.
 El algoritmo~\ref{algo:bisim-l} toma como entrada un modelo $\gM$ y una lista de pares de tuplas (R, R.\puse) que vinculan a cada
 relaci\'on R a una cierta probabilidad de uso R.\puse (nombrada en \ref{input_algo}). Es decir, si $\REL$ es el
 conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura} del modelo), recordemos que tomamos las unarias como relaciones, entonces R $\in (\REL \times [0,1])^*$. Por otra parte, asumimos que R esta ordenada por R.\puse\ de mayor a menor.
-\textcolor{blue}{deberia reemplazar aca que R es un conjunto por una lista ordenada...}
+%\textcolor{blue}{deberia reemplazar aca que R es un conjunto por una lista ordenada...}
 
 %\begin{figure}[t]
 %\small
@@ -306,9 +306,12 @@ conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{
 
 El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento
 y es inicializado por la descripci\'on m\'as general $\top$.
+
 Para cada R, primero calculamos R.\randomuse, un n\'umero aleatorio en [0,1].
 Si R.\randomuse $\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de
-clases. El valor de R.\puse\ se incrementar\'a en $R.\incuse$
+clases. 
+
+El valor de R.\puse\ se incrementar\'a en $R.\incuse$
 en cada ciclo principal, para asegurar que todas las relaciones son en alg\'un momento,
 consideradas por el algoritmo. Esto asegura que una expresi\'on referencial
 se encontrar\'a si existe; pero dar\'a mayor probabilidad a las expresiones
@@ -316,19 +319,25 @@ que usan las relaciones con m\'as alta R.\puse.
  
 Mientras que $\RE$ contiene descripciones que pueden ser refinadas (es decir, clases
 con al menos dos elementos) vamos a llamar a la funci\'on de refinamiento
-add$_\mathcal{L}$(R,$\varphi$,$\RE$) sucesivamente con cada relaci\'on
-de Rs. Un cambio en una de las clases, puede desencadenar cambios en
+add$_\mathcal{EL}$(R,$\varphi$,$\RE$) sucesivamente con cada relaci\'on
+de Rs.
+
+ Un cambio en una de las clases, puede desencadenar cambios en
 las otras. Por esa raz\'on, si $\RE$ cambia, salimos del ciclo for y volvemos a
-empezar con las relaciones de m\'as alta R.\puse. Si despu\'es de probar refinar el conjunto con todas las relaciones de Rs, el conjunto $\RE$ no ha
+empezar con las relaciones de m\'as alta R.\puse. 
+
+Si despu\'es de probar refinar el conjunto con todas las relaciones de Rs, el conjunto $\RE$ no ha
 cambiado, hemos alcanzado un estado estable (es decir, las clases que se describen
 en $\RE$ no puede ser refinadas, utilizando los valores de R.\puse\ ). 
 A continuaci\'on, se incrementar\'an todos los valores de R.\puse\ y se iniciar\'a el
 procedimiento de nuevo.
-
-El algoritmo~\ref{algo:bisim-add-el-over} coincide con el descripto
-en~\cite{arec2:2008:Areces}. Se refinar\'a cada una de las descripciones
+%El algoritmo~\ref{algo:bisim-add-el-over} coincide con el descripto
+%en~\cite{arec2:2008:Areces}. 
+Se refinar\'a cada una de las descripciones
 en $\RE$ utilizando la relaci\'on R y las otras descripciones que ya est\'an en
-$\RE$, bajo ciertas condiciones. La nueva descripci\'on debe ser
+$\RE$, bajo ciertas condiciones. 
+
+La nueva descripci\'on debe ser
 \emph{no redundante} (la nueva clase no se puede obtener como la uni\'on de
 clases ya representadas en $\RE$), \emph{no trivial} (la nueva
 clase no es vac\'{i}a), es \emph{informativa} (la nueva clase no debe
@@ -337,10 +346,9 @@ la nueva descripci\'on se a\~nade a $\RE$, y las descripciones redundantes
 posiblemente creadas por la adici\'on de la nueva descripci\'on son
 eliminadas.
 
-Supongamos que se fija un modelo de entrada $\gM$ y los valores de R.\puse, y se fija tambi\'en
-alg\'un elemento target $t$. Supongamos tambi\'en que $t$ tiene una expresi\'on referencial en 
+Supongamos que se fija un modelo de entrada $\gM$ y los valores de Rs (R.\puse para todos los elementos de la signatura del modelo), y se fija tambi\'en alg\'un elemento target $t$. Supongamos tambi\'en que $t$ tiene una expresi\'on referencial en 
 $\el$. Cuando termine el
-Algoritmo~\ref{fig:algo1} habr\'a calculado una f\'ormula $\varphi$ de $\el$ tal
+Algoritmo~\ref{algo:bisim-l} habr\'a calculado una f\'ormula $\varphi$ de $\el$ tal
 que $\interp{\varphi} = \{t\}$, pero $\varphi$ pueden ser diferentes en
 cada ejecuci\'on del algoritmo (a pesar de que $\gM$ y Rs son fijos). Si nosotros
 repetimos este procedimiento un n\'umero estad\'{i}sticamente significativo de veces,
@@ -351,9 +359,7 @@ para $\gM$, es posible definir los valores de R.\puse\ para que esta
 distribuci\'on de probabilidad coincida con buena precisi\'on a la distribuci\'on de probabilidad
  de ER que se encuentra en el corpus.
 
-
-
-
+En la siguiente secci\'on explicaremos como calcular R.\puse cuando tenemos corpus disponible, y cuando no lo tenemos.
 
 
 \subsection{Aprendizaje autom\'atico desde un corpus para describir nuevos objetos}
@@ -482,7 +488,7 @@ ellos son llevados a cabo en el corpus GRE3D7:
   modelo $\gM$ representado en
   Figura~\ref{GRE3D7-stimulus-4}.
 
-\item Para cada R$\in \REL$ c\'alculo R.\puse \ utilizando~(\ref{eq1}) si
+\item Para cada R$\in \REL$ calculo R.\puse \ utilizando~(\ref{eq1}) si
   hay muchas RE para cada escena o asignamos 1 a R.\puse \ si R se produce en
   el RE, asignamos 0 en caso contrario.
 
@@ -547,7 +553,7 @@ green ball on top of cube & 1 & 0.71\% \\
 \end{table}
 
 
-Observe que los valores R.\puse\ obtenidos de esta manera debe ser
+Observe que los valores R.\puse\ obtenidos de esta manera deben ser
 interpretados como la probabilidad de utilizar R para describir el target en
 modelo de $\gM $, y podr\'{i}amos argumentar que se correlacionan con la
  prominencia de R en el modelo. Por esa raz\'on, por ejemplo, el
@@ -572,7 +578,7 @@ en el corpus son naturales.
 %We use simple features to obtain the function, all the features can be
 %extracted automatically from the relational model and are listed in
 
-Si no hay corpus de expresiones referenciales que describen el target, se puede estimar la \puse a partir de corpus en un
+Si no hay corpus de expresiones referenciales que describen el target, se puede estimar la \puse~a partir de corpus de
 diferentes escenas en el mismo dominio.
 Usamos caracter\'isticas simples para obtener una funci\'on que nos dar\'a la probabilidad de cada palabra en el nuevo modelo, todas las caracter\'isticas que se pueden extraer de forma autom\'atica desde el modelo relacional y se enumeran en la Tabla~\ref{features}.
 
@@ -620,13 +626,12 @@ dominio independiente. Como resultado hay algunas relaciones complejas
 entre las caracter\'{i}sticas de las escenas que no es capaz de
 capturar. La caracter\'{i}stica m\'as importante del dominio GRE3D7
 que no somos capaces de aprender, y tiene un impacto en nuestro desempe\~no, es que
-las propiedades de tama\~no (es decir, peque\~nos y grandes) se utilizan mucho
+las propiedades de tama\~no (es decir, peque\~no y grande) se utilizan mucho
 m\'as cuando el target no puede ser identificado solo con las propiedades taxon\'omicas absolutas 
-(verde y azul) y (bola y cubo). En otras palabras, en el corpus GRE3D7 se utiliza el tama\~no con m\'as frecuencia (90,2 \%)
+(verde y azul) y (pelota y cubo). En otras palabras, en el corpus GRE3D7 se utiliza el tama\~no con m\'as frecuencia (90,2 \%)
 cuando la ER resultante no es sobreespecificada y cuando si es sobreespecificada el (34 \%). Puede que no sea posible aprender esta caracter\'{i}stica de los
 datos del GRE3D7 ya que incluso con las funciones que dependen de dominio definidos
-en~\cite[Cap\'{i}tulo 6] {viet:gene11}, no pod\'{i}a ser aprendido por \'arboles decisi\'on. Como resultado podemos ver en la tabla~\ref{probability-of-use} que
-de la Figura 13, el valor estimado para ``grande'' no est\'a cerca de la
+en~\cite[Cap\'{i}tulo 6] {viet:gene11}, no pod\'{i}a ser aprendido por \'arboles decisi\'on. Como resultado podemos ver en la tabla~\ref{probability-of-use} de la Figura 13, el valor estimado para ``grande'' no est\'a cerca de la
 valor calculado a partir de corpus. \textit{En el caso de la TUNA-corpus
   mostramos que no pod\'{i}amos aprender la dependencia de la dimensi\'on-X y
   dimensi\'on-y, es decir, cuando una persona a\~nade dimensi\'on-x es altamente
@@ -636,25 +641,25 @@ valor calculado a partir de corpus. \textit{En el caso de la TUNA-corpus
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-Palabra &  \puse 					& \puse Aprendida & \puse Model   & \puse  Aprendida \\
-        & Modelo Fig. 3   & Fig. 3   				& Fig. 13  			&  Fig. 13 \puse \\
+Palabra &  \puse 					& \puse Aprendida & \puse    							& \puse  Aprendida \\
+        & Modelo Fig. 3   & Fig. 3   				& Modelo Fig. 13  			&  Fig. 13 \puse \\
 \hline
-ball & 1.0 & 1.0 & 1.0 & 1.0 \\
-cube & 1.0 & 1.0 & 1.0 & 1.0 \\
-green & 0.978 & 0.993 & 1.0 & 0.9875 \\
-small & 0.257 & 0.346 & 0.0428 & 0.1993 \\
-on-top & 0.178 & 0.179 & 0 & 0\\ 
-blue & 0.15 & 0.124 & 0.064 & 0.1353 \\
-large & 0.107 & 0.03 & 0.307 & 0.7378 \\
-left & 0.007 & 0.002 & 0 & 0.0024 \\
-top & 0.007 & 0 & 0 & 0 \\
-right & 0 & 0.001 & 0.064 & 0.0005 \\
-left-of & 0 & 0 & 0 & 0 \\
-right-of & 0 & 0 & 0.064 & 0.1023 \\
-below-of & 0 & 0 & 0 & 0 \\
+pelota & 1.0 & 1.0 & 1.0 & 1.0 \\
+cubo & 1.0 & 1.0 & 1.0 & 1.0 \\
+verde & 0.978 & 0.993 & 1.0 & 0.9875 \\
+peque\~no & 0.257 & 0.346 & 0.0428 & 0.1993 \\
+arriba-de & 0.178 & 0.179 & 0 & 0\\ 
+azul & 0.15 & 0.124 & 0.064 & 0.1353 \\
+grande & 0.107 & 0.03 & 0.307 & 0.7378 \\
+izquierda & 0.007 & 0.002 & 0 & 0.0024 \\
+arriba & 0.007 & 0 & 0 & 0 \\
+derecha & 0 & 0.001 & 0.064 & 0.0005 \\
+a-la-izquierda-de & 0 & 0 & 0 & 0 \\
+a-la-derecha-de & 0 & 0 & 0.064 & 0.1023 \\
+debajo-de & 0 & 0 & 0 & 0 \\
 \hline
 \end{tabular}
-\caption{Probabilidades de uso de las palabras del corpus en Table~\ref{GRE3D7-stimulus-4} para las Figuras 3 y 13 del \textit{(GRE3D7)} 
+\caption{Probabilidades de uso de las palabras del corpus en Tabla~\ref{GRE3D7-stimulus-4} para las Figuras 3 y 13 del \textit{(GRE3D7)} 
 \label{probability-of-use}}
 \end{center}
 \end{table}
@@ -684,16 +689,18 @@ below-of & 0 & 0 & 0 & 0 \\
 %target share a property, this property is more salient.
 
 El aprendizaje se realiza con el kit de herramientas de aprendizaje autom\'atico
-WEKA~\cite{Hall:WEK09}, entrenando con todas las escenas menos una (para el que estamos aprendiendo) para todas las escenas del \textit{GRE3D7 y TUNA-corpus}. Utilizamos regresi\'on lineal para aprender la funci\'on de
+WEKA~\cite{Hall:WEK09}, entrenando con todas las escenas menos una (para el que estamos aprendiendo) para todas las escenas del \textit{GRE3D7 y TUNA-corpus}. 
+
+Utilizamos regresi\'on lineal para aprender la funci\'on de
 \puse\ para cada palabra en la signatura. Para una escena determinada, reemplazamos
 las variables de la funci\'on obtenida por los valores de las caracter\'{i}sticas
 de la escena que queremos describir.
 
-Con regresi\'on lineal podemos aprender interesantes
-caracter\'{i}sticas del dominio. Para empezar, se aprenden hechos conocidos
+Con regresi\'on lineal podemos aprender caracter\'{i}sticas interesantes
+ del dominio. Para empezar, se aprenden hechos conocidos
 de tal manera que la prominencia de un color depende en gran medida de si el
 target es de ese color, y que no depende de su
-poder de discriminaci\'on en el modelo. Por otra parte, vimos que la relaci\'on on-top
+poder de discriminaci\'on en el modelo. Por otra parte, vimos que la relaci\'on arriba-de
  se utiliza con m\'as frecuencia que las relaciones horizontales
 (izquierda y derecha) lo que confirma un hallazgo previo informado
 en~\cite{viet:gene11}. Por \'ultimo, vimos en el
