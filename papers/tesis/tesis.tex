@@ -8,6 +8,7 @@
 %\usepackage{amssymb}
 %\usepackage{amsmath}
 %\usepackage{amsthm} % theorems
+
 \usepackage{enumerate}
 \usepackage{epsfig}
 \usepackage{multirow}
@@ -21,16 +22,51 @@
 \usepackage{url}
 \usepackage{verbatim}
 \usepackage{array}
-\usepackage{todo}
+\usepackage{todonotes}
 \usepackage{fixme}
 \usepackage{xspace}
 \usepackage{ifthen}
-
 \usepackage{pdfpages}
-
+\usepackage{caption}
+\usepackage{titling}
 \renewcommand{\listtablename}{Indice de Tablas}
 \renewcommand{\tablename}{Tabla}
-
+\hyphenation{a-tri-bu-tos}
+\hyphenation{con-ti-nuan-do}
+\hyphenation{des-cri-bir}
+\hyphenation{des-crip-ci\'on}
+\hyphenation{des-crip-cio-nes}
+\hyphenation{e-va-lua-ci\'on}
+\hyphenation{ex-pe-ri-men-to}
+\hyphenation{Fi-gu-ra}
+\hyphenation{Fi-gu-ras}
+\hyphenation{fi-gu-ra}
+\hyphenation{fi-gu-ras}
+\hyphenation{ge-ne-ra}
+\hyphenation{ge-ne-rar-las}
+\hyphenation{ge-ne-ra-ci\'on}
+\hyphenation{i-ni-cia-li-za-do}
+\hyphenation{in-de-pen-dien-tes}
+\hyphenation{in-de-pen-dien-te}
+\hyphenation{landmark-}
+\hyphenation{ma-yo-r\'ia} 
+\hyphenation{mi-ni-ma-les}
+\hyphenation{nues-tro} 
+\hyphenation{pro-ba-bi-li-da-des} 
+\hyphenation{pro-ba-bi-li-dad} 
+\hyphenation{re-co-rrer}
+\hyphenation{re-fe-ren-cial}
+\hyphenation{re-fe-ren-cia-les}
+\hyphenation{res-pec-ti-va-men-te}
+\hyphenation{sa-li-da}
+\hyphenation{sa-li-das}
+\hyphenation{second-landmark}
+\hyphenation{si-guien-te}
+\hyphenation{si-guien-tes} 
+\hyphenation{so-bre-es-pe-ci-fi-ca-ci\'on}
+\hyphenation{so-bre-es-pe-ci-fi-ca-da}
+\hyphenation{su-pon-ga-mos}
+\hyphenation{su-pe-ra-do}
 % Sin sangria
 %\parindent=0mm  
 
@@ -51,7 +87,7 @@
 %\DeclareFloatFont{tiny}{\tiny}% "scriptsize" is defined by floatrow, "tiny" not
 %\floatsetup[table]{font=tiny}
 
-\usepackage{algorithm}
+%\usepackage{algorithm}
 \usepackage{algorithmic}
 
 \newcommand{\tup}[1]{\langle #1 \rangle}
@@ -61,31 +97,55 @@
 \newcommand{\RE}{\textsf{RE}\xspace}
 \newcommand{\REL}{\textsf{REL}\xspace}
 \newcommand{\IR}{\textrm{I}\!\textrm{R}}
-\newcommand{\gM}{\mathcal{M}}
+%\newcommand{\gM}{\mathcal{M}}
+%\newcommand{\el}{\ensuremath{\mathcal{EL}}\xspace}
+%\newcommand{\interp}[1]{|\!|#1|\!|}
+
+
+\newcommand{\nBlue}{\textsf{azul}\xspace}
+\newcommand{\nGreen}{\textsf{verde}\xspace}
+\newcommand{\nSmall}{\textsf{peque\~no}\xspace}
+\newcommand{\nBig}{\textsf{grande}\xspace}
+\newcommand{\nLarge}{\textsf{grande}\xspace}
+\newcommand{\nRed}{\textsf{rojo}\xspace}
+\newcommand{\nYellow}{\textsf{amarillo}\xspace}
+\newcommand{\nBall}{\textsf{pelota}\xspace}
+\newcommand{\nCube}{\textsf{cubo}\xspace}
+\newcommand{\nOntop}{\textsf{arriba-de}\xspace}
+\newcommand{\nTop}{\textsf{arriba}\xspace}
+\newcommand{\nBelow}{\textsf{abajo-de}\xspace}
+\newcommand{\nRightof}{\textsf{a-la-derecha-de}\xspace}
+\newcommand{\nLeftof}{\textsf{a-la-izquierda-de}\xspace}
+\newcommand{\nLeft}{\textsf{izquierda}\xspace}
+\newcommand{\nAlgorithm}{Algoritmo}
+\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
+
+\newcommand{\gM}{\ensuremath{\mathcal{M}}}
+\newcommand{\gL}{\ensuremath{\mathcal{L}}}
+
+\newcommand{\C}{\ensuremath{\mathcal{C}}\xspace}
+\newcommand{\M}{\ensuremath{\mathcal{M}}\xspace}
+%\newcommand{\RE}{\ensuremath{\mathit{RE}}\xspace}
+
+\newtheorem{definition}{Definic\'on}[section]
+\newtheorem{theorem}{Teorema}[section]
+
+%\newcommand{\todo}[1]{\textbf{(#1)}}
+\newcommand{\ignore}[1]{}
+
 \newcommand{\el}{\ensuremath{\mathcal{EL}}\xspace}
+\newcommand{\alc}{\ensuremath{\mathcal{ALC}}\xspace}
+\newcommand{\form}{\mathsf{form}\xspace}
+\newcommand{\prop}{\ensuremath{\mathsf{prop}}\xspace}
+\newcommand{\simm}{\textsf{sim}}
+\newcommand{\rel}{\ensuremath{\mathsf{rel}}\xspace}
+\newcommand{\propm}{\ensuremath{\mathsf{prop}^\gM\xspace}}
+
 \newcommand{\interp}[1]{|\!|#1|\!|}
 
 
-\newcommand{\nBlue}{\textsf{blue}\xspace}
-\newcommand{\nGreen}{\textsf{green}\xspace}
-\newcommand{\nSmall}{\textsf{small}\xspace}
-\newcommand{\nBig}{\textsf{big}\xspace}
-\newcommand{\nRed}{\textsf{red}\xspace}
-\newcommand{\nYellow}{\textsf{yellow}\xspace}
-\newcommand{\nBall}{\textsf{ball}\xspace}
-\newcommand{\nCube}{\textsf{cube}\xspace}
-\newcommand{\nOntop}{\textsf{ontop}\xspace}
-\newcommand{\nTop}{\textsf{top}\xspace}
-\newcommand{\nBelow}{\textsf{below}\xspace}
-\newcommand{\nRightof}{\textsf{rightof}\xspace}
-\newcommand{\nLeftof}{\textsf{leftof}\xspace}
-\newcommand{\nLeft}{\textsf{left}\xspace}
-
-
-
-
 \begin{document}
-
+\date{\today}
 % PARTE PRELIMINAR
 %\input{preliminar/preliminar}
 
@@ -101,6 +161,7 @@
 \include{resumen}
 %\usepackage[spanish]{babel}
 %\usepackage[latin1]{inputenc} %Letras con acentos, enies.
+\renewcommand{\contentsname}{Contenidos}
 \tableofcontents
 %\include{prefacio} --- Esto es opcional, no es necesario
 %\include{agradecimientos} Esto se hace al final
@@ -111,7 +172,12 @@
 \mainmatter % Comienza la numeracion de paginas con numeros arabicos
 
 %\begin{comment}
-
+\renewcommand{\chaptername}{Cap\'itulo}
+\renewcommand{\appendixname}{Ap\'endice}
+\renewcommand{\figurename}{Figura}
+\renewcommand{\bibname}{Bibliograf{\'\i}a}
+%\renewcommand{\algorithmname}{Algoritmo}
+%\renewcommand{\refname}{Bibliograf{\'\i}a}
 \include{1_intro} %trabajo previo
 
 \include{2_seleccion}
@@ -127,8 +193,12 @@
 \include{7_conclusiones}
 \vskip 0.2in
 %\bibliographystyle{apa} %es mas linda pero da errores
-\bibliographystyle{plain}
+ 
+\bibliographystyle{apalike}
 \bibliography{bibliografia}
-
+%\clearpage % o \cleardoublepage
+%\appendixpage
+\include{apendice}
+%http://vivaldi.ll.iac.es/sieinvens/siepedia/pmwiki.php?n=HOWTOs.LatexTesisEspanol
 \end{document}
 

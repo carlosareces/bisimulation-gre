@@ -1,43 +1,89 @@
 \chapter{Introducci\'on}
+
+%tesis en linguistica http://elies.rediris.es/miscelanea/misce_9/alcina.pdf
+
 En este cap\'itulo se hablar\'a del problema de la generaci\'on autom\'atica de RE, las contribuciones de este trabajo y el mapa de la tesis.
+\textcolor{blue}{de la tesis de Jette - The domain defines the types of entities that are being referred to, in some
+cases even a particular set of entities with all their properties. A
+context set
+contains a subset of the domain entities, for example, the landmarks visible at a certain point of the path for which we are giving directions, a
+subset of the photographs used in an experimental setup, or the cooking ingredients that have already been mentioned in a recipe. In a visual environment, the context set, including the
+properties of its member objects and their spatial configuration, is often called  a scene.Document Planning, Microplanning and Realisation  A system charged
+with generating a fully- edged natural language description will as a minimum
+have to perform the tasks of content determination (selecting the properties of the
+target referent to be mentioned), lexicalisation (choosing the words to represent
+the properties), and linguistic realisation (constructing a grammatically correct
+noun phrase). Even the task of aggregation can be argued to form part of the
+generation of a distinguishing description, as the semantic content might in some
+cases best be spread across several partially distinguishing noun phrases}
 
-Suppose one wants to point out an object in Figure~\ref{GRE3D7-stimulus-graph} to an addressee. Most speakers
-have no difficulty in accomplishing this task, by producing a referring expression
-such as ``the green ball on the cube'' for example. Now imagine a computer being confronted
-with the same task, aiming to point out individual $e3$. Assuming it has access to a
-database containing all the relevant properties of the objects in the scene as shown in the figure, it needs to
-find some combination of properties which applies to $e3$, and not to the other objects.
-There is a choice though: There are many ways in which $e3$ can be set apart from the
-rest (``the green ball on the left'', ``the small green ball'', ``the ball on the blue cube''), and
-the computer has to decide which of these is optimal in the given context. Moreover,
-optimality can mean different things. It might be thought, for instance, that references
-are optimal when they are minimal in length, containing just enough information to
-single out the target. But, as we shall see, finding minimal references is computationally
-expensive, and it is not necessarily what speakers do, nor what is most useful to hearers.
-
-So, what is Referring Expression Generation? Referring expressions play a central role
-in communication, and have been studied extensively in many branches of (computational) linguistics,
- including Natural Language Generation (NLG). NLG is concerned with the process of automatically converting non-linguistic information (e.g.,
-from a database such as the one illustrated in our figure) into natural language text, which is useful for practical applications
-ranging from generating weather forecasts to summarizing medical information~\cite{dale2000}. Of all the subtasks of NLG, Referring Expression Generation (REG) is
-among those that have received most scholarly attention. A survey of implemented,
-practical NLG systems shows that virtually all of them, regardless of their purpose,
-contain an REG module of some sort~\cite{Mellish2004}. This is hardly surprising
-in view of the central role that reference plays in communication. A system providing
-advice about air travel (White, Clark, and Moore 2010) needs to refer to flights (``the
-cheapest flight'' ``the KLM direct flight''), an in-car navigation system~\cite{Drager:2012:GLN:2380816.2380908}
-needs to generate spatial descriptions for areas (``take the bridge next to the church on your right''), 
-and a robot dialogue system that assembles construction
-toys together with a human user~\cite{foster-etal-ijcai2009} needs to refer to the components
-(``insert the green bolt through the end of this red cube'').
+Supongamos que uno quiere se\~nalar un objeto de la Figura~\ref{GRE3D7-stimulus-graph} a un destinatario. La mayor\'{i}a de las personas
+no tendr\'a dificultad en realizar esta tarea, mediante la producci\'on de una expresi\'on referencial como ``la
+bola verde sobre el cubo'', por ejemplo. Ahora imagine una computadora que se enfrenta a la misma
+tarea, con el objetivo de se\~nalar $e3$. Suponiendo que tiene acceso a una base de datos que contiene todas
+las propiedades relevantes de los objetos de la escena, como se muestra en la figura, tiene que encontrar alguna
+combinaci\'on de propiedades que se aplica unicamente a $e3$, y no a los otros objetos. No hay s\'olo una opci\'on,
+hay muchas formas en las que $e3$ puede ser identificado del resto (``la bola verde de la izquierda'',``la peque\~na bola verde'',``el bal\'on sobre el cubo azul''), la computadora tiene que decidir cu\'al de esas expresiones referenciales es \'optima en el contexto dado. Por otra parte, el concepto de \'optimo puede significar diferentes cosas.
+Se podr\'{i}a pensar, por ejemplo, que las referencias son \'optimas cuando son m\'{i}nimas en longitud,
+que contiene s\'olo la informaci\'on suficiente para identificar el objetivo. Pero, como veremos, la b\'usqueda de referencias m\'{i}nimas
+es computacionalmente caro, y no es necesariamente lo que los hablantes hacen, ni lo que es m\'as \'util para los oyentes.
 
 
-Our goal is actually twofold. First we show how we can add non-determinism to the refinement algorithms, by replacing the fixed ordering 
-over the properties of the input scene by a \emph{probability of use} for each property, and modifying the algorithm accordingly.  
-In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of REs (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) or the TUNA corpus introduced in~\cite{gatt-balz-kow:2008:ENLG} we can estimate these probability of use so that REs are generated with a probability distribution that matches those found in the corpora.  
+%Suppose one wants to point out an object in Figure~\ref{GRE3D7-stimulus-graph} to an addressee. Most speakers
+%have no difficulty in accomplishing this task, by producing a referring expression
+%such as ``the green ball on the cube'' for example. Now imagine a computer being confronted
+%with the same task, aiming to point out individual $e3$. Assuming it has access to a
+%database containing all the relevant properties of the objects in the scene as shown in the figure, it needs to
+%find some combination of properties which applies to $e3$, and not to the other objects.
+%There is a choice though: There are many ways in which $e3$ can be set apart from the
+%rest (``the green ball on the left'', ``the small green ball'', ``the ball on the blue cube''), and
+%the computer has to decide which of these is optimal in the given context. Moreover,
+%optimality can mean different things. It might be thought, for instance, that references
+%are optimal when they are minimal in length, containing just enough information to
+%single out the target. But, as we shall see, finding minimal references is computationally
+%expensive, and it is not necessarily what speakers do, nor what is most useful to hearers.
 
-All REG algorithms require an 
-ordered list of properties that can be used to described the objects in the scene, and the naturalness of the generated REs strongly depends on this ordering. 
+Entonces,  ?`qu\'e es la Generaci\'on de Expresiones referenciales? Las expresiones referenciales juegan un papel central
+en la comunicaci\'on, y se han estudiado ampliamente en muchas ramas (computacionales) de la ling\"u\'{i}stica,
+ incluyendo Generaci\'on del Lenguaje Natural (NLG). NLG se ocupa del proceso de convertir autom\'aticamente la informaci\'on no ling\"u\'{i}stica (por ejemplo, a partir de una base de datos como se ha ilustrado en nuestra figura) a texto en lenguaje natural, que es \'util para aplicaciones pr\'acticas que van desde la generaci\'on de pron\'osticos del tiempo, para resumir la informaci\'on m\'edica~\cite{dale2000}. De todas las subtareas de NLG, la Generaci\'on de Expresiones Referenciales (REG) es
+una de las que han recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los
+sistemas NLG, con independencia de su finalidad,
+contiene un m\'odulo REG de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
+en vista del papel central que las expresiones referenciales en la comunicaci\'on. Un sistema que proporciona
+consejos sobre los viajes a\'ereos (White, Clark y Moore 2010) ha de hacer referencia a los vuelos (``el
+vuelo m\'as barato '' ``el vuelo directo''), un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
+necesita para generar descripciones espaciales para las \'areas (``tomar el puente junto a la iglesia a la derecha''),
+y un sistema de di\'alogo de un robot que ensambla piezas de juguetes, junto con un usuario humano~\cite{foster-etal-ijcai2009} ha de hacer referencia a los componentes (``inserte el perno verde hasta el final en el cubo rojo'').
+%So, what is Referring Expression Generation? Referring expressions play a central role
+%in communication, and have been studied extensively in many branches of (computational) linguistics,
+% including Natural Language Generation (NLG). NLG is concerned with the process of automatically converting non-linguistic information (e.g.,
+%from a database such as the one illustrated in our figure) into natural language text, which is useful for practical applications
+%ranging from generating weather forecasts to summarizing medical information~\cite{dale2000}. Of all the subtasks of NLG, Referring Expression Generation (REG) is
+%among those that have received most scholarly attention. A survey of implemented,
+%practical NLG systems shows that virtually all of them, regardless of their purpose,
+%contain an REG module of some sort~\cite{Mellish2004}. This is hardly surprising
+%in view of the central role that reference plays in communication. A system providing
+%advice about air travel (White, Clark, and Moore 2010) needs to refer to flights (``the
+%cheapest flight'' ``the KLM direct flight''), an in-car navigation system~\cite{Drager:2012:GLN:2380816.2380908}
+%needs to generate spatial descriptions for areas (``take the bridge next to the church on your right''), 
+%and a robot dialogue system that assembles construction
+%toys together with a human user~\cite{foster-etal-ijcai2009} needs to refer to the components
+%(``insert the green bolt through the end of this red cube'').
+
+
+
+Nuestro objetivo es en realidad doble. Primero mostramos c\'omo podemos a\~nadir no determinismo de los algoritmos de refinamiento, reemplazando el orden fijo
+sobre las propiedades de la escena de entrada por una~\emph{probabilidad de uso} para cada propiedad, y modificar el algoritmo en consecuencia.
+De esta manera, cada llamada al algoritmo puede producir diferentes REs para la misma escena de entrada. A continuaci\'on, mostraremos que dado un corpus adecuado (como el corpus GRE3D7 discutido en~\cite{viet:gene11}) o el corpus TUNA introducido en~\cite{gatt-balz-kow:2008:ENLG} podemos estimar estas probabilidades de uso de manera que las ER se generen con una distribuci\'on de probabilidad que coincide con las que se encuentra en el corpus.
+
+Todos los algoritmos REG requieren una lista de propiedades que se pueden utilizar para describir los objetos en la escena, esta lista tiene un orden, y la naturalidad de los REs generados depende fuertemente de este ordenamiento.
+
+%Our goal is actually twofold. First we show how we can add non-determinism to the refinement algorithms, by replacing the fixed ordering 
+%over the properties of the input scene by a \emph{probability of use} for each property, and modifying the algorithm accordingly.  
+%In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of REs (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) or the TUNA corpus introduced in~\cite{gatt-balz-kow:2008:ENLG} we can estimate these probability of use so that REs are generated with a probability distribution that matches those found in the corpora.  
+
+%All REG algorithms require an 
+%ordered list of properties that can be used to described the objects in the scene, and the naturalness of the generated REs strongly depends on this ordering. 
 %coverage results reported over Viethen and 
 %Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that refinement algorithms have the capacity of producing REs similar to those produced by human subjects, provided a suitable ordering over relations appearing 
 %in the input scene is available, but it is unclear which of all possible orders should be used.  In this article we directly address this issue.  
@@ -45,34 +91,41 @@ ordered list of properties that can be used to described the objects in the scen
 %over properties of the input scene by a \emph{probability of use} for each property, and modifying the algorithm accordingly.  
 %In this way, each call to the algorithm can produce different REs for the same input scene and target.  We will then show that given suitable corpora of REs (like the GRE3D7 corpora discussed in~\cite{viet:gene11}) we can estimate these probabilities of use so that REs are generated with a probability distribution that matches the one found in corpora.  
 
-\cite{arec2:2008:Areces}
-show that the refinement algorithm using the description language \el as formal language is capable of generating 67\% of 
-the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
-done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
+\cite{arec2:2008:Areces}~mostraron que el algoritmo de refinamiento utilizando el lenguaje de descripci\'on \el como lenguaje formal es capaz de generar 67\% de
+las REs relacionales en el corpus ~\cite{viethen06:_algor_for_gener_refer_expres} cuando se consideran todos los posibles \'ordenes de las relaciones en el dominio. Esto est\'a en marcado contraste con el an\'alisis hecho en~\cite{viethen06:_algor_for_gener_refer_expres} sobre el cabinet corpus, de algoritmos basados en la propuesta original Dale y de Reiter.
 
-As mentioned, refinement algorithms require an 
-ordered list of the properties that can be used to described the objects in the scene, and the coverage results reported over Viethen and 
-Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that refinement algorithms have the capacity of producing REs similar to those produced by human subjects, provided a suitable ordering over relations appearing 
-in the input scene is available, but it is unclear which of all possible orders should be used.  In this article we directly address this issue.  
+%show that the refinement algorithm using the description language \el as formal language is capable of generating 67\% of 
+%the relational REs in the~\cite{viethen06:_algor_for_gener_refer_expres} dataset, when all possible orders of the relations in the domain are considered. This is in sharp contrast with the analysis 
+%done in~\cite{viethen06:_algor_for_gener_refer_expres} over the cabinet corpus, of algorithms based in Dale and Reiter's original proposal.    
 
+%As mentioned, refinement algorithms require an 
+%ordered list of the properties that can be used to described the objects in the scene, and the coverage results reported over Viethen and 
+%Dale's cabinet corpus means that \emph{some ordering} produces a reasonably wide coverage.  In other words, it has been shown that refinement algorithms have the capacity of producing REs similar to those produced by human subjects, provided a suitable ordering over relations appearing 
+%in the input scene is available, but it is unclear which of all possible orders should be used.  In this article we directly address this issue.  
 
-The rest of the paper is structured as follows. In Section~\ref{sec:algorithm} we introduce the technical details of the 
-refinement algorithms presented in~\cite{arec2:2008:Areces,arec:usin11} and show how to introduce non-determinism using 
-the probability of use of the properties in the input scene. In this section, we assume that these probabilities are provided as 
-input to the algorithm. In Section~\ref{sec:learning}, we show how to estimate the 
-probability of use of a property from training data. Given corpora consisting of pairs (scene, target) together with the REs used to 
-describe the target in each case, we propose a method to compute the probability of use of each property for each scene, and use a machine learning approach to generalize these properties to new targets and scenes not appearing in the corpora. 
+Como se ha mencionado, los algoritmos de refinamiento requieren una
+lista ordenada de las propiedades que se pueden utilizar para describir los objetos en la escena, y los resultados de cobertura reportados sobre Viethen and 
+Dale's sobre el 
+Gabinete corpus significa que~\emph{algun orden} produce una razonablemente amplia cobertura. En otras palabras, se ha demostrado que los algoritmos de refinamiento tienen la capacidad de producir REs similares a los producidos por los humanos, proporcionado una ordenaci\'on adecuada sobre las relaciones que aparecen
+en la escena de entrada disponible, pero no est\'a claro cu\'al de todos los \'ordenes posibles se debe utilizar. En esta tesis abordamos directamente esta cuesti\'on.
 
-Testing of the resulting algorithms shows that there is still one factor missing to property account for the REs found in corpora: overspecification.  Refinement algorithms only allow a mild form of over-specification in the REs produced.  We discuss this in 
-Section~\ref{sec:overspecification} and propose a modification that let the algorithm generate overspecified, but non trivially redundant RE.  The modification proposed is inspired by the work of~\cite{keysar:Curr98}, on the egocentric basis of language.  
-Section~\ref{sec:evaluation} presents a quantitative evaluation of the resulting algorithm and discusses interesting examples \textit{over the GRE3D7 and the TUNA-corpus}. 
-We show that when trained with scenes from the GRE3D7 corpora the algorithm can generate REs with a probability distribution that, 
-in certain scenes, coincides with an up to 84.49\% of accuracy with the probability distribution of REs used by humans for that scene. 
-\textit{We compare our results with the TUNA-corpus with results of the ASGRE challenge and show better results than the adquire for the best system in 2008.
-In Section~\ref{sec:error} we show an interesting analysis of errors that can be taken into account in the next works.}, then in Section~\ref{sec:related-work} we describe related work in the area.
+% In Section~\ref{sec:algorithm} we introduce the technical details of the 
+%refinement algorithms presented in~\cite{arec2:2008:Areces,arec:usin11} and show how to introduce non-determinism using 
+%the probability of use of the properties in the input scene. In this section, we assume that these probabilities are provided as 
+%input to the algorithm. In Section~\ref{sec:learning}, we show how to estimate the 
+%probability of use of a property from training data. Given corpora consisting of pairs (scene, target) together with the REs used to 
+%describe the target in each case, we propose a method to compute the probability of use of each property for each scene, and use a machine learning approach to generalize these properties to new targets and scenes not appearing in the corpora. 
 
-In Section~\ref{sec:discussion} we discuss motivations and future lines of research, focusing on recent work discussing the role 
-of non-determinism and over-specification in the generation of referring expressions. 
+%Testing of the resulting algorithms shows that there is still one factor missing to property account for the REs found in corpora: overspecification.  Refinement algorithms only allow a mild form of over-specification in the REs produced.  We discuss this in 
+%Section~\ref{sec:overspecification} and propose a modification that let the algorithm generate overspecified, but non trivially redundant RE.  The modification proposed is inspired by the work of~\cite{keysar:Curr98}, on the egocentric basis of language.  
+%Section~\ref{sec:evaluation} presents a quantitative evaluation of the resulting algorithm and discusses interesting examples \textit{over the GRE3D7 and the TUNA-corpus}. 
+%We show that when trained with scenes from the GRE3D7 corpora the algorithm can generate REs with a probability distribution that, 
+%in certain scenes, coincides with an up to 84.49\% of accuracy with the probability distribution of REs used by humans for that scene. 
+%\textit{We compare our results with the TUNA-corpus with results of the ASGRE challenge and show better results than the adquire for the best system in 2008.
+%In Section~\ref{sec:error} we show an interesting analysis of errors that can be taken into account in the next works.}, then in Section~\ref{sec:related-work} we describe related work in the area.
+
+%In Section~\ref{sec:discussion} we discuss motivations and future lines of research, focusing on recent work discussing the role 
+%of non-determinism and over-specification in the generation of referring expressions. 
 
 \section{Descripci\'on del problema}
 \label{sec:intro}
@@ -132,26 +185,109 @@ Las expresiones referenciales ocupan un papel central en la comunicaci\'on, popr
 %discussing the role of non-determinism and over-specification in the generation of referring
 %expressions.
 
-Suppose one wants to point out an object in Figure~\ref{GRE3D7-stimulus-graph} to an addressee. Most speakers
-have no difficulty in accomplishing this task, by producing a referring expression
-such as ``the green ball on the cube'' for example. Now imagine a computer being confronted
-with the same task, aiming to point out individual $e3$. Assuming it has access to a
-database containing all the relevant properties of the objects in the scene as shown in the figure, it needs to
-find some combination of properties which applies to $e3$, and not to the other objects.
-There is a choice though: There are many ways in which $e3$ can be set apart from the
-rest (``the green ball on the left'', ``the small green ball'', ``the ball on the blue cube''), and
-the computer has to decide which of these is optimal in the given context. Moreover,
-optimality can mean different things. It might be thought, for instance, that references
-are optimal when they are minimal in length, containing just enough information to
-single out the target. But, as we shall see, finding minimal references is computationally
-expensive, and it is not necessarily what speakers do, nor what is most useful to hearers.
+%Suppose one wants to point out an object in Figure~\ref{GRE3D7-stimulus-graph} to an addressee. Most speakers
+%have no difficulty in accomplishing this task, by producing a referring expression
+%such as ``the green ball on the cube'' for example. Now imagine a computer being confronted
+%with the same task, aiming to point out individual $e3$. Assuming it has access to a
+%database containing all the relevant properties of the objects in the scene as shown in the figure, it needs to
+%find some combination of properties which applies to $e3$, and not to the other objects.
+%There is a choice though: There are many ways in which $e3$ can be set apart from the
+%rest (``the green ball on the left'', ``the small green ball'', ``the ball on the blue cube''), and
+%the computer has to decide which of these is optimal in the given context. Moreover,
+%optimality can mean different things. It might be thought, for instance, that references
+%are optimal when they are minimal in length, containing just enough information to
+%single out the target. But, as we shall see, finding minimal references is computationally
+%expensive, and it is not necessarily what speakers do, nor what is most useful to hearers.
 
-So, what is Referring Expression Generation? Referring expressions play a central role
-in communication, and have been studied extensively in many branches of (computational) linguistics, including Natural Language Generation (NLG). NLG is concerned with the process of automatically converting non-linguistic information (e.g.,
-from a database such as the one illustrated in our figure) into natural language text, which is useful for practical applications
-ranging from generating weather forecasts to summarizing medical information~\cite{dale2000}. Of all the subtasks of NLG, Referring Expression Generation (REG) is
-among those that have received most scholarly attention. A survey of implemented,
-practical NLG systems shows that virtually all of them, regardless of their purpose,
-contain an REG module of some sort~\cite{Mellish2004}. This is hardly surprising
-in view of the central role that reference plays in communication. A system providing
-advice about air travel (White, Clark, and Moore 2010) needs to refer to flights (
+%So, what is Referring Expression Generation? Referring expressions play a central role
+%in communication, and have been studied extensively in many branches of (computational) linguistics, including Natural Language Generation (NLG). NLG is concerned with the process of automatically converting non-linguistic information (e.g.,
+%from a database such as the one illustrated in our figure) into natural language text, which is useful for practical applications
+%ranging from generating weather forecasts to summarizing medical information~\cite{dale2000}. Of all the subtasks of NLG, Referring Expression Generation (REG) is
+%among those that have received most scholarly attention. A survey of implemented,
+%practical NLG systems shows that virtually all of them, regardless of their purpose,
+%contain an REG module of some sort~\cite{Mellish2004}. This is hardly surprising
+%in view of the central role that reference plays in communication. A system providing
+%advice about air travel (White, Clark, and Moore 2010) needs to refer to flights (
+
+
+\section{Contribuciones de esta tesis}
+\label{sec:contribiciones}
+
+\begin{itemize}
+\item Se agregaron probabilidades de uso a un algoritmo existente
+\item Se creo un corpus de descripciones de mapas (el ZOOM corpus)
+\item
+\end{itemize}
+\section{Mapa de la tesis}
+\label{sec:mapadetesis}
+
+En el cap\'itulo 1 se da la introducci\'on al problema, luego se analizan los distintos algoritmos existentes
+
+which is useful for practical applications
+ranging from generating weather forecasts to summarizing medical information (Reiter
+and Dale 2000). Of all the subtasks of NLG, Referring Expression Generation (REG) is
+among the ones that have received most scholarly attention. A survey of implemented,
+practical  NLG  systems  shows  that  virtually  all  of  them,  regardless  of  their  purpose,
+contain a REG module of some sort (Mellish et al. 2006). This is hardly surprising in
+view  of  the  central  role  that  reference  plays  in  communication.  A  system  providing
+advice about air travel (White, Clark, and Moore 2010), needs to refer to flights (``the
+cheapest  flight'',  ``the  KLM  direct  flight'');  a  Pollen  forecast  system  (Turner  et  al.
+2008)  needs  to  generate  spatial  descriptions  for  areas  with  low  or  high  pollen  levels
+(``the  central  belt  and  further  North''),  and  a  robot  dialogue  system  that  assembles
+construction toys together with a human user (Giuliani et al. 2010), needs to refer to the
+components (``insert the green bolt through the end of this red cube'').
+REG ``is concerned with how we produce a description of an entity that enables
+the hearer to identify that entity in a given context'' (Reiter and Dale 2000, page 55).
+Since this can often be done in many different ways, a REG algorithm needs to make a
+number of choices. According to Reiter and Dale (2000), the first choice concerns what
+form
+of referring expression is to be used; should the target be referred to, for instance,
+using  its  proper  name,  a  pronoun  (``he'')  or  a  description  (``the  man  with  the  tie'').
+Proper  names  have  limited  applicability  because  many  domain  objects  do  not  have
+a name that is in common usage. For pronoun generation, a simple but conservative
+rule  is  discussed  by  Reiter  and  Dale  (2000),  similar  to  one  proposed  by  Dale  (1989,
+pages 150-151): use a pronoun if the target was mentioned in the previous sentence,
+and  if  this  sentence  contained  no  reference  to  any  other  entity  of  the  same  gender.
+Reiter  and  Dale  (2000)  concentrate  mostly  on  the  generation  of  descriptions.  If  the
+NLG  system  decides  to  generate  a  description,  two  choices  need  to  be  made:  which
+set of properties distinguishes the target (content selection), and how can the selected
+properties be turned into natural language (linguistic realisation). Content selection is a
+complex balancing act: we need to say enough to enable identification of the intended
+referent, but not too much. A selection of information needs to be made, and this needs
+to be done quickly. Reiter and Dale discuss various strategies that try to manage this
+balancing act, based on Dale and Reiter (1995), an early survey article that summarises
+and compares various influential algorithms for the generation of descriptions.
+
+\textcolor{blue}{traje esto...}
+La selecci\'on de qu\'e propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial. Una expresi\'on referencial ser\'a muy distinta si nuestro objetivo es dar la m\'inima informaci\'on que identifique al objeto que si nuestro objetivo es ayudar al interlocutor a que identifique el objeto.\\
+
+En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.\\
+
+En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.\\
+
+concerned with the process of automatically converting non-linguistic information (e.g.,
+from a database) into natural language text, 
+Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales (GER), es un procedimiento que tomar\'a alg\'un tipo de input y dar\'a como resultado una expresi\'on referencial.
+
+
+Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. \\
+
+Por ejemplo: Que cosa es? (el tipo) Una pelota. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.\\
+
+Con esta clase de datos para los objetos de la escena, tenemos una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.\\
+
+Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identicar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran seg\'un la cantidad de informaci\'on que dan, si dan la m\'inima informaci\'on para identificarlas un\'ivocamente ser\'an minimales, si dan m\'as informaci\'on estar\'an sobreespecificadas, pero en el caso de dar m\'as de la m\'inima informaci\'on... cu\'anta m\'as dar?
+
+El sistema deber\'ia tener una lista del orden de preferencia de los atributos a usar.\\ 
+
+Para una persona identificar ciertos atributos puede ser m\'as f\'acil que identificar ciertos otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir ``grande'' y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es ``grande''.\\
+
+Para un algoritmo entonces, ser\'ian cuestiones importantes de tener en cuenta:
+
+\begin{itemize}
+ \item Que propiedades o relaciones incluir?
+ \item Cuando terminar (dar la expresi\'on minimal? o dar una expresi\'on sobreespecificada, si es sobreespecifica, que tan sobreespecificada?)
+ \item Seguir un orden preferencias fijo para las propiedades? y luego otro para las relaciones?
+ \item Hacer o no backtraking?
+ \item Incluir o no negaciones?
+\end{itemize}
