@@ -335,7 +335,7 @@ $\ L \leftarrow \emptyset $ \tcp*[f]{\footnotesize Inicialmente es vac\'io}\\
 $\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los objetos menos r }\\
 
 
-\For{\em $A_{i} \in Pref$}{
+\For{\em $A_{i} \in Pref$ }{
 	$V = Value(r,A_{i})$ \tcp*[f]{\footnotesize V es el valor de la propiedad $A_{i}$ para r }\\
 	\If(\tcp*[f]{\footnotesize Si elimina alg\'un distractor}){\em $C \cap RulesOut(\[A_{i}\],V) \neq \emptyset $}
 	{
@@ -343,11 +343,11 @@ $\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los
     $\ C \leftarrow C - RulesOut(\[A_{i}\],V) $  \tcp*[f]{\footnotesize Actualiza C sacando los objetos que no tienen V en $A_{i}$} 
     }
     \If(\tcp*[f]{\footnotesize Si no quedan distractores}){\em $C = \emptyset $}
-	{
+	  {
      Return L  
     }
   }
-Return Failure 
+Return Fallo
 \end{algorithm}
 \end{center}
 %\end{figure}

@@ -41,47 +41,47 @@ ACA: Quizas deba poner un ejemplo
 
 \begin{verbatim}
 <?xml version="1.0"?>
-<problem id="e1">c
+<problem id="e1">
   <individual id="e1">
-    <related rel="small" to="c" />
-    <related rel="yellow" to="c" />
-    <related rel="ball" to="c" />
+    <related rel="pequeno" to="c" />
+    <related rel="amarillo" to="c" />
+    <related rel="pelota" to="c" />
   </individual>
   <individual id="e2">
-    <related rel="cube" to="c" />
-    <related rel="red" to="c" />
-    <related rel="small" to="c" />
-    <related rel="bellow" to="e3" />
+    <related rel="cubo" to="c" />
+    <related rel="rojo" to="c" />
+    <related rel="pequeno" to="c" />
+    <related rel="abajo-de" to="e3" />
   </individual>
   <individual id="e3">
-    <related rel="ball" to="c" />
-    <related rel="yellow" to="c" />
-    <related rel="small" to="c" />
-    <related rel="on-top" to="e2" />
+    <related rel="pelota" to="c" />
+    <related rel="amarillo" to="c" />
+    <related rel="pequeno" to="c" />
+    <related rel="arriba-de" to="e2" />
   </individual>
   <individual id="e4">
-    <related rel="cube" to="c" />
-    <related rel="red" to="c" />
-    <related rel="large" to="c" />
-    <related rel="left-of" to="e5" />
+    <related rel="cubo" to="c" />
+    <related rel="rojo" to="c" />
+    <related rel="grande" to="c" />
+    <related rel="a-la-izquierda-de" to="e5" />
   </individual>
   <individual refer-to="e5">
-    <related rel="large" to="c"/>
-    <related rel="ball" to="c" />
-    <related rel="red" to="c" />
-    <related rel="right-of" to="e4" />
+    <related rel="grande" to="c"/>
+    <related rel="pelota" to="c" />
+    <related rel="rojo" to="c" />
+    <related rel="a-la-derecha-de" to="e4" />
   </individual>
   <individual id="e6">
-    <related rel="small" to="c" />
-    <related rel="cube" to="c" />
-    <related rel="yellow" to="c" />
-    <related rel="left-of" to="e7" />
+    <related rel="pequeno" to="c" />
+    <related rel="cubo" to="c" />
+    <related rel="amarillo" to="c" />
+    <related rel="a-la-izquierda-de" to="e7" />
   </individual>
   <individual id="e7">
-    <related rel="small" to="c" />
-    <related rel="cube" to="c" />
-    <related rel="red" to="c" />
-    <related rel="right-of" to="e6" />
+    <related rel="pequeno" to="c" />
+    <related rel="cubo" to="c" />
+    <related rel="rojo" to="c" />
+    <related rel="a-la-derecha-de" to="e6" />
   </individual>
   <individual id="c">
     <related rel="terminal" to="c" />
@@ -89,10 +89,22 @@ ACA: Quizas deba poner un ejemplo
 </problem>
 \end{verbatim}
 
-y una lista de probabilidades ordenadas de mayor a menor con el orden de preferencia de las propiedades y relaciones. 
+y una lista de probabilidades ordenadas de mayor a menor con el orden de preferencia de las propiedades y relaciones. Por ejemplo esta es una lista de probabilidades de uso de la Figura \ref{GRE3D7-stimulus}
 
- 
-ACA puedo poner lista de probabilidades real
+pelota 1.0, \\
+cubo 1.0,\\
+rojo 0.978,\\ 
+grande 0.257,\\ 
+arriba-de 0.178,\\ 
+amarillo 0.15,\\
+peque\~no 0.107,\\ 
+izquierda 0.007,\\
+arriba 0.007, \\
+derecha 0, \\
+a-la-izquierda-de 0, \\
+a-la-derecha-de 0, \\
+debajo-de 0,\\
+
 En la Secci\'on \ref{sec:learning} explicaremos de donde sacar estas probabilidades que el algoritmo toma como input.
 
 Usaremos el contexto \ref{grafo-GRE3D7-stimulus} como ejemplo para mostrar los pasos a seguir para la ejecuci\'on del algoritmo.
@@ -115,19 +127,19 @@ Usaremos el contexto \ref{grafo-GRE3D7-stimulus} como ejemplo para mostrar los p
 
 La salida del algoritmo es un conjunto de f\'ormulas (que ser\'an expresiones referenciales si la clase de la f\'ormula contiene s\'olo 1 objeto) de los elementos del modelo. 
 
-\section{Procedimiento}
+\section{El nuevo algoritmo}
 
 Antes de empezar explicando el algoritmo, daremos algunos conceptos necesarios para entenderlo.
 
-Desde ahora hablaremos de {\it f\'ormulas} (una f\'ormula corresponde a una descripci\'on) por ejemplo usaremos la f\'ormula ``pelota'' para referirnos a todas las pelotas del contexto, en el contexto \ref{grafo-GRE3D7-stimulus} ser\'ian: $e_1$, $e_3$ y $e_5$  asi como ``pelota y amarillo'' ser\'ian: $e_1$ y $e_3$.
+Desde ahora hablaremos de {\it f\'ormulas} (una f\'ormula corresponde a una descripci\'on) por ejemplo usaremos la f\'ormula ``pelota'' para referirnos a todas las pelotas del contexto, en el contexto \ref{grafo-GRE3D7-stimulus} ser\'ian: $e_1$, $e_3$ y $e_5$  as\'i como ``pelota y amarillo'' ser\'ian: $e_1$ y $e_3$.\\
 
-Una clase es un conjunto de objetos que satisface la misma f\'ormula (descripci\'on), por ejemplo ``pelota'' ser\'an todas las pelotas del modelo.
+Una clase es un conjunto de objetos que satisface la misma f\'ormula (descripci\'on), por ejemplo ``pelota'' ser\'an todas las pelotas del modelo.\\
 
-Una f\'ormula es {\it Informativa} cuando tiene m\'as informaci\'on que las f\'ormulas que hay hasta el momento, es decir, el subgrupo de objetos que la satisfacen esta inclu\'ido en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas ``pelota'' y ``cubo'' y queremos saber si ``pelota roja'' es informativa, si lo es ya que $e_5$ es una ``pelota roja'' y existen otras que no son rojas, es decir divide el conjunto de pelotas. 
+Una f\'ormula es {\it Informativa} cuando tiene m\'as informaci\'on que las f\'ormulas que hay hasta el momento, es decir, el subgrupo de objetos que la satisfacen esta inclu\'ido en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas ``pelota'' y ``cubo'' y queremos saber si ``pelota roja'' es informativa, si lo es ya que $e_5$ es una ``pelota roja'' y existen otras que no son rojas, es decir divide el conjunto de pelotas. \\
 
-Una f\'ormula es {\it subsumida} si ya existen subf\'ormulas con m\'as informaci\'on que cubren todo el conjunto de objetos que la formula cubr\'ia. Por ejemplo, T que es la f\'ormula en la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen las f\'ormulas ``pelota'' y ``cubo'' ya que todos los elementos del contexto \ref{grafo-GRE3D7-stimulus} son o pelotas o cubos, es decir ya tenemos informaci\'on m\'as precisa de los objetos.
+Una f\'ormula es {\it subsumida} si ya existen subf\'ormulas con m\'as informaci\'on que cubren todo el conjunto de objetos que la formula cubr\'ia. Por ejemplo, T que es la f\'ormula en la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen las f\'ormulas ``pelota'' y ``cubo'' ya que todos los elementos del contexto \ref{grafo-GRE3D7-stimulus} son o pelotas o cubos, es decir ya tenemos informaci\'on m\'as precisa de los objetos.\\
 
-{\it Redundanteç es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el contexto \ref{grafo-GRE3D7-stimulus} si ya tenemos la f\'ormula ``pelota roja'', la f\'ormula ``pelota roja grande'' es redundante ya que no agrega informaci\'on porque el conjunto de objetos pelotas rojas es solamente 1 objeto.
+{\it Redundante} es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el contexto \ref{grafo-GRE3D7-stimulus} si ya tenemos la f\'ormula ``pelota roja'', la f\'ormula ``pelota roja grande'' es redundante ya que no agrega informaci\'on porque el conjunto de objetos pelotas rojas es solamente 1 objeto.\\
 
 {\it Trivial} es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el Contexto \ref{grafo-GRE3D7-stimulus} ``pelota amarilla grande'' es trivial ya que no hay pelotas amarillas grandes en el contexto considerado.
 
@@ -361,6 +373,7 @@ distribuci\'on de probabilidad coincida con buena precisi\'on a la distribuci\'o
 
 En la siguiente secci\'on explicaremos como calcular R.\puse cuando tenemos corpus disponible, y cuando no lo tenemos.
 
+\section{Obteniendo probabilidades de uso}
 
 \subsection{Aprendizaje autom\'atico desde un corpus para describir nuevos objetos}
 \label{sec:learning}

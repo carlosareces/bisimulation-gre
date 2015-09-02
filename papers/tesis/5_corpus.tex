@@ -434,7 +434,7 @@ A partir de los resultados de los 12 clasificadores binarios, una descripci\'on 
 Puesto que cada atributo que corresponde a una predicci\'on positiva est\'a siempre seleccionado, el algoritmo no considera singularidad como una condici\'on de parada. Como resultado, la descripci\'on de salida puede transmitir una cierta cantidad de sobrevaloraci\'on.
 
 %......................
-\subsection{Procedure}
+\subsection{Procedimiento}
 %......................
 
 %We used a subset of singular descriptions from the Portuguese portion of the corpus. This comprises  821 descriptions produced in 9 scenes. Evaluation was carried out by comparing the corpus description with the system output to measure overall accuracy (i.e., the number of exact matches between the two descriptions), Dice \cite{dice} and MASI \cite{masi} coefficients (i.e., the degree of overlap between the algorithm output and the corresponding corpus description).
@@ -454,7 +454,7 @@ Tabla \ref{tab-reg-resultados} resume los resultados obtenidos por el algoritmo 
 % these results are for SVM.All.VAR-   compared to the AEI- baseline
 \begin{table}[ht]
 \begin{center}
-\caption{GER resultados}
+\caption{Resultados de la GER}
 \label{tab-reg-results}
 \begin{tabular} {  l c c c }
 \hline
@@ -484,7 +484,7 @@ Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \
 \begin{table}[ht]
 \begin{center}
 \footnotesize{
-\caption{Classifier results}
+\caption{Resultados del clasificador}
 \begin{tabular}{l c c c c }
 \hline
 {{Classifier}}	& {P} & {R} & {$F_{1}$} & {AUC} \\
@@ -514,7 +514,7 @@ Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \
 A partir de estos resultados nos damos cuenta de que los atributos muy frecuentes (por ejemplo, el tipo y nombre) se clasificaron con gran precisi\'on, mientras que otros (por ejemplo, los atributos de varios valores y relaciones) no lo eran.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       >2
-\section{Final remarks}
+\section{Notas finales}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       >2
 \label{sec-final}
 
@@ -530,7 +530,7 @@ A partir de estos resultados nos damos cuenta de que los atributos muy frecuente
 
 En este trabajo se ha presentado el corpus de zoom de las descripciones en lenguaje natural de localizaciones en el mapa. El corpus tiene en cuenta un dominio que es significativamente m\'as cerca de aplicaciones del mundo real, y aborda las situaciones m\'as complejas de referencia de los recursos existentes de este tipo. En particular, el dominio de zoom hace uso de contextos con diferentes niveles de detalle, y contiene ejemplos de referencia singular y plural producido por un n\'umero relativamente grande de hablantes en ambos idiomas espa\~nol y portugu\'es.
 
-Los resultados preliminares de un enfoque basado en SVM a GER - que fueron \'unicamente presenta para la futura evaluaci\'on de algoritmos GER basados en datos Zoom - alusi\'on a la complejidad real de la tarea GER en este dominio en un n\'umero de maneras.
+Los resultados preliminares de un enfoque basado en SVM a GER - que fueron \'unicamente presentados para la futura evaluaci\'on de algoritmos GER basados en datos Zoom - alusi\'on a la complejidad real de la tarea GER en este dominio en un n\'umero de maneras.
 
 En primer lugar, nos damos cuenta de que un enfoque basado en SVM similar en~\cite{thiago-svm} en GRE3D3 y GRE3D7 datos ha obtenido considerablemente mayor precisi\'on media (0,46 y 0,64 respectivamente) y una mayor media de las puntuaciones de los dados (0,78 y 0,89 respectivamente). Esto es, por supuesto, se explica por el aumento de la complejidad del dominio Zoom (por ejemplo, en el n\'umero de posibles objetos y propiedades at\'omicas y relacionales etc.). Sin embargo, nos damos cuenta tambi\'en que el esquema de anotaci\'on Zoom \- aunque teniendo en cuenta la ya gran n\'umero de posibles atributos - sigue siendo demasiado simple. En particular, el atributo {\em dem\'as} ha sido usado en exceso y, como consecuencia, las posibilidades de reproducci\'on de las descripciones corpus es estrecho. Es evidente que a\'un queda trabajo por hacer para ampliar el esquema de anotaci\'on y dividida {\em otros} en un mayor n\'umero de atributos.
 
