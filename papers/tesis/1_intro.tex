@@ -2,20 +2,21 @@
 
 %tesis en linguistica http://elies.rediris.es/miscelanea/misce_9/alcina.pdf
 
-En este cap\'itulo se hablar\'a del problema de la generaci\'on autom\'atica de RE, las contribuciones de este trabajo y el mapa de la tesis.
-\textcolor{blue}{de la tesis de Jette -El dominio define los tipos de entidades que est\'an siendo contemplados, de alguna
-casos incluso un determinado conjunto de entidades con todas sus propiedades.El
-conjunto contexto
-contiene un subconjunto de las entidades de dominio, por ejemplo, los puntos de referencia visibles en un cierto punto de la ruta para la que estamos dando direcciones, una
-subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un entorno visual, establece el contexto, incluyendo el
-propiedades de sus objetos miembro y su configuraci\'on espacial, a menudo se llama una Planificaci\'on scene.Document, microplanificaci\'on y el sistema de Realizaci\'on Un cargada
-con la generaci\'on de una descripci\'on en lenguaje natural por integraci\'on global filo ser\'a como m\'inimo
-tienen que realizar las tareas de determinaci\'on del contenido (la selecci\'on de las propiedades de la
-apuntar referente ser mencionado), lexicalizaci\'on (la elecci\'on de las palabras para representar
-las propiedades), y la realizaci\'on ling\''u\'istica (la construcci\'on de una gramaticalmente correcto
-sintagma nominal). Incluso la tarea de agregaci\'on puede argumentar para formar parte de la
-generaci\'on de una descripci\'on distintiva, como el contenido sem\'antico de alguna fuerza
-casos m\'as se reparten entre varios sintagmas nominales parcialmente distintivas}
+En este cap\'itulo daremos una introducci\'on al problema de la generaci\'on autom\'atica de expresiones referenciales, contaremos las contribuciones de este trabajo y mostraremos como esta organizada la tesis.
+
+La generaci\'on autom\'atica de expresiones referenciales es una sub\'area de la generaci\'on autom\'atica de lenguaje natural, la cual es una rama principal de la inteligencia artificial.
+
+Un sistema de generaci\'on autom\'atica de texto en lenguaje natural deber\'ia incluir m\'inimamante 
+las tareas de determinaci\'on del contenido (que decir), lexicalizaci\'on (con que palabras), y la realizaci\'on ling\''u\'istica (armar el  sintagma nominal para que sea gramaticalmente correcto). 
+
+Esto mismo se aplica a la generaci\'on autom\'atica de expresiones referenciales, en la cual tendremos que la determinaci\'on de contenido estar\'a dada por las propiedades del objeto que queremos nombrar, la lexicalicalizaci\'on, las palabras que queremos usar para nombrarlo, y la realizaci\'on ling\''u\'istica, armar el sintagma nominal para que sea gramaticalmente correcto.
+
+ 
+
+
+%Incluso la tarea de agregaci\'on puede argumentar que forme parte de la generaci\'on de una descripci\'on distintiva, como el contenido sem\'antico de alguna fuerza
+%casos m\'as se reparten entre varios sintagmas nominales parcialmente distintivas
+
  %The domain defines the types of entities that are being referred to, in some
 %cases even a particular set of entities with all their properties. A
 %context set
@@ -33,10 +34,10 @@ casos m\'as se reparten entre varios sintagmas nominales parcialmente distintiva
 Supongamos que uno quiere se\~nalar un objeto de la Figura~\ref{GRE3D7-stimulus-graph} a un destinatario. La mayor\'{i}a de las personas
 no tendr\'a dificultad en realizar esta tarea, mediante la producci\'on de una expresi\'on referencial como ``la
 bola verde sobre el cubo'', por ejemplo. Ahora imagine una computadora que se enfrenta a la misma
-tarea, con el objetivo de se\~nalar $e3$. Suponiendo que tiene acceso a una base de datos que contiene todas
+tarea, con el objetivo de se\~nalar $e_3$. Suponiendo que tiene acceso a una base de datos que contiene todas
 las propiedades relevantes de los objetos de la escena, como se muestra en la figura, tiene que encontrar alguna
-combinaci\'on de propiedades que se aplica unicamente a $e3$, y no a los otros objetos. No hay s\'olo una opci\'on,
-hay muchas formas en las que $e3$ puede ser identificado del resto (``la bola verde de la izquierda'',``la peque\~na bola verde'',``el bal\'on sobre el cubo azul''), la computadora tiene que decidir cu\'al de esas expresiones referenciales es \'optima en el contexto dado. Por otra parte, el concepto de \'optimo puede significar diferentes cosas.
+combinaci\'on de propiedades que se aplica unicamente a $e_3$, y no a los otros objetos. No hay s\'olo una opci\'on,
+hay muchas formas en las que $e_3$ puede ser identificado del resto (``la bola verde de la izquierda'',``la peque\~na bola verde'',``el bal\'on sobre el cubo azul''), la computadora tiene que decidir cu\'al de esas expresiones referenciales es \'optima en el contexto dado. Por otra parte, el concepto de \'optimo puede significar diferentes cosas.
 Se podr\'{i}a pensar, por ejemplo, que las referencias son \'optimas cuando son m\'{i}nimas en longitud,
 que contiene s\'olo la informaci\'on suficiente para identificar el objetivo. Pero, como veremos, la b\'usqueda de referencias m\'{i}nimas
 es computacionalmente caro, y no es necesariamente lo que los hablantes hacen, ni lo que es m\'as \'util para los oyentes.
@@ -56,9 +57,12 @@ es computacionalmente caro, y no es necesariamente lo que los hablantes hacen, n
 %single out the target. But, as we shall see, finding minimal references is computationally
 %expensive, and it is not necessarily what speakers do, nor what is most useful to hearers.
 
-Entonces,  ?`qu\'e es la Generaci\'on de Expresiones referenciales? Las expresiones referenciales juegan un papel central
-en la comunicaci\'on, y se han estudiado ampliamente en muchas ramas (computacionales) de la ling\"u\'{i}stica,
- incluyendo Generaci\'on del Lenguaje Natural (NLG). NLG se ocupa del proceso de convertir autom\'aticamente la informaci\'on no ling\"u\'{i}stica (por ejemplo, a partir de una base de datos como se ha ilustrado en nuestra figura) a texto en lenguaje natural, que es \'util para aplicaciones pr\'acticas que van desde la generaci\'on de pron\'osticos del tiempo, para resumir la informaci\'on m\'edica~\cite{dale2000}. De todas las subtareas de NLG, la Generaci\'on de Expresiones Referenciales (REG) es
+Entonces,  ?`qu\'e es la Generaci\'on de Expresiones referenciales? 
+%Las expresiones referenciales juegan un papel central
+%en la comunicaci\'on, y se han estudiado ampliamente en muchas ramas (computacionales) de la ling\"u\'{i}stica,
+ %incluyendo Generaci\'on del Lenguaje Natural (NLG). NLG 
+
+Es el proceso de convertir autom\'aticamente la informaci\'on no ling\"u\'{i}stica (por ejemplo, a partir de una base de datos como se ha ilustrado en nuestra figura) a texto en lenguaje natural, que es \'util para aplicaciones pr\'acticas que van desde la generaci\'on de pron\'osticos del tiempo, para resumir la informaci\'on m\'edica~\cite{dale2000}. De todas las subtareas de NLG, la Generaci\'on de Expresiones Referenciales (REG) es
 una de las que han recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los
 sistemas NLG, con independencia de su finalidad,
 contiene un m\'odulo REG de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
@@ -82,6 +86,16 @@ y un sistema de di\'alogo de un robot que ensambla piezas de juguetes, junto con
 %and a robot dialogue system that assembles construction
 %toys together with a human user~\cite{foster-etal-ijcai2009} needs to refer to the components
 %(``insert the green bolt through the end of this red cube'').
+
+
+
+
+El dominio define los tipos de entidades que est\'an siendo contemplados, en algunos
+casos incluso un determinado conjunto de entidades con todas sus propiedades.
+
+El contexto contiene un subconjunto de las entidades del dominio, por ejemplo, los puntos de referencia visibles en un cierto punto de la ruta para la que estamos dando direcciones, un
+subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un entorno visual, establece el contexto, incluyendo las
+propiedades de sus objetos y su configuraci\'on espacial, se puede llamar escena. 
 
 
 
@@ -222,64 +236,105 @@ Las expresiones referenciales ocupan un papel central en la comunicaci\'on, popr
 %in view of the central role that reference plays in communication. A system providing
 %advice about air travel (White, Clark, and Moore 2010) needs to refer to flights (
 
+que es \'util para aplicaciones pr\'acticas
+que van desde la generaci\'on de pron\'osticos del tiempo para resumir la informaci\'on m\'edica (Reiter
+y Dale 2000). De todas las subtareas de NLG, referencia Generaci\'on Expresi\'on (REG) es
+entre los que han recibido mayor atenci\'on acad\'emica. Una encuesta de la marcha,
+sistemas pr\'acticos NLG muestra que pr\'acticamente todos ellos, independientemente de su finalidad,
+contener un m\'odulo REG de alg\'un tipo (Mellish et al. 2006). Esto no es sorprendente en
+habida cuenta del papel central que juega la referencia en la comunicaci\'on. Un sistema que proporciona
+consejos sobre los viajes a\'ereos (White, Clark, y Moore 2010), hay que hacer referencia a los vuelos (`` la
+m\'as barata de vuelo '', `` el vuelo directo KLM ''); un sistema de previsi\'on de polen (Turner et al.
+2008) tiene que generar descripciones espaciales para las \'areas con niveles bajos o altos de polen
+(`` el cintur\'on central y m\'as al norte ''), y un sistema de di\'alogo robot que re\'une
+juguetes de construcci\'on junto con un usuario humano (Giuliani et al 2010.), necesita para referirse a la
+componentes (`` insertar el perno verde hasta el final de este cubo rojo '').
+REG `` tiene que ver con la forma en que producimos una descripci\'on de una entidad que permite
+el oyente identificar esa entidad en un contexto dado '' (Reiter y Dale 2000, p\'agina 55).
+Dado que esto a menudo se puede hacer de muchas maneras diferentes, un algoritmo REG tiene que hacer una
+n\'umero de opciones. Seg\'un Reiter y Dale (2000), la primera opci\'on se refiere a lo
+forma
+de referirse expresi\'on es para ser utilizado; debe ser referido el objetivo de, por ejemplo,
+usando su propio nombre, un pronombre (`` \'el '') o una descripci\'on (`` el hombre con el lazo '').
+Los nombres propios han aplicabilidad limitada porque muchos objetos de dominio no tienen
+un nombre que es de uso com\'un. Para la generaci\'on de pronombre, un simple pero conservadora
+regla es discutido por Reiter y Dale (2000), similar al propuesto por Dale (1,989,
+p\'aginas 150 a 151): utilizar un pronombre si el objetivo fue mencionado en la frase anterior,
+y si esta frase conten\'ia ninguna referencia a cualquier otra entidad del mismo g\'enero.
+Reiter y Dale (2000) se concentran principalmente en la generaci\'on de descripciones. Si el
+Sistema de NLG decide generar una descripci\'on, dos opciones deben hacerse: que
+conjunto de propiedades que distingue al objetivo (selecci\'on de contenidos), y c\'omo puede el seleccionado
+propiedades pueden convertir en lenguaje natural (realizaci\'on lingü\'istica). La selecci\'on de contenido es un
+complejo acto de equilibrio: tenemos que decir lo suficiente para permitir la identificaci\'on de la intenci\'on
+referente, pero no demasiado. Una selecci\'on de la informaci\'on necesita ser hecho, y esto necesita
+que hacerse r\'apidamente. Reiter y Dale discuten diversas estrategias que tratan de gestionar este
+acto de equilibrio, basado en Dale y Reiter (1995), un art\'iculo encuesta temprana que resume
+y la compara varios algoritmos influyentes para la generaci\'on de descripciones.
+
 
 \section{Contribuciones de esta tesis}
 \label{sec:contribiciones}
 
 \begin{itemize}
-\item Se agregaron probabilidades de uso a un algoritmo existente
-\item Se creo un corpus de descripciones de mapas (el ZOOM corpus)
-\item
+\item Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes y los problemas que ellos ten\'ian.
+\item Se estudiaron las m\'etricas de evaluaci\'on tanto autom\'aticas como manuales.
+\item Se agregaron probabilidades de uso a un algoritmo existente.
+\item Se modific\'o el algoritmo para que sea no-determinista.
+\item Se agreg\'o sobreespecificaci\'on.
+\item Se propone un m\'etodo para calcular probabilidades de uso (\puse) \ de las relaciones del modelo el cual genera una distribuci\'on de expresiones referenciales cercana a la encontrada en el corpus.
+\item Se prob\'o el algoritmo en 2 corpus existentes.
+\item Se realiz\'o una evaluaci\'on en la que se compararon las salidas del algoritmo con ambos corpus. Se usaron m\'etricas autom\'aticas y manuales.
+\item Se creo un corpus de descripciones de mapas (el ZOOM corpus).
 \end{itemize}
 \section{Mapa de la tesis}
 \label{sec:mapadetesis}
 
 En el cap\'itulo 1 se da la introducci\'on al problema, luego se analizan los distintos algoritmos existentes
 
-which is useful for practical applications
-ranging from generating weather forecasts to summarizing medical information (Reiter
-and Dale 2000). Of all the subtasks of NLG, Referring Expression Generation (REG) is
-among the ones that have received most scholarly attention. A survey of implemented,
-practical  NLG  systems  shows  that  virtually  all  of  them,  regardless  of  their  purpose,
-contain a REG module of some sort (Mellish et al. 2006). This is hardly surprising in
-view  of  the  central  role  that  reference  plays  in  communication.  A  system  providing
-advice about air travel (White, Clark, and Moore 2010), needs to refer to flights (``the
-cheapest  flight'',  ``the  KLM  direct  flight'');  a  Pollen  forecast  system  (Turner  et  al.
-2008)  needs  to  generate  spatial  descriptions  for  areas  with  low  or  high  pollen  levels
-(``the  central  belt  and  further  North''),  and  a  robot  dialogue  system  that  assembles
-construction toys together with a human user (Giuliani et al. 2010), needs to refer to the
-components (``insert the green bolt through the end of this red cube'').
-REG ``is concerned with how we produce a description of an entity that enables
-the hearer to identify that entity in a given context'' (Reiter and Dale 2000, page 55).
-Since this can often be done in many different ways, a REG algorithm needs to make a
-number of choices. According to Reiter and Dale (2000), the first choice concerns what
-form
-of referring expression is to be used; should the target be referred to, for instance,
-using  its  proper  name,  a  pronoun  (``he'')  or  a  description  (``the  man  with  the  tie'').
-Proper  names  have  limited  applicability  because  many  domain  objects  do  not  have
-a name that is in common usage. For pronoun generation, a simple but conservative
-rule  is  discussed  by  Reiter  and  Dale  (2000),  similar  to  one  proposed  by  Dale  (1989,
-pages 150-151): use a pronoun if the target was mentioned in the previous sentence,
-and  if  this  sentence  contained  no  reference  to  any  other  entity  of  the  same  gender.
-Reiter  and  Dale  (2000)  concentrate  mostly  on  the  generation  of  descriptions.  If  the
-NLG  system  decides  to  generate  a  description,  two  choices  need  to  be  made:  which
-set of properties distinguishes the target (content selection), and how can the selected
-properties be turned into natural language (linguistic realisation). Content selection is a
-complex balancing act: we need to say enough to enable identification of the intended
-referent, but not too much. A selection of information needs to be made, and this needs
-to be done quickly. Reiter and Dale discuss various strategies that try to manage this
-balancing act, based on Dale and Reiter (1995), an early survey article that summarises
-and compares various influential algorithms for the generation of descriptions.
-
-\textcolor{blue}{traje esto...}
+%which is useful for practical applications
+%ranging from generating weather forecasts to summarizing medical information (Reiter
+%and Dale 2000). Of all the subtasks of NLG, Referring Expression Generation (REG) is
+%among the ones that have received most scholarly attention. A survey of implemented,
+%practical  NLG  systems  shows  that  virtually  all  of  them,  regardless  of  their  purpose,
+%contain a REG module of some sort (Mellish et al. 2006). This is hardly surprising in
+%view  of  the  central  role  that  reference  plays  in  communication.  A  system  providing
+%advice about air travel (White, Clark, and Moore 2010), needs to refer to flights (``the
+%cheapest  flight'',  ``the  KLM  direct  flight'');  a  Pollen  forecast  system  (Turner  et  al.
+%2008)  needs  to  generate  spatial  descriptions  for  areas  with  low  or  high  pollen  levels
+%(``the  central  belt  and  further  North''),  and  a  robot  dialogue  system  that  assembles
+%construction toys together with a human user (Giuliani et al. 2010), needs to refer to the
+%components (``insert the green bolt through the end of this red cube'').
+%REG ``is concerned with how we produce a description of an entity that enables
+%the hearer to identify that entity in a given context'' (Reiter and Dale 2000, page 55).
+%Since this can often be done in many different ways, a REG algorithm needs to make a
+%number of choices. According to Reiter and Dale (2000), the first choice concerns what
+%form
+%of referring expression is to be used; should the target be referred to, for instance,
+%using  its  proper  name,  a  pronoun  (``he'')  or  a  description  (``the  man  with  the  tie'').
+%Proper  names  have  limited  applicability  because  many  domain  objects  do  not  have
+%a name that is in common usage. For pronoun generation, a simple but conservative
+%rule  is  discussed  by  Reiter  and  Dale  (2000),  similar  to  one  proposed  by  Dale  (1989,
+%pages 150-151): use a pronoun if the target was mentioned in the previous sentence,
+%and  if  this  sentence  contained  no  reference  to  any  other  entity  of  the  same  gender.
+%Reiter  and  Dale  (2000)  concentrate  mostly  on  the  generation  of  descriptions.  If  the
+%NLG  system  decides  to  generate  a  description,  two  choices  need  to  be  made:  which
+%set of properties distinguishes the target (content selection), and how can the selected
+%properties be turned into natural language (linguistic realisation). Content selection is a
+%complex balancing act: we need to say enough to enable identification of the intended
+%referent, but not too much. A selection of information needs to be made, and this needs
+%to be done quickly. Reiter and Dale discuss various strategies that try to manage this
+%balancing act, based on Dale and Reiter (1995), an early survey article that summarises
+%and compares various influential algorithms for the generation of descriptions.
+%
+%\textcolor{blue}{traje esto...}
 La selecci\'on de qu\'e propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial. Una expresi\'on referencial ser\'a muy distinta si nuestro objetivo es dar la m\'inima informaci\'on que identifique al objeto que si nuestro objetivo es ayudar al interlocutor a que identifique el objeto.\\
 
 En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de sorpresa nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.\\
 
 En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.\\
 
-concerned with the process of automatically converting non-linguistic information (e.g.,
-from a database) into natural language text, 
+%concerned with the process of automatically converting non-linguistic information (e.g.,
+%from a database) into natural language text, 
 Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales (GER), es un procedimiento que tomar\'a alg\'un tipo de input y dar\'a como resultado una expresi\'on referencial.
 
 
