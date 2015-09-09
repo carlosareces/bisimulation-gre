@@ -2,16 +2,17 @@
 \label{sec:evaluacion}
 
 En esta secci\'on se presenta una evaluaci\'on cuantitativa del algoritmo propuesto.
-En particular, se muestra que el algoritmo de refinamiento probabil\'{i}stico con especificaci\'on excesiva es capaz de generar una distribuci\'on similar a la observada en los corpus.
+En particular, se muestra que el algoritmo de refinamiento probabil\'{i}stico con sobreespecificaci\'on es capaz de generar una distribuci\'on similar a la observada en los corpus.\\
 %, Incluso cuando no se dispone de corpus espec\'{i}fica para un objeto de destino determinado.
 
-Se discute en detalle los experimentos ejecutados para la escena se muestra en la Figura~\ref{GRE3D7-stimulus}  (escena 3 en el corpus GRE3D7), a continuaci\'on, un resumen de los resultados de las otras siete escenas que utilizamos para las pruebas.
+%Se discuten en detalle los experimentos ejecutados para la escena que se muestra en la Figura~\ref{GRE3D7-stimulus},  %(escena 3 en el corpus GRE3D7)
+%a continuaci\'on, un resumen de los resultados de las otras siete escenas que utilizamos para las pruebas.
 
 Usando \puse\ aprendida como se describe en la Secci\'on~\ref{sec:learning} y ejecutando
-nuestro algoritmo 10000, obtenemos 14 expresiones referenciales diferentes
+nuestro algoritmo 10000 veces, obtenemos 14 expresiones referenciales diferentes
 para la Figura~\ref{GRE3D7-stimulus}.
 
-\begin{table}[!t]
+\begin{table}
 \begin{small}
 \begin{center}
 \begin{tabular}{|l|r|r|r|r|r|}
@@ -40,27 +41,27 @@ para la Figura~\ref{GRE3D7-stimulus}.
 %ball,left,top                                 &  0 &  0.00 &    2 &  0.02 &  0.00\\
 %ball,small,top                                &  0 &  0.00 &    1 &  0.01 &  0.00\\
 %ball,front,on-top(cube,left)                  &  0 &  0.00 &    1 &  0.01 &  0.00\\
-pelota,verde                                    & 91 & 65.00 & 6376 & 63.76 & 63.76 \\
-pelota,verde,peque\~no                              & 23 & 16.43 & 3440 & 34.40 & 16.43 \\
-pelota,verde,peque\~no,arriba-de(azul,cubo,grande)      &  8 &  5.71 &    0 &  0.00 &  0.00\\
-pelota,verde,arriba-de(azul,cubo)                  &  5 &  3.57 &    0 &  0.00 &  0.00\\
-pelota,verde,arriba-de(azul,cubo,grande)            &  5 &  3.57 &    0 &  0.00 &  0.00\\
-pelota,verde,peque\~no,arriba-de(azul,cubo)            &  2 &  1.43 &    0 &  0.00 &  0.00\\
-pelota,arriba-de(cubo)                             &  1 &  0.71 &   27 &  0.27 &  0.27 \\
-pelota,verde,peque\~no,arriba-de(azul,cubo,grande,izquierda) &  1 &  0.71 &    0 &  0.00 &  0.00\\
-pelota,peque\~no,arriba-de(cubo,grande)	              &  1 &  0.71 &    2 &  0.02 &  0.02 \\
-pelota,verde,arriba                                &  1 &  0.71 &    0 &  0.00 &  0.00\\
-pelota,peque\~no,arriba-de(cubo)                       &  1 &  0.71 &    3 &  0.03 &  0.03 \\
-pelota,verde,arriba-de(cubo)                       &  1 &  0.71 &    0 &  0.00 &  0.00\\
-pelota,front,verde                              &  0 &  0.00 &   97 &  0.97 &  0.00\\
-pelota,front,verde,peque\~no                        &  0 &  0.00 &   13 &  0.13 &  0.00\\
-pelota,front,arriba                                &  0 &  0.00 &   12 &  0.12 &  0.00\\
-pelota,verde,izquierda	                              &  0 &  0.00 &   11 &  0.11 &  0.00\\
-pelota,arriba                                      &  0 &  0.00 &   10 &  0.10 &  0.00\\
-pelota,verde,izquierda,peque\~no                         &  0 &  0.00 &    5 &  0.05 &  0.00\\
-pelota,izquierda,arriba                                 &  0 &  0.00 &    2 &  0.02 &  0.00\\
-pelota,peque\~no,arriba                                &  0 &  0.00 &    1 &  0.01 &  0.00\\
-pelota,front,arriba-de(cubo,izquierda)                  &  0 &  0.00 &    1 &  0.01 &  0.00\\
+esfera,verde                                    & 91 & 65.00 & 6376 & 63.76 & 63.76 \\
+esfera,verde,peque\~no                              & 23 & 16.43 & 3440 & 34.40 & 16.43 \\
+esfera,verde,peque\~no,arriba-de(azul,cubo,grande)      &  8 &  5.71 &    0 &  0.00 &  0.00\\
+esfera,verde,arriba-de(azul,cubo)                  &  5 &  3.57 &    0 &  0.00 &  0.00\\
+esfera,verde,arriba-de(azul,cubo,grande)            &  5 &  3.57 &    0 &  0.00 &  0.00\\
+esfera,verde,peque\~no,arriba-de(azul,cubo)            &  2 &  1.43 &    0 &  0.00 &  0.00\\
+esfera,arriba-de(cubo)                             &  1 &  0.71 &   27 &  0.27 &  0.27 \\
+esfera,verde,peque\~no,arriba-de(azul,cubo,grande,izquierda) &  1 &  0.71 &    0 &  0.00 &  0.00\\
+esfera,peque\~no,arriba-de(cubo,grande)	              &  1 &  0.71 &    2 &  0.02 &  0.02 \\
+esfera,verde,arriba                                &  1 &  0.71 &    0 &  0.00 &  0.00\\
+esfera,peque\~no,arriba-de(cubo)                       &  1 &  0.71 &    3 &  0.03 &  0.03 \\
+esfera,verde,arriba-de(cubo)                       &  1 &  0.71 &    0 &  0.00 &  0.00\\
+esfera,front,verde                              &  0 &  0.00 &   97 &  0.97 &  0.00\\
+esfera,front,verde,peque\~no                        &  0 &  0.00 &   13 &  0.13 &  0.00\\
+esfera,front,arriba                                &  0 &  0.00 &   12 &  0.12 &  0.00\\
+esfera,verde,izquierda	                              &  0 &  0.00 &   11 &  0.11 &  0.00\\
+esfera,arriba                                      &  0 &  0.00 &   10 &  0.10 &  0.00\\
+esfera,verde,izquierda,peque\~no                         &  0 &  0.00 &    5 &  0.05 &  0.00\\
+esfera,izquierda,arriba                                 &  0 &  0.00 &    2 &  0.02 &  0.00\\
+esfera,peque\~no,arriba                                &  0 &  0.00 &    1 &  0.01 &  0.00\\
+esfera,front,arriba-de(cubo,izquierda)                  &  0 &  0.00 &    1 &  0.01 &  0.00\\
 
 \hline
 Total & 140 & 100.00 & 10000 & 100 & 80.51 \\
@@ -90,11 +91,20 @@ Total & 140 & 100.00 & 10000 & 100 & 80.51 \\
 
 
  Es interesante ver que con los
-valores de \puse\ aprendidos desde el corpus el algoritmo genera s\'olo un peque\~no conjunto de ER con una alta probabilidad.
-De estas 14 ER diferentes, 5 son las ER m\'as frecuentes encontradas en el corpus de 140 ER asociados a la escena; de hecho, 98 \% de las expresiones generados por el algoritmo para esta escena aparece en el corpus.
-Las 9 ER restantes generadas por el algoritmo, no est\'a presente en el corpus, pero son muy naturales como se puede observar en la tabla
-~\ref{results-algo-fig3}.
-La tabla muestra las ER en el corpus y las ER generados por el algoritmo usando las \puse\ calculadas. Para cada RE, indicamos el n\'umero de veces que aparece en el corpus (\#Cor), la proporci\'on que representa (\%Cor), el n\'umero de veces que se genera por nuestro algoritmo (\#Alg) y la proporci\'on que representa (\%Alg). Por \'ultimo, la precisi\'on (\%Acc) compara los ERs en el corpus con las ERs generadas por el algoritmo. La precisi\'on es la proporci\'on de coincidencias perfectas entre la salida de algoritmo y las ERs de humanos desde el corpus. La m\'etrica de precisi\'on ha sido utilizada en trabajos anteriores para comparar la salida de un algoritmo de generaci\'on de ER con las REs que se encuentran en corpora~\cite{sluis07:eval,viet:gene11} y se considera una m\'etrica muy estricta para esta tarea.
+valores de \puse\ aprendidos desde el corpus el algoritmo genera s\'olo un peque\~no conjunto de ER con una alta probabilidad.\\
+
+De estas 14 ER diferentes, 5 son las ER m\'as frecuentes encontradas en el corpus (el corpus tiene 140 ER para cada escena) de hecho, 98 \% de las expresiones generadas por el algoritmo para esta escena aparece en el corpus.\\
+
+Las 9 ER restantes generadas por el algoritmo, no estan presente en el corpus, pero son muy naturales como se puede observar en la Tabla
+\ref{results-algo-fig3}.\\
+
+La tabla muestra las ER en el corpus y las ER generadas por el algoritmo usando las \puse\ calculadas. Para cada RE, indicamos el n\'umero de veces que aparece en el corpus (\#Cor), la proporci\'on que representa (\%Cor), el n\'umero de veces que se genera por nuestro algoritmo (\#Alg) y la proporci\'on que representa (\%Alg). \\
+
+Por \'ultimo, la precisi\'on (\%Acc) compara los ERs en el corpus con las ERs generadas por el algoritmo. \\
+
+La precisi\'on es la proporci\'on de coincidencias perfectas entre la salida de algoritmo y las ERs de humanos desde el corpus. \\
+
+La m\'etrica de precisi\'on ha sido utilizada en trabajos anteriores para comparar la salida de un algoritmo de generaci\'on de ER con las REs que se encuentran en corpora~\cite{sluis07:eval,viet:gene11} y se considera una m\'etrica muy estricta para esta tarea.
 
 
 
@@ -136,10 +146,11 @@ Promedio	&	87.13\%	&	75.03\%	&	16.34\%	&	5.55\%	\\
 
 Para poner los resultados en perspectiva comparamos en la Tabla~\ref{results-algo-all} los resultados de
 nuestro algoritmo con una serie de posibles variaciones. Todos los n\'umeros mostrados en la tabla
-representan la exactitud con el correspondiente corpus.
+representan la exactitud con el correspondiente corpus.\\
+
 La primera columna muestra los valores obtenidos cuando corremos el algoritmo sobre la escena
 con los valores de \puse\ obtenidos~\emph{de la propia escena}. Como se puede esperar,
-esta columna tiene el mayor promedio de precisi\'on.
+esta columna tiene el mayor promedio de precisi\'on.\\
 
 %The second column shows the results of the algorithm runs with \puse\ learned from  
 %corpora as explained in Section~\ref{sec:learning}.  In most cases the accuracy 
@@ -150,22 +161,26 @@ esta columna tiene el mayor promedio de precisi\'on.
 La segunda columna muestra los resultados del algoritmo cuando se ejecuta con \puse\ aprendido de
 corpora como se explica en la Secci\'on~\ref{sec:learning}. En la mayor\'{i}a de los casos la exactitud
 es m\'as bien alta y la exactitud promedio sigue siendo alta. La relativamente baja precisi\'on
-obtenida en la escena 13 se explica principalmente las pobres estimaciones del valor de~\puse\ para la palabra \emph{grande}. En el corpus, las relaciones \emph{peque\~na} y \emph{grande} se utilizan mucho m\'as cuando el objetivo no puede ser identificado usando taxon\'omicas (\emph{pelota} y \emph{cubo}) y propiedades absolutas (\emph{verde} y \emph{azul}), pero las caracter\'{i}sticas que hemos utilizado para el aprendizaje autom\'atico no capturan dichas dependencias.
+obtenida en la escena 13 se explica principalmente las pobres estimaciones del valor de~\puse\ para la palabra \emph{grande}. \\
+
+En el corpus, las relaciones \emph{peque\~na} y \emph{grande} se utilizan mucho m\'as cuando el objetivo no puede ser identificado usando taxon\'omicas (\emph{esfera} y \emph{cubo}) y propiedades absolutas (\emph{verde} y \emph{azul}), pero las caracter\'{i}sticas que hemos utilizado para el aprendizaje autom\'atico no capturan dichas dependencias.\\
 
 
 %
 %In spite of this limitation, the average of the second column is 75\%, indicating that \puse\ values learned from the corpus are good enough to be used to generate REs for new scenes from the domain. 
 %
 
-A pesar de esta limitaci\'on, el promedio de la segunda columna es 75\%, lo que indica que los valores de \puse\ aprendidos a partir del corpus son lo suficientemente buenos para ser utilizados para generar REs para nuevas escenas del dominio.
+A pesar de esta limitaci\'on, el promedio de la segunda columna es 75\%, lo que indica que los valores de \puse\ aprendidos a partir del corpus son lo suficientemente buenos para ser utilizados para generar REs para nuevas escenas del dominio.\\
 
 %The last two columns can be considered as baselines. In the first one we generate 
 %random values for \puse.  The accuracy obtained is in most cases poor, but with 
 %a noticeable variation due to chance. 
 
-Las dos \'ultimas columnas pueden ser consideradas como l\'{i}neas de base (baselines). En la primero generamos
-valores aleatorios para \puse. La precisi\'on obtenida es en la mayor\'{i}a de los casos pobre, pero con
-una variaci\'on notable debido al azar.
+Las dos \'ultimas columnas pueden ser consideradas como l\'{i}neas de base (baselines). En la primera generamos
+valores aleatorios para \puse\ . La precisi\'on obtenida es en la mayor\'{i}a de los casos pobre, pero con
+una variaci\'on notable debido al azar.\\
+
+
 %In scene 12, for example, the random \puse approximated 
 %(by chance) some of the \puse\ values of the scene, and the accuracy of the algorithm 
 %peeked accordingly.  
@@ -174,18 +189,18 @@ una variaci\'on notable debido al azar.
 %REs generated in any of the previous columns were assigned the same 
 %probability. 
 
-Adem\'as de poca precisi\'on, cuando se utilizaron muchas de las ER generados donde suenan poco natural como ``peque\~na sobre
-el cubo azul que est\'a abajo de algo que es peque\~no.'' En la \'ultima columna se presenta la exactitud de una corrida artificial, donde a todas las ERs generadas en cualquiera de las columnas anteriores se les asigno la misma probabilidad.
+Adem\'as de poca precisi\'on, cuando se utilizaron muchas de las ER generadas donde suenan poco natural como ``peque\~na sobre
+el cubo azul que est\'a abajo de algo que es peque\~no.'' En la \'ultima columna se presenta la exactitud de una corrida artificial, donde a todas las ERs generadas en cualquiera de las columnas anteriores se les asigno la misma probabilidad.\\
 
 
-\begin{wrapfigure}{r}{0.52\textwidth}
+%\begin{wrapfigure}{r}{0.52\textwidth}
 \begin{center}
-\vspace*{-1cm}
+%\vspace*{-1cm}
 \hspace*{-.3cm}\includegraphics[width=.55\textwidth]{images/entropy.jpg}
 \end{center}
-\vspace*{-.5cm}
-\caption{Cross-entropy between the corpus distribution and different runs of the algorithm}\label{Entropy}
-\end{wrapfigure}
+%\vspace*{-.5cm}
+\caption{Entrop\'ia cruzada entre la distribuci\'on del corpus y diferentes ejecuciones del algoritmo}\label{Entropy}
+%\end{wrapfigure}
 
 %Because accuracy is considered a very strict measure that in some cases can 
 %be too stern on the evaluated algorithms 
@@ -193,13 +208,13 @@ el cubo azul que est\'a abajo de algo que es peque\~no.'' En la \'ultima columna
 %We also computed the entropy of the probability distribution of REs found in the corpus, and the cross-entropy between the corpus distribution of REs and the execution of each algorithm we just described~(see~\cite{juraksky:spee08} for details on cross-entropy evaluation). Figure~\ref{Entropy} shows the results for the eight scenes we are considering. 
 %
 
-Tambi\'en se calcul\'o la entrop\'{i}a de la distribuci\'on de probabilidad que se encuentro en el corpus, y la entrop\'{i}a cruzad entre la distribuci\'on del corpus de ER y las ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entropy} se muestran los resultados para las ocho escenas que hemos considerado.
+Tambi\'en se calcul\'o la entrop\'{i}a de la distribuci\'on de probabilidad que se encuentra en el corpus, y la entrop\'{i}a cruzada entre la distribuci\'on de ER del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entropy} se muestran los resultados para las ocho escenas que hemos considerado.\\
 
 %
 %The cross-entropies from the first two runs (\emph{scene} and \emph{learned}) are, in general, much closer to the corpus entropy than \emph{random}'s and \emph{uniform}'s cross-entropies, and to each other.  Only in Scene 12 \emph{random} approaches, by chance, the other two. 
 %
 
-Las entrop\'{i}as cruzadasde las dos primeras ejecusiones (\emph{escena} y \emph{aprendizaje autom\'atico}) son, en general, mucho m\'as cercanas de la entrop\'{i}a del corpus que las entrop\'ias cruzadas de \emph{random} y \emph{uniforme}. S\'olo la escena 12 \emph{enfoques aleatorios}, por casualidad, los otros dos.
+Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emph{aprendizaje autom\'atico}) son, en general, mucho m\'as cercanas de la entrop\'{i}a del corpus, que las entrop\'ias cruzadas de \emph{random} y \emph{uniforme}. S\'olo la escena 12  por azar se acerca un poco m\'as.\\
 
 %The figure clearly shows also that the cross entropies of \emph{scene} and \emph{learned} are in most cases very close to each other. 
 %This observation supports the learning mechanism proposed in Section~\ref{sec:learning} to estimate the \puse\ when no corpora of REs of the target scene is available. 
@@ -208,7 +223,9 @@ Las entrop\'{i}as cruzadasde las dos primeras ejecusiones (\emph{escena} y \emph
 
 %In this section we present two different evaluations we performed on our algorithm. Section~\ref{sec:automaticevaluation} describes an evaluation with respect to the state of the art algorithm GRAPH~\cite{KrahmerGRAPH}. GRAPH was the top performer in both editions of the ASGRE, shared task~\cite{gatt-balz-kow:2008:ENLG}. Due to the limitations of the automatic metrics, in Section~\ref{sec:humanevaluation} we perform a human evaluation in  which we ask human subjects to compare the output produced by our algorithm to expressions produced by humans. 
 %  
-En esta secci\'on presentamos dos evaluaciones diferentes que realizamos en nuestro algoritmo. Secci\'on~\ref{sec:automaticevaluation} describe una evaluaci\'on con respecto al estado del arte~\cite{KrahmerGRAPH}. GRAPH fue el de mejor desempe\~no en las dos ediciones de la competencia ASGRE~\cite{gatt-balz-kow:2008:ENLG}. Debido a las limitaciones de los indicadores autom\'aticos, en la Secci\'on~\ref{sec:humanevaluation} realizamos una evaluaci\'on humana en la que pedimos sujetos humanos para comparar la salida producida por nuestro algoritmo de expresiones producidas por los seres humanos.
+En esta secci\'on presentamos dos evaluaciones diferentes que realizamos en nuestro algoritmo. Secci\'on~\ref{sec:automaticevaluation} describe una evaluaci\'on con respecto al estado del arte~\cite{KrahmerGRAPH}. GRAPH fue el de mejor desempe\~no en las dos ediciones de la competencia ASGRE~\cite{gatt-balz-kow:2008:ENLG}. Debido a las limitaciones de los indicadores autom\'aticos, en la Secci\'on~\ref{sec:humanevaluation} realizamos una evaluaci\'on humana en la que pedimos a jueces humanos comparar la salida producida por nuestro algoritmo con las expresiones producidas por los seres humanos (las del corpus).
+
+
 \subsection{Evaluaci\'on autom\'atica } \label{sec:automaticevaluation}
 
 %In this section we present the comparison of our algorithm to the state of the art algorithm GRAPH introduced above. The GRAPH algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare algorithm to the GRAPH algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
@@ -219,68 +236,75 @@ En esta secci\'on presentamos dos evaluaciones diferentes que realizamos en nues
 %1 indicates a perfect match between sets. For two
 %attribute sets A and B, Dice is computed as follows:\\
 
-En esta secci\'on se presenta la comparaci\'on de nuestro algoritmo para el estado del arte GR\'AFICO algoritmo introducido anteriormente. El algoritmo GRAPH es un algoritmo determinista y por lo tanto produce la misma expresi\'on se refiere cuando se ejecuta con el mismo objetivo y modelo. Nuestro algoritmo es no determinista, puede dar una expresi\'on referencial diferente cada vez que se ejecuta. Con el fin de compararlos corremos nuestro tiempo k algoritmo y hacemos un ranking de los 20 mejores produjo refiri\'endose expresiones ordenados por la frecuencia que se produjeron. Utilizamos la parte de prueba del corpus AT\'UN comparar algoritmo para el algoritmo GR\'AFICO cuyos resultados en esta base de datos se describen en~\cite{KrahmerGRAPH} y reproducido en la tabla~\ref{Tabla_sis_1_20}.
+En esta secci\'on se presenta la comparaci\'on de nuestro algoritmo para el estado del arte GRAPH algoritmo introducido anteriormente. El algoritmo GRAPH es un algoritmo deterministico y por lo tanto produce la misma expresi\'on referencial cuando se ejecuta con el mismo target y contexto. \\
 
-El algoritmo GRAPH define la generaci\'on de expresiones que se refieren como un problema de b\'usqueda gr\'afica, que emite el gr\'afico distintivo m\'as barata (si existe) dada una funci\'on de coste particular. Comparamos a este algoritmo usando la precisi\'on m\'etrica, Dados y \textsc {masi}. La exactitud se define como el porcentaje de coincidencias exactas entre cada ER producido por un ser humano y el ER producido por el sistema para la misma escena.
+Nuestro algoritmo es no determinista, puede dar una expresi\'on referencial diferente cada vez que se ejecuta. Con el fin de compararlos corremos nuestro algoritmo k veces y hacemos un ranking de las 20 ERs ordenadas por la frecuencia que se produjeron. Utilizamos la parte de prueba del corpus TUNA para comparar nuestro algoritmo con las salidas del algoritmo GRAPH cuyos resultados se describen en~\cite{KrahmerGRAPH} y se reproducen en la tabla~\ref{Tabla_sis_1_20}.\\
 
-Coeficiente de Dice es una m\'etrica comparaci\'on set, que oscila entre 0 y 1, donde
-1 indica una combinaci\'on perfecta entre series. Para dos
-atributo de los conjuntos A y B, dados se calcula como sigue:
+El algoritmo GRAPH define la generaci\'on de expresiones referenciales como un problema de b\'usqueda en un grafo, devuelve el grafo distintivo de menor costo (si existe) dada una funci\'on de costo particular. Comparamos a este algoritmo usando las m\'etricas exactitud, Dice y \textsc {masi}. 
 
 
-$Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
 
 
-The \textsc{masi} score \cite{Passonneau06measuringagreement}~is an adaptation of the Jaccard coefficient
-which biases it in favor of similarity where one set
-is a subset of the other. Like Dice, it ranges between
-0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
+%La presici\'on se define como el porcentaje de coincidencias exactas entre cada ER producida por un ser humano y el ER producida por el sistema para el mismo target y escena.\\
+%
+%Coeficiente de Dice es una m\'etrica comparaci\'on set, que oscila entre 0 y 1, donde
+%1 indica una combinaci\'on perfecta entre series. Para dos
+%atributo de los conjuntos A y B, dados se calcula como sigue:
+%
+%
+%$Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
+%
+%
+%The \textsc{masi} score \cite{Passonneau06measuringagreement}~is an adaptation of the Jaccard coefficient
+%which biases it in favor of similarity where one set
+%is a subset of the other. Like Dice, it ranges between
+%0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
+%
+%
+%$\textsc{masi}(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
+%
+%
+%where $\delta$ is a monotonicity coefficient defined as follows:
+%
+%
+ %\begin{equation}
+     %\delta  = \left\{
+	       %\begin{array}{ll}
+		 %0      & if A \cap B = \emptyset \\
+		 %1 & if A = B  \\
+		 %\frac{2}{3}     & if A \subset B~or~B \subset A\\
+		 %\frac{1}{3}     & otherwise
+	       %\end{array}
+	     %\right.
+ %\end{equation}
+%
+%
+%Intuitively, this
+%means that those system-produced descriptions are
+%preferred which do not include attributes that are
+%omitted by a human.  
 
-
-$\textsc{masi}(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
-
-
-where $\delta$ is a monotonicity coefficient defined as follows:
-
-
- \begin{equation}
-     \delta  = \left\{
-	       \begin{array}{ll}
-		 0      & if A \cap B = \emptyset \\
-		 1 & if A = B  \\
-		 \frac{2}{3}     & if A \subset B~or~B \subset A\\
-		 \frac{1}{3}     & otherwise
-	       \end{array}
-	     \right.
- \end{equation}
-
-
-Intuitively, this
-means that those system-produced descriptions are
-preferred which do not include attributes that are
-omitted by a human.  
-
-In Table~\ref{Tabla_sis_1_20} we show the automatic metrics and compare the performance of our system  with the GRAPH system for the first ER in the ranking and the first 20 REs in the ranking. 
+En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistems con el sistma GRAPH para la primer ER en el ranking y para las primeras 20 REs del ranking. 
 
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
 %Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
-	 	& 	Dice		&	\textsc{masi}	&	ACCURACY		\\
+	 	& 	Dice		&	\textsc{masi}	&	EXACTITUD		\\
 \hline
-GRAPH system, Furniture domain	& 	.80 		&	.59	&	.48		 	\\
-GRAPH system, People domain 	& 	.72		&	.48	&	.28			\\
+sistema GRAPH, Dominio muebles	& 	.80 		&	.59	&	.48		 	\\
+sistema GRAPH, Dominio personas 	& 	.72		&	.48	&	.28			\\
 \hline
-Our system, Furniture domain (top 1)	&	.80		&	.60	&	.47		\\
-Our system, People domain (top 1)	&	.65		&	.37	&	.19		\\
+Nuestro sistema , Dominio muebles (top 1)	&	.80		&	.60	&	.47		\\
+Nuestro sistema , Dominio personas (top 1)	&	.65		&	.37	&	.19		\\
 \hline
-Our system, Furniture domain (top 20)&	.87		&	.75  	&	.65		\\
-Our system, People domain (top 20)   &	.81		&	.68	&	.60		\\
+Nuestro sistema , Dominio muebles (top 20)&	.87		&	.75  	&	.65		\\
+Nuestro sistema , Dominio personas (top 20)   &	.81		&	.68	&	.60		\\
 \hline
 \end{tabular}
 %\vspace*{.1cm}
-\caption{Comparison of the GRAPH algorithm and our system. We consider the 3 automatic metrics for the top 1 and the top 20 REs produced by our algorithm.}
+\caption{Comparaci\'on del algoritmo GRAPH y nuestro sistema. Consideramos 3 m\'etricas autom\'aticas para el top 1 para el top 20 REs producidas por nuestro algoritmo.}
 \vspace*{-.5cm}
 \label{Tabla_sis_1_20}
 \end{center}
@@ -306,7 +330,7 @@ Otro resultado que podemos observar es que la exactitud de dominio personas es m
 \centering
 \includegraphics[width=\textwidth]{images/precP.png}
 \end{minipage}
-\caption{Comparaci\'on de la precisi\'on del algoritmo GRAPH y nuestro sistema. El eje x indica que la precisi\'on se calcul\'o teniendo en cuenta las x primeras ER en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una línea de puntos y GRAPH como una línea continua.\label{graficoPresicion}}
+\caption{Comparaci\'on de la exactitud del algoritmo GRAPH y nuestro sistema. El eje x indica que la precisi\'on se calcul\'o teniendo en cuenta las x primeras ER en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
 \end{figure}
 
  
@@ -322,31 +346,35 @@ Otro resultado que podemos observar es que la exactitud de dominio personas es m
 %The REs produced by the system were considered equal or better by both
 %judges in 60 \% of the cases and, by at least one judge in 92\% of the cases.
 
-Pedimos dos jueces nativos de Ingl\'es para evaluar nuestras expresiones referidas a trav\'es de un experimento en la web. Los autores del trabajo no participaron en la evaluaci\'on. Los jueces podr\'{i}an registrarse en el sistema de evaluaci\'on a fin de que no ten\'{i}an que terminarlo de una vez, la podr\'{i}a volver a ella m\'as tarde. Durante la evaluaci\'on demostramos cada juez de las escenas y dos ER ordenadas al azar. Uno ER correspondi\'o a la ER presente en el corpus y producido por una persona y la otra ER correspondi\'o al 1 ER superior producida por nuestro sistema. Preguntamos a los jueces para seleccionar el ER que ser\'{i}a m\'as \'util para identificar el blanco en la escena. Es decir, para seleccionarlo de entre los otros objetos en las fotos de est\'{i}mulo.
+Como las ERs que generamos las generamos para el idioma ingl\'es, pedimos a dos jueces nativos de Ingl\'es evaluar nuestras expresiones referenciales a trav\'es de un experimento en la web. \\
 
-Nuestro objetivo es mostrar que incluso si el ER generada por nuestro algoritmo no coincide con la ER producido por un ser humano en la colecci\'on corpus, puede ser juzgado como bueno o incluso mejor que las REs generados por los seres humanos.
+Los jueces podr\'{i}an entrar en el sistema de evaluaci\'on varias veces, es decir no ten\'ian que terminar la evaluaci\'on en la primera vez, para cada ER pod\'ian resolverla o pod\'ian volver a ella m\'as tarde. \\
 
-En la tabla~\ref{sistema-contra-humana} se muestran los resultados del experimento de evaluaci\'on humana.
-Las ER producidos por el sistema se consideraron igual o mejor por tanto
-jueces en 60 \% de los casos y, por lo menos un juez en 92 \% de los casos.
+Durante la evaluaci\'on mostramos a cada juez una escena y dos ER ordenadas al azar. Una ER correspond\'ia a la ER presente en el corpus producida por una persona y la otra ER correspondi\'a al 1 ER producida por nuestro sistema. Solicitamos a los jueces seleccionar la ER que ser\'{i}a m\'as \'util para identificar el target en la escena. Es decir, para seleccionarlo de entre los otros objetos en la imagen.\\
+
+Nuestro objetivo es mostrar que incluso si la ER generada por nuestro algoritmo no coincide con la ER producida por un ser humano del corpus, puede ser juzgada como buena o incluso mejor que las REs generadas por los seres humanos.\\
+
+En la tabla~\ref{system-versus-human} se muestran los resultados del experimento de evaluaci\'on humana.
+Las ER producidas por el sistema se consideraron igual o mejor tanto por 2
+jueces en 60 \% de los casos y, por un juez en 92 \% de los casos.\\
 
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 %total scenes in evaluation set &                           80   &             68
- & Furniture domain & People domain & Weighted mean \\
+ & Dominio muebles & Dominio personas & Media pesada \\
 \hline
-system equal to human  	&	.46	&	.19	&	.33 \\
-system better by 2 judges &	.29 	& 	.24 	& 	.27 \\
-system better by 1 or 2 judges & .51	&	.68	&	.59 \\
-system worse by 2 judges &	.03	&	.13	&	.08 \\
-system equal or better by 2 judges  &.75  &       .43	&       .60 \\
-system equal or better by 1 judge  &.97	&	.87	&	.92 \\
+sistema igual al humano  	&	.46	&	.19	&	.33 \\
+sistema mejor por 2 jueces &	.29 	& 	.24 	& 	.27 \\
+sistema mejor por 1 or 2 jueces & .51	&	.68	&	.59 \\
+sistema peor por 2 jueces &	.03	&	.13	&	.08 \\
+sistema igual o mejor por 2 jueces  &.75  &       .43	&       .60 \\
+sistema igual o mejor por 1 juez  &.97	&	.87	&	.92 \\
 \hline
 \end{tabular}
 %\vspace*{.1cm}
-\caption{Percentage of system versus human selected choices} 
+\caption{Porcentaje de la selecci\'on ERs del sistema versus humana} 
 \label{system-versus-human}
 \vspace*{-.5cm}
 \end{center}
@@ -356,15 +384,15 @@ system equal or better by 1 judge  &.97	&	.87	&	.92 \\
 
 %Figure~\ref{smallBlueFan} illustrates a case in which the human generated an underspecified ER while the system produced an ER which unequivocally identifies the target. The ER generated by the system for this figure is ``small blue fan'' while the ER produced by the human is ``blue fan''. The human ER fails to uniquely identify the target and is then not preferred by the human judges. Humans are known for producing underspecified REs which may be due to cognitive limitations for not being able to consider the whole referential context at the same time. Our algorithm is able to consider the whole referential context and combine this ability with the probability of use of the REs learned from humans. 
 
-A continuaci\'on, se ilustra el experimento de evaluaci\'on, mostrando ejemplos de casos en los que la expresi\'on sistema fue considerado mejor por ambos jueces, por un solo juez o por ninguno de los dos.
+A continuaci\'on, se ilustra el experimento de evaluaci\'on, mostrando ejemplos de casos en los que la expresi\'on sistema fue considerada mejor por ambos jueces, por un solo juez o por ninguno de los dos.\\
 
-Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera un ER underspecified mientras el sistema produce un ER que identifica de manera inequ\'{i}voca el objetivo. El ER generada por el sistema para esta figura es `` peque\~no ventilador azul '', mientras que el ER producido por el ser humano es `` ventilador azul ''. El ER humano no logra identificar de forma \'unica el objetivo y es entonces no preferido por los jueces humanos. Los seres humanos son conocidos por producir ER underspecified que puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial, al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ER aprendido de los seres 
+Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera un ER subespecificada mientras el sistema produce un ER que identifica de manera inequ\'{i}voca al target. La ER generada por el sistema para esta figura es ``peque\~no ventilador azul'', mientras que el ER producida por el ser humano es ``ventilador azul ''. La ER del humano no logra identificar de forma \'unica el target y entonces no preferida por los jueces humanos. Los seres humanos son conocidos por producir ER subespecificadas que puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial, al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ER aprendidas de los seres humanos.
 
 \begin{figure}[h]
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
-\caption{Scene used during the collection of the TUNA corpus. The human ER \emph{blue fan}, and the system \emph{small blue fan}. Judges prefer the system generated.}
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{blue fan}, y la del sistema \emph{small blue fan}. Los jueces prefirieron la generada por el sistema.}
 \label{smallBlueFan}
 \end{minipage}
 \hspace*{.04cm}
@@ -373,7 +401,7 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera un ER under
 \vspace*{.4cm}
 \includegraphics[width=\textwidth]{images/tuna.jpg} % esta es la 101t5 la que mostramos al principio
 \vspace*{-.4cm}
-\caption{Scene used during the collection of the TUNA corpus. The human ER was \emph{blue frontal chair}, and the system \emph{the blue chair in the bottom}. Both human judges prefer the system generated RE.}
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{blue frontal chair}, y la del sistema \emph{the blue chair in the bottom}. Ambos jueces humanos prefirieron la generada por el sistema.}
 \label{BlueChair}
 \end{minipage}
 \end{figure}
@@ -381,13 +409,13 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera un ER under
 
 %In Figure~\ref{BlueChair} the human ER was ``blue frontal chair'', and the system ER was ``the blue chair in the bottom''; both judges selected the system RE. This case can be explained by the fact that, in this domain, the property ``bottom'' helps more during the identification than the property ``frontal'' because it concentrates the attention of the interpreter in the lower part of the scene. Our system learns this fact by learning a higher value of \puse~for ``bottom'' than for ``frontal'' from the training data. 
 
-En la figura~\ref{BlueChair}  el ER humana era `` silla frontal azul '', y el ER sistema era `` la silla azul en la parte inferior ''; ambos jueces seleccionaron el ER sistema. Este caso se puede explicar por el hecho de que, en este \'ambito, la propiedad '' inferior '' ayuda a m\'as durante la identificaci\'on de la propiedad '' frontal '' porque concentra la atenci\'on del int\'erprete en la parte inferior de la escena. Nuestro sistema aprende este hecho por el aprendizaje de un mayor valor de \ puse~por `` abajo '' que para `` frontal '' a partir de los datos de entrenamiento.
+En la Figura~\ref{BlueChair} la ER humana era ``silla frontal azul'', y el ER sistema era ``la silla azul en la parte inferior''; ambos jueces seleccionaron el ER sistema. Este caso se puede explicar por el hecho de que, en este \'ambito, la propiedad ``inferior'' ayuda a m\'as durante la identificaci\'on de la propiedad ``frontal'' porque concentra la atenci\'on del interlocutor en la parte inferior de la escena. Nuestro sistema aprende este hecho por el aprendizaje de un mayor valor de \puse\ ``abajo'' que para ``frontal'' a partir de los datos de entrenamiento.
 
 \begin{figure}[h]
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/s59t26.jpg}
-\caption{Scene used during the collection of the TUNA corpus. The human  ER was \emph{the man with black hair}, and the system \emph{the man wearing glasses in the fourth column}. Judges prefer the human RE.}
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{the man with black hair}, y la del sistema \emph{the man wearing glasses in the fourth column}. Los jueces prefirieron la RE humana.}
 \label{s28t25}
 \end{minipage}
 \hspace*{.04cm}
@@ -395,7 +423,7 @@ En la figura~\ref{BlueChair}  el ER humana era `` silla frontal azul '', y el ER
 \centering
 \includegraphics[width=\textwidth]{images/s315t21.jpg}
 \vspace*{-.3cm}
-\caption{Scene used during the collection of the TUNA corpus. The human ER was \emph{man with a beard}, and the system \emph{man with a beard wearing glasses}. Judges did not agree in their preference.}
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{man with a beard},  y la del sistema \emph{man with a beard wearing glasses}. Los jueces no estuvieron de acuerdo en su preferencia.}
 \label{s307t21}
 \end{minipage}
 \end{figure}
@@ -405,7 +433,7 @@ En la figura~\ref{BlueChair}  el ER humana era `` silla frontal azul '', y el ER
 %Figure~\ref{s307t21}~illustrates a case in which the system ER was more overspecified than the human RE; the system included ``wearing glasses'' while the human did not. In this case one human subject preferred the system ER and the other the human RE. The amount of overspecification is a subjective matter where human themselves disagree. Further evaluation where REs are actually used for a task would be interesting to investigate this issue.  
 
 
-Figura~\ref{s28t25} es un ejemplo para los que ambos jueces prefieren la expresi\'on humana. El ER humana era `` el hombre con el pelo negro '', y del sistema de `` el hombre con gafas en la cuarta columna ''. Este ejemplo pone de manifiesto el hecho de que, en el dominio de la gente algunas propiedades son m\'as destacada en algunas im\'agenes que en otros debido a diferentes tonos de colores. Propiedades graduables como este queridos (en contraste con las propiedades absolutas) son todav\'{i}a un problema abierto para los algoritmos GRE.
+Figura~\ref{s28t25} es un ejemplo para los que ambos jueces prefieren la expresi\'on humana. La ER humana era ``el hombre con el pelo negro '', y del sistema de ``el hombre con gafas en la cuarta columna''. Este ejemplo pone de manifiesto el hecho de que, en el dominio de la gente algunas propiedades son m\'as destacadas en algunas im\'agenes que en otros debido a diferentes tonos de colores. Propiedades graduables como estas (en contraste con las propiedades absolutas) son todav\'{i}a un problema abierto para los algoritmos GER.\\
 
-Figura~\ref{s307t21}~ilustra un caso en el que el ER sistema era m\'as falte espacio que el ER humana; el sistema incluye `` con gafas '', mientras que el ser humano no lo hizo. En este caso un sujeto humano prefiere el sistema de ER y el otro el ER humano. La cantidad de especificaci\'on excesiva es una cuesti\'on subjetiva, donde humana mismos no est\'an de acuerdo. Una evaluaci\'on m\'as profunda donde ER se utilizan realmente para una tarea ser\'{i}a interesante investigar este asunto.
+Figura~\ref{s307t21}~ilustra un caso en el que la ER del sistema era m\'as sobreespecificada que la ER humana; el sistema incluye ``con gafas'', mientras que el ser humano no lo hizo. En este caso un sujeto humano prefiere la ER del sistema y el otro la ER humano. La cantidad de sobreespecificaci\'on es una cuesti\'on subjetiva, donde los humanos mismos no est\'an de acuerdo. Una evaluaci\'on m\'as profunda donde las ERs se utilicen para resolver una tarea ser\'{i}a interesante para investigar este asunto.
 
