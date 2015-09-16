@@ -117,7 +117,7 @@ La salida del algoritmo es un conjunto de f\'ormulas (que ser\'an expresiones re
 
 %On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
 
-%In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE, which are the ones we will find in the corpora used for our evaluation\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detail description of $\el$, we refer to~\cite{baad:desc03}.  For this paper, we only need to know that the interpretation of the formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
+%In what follows, we will use formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes.  As discussed in~\cite{arec2:2008:Areces}, this language is suitable for conjunctive relational RE, which are the ones we will find in the corpora used for our evaluation\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. For a detail description of $\el$, we refer to~\cite{baad:desc03}.  For this paper, we only need to know that the interpretation of the formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. For example, the interpretation of the formula \emph{esfera} $\sqcap \exists$\emph{leftof}.\emph{cubo} is the set of all esferas that are on the left of some cubo.  
 
 %We are now ready to describe Algorithms~\ref{algo:bisim-l}
 %and~\ref{algo:bisim-add-el}. Algorithm~\ref{algo:bisim-l} takes as
@@ -217,7 +217,7 @@ conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{
 %\textcolor{blue}{deberia reemplazar aca que R es un conjunto por una lista ordenada...}
 
 %\begin{figure}[t]
-%\small
+%\peque\~no
 %\centering
 %\begin{algorithm}[H]
 %\dontprintsemicolon
@@ -257,14 +257,14 @@ conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{
 %
 %
 %\begin{figure}[t]
-%\small
+%\peque\~no
 %\centering
 %\begin{algorithm}[H]
 %\dontprintsemicolon
 %\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el}
 %
 %\For{\em $\psi \in$ \RE with $|\interp{\psi}| > 1$}{
-  %\If(\tcp*[f]{\footnotesize informative:smaller than the original?}){\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant:can't be obtained from \RE?}\\
+  %\If(\tcp*[f]{\footnotesize informative:peque\~noer than the original?}){\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant:can't be obtained from \RE?}\\
     %\em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial:has elements?}\\
      %\ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$ }{
     %add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
@@ -406,8 +406,8 @@ R.rnduse >= R.puse. Por lo tanto y considerando que en las siguientes ejecucione
 %that the original incremental algorithm allows.  But it has been argued~\cite{Engelhardt_Bailey_Ferreira_2006,Arts_Maes_Noordman_Jansen_2011} that 
 %a much higher degree of overspecification is usually found in corpora, and this 
 %is indeed what can be seen in the GRE3D7 corpus.  As we can see in Table~\ref{corpus-distribution}, 
-%the target is described 16.43\% of the times as a ``small green ball'' when ``green 
-%ball'' is already an RE.  Using the \puse\ values learnt from the calculus explained
+%the target is described 16.43\% of the times as a ``peque\~no green esfera'' when ``green 
+%esfera'' is already an RE.  Using the \puse\ values learnt from the calculus explained
 %in the previous section, Algorithm~\ref{algo:bisim-l} cannot simulate this behavior. 
 
 %Because the fundamental idea of the algorithm is semantics, handling overspecification in 
@@ -417,7 +417,7 @@ R.rnduse >= R.puse. Por lo tanto y considerando que en las siguientes ejecucione
 %On the other hand, if we disregard the condition the informativeness constrain (i.e., 
 %the fact that the addition of a relation indeed refine the class, eliminating some of 
 %the elements it contains), then we run the risk of generating descriptions like ``the green 
-%green ball.''
+%green esfera.''
 
 %As a compromise, we consider the following variation of Algorithm~\ref{algo:bisim-l} were 
 %we disregard the informativeness constrain (i.e., we allow the inclusion of new relations 
@@ -465,10 +465,10 @@ En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son d
 
 %%\newcommand{\nBlue}{\mathit{blue}\xspace}
 %%\newcommand{\nGreen}{\mathit{green}\xspace}
-%%\newcommand{\nSmall}{\mathit{small}\xspace}
+%%\newcommand{\npeque\~no}{\mathit{peque\~no}\xspace}
 %%\newcommand{\nBig}{\mathit{big}\xspace}
-%%\newcommand{\nBall}{\mathit{ball}\xspace}
-%%\newcommand{\nCube}{\mathit{cube}\xspace}
+%%\newcommand{\nesfera}{\mathit{esfera}\xspace}
+%%\newcommand{\ncubo}{\mathit{cubo}\xspace}
 %%\newcommand{\nOntop}{\mathit{ontop}\xspace}
 %%\newcommand{\nTop}{\mathit{top}\xspace}
 %%\newcommand{\nBelow}{\mathit{below}\xspace}
@@ -495,47 +495,47 @@ En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son d
 % \node[n,label=above:$e_1$,label=below:{
 %    \relsize{-1}$\begin{array}{c}
 %      \nLeft\\[-2pt]
-%      \nSmall\\[-2pt] 
+%      \npeque\~no\\[-2pt] 
 %      \nBlue \ \  
-%      \nBall\end{array}$}] (a) {};
+%      \nesfera\end{array}$}] (a) {};
 
 % \node[n,label=above:$e_2$,label=below:{
 %    \relsize{-1}$\begin{array}{c}
 %      \nLeft\\[-2pt]
 %      \nBig\\[-2pt] 
 %      \nBlue \ \  
-%      \nCube\end{array}$}, right of=a] (b) {};
+%      \ncubo\end{array}$}, right of=a] (b) {};
 
 % \node[n,label=below:$e_3$,label=above:{
 %    \relsize{-1}$\begin{array}{c}
 %      \nTop \ \       \nLeft \ \ 
-%      \nSmall \ \       \nGreen \ \ 
-%      \nBall\end{array}$}, above of=b] (c) {};
+%      \npeque\~no \ \       \nGreen \ \ 
+%      \nesfera\end{array}$}, above of=b] (c) {};
 
 % \node[n,label=above:$e_4$,label=below:{
 %    \relsize{-1}$\begin{array}{c}
-%      \nSmall\\[-2pt] 
+%      \npeque\~no\\[-2pt] 
 %      \nGreen\\[-2pt] 
-%      \nCube\end{array}$}, right of=b] (d) {};
+%      \ncubo\end{array}$}, right of=b] (d) {};
 
 % \node[n,label=above:$e_5$,label=below:{
 %    \relsize{-1}$\begin{array}{c}
 %      \nBig\\[-2pt] 
 %      \nBlue\\[-2pt] 
-%      \nBall\end{array}$}, right of=d] (e) {};
+%      \nesfera\end{array}$}, right of=d] (e) {};
 
 % \node[n,label=above:$e_6$,label=below:{
 %    \relsize{-1}$\begin{array}{c}
 %      \nBig\\[-2pt] 
 %      \nGreen\\[-2pt] 
-%      \nCube\end{array}$}, right of=e] (f) {};
+%      \ncubo\end{array}$}, right of=e] (f) {};
 
 % \node[n,label=below:$e_7$,label=above:{
 %    \relsize{-1}$\begin{array}{c}
 %      \nTop \ \ 
-%      \nSmall\ \ 
+%      \npeque\~no\ \ 
 %      \nBlue \ \  
-%      \nCube\end{array}$}, above of=f] (g) {};
+%      \ncubo\end{array}$}, above of=f] (g) {};
 
 % \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
 % \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
@@ -559,7 +559,7 @@ En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son d
 %The algorithm we discuss uses formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. 
 %For a detailed description of $\el$, we refer to~\cite{baad:desc03}.  
 %The interpretation of the $\el$ formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. 
-%For example, the interpretation of the formula \emph{ball} $\sqcap \exists$\emph{leftof}.\emph{cube} is the set of all balls that are on the left of some cube.  
+%For example, the interpretation of the formula \emph{esfera} $\sqcap \exists$\emph{leftof}.\emph{cubo} is the set of all esferas that are on the left of some cubo.  
 
 
 %aca faltaba algoluego de logicas
@@ -569,7 +569,7 @@ En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son d
 %%We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el-over}. 
 
 %\begin{figure}[!t]
-%\small
+%\peque\~no
 %\centering
 %\begin{algorithm}[H]
 %\dontprintsemicolon
@@ -611,7 +611,7 @@ En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son d
 
 
 %\begin{figure}[t]
-%\small
+%\peque\~no
 %\centering
 %\begin{algorithm}[H]
 %\dontprintsemicolon
@@ -619,7 +619,7 @@ En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son d
 
 %\If(\tcp*[f]{\footnotesize are we in the first loop?}){\em FirstLoop?}{
 %    Informative $\leftarrow$ TRUE \tcp*[f]{\footnotesize allow overspecification}}
-%\lElse(\tcp*[f]{\footnotesize informative:smaller than the original?}) {Informative $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
+%\lElse(\tcp*[f]{\footnotesize informative:peque\~noer than the original?}) {Informative $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
 %\For{\em $\psi \in$ \RE with $\#\interp{\psi} > 1$}{
 %  \If{\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant:can't be obtained from \RE?}\\
 %    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial:has elements?}\\
@@ -760,14 +760,14 @@ Antes de realizar el c\'alculo de R.\puse \ en el modelo $\gM$ asociado debemos 
 %  $T$. In particular, multi-word expressions like ``on top of''
 %  should be matched to a single token like \emph{ontop}.
 
-%\item Remove hyperonyms from $T$. E.g., if both \emph{cube} and
+%\item Remove hyperonyms from $T$. E.g., if both \emph{cubo} and
 %  \emph{thing} appear in $T$, delete \emph{thing}.
 
 %\item If the set of tokens obtained in the previous steps contains
 %  synonyms normalize them to a representative in the synonym class,
 %  and call the resulting set $\REL$; it will be the signature of the
 %  model $\gM$ used by the algorithm. E.g., the tokens \emph{little}
-%  and \emph{small} are both represented by the token \emph{small}.
+%  and \emph{peque\~no} are both represented by the token \emph{peque\~no}.
 
 %\item For each scene, define $\gM$ such that the interpretation
 %  $\interp{\cdot}$ ensures that all the REs in the corpus are REs in
@@ -816,8 +816,8 @@ Antes de realizar el c\'alculo de R.\puse \ en el modelo $\gM$ asociado debemos 
 %interpreted as the probability of using R to describe the target in
 %model $\gM$, and we could argue that they are correlated to the
 %\emph{saliency} of R in the model.  For that reason, for example, the
-%value of \emph{ball}.\puse\ is 1, while the value of
-%\emph{cube}.\puse\ is 0.178.  These probabilities will not be useful
+%value of \emph{esfera}.\puse\ is 1, while the value of
+%\emph{cubo}.\puse\ is 0.178.  These probabilities will not be useful
 %to describe different targets in different scenes.  We will see how we
 %can use them to obtain values for new targets and scenes using a
 %machine learning approach in the next section.  Not surprisingly,
@@ -840,18 +840,18 @@ Las ER's, cantidad de ocurrencias y porcentaje del corpus para de la Figura~\ref
 \hline
 Expresiones Referenciales & Cantidad de ocurrencias & Porcentage \\
 \hline
-%green ball & 91 & 65.00\% \\
-%small green ball & 23 & 16.43\% \\
-%small green ball on top of large blue cube & 8 & 5.71\% \\
-%green ball on top of blue cube & 5 & 3.57\% \\
-%green ball on top of large blue cube & 5 & 3.57\% \\
-%small green ball on top of blue cube & 2 & 1.43\% \\
-%ball on top of cube & 1 & 0.71\% \\
-%small green ball on top of large blue cube to the left & 1 & 0.71\% \\
-%small ball on top large cube & 1 & 0.71\% \\
-%green ball on top & 1 & 0.71\% \\
-%small ball on top of small cube & 1 & 0.71\% \\
-%green ball on top of cube & 1 & 0.71\% \\
+%green esfera & 91 & 65.00\% \\
+%peque\~no green esfera & 23 & 16.43\% \\
+%peque\~no green esfera on top of grande blue cubo & 8 & 5.71\% \\
+%green esfera on top of blue cubo & 5 & 3.57\% \\
+%green esfera on top of grande blue cubo & 5 & 3.57\% \\
+%peque\~no green esfera on top of blue cubo & 2 & 1.43\% \\
+%esfera on top of cubo & 1 & 0.71\% \\
+%peque\~no green esfera on top of grande blue cubo to the left & 1 & 0.71\% \\
+%peque\~no esfera on top grande cubo & 1 & 0.71\% \\
+%green esfera on top & 1 & 0.71\% \\
+%peque\~no esfera on top of peque\~no cubo & 1 & 0.71\% \\
+%green esfera on top of cubo & 1 & 0.71\% \\
 
 verde esfera & 91 & 65.00\% \\
 peque\~no verde esfera & 23 & 16.43\% \\
@@ -929,16 +929,16 @@ discrimination & calculada como 1 sobre el n\'umero de objetos en el modelo que 
 %between characteristics of the scenes that it is not able to
 %capture. The most important characteristic of the GRE3D7 domain is
 %that we are not able to learn, and has an impact in our performance,
-%the properties of type size (namely, small and large) are used much
+%the properties of type size (namely, peque\~no and grande) are used much
 %more when the target cannot be uniquely identified with taxonomical
-%(ball and cube) and absolute (green and blue) properties only.  In
+%(esfera and cubo) and absolute (green and blue) properties only.  In
 %other words, in the GRE3D7 corpus the size is used more often (90.2\%)
 %of the time when the resulting RE is not overspecified than when it is
 %(34\%). It may not be possible to learn this characteristic from the
 %GRE3D7 data since even with the domain dependent features defined
 %in~\cite[Chapter 6]{viet:gene11}, it could not be learned by decision
 %trees. As a result we can see in Table~\ref{probability-of-use} that
-%for Fig 13 the value estimated for ``large'' are not close to the
+%for Fig 13 the value estimated for ``grande'' are not close to the
 %value calculated from corpora.  \textit{In the case of the TUNA-corpus
 %  we show that we couldn't learn the dependency of dimension-x and
 %  dimension-y, it mean, when a person adds dimension-x is highly
@@ -981,8 +981,8 @@ grande & 0.107 & 0.03 & 0.307 & 0.7378 \\
 izquierda & 0.007 & 0.002 & 0 & 0.0024 \\
 arriba & 0.007 & 0 & 0 & 0 \\
 derecha & 0 & 0.001 & 0.064 & 0.0005 \\
-a-la-izquierda-de & 0 & 0 & 0 & 0 \\
-a-la-derecha-de & 0 & 0 & 0.064 & 0.1023 \\
+a-la-izq-de & 0 & 0 & 0 & 0 \\
+a-la-der-de & 0 & 0 & 0.064 & 0.1023 \\
 debajo-de & 0 & 0 & 0 & 0 \\
 \hline
 \end{tabular}
@@ -1043,3 +1043,241 @@ y el 25 \% cuando target y el landmark no lo compart\'ian. Esto puede explicarse
 
 %\section{Agregando sobreespecificaci\F3n}
 \section{Ejemplo de ejecuci\'on}
+
+
+%ALGO ORIGINAL MOD ejemplo para el nuestro 
+%\begin{figure}[h!]
+%\begin{center}
+%\includegraphics[width=\textwidth]{images/algoritmoOriginal.png}
+%\end{center}
+%\vspace*{-2em}
+%\caption{Algoritmo para GER con l\'ogicas de descripci\'on}
+%\label{algoritmoOriginal}
+%\end{figure}
+%
+%Vamos a ejecutar el algoritmo para la Figura~\ref{GRE3D7-stimulus-cap2},
+%el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
+%esas listas son las siguientes:
+%
+%propiedades ordenadas (prop): \textsf{esfera}, \textsf{cubo}, \textsf{red}, \textsf{yellow}, \textsf{peque\~no}, \textsf{grande}.\\
+%relaciones ordenadas (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
+
+%\begin{figure}
+%\begin{center}	
+%\includegraphics[width=.5\textwidth]{images/22.jpg}
+%\end{center}
+%\vspace*{-1.5em}
+%\caption{Escena 3D de figuras geom\'etricas}\label{figure22}
+%\end{figure}
+
+%\begin{figure}
+%\begin{minipage}[b]{0.6\linewidth}
+%\centering
+%\begin{tikzpicture}
+%  [
+%    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+%    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
+%  ]
+% \node[n,label=above:$e_1$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nLeft\\[-2pt]
+%      \npeque\~no\\[-2pt] 
+%      \nYellow \\[-2pt] 
+%      \nesfera\end{array}$}] (a) {};
+
+% \node[n,label=above:$e_2$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nLeft\\[-2pt]
+%      \npeque\~no\\[-2pt] 
+%      \nRed\\[-2pt] 
+%      \ncubo\end{array}$}, right of=a] (b) {};
+
+% \node[n,label=below:$e_3$,label=above:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nTop\\[-2pt]
+%      \nLeft\\[-2pt]
+%      \npeque\~no\\[-2pt] 
+%      \nYellow\\[-2pt] 
+%      \nesfera\end{array}$}, above of=b] (c) {};
+
+% \node[n,label=above:$e_4$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nBig\\[-2pt] 
+%      \nRed\\[-2pt] 
+%      \ncubo\end{array}$}, right of=b] (d) {};
+
+% \node[n,label=above:$e_5$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \nBig\\[-2pt] 
+%      \nRed\\[-2pt] 
+%      \nesfera\end{array}$}, right of=d] (e) {};
+
+% \node[n,label=above:$e_6$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \npeque\~no\\[-2pt] 
+%      \nYellow\\[-2pt] 
+%      \ncubo\end{array}$}, right of=e] (f) {};
+
+% \node[n,label=above:$e_7$,label=below:{
+%    \relsize{-1}$\begin{array}{c}
+%      \npeque\~no\\[-2pt] 
+%      \nRed\\[-2pt] 
+%      \ncubo\end{array}$}, right of=f] (g) {};
+
+% \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
+% \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+
+% \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
+% \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+
+% \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
+% \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
+
+% \draw[dotted] (-.4,-1.7) rectangle (7.5,3.3);
+
+% \end{tikzpicture}
+%\caption{La escena como modelo relacional}\label{GRE3D7-stimulus-graph}
+%\end{minipage}
+%\end{figure}
+
+
+%El algoritmo siempre termina, y devuelve ER un conjunto de f\'ormulas que describe cada elemento en el dominio (si existe esa f\'ormula). \\
+
+En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
+
+
+\begin{figure}[ht]
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/22.jpg}
+\vspace*{1cm}
+%\caption{Input scene}
+\label{GRE3D7-stimulus-22}
+\end{minipage}
+%\hspace*{-0.35cm}
+\begin{minipage}[b]{0.6\linewidth}
+\centering
+%\begin{figure}[ht]
+%\begin{center}
+\frame{\includegraphics[width=8cm]{images/base.png}}\\[0pt]
+\caption{Modelo de la Figura \ref{GRE3D7-stimulus-22}}
+\label{fig-modelo}
+\end{minipage}
+\end{figure}
+%El primer bucle del algoritmo es en las propiedades. Para cada propiedad hace add$_\el$ ($\varphi$, RE), las propiedades at\'omicas se muestran en la Figura~\ref{fig-modelo2}.
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo2.png}}\\[0pt]
+\caption{Propiedades proposicionales en cuadro rojo, las del primer ciclo del algoritmo}
+\label{fig-modelo2}
+\end{center}
+\end{figure}
+
+%La primer relaci\'on a considerar es 'esfera', 
+%
+%La f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on tiene al menos un elemento, a continuaci\'on, para cada f\'ormula
+ %$\psi$ en ER la conjunci\'on
+%$\varphi  \wedge \psi$ no necesita estar subsumida in ER, la $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\psi}$. Luego las f\'ormulas subsumidas se borran.
+
+La primer relaci\'on a considerar es \textsf{esfera}, recordemos que la f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on tiene al menos un elemento, $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\psi}$. 
+
+ER = \{$\top$, \textsf{esfera}\}, se ven los elementos de la f\'ormula ``esfera'' en un recuadro en la Figura~\ref{fig-modelo3}.
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo3.png}}\\[0pt]
+\caption{El cuadro indica cuales son ``esfera''}
+\label{fig-modelo3}
+\end{center}
+\end{figure}
+
+La siguiente propiedad es \textsf{cubo}, ER = \{$\top$, \textsf{esfera}, \textsf{cubo}\}, pero ahora la $\interp{\textsf{esfera}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cubo}}$ = $\{e_2, e_4, e_6, e_7\}$, quedando las particiones como se muestra en la Figura~\ref{fig-modelo4}
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo4.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'' y ``cubo''}
+\label{fig-modelo4}
+\end{center}
+\end{figure}
+Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) las otras dos f\'ormulas. La siguiente propiedad es  \textsf{rojo}, $\interp{\textsf{rojo}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{esfera}, \textsf{cubo}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo}\}$, las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo9.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'' y ``rojo''}
+\label{fig-modelo9}
+\end{center}
+\end{figure}
+
+Siguiendo con \textsf{amarillo}, tenemos, $\interp{\textsf{amarillo}}$ = $\{e_1, e_3, e_6\}$ y obtenemos ER = $\{\textsf{esfera} \wedge \textsf{amarillo}, \textsf{cubo} \wedge \textsf{amarillo}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo}\}$. 
+Note que aqu\'i ya borramos la f\'ormula \textsf{esfera} porque estaba subsumida, y la f\'ormula \textsf{cubo} tambi\'en. Se muestran particiones en Figura~\ref{fig-modelo10}.
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo10.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'' y ``amarillo''}
+\label{fig-modelo10}
+\end{center}
+\end{figure}
+
+Haciendo lo mismo con \textsf{peque\~no} tenemos ER = $\{\textsf{esfera} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}, \textsf{cubo} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}\}$, como se puede ver en Figura~\ref{fig-modelo11}.
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo11.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo'', ``peque\~no'' y ``grande''}
+\label{fig-modelo11}
+\end{center}
+\end{figure}
+
+La siguiente propiedad es \textsf{grande} as\'i, tenemos ER = $\{\textsf{esfera} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}, \textsf{cubo} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{grande}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}\}$. Aqu\'i no podemos agregar \textsf{grande} a la f\'ormula $\textsf{rojo} \wedge \textsf{cubo}$ porque su interpretaci\'on tiene un solo elemento, y la condici\'on dice que es necesario tener m\'as de uno.
+
+Hasta ahora ER = $\{\textsf{esfera} \wedge \textsf{yellow} \wedge \textsf{peque\~no}, \textsf{cubo} \wedge \textsf{yellow} \wedge \textsf{peque\~no}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{grande}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}\}$ 
+y tenemos las siguientes extensiones: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, \{e_2, e_7\}$ respectivamente. 
+Hay dos f\'ormulas que a\'un pueden ser refinadas, $\textsf{esfera} \wedge \textsf{yellow} \wedge \textsf{peque\~no}$ y $\textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}$ 
+debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo, while del algoritmo 1, en la l\'inea 4. Ahora es el turno de las relaciones, la primera de ellas es \textsf{leftof}, para cada f\'ormula $\varphi$ en ER trataremos de hacer add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Notar que $\psi$ solo puede ser $\textsf{esfera} \wedge \textsf{yellow} \wedge \textsf{peque\~no}$ o $\textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}$ porque esos son los que su interpretaci\'on tiene m\'as de un elemento. 
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo15.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``yellow''...}
+\label{fig-modelo15}
+\end{center}
+\end{figure}
+
+
+No hay
+%because those are the ones that its interpretation have more than one element. There is not 
+$\varphi$ y $\psi$ que puedan ser aplicadas. Continuando con \textsf{a-la-der-de} agregamos $\textsf{cubo} \wedge \textsf{yellow} \wedge \textsf{peque\~no} \wedge \exists \textsf{a-la-der-de}. \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}$, y asi con \textsf{topof} agregamos $\textsf{peque\~no} \wedge \textsf{rojo} \wedge \textsf{cubo} \wedge \exists \textsf{ontop}. \textsf{peque\~no} \wedge \textsf{yellow} \wedge \textsf{esfera}$ y el algoritmo termina con ER = $\{\textsf{esfera} \wedge \textsf{yellow} \wedge \textsf{peque\~no}, \textsf{cubo} \wedge \textsf{yellow} \wedge \textsf{peque\~no}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{grande}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}, \textsf{cubo} \wedge \textsf{yellow} \wedge \textsf{peque\~no} \wedge \exists \textsf{a-la-der-de}. \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}, \textsf{peque\~no} \wedge \textsf{rojo} \wedge \textsf{cubo} \wedge \exists \textsf{ontop}. \textsf{peque\~no} \wedge \textsf{yellow} \wedge \textsf{esfera}\}$, 
+aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer ning\'un refinamiento m\'as. 
+%can be applied to $cubo \wedge red \wedge peque\~no$ but there is no formula which interpretation has more than one element to be apply with this one. The same happen for the other relations, so the algorithm ends.
+%its interpretation is $\{e_7\}$ with $\psi$ is $cubo \wedge yellow \wedge peque\~no$, the others combinations can't be apply because they don't do true the preconditions. The following relation is rightof, 
+
+%leftof, rightof, ontopof, bellowof
+
+%At this point we already have the target in a singleton set. So the formula for it is ``red and esfera'', and also for s6 which formula is ``yellow cubo''.\\
+%As we show this algorithm depends of the order of properties and relations.\\
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo16.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo''...}
+\label{fig-modelo16}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo17.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo''...}
+\label{fig-modelo17}
+\end{center}
+\end{figure}
+
+Las expresiones referenciales encontradas son:\\
+
+$\textsf{esfera} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}$ representa $e_1$ \\
+$\textsf{cubo} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}$ representa $e_6$ \\
+$\textsf{esfera} \wedge \textsf{rojo}$ representa $e_5$ \\
+$\textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{grande}$ representa $e_4$ \\
+$\textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}$ representa $\{e_2,e_7\}$  \\
+$\textsf{cubo} \wedge \textsf{amarillo} \wedge \textsf{peque\~no} \wedge \exists \textsf{a-la-der-de}. \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}$ representa $e_6$ \\
+$\textsf{peque\~no} \wedge \textsf{rojo} \wedge \textsf{cubo} \wedge \exists \textsf{ontop}. \textsf{peque\~no} \wedge \textsf{amarillo} \wedge \textsf{esfera}$ representa $e_2$ \\
+
