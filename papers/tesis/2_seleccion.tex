@@ -47,7 +47,7 @@ A continuaci\'on daremos 2 ejemplos de diferentes maneras de modelar el contexto
 
 %El contexto que toma como input el algoritmo GRAPH \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto target que es el $e_5$, tiene propiedades large, red, ball y una flecha con la etiqueta rightof $e_4$, y $e_4$ tiene propiedades large, red, cube, y una flecha hacia $e_5$ con etiqueta leftof.\\
 
-El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto $e_5$, tiene propiedades grande, rojo, esfera y una flecha con la etiqueta a-la-derecha-de hacia $e_4$, y $e_4$ tiene propiedades grande, rojo, cubo, y una flecha hacia $e_5$ con etiqueta a-la-izquierda-de.\\
+El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto $e_5$, tiene propiedades grande, rojo, esfera y una flecha con la etiqueta a-la-der-de hacia $e_4$, y $e_4$ tiene propiedades grande, rojo, cubo, y una flecha hacia $e_5$ con etiqueta a-la-izq-de.\\
 
 \begin{figure}[ht]
 \centering
@@ -125,13 +125,13 @@ Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo d
     <related rel="cubo" to="c" />
     <related rel="rojo" to="c" />
     <related rel="grande" to="c" />
-    <related rel="a-la-izquierda-de" to="e5" />
+    <related rel="a-la-izq-de" to="e5" />
   </individual>
   <individual refer-to="e5">
     <related rel="grande" to="c"/>
     <related rel="esfera" to="c" />
     <related rel="rojo" to="c" />
-    <related rel="a-la-derecha-de" to="e4" />
+    <related rel="a-la-der-de" to="e4" />
   </individual>
   ...
   <individual id="c">
@@ -462,7 +462,28 @@ El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que re
 
 La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cuando estas se hacen m\'as costosas que el grafo de menor costo encontrado hasta el momento. Esta funci\'on hace que se prefieran propiedades sobre otras que tienen mayor costo.
 
-\textcolor{blue}{aca quiero agregar ejemplo, no me gusta como quedo esta parte}
+Por ejemplo, 
+Los algoritmos discutidos por Dale y Reiter (1995) pueden ser vistos como
+diferentes instancias de un algoritmo de b\'usqueda (Bohnet y Dale 2005; Gatt de 2007).
+Todos ellos, b\'asicamente, buscan a trav\'es de un mismo espacio de estados, compuestos por tres componentes: conjunto de cosas verdaderas para el target, un conjunto de distractores, y un conjunto de propiedades del target que a\'un no han sido consideradas. El estado inicial se puede formalizar como la tripla ($\emptyset$, C, P) 
+(no hay descripci\'on del target constru\'ida, no se han descartado distractores, y todas las propiedades P del target todav\'ia est\'an disponibles), y el estado final como
+(L, $\emptyset$, P'), se ha encontrado una descripci\'on que distingue al target,
+el conjunto de distractores est\'a vac\'io, y pueden o no quedar propiedades del target en P'. Todos los otros estados en el espacio de b\'usqueda son intermedios,
+a trav\'es de cuales un algoritmo podr\'ia moverse en funci\'on de su estrategia de b\'usqueda. 
+Por ejemplo 
+cuando buscamos de una descripci\'on distintiva de $e_{5}$ del Contexto\ref{GRE3D7-stimulus-conLetras}, un estado intermedio podr\'ia ser
+s = ({[forma, esfera],[color,rojo]},{$e_{5}$}, {[taman\~o, grande],[a-la-der-de, $e_4$]})
+
+Los algoritmos discutidos anteriormente difieren en el m\'etodo de creaci\'on de los estados, y en el orden en que estos estados son recorridos. Full Brevity, por ejemplo, utiliza un m\'etodo de expansi\'on, que crea un nuevo estado para cada atributo
+del target no contemplado antes (y que excluye al menos un distractor). 
+
+
+Comenzando desde el estado inicial y aplicando a nuestro ejemplo de contexto, este m\'etodo ser\'ia dar\'ia lugar a tres nuevos estados, la creaci\'on de descripciones, incluyendo la informaci\'on de forma, el color, y el taman\~o, respectivamente. Estos estados son chequeados mediante un m\'etodo de amplitud-primero. 
+El IA, por el contrario, utiliza un m\'etodo diferente para ampliar el grafo, cada vez que crea
+un nuevo estado, lo hace de acuerdo con un orden de preferencia predeterminado. As\'i, en
+el estado inicial, y suponiendo que (como antes) que escribe es el atributo m\'as preferido, el
+ampliar m\'etodo ser\'ia crear un solo nuevo estado: s = {[forma, esfera]}, siempre hay 1 solo nuevo estado elegido por el orden de preferencia.
+
 
 
 \subsection{Bisimulaci\'on}
