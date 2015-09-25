@@ -27,7 +27,7 @@ la distribuci\'on de probabilidad de las ER generadas para el modelo
 simule la que se encuentra en el corpus.\\
 \end{itemize}
 
-En las siguientes secciones explicaremos el input y output del algoritmo, luego el algoritmo en detalle,como conseguimos asegurar terminaci\'on, como se generan las ER no-determin\'isticamente, como conseguimos mayor sobreespecificaci\'on y luego veremos como calcular las \puse\ que el algoritmo toma como input para ambos casos, cuando tenemos un corpus disponible para la escena y target y cuando no lo tenemos, para finalizar daremos un ejemplo de ejecuci\'on.
+En las siguientes secciones explicaremos el input y output del algoritmo, luego el algoritmo en detalle, como conseguimos asegurar terminaci\'on, como se generan las ER no-determin\'isticamente, como conseguimos mayor sobreespecificaci\'on y luego veremos como calcular las \puse\ que el algoritmo toma como input para ambos casos, cuando tenemos un corpus disponible para la escena y target y cuando no lo tenemos, para finalizar daremos un ejemplo de ejecuci\'on.
 
 \section{Input/Output del algoritmo}
 \label{input_algo}
@@ -62,25 +62,25 @@ Las relaciones ternarias o de mayor orden se pueden codificar como relaciones bi
     <related rel="cubo" to="c" />
     <related rel="rojo" to="c" />
     <related rel="grande" to="c" />
-    <related rel="a-la-izquierda-de" to="e5" />
+    <related rel="a-la-izq-de" to="e5" />
   </individual>
   <individual refer-to="e5">
     <related rel="grande" to="c"/>
     <related rel="esfera" to="c" />
     <related rel="rojo" to="c" />
-    <related rel="a-la-derecha-de" to="e4" />
+    <related rel="a-la-der-de" to="e4" />
   </individual>
   <individual id="e6">
     <related rel="pequeno" to="c" />
     <related rel="cubo" to="c" />
     <related rel="amarillo" to="c" />
-    <related rel="a-la-izquierda-de" to="e7" />
+    <related rel="a-la-izq-de" to="e7" />
   </individual>
   <individual id="e7">
     <related rel="pequeno" to="c" />
     <related rel="cubo" to="c" />
     <related rel="rojo" to="c" />
-    <related rel="a-la-derecha-de" to="e6" />
+    <related rel="a-la-der-de" to="e6" />
   </individual>
   <individual id="c">
     <related rel="terminal" to="c" />
@@ -88,7 +88,8 @@ Las relaciones ternarias o de mayor orden se pueden codificar como relaciones bi
 </problem>
 \end{verbatim}
 
-y una lista de probabilidades ordenadas de mayor a menor con el orden de preferencia de las propiedades y relaciones. Por ejemplo esta es una lista de probabilidades de uso de la Figura \ref{GRE3D7-stimulus}
+La lista de probabilidades Rs, es una lista de pares de tuplas (R, R.\puse) que vinculan a cada
+relaci\'on R a una cierta probabilidad de uso R.\puse ordenada de mayor a menor con el orden de preferencia de las propiedades y relaciones. Por ejemplo esta es una lista de probabilidades de uso de la Figura \ref{GRE3D7-stimulus}
 
 esfera 1.0, \\
 cubo 1.0,\\
@@ -100,16 +101,18 @@ peque\~no 0.107,\\
 izquierda 0.007,\\
 arriba 0.007, \\
 derecha 0, \\
-a-la-izquierda-de 0, \\
-a-la-derecha-de 0, \\
+a-la-izq-de 0, \\
+a-la-der-de 0, \\
 debajo-de 0\\
 
+Es decir, si $\REL$ es el
+conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura} del modelo), recordemos que tomamos las unarias como relaciones, entonces podemos decir que Rs $\in (\REL \times [0,1])^*$
 
 En la Secci\'on \ref{sec:learning} explicaremos de donde sacar estas probabilidades que el algoritmo toma como input.
 
-Luego de terminar, el algoritmo calcula lo que se llaman las $\mathcal {L}$- clases de semejanza del modelo de entrada de~$\gM $. Intuitivamente, si dos elementos en el modelo pertenecen a la misma $\mathcal {L}$- clase similitud, entonces~$\mathcal {L}$ no es lo suficientemente expresiva para diferenciarlos (es decir, no hay una f\'ormula en~$\mathcal {L }$ que pueda distinguirlos).
+Luego de terminar, el algoritmo calcula lo que se llaman las $\mathcal {L}$-clases (clases de la l\'ogica $\mathcal {L}$) de semejanza del modelo de entrada de~$\gM $. Intuitivamente, si dos elementos en el modelo pertenecen a la misma $\mathcal {L}$-clase de similitud, entonces~$\mathcal {L}$ no es lo suficientemente expresiva para diferenciarlos (es decir, no hay una f\'ormula en~$\mathcal {L }$ que pueda distinguirlos).\\
 
-La salida del algoritmo es un conjunto de f\'ormulas (que ser\'an expresiones referenciales si la clase de la f\'ormula contiene s\'olo 1 objeto) de los elementos del modelo. Si cada f\'ormula tiene un solo objeto, tenemos una ER para cada elemento del modelo, es decir el algoritmo da ER para todos los objetos que puede identificar un\'ivocamente. 
+La salida del algoritmo es un conjunto de f\'ormulas (que ser\'an expresiones referenciales si la clase de la f\'ormula contiene s\'olo 1 objeto) de los elementos del modelo. Si cada f\'ormula tiene un solo objeto, tenemos una ER para cada elemento del modelo, es decir el algoritmo da ER para todos los objetos que puede identificar un\'ivocamente. Lo llamaremos $RE$.\\
 %Usaremos el contexto \ref{grafo-GRE3D7-stimulus} como ejemplo para mostrar los pasos a seguir para la ejecuci\'on del algoritmo.
 
 %It is clear that a scene can be encoded in different ways as a relational model (for example, we could argue that $e_1$ is also \emph{leftof} $e_2$, and so on).  The algorithm assumes that these issues have been resolved and that the model encodes a suitable representation of the scene we want to describe.  Moreover, we will assume that all relations are \emph{binary}.  We will not consider relations of arity greater than two (relations of higher arity can be encoded as binary relations via reification, if necessary), and unary
@@ -137,18 +140,18 @@ Desde ahora hablaremos de {\it f\'ormulas} (una f\'ormula corresponde a una desc
 
 Una clase es un conjunto de objetos que satisface la misma f\'ormula (descripci\'on), por ejemplo ``esfera'' ser\'an todas las esferas del modelo.\\
 
-Una f\'ormula es {\it Informativa} cuando tiene m\'as informaci\'on que las f\'ormulas que hay hasta el momento, es decir, la clase de la f\'ormula esta inclu\'ida en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas ``esfera'' y ``cubo'' y queremos saber si ``esfera roja'' es informativa, si lo es ya que $e_5$ es una ``esfera roja'' y existen otras que no son rojas, es decir divide el conjunto de esferas, por lo tanto si lo es. \\
+Una f\'ormula es {\it Informativa} cuando tiene m\'as informaci\'on que las f\'ormulas que hay hasta el momento, es decir, la clase de la f\'ormula esta inclu\'ida en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas ``esfera'' y ``cubo'' y queremos saber si ``esfera roja'' es informativa, si lo es, ya que $e_5$ es una ``esfera roja'' y existen otras que no son rojas, es decir divide el conjunto de esferas, por lo tanto si lo es. \\
 
-Una f\'ormula es {\it subsumida} si ya tenemos subf\'ormulas con m\'as informaci\'on que cubren todo el conjunto de objetos que la formula cubr\'ia. Por ejemplo, T que es la f\'ormula en la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen las f\'ormulas ``esfera'' y ``cubo'' ya que todos los elementos del contexto \ref{grafo-GRE3D7-stimulus} son o esferas o cubos, es decir ya tenemos informaci\'on m\'as precisa de los objetos.\\
+Una f\'ormula es {\it subsumida} si ya tenemos subf\'ormulas con m\'as informaci\'on que cubren todo el conjunto de objetos que la f\'ormula cubr\'ia. Por ejemplo, T que es la f\'ormula en la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen las f\'ormulas ``esfera'' y ``cubo'' ya que todos los elementos del contexto \ref{grafo-GRE3D7-stimulus} son o esferas o cubos, es decir ya tenemos informaci\'on m\'as precisa de los objetos.\\
 
 {\it Redundante} es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el contexto \ref{grafo-GRE3D7-stimulus} si ya tenemos la f\'ormula ``esfera roja'', la f\'ormula ``esfera roja grande'' es redundante ya que no agrega informaci\'on porque el conjunto de objetos esferas rojas es solamente 1 objeto.\\
 
 {\it Trivial} es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el Contexto \ref{grafo-GRE3D7-stimulus} ``esfera amarilla grande'' es trivial ya que no hay esferas amarillas grandes en el contexto considerado.\\
 
-Este algoritmo utiliza f\'ormulas de el lenguaje de descripci\'on $\el$ de la l\'ogica~\cite{baad:desc03} para describir clases de refinamiento \footnote {Note, sin embargo, que el lenguaje formal utilizado en particular es independiente del algoritmo principal, y diferentes funciones add$_{\mathcal {L}}$(R,$\varphi $, \RE) se pueden utilizar en funci\'on del lenguaje en cuesti\'on.}.
+Vamos a utilizar f\'ormulas de el lenguaje de descripci\'on $\el$ de la l\'ogica~\cite{baad:desc03} para describir clases de refinamiento \footnote {Note, sin embargo, que el lenguaje formal utilizado en particular es independiente del algoritmo principal, y diferentes funciones add$_{\mathcal {L}}$(R,$\varphi $, \RE) se pueden utilizar en funci\'on del lenguaje en cuesti\'on.}.\\
 %Para una descripci\'on detallada de $\el$, nos referimos a~\cite{baad:desc03}.
-La interpretaci\'on de las $\el$ f\'ormula $\psi \sqcap \exists $R.$ \varphi$ es el conjunto de todos los elementos que satisfagan~$\psi$ y que est\'an relacionados por relaci\'on R con alg\'un elemento que satisface $\varphi $.
-Por ejemplo, existe la interpretaci\'on de la f\'ormula \emph{esfera}$\sqcap$ \emph{a-la-izquierda-de}. \emph{cubo} es el conjunto de todas las esferas que est\'an a la izquierda de alg\'un cubo.
+La {\it interpretaci\'on} de la f\'ormula de $\el$  $\psi \sqcap \exists $R.$ \varphi$ es el conjunto de todos los elementos que satisfagan~$\psi$ y que est\'an relacionados por relaci\'on R con alg\'un elemento que satisface $\varphi $.
+Por ejemplo, la interpretaci\'on de la f\'ormula \emph{esfera}$\sqcap$ \emph{a-la-izq-de}. \emph{cubo} es el conjunto de todas las esferas que est\'an a la izquierda de alg\'un cubo.\\
 
 
 \begin{figure}[!t]
@@ -211,9 +214,10 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 
 %Tenemos 2 algoritmos~\ref{algo:bisim-l} y~\ref{algo:bisim-add-el-over}. 
 
-El algoritmo~\ref{algo:bisim-l} toma como entrada un modelo $\gM$ y una lista de pares de tuplas (R, R.\puse) que vinculan a cada
-relaci\'on R a una cierta probabilidad de uso R.\puse (nombrada en \ref{input_algo}). Es decir, si $\REL$ es el
-conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura} del modelo), recordemos que tomamos las unarias como relaciones, entonces R $\in (\REL \times [0,1])^*$. Por otra parte, asumimos que R esta ordenada por R.\puse\ de mayor a menor.
+%El algoritmo~\ref{algo:bisim-l} toma como entrada un modelo $\gM$ y una lista de pares de tuplas (R, R.\puse) que vinculan a cada
+%relaci\'on R a una cierta probabilidad de uso R.\puse (nombrada en \ref{input_algo}). 
+%Es decir, si $\REL$ es el
+%conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura} del modelo), recordemos que tomamos las unarias como relaciones, entonces R $\in (\REL \times [0,1])^*$. Por otra parte, asumimos que R esta ordenada por R.\puse\ de mayor a menor.
 %\textcolor{blue}{deberia reemplazar aca que R es un conjunto por una lista ordenada...}
 
 %\begin{figure}[t]
@@ -325,37 +329,38 @@ conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{
 
 
 El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento
-y es inicializado por la descripci\'on m\'as general $\top$.
+y es inicializado por la descripci\'on m\'as general $\top$.\\
 
-Para cada R, primero calculamos R.\randomuse, un n\'umero aleatorio en [0,1].
+Recorremos Rs, para cada R (relaciones de la signatura del dominio REL), primero calculamos R.\randomuse, un n\'umero aleatorio en [0,1], y R.incuse que ser\'a (1 -R.puse) / MaxIterations, siendo MaxIterations el n\'umero m\'aximo de iteraciones del ciclo principal que queremos permitir.\\
+
 Si R.\randomuse $\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de
-clases. 
+clases. \\
 
 El valor de R.\puse\ se incrementar\'a en $R.\incuse$
 en cada ciclo principal, para asegurar que todas las relaciones son en alg\'un momento,
 consideradas por el algoritmo. Esto asegura que una expresi\'on referencial
 se encontrar\'a si existe; pero dar\'a mayor probabilidad a las expresiones
-que usan las relaciones con m\'as alta R.\puse.
+que usan las relaciones con m\'as alta R.\puse.\\
  
 Mientras que $\RE$ contiene descripciones que pueden ser refinadas (es decir, clases
 con al menos dos elementos) vamos a llamar a la funci\'on de refinamiento
 add$_\mathcal{EL}$(R,$\varphi$,$\RE$) sucesivamente con cada relaci\'on
-de Rs.
+de Rs.\\
 
  Un cambio en una de las clases, puede desencadenar cambios en
 las otras. Por esa raz\'on, si $\RE$ cambia, salimos del ciclo for y volvemos a
-empezar con las relaciones de m\'as alta R.\puse. 
+empezar con las relaciones de m\'as alta R.\puse. \\
 
 Si despu\'es de probar refinar el conjunto con todas las relaciones de Rs, el conjunto $\RE$ no ha
 cambiado, hemos alcanzado un estado estable (es decir, las clases que se describen
-en $\RE$ no puede ser refinadas, utilizando los valores de R.\puse\ ). 
+en $\RE$ no puede ser refinadas, utilizando los valores de R.\puse\). 
 A continuaci\'on, se incrementar\'an todos los valores de R.\puse\ y se iniciar\'a el
-procedimiento de nuevo.
+procedimiento de nuevo.\\
 %El algoritmo~\ref{algo:bisim-add-el-over} coincide con el descripto
 %en~\cite{arec2:2008:Areces}. 
 Se refinar\'a cada una de las descripciones
 en $\RE$ utilizando la relaci\'on R y las otras descripciones que ya est\'an en
-$\RE$, bajo ciertas condiciones. 
+$\RE$, bajo ciertas condiciones. \\
 
 La nueva descripci\'on debe ser
 \emph{no redundante} (la nueva clase no se puede obtener como la uni\'on de
@@ -364,20 +369,20 @@ clase no es vac\'{i}a), es \emph{informativa} (la nueva clase no debe
 coincidir con la clase original). Si se cumplen todas estas condiciones,
 la nueva descripci\'on se a\~nade a $\RE$, y las descripciones redundantes
 posiblemente creadas por la adici\'on de la nueva descripci\'on son
-eliminadas.
+eliminadas.\\
 
-Supongamos que se fija un modelo de entrada $\gM$ y los valores de Rs (R.\puse \ para todos los elementos de la signatura del modelo), y se fija tambi\'en alg\'un elemento target $t$. Supongamos tambi\'en que $t$ tiene una expresi\'on referencial en 
-$\el$. Cuando termine el
-Algoritmo~\ref{algo:bisim-l} habr\'a calculado una f\'ormula $\varphi$ de $\el$ tal
-que $\interp{\varphi} = \{t\}$, pero $\varphi$ pueden ser diferentes en
-cada ejecuci\'on del algoritmo (a pesar de que $\gM$ y Rs son fijos). Si nosotros
-repetimos este procedimiento un n\'umero estad\'{i}sticamente significativo de veces,
-podemos definir una estimaci\'on de la distribuci\'on de probabilidad de las ER
-generadas por el algoritmo para $t$, dado $\gM$ y Rs. En la
-Secci\'on~\ref{sec:evaluacion} vamos a demostrar que dado un corpus de ER
-para $\gM$, es posible definir los valores de R.\puse\ para que esta
-distribuci\'on de probabilidad coincida con buena precisi\'on a la distribuci\'on de probabilidad
- de ER que se encuentra en el corpus.
+%Supongamos que se fija un modelo de entrada $\gM$ y los valores de Rs (R.\puse \ para todos los elementos de la signatura del modelo), y se fija tambi\'en alg\'un elemento target $t$. Supongamos tambi\'en que $t$ tiene una expresi\'on referencial en 
+%$\el$. Cuando termine el
+%Algoritmo~\ref{algo:bisim-l} habr\'a calculado una f\'ormula $\varphi$ de $\el$ tal
+%que $\interp{\varphi} = \{t\}$, pero $\varphi$ pueden ser diferentes en
+%cada ejecuci\'on del algoritmo (a pesar de que $\gM$ y Rs son fijos). \\
+%
+%Si repetimos este procedimiento un n\'umero estad\'{i}sticamente significativo de veces,
+%podemos definir una estimaci\'on de la distribuci\'on de probabilidad de las ER
+%generadas por el algoritmo para $t$, dado $\gM$ y Rs. En la
+%Secci\'on~\ref{sec:evaluacion} vamos a demostrar que dado un corpus de ER
+%para $\gM$, es posible definir los valores de R.\puse\ para que esta
+%distribuci\'on de probabilidad coincida con buena precisi\'on a la distribuci\'on de probabilidad de ER que se encuentra en el corpus.
 
 
 \subsection{Asegurando terminaci\'on}
@@ -388,11 +393,15 @@ Definimos MaxIterations como la cantidad m\'axima de iteraciones que vamos a per
 
 R.incuse = (1 -R.puse) / MaxIterations
 
-con esto nos aseguramos que en MaxIterations todas lleguen a 1, y en consecuencia el algoritmo termine, ya que la l\'inea 15 del c\'odigo incremente R.puse con R.incuse y la 16 dice salir del ciclo principal si para todas las R, R.puse es >=1
+con esto nos aseguramos que en MaxIterations todas lleguen a 1, y en consecuencia el algoritmo termine, ya que la l\'inea 15 del c\'odigo, se incrementa R.puse con R.incuse y en la 16 dice salir del ciclo principal si para todas las R, R.puse es >=1
+
+\subsection{Generando ER relacionales}
+
+Nuestro algoritmo permite generar relaciones con otros objetos e incliur las ER de los dem\'as objetos, no tiene preferencia por las relaciones ni por las propiedades proposicionales, en el sentido de que va o no incluirlas de acuerdo a la probabilidad de uso que ellas tengas, las cuales fueron calculadas o sacadas de un corpus.
 
 \subsection{Generando ER no-determ\'inisticamente}
 
-Al iniciar el algoritmo (en l\'inea 3) calcula para cada R, R.rnduse que es un n\'umero aleatorio entre 0 y 1, ese n\'umero va a hacer que el algoritmo sea no-determin\'istico, ya que en la l\'inea 9, el algoritmo usara R para refinar las clases solamente si 
+Al iniciar el algoritmo (en l\'inea 3) calcula para cada R, R.rnduse que es un n\'umero aleatorio entre 0 y 1, ese n\'umero va a hacer que el algoritmo sea no-determin\'istico, ya que en la l\'inea 9, el algoritmo usar\'a R para refinar las clases solamente si 
 R.rnduse >= R.puse. Por lo tanto y considerando que en las siguientes ejecuciones R.rnduse ser\'an distintos, va a poder generar distintas ER.
 
 \subsection{Generando descripciones sobreespecificadas}\label{sec:overspecification}
@@ -431,35 +440,38 @@ R.rnduse >= R.puse. Por lo tanto y considerando que en las siguientes ejecucione
 %if FirstLoop? then // primera iteración?
 %2 Informativa   TRUE
 
-El algoritmo~\ref{algo:bisim-l} permite muy poca sobreespecificaci\'on en las ER que
-genera. Una relaci\'on con una baja \puse\ podr\'{i}a ser suficiente
+El algoritmo original~\ref{algo:bisim-l}
+ permit\'ia muy poca sobreespecificaci\'on en las ER que
+generaba. Una relaci\'on con una baja \puse\ podr\'{i}a ser suficiente
 (Por s\'{i} mismo o en combinaci\'on con algunas de las relaciones ya consideradas) para
-identificar el target. Una vez que se a\~nade esta relaci\'on, se obtiene una ER, pero una ER m\'as corta,
-m\'as espec\'{i}fica podr\'{i}a ser encontrada, mediante la eliminaci\'on de algunos de los refinamientos anteriores.
+identificar el target. Una vez que se a\~nadi\'o esa relaci\'on, se obtiene una ER, pero una ER m\'as corta, m\'as espec\'{i}fica podr\'{i}a ser encontrada, mediante la eliminaci\'on de algunos de los refinamientos anteriores.
 Por lo tanto, la ER resultante podr\'{i}a ser sobreespecificada. Este es el mismo tipo de sobreespecificaci\'on
 que permite el algoritmo incremental. Pero se ha argumentado~\cite{Engelhardt_Bailey_Ferreira_2006, Arts_Maes_Noordman_Jansen_2011} que
 un grado mucho mayor de sobreespecificaci\'on se encuentra generalmente en corpora, y esto
 es de hecho lo que se ve en el corpus GRE3D7. Como podemos ver en la tabla~\ref{corpus-distribution},
-el target es descripto 16,43 \% de las veces como ``peque\~na esfera verde'' cuando ``esfera verde'' ya es una ER. Con el uso de los valores de \puse\ aprendidos con el c\'alculo explicado en la secci\'on anterior, el algoritmo~\ref{algo:bisim-l} no pueden simular este comportamiento.\\
+el target es descripto 16,43 \% de las veces como ``peque\~na esfera verde'' cuando ``esfera verde'' ya es una ER. Con el uso de los valores de \puse\ aprendidos con el c\'alculo explicado en la secci\'on anterior, el algoritmo original no pueden simular este comportamiento.\\
 
 Debido a que la idea fundamental del algoritmo es la sem\'antica, la manipulaci\'on sobreespecificaci\'on en
 una forma natural es dif\'{i}cil de obtener. Si dos propiedades tienen la misma interpretaci\'on en un determinado
 modelo, entonces una vez que la primera ha sido considerada, la segunda no refinar\'a las clases
 obtenidas hasta el momento, y por lo tanto, el algoritmo no la incluir\'a en las descripciones generadas.
-Por otro lado, si hacemos caso omiso de la condici\'on de la restricci\'on informatividad (es decir,
-el hecho de que la adici\'on de una relaci\'on de hecho refinar la clase, eliminando algunos de
+Por otro lado, si hacemos caso omiso de la condici\'on de la restricci\'on de informatividad (es decir,
+el hecho de que la adici\'on de una relaci\'on debe refinar la clase, eliminando algunos de
 los elementos que contiene), entonces corremos el riesgo de generar descripciones como ``bola verde verde''.\\
 
-Como soluci\'on de compromiso, consideramos la siguiente variaci\'on del algoritmo~\ref{algo:bisim-l} 
-hacemos caso omiso de la restricci\'on informatividad (es decir, que permite la inclusi\'on de nuevas relaciones
+Como soluci\'on de compromiso, consideramos la siguiente variaci\'on del algoritmo
+original %~\ref{algo:bisim-l} 
+hacemos caso omiso de la restricci\'on de informatividad (es decir, que permite la inclusi\'on de nuevas relaciones
 en la descripci\'on, incluso si no refinan la clase asociada) \emph{pero s\'olo durante el
 primer bucle del algoritmo}. Es decir, durante el primer bucle sobre los elementos de la
-Lista de entrada R, se permitir\'a la inclusi\'on de todas las relaciones que no trivializan la
+lista de probabilidades Rs, se permitir\'a la inclusi\'on de todas las relaciones que no trivializan la
 descripci\'on (es decir, la clase asociada no est\'a vac\'{i}a). Debido a que esto se hace s\'olo durante
 el primer bucle, sabemos que las propiedades repetidas no aparecer\'an en las ER generadas.
 En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son de car\'acter informativo.\\
 
+\subsection{Generando ER para plurales}
 
+Este algoritmo devuelve ER para todos los elementos del contexto, esto implica que podr\'iamos con agrupar propiedades por similitud (agregaci\'on) y conseguir una expressi\'on referencial para un conjunto de elementos del contexto.
 
 %The modified algorithm is shown in Figure~\ref{fig:algo3}.
 
@@ -829,9 +841,9 @@ Antes de realizar el c\'alculo de R.\puse \ en el modelo $\gM$ asociado debemos 
 %in the corpus are natural.
 
 Los pasos 1-5 anteriores son f\'aciles de llevar a cabo (en realidad, la tokenizaci\'on y
-pasos de normalizaci\'on ya se realizaron en el corpus GRE3D7). 
+pasos de normalizaci\'on ya se realizaron en el corpus GRE3D7). \\
 %no se entiende
-Las ER's, cantidad de ocurrencias y porcentaje del corpus para de la Figura~\ref{GRE3D7-stimulus-cap2} se muestran en la tabla~\ref{corpus-distribution}, la signatura resultante y su asociado \puse\ figuran en las tres primeras columnas de la tabla~\ref{probability-of-use}.
+Las ERs, cantidad de ocurrencias y porcentaje del corpus para de la Figura~\ref{GRE3D7-stimulus-cap2} se muestran en la tabla~\ref{corpus-distribution}, la signatura resultante y su asociado \puse\ figuran en las tres primeras columnas de la tabla~\ref{probability-of-use}.\\
 
 
 \begin{table}[h!]
@@ -853,19 +865,20 @@ Expresiones Referenciales & Cantidad de ocurrencias & Porcentage \\
 %peque\~no esfera on top of peque\~no cubo & 1 & 0.71\% \\
 %green esfera on top of cubo & 1 & 0.71\% \\
 
-verde esfera & 91 & 65.00\% \\
-peque\~no verde esfera & 23 & 16.43\% \\
-peque\~no verde esfera arriba de grande azul cubo & 8 & 5.71\% \\
-verde esfera arriba de azul cubo & 5 & 3.57\% \\
-verde esfera arriba de grande azul cubo & 5 & 3.57\% \\
-peque\~no verde esfera arriba de azul cubo & 2 & 1.43\% \\
+esfera verde & 91 & 65.00\% \\
+esfera verde peque\~no  & 23 & 16.43\% \\
+esfera verde peque\~no arriba de cubo azul grande & 8 & 5.71\% \\
+esfera verde arriba de cubo azul & 5 & 3.57\% \\
+esfera verde arriba de grande cubo azul & 5 & 3.57\% \\
+esfera verde peque\~no arriba de cubo azul & 2 & 1.43\% \\
 esfera arriba de cubo & 1 & 0.71\% \\
-peque\~no verde esfera arriba de grande azul cubo a la izquierda & 1 & 0.71\% \\
-peque\~no esfera arriba de grande cubo & 1 & 0.71\% \\
-verde esfera arriba & 1 & 0.71\% \\
-peque\~no esfera arriba de peque\~no cubo & 1 & 0.71\% \\
-verde esfera arriba de cubo & 1 & 0.71\% \\
+esfera verde peque\~no arriba de cubo azul grande a la izquierda & 1 & 0.71\% \\
+peque\~no esfera arriba de cubo grande & 1 & 0.71\% \\
+esfera verde arriba & 1 & 0.71\% \\
+%peque\~no esfera arriba de cubo peque\~no & 1 & 0.71\% \\
+esfera verde arriba de cubo & 1 & 0.71\% \\
 
+ARREGLAR ESTO HABIA UNO MAL... ver original...
 
 \hline
 \end{tabular}
@@ -879,7 +892,9 @@ interpretados como la probabilidad de utilizar R para describir el target en
 modelo de $\gM $, y podr\'{i}amos argumentar que se correlacionan con la
  prominencia de R en el modelo. Por esa raz\'on, por ejemplo, el
 valor de \emph{esfera}.\puse\ es 1, mientras que el valor de
-\emph{cubo}.\puse\ es 0.178. Estas probabilidades no ser\'an \'utiles
+\emph{cubo}.\puse\ es 0.178. \\
+
+Estas probabilidades no ser\'an \'utiles
 para describir los diferentes targets en diferentes escenas. Veremos c\'omo se
 pueden utilizarlas para obtener valores para los nuevos targets y escenas utilizando un
 enfoque de aprendizaje autom\'atico en la siguiente secci\'on. No es de extra\~nar,
@@ -904,7 +919,7 @@ en el corpus son naturales.
 
 Si no hay corpus de expresiones referenciales que describen el target, se puede estimar la \puse~a partir de corpus de
 diferentes escenas en el mismo dominio.
-Usamos caracter\'isticas simples para obtener una funci\'on que nos dar\'a la probabilidad de cada palabra en el nuevo modelo, todas las caracter\'isticas que se pueden extraer de forma autom\'atica desde el modelo relacional y se enumeran en la Tabla~\ref{features}.
+Usamos caracter\'isticas simples para obtener una funci\'on que nos dar\'a la probabilidad de cada palabra en el nuevo modelo, todas las caracter\'isticas se pueden extraer de forma autom\'atica desde el modelo relacional y se enumeran en la Tabla~\ref{features}.
 
 \begin{small}
 \begin{table}[h]
@@ -919,7 +934,7 @@ location-has & cuando la RE puede usar la ubicaci\'on del target en la figura (e
 discrimination & calculada como 1 sobre el n\'umero de objetos en el modelo que tienen la propiedad.  \\
 \hline
 \end{tabular}
-\caption{Caracter\'isticas usadas para aprendizaje autom\'atico de las \puse~para cada palabra en la signatura de las escenas de \textit{(GRE3D7 y TUNA-corpus)} \label{features}}
+\caption{Caracter\'isticas usadas para aprendizaje autom\'atico de las \puse~para cada palabra en la signatura de los modelos de \textit{GRE3D7 y TUNA-corpus} \label{features}}
 \end{center}
 \end{table}
 \end{small}
@@ -1025,7 +1040,7 @@ de la escena que queremos describir.\\
 
 Con regresi\'on lineal podemos aprender caracter\'{i}sticas interesantes
  del dominio. Para empezar, se aprenden hechos conocidos
-de tal manera que la prominencia de un color depende en gran medida de si el
+como que color aparezca en la ER depende en gran medida de si el
 target es de ese color, y que no depende de su
 poder de discriminaci\'on en el modelo. Por otra parte, vimos que la relaci\'on arriba-de
  se utiliza con m\'as frecuencia que las relaciones horizontales
