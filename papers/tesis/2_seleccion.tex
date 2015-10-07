@@ -341,12 +341,12 @@ $\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los
 	{
     $\ L \leftarrow L \cup \{A_{i},V\} $  \tcp*[f]{\footnotesize Agrega la propiedad $A_{i}$ a L }\\
     $\ C \leftarrow C - RulesOut(\[A_{i}\],V) $ \tcp*[f]{\footnotesize Actualiza C sacando los objetos que no tienen V en $A_{i}$} 
-    }
-    \If(\tcp*[f]{\footnotesize Si no quedan distractores}){\em $C = \emptyset$}
-	  {
-     Return L 
-    }
   }
+  \If(\tcp*[f]{\footnotesize Si no quedan distractores}){\em $C = \emptyset$}
+	{
+     Return L 
+  }
+}
 Return Fallo
 \end{algorithm}
 \end{center}
@@ -1266,6 +1266,74 @@ En el trabajo \ref{ivandre-work-corpus} presentan 2 alternativas para aprender l
 
 \subsection{M\'etricas de evaluaci\'on/comparaci\'on con corpus}
 
+Jordan y Walker usaron 25 veces la validaci\'on cruzada en 393 expresiones referenciales
+de 13 de la Coco di\'alogos para probar diferentes combinaciones de caracter\'isticas. Ellos
+medido la precisi\'on absoluta, siendo \'esta la proporci\'on de expresiones referenciales
+generadas que son id\'enticas a las descripciones de referencia humanos producidos a partir de
+el corpus. En el aislamiento, la intencional uencias factores desempe\~naron mejor (42,4\%
+exactitud) que los otros dos conjuntos de caracter\'isticas (conjuntos de contraste: 30,4\% y conceptual
+pactos: 28,9\%) y la combinaci\'on de los tres tipos de caracter\'isticas hicieron signicativa no inexactitud aumento (43,2\%). Sin embargo, lo que tuvo el mayor impacto fue cuarto,
+independiente de la teor\'ia, el tipo de caracter\'isticas que registran informaci\'on al juicio espec\'ifico c, tales
+como el juicio
+Identificaci\'on
+, El participante-diada, el hablante actual y el atributo exacta
+valores de la referente de destino. En el aislamiento, esta colecci\'on de caracter\'isticas logra el 54,5\%
+exactitud, y combin\'andolos con todos los otros tres tipos de caracter\'isticas s\'olo aumentaron
+esta actuaci\'on al 59,9\%. Estos resultados apoyan leve a Jordan intencional
+en
+influencias modelo sobre los otros dos modelos, pero m\'as fuertemente sugieren que ninguno
+de los modelos de capturar la variaci\'on en los datos muy bien
+incursi\'on en el uso de la m\'aquina de aprendizaje para
+reg
+fue hecha por Stoia et al.
+(2006). Ellos apuntan a la construcci\'on de un sistema de di\'alogo para un agente situado dando
+instrucciones en un mundo virtual en 3D. Sin embargo, este enfoque no se centr\'o por lo
+tanto en la selecci\'on de contenidos como en determinar la mejor forma de referencia a utilizar.
+Utilizaron un aprendiz m\'aquina para entrenar a los \'arboles de decisi\'on que decidieron que determinador
+utilizar, qu\'e tipo de cabeza para incluir en el sintagma nominal (por ejemplo, un pronombre o una
+nombre com\'un) y si desea o no utilizar una frase modi sustantivo. La sem\'antica
+contenido del modificador no estaba en cuesti\'on. Las funciones disponibles para la decisi\'on
+alumnos de los \'arboles eran una mezcla de la historia del di\'alogo, contexto visual y tipo sem\'antico
+informaci\'on sobre el referente objetivo. Entrenaron \'arboles de decisi\'on separados para de-
+terminer, sustantivo principal y la elecci\'on modificador y les aplicaron secuencialmente, con cada \'arbol que tenga acceso a la salida del \'arbol anterior. Para el entrenamiento y autom\'atico
+%evaluaci\'on que utilizan un conjunto de 1242 expresiones referenciales de una colecci\'on de di\'alogo
+%Logues entre dos compan\~eros de conversaci\'on que llevaban a cabo la instrucci\'on
+%tarea en el mismo mundo virtual como el sistema se emplea en adelante. Esta
+%evaluaci\'on autom\'atica encontr\'o que los \'arboles de decisi\'on fueron capaces de igualar la humana datos en el 31\% de todos los casos. Como no estaban interesados ​​tanto en la semejanza humana
+%de su sistema, pero sobre todo en su cacia e, tambi\'en realizaron un intr\'inseca
+%Evaluaci\'on humana en la que se pidi\'o a los participantes para comparar la salida del sistema
+%a las expresiones que se refieren humanos producidos en una l\'inea de base y al azar. El humano
+%evaluadores juzgados 62,6\% de las expresiones que se refieren generados por el sistema para
+
+
+Un n\'umero de los sistemas presentados a la reg desaf\'ios de evaluaci\'on basados
+en el at\'un
+Corpus se basaron en los an\'alisis emp\'iricos del conjunto de entrenamiento. La mayor\'ia
+de estos sistemas se basaban en la
+ia y se utiliza un simple recuento de frecuencia de la
+propiedades en el conjunto de entrenamiento para informar el orden en que Propie- del referente de destino
+propie- deben ser juzgados (Kelleher, 2007; Spanger et al, 2007;. Fabbrizio et al., 2008;
+Kelleher y Namee, 2008; de Lucena y Paraboni, 2008; Gerv como et al, 2008?.;
+de Lucena y Paraboni, 2009). Un equipo, que yo era parte de, que se utiliza en frecuencia
+funciones basadas en costos en el algoritmo gr\'afico-Based (Theune et al, 2007; Krahmer.
+et al., 2008; Brugman et al., 2009). Bohnet (2007, 2008, 2009) nearest- combinado
+vecino de aprendizaje con un enfoque brevedad completa, con el fin de elegir el m\'as corto
+refiri\'endose expresi\'on que mejor se ajuste a los datos de entrenamiento para un determinado objetivo; y
+utiliza un \'arbol de decisi\'on aprendido de los datos de entrenamiento para determinar din\'amicamente el
+orden de preferencia para la
+ia
+. En 2008 y 2009, Bohnet adapta su brevedad completo al-
+goritmo para que coincida con los participantes individuales, pero encontr\'o que la informaci\'on del participante
+no se proporcion\'o de forma fiable en los datos de prueba. Fabbrizio et al. (2008) present\'o la
+\'unico otro enfoque que intent\'o capturar las preferencias de c-altavoz espec\'ifico en
+la brevedad completo y el algoritmo incrementales. Su enfoque completo brevedad recogi\'o
+las descripciones m\'as cortas que estaba bien con m\'as frecuencia o m\'as recientemente utilizado por el
+mismo orador, y su versi\'on de la
+ia
+basada en frecuencia usada altavoz espec\'i c
+\'ordenes de preferencias. King (2008) y Herv\'e? Como y Gerv? As (2009) utilizaron evolutiva
+programaci\'on para la tarea de selecci\'on de contenido, pero ambos se encontraron con muy limitado
+el \'exito.
 
 Investigaci\'on REG Pre-2000 dio poca o ninguna atenci\'on a la evaluaci\'on emp\'irica de algoritmos. M\'as recientemente, sin embargo, los estudios de evaluaci\'on REG han comenzado a realizar
 m\'as y m\'as a menudo. Al parecer, la mayor\'ia de ellos se basaban en el supuesto de
@@ -1279,7 +1347,7 @@ conjuntos son dif\'iciles de conseguir. En esta secci\'on, se discuten cu\'ales 
 para que sea adecuado para la evaluaci\'on REG, y estudiar qu\'e colecciones est\'an actualmente
 disponible. Adem\'as, se discute c\'omo uno es para determinar el rendimiento de un REG
 algoritmo en un determinado conjunto de datos. Veremos que aunque mucho se ha trabajado en
-los \'ultimos años, todav\'ia hay cuestiones abiertas importantes, particularmente con respecto a la relaci\'on
+los \'ultimos a\~nos, todav\'ia hay cuestiones abiertas importantes, particularmente con respecto a la relaci\'on
 entre las m\'etricas autom\'aticas y juicios humanos
 
 Para medir la performance de los algoritmos podemos usar m\'etricas autom\'aticas o m\'etricas manuales, las m\'etricas autom\'aticas son aquellas que se calculan mediante un algoritmo y las manuales en las cuales les requerimos a personas que evaluen las expresiones referenciales.
@@ -1342,6 +1410,8 @@ Cobertura: todas las ER que estan en el corpus fueron producidas por el sistema?
 Se trata de poner a jueces a evaluar las ER, esto se puede hacer de distintas maneras, y se pueden evaluar distintas cosas, por ejemplo, que tan natural es la ER, si ayuda o no a identificar al target pretendido. 
 
 Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan cual ER les es m\'as natural, se les mostro el contexto, y se les present\'o 2 ER una dada por el sistema y otra proveniente del corpus dada por un humano.
+
+
 
 
 

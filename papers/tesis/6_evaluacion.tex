@@ -196,7 +196,8 @@ el cubo azul que est\'a abajo de algo que es peque\~no.'' En la \'ultima columna
 %\begin{wrapfigure}{r}{0.52\textwidth}
 \begin{center}
 %\vspace*{-1cm}
-\hspace*{-.3cm}\includegraphics[width=.55\textwidth]{images/entropy.jpg}
+\hspace*{-.3cm}
+\includegraphics[width=.55\textwidth]{images/entropy.jpg}
 \end{center}
 %\vspace*{-.5cm}
 \caption{Entrop\'ia cruzada entre la distribuci\'on del corpus y diferentes ejecuciones del algoritmo}\label{Entropy}
@@ -226,7 +227,7 @@ Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emp
 En esta secci\'on presentamos dos evaluaciones diferentes que realizamos en nuestro algoritmo. Secci\'on~\ref{sec:automaticevaluation} describe una evaluaci\'on con respecto al estado del arte~\cite{KrahmerGRAPH}. GRAPH fue el de mejor desempe\~no en las dos ediciones de la competencia ASGRE~\cite{gatt-balz-kow:2008:ENLG}. Debido a las limitaciones de los indicadores autom\'aticos, en la Secci\'on~\ref{sec:humanevaluation} realizamos una evaluaci\'on humana en la que pedimos a jueces humanos comparar la salida producida por nuestro algoritmo con las expresiones producidas por los seres humanos (las del corpus).
 
 
-\subsection{Evaluaci\'on autom\'atica } \label{sec:automaticevaluation}
+\section{Evaluaci\'on autom\'atica } \label{sec:automaticevaluation}
 
 %In this section we present the comparison of our algorithm to the state of the art algorithm GRAPH introduced above. The GRAPH algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare algorithm to the GRAPH algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
 
@@ -336,7 +337,7 @@ Otro resultado que podemos observar es que la exactitud de dominio personas es m
  
 %\vspace*{-1.0cm}
 
-\subsection{Evaluaci\'on humana} \label{sec:humanevaluation}
+\section{Evaluaci\'on humana} \label{sec:humanevaluation}
 
 %We asked two native speaker judges of English to evaluate our referring expressions via an experiment on the web. The authors of the paper did not participate during the evaluation. The judges could register to the evaluation system so that they did not have to complete it in one go, the could come back to it later. During the evaluation we showed each judge the scenes and two randomly ordered REs. One ER corresponded to the ER present in the corpus and produced by a person and the other ER corresponded to the top 1 ER produced by our system. We asked the judges to select the ER that would be more useful to identify the target in the scene. That is, to select it from among the other objects in the stimulus pictures. 
 
@@ -392,7 +393,7 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera un ER subes
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
-\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{ventilador azul}, y la del sistema \emph{ventilador azul pequeño}. Los jueces prefirieron la generada por el sistema.}
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{ventilador azul}, y la del sistema \emph{ventilador azul peque\~o}. Los jueces prefirieron la generada por el sistema.}
 \label{smallBlueFan}
 \end{minipage}
 \hspace*{.04cm}
