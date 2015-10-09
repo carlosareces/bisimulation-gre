@@ -49,6 +49,8 @@ A continuaci\'on daremos 2 ejemplos de diferentes maneras de modelar el contexto
 
 El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto $e_5$, tiene propiedades grande, rojo, esfera y una flecha con la etiqueta a-la-der-de hacia $e_4$, y $e_4$ tiene propiedades grande, rojo, cubo, y una flecha hacia $e_5$ con etiqueta a-la-izq-de.\\
 
+Notaci\'on: a-la-der-de y a-la-izqu-de son relaciones las cuales significan ``a la derecha de'' y ``a la izquierda de'' respectivamente.\\
+
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}
@@ -105,7 +107,7 @@ El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explic
 \label{grafo-GRE3D7-stimulus}
 \end{figure}
 
-Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de Bisimulaci\'on el cual explicaremos en Secci\'on \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on del Contexto \ref{input-bisimulacion}. En este caso se representan las propiedades como relaciones a un objeto ficticio, terminal {\it c}, creado para modelar propiedades y relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que todos los objetos tienen ``id'' que es el identificador, salvo el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}. Con la etiqueta ``rel'', identificamos las relaciones y con la etiqueta ``to'' con que objeto esta relacionado. El target tiene relaciones con c (grande, rojo, esfera) y con $e_4$ a-la-derecha-de.  
+Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de Bisimulaci\'on el cual explicaremos en Secci\'on \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on del Contexto \ref{input-bisimulacion}. En este caso se representan las propiedades como relaciones a un objeto ficticio, terminal {\it c}, creado para modelar propiedades y relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que todos los objetos tienen ``id'' que es el identificador, salvo el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}. Con la etiqueta ``rel'', identificamos las relaciones y con la etiqueta ``to'' con que objeto esta relacionado. En este ejemplo el target tiene relaciones con c (grande, rojo, esfera) y con $e_4$ a-la-derecha-de.  
 %\'Este tiene las relaciones con c (large, red, ball) y con $e_4$ rightof.  
 \textcolor{blue}{aca tengo problemas en verbatim para escribir la enie de pequeino}
 \label{input-bisimulacion}
@@ -203,9 +205,9 @@ generar ER sobreespecificadas o minimales.  A continuaci\'on se describen cada u
 
 Un algoritmo es {\it determin\'{i}stico} si dado un input (un contexto y un objeto target), da siempre la misma ER de salida. En cambio un algoritmo es {\it no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, por lo tanto los algoritmos no determin\'isticos simulan el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos. Por ejemplo ser\'ia no determin\'istico si para el Contexto \ref{GRE3D7-stimulus-conLetras} una vez da ``La esfera roja'' y en otra ejecuci\'on ``La esfera grande''.\\
 
-Un algoritmo es {\it proposicional}, cuando las ER que genera contienen solo atributos del target, es decir no contiene relaciones con otros atributos ni ER de otros objetos.  Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} una vez da ``La esfera roja''.\\
+Un algoritmo es {\it proposicional}, cuando las ER que genera contienen solo atributos del target, es decir no contiene relaciones con otros atributos ni ER de otros objetos.  Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} ``La esfera roja''.\\
 
-Un algoritmo es {\it relacional} si adem\'as de generar ER proposicionales genera ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar ERs para el o los objetos relacionados. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} la ER ``La esfera roja a la derecha del cubo grande''. En este caso ``el cubo grande'' es una expresi\'on referencial que se tuvo que dar como consecuencia de incluir la relaci\'on ``a la derecha de''.\\
+Un algoritmo es {\it relacional} si adem\'as de generar ER proposicionales genera ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar ERs para el o los objetos relacionados. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} la ER ``La esfera roja a la derecha del cubo grande''. En este caso ``el cubo grande'' es una expresi\'on referencial que se tuvo que dar como consecuencia de incluir la relaci\'on ``a la derecha de''. En estos casos hay que asegurarse que el algoritmo termina, es decir que no entra en loops tratando de identificar objetos.\\
 
 En algunos contextos cuando el target es el \'unico que no tiene una propiedad por ejemplo, ser\'ia \'util un algoritmo que incluya {\it negaciones}. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras}, ``La \'unica esfera que no es peque\~na''.\\
 
@@ -220,7 +222,9 @@ Un algoritmo puede generar ER para {\it plurales}, es decir dar ER para varios t
 %esto lo saque porque confunde aca... me parece que todavia no hay que hablar de esto, es muy de logica
 %Los algoritmos tambi\'en se pueden diferenciar en los conectores que permiten si usan conjunciones, disyunciones o ambas.\\
 
-Un algoritmo que genera ER {\it minimales}, es un algoritmo que da ER que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target.  Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} ``La esfera grande''.\\
+Un algoritmo que genera ER {\it minimales}, es un algoritmo que da ER que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target.  Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} ``La esfera grande''. Notar que incluso puede haber varias ER minimales, como en este caso ``la esfera roja''.\\
+
+Un algoritmo que genera ER {\it minimales}, es un algoritmo que da ER que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target.  Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} ``La esfera grande''. Notar que incluso puede haber varias ER minimales, como en este caso ``la esfera roja''.\\
 
 La {\it sobreespecificaci\'on} es la caracter\'istica de dar m\'as atributos o relaciones de las necesarias para identificar al objeto target. Por ejemplo para el Contexto \ref{GRE3D7-stimulus-conLetras} la ER ``La esfera roja, grande que esta a la derecha del cubo rojo grande'' es una ER sobreespecificada.\\
 
@@ -798,11 +802,11 @@ como la ER con el sustantivo
 ``\textsf{cosa}''. Decimos que una f\'ormula es
 \emph{subsumida} por otras f\'ormulas, cuando su extensi\'on puede ser cubierta por la
 union de las extensiones de las otras f\'ormulas. Por ejemplo, en la
-Figura~\ref{GRE3D7-stimulus-cap2}, $\top$ es subsumida por ``\textsf{ball}'' y
-``\textsf{cube}'', porque $\interp{\top}$ = $\interp{\textsf{ball}}
+Figura~\ref{GRE3D7-stimulus-cap2}, $\top$ es subsumida por ``\textsf{esfera}'' y
+``\textsf{cubo}'', porque $\interp{\top}$ = $\interp{\textsf{esfera}}
 \cup \interp{\textsf{cube}}$.
 %= $\{e_2, e_4, e_6, e_7\}$, it is $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ = $\{e_1, e_3, e_5\} \cup \{e_2, e_4, e_6, e_7\}$. 
-Intuitivamente la f\'ormula ``\textsf{cube}'' o ``\textsf{ball}'' tienen m\'as informaci\'on que $\top$, para cada elemento de $\top$, hay una f\'ormula que d\'a m\'as informaci\'on, digamos ``\textsf{cube}'' es m\'as informativa que ``\textsf{cosa}''.\\
+Intuitivamente la f\'ormula ``\textsf{cubo}'' o ``\textsf{esfera}'' tienen m\'as informaci\'on que $\top$, para cada elemento de $\top$, hay una f\'ormula que d\'a m\'as informaci\'on, digamos ``\textsf{cubo}'' es m\'as informativa que ``\textsf{cosa}''.\\
 
 %In the following we will explain an example of execusion of the
 %algorithm shown in Figure
