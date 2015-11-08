@@ -459,6 +459,7 @@ Por otro lado, si hacemos caso omiso de la condici\'on de la restricci\'on de in
 el hecho de que la adici\'on de una relaci\'on debe refinar la clase, eliminando algunos de
 los elementos que contiene), entonces corremos el riesgo de generar descripciones como ``bola verde verde''.\\
 
+--No me gusta esta parte--
 Como soluci\'on de compromiso, consideramos la siguiente variaci\'on del algoritmo
 original %~\ref{algo:bisim-l} 
 hacemos caso omiso de la restricci\'on de informatividad (es decir, que permite la inclusi\'on de nuevas relaciones
@@ -471,7 +472,14 @@ En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son d
 
 \subsection{Generando ER para plurales}
 
-Este algoritmo devuelve ER para todos los elementos del contexto, esto implica que podr\'iamos con agrupar propiedades por similitud (agregaci\'on) y conseguir una expressi\'on referencial para un conjunto de elementos del contexto.
+Este algoritmo devuelve ER para todos los elementos del contexto, 
+esto implica que podr\'iamos dar expressiones referenciales de un conjunto de elementos.
+
+Por ejemplo queremos identificar a $e_1$ y $e_5$ 
+siendo resultados dados por el algoritmo que $e_1$
+esfera, amarillo, peque\~no
+y $e_5$ esfera, rojo
+
 
 %The modified algorithm is shown in Figure~\ref{fig:algo3}.
 
