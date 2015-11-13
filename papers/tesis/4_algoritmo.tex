@@ -715,7 +715,32 @@ metodolog\'{i}a utilizando el corpus GRE3D7 que introducimos en ~\ref{sec:corpus
 
 
 \subsection{Calculando \puse\ cuando hay disponible un corpus para la escena considerada}
+CALCULANDO P_USE PARA TODO EL CORPUS VERDE-AZUL GRE3D7				
 
+
+\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+
+
+	Palabra &average	error-LR	& error-PM	& formula de LR\\
+	\hline
+
+ball		&0.0465 &	0.0609	     & 0.2894 * disc-gatt +0.7883\\
+blue		 &0.0353	 &0.0454	       &0.848  * target-tiene +0.1073\\
+centre		 &0.0023	 &0.0037	       &0.0047 * target-tiene + 0.0047 * adj-target-tiene +0.0029 * vecino-tiene +-0.009\\
+cube		 &0.0417	 &0.0531	       &0.49   * disc-gatt +-0.0129\\
+green		 &0.0264	 &0.046	       &0.8722 * target-tiene +0.0016\\
+large		 &0.1762	 &0.2378	       &0.5911 * target-tiene +0.0354\\
+left-of 		 &0.0041	 &0.0094	       &0.0131 * target-tiene +0.0253 * adj-target-tiene +-0.0507\\
+left		 &0.0068	 &0.0101	       &0.0346 * adj-target-tiene +-0.0653\\
+on-top		 &0.0706	 &0.1594	       &0.2942 * target-tiene \\
+right-of		 &0.0029	 &0.0049	       &0.0153 * target-tiene +0.001\\
+right		 &0.0079	 &0.0092	      &-0.0118 * disc-gatt +0.0141\\
+small		 &0.1499	 &0.1755	 &0.3918 * target-tiene + 0.2478 * vecino-tiene + -0.0913\\
+front     & & & \\
+\end{table}
 %Suppose we want to automatically generate REs for target $t$ in a
 %given scene, and that we do have available a corpus $C$ of REs for $t$
 %in that scene (this is exactly the kind of information we find in the
