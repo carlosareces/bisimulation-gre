@@ -399,46 +399,13 @@ con esto nos aseguramos que en MaxIterations todas lleguen a 1, y en consecuenci
 
 Nuestro algoritmo permite generar relaciones con otros objetos e incliur las ER de los dem\'as objetos, no tiene preferencia por las relaciones ni por las propiedades proposicionales, en el sentido de que va o no incluirlas de acuerdo a la probabilidad de uso que ellas tengas, las cuales fueron calculadas o sacadas de un corpus.
 
-\subsection{Generando ER no-determ\'inisticamente}
+\subsection{Generando ER no-determin\'isticamente}
 
 Al iniciar el algoritmo (en l\'inea 3) calcula para cada R, R.rnduse que es un n\'umero aleatorio entre 0 y 1, ese n\'umero va a hacer que el algoritmo sea no-determin\'istico, ya que en la l\'inea 9, el algoritmo usar\'a R para refinar las clases solamente si 
 R.rnduse >= R.puse. Por lo tanto y considerando que en las siguientes ejecuciones R.rnduse ser\'an distintos, va a poder generar distintas ER.
 
 \subsection{Generando descripciones sobreespecificadas}\label{sec:overspecification}
 
-%As it stand, Algorithm~\ref{algo:bisim-l} allows very little overspecification in the REs it
-%generates.  A relation with a low \puse\ might be enough 
-%(by itself or in combination with some of the relations already considered) to 
-%identify the target. Once this relation is added, we obtain an RE, but a shorter, 
-%more specific RE might be possible, by eliminating some of the previous refinements. 
-%Hence, the resulting RE might be overspecified. This is the same kind of overspecification 
-%that the original incremental algorithm allows.  But it has been argued~\cite{Engelhardt_Bailey_Ferreira_2006,Arts_Maes_Noordman_Jansen_2011} that 
-%a much higher degree of overspecification is usually found in corpora, and this 
-%is indeed what can be seen in the GRE3D7 corpus.  As we can see in Table~\ref{corpus-distribution}, 
-%the target is described 16.43\% of the times as a ``peque\~no green esfera'' when ``green 
-%esfera'' is already an RE.  Using the \puse\ values learnt from the calculus explained
-%in the previous section, Algorithm~\ref{algo:bisim-l} cannot simulate this behavior. 
-
-%Because the fundamental idea of the algorithm is semantics, handling overspecification in 
-%a natural way is difficult. If two properties have the same interpretation in a given 
-%model, then once the first has been considered the second will not refine the classes 
-%obtained so far, and hence the algorithm won't include it in the generated descriptions. 
-%On the other hand, if we disregard the condition the informativeness constrain (i.e., 
-%the fact that the addition of a relation indeed refine the class, eliminating some of 
-%the elements it contains), then we run the risk of generating descriptions like ``the green 
-%green esfera.''
-
-%As a compromise, we consider the following variation of Algorithm~\ref{algo:bisim-l} were 
-%we disregard the informativeness constrain (i.e., we allow the inclusion of new relations 
-%in the description, even if they do not refine the associated class) \emph{but only during the 
-%first loop of the algorithm}.  That is, during the first loop over the elements in the 
-%input list Rs, we will allow the inclusion of all relations that do not trivialize the 
-%description (i.e., the associated class is not empty).  Because this is done only during 
-%the first loop, we know that repeated properties will not appear in the generated REs.  
-%In the remaining loops, additional properties will be added only if they are informative. 
-
-%if FirstLoop? then // primera iteración?
-%2 Informativa   TRUE
 
 El algoritmo original~\ref{algo:bisim-l}
  permit\'ia muy poca sobreespecificaci\'on en las ER que
@@ -449,7 +416,7 @@ Por lo tanto, la ER resultante podr\'{i}a ser sobreespecificada. Este es el mism
 que permite el algoritmo incremental. Pero se ha argumentado~\cite{Engelhardt_Bailey_Ferreira_2006, Arts_Maes_Noordman_Jansen_2011} que
 un grado mucho mayor de sobreespecificaci\'on se encuentra generalmente en corpora, y esto
 es de hecho lo que se ve en el corpus GRE3D7. Como podemos ver en la tabla~\ref{corpus-distribution},
-el target es descripto 16,43 \% de las veces como ``peque\~na esfera verde'' cuando ``esfera verde'' ya es una ER. Con el uso de los valores de \puse\ aprendidos con el c\'alculo explicado en la secci\'on anterior, el algoritmo original no pueden simular este comportamiento.\\
+el target es descripto 16,43 \% de las veces como ``peque\~na green ball'' cuando ``green ball'' ya es una ER. Con el uso de los valores de \puse\ aprendidos con el c\'alculo explicado en la secci\'on anterior, el algoritmo original no pueden simular este comportamiento.\\
 
 Debido a que la idea fundamental del algoritmo es la sem\'antica, la manipulaci\'on sobreespecificaci\'on en
 una forma natural es dif\'{i}cil de obtener. Si dos propiedades tienen la misma interpretaci\'on en un determinado
@@ -481,235 +448,12 @@ esfera, amarillo, peque\~no
 y $e_5$ esfera, rojo
 
 
-%The modified algorithm is shown in Figure~\ref{fig:algo3}.
-
-%%\newcommand{\nBlue}{\mathit{blue}\xspace}
-%%\newcommand{\nGreen}{\mathit{green}\xspace}
-%%\newcommand{\npeque\~no}{\mathit{peque\~no}\xspace}
-%%\newcommand{\nBig}{\mathit{big}\xspace}
-%%\newcommand{\nesfera}{\mathit{esfera}\xspace}
-%%\newcommand{\ncubo}{\mathit{cubo}\xspace}
-%%\newcommand{\nOntop}{\mathit{ontop}\xspace}
-%%\newcommand{\nTop}{\mathit{top}\xspace}
-%%\newcommand{\nBelow}{\mathit{below}\xspace}
-%%\newcommand{\nRightof}{\mathit{rightof}\xspace}
-%%\newcommand{\nLeftof}{\mathit{leftof}\xspace}
-%%\newcommand{\nLeft}{\mathit{left}\xspace}
-
-%\begin{figure}[ht]
-%\begin{minipage}[b]{0.42\linewidth}
-%\centering
-%\includegraphics[width=\textwidth]{images/3.jpg}
-%\vspace*{-.25cm}
-%\vspace*{-.4cm}\caption{Input scene}
-%\label{GRE3D7-stimulus}
-%\end{minipage}
-%\hspace*{-0.2cm}
-%\begin{minipage}[b]{0.6\linewidth}
-%\centering
-%\begin{tikzpicture}
-%  [
-%    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
-%    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
-%  ]
-% \node[n,label=above:$e_1$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nLeft\\[-2pt]
-%      \npeque\~no\\[-2pt] 
-%      \nBlue \ \  
-%      \nesfera\end{array}$}] (a) {};
-
-% \node[n,label=above:$e_2$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nLeft\\[-2pt]
-%      \nBig\\[-2pt] 
-%      \nBlue \ \  
-%      \ncubo\end{array}$}, right of=a] (b) {};
-
-% \node[n,label=below:$e_3$,label=above:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nTop \ \       \nLeft \ \ 
-%      \npeque\~no \ \       \nGreen \ \ 
-%      \nesfera\end{array}$}, above of=b] (c) {};
-
-% \node[n,label=above:$e_4$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \npeque\~no\\[-2pt] 
-%      \nGreen\\[-2pt] 
-%      \ncubo\end{array}$}, right of=b] (d) {};
-
-% \node[n,label=above:$e_5$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nBig\\[-2pt] 
-%      \nBlue\\[-2pt] 
-%      \nesfera\end{array}$}, right of=d] (e) {};
-
-% \node[n,label=above:$e_6$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nBig\\[-2pt] 
-%      \nGreen\\[-2pt] 
-%      \ncubo\end{array}$}, right of=e] (f) {};
-
-% \node[n,label=below:$e_7$,label=above:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nTop \ \ 
-%      \npeque\~no\ \ 
-%      \nBlue \ \  
-%      \ncubo\end{array}$}, above of=f] (g) {};
-
-% \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
-% \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
-
-% \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
-% \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
-
-% \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
-% \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
-
-% \draw[dotted] (-.65,-1.2) rectangle (7.1,2.1);
-
-% \end{tikzpicture}
-%\vspace*{-.4cm}\caption{Scene as a relational model}
-%\label{GRE3D7-stimulus-graph}
-%\end{minipage}
-%\end{figure}
-
-%On termination, the algorithm computes what are called the $\mathcal{L}$-similarity classes of the input model $\gM$. Intuitively, if two elements in the model belong to the same $\mathcal{L}$-similarity class, then $\mathcal{L}$ is not expressive enough to tell them appart (i.e, no formula in $\mathcal{L}$ can distinguish them). 
-
-%The algorithm we discuss uses formulas of the $\el$ description logic language~\cite{baad:desc03} to describe refinement classes\footnote{Notice, though, that the particular formal language used is independent of the main algorithm, and different add$_{\mathcal{L}}$(R,$\varphi$,\RE) functions can be used depending on the language involved.}. 
-%For a detailed description of $\el$, we refer to~\cite{baad:desc03}.  
-%The interpretation of the $\el$ formula $\psi \sqcap \exists$R.$\varphi$ is the set of all elements that satisfy $\psi$ and that are related by relation R to some element that satisfy $\varphi$. 
-%For example, the interpretation of the formula \emph{esfera} $\sqcap \exists$\emph{leftof}.\emph{cubo} is the set of all esferas that are on the left of some cubo.  
-
-
-%aca faltaba algoluego de logicas
-
-
-
-%%We are now ready to describe Algorithms~\ref{algo:bisim-l} and~\ref{algo:bisim-add-el-over}. 
-
-%\begin{figure}[!t]
-%\peque\~no
-%\centering
-%\begin{algorithm}[H]
-%\dontprintsemicolon
-%\caption{Computing $\mathcal{L}$-similarity classes}\label{algo:bisim-l}
-%\KwIn{\footnotesize A model $\gM$ and a list Rs $\in (\REL \times [0,1])^*$
-% of relation symbols with their \puse\ values, ordered by \puse}
-%\KwOut{\footnotesize A set of formulas \RE such that
-%$\{\interp{\varphi} \mid \varphi \in \RE\}$ is the set of
-%$\mathcal{L}$-similarity classes of $\gM$}
-
-%$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize the most general description $\top$ applies to all elements in the scene}
-
-%\For{\em (R,R.\puse) $\in$ Rs}{
-%	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse is the probability of using R} \;
-%        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ are incremented by R.\incuse in each loop}
-%}
-
-%\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ are incremented until they reach 1}}{
-%  \While(\tcp*[f]{\footnotesize while some class has at least two elements}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
-%      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize make a copy for future comparison} \;
-%      \For{\em (R, R.\puse) $\in$ Rs}{
-%          \If(\tcp*[f]{\footnotesize R will be used in the expression}){\em R.\randomuse $\le$ R.\puse}{
-%              \lFor{\em $\varphi \in$ \RE}{
-%                  add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine all classes using R}}
-%                  }\;
-%              \If(\tcp*[f]{\footnotesize the classification has changed}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize exit for-loop to try again highest R.\puse}}
-%              }
-%     \If(\tcp*[f]{\footnotesize the classification has stabilized}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize exit while-loop to increase R.\puse}}
-%  }
-%  \lFor{\em (R,R.\puse) $\in$ Rs}{
-%    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize increase R.\puse}
-%  }
-%}
-%\end{algorithm}
-
-%\begin{algorithm}[H]
-%\dontprintsemicolon
-%\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el-over}
-
-
-%\begin{figure}[t]
-%\peque\~no
-%\centering
-%\begin{algorithm}[H]
-%\dontprintsemicolon
-%\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el-over}
-
-%\If(\tcp*[f]{\footnotesize are we in the first loop?}){\em FirstLoop?}{
-%    Informative $\leftarrow$ TRUE \tcp*[f]{\footnotesize allow overspecification}}
-%\lElse(\tcp*[f]{\footnotesize informative:peque\~noer than the original?}) {Informative $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
-%\For{\em $\psi \in$ \RE with $\#\interp{\psi} > 1$}{
-%  \If{\em $\psi \sqcap \exists$R.$\varphi$ is not subsumed in \RE\ {\bf and} \tcp*[f]{\footnotesize non-redundant:can't be obtained from \RE?}\\
-%    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize non-trivial:has elements?}\\
-%     \ \ \  \emph{Informative}}{
-%    add $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize add the new class to the classification} \;
-%    remove subsumed formulas from $\RE$ \tcp*[f]{\footnotesize remove redundant classes}
-%  }
-%}
-%\end{algorithm}
-%\vspace*{-.5cm}\caption{Refinement algorithm with probabilities and overspecification for the \el-language}\label{fig:algo3}
-
-%\end{figure}
-
-%Algorithm~\ref{algo:bisim-l} takes as input a model and a list Rs of pairs (R,R.\puse) that links each relation R $\in \REL$, the set of all relation symbols in the model,  to some probability of use R.\puse. 
-%I.e., if $\REL$ is the set of all relation symbols in the model then Rs $\in (\REL \times [0,1])^*$. We assume Rs to be ordered by R.\puse. 
-
-%The set $\RE$ will contain the formal description of the refinement classes and it is initialized by the most general description $\top$.  
-%For each R, we first compute R.\randomuse, a random number in [0,1].  If R.\randomuse $\le$ R.\puse\ then we will use R to refine the set of classes.  The value of R.\puse\ will be incremented by R.$\incuse$ in each main loop, to ensure that all relations are, at some point, considered by the algorithm.  This ensures that a referring expression will be found if it exists; but gives higher probability to expressions using relations with a high R.\puse. 
-
-%While $\RE$ contains descriptions that can be refined (i.e., classes with at least two elements) we will call the refinement function add$_\mathcal{L}$(R,$\varphi$,$\RE$) successively with each relation in Rs. A change in one of the classes, can trigger changes in others. For that reason, if $\RE$ changes, we exit the \textbf{for} loop to start again with the relations of higher R.\puse. If after trying to refine the set with all relations in Rs, the set $\RE$ has not changed, then we have reached a stable state (i.e., the classes described in $\RE$ cannot be further refined with the current R.\puse\ values). We will then increment all the R.\puse\ values and start the procedure again. 
-
-%Algorithm~\ref{fig:algo1} almost coincides with the one in~\cite{arec2:2008:Areces}.  The \textbf{for} loop will refine each descriptions in $\RE$ using the relation R and the other descriptions already in $\RE$, under certain conditions. The new description should be \emph{non-redundant} (it cannot be obtained from classes already in $\RE$), \emph{non-trivial} (it is not empty), and \emph{informative} (it does not coincide with the original class).  If these conditions are met, the new description is added to $\RE$, and redundant descriptions created by the new description are eliminated. The \textbf{if} statement at the beginning of Algorithm in Figure~\ref{fig:algo2} disregards the informativity test during the first loop of the algorithm allowing overspecification.    
-
-%Suppose fixed an input model $\gM$ and values for Rs, and fix also some target element $t$.  Assume also that $t$ indeed has an $\el$-referring expression.  Upon termination, Algorithm~\ref{fig:algo1} will compute an $\el$ formula $\varphi$ such that $\interp{\varphi} = \{t\}$, but $\varphi$ might be different in each run of the algorithm (even though $\gM$ and Rs are fixed).  If we repeat this experiment a statistically significant number of times, we can define an estimate of the probability distribution of the REs generated by the algorithm for $t$, given $\gM$ and Rs. In Section~\ref{sec:evaluation} we will show that given a corpus of REs for $\gM$, it is possible to define R.\puse\ values so that this probability distribution matches with good accuracy the probability distribution of REs found in the corpus.  
-
-
-%Algoritmo~\ref{algo:bisim-l} toma como entrada un modelo y una lista de pares (R, R \puse) Que une cada relaci\'on R$\in \REL $, el conjunto de todos los s\'{i}mbolos de relaci\'on en el modelo, en cierta probabilidad de uso R.\puse.
-%Es decir, si $\REL$ es el conjunto de todos los s\'{i}mbolos de relaci\'on en el modelo a continuaci\'on, R$\in (\REL \ \times [0,1]) ^ * $. Suponemos Rs estan ordenados de mayor a menor por R.\puse.
-
-%El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento y es inicializado por la clase m\'as general $\top$. 
-%Descripci\'on$\mayor de $.
-%Para cada R, primero calculamos R.\randomuse, un n\'umero aleatorio en [0,1]. Si R.\randomuse$\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de clases. El valor de R.\puse \ se incrementar\'a en R.$\incuse$ en cada bucle principal, para asegurar que todas las relaciones son, en alg\'un momento, consideradas por el algoritmo. Esto asegura que una expresi\'on referencial se encontrar\'a si existe; pero da mayor probabilidad a las expresiones que utilizan las relaciones con un alto R.\puse.
-%
-%Mientras que $\RE$ contiene descripciones que pueden ser refinadas (es decir, las clases con al menos dos elementos) vamos a llamar a la funci\'on refinamiento add$_\mathcal {L}$(R,$\varphi $,$\RE$) sucesivamente con cada relaci\'on en Rs. Un cambio en una de las clases, puede desencadenar cambios en las dem\'as. Por esa raz\'on, si $\RE$ cambia, salimos del \textbf {for} bucle para empezar de nuevo con las relaciones de m\'as alto R.\puse. Si despu\'es de tratar de refinar el conjunto con todas las relaciones en R, el conjunto $\RE$ no ha cambiado, entonces hemos llegado a un estado estable (es decir, las clases descriptas en $\RE$ no pueden ser refinadas con los valores actuales de R.\puse). A continuaci\'on, se incrementar\'a todos los valores de R.\puse y se iniciar\'a el procedimiento de nuevo.
-%
-%Algoritmo~\ref{fig:algo1} casi coincide con el de~\cite{arec2:2008:Areces}. El \ textbf {for} bucle refinar\'a cada descripciones en $\RE$ utilizando la relaci\'on R y las otras descripciones que ya est\'an en $\RE $, bajo ciertas condiciones. La nueva descripci\'on debe ser \emph{no redundante} (que no se puede obtener a partir de clases que ya est\'an en $\RE$ ), \emph{no trivial} (no ser vac\'{i}a), y \emph{informativa} (no debe coincidir con la clase original). Si se cumplen estas condiciones, la nueva descripci\'on se a\~nade a $\RE $, y las descripciones redundantes creadas por la nueva descripci\'on se eliminan. La declaraci\'on \textbf{if} al principio del algoritmo en la Figura~\ref{fig:algo2} no tiene en cuenta la prueba de informatividad durante el primer bucle del algoritmo que permite sobreespecificaci\'on.
-%
-%Supongamos que fija un modelo de entrada de $\gM$ y los valores de R, y alg\'un elemento target $t$. Supongamos tambi\'en que $t$ efectivamente tiene una expresi\'on referencial en $\el$. Cuando termina, el Algoritmo~\ref{fig:algo1} d\'a $\el$ f\'ormulas $\varphi$ tal que $\interp{\varphi} = \{t\}$, pero $\varphi$ podr\'{i}a ser diferente en cada ejecuci\'on del algoritmo (a pesar de que $\gM$ y Rs son fijos). Si repetimos este experimento un n\'umero estad\'{i}sticamente significativo de veces, podemos definir una estimaci\'on de la distribuci\'on de probabilidad de las ER generadas por el algoritmo de $t $, dado $\gM$ y Rs. En la Secci\'on~\ref{sec:evaluacion} vamos a demostrar que dado un corpus para $\gM$, es posible definir R.\puse valores para que esta distribuci\'on de probabilidad coincida con buena precisi\'on la distribuci\'on de probabilidad encontrada en el corpus.
-
-
-
-
-
-
-
-
-
-
-
 En la siguiente secci\'on explicaremos como calcular R.\puse\ cuando tenemos corpus disponible, y cuando no lo tenemos.
 
 \section{Obteniendo probabilidades de uso}
 
 %\subsection{Aprendizaje autom\'atico desde un corpus para describir nuevos objetos}
 \label{sec:learning}
-
-%In the previous section we presented an algorithm that assumes that
-%each relation R used in a referring expressions has a known
-%probability of use R.\puse. In this section, we describe how to
-%calculate these probabilities from corpora.  The general set up is the
-%following:we assume available a corpus of REs associated to different
-%scenes that are typical of the domain in which the GRE algorithm will
-%have to operate.  We show first how to calculate R.\puse\ values for
-%those scenes for which a corpus of REs is available.  We then show how
-%to generalize these values to other scenes in the domain, using a
-%machine learning algorithm. \textit{First we} will exemplify the
-%methodology using the GRE3D7 corpus which we introduce in the Section
-%~\ref{sec:learningGRE} and then we will show how to do the same with
-%the TUNA-corpus that we describe in Section~\ref{sec:learningTUNA}.
-
 
 En la secci\'on anterior hemos presentado un algoritmo que supone que para
 cada relaci\'on R se tiene una conocida
@@ -723,60 +467,27 @@ metodolog\'{i}a utilizando el corpus GRE3D7 que introducimos en ~\ref{sec:corpus
 
 
 \subsection{Calculando \puse\ cuando hay disponible un corpus para la escena considerada}
-CALCULANDO P\_USE PARA TODO EL CORPUS VERDE-AZUL GRE3D7				
 
+Las siguientes son las escenas del GRE3D7, las hemos agrupado seg\'un los colores que tienen.
 
-\begin{table}[h!]
-\begin{center}
-\begin{tabular}{|l|c|c|c|}
-\hline
-Palabra &average	error-LR	& error-PM	& f\'ormula de LR\\
-\hline
-ball		 &0.0465   &0.0609	  & 0.2894 * disc-gatt +0.7883\\
-blue		 &0.0353	 &0.0454	  &0.848  * target-tiene +0.1073\\
-center	 &0.0023	 &0.0037	  &0.0047 * target-tiene + \\
-				 &				 &					&0.0047 * adj-target-tiene +0.0029 * vecino-tiene -0.009\\
-cube		 &0.0417	 &0.0531	  &0.49   * disc-gatt -0.0129\\
-green		 &0.0264	 &0.046	    &0.8722 * target-tiene +0.0016\\
-large		 &0.1762	 &0.2378	  &0.5911 * target-tiene +0.0354\\
-left-of  &0.0041	 &0.0094	  &0.0131 * target-tiene +\\
-				 &				 &					&0.0253 * adj-target-tiene -0.0507\\
-left		 &0.0068	 &0.0101	  &0.0346 * adj-target-tiene -0.0653\\
-on-top	 &0.0706	 &0.1594	  &0.2942 * target-tiene \\
-right-of &0.0029	 &0.0049	  &0.0153 * target-tiene +0.001\\
-right		 &0.0079	 &0.0092	  &-0.0118 * disc-gatt +0.0141\\
-small		 &0.1499	 &0.1755	  &0.3918 * target-tiene + \\
-				 &				 &					&0.2478 * vecino-tiene -0.0913\\
-front    & 				 & 					& \\
-\hline
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{images/rojo-amarillo.png}
+\caption{Im\'agenes del GRE3D7 (rojo y amarillo)}
+\label{rojo-amarillo}
+\end{figure}
 
-\end{tabular}
-\end{center}
-\end{table}
-%Suppose we want to automatically generate REs for target $t$ in a
-%given scene, and that we do have available a corpus $C$ of REs for $t$
-%in that scene (this is exactly the kind of information we find in the
-%GRE3D7 corpus \textit{and in the TUNA-corpus}).  We use the REs in $C$
-%to define the relational model used by the algorithm.  Then we
-%estimate the value of \puse\ for each of the relations in the model as
-%the percentage of REs in which the relation appears.  I.e.,
-%\begin{equation}\label{eq1}
-%R.\puse = \frac{\# \mbox{ of REs in $C$ in which R appears}}{\# \mbox{ of REs in $C$}}.
-%\end{equation}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{images/imagenesML.png}
+\caption{Im\'agenes del GRE3D7 (azul y verde)}
+\label{verde-azul}
+\end{figure}
 
-%In the case of the TUNA corpus the calculation is not neccesary
-%because we have only one RE for each scene.
+La regresi\'on lineal es un m\'etodo matem\'atico que modela la relaci\'on que hay entre una variable dependiente Y, las variables independientes Xi y un t\'ermino aleatorio E.  
 
-%This estimation is overly simplified and, for example, it does not
-%differentiate between the properties of a target and the properties of
-%a landmark object used in a relational RE to complete the description
-%of the target.  But it is extremely easy to compute, and we will see
-%in Section~\ref{sec:evaluation} that it already produces natural REs
-%that match those found in the corpus.
+Vamos a tomar la parte \ref{verde-azul} para aprender las probabilidades de uso de cada palabra, y as\'i darnos una idea de como es la distribuci\'on del uso de las palabras consideradas del corpus.
 
-%To clarify the computation of R.\puse\ and the model $\gM$ associated
-%to each scene we list the required steps in detail, and discuss how we
-%carried them out in the GRE3D7 corpus:
 
 Supongamos que queremos generar autom\'aticamente ER para el target $t$ en una
 determinada escena, y que tenemos disponible un corpus $C$ de ER de $t$
@@ -854,28 +565,65 @@ Antes de realizar el c\'alculo de R.\puse \ en el modelo $\gM$ asociado debemos 
 
 \end{enumerate}
 
-%Steps 1-5 above are easy to carry out (actually, the tokenization and
-%normalization steps were already done in the GRE3D7 corpus).  Starting
-%from the scene in Figure~\ref{GRE3D7-stimulus} and the corresponding
-%corpus shown in Table~\ref{corpus-distribution}, the resulting
-%signature and their associated \puse\ are listed in the first three
-%columns of Table~\ref{probability-of-use}.
 
-%Notice that the values R.\puse\ obtained in this way should be
-%interpreted as the probability of using R to describe the target in
-%model $\gM$, and we could argue that they are correlated to the
-%\emph{saliency} of R in the model.  For that reason, for example, the
-%value of \emph{esfera}.\puse\ is 1, while the value of
-%\emph{cubo}.\puse\ is 0.178.  These probabilities will not be useful
-%to describe different targets in different scenes.  We will see how we
-%can use them to obtain values for new targets and scenes using a
-%machine learning approach in the next section.  Not surprisingly,
-%using these values for R.\puse\ the REs generated most often by the
-%algorithm can be found in the corpus.  More interestingly, as we
-%discuss in Section~\ref{sec:evaluation} the algorithm generates REs
-%with a distribution that matches the one found in the corpus and, as
-%Table~\ref{results-algo-fig3} shows, even the generated REs not found
-%in the corpus are natural.
+
+
+Antes de esto deberia haber hablado de las propiedades a considerar..
+
+
+
+
+\begin{table}[h!]
+\begin{center}
+\caption{F\'ormulas y errores de regresi\'on lineal para todo el corpus \ref{verde-azul}}
+\label{tabla-linear-regresion-all}
+\begin{tabular}{|l|c|c|l|}
+\hline
+Palabra &Error promedio	LR	& Error-PM	& F\'ormula de LR\\
+\hline
+ball		 &0.0465   &0.0609	  & 0.2894 * disc-gatt + 0.7883\\
+\hline
+cube		 &0.0417	 &0.0531	  &0.49   * disc-gatt - 0.0129\\
+\hline
+\hline
+blue		 &0.0353	 &0.0454	  &0.848  * target-tiene + 0.1073\\
+\hline
+green		 &0.0264	 &0.046	    &0.8722 * target-tiene + 0.0016\\
+\hline
+\hline
+large		 &0.1762	 &0.2378	  &0.5911 * target-tiene + 0.0354\\
+\hline
+small		 &0.1499	 &0.1755	  &0.3918 * target-tiene + 0.2478 * vecino-tiene -\\
+				 &				 &					&0.0913\\
+\hline
+\hline
+left-of  &0.0041	 &0.0094	  &0.0131 * target-tiene +\\
+				 &				 &					&0.0253 * adj-target-tiene - 0.0507\\
+\hline
+on-top	 &0.0706	 &0.1594	  &0.2942 * target-tiene \\
+\hline
+right-of &0.0029	 &0.0049	  &0.0153 * target-tiene + 0.001\\
+\hline
+\hline
+left		 &0.0068	 &0.0101	  &0.0346 * adj-target-tiene - 0.0653\\
+\hline
+right		 &0.0079	 &0.0092	  &-0.0118 * disc-gatt + 0.0141\\
+\hline
+front    &0.0099 	 &0.0135		& 0.0069\\
+\hline
+center	 &0.0023	 &0.0037	  &0.0047 * target-tiene + 0.0047 * adj-target-tiene +\\
+				 &				 &					&0.0029 * vecino-tiene - 0.009\\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+En la Tabla \ref{tabla-linear-regresion-all} podemos ver por ejemplo que {\it ball} tiene una \puse alta, es natural ya que en el corpus \ref{verde-azul} todos los targets son {\it ball}, en cambio se puede ver que {\it cube} no es tan alta y depende de la discernibilidad, este n\'umero en la \puse debe leerse como la probabilidad de usar el landmark. En los casos de {\it blue} y {\it green} el valor de \puse depende de si el target es {\it blue} o {\it green}, entonces si el target es {\it blue}, le da un valor alto a {\it blue} y bajo a {\it green} y viceversa.
+En la tabla tambi\'en podemos ver que relaciones como {\it small} y {\it large} tienen un error mucho mas alto que el resto de las relaciones, esto se debe a que ellas son propiedades vagas... 
+Las relaciones {\it on-top}, {\it left-of} y {\it right-of} dependen fuertemente si el target tiene esa relaci\'on y en caso de tenerla igualmente la \puse no es muy alta, esto indica que en un porcentaje del 30\% por ejemplo se usa {it on-top} y en menos del 3\% left-of o right-of
+
+Agregar aca, lo que dijo luciana en paper!!!
+
 
 Los pasos 1-5 anteriores son f\'aciles de llevar a cabo (en realidad, la tokenizaci\'on y
 pasos de normalizaci\'on ya se realizaron en el corpus GRE3D7). \\
@@ -889,33 +637,19 @@ ARREGLAR ESTA TABLA HABIA UNO MAL... ver original...
 \hline
 Expresiones Referenciales & Cantidad de ocurrencias & Porcentage \\
 \hline
-%green esfera & 91 & 65.00\% \\
-%peque\~no green esfera & 23 & 16.43\% \\
-%peque\~no green esfera on top of grande blue cubo & 8 & 5.71\% \\
-%green esfera on top of blue cubo & 5 & 3.57\% \\
-%green esfera on top of grande blue cubo & 5 & 3.57\% \\
-%peque\~no green esfera on top of blue cubo & 2 & 1.43\% \\
-%esfera on top of cubo & 1 & 0.71\% \\
-%peque\~no green esfera on top of grande blue cubo to the left & 1 & 0.71\% \\
-%peque\~no esfera on top grande cubo & 1 & 0.71\% \\
-%green esfera on top & 1 & 0.71\% \\
-%peque\~no esfera on top of peque\~no cubo & 1 & 0.71\% \\
-%green esfera on top of cubo & 1 & 0.71\% \\
 
-esfera verde & 91 & 65.00\% \\
-esfera verde peque\~no  & 23 & 16.43\% \\
-esfera verde peque\~no arriba de cubo azul grande & 8 & 5.71\% \\
-esfera verde arriba de cubo azul & 5 & 3.57\% \\
-esfera verde arriba de grande cubo azul & 5 & 3.57\% \\
-esfera verde peque\~no arriba de cubo azul & 2 & 1.43\% \\
-esfera arriba de cubo & 1 & 0.71\% \\
-esfera verde peque\~no arriba de cubo azul grande a la izquierda & 1 & 0.71\% \\
-peque\~no esfera arriba de cubo grande & 1 & 0.71\% \\
-esfera verde arriba & 1 & 0.71\% \\
-%peque\~no esfera arriba de cubo peque\~no & 1 & 0.71\% \\
-esfera verde arriba de cubo & 1 & 0.71\% \\
-
-
+green ball & 91 & 65.00\% \\
+green ball small  & 23 & 16.43\% \\
+green ball small on-top red large cube & 8 & 5.71\% \\
+green ball on-top blue cube & 5 & 3.57\% \\
+green ball arriba de grande cubo azul & 5 & 3.57\% \\
+green ball small on-top blue cube & 2 & 1.43\% \\
+ball on-top cube & 1 & 0.71\% \\
+green ball small on-top red large left cube  & 1 & 0.71\% \\
+peque\~no esfera on-top cube large & 1 & 0.71\% \\
+green ball arriba & 1 & 0.71\% \\
+%peque\~no esfera on-top cube small & 1 & 0.71\% \\
+green ball on-top cube & 1 & 0.71\% \\
 
 \hline
 \end{tabular}
@@ -976,40 +710,17 @@ discrimination & calculada como 1 sobre el n\'umero de objetos en el modelo que 
 \end{table}
 \end{small}
 
-%Our feature set is intentionally simplistic in order for it to be
-%domain independent. As a result there are some complex relations
-%between characteristics of the scenes that it is not able to
-%capture. The most important characteristic of the GRE3D7 domain is
+% The most important characteristic of the GRE3D7 domain is
 %that we are not able to learn, and has an impact in our performance,
 %the properties of type size (namely, peque\~no and grande) are used much
 %more when the target cannot be uniquely identified with taxonomical
 %(esfera and cubo) and absolute (green and blue) properties only.  In
 %other words, in the GRE3D7 corpus the size is used more often (90.2\%)
-%of the time when the resulting RE is not overspecified than when it is
-%(34\%). It may not be possible to learn this characteristic from the
-%GRE3D7 data since even with the domain dependent features defined
-%in~\cite[Chapter 6]{viet:gene11}, it could not be learned by decision
-%trees. As a result we can see in Table~\ref{probability-of-use} that
-%for Fig 13 the value estimated for ``grande'' are not close to the
-%value calculated from corpora.  \textit{In the case of the TUNA-corpus
-%  we show that we couldn't learn the dependency of dimension-x and
-%  dimension-y, it mean, when a person adds dimension-x is highly
-%  probably that he includes dimension-y in his referring expression.}
-
 
 En el caso del GRE3D7 usamos la parte verde-azul, es decir todas las im\'agenes que tienen colores verde y azul, para acotar el problema, asumiendo que la otra parte dar\'ia algo similar. En la siguiente figura se muestran los contextos considerados.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.6\textwidth]{images/imagenesML.png}
-\caption{Im\'agenes del GRE3D7}
-\label{plurales}
-\end{figure}
 
 Para hacer el aprendizaje, separamos 1 contexto al que llamamos testing, y todos los dem\'as de entrenamiento. Por ejemplo para aprender \puse del contexto 13, se usaron los contextos: 1,3,6,8,10,12,15,18,20,21,23,25,27,30 y 32. Y as\'i sucesivamente para los dem\'as contextos.
-
-
-
 
 Nuestro conjunto de caracter\'{i}sticas es intencionadamente simplista con el fin de que sea
 independiente de dominio. Como resultado hay algunas relaciones complejas
@@ -1030,12 +741,32 @@ valor calculado a partir de corpus. \textit{En el caso de la TUNA-corpus
   dimensi\'on-y, es decir, cuando una persona a\~nade dimensi\'on-x es altamente
   probable que incluya la dimensi\'on-y en su expresi\'on referencial.}
 
+
+\begin{figure}[ht]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/3.jpg}
+%\vspace*{1cm}
+\caption{Escena 3 del GRE3D7}
+\label{GRE3D7-stimulus-3}
+\end{minipage}
+%\hspace*{-0.35cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+%\begin{figure}[ht]
+%\begin{center}
+\includegraphics[width=\textwidth]{images/13.jpg}
+\caption{Escena 13 del GRE3D7}
+\label{GRE3D7-stimulus-13}
+\end{minipage}
+\end{figure}
+
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 Palabra &  \puse 					& \puse\ Aprendida & \puse\    							& \puse\  Aprendida \\
-        & Modelo Fig. 3   & Fig. 3   				& Modelo Fig. 13  			&  Fig. 13  \\
+        & Modelo \ref{GRE3D7-stimulus-3}   & \ref{GRE3D7-stimulus-3} 				& Modelo \ref{GRE3D7-stimulus-13} 			&  \ref{GRE3D7-stimulus-13}  \\
 \hline
 esfera & 1.0 & 1.0 & 1.0 & 1.0 \\
 cubo & 1.0 & 1.0 & 1.0 & 1.0 \\
@@ -1052,7 +783,7 @@ a-la-der-de & 0 & 0 & 0.064 & 0.1023 \\
 debajo-de & 0 & 0 & 0 & 0 \\
 \hline
 \end{tabular}
-\caption{Probabilidades de uso de las palabras del corpus \textit{(GRE3D7) para las Figuras 3 y 13 } 
+\caption{Probabilidades de uso de las palabras del corpus \textit{(GRE3D7) para las Figuras\ref{GRE3D7-stimulus-3} y \ref{GRE3D7-stimulus-13} } 
 \label{probability-of-use}}
 \end{center}
 \end{table}
