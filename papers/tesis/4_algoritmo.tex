@@ -468,110 +468,178 @@ metodolog\'{i}a utilizando el corpus GRE3D7 que introducimos en ~\ref{sec:corpus
 
 \subsection{Calculando \puse\ cuando hay disponible un corpus para la escena considerada}
 
-Las siguientes son las escenas del GRE3D7, las hemos agrupado seg\'un los colores que tienen.
+Las Figuras \ref{rojo-amarillo} y  \ref{verde-azul} son las escenas del corpus GRE3D7 introducido en \ref{sec:corpusGRE}, est\'an agrupadas seg\'un los colores que tienen.\\
 
-\begin{figure}[ht]
+\begin{figure}
 \centering
-\includegraphics[width=0.6\textwidth]{images/rojo-amarillo.png}
-\caption{Im\'agenes del GRE3D7 (rojo y amarillo)}
+\includegraphics[width=1\textwidth]{images/rojo-amarillo.png}
+\caption{Im\'agenes del GRE3D7 parte rojo y amarillo}
 \label{rojo-amarillo}
 \end{figure}
 
-\begin{figure}[ht]
+\begin{figure}
 \centering
-\includegraphics[width=0.6\textwidth]{images/imagenesML.png}
-\caption{Im\'agenes del GRE3D7 (azul y verde)}
+\includegraphics[width=1\textwidth]{images/imagenesML.png}
+\caption{Im\'agenes del GRE3D7 parte azul y verde}
 \label{verde-azul}
 \end{figure}
 
-La regresi\'on lineal es un m\'etodo matem\'atico que modela la relaci\'on que hay entre una variable dependiente Y, las variables independientes Xi y un t\'ermino aleatorio E.  
 
-Vamos a tomar la parte \ref{verde-azul} para aprender las probabilidades de uso de cada palabra, y as\'i darnos una idea de como es la distribuci\'on del uso de las palabras consideradas del corpus.
+\begin{figure}[ht]
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/3.jpg}
+%\vspace*{1cm}
+\caption{Contexto 3 del GRE3D7}
+\label{fig3}
+\end{minipage}
+\hspace*{1cm}
+\begin{minipage}[b]{0.5\linewidth}
+%\centering
+%\begin{figure}[ht]
+%\begin{center}
+green ball \\
+small green ball  \\
+small green ball on-top red large cube \\
+green ball on-top blue cube\\
+green ball on-top large blue cube \\
+small green ball on-top blue cube  \\
+ball on-top cube \\
+small green ball on-top red large left cube  \\
+small ball on-top cube large  \\
+top green ball   \\
+green ball on-top cube  \\
+\caption{ER dadas por personas para el Contexto \ref{fig3}}
+\label{ER-fig3}
+\end{minipage}
+\end{figure}
 
 
-Supongamos que queremos generar autom\'aticamente ER para el target $t$ en una
-determinada escena, y que tenemos disponible un corpus $C$ de ER de $t$
-en esa escena (esto es exactamente el tipo de informaci\'on que encontramos en el
-GRE3D7 corpus \textit{y en el TUNA-corpus}). Utilizamos las ER de $C$
-para definir el modelo relacional utilizado por el algoritmo. Entonces 
-estimaremos el valor de \puse\ para cada una de las relaciones en el modelo como el
-porcentaje en que aparece la relaci\'on en las ER. Es decir,
-\begin{equation} \label{eq1}
-R.\puse = \frac {\#\mbox{de ERs en $C$ en el que aparece R}} {\#\mbox{de las ER en $C$}}.
-\end{equation}
-
-En el caso del corpus TUNA el c\'alculo no es necesario
-porque tenemos solo una ER para cada escena.
-
-Esta estimaci\'on es demasiado simplificada y, por ejemplo, no 
-diferencia las propiedades del target y las propiedades de
-los landmarks utilizadas en una ER relacional para completar la descripci\'on
-del target. Pero es muy f\'acil de calcular, y vamos a ver
-en la Secci\'on~\ref{sec:evaluacion} que ya produce ER naturales
-que coinciden con las encontradas en el corpus.
-
-%Para aclarar el 
-
-Antes de realizar el c\'alculo de R.\puse \ en el modelo $\gM$ asociado debemos realizar los siguientes pasos, para unificar el vocabulario del corpus.
-
+El corpus tiene para cada imagen 140 ER dadas por personas. Las ER dadas en \ref{ER-fig3} son las ER diferentes que aparecieron en el corpus para el Contexto \ref{fig3}, pero... uno se imagina un corpus en que las personas usaron distintas palabras para nombrar lo mismo, distintas frases, distinto orden de las palabras, s\'i es verdad, este corpus ya est\'a limpio de todas esas cosas, pero si quisieramos partir de un corpus con las ER tal cual dieron las personas, tendr\'iamos que realizar los siguientes pasos a fin de unificar el vocabulario:
 
 \begin{enumerate}
-%\item Tokenize the referring expressions and call the set of tokens
-%  $T$. In particular, multi-word expressions like ``on top of''
-%  should be matched to a single token like \emph{ontop}.
+\item Tokenizar las expresiones referenciales y llamar al conjunto de palabras distintas
+ $Pal$. En particular, las expresiones de varias palabras como ``arriba de'', ``encima de''
+  debe ser igualadas a una \'unica palabra que signifique lo mismo, digamos \emph{arriba-de}.
 
-%\item Remove hyperonyms from $T$. E.g., if both \emph{cubo} and
-%  \emph{thing} appear in $T$, delete \emph{thing}.
-
-%\item If the set of tokens obtained in the previous steps contains
-%  synonyms normalize them to a representative in the synonym class,
-%  and call the resulting set $\REL$; it will be the signature of the
-%  model $\gM$ used by the algorithm. E.g., the tokens \emph{little}
-%  and \emph{peque\~no} are both represented by the token \emph{peque\~no}.
-
-%\item For each scene, define $\gM$ such that the interpretation
-%  $\interp{\cdot}$ ensures that all the REs in the corpus are REs in
-%  the model.  E.g., the $\el$ formulas corresponding to the REs in
-%  Table~\ref{corpus-distribution} should all denote the target in the
-%  model $\gM$ depicted in
-%  Figure~\ref{GRE3D7-stimulus-graph}.
-
-%\item For each R $\in \REL$ compute R.\puse\ using~(\ref{eq1}) if we
-%  ave many RE for each scene or we assign 1 to R.\puse\ if R occurs in
-%  the RE, we assign 0 otherwise.
-
-\item Tokenizar las expresiones referenciales y llamar al conjunto de palabras
- $T$. En particular, las expresiones de varias palabras como ``arriba de'', ``encima de''
-  debe ser igualado a un \'unica palabra que signifique lo mismo, digamos \emph{arriba-de}.
-
-\item Eliminar hiper\'onimos de $T$. Por ejemplo, si ambos \emph{cubo} y
-  \emph{cosa} aparecen en $T$, eliminar \emph{cosa}.
+\item Eliminar hiper\'onimos de $Pal$. Por ejemplo, si ambos \emph{cubo} y
+  \emph{cosa} aparecen en $Pal$ para nombrar la misma cosa, eliminar \emph{cosa}, ya que \emph{cubo} es m\'as espec\'ifico.
 
 \item Si el conjunto de palabras obtenidas en los pasos anteriores contiene
-  sin\'onimos normalizarlos con un representante de la clase,
-  y llamar al conjunto resultante $\REL$; que ser\'a la signatura del
-  modelo $\gM$ utilizada por el algoritmo. Por ejemplo, las palabras \emph{chico}
+  sin\'onimos normalizarlos con un representante de la clase.  Por ejemplo, las palabras \emph{chico}
   y \emph{peque\~no} son ambas representadas por la palabra \emph{peque\~no}.
+
+\item Llamar al conjunto resultante $\REL$; que ser\'a la signatura del modelo $\gM$ utilizada por el algoritmo.
 
 \item Para cada escena, definir $\gM$ tal que la interpretaci\'on
  $\interp {\cdot}$ asegure de que todas las ERs encontradas en el corpus sean ER en
-  el modelo. Por ejemplo, las $\el$ f\'ormulas correspondientes a la tabla~\ref{results-algo-fig3} deben denotar el target en el
-  modelo $\gM$ representado en
-  Figura~\ref{GRE3D7-stimulus-cap2}.
+  el modelo. Por ejemplo, las %$\el$ f\'ormulas correspondientes%
+	ER de \ref{ER-fig3} deben denotar el target se\~nalado en la Figura \ref{fig3} el modelo 
+$\gM$ est\'a representado en Figura~\ref{modelo-fig3}.
 %GRE3D7-stimulus-cap2
 \item Para cada R$\in \REL$ calculo R.\puse \ utilizando~(\ref{eq1}) si
   hay muchas ER para cada escena (caso corpus GRE3D7) o asignamos 1 a R.\puse \ si R esta en ER, asignamos 0 en caso contrario (caso corpus TUNA).
-
-
 \end{enumerate}
 
+En el caso del GRE3D7 ya estaba unificado el vocabulario y la signatura del modelo es 
+$\REL = \{green, ball, small, ontop, red, large, cube, blue, left, top\} $
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
+    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
+  ]
+ \node[n,label=above:$e_1$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-2pt]
+      \nSmall\\[-2pt] 
+      \nBlue \ \  
+      \nBall\end{array}$}] (a) {};
+
+ \node[n,label=above:$e_2$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nLeft\\[-2pt]
+      \nBig\\[-2pt] 
+      \nBlue \ \  
+      \nCube\end{array}$}, right of=a] (b) {};
+
+ \node[n,label=below:$e_3$,label=above:{
+    \relsize{-1}$\begin{array}{c}
+      \nTop \ \       \nLeft \ \ 
+      \nSmall \ \       \nGreen \ \ 
+      \nBall\end{array}$}, above of=b] (c) {};
+
+ \node[n,label=above:$e_4$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nSmall\\[-2pt] 
+      \nGreen\\[-2pt] 
+      \nCube\end{array}$}, right of=b] (d) {};
+
+ \node[n,label=above:$e_5$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nBlue\\[-2pt] 
+      \nBall\end{array}$}, right of=d] (e) {};
+
+ \node[n,label=above:$e_6$,label=below:{
+    \relsize{-1}$\begin{array}{c}
+      \nBig\\[-2pt] 
+      \nGreen\\[-2pt] 
+      \nCube\end{array}$}, right of=e] (f) {};
+
+ \node[n,label=below:$e_7$,label=above:{
+    \relsize{-1}$\begin{array}{c}
+      \nTop \ \ 
+      \nSmall\ \ 
+      \nBlue \ \  
+      \nCube\end{array}$}, above of=f] (g) {};
+
+ \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
+ \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
+
+ \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
+ \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
+
+ \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
+ \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
+
+ \draw[dotted] (-.65,-1.2) rectangle (7.1,2.1);
+
+ \end{tikzpicture}
+\vspace*{-.4cm}\caption{El modelo del Contexto \ref{fig3}}
+\label{modelo-fig3}
+\end{figure}
+
+La regresi\'on lineal es un m\'etodo matem\'atico que modela la relaci\'on que hay entre una variable dependiente Y, las variables independientes Xi y un t\'ermino aleatorio E.  \\
+
+Vamos a tomar la parte \ref{verde-azul} del corpus GRE3D7 para aprender las probabilidades de uso de cada palabra en las ER que di\'o la gente, y as\'i darnos una idea de como es la distribuci\'on del uso de las palabras del conjunto $REL$ en el corpus.\\
+
+Vamos a usar las siguientes propiedades, las cuales las sacamos autom\'aticamente del XML del corpus.
+
+\begin{small}
+\begin{table}[h]
+\begin{center}
+\begin{tabular}{|l|p{10cm}|}
+\hline
+target & cuando el elemento target tiene la propiedad. \\
+\#rel-prop & n\'umero de propiedades y relaciones que el target tiene.\\
+\#rel & n\'umero de relaciones que el target tiene. \\
+landmark & cuando un landmark del target tiene la propiedad, un objeto es un landmark si tiene una relaci\'on directa en el modelo, con el target (lo usamos para el GRE3D7).\\
+location-has & cuando la RE puede usar la ubicaci\'on del target en la figura (esto se hizo porque el TUNA corpus tiene algunas ER donde se le dijo a la gente que pod\'ian usar la localizaci\'on del objeto).\\
+discrimination & calculada como 1 sobre el n\'umero de objetos en el modelo que tienen la propiedad.  \\
+\hline
+\end{tabular}
+\caption{Caracter\'isticas usadas para aprendizaje autom\'atico de las \puse~para cada palabra en la signatura de los modelos de \textit{GRE3D7 y TUNA-corpus} \label{features}}
+\end{center}
+\end{table}
+\end{small}
 
 
+%Para aclarar el 
 
 Antes de esto deberia haber hablado de las propiedades a considerar..
-
-
-
 
 \begin{table}[h!]
 \begin{center}
@@ -625,9 +693,29 @@ Las relaciones {\it on-top}, {\it left-of} y {\it right-of} dependen fuertemente
 Agregar aca, lo que dijo luciana en paper!!!
 
 
-Los pasos 1-5 anteriores son f\'aciles de llevar a cabo (en realidad, la tokenizaci\'on y
-pasos de normalizaci\'on ya se realizaron en el corpus GRE3D7). \\
-%no se entiende
+
+Supongamos que queremos generar autom\'aticamente ER para el target $t$ en una
+determinada escena, y que tenemos disponible un corpus $C$ de ER de $t$
+en esa escena (esto es exactamente el tipo de informaci\'on que encontramos en el
+GRE3D7 corpus \textit{y en el TUNA-corpus}). Utilizamos las ER de $C$
+para definir el modelo relacional utilizado por el algoritmo. Entonces 
+estimaremos el valor de \puse\ para cada una de las relaciones en el modelo como el
+porcentaje en que aparece la relaci\'on en las ER. Es decir,
+\begin{equation} \label{eq1}
+R.\puse = \frac {\#\mbox{de ERs en $C$ en el que aparece R}} {\#\mbox{de las ER en $C$}}.
+\end{equation}
+
+En el caso del corpus TUNA el c\'alculo no es necesario
+porque tenemos solo una ER para cada escena.
+
+Esta estimaci\'on es demasiado simplificada y, por ejemplo, no 
+diferencia las propiedades del target y las propiedades de
+los landmarks utilizadas en una ER relacional para completar la descripci\'on
+del target. Pero es muy f\'acil de calcular, y vamos a ver
+en la Secci\'on~\ref{sec:evaluacion} que ya produce ER naturales
+que coinciden con las encontradas en el corpus.
+
+
 Las ERs, cantidad de ocurrencias y porcentaje del corpus para de la Figura~\ref{GRE3D7-stimulus-cap2} se muestran en la tabla~\ref{corpus-distribution}, la signatura resultante y su asociado \puse\ figuran en las tres primeras columnas de la tabla~\ref{probability-of-use}.\\
 
 ARREGLAR ESTA TABLA HABIA UNO MAL... ver original...
@@ -639,15 +727,15 @@ Expresiones Referenciales & Cantidad de ocurrencias & Porcentage \\
 \hline
 
 green ball & 91 & 65.00\% \\
-green ball small  & 23 & 16.43\% \\
-green ball small on-top red large cube & 8 & 5.71\% \\
+small green ball   & 23 & 16.43\% \\
+small green ball on-top red large cube & 8 & 5.71\% \\
 green ball on-top blue cube & 5 & 3.57\% \\
-green ball arriba de grande cubo azul & 5 & 3.57\% \\
-green ball small on-top blue cube & 2 & 1.43\% \\
+green ball on-top large blue cube & 5 & 3.57\% \\
+small green ball on-top blue cube & 2 & 1.43\% \\
 ball on-top cube & 1 & 0.71\% \\
-green ball small on-top red large left cube  & 1 & 0.71\% \\
-peque\~no esfera on-top cube large & 1 & 0.71\% \\
-green ball arriba & 1 & 0.71\% \\
+small green ball on-top red large left cube  & 1 & 0.71\% \\
+small ball on-top large cube & 1 & 0.71\% \\
+top green ball  & 1 & 0.71\% \\
 %peque\~no esfera on-top cube small & 1 & 0.71\% \\
 green ball on-top cube & 1 & 0.71\% \\
 
