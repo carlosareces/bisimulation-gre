@@ -623,23 +623,19 @@ Vamos a usar las siguientes propiedades, las cuales las sacamos autom\'aticament
 \begin{center}
 \begin{tabular}{|l|p{10cm}|}
 \hline
-target & cuando el elemento target tiene la propiedad. \\
+target-tiene & cuando el elemento target tiene la propiedad. \\
 \#rel-prop & n\'umero de propiedades y relaciones que el target tiene.\\
 \#rel & n\'umero de relaciones que el target tiene. \\
-landmark & cuando un landmark del target tiene la propiedad, un objeto es un landmark si tiene una relaci\'on directa en el modelo, con el target (lo usamos para el GRE3D7).\\
+landmark-tiene & cuando un landmark del target tiene la propiedad, un objeto es un landmark si tiene una relaci\'on directa en el modelo, con el target (lo usamos para el GRE3D7).\\
 location-has & cuando la RE puede usar la ubicaci\'on del target en la figura (esto se hizo porque el TUNA corpus tiene algunas ER donde se le dijo a la gente que pod\'ian usar la localizaci\'on del objeto).\\
 discrimination & calculada como 1 sobre el n\'umero de objetos en el modelo que tienen la propiedad.  \\
 \hline
 \end{tabular}
-\caption{Caracter\'isticas usadas para aprendizaje autom\'atico de las \puse~para cada palabra en la signatura de los modelos de \textit{GRE3D7 y TUNA-corpus} \label{features}}
+\caption{Caracter\'isticas usadas para conseguir f\'ormulas con regresi\'on lineal que nos den una idea de la \puse de las palabras} 
+\label{features}
 \end{center}
 \end{table}
 \end{small}
-
-
-%Para aclarar el 
-
-Antes de esto deberia haber hablado de las propiedades a considerar..
 
 \begin{table}[h!]
 \begin{center}
@@ -661,7 +657,7 @@ green		 &0.0264	 &0.046	    &0.8722 * target-tiene + 0.0016\\
 \hline
 large		 &0.1762	 &0.2378	  &0.5911 * target-tiene + 0.0354\\
 \hline
-small		 &0.1499	 &0.1755	  &0.3918 * target-tiene + 0.2478 * vecino-tiene -\\
+small		 &0.1499	 &0.1755	  &0.3918 * target-tiene + 0.2478 * landmark-tiene -\\
 				 &				 &					&0.0913\\
 \hline
 \hline
@@ -686,12 +682,11 @@ center	 &0.0023	 &0.0037	  &0.0047 * target-tiene + 0.0047 * adj-target-tiene +\
 \end{center}
 \end{table}
 
-En la Tabla \ref{tabla-linear-regresion-all} podemos ver por ejemplo que {\it ball} tiene una \puse alta, es natural ya que en el corpus \ref{verde-azul} todos los targets son {\it ball}, en cambio se puede ver que {\it cube} no es tan alta y depende de la discernibilidad, este n\'umero en la \puse debe leerse como la probabilidad de usar el landmark. En los casos de {\it blue} y {\it green} el valor de \puse depende de si el target es {\it blue} o {\it green}, entonces si el target es {\it blue}, le da un valor alto a {\it blue} y bajo a {\it green} y viceversa.
+En la Tabla \ref{tabla-linear-regresion-all} podemos ver por ejemplo que {\it ball} tiene una \puse alta, es natural ya que en el corpus \ref{verde-azul} todos los targets son {\it ball}, en cambio se puede ver que {\it cube} no es tan alta y depende de la discernibilidad, este n\'umero en la \puse debe leerse como la probabilidad de usar {\it cube} en la descripci\'on del landmark. En los casos de {\it blue} y {\it green} el valor de \puse depende de si el target es {\it blue} o {\it green}, entonces si el target es {\it blue}, le da un valor alto a {\it blue} y bajo a {\it green} y viceversa, no depende del valor de discernibilidad en el modelo.
 En la tabla tambi\'en podemos ver que relaciones como {\it small} y {\it large} tienen un error mucho mas alto que el resto de las relaciones, esto se debe a que ellas son propiedades vagas... 
-Las relaciones {\it on-top}, {\it left-of} y {\it right-of} dependen fuertemente si el target tiene esa relaci\'on y en caso de tenerla igualmente la \puse no es muy alta, esto indica que en un porcentaje del 30\% por ejemplo se usa {it on-top} y en menos del 3\% left-of o right-of
-
-Agregar aca, lo que dijo luciana en paper!!!
-
+Las relaciones {\it ontop}, {\it leftof} y {\it rightof} dependen fuertemente si el target tiene esa relaci\'on y en caso de tenerla igualmente la \puse no es muy alta, esto indica que en un porcentaje del 30\% por ejemplo se usa {it ontop} y en menos del 3\% left-of o rightof, esta observaci\'on fue reportada en (Viethen, 2011)
+Una caracter\'istica interesante que se no fue mencionada en trabajo previo es que tama\~no es m\'as frecuente usado para sobreespecificaci\'on cuando el target y el landmark tienen el mismo tama\~no 
+(es usado en ER sobreespecificadas el 49\% cuando el target y el landmarck comparten el tama\~no, y s\'olo el 25\% cuando no lo comparten)
 
 
 Supongamos que queremos generar autom\'aticamente ER para el target $t$ en una
@@ -934,104 +929,6 @@ y el 25 \% cuando target y el landmark no lo compart\'ian. Esto puede explicarse
 %\section{Agregando sobreespecificaci\F3n}
 \section{Ejemplo de ejecuci\'on}
 
-
-%ALGO ORIGINAL MOD ejemplo para el nuestro 
-%\begin{figure}[h!]
-%\begin{center}
-%\includegraphics[width=\textwidth]{images/algoritmoOriginal.png}
-%\end{center}
-%\vspace*{-2em}
-%\caption{Algoritmo para GER con l\'ogicas de descripci\'on}
-%\label{algoritmoOriginal}
-%\end{figure}
-%
-%Vamos a ejecutar el algoritmo para la Figura~\ref{GRE3D7-stimulus-cap2},
-%el algoritmo comienza con una lista fija de propiedades y relaciones, supongamos que
-%esas listas son las siguientes:
-%
-%propiedades ordenadas (prop): \textsf{esfera}, \textsf{cubo}, \textsf{red}, \textsf{yellow}, \textsf{peque\~no}, \textsf{grande}.\\
-%relaciones ordenadas (rel): \textsf{leftof}, \textsf{rightof}, \textsf{ontopof}, \textsf{bellowof}.
-
-%\begin{figure}
-%\begin{center}	
-%\includegraphics[width=.5\textwidth]{images/22.jpg}
-%\end{center}
-%\vspace*{-1.5em}
-%\caption{Escena 3D de figuras geom\'etricas}\label{figure22}
-%\end{figure}
-
-%\begin{figure}
-%\begin{minipage}[b]{0.6\linewidth}
-%\centering
-%\begin{tikzpicture}
-%  [
-%    n/.style={circle,fill,draw,inner sep=3pt,node distance=1.4cm},
-%    aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
-%  ]
-% \node[n,label=above:$e_1$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nLeft\\[-2pt]
-%      \npeque\~no\\[-2pt] 
-%      \nYellow \\[-2pt] 
-%      \nesfera\end{array}$}] (a) {};
-
-% \node[n,label=above:$e_2$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nLeft\\[-2pt]
-%      \npeque\~no\\[-2pt] 
-%      \nRed\\[-2pt] 
-%      \ncubo\end{array}$}, right of=a] (b) {};
-
-% \node[n,label=below:$e_3$,label=above:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nTop\\[-2pt]
-%      \nLeft\\[-2pt]
-%      \npeque\~no\\[-2pt] 
-%      \nYellow\\[-2pt] 
-%      \nesfera\end{array}$}, above of=b] (c) {};
-
-% \node[n,label=above:$e_4$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nBig\\[-2pt] 
-%      \nRed\\[-2pt] 
-%      \ncubo\end{array}$}, right of=b] (d) {};
-
-% \node[n,label=above:$e_5$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \nBig\\[-2pt] 
-%      \nRed\\[-2pt] 
-%      \nesfera\end{array}$}, right of=d] (e) {};
-
-% \node[n,label=above:$e_6$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \npeque\~no\\[-2pt] 
-%      \nYellow\\[-2pt] 
-%      \ncubo\end{array}$}, right of=e] (f) {};
-
-% \node[n,label=above:$e_7$,label=below:{
-%    \relsize{-1}$\begin{array}{c}
-%      \npeque\~no\\[-2pt] 
-%      \nRed\\[-2pt] 
-%      \ncubo\end{array}$}, right of=f] (g) {};
-
-% \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
-% \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
-
-% \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
-% \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
-
-% \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-1}$\nLeftof$} (g);
-% \draw [aArrow,bend right=30] (g) to node[auto,swap]{\relsize{-1}$\nRightof$} (f);
-
-% \draw[dotted] (-.4,-1.7) rectangle (7.5,3.3);
-
-% \end{tikzpicture}
-%\caption{La escena como modelo relacional}\label{GRE3D7-stimulus-graph}
-%\end{minipage}
-%\end{figure}
-
-
-%El algoritmo siempre termina, y devuelve ER un conjunto de f\'ormulas que describe cada elemento en el dominio (si existe esa f\'ormula). \\
 
 En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
 
