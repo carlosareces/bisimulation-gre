@@ -1,0 +1,99 @@
+\section{Generating Referring Expressions}
+
+The generation of referring expressions (GRE) --given a context and
+an element in that context generate a grammatically correct
+expression in a given natural language that uniquely represents the
+element-- is a basic task in natural language generation, and one of
+active research
+(see~\cite{dale89cooking,dale91:_gener_refer_expres_invol_relat,Dale1995,Stone2000,deemter02:_gener_refer_expres}
+among others). Most of the work in this area is focused on the
+\emph{content determination} problem (i.e., finding a collection of
+properties that singles out the target object from the remaining
+objects in the context) and leaves the actual \emph{realization}
+(i.e., expressing a given content as a grammatically correct
+expression) to standard techniques\footnote{For exceptions to this
+practice see, e.g.,~\cite{hora:algo97,ston:text98}}.
+
+However, there is yet no general agreement on the basic representation of both the input
+and the output to the problem; this is handled in a rather ad-hoc way by each
+new proposal instead.
+
+Krahmer~et~al.~\cite{Krahmer2003} make the case for the use of \emph{labeled
+directed graphs} in the context of this problem: graphs are abstract
+enough to express a large number of domains and there are many
+attractive, and well-known algorithms for dealing with this type of
+structures. Indeed, these are nothing other than
+an alternative representation of relational models, typically used to provide
+semantics for formal languages like first and higher-order logics,
+modal logics, etc. Even valuations, the basic models of
+propositional logic, can be seen as a single-pointed labeled graph.
+It is not surprising then that they are well suited to the task.
+
+In this article, we side with~\cite{Krahmer2003} and use labeled
+graphs as input, but we argue that an important notion has been left
+out when making this decision. Exactly because of their generality,
+graphs do not define, by themselves, a unique notion of
+\emph{sameness}. When do we say that two nodes in the graphs can or
+cannot be referred uniquely in terms of their properties?  This
+question only makes sense once we fix a certain level of
+expressiveness which determines when two graphs, or two elements in
+the same graph, are equivalent.
+
+Expressiveness can be formalized using
+structural relations on graphs (isomorphisms, etc.) or, alternatively, logical languages.
+Both ways are presented in~\sect{technical}, where we also discuss
+how fixing a notion of expressiveness impacts on
+the number of instances of the GRE problem that have a solution; the
+computational complexity of the GRE algorithms involved; and the
+complexity of the surface realization problem.
+We then investigate the GRE problem in terms of different notions of
+expressiveness. We first explore in~\sect{simulation} how well-known algorithms
+from computational logic can be applied to GRE. This is a systematization of the
+approach of~\cite{AKS08}, and we are able to answer a complexity
+question that was left open there. In \sect{krahmer} we take the opposite route:
+we take the well-known GRE-algorithm of~\cite{Krahmer2003}, identify its
+underlying expressivity and rewrite in term of other logics. We then show in~\sect{combining}
+that both approaches can be combined and finally discuss in \sect{size} the size of
+an RE relative to the expressiveness employed. We conclude in~\sect{conclusions} with
+a short discussion and prospects for future work.
+
+%We conclude in
+%\sect{conclusions} discussing advantages and disadvantages of the
+%two particular approaches considered.
+
+
+%
+%In~\cite{AKS08} the problem of generating referring expressions (GRE) is
+%reformulated as the problem of computing a formula (in a formal
+%language with a formal semantics defined in
+%terms of models) that singles out the target to be referred to.  More formally,
+%the current available information is represented as a model
+%$\gM$ of the chosen formal language $\gL$.  Then an element,
+%or a set of elements, in the domain of $\gM$ is chosen as target $T$
+%for the generation of a referring expression (RE).  The concrete task then is to
+%compute a formula $\varphi \in \gL$ such that the interpretation of
+%$\varphi$ in the model $\gM$ coincides exactly with $T$ if such a formula exists,
+%or report that such a formula does not exists.
+%
+%It is clear that the proposed reformulation does not solve the GRE task,
+%as the result is not a natural language expression (i.e., a grammatically
+%correct expression in some natural language) that refers to the target. But
+%it does provide a precise definition of \emph{part} of the problem to be solved
+%when generating RE.
+%
+%Actually, we could split the computational linguistic GRE task into two
+%separate problems: 1) the problem of whether a RE \emph{exists}, and
+%in that case which \emph{information} should be used to generate it; and 2)
+%the problem of generating a grammatically correct expression in a
+%particular natural language that exactly conveys this information.
+%This last problem can be seen as a surface realization task~\findcite{}, which
+%given a semantically annotated grammar will compute a sentence expressing
+%the semantics (represented as a formula in the formal language) obtained
+%while solving the first problem.
+%
+%In this article, we will focus in the first problem and use graph algorithms to solve it.
+%In that respect, our work is related to~\cite{Krahmer2003} which also provide
+%a graph based algorithm computing RE. The main difference is that \cite{Krahmer2003}
+%algorithm is based on subgraph isomorphisms, and hence it is computationally expensive.
+%We will show that depending on the formal language $\gL$ we used, we will obtained
+%algorithms of different complexity.

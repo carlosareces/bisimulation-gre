@@ -1,0 +1,98 @@
+\section{Conclusions}\label{sec:conclusions}
+
+%\fxnote{\tiny  I would like to rewrite the conclusions also. It reads to weak
+%and too vague. Empezar repitiendo cual es el punto principal del paper y cual
+%fue la contribucion.  Lo que hay que decir ya esta dicho en lo que esta escrito,
+%pero falta decirlo more 'to the point' y sin dar tantas vueltas.}
+
+The content determination phase during the generation of referring
+expressions identifies which `properties' will be used to refer to a
+given target object or set of objects. What is considered as a
+`property' is specified in different ways by each of the many
+algorithms for content determination existing  in the literature. In
+this article, we put forward that this issue can be addressed by
+deciding when two elements should be considered to be equal, that
+is, by deciding which discriminatory power we want to use. Formally,
+the discriminatory power we want to use in a particular case can be
+specified syntactically by choosing a particular formal language, or
+semantically, by choosing a suitable notion of simulation.  It is
+irrelevant whether we choose first the language (and obtain the
+associated notion of simulation afterwards) or vice versa.
+
+We maintain that having both at hand is extremely useful. Obviously,
+the formal language will come handy as representation language for
+the output to the content determination problem.  But perhaps more
+importantly, once we have fixed the expressivity we want to use, we
+can  rely on model theoretical results defining the adequate notion
+of sameness underlying each language, which indicates what can and
+cannot be said (as we discussed in \sect{technical}). Moreover, we
+can transfer general results from the well-developed fields of
+computational logics and graph theory as we discuss
+in~\sect{simulation} and~\sect{krahmer}, where we generalized known
+algorithms into \emph{families} of GRE algorithms for different
+logical languages. %These notions were crucial also in
+%\sect{combining} to devise new heuristics.
+
+
+%Each language has its own expressive power, and
+%this induces an adequate notion of sameness. Naturally this last
+%notion becomes crucial when trying to uniquely refer to an element
+%in a model.
+
+
+%We have discussed making the notion of expressiveness involved an
+%explicit parameter of the GRE problem, unlike usual practice. Hence
+%we talk of ``$\+L$-GRE problem'', for a logical language $\+L$. We
+%considered various possible choices for $\+L$, though we did not
+%argue for any of them. Instead, we tried to make explicit the
+%trade-off involved in the selection of a particular $\+L$. This, we
+%believe, depends heavily on the given context.
+
+
+An explicit notion of expressiveness also provides a
+cleaner interface, either between the content determination and
+surface realization modules or between two collaborating content
+determination modules. An instance of the latter was exhibited in
+\sect{combining}.
+
+As a future line of research, one may want to avoid sticking to a
+fixed $\+L$ but instead favor an incremental approach in which
+features of a more expressive language $\+L_1$ are used only when
+$\+L_0$ is not enough to distinguish certain element.
+
+%\fixme{Podemos generalizar el algoritmo para conjuntos? Mencionar algoritmo de Piazza}
+
+%To finish this section, observe that the algorithms introduced here
+%can also be used to compute referring expressions for \emph{sets} of
+%elements. Let $\+L$ be \EL or \ELAN. For any $v\in\Delta$ we define
+%the $\+L$-class of $v$ as
+%%\fixme{$[v]_{\+L}$ pide demasiado. alcanza con que sean todos los $u$ tq $v \simul{\+L} u$, no?}
+%$$
+%[v]_{\+L}=\{u\in\Delta\mid u\in\simset_{\+L}(v)\wedge
+%v\in\simset_{\+L}(u)\}.
+%$$
+%A set $T\subseteq\Delta$ has an $\+L$-RE iff $T=[u]_{\+L}$ for some
+%$u\in\Delta$. In case $T=[u]_{\+L}$ for some $u$ then for any
+%$v\in[u]_{\+L}$, $F(v)$ is a $\+L$-RE for $T$.
+%
+%Since computing the $\+L$-classes of $\Delta$ is polynomial in
+%$\size{\Delta}$, Theorem \ref{thm:complexity-EL-GRE} implies the
+%following:
+
+
+%\fixme{ARREGLAR} To finish this section, observe that the algorithms
+%introduced here can also be used to compute referring expressions
+%for some \emph{sets} of elements. Let $\+L$ be \EL or \ELAN. A set
+%$T\subseteq\Delta$ has an $\+L$-RE iff $T=\simset_{\+L}(u)$ for some
+%$u\in\Delta$. In case $T=\simset_{\+L}(u)$ for some $u$ then $F(u)$
+%is a $\+L$-RE for $T$. In fact, $F(v)$ also is, for any $v$ such
+%that $u\in\simset_{\+L}(v)\wedge v\in\simset_{\+L}(u)$.
+
+%Hence by Theorem \ref{thm:complexity-EL-GRE} we have:
+
+%\begin{cor}
+%The problem of generating the \EL and \ELAN referring expressions of
+%sets of elements given a finite model
+%%$\gM=\tup{\Delta,\interp{\cdot}}$
+%can be solved in polynomial time.
+%\end{cor}

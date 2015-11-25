@@ -1,0 +1,68 @@
+\section{Combining GRE Methods}\label{sec:combining}
+
+An appealing feature of formulating the GRE problem modulo expressivity
+is that one can devise general strategies that combine $\+L$-GRE algorithms.
+We illustrate this with an example.
+
+The algorithms based on $\+L$-simulator sets like the ones in
+\sect{simulation} simultaneously compute referring
+expressions for every object in the domain, and do this for many
+logics in polynomial time. This is an interesting property when one
+anticipates the need of referring to a large number of elements.
+However, this family of algorithms is not as flexible in terms of
+implementing preferences as those we introduced in
+\sect{krahmer} --though some flexibility can be obtained
+by using cost functions for selecting $u$, $v$ and $w$ in the main
+loop of Algorithm~\ref{alg:schematic-GRE} instead of the
+non-deterministic choices.
+
+
+There is a simple way to obtain an algorithm that is a compromise
+between these two techniques. Let $A_1$ and $A_2$ be two procedures
+that solve the $\+L$-GRE problem based on the techniques of
+\sect{simulation} and~\sect{krahmer}, respectively.
+One can first compute an $\+L$-RE for every possible object using
+$A_1$ and then (lazily) replace the calculated RE for $u$ with
+$A_2(u)$ whenever the former does not conform to some predefined
+criterion. This is correct but we do better, taking advantage of the
+equivalence classes obtained using $A_1$.
+
+Since $A_1$ computes, for a given $\+M = \tup{\Delta,\interp{\cdot}}$, the
+set $\simset(u)$ for every $u \in \Delta$, one can  build in polynomial time, using
+the output of $A_1$, the model $\+M_{\+L} = \tup{\cset{[u] \mid u \in \Delta}, \interp{\cdot}_{\+L}}$,
+such that:
+$[u] = \cset{v \mid u \simul{\+L} v$ and $v \simul{\+L}
+u}\quad \mbox{and}\quad \interp{r}_{\+L} = \cset{([u_1]\ldots [u_n])
+\mid (u_1\ldots u_n) \in \interp{r}}$.
+% $$
+% \begin{array}{l@{\;=\;}l}
+% \setlength{\abovedisplayskip}{0pt}%
+% \setlength{\abovedisplayshortskip}{0pt}%
+% [u] & \cset{v \mid u \simul{\+L} v \text{ and } v \simul{\+L} u}\\
+% %\interp{p}_{\+L} &= \cset{[u] \mid u \in \interp{p}}\\
+% \interp{r}_{\+L} & \cset{([u_1]\ldots [u_n]) \mid (u_1\ldots u_n) \in \interp{r}}
+% \end{array}
+% $$
+$\+M_{\+L}$ is known as \emph{the $\+L$-minimization of $\+M$}. By a
+straightforward induction on $\gamma$ one can verify that
+$(u_1\ldots u_n) \in \interp{\gamma}$ iff $([u_1]\dots [u_n]) \in
+\interp{\gamma}_{\+L}$ and this implies that $\gamma$ is an $\+L$-RE
+for $u$ in $\+M$ iff it is an $\+L$-RE for $[u]$ in $\+M_{\+L}$.
+
+If $\+M$ has a large number of indistinguishable elements (using $\+L$), then
+ $\+M_{\+L}$ will be much smaller than $\+M$. Since the computational complexity of
+ $A_2$ depends on the size of $\+M$, for very large scenes, one should compute
+ $A_2([u])$ instead.
+
+%
+% \subsection{Incremental expressivity}
+%
+%It may appear from what we have discussed so far that one has to pick an expressivity $\+L$
+%in advance and stick to it. That is not necessarily true.  Let $\+L_0$ be a sublanguage or $\+L_1$
+%(e.g., \EL and \EPFOL, respectively) and assume one prefers $\+L_0$-REs, although for some
+%elements of the domain $\+L_0$ may not be enough.
+
+%In order to obtain a RE for an element $u$ in $\+M$, one can first try an $\+L_0$-GRE algorithm and
+%obtain a formula $\gamma_0$. If $\interp{\gamma_0} = \cset{u}$ then we are done. If not, instead of
+%finding a $\+L_1$-RE for $u$ in $\+M$, one can run a $\+L_1$-GRE algorithm for $u$ in
+%$\+M_{\gamma_0}$, where $\+M_{\gamma_0}$\ldots\fixme{hace falta un algoritmo que calcule deltas}
