@@ -1,0 +1,185 @@
+\documentclass[runningheads,a4paper]{llncs}
+
+\usepackage[draft]{fixme}
+%\usepackage{times}
+\usepackage{url}
+\usepackage{latexsym}
+
+\usepackage{amsmath, amssymb, xspace, enumerate}
+
+\usepackage{tikz}
+\usetikzlibrary{automata}
+
+\usepackage[ruled,vlined]{algorithm2e}
+%%% Opciones de algorithms2e (para que ocupen menos)
+  % margen chiquito
+\setlength{\algomargin}{9pt}
+  % no usar punto-y-coma
+%\DontPrintSemicolon
+\renewcommand{\algorithmcfname}{\small Algorithm}
+
+\usepackage{mathtools}
+
+\usepackage{relsize}
+
+\usepackage{hyperref}
+
+% para que los align puedan cortarse
+\allowdisplaybreaks
+
+% esto controla la separación de los floats respecto al texto. necesitamos el espacio extra!
+\addtolength{\textfloatsep}{-13pt}
+\addtolength{\intextsep}{-8pt}
+
+% Compiling version
+\newif\iffullversion\fullversionfalse
+
+% for compatibility with older versions of algorithm2e
+\providecommand{\LinesNumbered}{\linesnumbered}
+\providecommand{\dontprintsemicolon}{\DontPrintSemicolon}
+
+\newcommand{\pr}[2]{{\it pre}_{#1}(#2)}
+\newcommand{\su}[2]{{\it suc}_{#1}(#2)}
+\newcommand{\guard}{$\exists r,u,v,w:v \in
+\su{r}{u},w\in S(u),\su{r}{w}\cap S(v)=\emptyset$}
+\newcommand{\unary}{P}
+
+
+
+\newcommand{\findcite}{\cite{XXX}\fixme{cite!}\xspace}
+
+\newcommand{\FOL}{\ensuremath{\mathcal{FO}}\xspace}
+\newcommand{\EPFOL}{\ensuremath{{\FOL^-}}\xspace}
+\newcommand{\ALC}{\ensuremath{\mathcal{ALC}}\xspace}
+\newcommand{\EL}{\ensuremath{\mathcal{EL}}\xspace}
+\newcommand{\ELAN}{\ensuremath{{\mathcal{EL}^+}}\xspace}
+
+\newcommand{\st}{\mathit{\tau}\xspace}
+
+\newcommand\+[1]{\mathcal{#1}}
+
+\newcommand{\simil}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\raisebox{-.07em}{$\rightsquigarrow$}}}}
+\newcommand{\simul}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\underline{\makebox[.75em][l]{\hspace{-.05em}\raisebox{-.15ex}{$\rightarrow$}}}}}}
+
+\newcommand{\ext}[1]{\|#1\|}
+\newcommand{\size}[1]{\# #1}
+\newcommand{\leqs}{\leq_s}
+
+\newcommand{\atomL}{\textsc{atom}_L\xspace}
+\newcommand{\atomR}{\textsc{atom}_R\xspace}
+\newcommand{\atomLR}{\textsc{atom}_{L/R}\xspace}
+
+\newcommand{\zig}{\textsc{rel}_L\xspace}
+\newcommand{\zag}{\textsc{rel}_R\xspace}
+\newcommand{\zigzag}{\textsc{rel}_{L/R}\xspace}
+
+\newcommand{\injL}{\textsc{inj}_L\space}
+\newcommand{\injR}{\textsc{inj}_R\space}
+\newcommand{\injLR}{\textsc{inj}_{L/R}\space}
+
+\newcommand{\diam}{\exists r.}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+
+\newcommand{\pos}{\EL}
+\newcommand{\posre}{$\pos$-RE\xspace}
+\newcommand{\Id}{{\rm Id}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\simmax}{\sim^m}
+\newcommand{\dom}{{\rm dom}}
+\newcommand{\remove}{{\it remove}}
+\newcommand{\prevS}{{\it prevS}}
+\newcommand{\form}{{\it form}}
+\newcommand{\simset}{{\it sim}}
+\newcommand{\pred}{{\it pre}}
+\newcommand{\post}{{\it post}}
+
+\newcommand{\io}{
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{a finite model $\gM=\tup{\Delta,\interp{\cdot}}$}
+\Output{$\forall v\in \Delta$, a formula $F(v) \in \EL$, and  the
+simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
+\BlankLine}
+
+\newcommand{\pair}[2]{\langle #1,#2\rangle}
+\newcommand{\rg}{{\rm rg}}
+
+\newcommand{\tup}[1]{\langle #1\rangle}
+\newcommand{\cset}[1]{\{#1\}}
+
+\newcommand{\gM}{\mathcal{M}}
+\newcommand{\gG}{\mathcal{G}}
+\newcommand{\gL}{\mathcal{L}}
+\newcommand{\interp}[1]{|\!|#1|\!|}
+\newcommand{\rel}{\ensuremath{\mathsf{rel}}\xspace}
+\newcommand{\prop}{\ensuremath{\mathsf{prop}}\xspace}
+
+\newcommand{\sect}[1]{\S\ref{sec:#1}}
+
+%\theoremstyle{plain}
+%\newtheorem{thm}{Theorem}
+%\newtheorem{propos}[thm]{Proposition}
+%\newtheorem{lem}[thm]{Lemma}
+%\newtheorem{cor}[thm]{Corollary}
+%\newtheorem{fact}[thm]{Fact}
+%\newtheorem{defn}[thm]{Definition}
+%\theoremstyle{remark}
+%\newtheorem{ex}[thm]{Example}
+
+%\pagestyle{plain}  % switches on printing of running heads
+
+\spnewtheorem{convention}{Convention}{\bfseries}{}
+
+\iffullversion
+\title{Referring Expressions modulo Expressiveness\\{\sc(full version)}}
+\else
+\title{Using Logic in the
+Generation of Referring Expressions}
+\fi
+%
+\author{%
+Carlos Areces\inst{1}
+\and%
+Santiago Figueira\thanks{S.~Figueira was partially
+supported by CONICET (grant PIP 370) and UBA (grant UBACyT 20020090200116).}\inst{2}
+\and%
+Daniel Gor\'in\inst{3}
+}
+
+
+\institute{INRIA Nancy, Grand Est, France\\
+\email{areces@loria.fr}\\
+\and
+Departamento de Computaci\'on, FCEyN, UBA and CONICET,
+Argentina
+\and
+Departamento de Computaci\'on, FCEyN, UBA, Argentina\\
+\email{\{santiago,dgorin\}@dc.uba.fr}}
+
+\date{}
+
+\begin{document}
+\maketitle
+\begin{abstract}
+Resumen: El problema GRE es una tarea importante en la generaci\'on de lenguaje natural. En este trabajo, opta por el uso de lenguajes l\'ogicos en la fase de determinaci\'on de contenido (es decir, cuando las caracter\'isticas relevantes del target son seleccionadas). Muchas  L\'ogicas diferentes se pueden utilizar para esto y argumentamos que, para una aplicaci\'on particular, la elecci\'on real constituye un compromiso entre poder expresivo (cu\'antos objetos pueden ser distinguidos), la complejidad computacional (cuan dificil es determinar el contenido) y realizabilidad (cuan a menudo el contenido seleccionado podra 
+realizarse a una expresi\'on idiom\'atica). Mostramos que los resultados conocidos
+del \'area de la l\'ogica computacional pueden ser transferido a GRE.
+Adem\'as, nuestro enfoque es ortogonal a las propuestas anteriores lo que ilustramos  generalizando algoritmos de determinaci\'on de contenidos conocidos
+para hacerlos param\'etricos en la l\'ogica empleada.
+
+
+%We provide new complexity
+%bounds, discuss the issue of the length of the generated
+%descriptions, and propose ways in which the two approaches discussed
+%in this article can be combined.
+\end{abstract}
+
+
+\input{tradPaperLACL}
+
+\bibliographystyle{splncs03}
+\bibliography{plan}
+
+
+\end{document}
