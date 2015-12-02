@@ -7,7 +7,7 @@ trabajo en esta \'area se centra en el problema de la determinaci\'on del conten
 objetos en el contexto) y deja la realizaci\'on real (es decir, que expresa un hecho
 contenido como una expresi\'on gramaticalmente correcta) para tecnicas est\'andares.(excepto 16,21)
 Sin embargo, a\'un no existe un acuerdo general sobre la representaci\'on b\'asica de
-tanto la entrada y la salida del problema; esto se maneja mas bien de manera ad-hoc
+tanto la entrada y la salida del problema; esto se maneja m\'as bien de manera ad-hoc
 por cada nueva propuesta.
 Krahmer et al. [17] usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos para expresar un gran n\'umero de
 
@@ -16,7 +16,10 @@ con este tipo de estructuras. De hecho, no se trata de otra cosa que una represe
 
 ''Incluso las valoraciones'' (esto no entendi...), los modelos b\'asicos de la l\'ogica proposicional, pueden ser vistos como un grafo de un solo punto etiquetado.
  No es de extra\~nar que son muy adecuadas para la tarea.
-En este art\'iculo, nos ponemos del lado de [17] y usamos grafos etiquetados como entrada, pero sostenemos que una noci\'on importante se ha quedado fuera al tomar esta decisi\'on. Exactamente debido a su generalidad, los grafos no se definen por s\'i mismos, una unica noci\'on de igualdad. ¿Cu\'ando decimos que dos nodos en el grafo pueden o no pueden ser
+En este art\'iculo, nos ponemos del lado de [17] y usamos grafos etiquetados como entrada, pero sostenemos que una noci\'on importante se ha quedado fuera al tomar esta decisi\'on.
+
+
+ Exactamente debido a su generalidad, los grafos no definen por s\'i mismos, una unica noci\'on de igualdad. ¿Cu\'ando decimos que dos nodos en el grafo pueden o no pueden ser
 referenciados de forma \'unica en t\'erminos de sus propiedades? Esta pregunta s\'olo tiene sentido una vez que ya hemos fijado un cierto nivel de expresividad el cual determina cuando dos grafos, o dos elementos en el mismo gr\'afico, son equivalentes.
 La expresividad se puede formalizar usando las relaciones estructurales de los grafos (iso
 morfismos, etc.) o, alternativamente, lenguajes l\'ogicos. Ambas formas se presentan
@@ -33,12 +36,12 @@ A continuaci\'on, mostramos en [cap5] que ambos enfoques se pueden combinar y fi
 \newcommand{\aSniffing}{\mathit{sniffs}\xspace}
 \newcommand{\nBreed}{\mathit{beagle}\xspace}
 
-\section{Mediendo el poder expresivor}\label{sec:technical}
+\section{Mediendo el poder expresivo}\label{sec:technical}
 
 
 Las estructuras relacionales son muy adecuadas para la representaci\'on de situaciones o escenas. La estructura relacional (tambi\'en llamado ''el modelo relacional'') es un conjunto no vac\'io de objetos -el dominio- junto con una colecci\'on de las relaciones, cada uno con una aridad fija.
 Formalmente, asumimos un vocabulario fijo y finito (pero arbitrario) vocabulario de
-s\'imbolos de relaci\'on n-aria (las constantes y s\'imbolos de funci\'ones pueden ser representados como relaciones de aridad adecuada). 
+s\'imbolos de relaci\'on n-aria (las constantes y s\'imbolos de funciones pueden ser representadas como relaciones de aridad adecuada). 
 Un modelo relacional $\+M$ es una tupla 
 $\tup{\Delta,\interp{\cdot}}$ donde $\Delta$ es un conjunto no vac\'io, y
 $\interp{\cdot}$ es una funci\'on de interpretaci\'on, esto es,
@@ -49,8 +52,8 @@ $\#\Delta + \#\interp{\cdot}$, donde $\#\Delta$ es la cardinalidad
 de $\Delta$ y $\#\interp{\cdot}$ es la suma de los tama\~nos de todas las
 relaciones en $\interp{\cdot}$.
 
-La Figura~\ref{fig:cat-dog-1} abajo muestra como nosotros podemos representar una escene
-as un modelo relacional. Intuitivamente, $a$, $b$ y $d$ son dogs, mientras que 
+La Figura~\ref{fig:cat-dog-1} abajo muestra como nosotros podemos representar una escena
+como un modelo relacional. Intuitivamente, $a$, $b$ y $d$ son dogs, mientras que 
 $c$ y $e$ are cats;  $d$ es un small beagle;
  $b$ y $c$ son tambi\'en small.
  Nosotros leemos $\aSniffing(d,e)$ como ``{\em $d$ is sniffing $e$}''.

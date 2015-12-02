@@ -30,6 +30,101 @@
 \usepackage{caption}
 \usepackage{titling}
 \usepackage{hyperref}
+
+%%%DE LACL
+
+\newcommand{\nDog}{\mathit{dog}\xspace}
+\newcommand{\nCat}{\mathit{cat}\xspace}
+\newcommand{\aSmall}{\mathit{small}\xspace}
+\newcommand{\aSniffing}{\mathit{sniffs}\xspace}
+\newcommand{\nBreed}{\mathit{beagle}\xspace}
+
+\newcommand{\cset}[1]{\{#1\}}
+% esto controla la separación de los floats respecto al texto. necesitamos el espacio extra!
+\addtolength{\textfloatsep}{-13pt}
+\addtolength{\intextsep}{-8pt}
+
+% Compiling version
+\newif\iffullversion\fullversionfalse
+
+% for compatibility with older versions of algorithm2e
+\providecommand{\LinesNumbered}{\linesnumbered}
+%\providecommand{\dontprintsemicolon}{\DontPrintSemicolon}
+
+\newcommand{\pr}[2]{{\it pre}_{#1}(#2)}
+\newcommand{\su}[2]{{\it suc}_{#1}(#2)}
+\newcommand{\guard}{$\exists r,u,v,w:v \in
+\su{r}{u},w\in S(u),\su{r}{w}\cap S(v)=\emptyset$}
+\newcommand{\unary}{P}
+
+
+
+\newcommand{\findcite}{\cite{XXX}\fixme{cite!}\xspace}
+
+\newcommand{\FOL}{\ensuremath{\mathcal{FO}}\xspace}
+\newcommand{\EPFOL}{\ensuremath{{\FOL^-}}\xspace}
+\newcommand{\ALC}{\ensuremath{\mathcal{ALC}}\xspace}
+\newcommand{\EL}{\ensuremath{\mathcal{EL}}\xspace}
+\newcommand{\ELAN}{\ensuremath{{\mathcal{EL}^+}}\xspace}
+
+\newcommand{\st}{\mathit{\tau}\xspace}
+
+\newcommand\+[1]{\mathcal{#1}}
+
+\newcommand{\simil}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\raisebox{-.07em}{$\rightsquigarrow$}}}}
+\newcommand{\simul}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\underline{\makebox[.75em][l]{\hspace{-.05em}\raisebox{-.15ex}{$\rightarrow$}}}}}}
+
+\newcommand{\ext}[1]{\|#1\|}
+\newcommand{\size}[1]{\# #1}
+\newcommand{\leqs}{\leq_s}
+
+\newcommand{\atomL}{\textsc{atom}_L\xspace}
+\newcommand{\atomR}{\textsc{atom}_R\xspace}
+\newcommand{\atomLR}{\textsc{atom}_{L/R}\xspace}
+
+\newcommand{\zig}{\textsc{rel}_L\xspace}
+\newcommand{\zag}{\textsc{rel}_R\xspace}
+\newcommand{\zigzag}{\textsc{rel}_{L/R}\xspace}
+
+\newcommand{\injL}{\textsc{inj}_L\space}
+\newcommand{\injR}{\textsc{inj}_R\space}
+\newcommand{\injLR}{\textsc{inj}_{L/R}\space}
+
+\newcommand{\diam}{\exists r.}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+
+\newcommand{\pos}{\EL}
+\newcommand{\posre}{$\pos$-RE\xspace}
+\newcommand{\Id}{{\rm Id}}
+\renewcommand{\phi}{\varphi}
+\newcommand{\simmax}{\sim^m}
+\newcommand{\dom}{{\rm dom}}
+\newcommand{\remove}{{\it remove}}
+\newcommand{\prevS}{{\it prevS}}
+%\newcommand{\form}{{\it form}}
+\newcommand{\simset}{{\it sim}}
+\newcommand{\pred}{{\it pre}}
+\newcommand{\post}{{\it post}}
+
+\newcommand{\io}{
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{a finite model $\gM=\tup{\Delta,\interp{\cdot}}$}
+\Output{$\forall v\in \Delta$, a formula $F(v) \in \EL$, and  the
+simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
+\BlankLine}
+
+\newcommand{\pair}[2]{\langle #1,#2\rangle}
+\newcommand{\rg}{{\rm rg}}\\
+
+
+
+
+
+
+%%% DE LACL
+
 \renewcommand{\listtablename}{Indice de Tablas}
 \renewcommand{\tablename}{Tabla}
 \hyphenation{a-tri-bu-to}
@@ -113,23 +208,6 @@
 %\newcommand{\interp}[1]{|\!|#1|\!|}
 
 
-%\newcommand{\nBlue}{\textsf{azul}\xspace}
-%\newcommand{\nGreen}{\textsf{verde}\xspace}
-%\newcommand{\nSmall}{\textsf{peque\~no}\xspace}
-%\newcommand{\nBig}{\textsf{grande}\xspace}
-%\newcommand{\nLarge}{\textsf{grande}\xspace}
-%\newcommand{\nRed}{\textsf{rojo}\xspace}
-%\newcommand{\nYellow}{\textsf{amarillo}\xspace}
-%\newcommand{\nBall}{\textsf{esfera}\xspace}
-%\newcommand{\nCube}{\textsf{cubo}\xspace}
-%\newcommand{\nOntop}{\textsf{arriba-de}\xspace}
-%\newcommand{\nTop}{\textsf{arriba}\xspace}
-%\newcommand{\nBelow}{\textsf{abajo-de}\xspace}
-%\newcommand{\nRightof}{\textsf{a-la-der-de}\xspace}
-%\newcommand{\nLeftof}{\textsf{a-la-izq-de}\xspace}
-%\newcommand{\nLeft}{\textsf{izquierda}\xspace}
-
-
 \newcommand{\nBlue}{\mathit{blue}\xspace}
 \newcommand{\nGreen}{\mathit{green}\xspace}
 \newcommand{\nSmall}{\mathit{small}\xspace}
@@ -145,7 +223,7 @@
 \newcommand{\nRightof}{\mathit{rightof}\xspace}
 \newcommand{\nLeftof}{\mathit{leftof}\xspace}
 \newcommand{\nLeft}{\mathit{left}\xspace}
-\newcommand{\nright}{\mathit{right}\xspace}
+\newcommand{\nRight}{\mathit{right}\xspace}
 
 \usepackage[algoruled, linesnumbered,noend]{algorithm2e}
 
@@ -210,6 +288,8 @@
 %\renewcommand{\algorithmname}{Algoritmo}
 %\renewcommand{\refname}{Bibliograf{\'\i}a}
 \include{1_intro} %trabajo previo
+
+\include{1_intro_logica}
 
 \include{2_seleccion}
 
