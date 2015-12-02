@@ -10,15 +10,15 @@ MinPos.y=-1
 MaxPos.x=-1
 MaxPos.y=-1
 NormalPos.left=4
-NormalPos.top=36
-NormalPos.right=1562
-NormalPos.bottom=630
+NormalPos.top=26
+NormalPos.right=1079
+NormalPos.bottom=529
 Class=LaTeXView
 Document=mainZoom.tex
 
 [Frame0_View0,0]
-TopLine=57
-Cursor=1549
+TopLine=124
+Cursor=6480
 
 [SessionInfo]
 FrameCount=1
