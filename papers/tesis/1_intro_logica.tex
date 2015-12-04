@@ -1,7 +1,18 @@
 \chapter{Introducci\'on a la L-simulaci\'on}
+\label{sec:intro_logica}
 
-Exactamente debido a su generalidad, los grafos no definen por s\'i mismos, una unica noci\'on de igualdad. Cu\'ando decimos que dos nodos en el grafo pueden o no pueden ser
-referenciados de forma \'unica en t\'erminos de sus propiedades? Esta pregunta s\'olo tiene sentido una vez que ya hemos fijado un cierto nivel de expresividad el cual determina cuando dos grafos, o dos elementos en el mismo gr\'afico, son equivalentes.
+No existe un acuerdo general sobre la representaci\'on b\'asica de
+tanto la entrada y la salida del problema; esto se maneja m\'as bien de manera ad-hoc
+por cada nueva propuesta.
+Krahmer et al.~\cite{Krahmer2003} usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos para expresar un gran n\'umero de dominios y hay muchos algoritmos conocidos para tratar
+con este tipo de estructuras. 
+
+De hecho, no se trata de otra cosa que una representaci\'on alternativa de los modelos relacionales, usada t\'ipicamente para proporcionar sem\'antica a los lenguajes formales como el de primer orden y l\'ogicas de orden superior, l\'ogicas modales, etc.
+
+
+Exactamente debido a su generalidad, los grafos no definen por s\'i mismos, una \'unica noci\'on de igualdad. Cu\'ando decimos que dos nodos en el grafo pueden o no pueden ser
+referenciados de forma \'unica en t\'erminos de sus propiedades? Esta pregunta s\'olo tiene sentido una vez que ya hemos fijado un cierto nivel de expresividad el cual determina cuando dos grafos, o dos elementos en el mismo gr\'afo, son equivalentes.
+
 La expresividad se puede formalizar usando las relaciones estructurales de los grafos (isomorfismos, etc.) o, alternativamente, lenguajes l\'ogicos. 
 
 Ambas formas se presentan en Secci\'on \ref{sec:estructurales}, donde tambi\'en discutimos c\'omo arreglar la noci\'on de impacto de expresividad 
@@ -12,16 +23,14 @@ nociones de expresividad.
 \section{Estructuras}
 \label{sec:estructurales}
 
-%\newcommand{\nBall}{\mathit{ball}\xspace}
-%\newcommand{\nCube}{\mathit{cube}\xspace}
-%\newcommand{\aSmall}{\mathit{small}\xspace}
-\newcommand{\aLarge}{\mathit{large}\xspace}
 
-%\newcommand{\nOntop}{\mathit{ontop}\xspace}
-%\newcommand{\nRightof}{\mathit{right of}\xspace}
-\newcommand{\nLeftOf}{\mathit{leftof}\xspace}
-\newcommand{\aRed}{\mathit{red}\xspace}
-\newcommand{\aYellow}{\mathit{yellow}\xspace}
+\subsection{Lenguajes l\'ogicos}
+
+
+%\newcommand{\aLarge}{\mathit{large}\xspace}
+%\newcommand{\nLeftOf}{\mathit{leftof}\xspace}
+%\newcommand{\aRed}{\mathit{red}\xspace}
+%\newcommand{\aYellow}{\mathit{yellow}\xspace}
 
 Las estructuras relacionales son muy adecuadas para la representaci\'on de situaciones o escenas. La estructura relacional (tambi\'en llamado ``el modelo relacional'') es un conjunto no vac\'io de objetos -el dominio- junto con una colecci\'on de las relaciones, cada uno con una aridad fija.
 Formalmente, asumimos un vocabulario fijo y finito (pero arbitrario) vocabulario de
@@ -38,7 +47,7 @@ $\#\Delta + \#\interp{\cdot}$, donde $\#\Delta$ es la cardinalidad
 de $\Delta$ y $\#\interp{\cdot}$ es la suma de todas las aridades de las
 relaciones en $\interp{\cdot}$.
 
-La Figura~\ref{grafo-GRE3D7-stimulus_b} abajo muestra como nosotros podemos representar una escena
+La Figura~\ref{grafo-GRE3D7-stimulus_b} abajo muestra como podemos representar una escena
 como un modelo relacional. Intuitivamente, $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$,y $e_7$, son 'cube', mientras que 
 $e_1$, $e_3$ y $e_6$ son 'yellow', $e_2$, $e_4$, $e_5$, $e_7$ son 'red';
 %Para las relaciones tenemos $\Ontop(e_3,e_2)$ como ``{\em $e_3$ on top of $e_2$}''.
@@ -65,30 +74,9 @@ $\interp{\nOntop}$     & = & $\cset{(e_3,e_2)}$\\
 \put(0,-50){\begin{tikzpicture}
   [
     n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
-    aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+    %aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
   ]
-% \node[n,label=above:$a$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}] (a) {};
-
-% \node[n,label=above:$b$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \aSmall \end{array}$}, right of=a] (b) {};
-
-% \node[n,label=above:$c$,label=below:{\relsize{-1}$\begin{array}{c}\nCat\\ \aSmall\end{array}$}, right of=b] (c) {};
-
-% \node[n,label=above left:$d$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \nBreed\\  \aSmall \end{array}$}, below of=a,xshift=25pt,yshift=-10pt] (d) {};
-
-% \node[n,label=above right:$e$,,label=below:{\relsize{-1}$\begin{array}{c}\nCat\end{array}$},right of=d] (e) {};
-
-% \draw [aSniffing,loop left] (a) to node[above,xshift=-5pt]{\relsize{-1}$\aSniffing$} (a);
-
-% \draw [aSniffing,bend right=40] (b) to node[auto,swap]{\relsize{-1}$\aSniffing$} (a);
-
-% \draw [aSniffing,bend right=40] (c) to node[auto,swap]{\relsize{-1}$\aSniffing$} (b);
-
-% \draw[aSniffing, bend left=40] (d) to node[auto]{\relsize{-1}$\aSniffing$} (e);
-% \draw[aSniffing, bend left=40] (e) to node[auto,swap]{\relsize{-1}$\aSniffing$} (d);
-
-
-%\begin{figure}
-%\centering
 %\begin{tikzpicture}
 %  [
 %    n/.style={circle,fill,draw,inner sep=3pt,node distance=2cm},
@@ -144,14 +132,140 @@ $\interp{\nOntop}$     & = & $\cset{(e_3,e_2)}$\\
 %\end{figure}
  \end{tikzpicture}}
  \end{picture}
-
  \end{left}
- \caption{Representaci\'on de escenas de Graph $\+S$.\label{fig:cat-dog-1}}
+ \caption{Representaci\'on de escenas de Graph $\+S$.\label{GRE3D7-stimulus-conLetras}}
  \end{figure}
+
+
+Los languajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relational. 
+
+Por ejemplo, el lenguaje cl\'asico
+de l\'ogica de primer-orden (con igualdad), \FOL, dado por:
+$$
+  \top \mid x_i \not\approx x_j \mid  r (\bar x) \mid \lnot \gamma \mid \gamma \land \gamma' \mid \exists x_i . \gamma
+$$
+%
+donde $\gamma,\gamma' \in \FOL$,
+$r$ es un s\'imbolo de relaci\'on $n$-ario y $\bar x$ es una $n$-tupla de variables.
+Como es usual, $\gamma \lor \gamma'$ y $\forall x . \gamma$ son las versiones cortas de
+$\lnot(\lnot\gamma \land \lnot\gamma')$ y $\lnot\exists x . \lnot\gamma$, respectivamente.
+F\'ormulas de la forma $\top$, $x_i \not\approx x_j$ y $r(\bar
+x)$ son llamados \emph{atomos}.%
+  \footnote{%
+    Por razones t\'ecnicas, incluimos el s\'imbolo de desigualdad symbol $\not \approx$ como
+    primitivo. La igualdad puede ser definida usando negaci\'on.
+  }
+Dado un modelo relacional $\+M = \tup{\Delta,\interp{\cdot}}$ y una
+f\'ormula $\gamma$ con variables libres%
+\footnote{%
+    W.l.o.g.\ asumimos que cada variable no puede aparecer libre y ligada a la vez, que una variable no esta ligada 2 veces,
+    y que el \'indice de las variables crece en la f\'ormula de izquierda a derecha.%
+}
+entre $x_1\ldots x_n$, inductivamente definimos la \emph{extensi\'on} o
+\emph{interpretaci\'on} de $\gamma$ como el conjunto de $n$-tuplas
+ $\interp{\gamma}^n \subseteq \Delta^n$ que satisface:
+
+\begin{center}
+\begin{tabular}{rcl@{\hspace{1cm}}rcl}
+$\interp{\top}^n$ &$=$& $\Delta^n$
+&
+$\interp{x_i \not\approx x_j}^n$ &$=$& $\cset{\bar{a} \mid \bar{a} \,{\in}\, \Delta^n, a_i \neq a_j}$
+\\
+$\interp{\lnot\delta}^n$ &$=$& $\Delta^n \setminus \interp{\delta}^n$
+&
+$\interp{r (x_{i_1} \ldots x_{i_k})}^n$ & $=$&$\cset{\bar{a} \mid \bar{a} \,{\in}\, \Delta^n, (a_{i_1} \ldots a_{i_k}) {\in} \interp{r}}$
+\\
+$\interp{\delta \land \theta}^n$ &$=$& $\interp{\delta}^n \cap \interp{\theta}^n$
+&
+$\interp{\exists x_{l}.\delta}^n$ &$=$& $\cset{\bar a \mid \bar a  e  \in \interp{\delta'}^{n+1}\ \text{for some $e$}}$
+\end{tabular}
+\end{center}
+%
+donde $1 \le i,j, i_1, \ldots, i_k \le n$, $\bar{a} = (a_1\ldots
+a_n)$, $\bar{a}e = (a_1\ldots a_n,e)$ y $\delta'$ son
+obtenidos reeplazando todas las ocurrencias de $x_l$ en $\delta$ por
+$x_{n+1}$. Cuando la cardinalidad de las tuplas involucradas en el contexto es conocida 
+escribiremos $\interp{\gamma}$ en lugar de
+$\interp{\gamma}^n$.
+
+Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente definir el problema de L-GRE para un conjunto target de elementos T %(ligeramente adaptaremos la definici\'on en ~\cite{arec2:2008:Areces}):
+
+\medskip
+\noindent
+{\small
+\begin{center}
+\begin{tabular}{ll} \hline
+\multicolumn{2}{l}{
+\textsc{Problema $\gL$-GRE }}\\ \hline
+\ \ Input: & a model $\gM=\tup{\Delta,\interp{\cdot}}$ and a nonempty target  set $T \subseteq \Delta$.\\
+\ \ Output: & a formula $\varphi \in \gL$ such that
+$\interp{\varphi} = T$ if it exists, and $\bot$ otherwise.\\ \hline
+\end{tabular}
+\end{center}}
+Cuando el output es no $\bot$, decimos que $\phi$ es una
+\emph{$\+L$-referring expression ($\+L$-RE) para $T$ en $\+M$}.
+
+La salida de el problema $\+L$-GRE es una f\'ormula de
+$\+L$ cuya interpretaci\'on en el modelo de input $\gM$ es el conjunto target, si
+esa f\'ormula existe. 
+
+
+% Esta definici\'on aplica incluso a la GRE para
+%objetos  de el dominio teniendo un conjunto singleton como target.
+
+Consideramos solo modelos relacionales con s\'imbolos de relaciones unarios y binarios, usaremos p para las proposiciones (propiedades) y r para los s\'imbolos de relaci\'on binarias.
+
+
+Seleccionando el lenguaje apropiado...
+
+Dado un modelo M, podr\'ia haber un infinito n\'umero de f\'ormulas que de forma \'unica
+describan un target (incluso f\'ormulas que no son l\'ogicamente equivalentes podr\'ian tener
+la misma interpretaci\'on una vez al modelo este fijo). 
+
+Como es bien conocido en la comunidad de generaci\'on autom\'atica de lenguaje natural, diferentes
+realizaciones del mismo contenido podr\'ian dar lugar a expresiones referenciales que son m\'as o menos
+apropiadas en el contexto dado. 
+
+Argumentamos que la generaci\'on de contenido usando lenguajes con diferente poder expresivo puede tener un impacto en la estapa posterior
+de realizaci\'on sint\'actica (surface realization).
+
+
+Supongamos que queremos identificar a $e_5$ del Contexto \ref{GRE3D7-stimulus-conLetras}, las siguientes son f\'ormulas que identifican a un\'ivocamente a $e_5$ en el contexto considerado.
+
+\begin{table}
+$$
+\begin{array}{cl}
+ \gamma_1: & \nLarge(x) \land \aRed(x) \land \nBall(x)\\[3pt]
+  %
+ \gamma_2: & \aRed(x) \land \nBall(x)\\[3pt]
+  %
+ \gamma_3: & \aLarge(x) \land \nBall(x)\\[3pt]
+  %
+ \gamma_4: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
+   \exists y . (\nRightof(x,y) \land \aLarge(y) \land \aRed(y) \land \nCube(y))\\[3pt]
+  %ex1
+ \gamma_5: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
+  \forall y . (\neg \nBall(y) \lor \neg \nRightof(x,y))\\[3pt]
+  %ex 2
+ \gamma_6: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
+  \exists y . (x \not\approx y \land \nCube(y) \land \nRightof(x,y))\\[3pt]
+  %ex 3
+ \gamma_7: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
+  \exists y . (\nCube(y) \land \aRed(y) \land \nLeftof(y,x))
+  %ex 4
+ \end{array}
+$$
+\caption{Descripciones alternativas para el objeto $e_5$ del Contexto~\ref{GRE3D7-stimulus-conLetras}.}\label{tab:gammas}
+\end{table}
+
+Notar que $\gamma_2$ y $\gamma_3$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas.
+$\gamma_4$ se puede realizar como ``Large red ball right-of large red cube''. Esta f\'ormula junto con $\gamma_1$, $\gamma_2$ y $\gamma_3$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y solo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpus ~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}.
+
+  
 
 
 \subsection{Grafos}
 
 
-\subsection{L\'ogicas modales}
+
 
