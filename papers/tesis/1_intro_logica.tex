@@ -1,6 +1,8 @@
 \chapter{Introducci\'on a la L-simulaci\'on}
 \label{sec:intro_logica}
 
+mover a intro... y linkear con est capitulo...
+
 No existe un acuerdo general sobre la representaci\'on b\'asica de
 tanto la entrada y la salida del problema; esto se maneja m\'as bien de manera ad-hoc
 por cada nueva propuesta.
@@ -33,7 +35,7 @@ nociones de expresividad.
 %\newcommand{\aYellow}{\mathit{yellow}\xspace}
 
 Las estructuras relacionales son muy adecuadas para la representaci\'on de situaciones o escenas. La estructura relacional (tambi\'en llamado ``el modelo relacional'') es un conjunto no vac\'io de objetos -el dominio- junto con una colecci\'on de las relaciones, cada uno con una aridad fija.
-Formalmente, asumimos un vocabulario fijo y finito (pero arbitrario) vocabulario de
+Formalmente, asumimos un vocabulario fijo y finito (pero arbitrario) de
 s\'imbolos de relaci\'on n-aria (las constantes y s\'imbolos de funci\'ones pueden ser representados como relaciones de aridad adecuada). 
 
 
@@ -41,14 +43,14 @@ Un modelo relacional $\+M$ es una tupla
 $\tup{\Delta,\interp{\cdot}}$ donde $\Delta$ es un conjunto no vac\'io, y
 $\interp{\cdot}$ es una funci\'on de interpretaci\'on, esto es,
 $\interp{r} \subseteq \Delta^n$ para todo s\'imbolo de relaci\'on $n$-aria tal que
-$r$ est\'a en el vocabulario. Decimos que $\+M$ es \emph{finite} cuando
+$r$ est\'a en el vocabulario. $\+M$ es \emph{finito} cuando
 $\Delta$ es finito.  El \emph{tama\~no} de un modelo $\+M$ es la suma
 $\#\Delta + \#\interp{\cdot}$, donde $\#\Delta$ es la cardinalidad
 de $\Delta$ y $\#\interp{\cdot}$ es la suma de todas las aridades de las
 relaciones en $\interp{\cdot}$.
 
 La Figura~\ref{grafo-GRE3D7-stimulus_b} abajo muestra como podemos representar una escena
-como un modelo relacional. Intuitivamente, $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$,y $e_7$, son 'cube', mientras que 
+como un modelo relacional. Intuitivamente, $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$ y $e_7$, son 'cube', mientras que 
 $e_1$, $e_3$ y $e_6$ son 'yellow', $e_2$, $e_4$, $e_5$, $e_7$ son 'red';
 %Para las relaciones tenemos $\Ontop(e_3,e_2)$ como ``{\em $e_3$ on top of $e_2$}''.
 %$\Rightof(e_4,e_5)$, $\Rightof(e_6,e_7)$, $\Lefttof(e_5,e_4)$,$\Leftof(e_7,e_6)$. $e_4$ y $e_5$ son 'large', los dem\'as 'small'.
@@ -133,14 +135,15 @@ $\interp{\nOntop}$     & = & $\cset{(e_3,e_2)}$\\
  \end{tikzpicture}}
  \end{picture}
  \end{left}
- \caption{Representaci\'on de escenas de Graph $\+S$.\label{GRE3D7-stimulus-conLetras}}
+ \caption{Representaci\'on del Contexto \ref{GRE3D7-stimulus1}.
+ \label{grafo-GRE3D7-stimulus_b}}
  \end{figure}
 
 
 Los languajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relational. 
 
 Por ejemplo, el lenguaje cl\'asico
-de l\'ogica de primer-orden (con igualdad), \FOL, dado por:
+de la l\'ogica de primer-orden (con desigualdad), \FOL, dado por:
 $$
   \top \mid x_i \not\approx x_j \mid  r (\bar x) \mid \lnot \gamma \mid \gamma \land \gamma' \mid \exists x_i . \gamma
 $$
@@ -184,9 +187,10 @@ $\interp{\exists x_{l}.\delta}^n$ &$=$& $\cset{\bar a \mid \bar a  e  \in \inter
 donde $1 \le i,j, i_1, \ldots, i_k \le n$, $\bar{a} = (a_1\ldots
 a_n)$, $\bar{a}e = (a_1\ldots a_n,e)$ y $\delta'$ son
 obtenidos reeplazando todas las ocurrencias de $x_l$ en $\delta$ por
-$x_{n+1}$. Cuando la cardinalidad de las tuplas involucradas en el contexto es conocida 
-escribiremos $\interp{\gamma}$ en lugar de
-$\interp{\gamma}^n$.
+$x_{n+1}$. 
+%Cuando la cardinalidad de las tuplas involucradas en el contexto es conocida 
+%escribiremos $\interp{\gamma}$ en lugar de
+%$\interp{\gamma}^n$.
 
 Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente definir el problema de L-GRE para un conjunto target de elementos T %(ligeramente adaptaremos la definici\'on en ~\cite{arec2:2008:Areces}):
 
@@ -197,13 +201,13 @@ Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente defi
 \begin{tabular}{ll} \hline
 \multicolumn{2}{l}{
 \textsc{Problema $\gL$-GRE }}\\ \hline
-\ \ Input: & a model $\gM=\tup{\Delta,\interp{\cdot}}$ and a nonempty target  set $T \subseteq \Delta$.\\
-\ \ Output: & a formula $\varphi \in \gL$ such that
-$\interp{\varphi} = T$ if it exists, and $\bot$ otherwise.\\ \hline
+\ \ Input: & a model $\gM=\tup{\Delta,\interp{\cdot}}$ y un conjunto trget no vac\'io $T \subseteq \Delta$.\\
+\ \ Output: & a formula $\varphi \in \gL$ tal que
+$\interp{\varphi} = T$ si existe, y $\bot$ caso contrario.\\ \hline
 \end{tabular}
 \end{center}}
 Cuando el output es no $\bot$, decimos que $\phi$ es una
-\emph{$\+L$-referring expression ($\+L$-RE) para $T$ en $\+M$}.
+\emph{expresi\'on referencial en $\+L$. (ER-$\+L$) para $T$ en $\+M$}.
 
 La salida de el problema $\+L$-GRE es una f\'ormula de
 $\+L$ cuya interpretaci\'on en el modelo de input $\gM$ es el conjunto target, si
@@ -235,11 +239,11 @@ Supongamos que queremos identificar a $e_5$ del Contexto \ref{GRE3D7-stimulus-co
 \begin{table}
 $$
 \begin{array}{cl}
- \gamma_1: & \nLarge(x) \land \aRed(x) \land \nBall(x)\\[3pt]
+ \gamma_1: & \aRed(x) \land \nBall(x)\\[3pt]
   %
- \gamma_2: & \aRed(x) \land \nBall(x)\\[3pt]
+ \gamma_2: & \aLarge(x) \land \nBall(x)\\[3pt]
   %
- \gamma_3: & \aLarge(x) \land \nBall(x)\\[3pt]
+ \gamma_3: & \nLarge(x) \land \aRed(x) \land \nBall(x)\\[3pt]
   %
  \gamma_4: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
    \exists y . (\nRightof(x,y) \land \aLarge(y) \land \aRed(y) \land \nCube(y))\\[3pt]
@@ -260,6 +264,73 @@ $$
 
 Notar que $\gamma_2$ y $\gamma_3$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas.
 $\gamma_4$ se puede realizar como ``Large red ball right-of large red cube''. Esta f\'ormula junto con $\gamma_1$, $\gamma_2$ y $\gamma_3$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y solo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpus ~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}.
+
+Bueno, pero entonces podemos elegir otra l\'ogca cuyo lenguaje este restringido a las ER que queremos generar.
+
+Restringiendo la determinaci\'on de contenido a FO-, aseguramos que f\'ormulas como  $\gamma_5$ no se generar\'an. 
+Si prohibimos el distinto del lenguaje  $\gamma_6$ tambi\'en queda exclu\'ida.
+
+%El hecho de que el lenguaje de representaci\'on utilizado tiene un impacto sobre la determinaci\'on de contenido es obvio, 
+%pero no ha recibido la atenci\'on que merece. 
+%Areces et al. [1] usaron diferentes l\'ogicas de descripci\'on (una familia de lenguajes formales utilizado en 
+%representaci\'on del conocimiento, vea [2]) para clasificar y dar un marco formal para
+%trabajo previo sobre GRE. 
+
+Usar l\'ogicas de descripci\'on en lugar de fragmentos de FO es s\'olo una cuesti\'on de notaci\'on, como la mayor\'ia de l\'ogicas 
+descriptivas se pueden ver como
+fragmentos de FO. Por ejemplo, el lenguaje de la l\'ogica de descripci\'on ALC, se define sint\'acticamente como el conjunto de f\'ormulas,
+$$
+\top \mid p \mid \neg \gamma \mid \gamma \wedge \gamma' \mid  \exists r. \gamma
+$$
+(donde $p$ es un s\'imbolo proposicional, $r$ s\'imbolo relacional binario, y $\gamma,\gamma' \in \ALC$) corresponde al fragmento 
+sint\'actico de
+\FOL sin $\not\approx$, como es mostrado por la traducci\'on est\'andar $\st_x$:
+
+\begin{center}
+\begin{tabular}{rcl@{\hspace{1cm}}rcl}
+$ \st_{x_i}(\top)$ &$=$& $\top$
+&
+$\st_{x_i}(\gamma_1 \land \gamma_2)$ &$=$& $\st_{x_i}(\gamma_1) \land \st_{x_i}(\gamma_2)$
+\\
+  $\st_{x_i}(p)$ &$=$& $p(x_i)$
+&
+$\st_{x_i}(\exists r . \gamma)$ &$=$& $\exists x_{i+1} . (r(x_i,x_{i+1}) \land \st_{x_{i+1}}(\gamma))$
+\\
+ $\st_{x_i}(\lnot \gamma)$ &$=$& $\lnot\st_{x_i}(\gamma)$
+&
+\end{tabular}
+\end{center}
+
+En efecto, dado un modelo relacional $\+M$, la extensi\'on de una f\'ormula \ALC en $\+M$ coincide exactamente con la extensi\'on
+ de $\st_{x_1}(\varphi)$ (v\'ease, por ejemplo, ~\cite{baad:desc03}). Gracias
+a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes podemos definir 
+$\interp{\varphi} = \interp{\st_{x_1}(\varphi)}$.
+
+
+
+
+ Volviendo a nuestro ejemplo anterior, mediante la restricci\'on de la generaci\'on de contenido
+a f\'ormulas de $\ALC$ (o equivalentemente, el fragmento correspondiente de \FOL)
+evitar\'iamos f\'ormulas como
+$\gamma_5$ (sin igualdad) y
+
+$\gamma_4$ (aparece cuanti elemento ed
+siempre en segunda posici\'on de argumento). ESTE EJ NO LO PUSE... ver si consigo alguno interesante
+
+
+%Generaci\'on se discute en ~\cite{AKS08}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
+%y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, consideando por ejemplo \ELAN 
+%(\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
+%lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
+
+
+
+
+
+----
+Argumento a favor EL
+----
+
 
   
 
