@@ -6,7 +6,7 @@ mover a intro... y linkear con est capitulo...
 No existe un acuerdo general sobre la representaci\'on b\'asica de
 tanto la entrada y la salida del problema; esto se maneja m\'as bien de manera ad-hoc
 por cada nueva propuesta.
-Krahmer et al.~\cite{Krahmer2003} usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos para expresar un gran n\'umero de dominios y hay muchos algoritmos conocidos para tratar
+\cite{Krahmer2003} usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos para expresar un gran n\'umero de dominios y hay muchos algoritmos conocidos para tratar
 con este tipo de estructuras. 
 
 De hecho, no se trata de otra cosa que una representaci\'on alternativa de los modelos relacionales, usada t\'ipicamente para proporcionar sem\'antica a los lenguajes formales como el de primer orden y l\'ogicas de orden superior, l\'ogicas modales, etc.
@@ -56,8 +56,8 @@ $e_1$, $e_3$ y $e_6$ son 'yellow', $e_2$, $e_4$, $e_5$, $e_7$ son 'red';
 %$\Rightof(e_4,e_5)$, $\Rightof(e_6,e_7)$, $\Lefttof(e_5,e_4)$,$\Leftof(e_7,e_6)$. $e_4$ y $e_5$ son 'large', los dem\'as 'small'.
 
  \begin{figure}
- \begin{left}
- \begin{tabular}{rcl}
+\begin{flushleft}
+\begin{tabular}{rcl}
 $\Delta$              & = & $\cset{e_1,e_2,e_3,e_4,e_5,e_6,e_7}$\\
 $\interp{\aRed}$      & = & $\cset{e_2,e_4,e_5,e_7}$\\
 $\interp{\aYellow}$   & = & $\cset{e_1,e_3,e_6}$\\
@@ -134,13 +134,13 @@ $\interp{\nOntop}$     & = & $\cset{(e_3,e_2)}$\\
 %\end{figure}
  \end{tikzpicture}}
  \end{picture}
- \end{left}
+ \end{flushleft}
  \caption{Representaci\'on del Contexto \ref{GRE3D7-stimulus1}.
  \label{grafo-GRE3D7-stimulus_b}}
  \end{figure}
 
 
-Los languajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relational. 
+Los languajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relacional. 
 
 Por ejemplo, el lenguaje cl\'asico
 de la l\'ogica de primer-orden (con desigualdad), \FOL, dado por:
@@ -149,7 +149,7 @@ $$
 $$
 %
 donde $\gamma,\gamma' \in \FOL$,
-$r$ es un s\'imbolo de relaci\'on $n$-ario y $\bar x$ es una $n$-tupla de variables.
+$r$ es un s\'imbolo de relaci\'on $n$-aria y $\bar x$ es una tupla de $n$ variables.
 Como es usual, $\gamma \lor \gamma'$ y $\forall x . \gamma$ son las versiones cortas de
 $\lnot(\lnot\gamma \land \lnot\gamma')$ y $\lnot\exists x . \lnot\gamma$, respectivamente.
 F\'ormulas de la forma $\top$, $x_i \not\approx x_j$ y $r(\bar
@@ -201,13 +201,13 @@ Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente defi
 \begin{tabular}{ll} \hline
 \multicolumn{2}{l}{
 \textsc{Problema $\gL$-GRE }}\\ \hline
-\ \ Input: & a model $\gM=\tup{\Delta,\interp{\cdot}}$ y un conjunto trget no vac\'io $T \subseteq \Delta$.\\
-\ \ Output: & a formula $\varphi \in \gL$ tal que
+\ \ Input: & un model $\gM=\tup{\Delta,\interp{\cdot}}$ y un conjunto target no vac\'io $T \subseteq \Delta$.\\
+\ \ Output: & una f\'ormula $\varphi \in \gL$ tal que
 $\interp{\varphi} = T$ si existe, y $\bot$ caso contrario.\\ \hline
 \end{tabular}
 \end{center}}
 Cuando el output es no $\bot$, decimos que $\phi$ es una
-\emph{expresi\'on referencial en $\+L$. (ER-$\+L$) para $T$ en $\+M$}.
+\emph{expresi\'on referencial en $\+L$ (ER-$\+L$) para $T$ en $\+M$}.
 
 La salida de el problema $\+L$-GRE es una f\'ormula de
 $\+L$ cuya interpretaci\'on en el modelo de input $\gM$ es el conjunto target, si
@@ -217,14 +217,17 @@ esa f\'ormula existe.
 % Esta definici\'on aplica incluso a la GRE para
 %objetos  de el dominio teniendo un conjunto singleton como target.
 
-Consideramos solo modelos relacionales con s\'imbolos de relaciones unarios y binarios, usaremos p para las proposiciones (propiedades) y r para los s\'imbolos de relaci\'on binarias.
+Consideramos solo modelos relacionales con s\'imbolos de relaciones unarios y binarios, usaremos $p$ para las proposiciones (propiedades) y $r$ para los s\'imbolos de relaci\'on binarias.
 
 
 Seleccionando el lenguaje apropiado...
 
 Dado un modelo M, podr\'ia haber un infinito n\'umero de f\'ormulas que de forma \'unica
-describan un target (incluso f\'ormulas que no son l\'ogicamente equivalentes podr\'ian tener
+describan al target (incluso f\'ormulas que no son l\'ogicamente equivalentes podr\'ian tener
 la misma interpretaci\'on una vez al modelo este fijo). 
+
+
+Por ejemplo en el Contexto \ref{GRE3D7-stimulus1} \Large \Ball y \Red \Ball son diferentes f\'ormulas pero tienen la misma interpretaci\'on en $+M$.
 
 Como es bien conocido en la comunidad de generaci\'on autom\'atica de lenguaje natural, diferentes
 realizaciones del mismo contenido podr\'ian dar lugar a expresiones referenciales que son m\'as o menos
