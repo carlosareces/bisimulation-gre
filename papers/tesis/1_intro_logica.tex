@@ -4,30 +4,39 @@
 mover a intro... y linkear con est capitulo...
 
 No existe un acuerdo general sobre la representaci\'on b\'asica de
-tanto la entrada y la salida del problema; esto se maneja m\'as bien de manera ad-hoc
+tanto la entrada y la salida del problema de GER; esto se maneja m\'as bien de manera ad-hoc
 por cada nueva propuesta.
-\cite{Krahmer2003} usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos para expresar un gran n\'umero de dominios y hay muchos algoritmos conocidos para tratar
+
+\cite{Krahmer2003} usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos 
+para expresar un gran n\'umero de dominios y hay muchos algoritmos conocidos para tratar
 con este tipo de estructuras. 
 
-De hecho, no se trata de otra cosa que una representaci\'on alternativa de los modelos relacionales, usada t\'ipicamente para proporcionar sem\'antica a los lenguajes formales como el de primer orden y l\'ogicas de orden superior, l\'ogicas modales, etc.
+De hecho, no se trata de otra cosa que una representaci\'on alternativa de los modelos relacionales, usada t\'ipicamente }}
+para proporcionar sem\'antica a los lenguajes formales como el de primer orden y l\'ogicas de orden superior, l\'ogicas modales, etc.
 
 
-Exactamente debido a su generalidad, los grafos no definen por s\'i mismos, una \'unica noci\'on de igualdad. Cu\'ando decimos que dos nodos en el grafo pueden o no pueden ser
-referenciados de forma \'unica en t\'erminos de sus propiedades? Esta pregunta s\'olo tiene sentido una vez que ya hemos fijado un cierto nivel de expresividad el cual determina cuando dos grafos, o dos elementos en el mismo gr\'afo, son equivalentes.
+Exactamente debido a su generalidad, los grafos no definen por s\'i mismos, una \'unica noci\'on de igualdad. Cu\'ando decimos 
+que dos nodos en el grafo pueden o no pueden ser
+referenciados de forma \'unica en t\'erminos de sus propiedades? Esta pregunta s\'olo tiene sentido una vez que ya hemos 
+fijado un cierto nivel de expresividad el cual determina cuando dos grafos, o dos elementos en el mismo gr\'afo, son equivalentes.
 
-La expresividad se puede formalizar usando las relaciones estructurales de los grafos (isomorfismos, etc.) o, alternativamente, lenguajes l\'ogicos. 
+La expresividad se puede formalizar usando las relaciones estructurales de los grafos (isomorfismos, etc.) o, alternativamente, 
+lenguajes l\'ogicos. 
 
-Ambas formas se presentan en Secci\'on \ref{sec:estructurales}, donde tambi\'en discutimos c\'omo arreglar la noci\'on de impacto de expresividad 
-en los casos que el problema GRE tiene soluci\'on; la complejidad computacional de los algoritmos GRE involucrados; 
-y la complejidad computacional del problema de la realizaci\'on. Luego investigamos el problema GRE en t\'erminos de diferentes 
+%Ambas formas se presentan en Secci\'on \ref{sec:estructurales}, donde tambi\'en 
+Discutiremos la noci\'on de impacto de expresividad 
+en los casos que el problema GRE tiene soluci\'on; la complejidad computacional de los algoritmos GER involucrados; 
+y la complejidad computacional del problema de la realizaci\'on. Luego investigamos el problema GER en t\'erminos de diferentes 
 nociones de expresividad. 
 
-\section{Estructuras}
-\label{sec:estructurales}
 
+\section{Seleccionando el lenguaje}
 
-\subsection{Lenguajes l\'ogicos}
-
+\newcommand{\nDog}{\mathit{dog}\xspace}
+\newcommand{\nCat}{\mathit{cat}\xspace}
+\newcommand{\aSmall}{\mathit{small}\xspace}
+\newcommand{\aSniffing}{\mathit{sniffs}\xspace}
+\newcommand{\nBreed}{\mathit{beagle}\xspace}
 
 %\newcommand{\aLarge}{\mathit{large}\xspace}
 %\newcommand{\nLeftOf}{\mathit{leftof}\xspace}
@@ -49,13 +58,67 @@ $\#\Delta + \#\interp{\cdot}$, donde $\#\Delta$ es la cardinalidad
 de $\Delta$ y $\#\interp{\cdot}$ es la suma de todas las aridades de las
 relaciones en $\interp{\cdot}$.
 
-La Figura~\ref{grafo-GRE3D7-stimulus_b} abajo muestra como podemos representar una escena
-como un modelo relacional. Intuitivamente, $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$ y $e_7$, son 'cube', mientras que 
+Vamos a presentar 2 ejemplos, uno en el que los tenemos agentes (perros y gatos),y otro en el que el dominio son cosas es decir, es de alguna manera est\'atico.
+
+El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos representado una escena
+como un modelo relacional. Intuitivamente, $a$, $b$ y $d$ son dogs, mientras que 
+$c$ y $e$ are cats;  $d$ es un small beagle;
+ $b$ y $c$ son tambi\'en small.
+ Leeremos $\aSniffing(d,e)$ como ``{\em $d$ is sniffing $e$}''.
+
+ \begin{figure}
+ \begin{center}
+ \begin{tabular}{rcl}
+$\Delta$               & = & $\cset{a,b,c,d,e}$\\
+$\interp{\nDog}$      & = & $\cset{a,b,d}$\\
+$\interp{\nCat}$      & = & $\cset{c,e}$\\
+$\interp{\nBreed}$    & = & $\cset{d}$\\
+$\interp{\aSmall}$    & = & $\cset{b,c,d}$\\
+$\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
+ \end{tabular}
+\begin{picture}(120,50)
+\put(0,-50){\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
+    aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
+  ]
+ \node[n,label=above:$a$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}] (a) {};
+
+ \node[n,label=above:$b$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \aSmall \end{array}$}, right of=a] (b) {};
+
+ \node[n,label=above:$c$,label=below:{\relsize{-1}$\begin{array}{c}\nCat\\ \aSmall\end{array}$}, right of=b] (c) {};
+
+ \node[n,label=above left:$d$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \nBreed\\  \aSmall \end{array}$}, below of=a,xshift=25pt,yshift=-10pt] (d) {};
+
+ \node[n,label=above right:$e$,,label=below:{\relsize{-1}$\begin{array}{c}\nCat\end{array}$},right of=d] (e) {};
+
+ \draw [aSniffing,loop left] (a) to node[above,xshift=-5pt]{\relsize{-1}$\aSniffing$} (a);
+
+ \draw [aSniffing,bend right=40] (b) to node[auto,swap]{\relsize{-1}$\aSniffing$} (a);
+
+ \draw [aSniffing,bend right=40] (c) to node[auto,swap]{\relsize{-1}$\aSniffing$} (b);
+
+ \draw[aSniffing, bend left=40] (d) to node[auto]{\relsize{-1}$\aSniffing$} (e);
+ \draw[aSniffing, bend left=40] (e) to node[auto,swap]{\relsize{-1}$\aSniffing$} (d);
+
+ \end{tikzpicture}}
+ \end{picture}
+
+ \end{center}
+ \caption{Representaci\'on de escenas de Graph $\+S$.\label{fig:cat-dog-1}}
+ \end{figure}
+
+
+
+
+
+El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} en el que hemos representado el Contexto \ref{GRE3D7-stimulus1} 
+como un modelo relacional. $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$ y $e_7$, son 'cube', mientras que 
 $e_1$, $e_3$ y $e_6$ son 'yellow', $e_2$, $e_4$, $e_5$, $e_7$ son 'red';
 %Para las relaciones tenemos $\Ontop(e_3,e_2)$ como ``{\em $e_3$ on top of $e_2$}''.
 %$\Rightof(e_4,e_5)$, $\Rightof(e_6,e_7)$, $\Lefttof(e_5,e_4)$,$\Leftof(e_7,e_6)$. $e_4$ y $e_5$ son 'large', los dem\'as 'small'.
 
- \begin{figure}
+\begin{figure}
 \begin{flushleft}
 \begin{tabular}{rcl}
 $\Delta$              & = & $\cset{e_1,e_2,e_3,e_4,e_5,e_6,e_7}$\\
@@ -135,8 +198,8 @@ $\interp{\nOntop}$     & = & $\cset{(e_3,e_2)}$\\
  \end{tikzpicture}}
  \end{picture}
  \end{flushleft}
- \caption{Representaci\'on del Contexto \ref{GRE3D7-stimulus1}.
- \label{grafo-GRE3D7-stimulus_b}}
+ \caption{Representaci\'on del Contexto \ref{GRE3D7-stimulus1}}
+ \label{grafo-GRE3D7-stimulus_b}
  \end{figure}
 
 
@@ -236,7 +299,71 @@ apropiadas en el contexto dado.
 Argumentamos que la generaci\'on de contenido usando lenguajes con diferente poder expresivo puede tener un impacto en la estapa posterior
 de realizaci\'on sint\'actica (surface realization).
 
+F\'ormulas que identifican a $b$ en nuestro primer ejemplo
 
+\begin{table}
+$$
+\begin{array}{cl}
+ \gamma_1: & \nDog(x) \land \aSmall(x) \land
+   \exists y . (\aSniffing(x,y) \land \nDog(y))\\[3pt]
+  %
+  \gamma_2: & \nDog(x) \land \aSmall(x) \land
+  \forall y . (\neg \nCat(y) \lor \neg \aSniffing(x,y))\\[3pt]
+  %
+  \gamma_3: & \nDog(x) \land
+  \exists y . (x \not\approx y \land \nDog(y)  \land \aSniffing(x,y))\\[3pt]
+  %
+  \gamma_4: & \nDog(x) \land
+  \exists y . (\nCat(y) \land \aSmall(y) \land \aSniffing(y,x))
+  %
+ \end{array}
+$$
+\caption{Descripciones alternativas para el objeto $b$ en el modelo mostrado en Figura~\ref{fig:cat-dog-1}.}\label{tab:gammas}
+\end{table}
+
+Restringiendo la determinaci\'on de contenido a FO-, aseguramos que f\'ormulas como  $\gamma_2$ no se generar\'an. Si prohibimos el distinto del lenguaje  $\gamma_3$ tambi\'en queda exclu\'ida.
+
+El hecho de que el lenguaje de representaci\'on utilizado tiene un impacto sobre la determinaci\'on de contenido es obvio, pero no ha recibido la atenci\'on que merece. Areces et al. [1] usaron diferentes l\'ogicas de descripci\'on (una familia de lenguajes formales utilizado en representaci\'on del conocimiento, vea [2]) para clasificar y dar un marco formal para
+trabajo previo sobre GRE. Vamos a presentar r\'apidamente algunas de estos lenguajes ya que los mencionaremos en las siguientes secciones. Usando l\'ogicas de descripci\'on en lugar de fragmentos de FO es s\'olo una cuesti\'on de notaci\'on, como la mayor\'ia de l\'ogicas descriptivas se pueden ver
+fragmentos como impl\'icitas de FO. Por ejemplo, el lenguaje de la l\'ogica de descripci\'on ALC, se define sint\'acticamente como el conjunto de f\'ormulas,
+$$
+\top \mid p \mid \neg \gamma \mid \gamma \wedge \gamma' \mid  \exists r. \gamma
+$$
+(donde $p$ es un s\'imbolo proposicional, $r$ s\'imbolo relacional binario, y $\gamma,\gamma' \in \ALC$) corresponde al fragmento sint\'actico de
+\FOL sin $\not\approx$, como es mostrado por la traducci\'on est\'andar $\st_x$:
+
+\begin{center}
+\begin{tabular}{rcl@{\hspace{1cm}}rcl}
+$ \st_{x_i}(\top)$ &$=$& $\top$
+&
+$\st_{x_i}(\gamma_1 \land \gamma_2)$ &$=$& $\st_{x_i}(\gamma_1) \land \st_{x_i}(\gamma_2)$
+\\
+  $\st_{x_i}(p)$ &$=$& $p(x_i)$
+&
+$\st_{x_i}(\exists r . \gamma)$ &$=$& $\exists x_{i+1} . (r(x_i,x_{i+1}) \land \st_{x_{i+1}}(\gamma))$
+\\
+ $\st_{x_i}(\lnot \gamma)$ &$=$& $\lnot\st_{x_i}(\gamma)$
+&
+\end{tabular}
+\end{center}
+
+En efecto, dado un modelo relacional $\+M$, la extensi\'on de una f\'ormula \ALC en M coincide exactamente con la extensi\'on de $\st_{x_1}(\varphi)$ (v\'ease, por ejemplo, ~\cite{baad:desc03}). Gracias
+a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes podemos definir $\interp{\varphi} = \interp{\st_{x_1}(\varphi)}$.
+ Volviendo a nuestro ejemplo anterior, mediante la restricci\'on de contenido
+generaci\'on en f\'ormulas $\ALC$ (o equivalentemente, el fragmento correspondiente de \FOL)
+evitar\'iamos f\'ormulas como
+$\gamma_3$ (sin igualdad) y
+$\gamma_4$ (aparece cuanti elemento ed
+siempre en segunda posici\'on de argumento).
+Generaci\'on se discute en ~\cite{AKS08}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
+y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, con-
+Sidering por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
+lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
+
+
+
+
+Para el segundo ejemplo: \\
 Supongamos que queremos identificar a $e_5$ del Contexto \ref{GRE3D7-stimulus-conLetras}, las siguientes son f\'ormulas que identifican a un\'ivocamente a $e_5$ en el contexto considerado.
 
 \begin{table}
@@ -338,7 +465,7 @@ Argumento a favor EL
   
 
 
-\subsection{Grafos}
+%\section{}
 
 
 
