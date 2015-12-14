@@ -36,12 +36,20 @@ Los algoritmos se pueden diferenciar por la cantidad y forma de los par\'ametros
 
 En todos los casos, la computadora necesita tener un conjunto de propiedades/relaciones para cada objeto y poder identificarlos, para ello vamos a etiquetar a los objetos con $e_1$, $e_2$, etc. como se muestra en la Figura \ref{GRE3D7-stimulus-conLetras}. En la imagen tambi\'en podemos ver que el objeto se\~nalado con la flecha es $e_5$, es el objeto target, para el cual queremos generar autom\'aticamente una expresi\'on referencial.
 
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.6\textwidth]{images/22.jpg}
-\caption{Ejemplo de contexto con objetos etiquetados}
-\label{GRE3D7-stimulus-conLetras}
-\end{figure}
+\savebox{\mybox}{\includegraphics[scale=0.40]{images/22.jpg}\caption{Ejemplo de contexto con objetos etiquetados}\label{GRE3D7-stimulus-conLetras}} 
+ \begin{figure}
+   \begin{picture}(8,6)
+  \put(0,0){\usebox{\mybox}} 
+  %\put(2,2.5){\oval(6,5)}
+   \end{picture}   
+ \end{figure}    
+
+%\begin{figure}[ht]
+%\centering
+%\includegraphics[width=0.6\textwidth]{images/22.jpg}
+%\caption{Ejemplo de contexto con objetos etiquetados}
+%\label{GRE3D7-stimulus-conLetras}
+%\end{figure}
 
 A continuaci\'on daremos 2 ejemplos de diferentes maneras de modelar el contexto que toman como input, uno para el algoritmo Graph y otro para algoritmo de Bisimulaci\'on.\\
 
@@ -1149,23 +1157,43 @@ GRE3D3 y su extensi\'on GRE3D7 \cite{gre3d3,gre3d7} se desarrollaron en una seri
 %and its extension Stars2 were collected for the study of referential overspecification (particularly in the case of relational descriptions). Stars was developed in a pilot web-based experiment, containing 704 descriptions produced by 64 speakers.  The more comprehensive Stars2 data set was produced in dialogue situations involving subject pairs, and it contains 884 descriptions produced by 56 speakers. Both domains make use of simple visual scenes containing up to four object types (e.g., stars, boxes, cones and spheres) with limited variation in colour and size. Differently from other REG corpora, however, Stars/2 includes a considerable number of complex situations of reference involving up to three objects, as in `the box near the sphere, next to the cone'.http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-002_2014.pdf y http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-001_2015.pdf
 Stars \cite{stars-mutual-disamb} y su extensi\'on Stars2 se colectaron para el estudio de la sobre-especificaci\'on (particularmente en el caso de las descripciones relacionales). Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 es m\'as completo y se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen tres tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~no. A diferencia de otros corpus para GER, Stars/2 incluyen un n\'umero considerable de situaciones complejas de referencia en que participan hasta tres objetos, como en ``el cubo cerca de la esfera, al lado del cono''. Ejemplos de imagenes se muestran en las Figuras \ref{fig-STARS} y \ref{fig-STARS2}.\\
 
+\setlength{\unitlength}{1cm}
 
-\begin{figure}
-\begin{minipage}[b]{0.5\linewidth}
-\centering
-\includegraphics[width=\textwidth]{images/STARS.png}\\[0pt]
-\caption{Imagen de Stars corpus}
-\label{fig-STARS}
-%\vspace*{1cm}
-\end{minipage}
-\hspace*{0cm}
-\begin{minipage}[b]{0.5\linewidth}
-\centering
-\includegraphics[width=\textwidth]{images/STARS2.png}\\[0pt]
-\caption{Imagen de Stars2 corpus}
-\label{fig-STARS2}
-\end{minipage}
-\end{figure}
+\newsavebox{\mybox} 
+\savebox{\mybox}{\includegraphics[scale=0.40]{images/STARS.png}} 
+ \begin{figure}
+   \begin{picture}(8,6)
+  \put(0,0){\usebox{\mybox}} 
+  %\put(2,2.5){\oval(6,5)}
+   \end{picture}   
+ \end{figure} 
+\setlength{\unitlength}{1cm}
+
+\newsavebox{\mybox} 
+\savebox{\mybox}{\includegraphics[scale=0.40]{images/STARS2.png}} 
+ \begin{figure}
+   \begin{picture}(8,6)
+  \put(0,0){\usebox{\mybox}} 
+  %\put(2,2.5){\oval(6,5)}
+   \end{picture}   
+ \end{figure} 
+
+%\begin{figure}
+%\begin{minipage}[b]{0.5\linewidth}
+%\centering
+%\includegraphics[width=\textwidth]{images/STARS.png}\\[0pt]
+%\caption{Imagen de Stars corpus}
+%\label{fig-STARS}
+%%\vspace*{1cm}
+%\end{minipage}
+%\hspace*{0cm}
+%\begin{minipage}[b]{0.5\linewidth}
+%\centering
+%\includegraphics[width=\textwidth]{images/STARS2.png}\\[0pt]
+%\caption{Imagen de Stars2 corpus}
+%\label{fig-STARS2}
+%\end{minipage}
+%\end{figure}
 
 %ejemplo minipage
 %\begin{figure}
