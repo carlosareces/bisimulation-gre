@@ -450,3 +450,165 @@ siempre en segunda posici\'on de argumento). ESTE EJ NO LO PUSE... ver si consig
 Argumento a favor EL
 ----
 
+Intuitivamente, dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
+$\+M_1$ es similar en $\+L$ a otro objeto
+ $v$ en el model $\+M_2$ para cualquier $\+L$-f\'ormulas que son satisfechas por $u$ tambi\'en son satisfechas por $v$. Formalmente,
+%let $\+L$ stand for any of the languages discussed so far, and
+Sea $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 = \tup{\Delta_2, \interp{\cdot}_2}$ 2 modelos relacionales con $u \in \Delta_1$ y $v \in \Delta_2$; seguimos la terminolog\'ia de~\cite{AKS08} y decimos que
+\emph{$u$ es $\+L$-similar a $v$}  (notaci\'on $u \simil{\+L} v$) si para toda $\gamma \in \+L$, $u \in \interp{\gamma}_1$ implica
+$v \in \interp{\gamma}_2$. Es facil mostrar que
+$\+L$-similaridad es reflexiva para todo $\+L$, y simm\'etrica  para languajes que contienen negaci\'on.
+
+
+Observe que la $\+L$-similitud captura la noci\'on de ``capacidad de identificar en $\+L$''. Si tomamos $\+M_1$ y $\+M_2$ a ser del mismo modelo, un objeto $u$ en el modelo identificarse un\'ivocamente en $\+L$ si no hay ning\'un objeto $v$ diferente de $u$ tal que $u \simil{\+L} v$. En otras palabras, si hay dos objetos $u$ y $v$ en un modelo $\+M$  tal que
+$u \simil{\+L} v$, entonces el problema $\+L$-GRE con entrada de $\+M$ y destino $T=\{u\}$ no tendr\'a \'exito ya que para todas las f\'ormulas $\gamma \in L$ tenemos que $\{u,v\} \subseteq \interp{\gamma} \not = \{u\}$.
+
+La noci\'on de $\+L$-similitud entonces, nos permite manejar el problema de  $\+L$-GRE.
+Por otra parte, podemos reformular esta de noci\'on de una manera estructural, por lo que no lo hacemos
+que considerar en muchos $\+L$-f\'ormulas infinitamente decidir si $u$ es $\+L$- similar a $v$. Podemos reinterpretar $\+L$-similitud en t\'erminos de nociones de teor\'ia de modelos estandares
+como isomorfismos o bisimulaciones que describen las propiedades estructurales del modelo. Dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ and $\tup{\Delta_2,
+\interp{\cdot}_2}$, considere las siguiente
+propiedades de una relaci\'on binaria ${\sim} \subseteq \Delta_1 \times \Delta_2$ (cf.~Convention~\ref{conv:signature}):
+\smallskip 
+
+\newcommand{\simdef}[2]{\noindent\ \ #1\hfill:\ \parbox[t]{.87\textwidth}{#2}\par}
+
+\simdef{$\atomL$}{If $u_1{\sim} u_2$, entonces $u_1 \in \interp{p}_1 \Rightarrow u_2 \in \interp{p}_2$}
+\simdef{$\atomR$}{If $u_1{\sim} u_2$, entonces $u_2 \in \interp{p}_2 \Rightarrow u_1 \in \interp{p}_1$}
+\simdef{$\zig$}{If $u_1{\sim} u_2$ y $(u_1,v_1) \in \interp{r}_1$, entonces $\exists v_2$ s.t.\ $v_1{\sim}v_2$
+  y $(u_2,v_2) \in \interp{r}_2$}
+\simdef{$\zag$}{If $u_1{\sim}u_2$ y $(u_2,v_2) \in \interp{r}_2$, entonces $\exists v_1$ s.t.\ $u_1{\sim}v_1$ y
+ $(u_1,v_1) \in \interp{r}_1$}
+\simdef{$\injL$}{$\sim$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
+\simdef{$\injR$}{$\sim^{-1}$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
+\smallskip
+
+Diremos que una relacion binaria no-vac\'ia $\sim$ es una 
+\emph{$\+L$-simulation} cuando satisface las propiedades indicadas
+en la Tabla~\ref{tab:simuls}. Por ejemplo, una relacion binaria no-vac\'ia que satisface $\atomL$, y $\zig$ es una $\EL$-simulation, como es indicado en fila~4 de la Tabla~\ref{tab:simuls}. M\'as a\'un, diremos que un objeto
+\emph{$v$ $\+L$-simulates $u$} (notaci\'on $u \simul{\+L} v$) si hay una relaci\'on $\sim$ que satisface el correspondiente propiedad tal que
+$u \sim v$. El siguiente es un resultado fundamentar del modelo-teor\'etico  result:%~\cite{ebbi:math96,KR99,BRV01}
+
+\begin{table}[t]
+$$
+\begin{array}{c|cccccc}
+  \+L & \atomL & \atomR & \zig & \zag & \injL & \injR \\
+  \hline
+  \FOL   & \times & \times & \times & \times & \times & \times\\
+  \EPFOL & \times & & \times && \times &\\
+  \ALC   & \times & \times & \times & \times&&\\
+  \EL    & \times & &  \times & &\\
+  \ELAN  & \times & \times &  \times & &\\
+\end{array}
+$$
+\caption{$\+L$-simulaciones para varios lenguajes l\'ogicas.}\label{tab:simuls}
+\end{table}
+
+\begin{theorem} \label{thm:simulation}
+If  $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ and $\+M_2 =
+\tup{\Delta_2, \interp{\cdot}_2}$ son modelos finitos, $u \in
+\Delta_1$ and $v \in \Delta_2$, then $u \simil{\+L} v$ iff $u
+\simul{\+L} v$ (for $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$).
+\end{theorem}
+\begin{proof}
+Algunos resultados son bien conocidos: $\simul{\FOL}$ es isomorfismo en
+grafos etiquetados~\cite{ebbi:math96}; $\simul{\ALC}$ corresponde a la
+noci\'on de bisimulaci\'on~\cite[Def.~2.16]{BRV01}; $\simul{\EL}$ es una
+simulaci\'on definida en~\cite[Def.~2.77]{BRV01}. Los restantes son variaciones de estos.
+\end{proof}
+
+
+Therefore, on finite models\footnote{Finiteness is not the weakest hypothesis,
+but it is enough for our development.} simulations capture exactly the notion of similarity.
+The right to left implication does not hold in general on infinite
+models.
+
+$\+L$-simulations allow us to determine, in an effective way,
+when an object is indistinguishable from another in a given model with respect to $\+L$.
+
+For example, we can verify that $a \simul{\EL} b$ in the model of
+Figure~\ref{fig:cat-dog-1} (the relation ${\sim} = \{(a,a), (a, b) \}
+%\cup\{ (x,x) \mid x \in \Delta\}
+$ satisfies $\atomL$ and $\zig$).
+Using Theorem~\ref{thm:simulation}
+we conclude that there is no \EL-description for $a$, since for any \EL-formula $\gamma$,
+if $a\in\interp{\gamma}$, then $b\in\interp{\gamma}$.
+Observe that $b \not\simul{\EL} a$, since
+(again applying Theorem~\ref{thm:simulation}), $b\in\interp{\aSmall(x)}$ but
+$a\notin\interp{\aSmall(x)}$.
+%
+If one chooses a language richer than $\EL$, such as $\ELAN$, one may be
+able to describe $a$: take, for instance the $\ELAN$-formula
+$\nDog(x)\wedge\lnot\aSmall(x)$.
+
+
+As we will discuss in the next section, simulation gives us an
+efficient, computationally feasible approach to the $\+L$-GRE
+problem. Algorithms to compute many kinds of $\+L$-simulations are
+well known (see, \cite{H71,PT87,HHK95,DPP03}), and for many
+languages  (e.g., \ALC, \ALC with inverse relations,  \ELAN and \EL)
+they run in polynomial time (on the other hand, no polynomial
+algorithm for \FOL- or \EPFOL-simulation is known and even the exact
+complexity of the problem in these cases is open
+\cite{gare:comp79}).
+
+\section{GRE via Simulator Sets}\label{sec:simulation}
+
+En esta secci\'on discutiremos como resolver el problema $\+L$-GRE
+usando simulation. Dado a model $\+M = \tup{\Delta,
+\interp{\cdot}}$, Theorema~\ref{thm:simulation} nos dice que si 2 elementos distintos $u$ y $v$ en $\Delta$ son tales que $u
+\simul{\+L} v$ entonces para toda $\+L$-f\'ormula que es verdadera para $u$ es tambi\'en verdadera para $v$. No hay f\'ormula en $\+L$ que pueda identificar un\'ivocamente a $u$. Desde esta perspectiva, conociendo cuando el modelo contiene un elemento que es $\gL$-similar pero distinto de $u$ es
+equivalente a decidir hay una $\+L$-RE for $u$.
+
+
+Asumamos un lenguaje fixo $\+L$ y un modelo $\+M$.  Supongamos que queremos referirnos a un elemento $u$ del dominio de $\+M$. Queremos computar \emph{simulator set} de $u$ definidas como
+$\simset_{\+L}^{\+M}(u) = \cset{v \in \Delta \mid u \simul{\+L} v}$.
+Cuando un modelo $\+M$ is clear from the context, we just write
+$\simset_{\+L}$.
+ If $\simset_{\+L}^{\+M}(u)$ no es singleton $\cset{u}$,
+el problem $\+L$-GRE con target $\{u\}$ en $\+M$ fallar\'a.
+
+\iffullversion
+Es facil de ver que la union de 2 $\+L$-simulations es
+es tambi\'en una $\+L$-simulation. Podemos entonces definir el \emph{maximal
+auto $\+L$-simulation} (notaci\'on, $\simmax_{\+L}$) sobre un modelo $\+M$ como la union de todos los
+auto $\+L$-simulations sobre $\+M$. Ya que
+$\simset_{\+L}(u) = \cset{v \mid u \simmax_{\+L} v}$, un algoritmo
+para computar $\simmax_{\+L}$ tambi\'en computa $\simset_{\+L}(u)$.
+\else
+\fi
+
+\iffullversion
+If $P$ es reflexiva y transitiva entonces tambi\'en lo es $\simmax_P$. En
+particular, $\simmax$ es reflexiva y transitiva.
+\fixme{Are reflexivity and transitivity important? Check.}
+\else
+\fi
+
+
+
+Un algoritmo es dado en~\cite{HHK95} para computar $\simset_{\ELAN}(v)$ para cada
+elemento $v$ de un modelo dado finito
+$\+M=\tup{\Delta,\interp{\cdot}}$
+%\footnote{%
+%  Actually the algorithm proposed in \cite{HHK95} is over labeled graphs, but
+%  it can be adapted to compute $\simset_{\ELAN}$ by
+%  appropriately labeling the model.%
+%}
+en tiempo $O(\size{\Delta}\times\size{{\interp{\cdot}}})$.
+Intuitivamente, este algoritmo
+define $S(v)$ como un conjunto de candidatos para simuolar $v$ y
+sucesivamente refina este borrando aquellos los cuales falla en simular $v$.
+%Since we never put new vertices into $\simset(v)$, all the deletions
+%from $\simset(v)$ are permanent.
+Al final, $S(v)=\simset_\ELAN(v)$. El algoritmo puede ser adaptado para
+computar $\simset_\+L$ para cualquier otro languaje $\+L$. En particular,
+lo podemos usar para computar $\simset_\EL$ en tiempo polinomial which will
+give us the basic algorithm for establishing an upper bound to the
+complexity of the \EL-GRE problem --this will answer an open
+question of~\cite{AKS08}. The pseudo-code is shown in
+Algorithm~\ref{alg:schematic-gen-sim}, which uses the following
+notation: $\+P$ is a fixed set of unary relation symbols,  for $v\in
+\Delta$, let $\unary(v)=\{p\in\+P\mid v\in\interp{p}\}$ and let also
+$\su{r}{v}=\{u\in\Delta\mid(v,u)\in\interp{r}\}$ for $r$ a binary
+relation symbol.
