@@ -1,5 +1,5 @@
-\chapter{Introducci\'on}
-
+\chapter{Introducci\'on a la expresi\'on referencial}
+\label{sec:intro}
 %tesis en linguistica http://elies.rediris.es/miscelanea/misce_9/alcina.pdf
 
 En este cap\'itulo daremos una introducci\'on al problema de la generaci\'on autom\'atica de expresiones referenciales, contaremos las contribuciones de este trabajo y mostraremos como est\'a organizada la tesis.
@@ -61,7 +61,7 @@ esfera roja que est\'a al lado del cubo rojo'', o ``la bola grande'' o ``el obje
 
 Ahora imaginemos una computadora que se enfrenta a la misma
 tarea, ella necesitar\'a tener a los objetos identificados y las propiedades de cada uno de ellos, una forma de identificar a los objetos se muestra en la Figura~\ref{GRE3D7-stimulus2}. Suponiendo que tiene acceso a una base de datos que contiene todas
-las propiedades relevantes de los objetos de la escena, como se muestra en la Tabla \ref{tabla-propiedades}, la tarea de encontrar una ER para el objeto $e_5$ es lo mismo que encontrar alguna combinaci\'on de propiedades que se aplica \'unicamente a $e_5$, y no a los otros objetos.
+las propiedades relevantes de los objetos de la escena, como se muestra en la Tabla \ref{tabla-propiedades}, la tarea de encontrar una ER para el objeto $e_5$ es lo mismo que encontrar alguna combinaci\'on de propiedades que se aplica \'unicamente a $e_5$, y no a los otros objetos.\\
 
 
 \begin{table}[h!]
@@ -101,28 +101,32 @@ es computacionalmente cara, y no es necesariamente lo que los hablantes hacen, n
 
 Entonces,  ?`qu\'e es la Generaci\'on de Expresiones referenciales? 
 
-Es el proceso de convertir autom\'aticamente la informaci\'on no ling\"u\'{i}stica (por ejemplo, a partir de una base de datos como se ha ilustrado en nuestra figura) a texto en lenguaje natural, que es \'util para aplicaciones pr\'acticas que van desde la generaci\'on de pron\'osticos del tiempo, a resumir informaci\'on m\'edica~\cite{dale2000}.
+Es el proceso de convertir autom\'aticamente la informaci\'on no ling\"u\'{i}stica (por ejemplo, a partir de una base de datos como se ha ilustrado en la Tabla \ref{tabla-propiedades}) a texto en lenguaje natural, que es \'util para aplicaciones pr\'acticas que van desde la generaci\'on de pron\'osticos del tiempo, a resumir informaci\'on m\'edica~\cite{dale2000}.
 
 De todas las subtareas de NLG, la Generaci\'on de Expresiones Referenciales (GER) es
-una de las que han recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los
-sistemas NLG, con independencia de su finalidad,
-contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
+una de las que ha recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los
+sistemas NLG, con independencia de su finalidad, contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
 en vista del papel central que las expresiones referenciales en la comunicaci\'on. Un sistema que proporciona
 consejos sobre los viajes a\'ereos (NO ENCUENTRO CITA!) (White, Clark y Moore 2010) ha de hacer referencia a los vuelos (``el
 vuelo m\'as barato'', ``un vuelo directo''), un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
 necesita para generar descripciones espaciales para las \'areas (``tomar el puente junto a la iglesia a la derecha''),
 y un sistema de di\'alogo de un robot que ensambla piezas de juguetes, junto con un usuario humano~\cite{foster-etal-ijcai2009} ha de hacer referencia a los componentes (``inserte el perno verde hasta el final en el cubo rojo'').
 
-El dominio define los tipos de entidades que est\'an siendo contemplados, en algunos
+El {\it dominio} define los tipos de entidades que est\'an siendo contemplados, en algunos
 casos incluso un determinado conjunto de entidades con todas sus propiedades.
 
-El contexto contiene un subconjunto de las entidades del dominio, por ejemplo, los puntos de referencia visibles en un cierto punto de la ruta para la que estamos dando direcciones, un
-subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un entorno visual, el contexto, incluyendo las
+El {\it contexto} contiene un subconjunto de las entidades del dominio, por ejemplo, los puntos de referencia visibles en un cierto punto de la ruta para la que estamos dando direcciones, un subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un entorno visual, el contexto, incluyendo las
 propiedades de sus objetos y su configuraci\'on espacial, se puede llamar escena. 
+
+Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas, valores de esas propiedades, que incluso pueden ser relaciones con otros objetos.
+
+Una {\it propiedad} es una caracter\'istica de una entidad particular por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto, cada entidad puede tener muchas propiedades, e incluso puede tener relaciones, as\'i como las relaciones familiares, las relaciones con respecto a la posici\'on f\'isica, por ejemplo: el hecho de estar situado al lado de otro objeto.
 
 El \emph{target} u objetivo, es el objeto al cual queremos referirnos. En las escenas de nuestros ejemplos es el se\~nalado por la flecha.
 
 Los \emph{distractores} son objetos los cuales se encuentran en el contexto considerado, y por los cuales es necesario hacer una expresi\'on referencial para identificar a nuestro target. 
+
+Un {\it algoritmo} para la generaci\'on autom\'atica de expresiones referenciales (GER), es un procedimiento que tomar\'a alg\'un tipo de input y dar\'a como resultado una expresi\'on referencial.
 
 En esta tesis estudiamos la generaci\'on autom\'atica de expresiones referenciales, 
 primero mostramos c\'omo podemos a\~nadir no determinismo (posibilidad de dar distantas expresiones referenciales considerando el mismo contexto y target) de los algoritmos de refinamiento estudiados, ellos tienen un orden fijo en el cual consideran las propiedades y relaciones, y la naturalidad de las expresiones referenciales que generan dependen de este orden particular considerado, nosotros proponemos reemplazar ese orden fijo
@@ -144,11 +148,11 @@ Dale's sobre el Cabinet corpus significan que~\emph{alg\'un orden} produce una r
 en la escena de entrada, pero no est\'a claro cu\'al de todos los \'ordenes posibles se debe utilizar. En esta tesis abordamos directamente esta cuesti\'on.
 
 \section{Descripci\'on del problema}
-\label{sec:intro}
+\label{sec:problema}
 
 En ling\"u\'{i}stica, una expresi\'on referencial ER (que viene de la expresi\'on en ingl\'es referring expression (RE)) es una expresi\'on que identifica un\'ivocamente a un objeto para un interlocutor particular, desde un conjunto de posibles distractores. Por ejemplo si nosotros queremos identificar a un cierto animal d de un conjunto de mascotas, la expresi\'on ``el perro'' ser\'a ER si d es el \'unico perro en el conjunto, y si nosotros estamos seguros que nuestro interlocutor identificar\'a a d como un perro. Para una persona esto ser\'ia una tarea f\'acil de realizar, pensemos ahora como lo har\'ia una computadora, supongamos que queremos conseguir un algoritmo que genere autom\'aticamente esas expresiones referenciales que la gente genera.\\
 
-Una propiedad es una caracter\'istica de una entidad particular por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto, cada entidad puede tener muchas propiedades, e incluso puede tener relaciones, as\'i como las relaciones familiares, las relaciones con respecto a la posici\'on f\'isica, por ejemplo: el hecho de estar situado al lado de otro obejto.
+
 
  Para que una computadora pueda generar las ER generadas por las personas, primero deber\'ia seleccionar las propiedades y/o relaciones que se incluir\'an en la RE, deber\'a tener una base de datos conteniendo las propiedades y relaciones relevantes de la escena, podemos imaginar que una computadora podr\'a generar muchas m\'as expresiones referenciales que una persona, este es un desaf\'io que direccionaremos en esta tesis, nuestra meta ser\'a imitar al humano en la generaci\'on de expresiones referenciales. 
 
@@ -159,12 +163,14 @@ En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro inter
 
 En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.
  
-Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales (GER), es un procedimiento que tomar\'a alg\'un tipo de input y dar\'a como resultado una expresi\'on referencial.\\
 
+%\paragraph{Juguemos al Veo Veo}
+\paragraph{Heading} Juguemos al Veo Veo
 
-Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas y los valores de esas propiedades, que incluso pueden ser relaciones con otros objetos. \\
-
-Por ejemplo: Que cosa es? (el tipo) Una esfera. Que color? Rojo. Esta al lado de otro objeto? Si. Cual? El cubo azul.\\
+A-Veo, veo
+B-Qu\'e ves?
+A-Una cosa
+B-De qu\'e color?
 
 Con esta clase de datos para los objetos de la escena, tenemos una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.\\
 
@@ -189,17 +195,7 @@ Hay diferentes tipos de propiedades, por ejemplo taxon\'omicas (las que tiene el
 Si el objeto target tiene la propiedad de medir 1.80 de alto, y est\'a en un grupo donde los dem\'as son m\'as peque\~nos, es m\'as natural decir el m\'as alto, que el que mide 1.80.\\
 
 
-%hablar de syntactic realization en algun lugar
-%In many early REG proposals, Lexical Choice and Surface Realization follow Content
-%Determination,  in  the  style  of  a  pipeline,  with  most  of  the  actual  research  focusing
-%predominantly on Content Determination.
 
-%Tambi\'en podemos hablar 
-%
-%to plurals, as in ``the old men and women'', where ``old'' may or may not pertain to the
-%women. These issues have been studied in some detail as part of a systematic study of
-%the ambiguities that arise in coordinated phrases of the form ``the Adjective Noun and
-%Noun'',
 Las primeras investigaciones en GER hicieron una serie de supuestos simplificadores, y como resultado los primeros
 algoritmos GER s\'olo pod\'ian generar una variedad limitada de expresiones referenciales. Cuando
 los investigadores comenzaron a levantar algunos de estos supuestos, esto di\'o lugar a algoritmos de GER
@@ -268,12 +264,25 @@ cada sintagma nominal requiere un sustantivo, y por lo general es el tipo del re
 \section{Mapa de la tesis}
 \label{sec:mapadetesis}
 
-En el Cap\'itulo 2 se habla de los diferentes tipos de expresiones referenciales, los diferentes tipos de algoritmos, la tarea de generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes en el \'area, se dan algunas aproximaciones emp\'iricas y tambi\'en daremos una introducci\'on a las m\'etricas de evaluaci\'on. 
+En este Cap\'itulo ``Introducci\'on a la expresi\'on referencial'' situamos a la generaci\'on autom\'atica de expresiones referenciales dentro de la inteligencia artificial y de la generaci\'on de lenguaje natural. Luego dimos las partes de un sistema de generaci\'on de lenguaje natural, el cual incluye la generaci\'on de expresiones referenciales y por lo tanto, \'este ultimo tiene las mismas partes principales. Entre esas partes est\'a la determinaci\'on de contenido, que es la selecci\'on de las propiedades que vamos a elegir para identificar un\'ivocamente al objeto de los dem\'as objetos del contexto, sobre este tema, trabajaremos profundamente en el resto de la tesis. Dimos intuiciones de qu\'e es una expresi\'on referencial en el contexto de una imagen que presentamos. Despu\'es explicamos la importancia de la generaci\'on de expresiones referenciales dentro de la generaci\'on de lenguaje natural, dimos ejemplos en much\'isimos dominios diferentes que van desde generaci\'on de pron\'osticos del tiempo, resumir informaci\'on m\'edica, dar consejos de viajes a\'ereos, sistemas de apoyo para la contrucci\'on de juguetes... en fin... {\it D\'igame un sistema, y puedo decirle donde usa expresiones referenciales!}. Explicamos conceptos b\'asicos que usaremos a lo largo de la tesis, como ser el de {\it dominio}, {\it contexto}, {\it propiedad}, {\it target}, {\it distractor} y {\it algoritmo}. Damos una introducci\'on a la variedad de expresiones referenciales para el mismo objeto target en el mismo contexto.
 
-Luego en el Cap\'itulo 3 daremos la definici\'on de lo que consideramos como \'optimalidad para una expresi\'on referencial...\\
+Intentando escribir lo que sigue, me da como la sensacion que hay mucha informacion muy resumida y multiplicada, y que quizas no tiene sentido que este en este primer capitulo...
+Luego en el Secci\'on \ref{sec:problema} explicamos el problema de la generaci\'on de lenguaje natural, presentamos el desaf\'io de la tesis, el cual es generar autom\'aticamente expresiones referenciales imitando a las personas, lo cual incluye dar expresiones referenciales distintas para el mismo target y contexto, y sobreespecificar las expresiones referenciales. 
 
-En el Cap\'itulo 4 explicamos el algoritmo en el cual nos basamos, como agregamos probabilidades de uso a las palabras de la signatura del modelo, sobreespecificaci\'on y no-determinismo, as\'i como la obtenci\'on de esas probabilidades de uso a partir de corpus o una aproximaci\'on cuando no hay corpus disponible para la escena.
+Luego en el Cap\'itulo \ref{sec:intro_logica} a fin de seleccionar una l\'ogica cuyo lenguaje sea apropiado a nuestro problema de genereaci\'on de expresiones referenciales imitando el comportamiento humano, partimos de la l\'ogica de primer orden (\FOL) y su lenguaje asociado, para darnos una idea de cuales son las f\'ormulas que el lenguaje puede generar, vemos una serie de ejemplos de f\'ormulas que se pueden generar con ese lenguaje y si podemos compararlas con las expresiones referenciales que dar\'ia un humano en una situaci\'on similar. Luego empezamos a restringirlo pasando por \EPFOL, \ALC, \EL, \ELAN, vemos que hay muchos lenguajes mucho m\'as expresivos que el lenguaje que usamos los humanos, seleccionamos como nuestro lenguaje el \EL y justificamos nuestra selecci\'on. Daremos definiciones b\'asicas de modelo, interpretaci\'on, f\'ormula, hablaremos de la noci\'on de similaridad de 2 elementos u y v del modelo la cual dice que son L-similares ($u \simil{\+L} v$ en el lenguaje $L$), cuando para toda f\'ormula $\gamma \in L$, tenemos que $\{u,v\} \subseteq \interp{\gamma}$, se dice que no podemos identificarlos por separado, ya que no hay una f\'ormula que satisfaga uno y no el otro. Si pudieramos identificar a un elemento de los dem\'as con una f\'ormula diremos que es la expresi\'on referencial para ese elemento en ese lenguaje. \cite{arec:usin11} dan la definici\'on de L-simular () Dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ and $\tup{\Delta_2,
+\interp{\cdot}_2}$, considere las siguiente
+propiedades de una relaci\'on binaria ${\sim} \subseteq \Delta_1 \times \Delta_2$ Diremos que una relacion binaria no-vac\'ia $\sim$ es una 
+\emph{$\+L$-simulacion} cuando satisface ciertas propiedades que dependen del lenguaje considerado, es decir de la l\'ogica considerada. diremos que un objeto
+\emph{$v$ $\+L$-simulates $u$} (notaci\'on $u \simul{\+L} v$) si hay una relaci\'on $\sim$ que satisface el correspondiente propiedad tal que
+$u \sim v$. Un teorema dice que Si $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ and $\+M_2 =
+\tup{\Delta_2, \interp{\cdot}_2}$ son modelos finitos, $u \in \Delta_1$ and $v \in \Delta_2$, then $u \simil{\+L} v$ iff $u \simul{\+L} v$ (for $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$). Se presentan los algoritmos...
 
-Luego en Cap\'itulo 5 introducimos un nuevo corpus, el ZOOM corpus, el cual fue recolectado en un trabajo conjunto con la Universidad de S\H ao Paulo Brasil, para tener un corpus m\'as natural de expresiones refenciales ya que el corpus nombrado tiene expresiones referenciales de mapas. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el experimento, se explica la manera en que se anot\'o el corpus y se da una evaluaci\'on del corpus conseguido.
+En el Cap\'itulo \ref{sec:seleccion} formalizamos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas, los diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo sigulares, relacionales o proposicionales, los algoritmos tambi\'en se pueden distinguir por la forma en la que toman el input: mostramos un ejemplo de input de 2 algoritmos conocidos de la literatura, la forma en la que deciden cu\'al propiedad o relaci\'on agregar es decir la teor\'ia subyascente del algoritmo. Luego se explica la historia de los algoritmos del \'area de generaci\'on autom\'atica de expresiones referenciales. Despues veremos que una forma de acercarnos m\'as a la generaci\'on autom\'atica de expresiones referenciales imitando el comportanmiento humano, es viendo como los humanos hacen expresiones referenciales, llamamos {\it aproximaciones emp\'iricas} a aquellos algoritmos que hacen uso de corpus de expresiones referenciales dichas por humanos. Damos una breve descripci\'on de los corpus que actualmente hay disponibles en el \'area y al ver la simplicidad de estos corpus, por un lado podemos ver la complejidad de la tarea, ya que si para corpus tan simples, es tan dificil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dificil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, el cual usa im\'agenes de mapas de ciudades como contexto. Para finalizar daremos una introducci\'on a las m\'etricas de evaluaci\'on. 
+
+Habiendo ya decidido cuales son los tipos de expresiones referenciales que queremos generar en el Cap\'itulo \ref{sec:seleccion} y ya teniendo claro el lenguaje \EL que hemos seleccionado en el Cap\'itulo \ref{sec:intro_logica}, en el Cap\'itulo \ref{sec:algoritmo}  explicamos nuestra propuesta de agregar probabilidades de uso a las palabras de la signatura del modelo, adaptando un algoritmo existente \cite{arec2:2008:Areces} el cual introducimos en \ref{sec:seleccion}, modificamos el algoritmo permitiendo sobreespecificaci\'on, pero asegurando terminaci\'on y agregamos un componente aleatorio para conseguir no-determinismo. Mostramos en detalle el input que toma el nuevo algoritmo, dejando como caja negra de donde la sacamos las probabilidades de uso, tema que abordaremos en el siguiente cap\'itulo, mostramos la salida del algoritmo, explicamos como conseguimos no-determinismo en las distintas ejecusiones del algoritmo, como aseguramos terminaci\'on y que conseguimos la expresi\'on referencial si existe y como agregamos sobreespecificaci\'on a las expresiones referenciales. Luego damos un ejemplo de ejecusi\'on del algoritmo. 
+
+En el Cap\'itulo \ref{sec:learning} explicamos como obtener las probabilidades de uso usadas por el algoritmo del Cap\'itulo \ref{sec:algoritmo} a partir de corpus cuando hay disponible o una aproximaci\'on usando aprendizaje autom\'atico cuando no hay corpus disponible para la escena y target considerados. 
+
+Luego en Cap\'itulo 5 introducimos un nuevo corpus, el ZOOM corpus, el cual fue recolectado en un trabajo conjunto con la Universidad de S\H ao Paulo Brasil, para tener un corpus m\'as natural de expresiones refenciales ya que el corpus nombrado tiene expresiones referenciales de mapas. Los mapas son fragmentos de las ciudades de Madrid y Lisboa. Este corpus fue recolectado en 2 idiomas, espa\~nol y portugues. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el experimento, se explica la manera en que se anot\'o el corpus y se da una evaluaci\'on del corpus conseguido.
 
 En Cap\'itulo 6 mostramos una evaluaci\'on de nuestro algoritmo, teniendo en cuenta m\'etricas manuales y autom\'aticas. Y para finalizar en el Cap\'itulo 7 damos las conclusiones.

@@ -7,24 +7,24 @@ No existe un acuerdo general sobre la representaci\'on b\'asica de
 tanto la entrada y la salida del problema de GER; esto se maneja m\'as bien de manera ad-hoc
 por cada nueva propuesta.
 
-\cite{Krahmer2003} usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos 
-para expresar un gran n\'umero de dominios y hay muchos algoritmos conocidos para tratar
-con este tipo de estructuras. 
-
-De hecho, no se trata de otra cosa que una representaci\'on alternativa de los modelos relacionales, usada t\'ipicamente 
-para proporcionar sem\'antica a los lenguajes formales como el de primer orden y l\'ogicas de orden superior, l\'ogicas modales, etc.
-
-
-Exactamente debido a su generalidad, los grafos no definen por s\'i mismos, una \'unica noci\'on de igualdad. Cu\'ando decimos 
-que dos nodos en el grafo pueden o no pueden ser
-referenciados de forma \'unica en t\'erminos de sus propiedades? Esta pregunta s\'olo tiene sentido una vez que ya hemos 
-fijado un cierto nivel de expresividad el cual determina cuando dos grafos, o dos elementos en el mismo gr\'afo, son equivalentes.
-
-La expresividad se puede formalizar usando las relaciones estructurales de los grafos (isomorfismos, etc.) o, alternativamente, 
-lenguajes l\'ogicos. 
+%\cite{Krahmer2003} usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos 
+%para expresar un gran n\'umero de dominios y hay muchos algoritmos conocidos para tratar
+%con este tipo de estructuras. 
+%
+%De hecho, no se trata de otra cosa que una representaci\'on alternativa de los modelos relacionales, usada t\'ipicamente 
+%para proporcionar sem\'antica a los lenguajes formales como el de primer orden y l\'ogicas de orden superior, l\'ogicas modales, etc.
+%
+%
+%Exactamente debido a su generalidad, los grafos no definen por s\'i mismos, una \'unica noci\'on de igualdad. Cu\'ando decimos 
+%que dos nodos en el grafo pueden o no pueden ser
+%referenciados de forma \'unica en t\'erminos de sus propiedades? Esta pregunta s\'olo tiene sentido una vez que ya hemos 
+%fijado un cierto nivel de expresividad el cual determina cuando dos grafos, o dos elementos en el mismo gr\'afo, son equivalentes.
+%
+%La expresividad se puede formalizar usando las relaciones estructurales de los grafos (isomorfismos, etc.) o, alternativamente, 
+%lenguajes l\'ogicos. 
 
 %Ambas formas se presentan en Secci\'on \ref{sec:estructurales}, donde tambi\'en 
-Discutiremos la noci\'on de impacto de expresividad 
+En este cap\'itulo discutiremos la noci\'on de impacto de expresividad del lenguaje elegido, 
 en los casos que el problema GRE tiene soluci\'on; la complejidad computacional de los algoritmos GER involucrados; 
 y la complejidad computacional del problema de la realizaci\'on. Luego investigamos el problema GER en t\'erminos de diferentes 
 nociones de expresividad. 
@@ -346,8 +346,7 @@ $\gamma_3$ (sin igualdad) y
 $\gamma_4$ (aparece cuanti elemento ed
 siempre en segunda posici\'on de argumento).
 Generaci\'on se discute en ~\cite{AKS08}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
-y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, con-
-Sidering por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
+y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, considerando por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
 lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
 
 
@@ -396,9 +395,9 @@ Si prohibimos el distinto del lenguaje  $\gamma_6$ tambi\'en queda exclu\'ida.
 %representaci\'on del conocimiento, vea [2]) para clasificar y dar un marco formal para
 %trabajo previo sobre GRE. 
 
-Usar l\'ogicas de descripci\'on en lugar de fragmentos de FO es s\'olo una cuesti\'on de notaci\'on, como la mayor\'ia de l\'ogicas 
+Usar l\'ogicas de descripci\'on en lugar de fragmentos de \FOL es s\'olo una cuesti\'on de notaci\'on, como la mayor\'ia de l\'ogicas 
 descriptivas se pueden ver como
-fragmentos de FO. Por ejemplo, el lenguaje de la l\'ogica de descripci\'on ALC, se define sint\'acticamente como el conjunto de f\'ormulas,
+fragmentos de \FOL. Por ejemplo, el lenguaje de la l\'ogica de descripci\'on ALC, se define sint\'acticamente como el conjunto de f\'ormulas,
 $$
 \top \mid p \mid \neg \gamma \mid \gamma \wedge \gamma' \mid  \exists r. \gamma
 $$
