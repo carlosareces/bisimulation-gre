@@ -17,46 +17,47 @@ las tareas de determinaci\'on de contenido (qu\'e decir), lexicalizaci\'on (con 
 En generaci\'on autom\'atica de expresiones referenciales, tenemos esas 3 partes tambi\'en: la determinaci\'on de contenido est\'a dada por las propiedades o relaciones del objeto que queremos incluir en la expresi\'on referencial, la lexicalicalizaci\'on de las anteriores, es decir las palabras que vamos a usar para nombrarlo y la realizaci\'on ling\"u\'istica, que se encarga de armar el sintagma nominal para que sea gramaticalmente correcto.\\
 
  
-%\begin{figure}[ht]
-%\centering
-%\includegraphics[width=0.6\textwidth]{images/22sinletras.jpg}
-%\caption{Ejemplo de contexto}
-%\label{GRE3D7-stimulus1}
-%\end{figure}
+\begin{figure}[ht]
+\centering
+\includegraphics[scale=.4]{images/22sinletras.jpg}
+\caption{Ejemplo de contexto}
+\label{GRE3D7-stimulus1}
 
-\setlength{\unitlength}{1cm}
+\end{figure}
 
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/22sinletras.jpg}\caption{Ejemplo de contexto}\label{GRE3D7-stimulus1}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure}    
+%\setlength{\unitlength}{1cm}
+%
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/22sinletras.jpg}\caption{Ejemplo de contexto}\label{GRE3D7-stimulus1}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure}    
 
 
 
 Si quisieramos referirnos al objeto se\~nalado en la Figura~\ref{GRE3D7-stimulus1} podr\'iamos hacerlo con la expresi\'on referencial ``la
 esfera roja que est\'a al lado del cubo rojo'', o ``la bola grande'' o ``el objeto que esta al lado del cubo grande''. 
 
-%\begin{figure}[ht]
-%\centering
-%\includegraphics[width=0.6\textwidth]{images/22.jpg}
-%\caption{Ejemplo de contexto con objetos etiquetados}
-%\label{GRE3D7-stimulus2}
-%\end{figure}
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{images/22.jpg}
+\caption{Ejemplo de contexto con objetos etiquetados}
+\label{GRE3D7-stimulus2}
+\end{figure}
 
-\setlength{\unitlength}{1cm}
-
-%\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/22.jpg}\caption{Ejemplo de contexto con objetos etiquetados}\label{GRE3D7-stimulus2}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure}    
+%\setlength{\unitlength}{1cm}
+%
+%%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/22.jpg}\caption{Ejemplo de contexto con objetos etiquetados}\label{GRE3D7-stimulus2}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure}    
 
 
 Ahora imaginemos una computadora que se enfrenta a la misma
@@ -219,31 +220,6 @@ considerarlo por separado para asegurarse de que se a\~nade a cada expresi\'on r
 
 Una explicaci\'on parcial para esta condici\'on especial es que las expresiones referenciales consiguen realizarse como sintagmas nominales,
 cada sintagma nominal requiere un sustantivo, y por lo general es el tipo del referente dado que es el sustantivo principal.\\
-%Early REG research made a number of simplifying assumptions, and as a result the early
-%REG algorithms could only generate a limited variety of referring expressions. When
-%researchers started lifting some of these assumptions, this resulted in REG algorithms
-%with an expanded repertoire, being able to generate, for instance, plural and relational
-%descriptions. This move created a number of new challenges, however. For instance, the
-%number of ways in which one can refer to a set of target objects increases, so choosing a
-%good referring expression is more difficult as well
-%
-%Similarly, even
-%recent proposals tend to assume that it is unproblematic to determine what information
-%is shared between speaker and hearer. 
- %(a) How is domain information represented? 
-%(b) How is the semantic content
-%of a referring expression represented? and (c) How can distinguishing descriptions be
-%found?
- %In  the  context  of  the  corpora discussed in this thesis, we will encounter four diferent kinds of attributes:
-%object types, absolute attributes, relative attributes, and spatial attributes including relations and location attributes.
-%
-%The type of an object constitutes a special case because it is very rarely omitted
-%from a referring expression,  and this is the case in all human-produced corpora
-%under discussion in this thesis. Consequently, most algorithms treat
-%type separately to ensure that it is added to every referring expression.  One partial explanation
-%for this special status is that referring expressions get realised as noun phrases,
-%every noun phrase requires a head noun, and it is usually the referent type that
-%gets realised as the head noun
 
 \section{Contribuciones de esta tesis}
 \label{sec:contribiciones}
@@ -282,6 +258,24 @@ Luego en el Secci\'on \ref{sec:problema} explicamos el problema de la generaci\'
  el cual es generar autom\'aticamente expresiones referenciales imitando a las personas, lo cual incluye dar expresiones referenciales 
 distintas para el mismo target y contexto, y sobreespecificar las expresiones referenciales. 
 
+\paragraph{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} Formalizamos los diferentes tipos de expresiones referenciales: 
+proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas, los diferentes tipos de algoritmos para la tarea de 
+generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, 
+plurales, s\'olo sigulares, relacionales o proposicionales, los algoritmos tambi\'en se pueden distinguir por la forma en la que toman el 
+input: mostramos un ejemplo de input de 2 algoritmos conocidos de la literatura, la forma en la que deciden cu\'al propiedad o relaci\'on 
+agregar es decir la teor\'ia subyascente del algoritmo. Luego se explica la historia de los algoritmos del \'area de generaci\'on autom\'atica
+ de expresiones referenciales. Despu\'es veremos que una forma de acercarnos m\'as a la generaci\'on autom\'atica de expresiones referenciales
+ imitando el comportanmiento humano, es viendo como los humanos hacen expresiones referenciales, llamamos {\it aproximaciones emp\'iricas} 
+a aquellos algoritmos que hacen uso de corpus de expresiones referenciales dichas por humanos. Damos una breve descripci\'on de los corpus 
+que actualmente hay disponibles en el \'area y al ver la simplicidad de estos corpus, por un lado podemos ver la complejidad de la tarea, 
+ya que si para corpus tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es 
+realmente una tarea mucho m\'as dificil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo
+ corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, el cual usa im\'agenes de mapas de ciudades como contexto. Para finalizar 
+daremos una introducci\'on a las m\'etricas de evaluaci\'on. 
+
+Habiendo ya decidido cuales son los tipos de expresiones referenciales que queremos generar en el Cap\'itulo \ref{sec:seleccion} y ya teniendo 
+claro el lenguaje \EL que hemos seleccionado en el Cap\'itulo \ref{sec:intro_logica}, en el 
+
 \paragraph{Cap\'itulo~\ref{sec:intro_logica}: ``Introducci\'on a la L-simulaci\'on''}: A fin de seleccionar una l\'ogica cuyo lenguaje sea apropiado a nuestro problema de 
 genereaci\'on de expresiones referenciales imitando el comportamiento humano, partimos desde la l\'ogica de primer orden (\FOL) y su lenguaje 
 asociado, para darnos una idea de cuales son las f\'ormulas que el lenguaje puede generar, vemos una serie de ejemplos de f\'ormulas que se 
@@ -302,24 +296,6 @@ $u \sim v$. Un teorema dice que Si $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ an
 \tup{\Delta_2, \interp{\cdot}_2}$ son modelos finitos, $u \in \Delta_1$ and $v \in \Delta_2$, entonces $u \simil{\+L} v$ si y s\'olo si 
 $u \simul{\+L} v$ (para $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$). Se presentan los algoritmos...
 
-
-\paragraph{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} Formalizamos los diferentes tipos de expresiones referenciales: 
-proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas, los diferentes tipos de algoritmos para la tarea de 
-generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, 
-plurales, s\'olo sigulares, relacionales o proposicionales, los algoritmos tambi\'en se pueden distinguir por la forma en la que toman el 
-input: mostramos un ejemplo de input de 2 algoritmos conocidos de la literatura, la forma en la que deciden cu\'al propiedad o relaci\'on 
-agregar es decir la teor\'ia subyascente del algoritmo. Luego se explica la historia de los algoritmos del \'area de generaci\'on autom\'atica
- de expresiones referenciales. Despu\'es veremos que una forma de acercarnos m\'as a la generaci\'on autom\'atica de expresiones referenciales
- imitando el comportanmiento humano, es viendo como los humanos hacen expresiones referenciales, llamamos {\it aproximaciones emp\'iricas} 
-a aquellos algoritmos que hacen uso de corpus de expresiones referenciales dichas por humanos. Damos una breve descripci\'on de los corpus 
-que actualmente hay disponibles en el \'area y al ver la simplicidad de estos corpus, por un lado podemos ver la complejidad de la tarea, 
-ya que si para corpus tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es 
-realmente una tarea mucho m\'as dificil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo
- corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, el cual usa im\'agenes de mapas de ciudades como contexto. Para finalizar 
-daremos una introducci\'on a las m\'etricas de evaluaci\'on. 
-
-Habiendo ya decidido cuales son los tipos de expresiones referenciales que queremos generar en el Cap\'itulo \ref{sec:seleccion} y ya teniendo 
-claro el lenguaje \EL que hemos seleccionado en el Cap\'itulo \ref{sec:intro_logica}, en el 
 
 \paragraph{Cap\'itulo~\ref{sec:algoritmo} ``Nuestra propuesta''} Habiendo ya decidido cuales son los tipos de expresiones referenciales que queremos generar en el Cap\'itulo \ref{sec:seleccion} y ya teniendo
 claro el lenguaje \EL que hemos seleccionado en el Cap\'itulo \ref{sec:intro_logica}, en este cap\'itulo 

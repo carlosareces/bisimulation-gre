@@ -54,7 +54,7 @@ El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos r
 como un modelo relacional. Intuitivamente, $a$, $b$ y $d$ son dogs, mientras que 
 $c$ y $e$ are cats;  $d$ es un small beagle;
  $b$ y $c$ son tambi\'en small.
- Leeremos $\aSniffing(d,e)$ como ``{\em $d$ is sniffing $e$}''.
+ Leeremos $\aSniffing(d,e)$ como ``{\em $d$ is sniffing $e$}''.\\
 
  \begin{figure}
  \begin{center}
@@ -67,7 +67,7 @@ $\interp{\aSmall}$    & = & $\cset{b,c,d}$\\
 $\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
  \end{tabular}
 \begin{picture}(120,50)
-\put(0,-50){\begin{tikzpicture}
+\put(0,-70){\begin{tikzpicture}
   [
     n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
     aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
@@ -104,7 +104,8 @@ $\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
 
 El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} en el que hemos representado el Contexto \ref{GRE3D7-stimulus1} 
 como un modelo relacional. $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$ y $e_7$, son 'cube', mientras que 
-$e_1$, $e_3$ y $e_6$ son 'yellow', $e_2$, $e_4$, $e_5$, $e_7$ son 'red';
+$e_1$, $e_3$ y $e_6$ son 'yellow', $e_2$, $e_4$, $e_5$, $e_7$ son 'red';\\
+
 %Para las relaciones tenemos $\Ontop(e_3,e_2)$ como ``{\em $e_3$ on top of $e_2$}''.
 %$\Rightof(e_4,e_5)$, $\Rightof(e_6,e_7)$, $\Lefttof(e_5,e_4)$,$\Leftof(e_7,e_6)$. $e_4$ y $e_5$ son 'large', los dem\'as 'small'.
 
@@ -232,8 +233,8 @@ $\interp{\lnot\delta}^n$ &$=$& $\Delta^n \setminus \interp{\delta}^n$
 $\interp{r (x_{i_1} \ldots x_{i_k})}^n$ & $=$&$\cset{\bar{a} \mid \bar{a} \,{\in}\, \Delta^n, (a_{i_1} \ldots a_{i_k}) {\in} \interp{r}}$
 \\
 $\interp{\delta \land \theta}^n$ &$=$& $\interp{\delta}^n \cap \interp{\theta}^n$
-&
-$\interp{\exists x_{l}.\delta}^n$ &$=$& $\cset{\bar a \mid \bar a  e  \in \interp{\delta'}^{n+1}\ \text{for some $e$}}$
+%&
+%$\interp{\exists x_{l}.\delta}^n$ &$=$& $\cset{\bar a \mid \bar a  e  \in \interp{\delta'}^{n+1}\ \text{for some $e$}}$
 \end{tabular}
 \end{center}
 %
@@ -510,12 +511,12 @@ If  $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ and $\+M_2 =
 \Delta_1$ and $v \in \Delta_2$, then $u \simil{\+L} v$ iff $u
 \simul{\+L} v$ (for $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$).
 \end{theorem}
-\begin{proof}
+%\begin{proof}
 Algunos resultados son bien conocidos: $\simul{\FOL}$ es isomorfismo en
 grafos etiquetados~\cite{ebbi:math96}; $\simul{\ALC}$ corresponde a la
 noci\'on de bisimulaci\'on~\cite[Def.~2.16]{BRV01}; $\simul{\EL}$ es una
 simulaci\'on definida en~\cite[Def.~2.77]{BRV01}. Los restantes son variaciones de estos.
-\end{proof}
+%\end{proof}
 
 
 Therefore, on finite models\footnote{Finiteness is not the weakest hypothesis,

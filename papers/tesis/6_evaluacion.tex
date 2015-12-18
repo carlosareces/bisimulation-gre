@@ -193,22 +193,12 @@ Adem\'as de poca precisi\'on, cuando se utilizaron muchas de las ER generadas do
 el cubo azul que est\'a abajo de algo que es peque\~no.'' En la \'ultima columna se presenta la exactitud de una corrida artificial, donde a todas las ERs generadas en cualquiera de las columnas anteriores se les asigno la misma probabilidad.\\
 
 
-%\begin{figure}[ht]
-%\centering
-%\includegraphics[width=0.6\textwidth]{images/entropy.jpg}
-%\caption{Entrop\'ia cruzada entre la distribuci\'on del corpus y diferentes ejecuciones del algoritmo}\label{Entropy}
-%\end{figure}
-
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/entropy.jpg}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure}  
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{images/entropy.jpg}
+\caption{Entrop\'ia cruzada entre la distribuci\'on del corpus y diferentes ejecuciones del algoritmo}\label{Entropy}
+\end{figure}
+  
 
 %
 %%\begin{wrapfigure}{r}{0.52\textwidth}
@@ -338,40 +328,19 @@ Precisi\'on, Dados y \textsc{masi}  evaluar humanlikeness con respecto a un corp
 
 Otro resultado que podemos observar es que la exactitud de dominio personas es mucho menor para el 1 ER que para el dominio de muebles (19 vs 47), pero la precisi\'on estabiliza cuando se consideran ER inferiores en nuestro ranking. Esto puede explicarse por el hecho de que el conjunto de entrenamiento para el dominio de la gente es m\'as peque\~no y menos equilibrado y por lo tanto, las probabilidades de uso inferido no generalizar, as\'{i} como en el dominio de muebles.
 
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/furniturePrec.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure}  
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/precP.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure}  
-
-%\begin{figure}[ht]
-%\begin{minipage}{0.50\linewidth}
-%\centering
-%\includegraphics[width=\textwidth]{images/furniturePrec.png}
-%%\end{figure}
-%\end{minipage}
-%%\begin{figure}[ht]
-%\begin{minipage}{0.50\linewidth}
-%\centering
-%\includegraphics[width=\textwidth]{images/precP.png}
-%\end{minipage}
-%\caption{Comparaci\'on de la exactitud del algoritmo GRAPH y nuestro sistema. El eje x indica que la precisi\'on se calcul\'o teniendo en cuenta las x primeras ER en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
+\begin{figure}[ht]
+\begin{minipage}{0.50\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/furniturePrec.png}
 %\end{figure}
+\end{minipage}
+%\begin{figure}[ht]
+\begin{minipage}{0.50\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/precP.png}
+\end{minipage}
+\caption{Comparaci\'on de la exactitud del algoritmo GRAPH y nuestro sistema. El eje x indica que la precisi\'on se calcul\'o teniendo en cuenta las x primeras ER en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
+\end{figure}
 
  
 %\vspace*{-1.0cm}
@@ -428,46 +397,26 @@ A continuaci\'on, se ilustra el experimento de evaluaci\'on, mostrando ejemplos 
 
 Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera un ER subespecificada mientras el sistema produce un ER que identifica de manera inequ\'{i}voca al target. La ER generada por el sistema para esta figura es ``peque\~no ventilador azul'', mientras que el ER producida por el ser humano es ``ventilador azul ''. La ER del humano no logra identificar de forma \'unica el target y entonces no preferida por los jueces humanos. Los seres humanos son conocidos por producir ER subespecificadas que puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial, al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ER aprendidas de los seres humanos.
 
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/smallBlueFan.jpg}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure}  
-
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/tuna.jpg}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure}  
 
 
-%\begin{figure}[h]
-%\begin{minipage}{0.48\linewidth}
-%\centering
-%\includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
-%\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{ventilador azul}, y la del sistema \emph{ventilador azul peque\~o}. Los jueces prefirieron la generada por el sistema.}
-%\label{smallBlueFan}
-%\end{minipage}
-%\hspace*{.04cm}
-%\begin{minipage}{0.48\linewidth}
-%\centering
-%\vspace*{.4cm}
-%\includegraphics[width=\textwidth]{images/tuna.jpg} % esta es la 101t5 la que mostramos al principio
-%\vspace*{-.4cm}
-%\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{silla azul frontal}, y la del sistema \emph{La silla azul de abajo}. Ambos jueces humanos prefirieron la generada por el sistema.}
-%\label{BlueChair}
-%\end{minipage}
-%\end{figure}
+
+\begin{figure}[h]
+\begin{minipage}{0.48\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{ventilador azul}, y la del sistema \emph{ventilador azul peque\~o}. Los jueces prefirieron la generada por el sistema.}
+\label{smallBlueFan}
+\end{minipage}
+\hspace*{.04cm}
+\begin{minipage}{0.48\linewidth}
+\centering
+\vspace*{.4cm}
+\includegraphics[width=\textwidth]{images/tuna.jpg} % esta es la 101t5 la que mostramos al principio
+\vspace*{-.4cm}
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{silla azul frontal}, y la del sistema \emph{La silla azul de abajo}. Ambos jueces humanos prefirieron la generada por el sistema.}
+\label{BlueChair}
+\end{minipage}
+\end{figure}
 
 
 %In Figure~\ref{BlueChair} the human ER was ``blue frontal chair'', and the system ER was ``the blue chair in the bottom''; both judges selected the system RE. This case can be explained by the fact that, in this domain, the property ``bottom'' helps more during the identification than the property ``frontal'' because it concentrates the attention of the interpreter in the lower part of the scene. Our system learns this fact by learning a higher value of \puse~for ``bottom'' than for ``frontal'' from the training data. 

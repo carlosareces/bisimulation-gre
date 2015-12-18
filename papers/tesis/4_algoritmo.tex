@@ -157,54 +157,56 @@ Por ejemplo, la interpretaci\'on de la f\'ormula \emph{esfera}$\sqcap$ \emph{a-l
 \small
 \centering
 \begin{algorithm}[H]
-\dontprintsemicolon
-\caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
-\KwIn{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
- de relaciones con sus valores de \puse\, odenados por \puse}
-\KwOut{\footnotesize Un conjunto de f\'ormulas \RE tal que
-$\{\interp{\varphi} \mid \varphi \in \RE\}$ es el conjunto de clases de
-$\mathcal{L}$-similaridad de $\gM$}
+%\dontprintsemicolon
+%\caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
+%\KwIn{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
+ %de relaciones con sus valores de \puse\, odenados por \puse}
+%\KwOut{\footnotesize Un conjunto de f\'ormulas \RE tal que
+%$\{\interp{\varphi} \mid \varphi \in \RE\}$ es el conjunto de clases de
+%$\mathcal{L}$-similaridad de $\gM$}
+%
+%$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\top$ aplica a todos los elementos del contexto}
+%
+%Bloque con error comentado
+%\For{\em (R,R.\puse) $\in$ Rs}{
+	%R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es la probabilidad de usar R} \;
+        %R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ incrementadas por R.\incuse en cada ciclo}
+%}
 
-$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\top$ aplica a todos los elementos del contexto}
-
-\For{\em (R,R.\puse) $\in$ Rs}{
-	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es la probabilidad de usar R} \;
-        R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ incrementadas por R.\incuse en cada ciclo}
-}
-
-\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ incrementadas hasta que alcanzan 1}}{
-  \While(\tcp*[f]{\footnotesize mientras alguna clase tenga al menos 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
-      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize hacer una copia para futura comparaci\'on} \;
-      \For{\em (R, R.\puse) $\in$ Rs}{
-          \If(\tcp*[f]{\footnotesize R ser\'a usada en la expresi\'on}){\em R.\randomuse $\le$ R.\puse}{
-              \lFor{\em $\varphi \in$ \RE}{
-                  add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine todas las clases usando R}}
-                  }\;
-              \If(\tcp*[f]{\footnotesize la clasificaci\'on cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo for para tratar de nuevo con la m\'as alta R.\puse}}
-              }
-     \If(\tcp*[f]{\footnotesize la clasificaci\'on se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse}}
-  }
-  \lFor{\em (R,R.\puse) $\in$ Rs}{
-    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\puse}
-  }
-}
+%\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ incrementadas hasta que alcanzan 1}}{
+  %\While(\tcp*[f]{\footnotesize mientras alguna clase tenga al menos 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
+      %\RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize hacer una copia para futura comparaci\'on} \;
+      %\For{\em (R, R.\puse) $\in$ Rs}{
+          %\If(\tcp*[f]{\footnotesize R ser\'a usada en la expresi\'on}){\em R.\randomuse $\le$ R.\puse}{
+              %\lFor{\em $\varphi \in$ \RE}{
+                  %add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine todas las clases usando R}}
+                  %}\;
+              %\If(\tcp*[f]{\footnotesize la clasificaci\'on cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo for para tratar de nuevo con la m\'as alta R.\puse}}
+              %}
+     %\If(\tcp*[f]{\footnotesize la clasificaci\'on se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse}}
+  %}
+	Bloque con error comentado
+  %\For{\em (R,R.\puse) $\in$ Rs}{
+    %R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\puse}
+  %}
+%}
 \end{algorithm}
 
 \begin{algorithm}[H]
 \dontprintsemicolon
 \caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el-over}
-
-\If(\tcp*[f]{\footnotesize primera iteraci\'on?}){\em FirstLoop?}{
-    Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
-\lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
-\For{\em $\psi \in$ \RE con $\#\interp{\psi} > 1$}{
-  \If{\em $\psi \sqcap \exists$R.$\varphi$ no esta subsumida en \RE\ {\bf y} \tcp*[f]{\footnotesize no-redundante: no puede ser obtenida desde \RE?}\\
-    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf y} \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}\\
-     \ \ \  \emph{Informativa}}{
-    y $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a la clasificaci\'on} \;
-    borrar f\'ormulas subsumidas de $\RE$ \tcp*[f]{\footnotesize borrar clases redundantes}
-  }
-}
+%
+%\If(\tcp*[f]{\footnotesize primera iteraci\'on?}){\em FirstLoop?}{
+    %Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
+%\lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
+%\For{\em $\psi \in$ \RE con $\#\interp{\psi} > 1$}{
+  %\If{\em $\psi \sqcap \exists$R.$\varphi$ no esta subsumida en \RE\ {\bf y} \tcp*[f]{\footnotesize no-redundante: no puede ser obtenida desde \RE?}\\
+    %\em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf y} \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}\\
+     %\ \ \  \emph{Informativa}}{
+    %y $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a la clasificaci\'on} \;
+    %borrar f\'ormulas subsumidas de $\RE$ \tcp*[f]{\footnotesize borrar clases redundantes}
+  %}
+%}
 \end{algorithm}
 \vspace*{-.5cm}\caption{Algoritmos de refinamiento con probabilidades y sobreespecificaci\'on para el \el-language}\label{fig:algo3}
 
@@ -453,58 +455,58 @@ y $e_5$ esfera, rojo
 En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
 
 
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/22.jpg}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
- % \put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
-
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/base.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
-
-
+%\setlength{\unitlength}{1cm}
 %
-%\begin{figure}[ht]
-%\begin{minipage}[b]{0.45\linewidth}
-%\centering
-%\includegraphics[width=\textwidth]{images/22.jpg}
-%\vspace*{1cm}
-%%\caption{Input scene}
-%\label{GRE3D7-stimulus-22}
-%\end{minipage}
-%%\hspace*{-0.35cm}
-%\begin{minipage}[b]{0.6\linewidth}
-%\centering
-%%\begin{figure}[ht]
-%%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/base.png}}\\[0pt]
-%\caption{Modelo de la Figura \ref{GRE3D7-stimulus-22}}
-%\label{fig-modelo}
-%\end{minipage}
-%\end{figure}
-\setlength{\unitlength}{1cm}
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/22.jpg}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+ %% \put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure} 
+%
+%\setlength{\unitlength}{1cm}
+%
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/base.png}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure} 
 
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo2.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
+
+
+\begin{figure}[ht]
+\begin{minipage}[b]{0.45\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/22.jpg}
+\vspace*{1cm}
+%\caption{Input scene}
+\label{GRE3D7-stimulus-22}
+\end{minipage}
+%\hspace*{-0.35cm}
+\begin{minipage}[b]{0.6\linewidth}
+\centering
+%\begin{figure}[ht]
+%\begin{center}
+\frame{\includegraphics[width=8cm]{images/base.png}}\\[0pt]
+\caption{Modelo de la Figura \ref{GRE3D7-stimulus-22}}
+\label{fig-modelo}
+\end{minipage}
+\end{figure}
+%\setlength{\unitlength}{1cm}
+%
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo2.png}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure} 
 %
 %\begin{figure}[ht]
 %\begin{center}
@@ -524,109 +526,109 @@ La primer relaci\'on a considerar es \textsf{esfera}, recordemos que la f\'ormul
 
 ER = \{$\top$, \textsf{esfera}\}, se ven los elementos de la f\'ormula ``esfera'' en un recuadro en la Figura~\ref{fig-modelo3}.
 
-\setlength{\unitlength}{1cm}
+%\setlength{\unitlength}{1cm}
+%
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo3.png}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure} 
 
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo3.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
 
-
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo3.png}}\\[0pt]
-%\caption{El cuadro indica cuales son ``esfera''}
-%\label{fig-modelo3}
-%\end{center}
-%\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo3.png}}\\[0pt]
+\caption{El cuadro indica cuales son ``esfera''}
+\label{fig-modelo3}
+\end{center}
+\end{figure}
 
 La siguiente propiedad es \textsf{cubo}, ER = \{$\top$, \textsf{esfera}, \textsf{cubo}\}, pero ahora la $\interp{\textsf{esfera}}$ = $\{e_1, e_3, e_5\}$, $\interp{\textsf{cubo}}$ = $\{e_2, e_4, e_6, e_7\}$, quedando las particiones como se muestra en la Figura~\ref{fig-modelo4}
 
-\setlength{\unitlength}{1cm}
+%\setlength{\unitlength}{1cm}
+%
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo4.png}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure} 
 
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo4.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
-
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo4.png}}\\[0pt]
-%\caption{Cuadros indicando ``esfera'' y ``cubo''}
-%\label{fig-modelo4}
-%\end{center}
-%\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo4.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'' y ``cubo''}
+\label{fig-modelo4}
+\end{center}
+\end{figure}
 Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) las otras dos f\'ormulas. La siguiente propiedad es  \textsf{rojo}, $\interp{\textsf{rojo}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\textsf{esfera}, \textsf{cubo}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo}\}$, las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
 
-\setlength{\unitlength}{1cm}
+%\setlength{\unitlength}{1cm}
+%
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo9.png}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure} 
 
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo9.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
-
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo9.png}}\\[0pt]
-%\caption{Cuadros indicando ``esfera'', ``cubo'' y ``rojo''}
-%\label{fig-modelo9}
-%\end{center}
-%\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo9.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'' y ``rojo''}
+\label{fig-modelo9}
+\end{center}
+\end{figure}
 %
 Siguiendo con \textsf{amarillo}, tenemos, $\interp{\textsf{amarillo}}$ = $\{e_1, e_3, e_6\}$ y obtenemos ER = $\{\textsf{esfera} \wedge \textsf{amarillo}, \textsf{cubo} \wedge \textsf{amarillo}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo}\}$. 
 Note que aqu\'i ya borramos la f\'ormula \textsf{esfera} porque estaba subsumida, y la f\'ormula \textsf{cubo} tambi\'en. Se muestran particiones en Figura~\ref{fig-modelo10}.
 
-\setlength{\unitlength}{1cm}
+%\setlength{\unitlength}{1cm}
+%
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo10.png}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure} 
 
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo10.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
-
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo10.png}}\\[0pt]
-%\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'' y ``amarillo''}
-%\label{fig-modelo10}
-%\end{center}
-%\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo10.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'' y ``amarillo''}
+\label{fig-modelo10}
+\end{center}
+\end{figure}
 
 Haciendo lo mismo con \textsf{peque\~no} tenemos ER = $\{\textsf{esfera} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}, \textsf{cubo} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}\}$, como se puede ver en Figura~\ref{fig-modelo11}.
 
-\setlength{\unitlength}{1cm}
+%\setlength{\unitlength}{1cm}
+%
+%\newsavebox{\mybox} 
+%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo11.png}} 
+ %\begin{figure}
+   %\begin{picture}(8,6)
+  %\put(0,0){\usebox{\mybox}} 
+  %%\put(2,2.5){\oval(6,5)}
+   %\end{picture}   
+ %\end{figure} 
 
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo11.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
-
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo11.png}}\\[0pt]
-%\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo'', ``peque\~no'' y ``grande''}
-%\label{fig-modelo11}
-%\end{center}
-%\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo11.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo'', ``peque\~no'' y ``grande''}
+\label{fig-modelo11}
+\end{center}
+\end{figure}
 
 La siguiente propiedad es \textsf{grande} as\'i, tenemos ER = $\{\textsf{esfera} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}, \textsf{cubo} \wedge \textsf{amarillo} \wedge \textsf{peque\~no}, \textsf{esfera} \wedge \textsf{rojo}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{grande}, \textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}\}$. Aqu\'i no podemos agregar \textsf{grande} a la f\'ormula $\textsf{rojo} \wedge \textsf{cubo}$ porque su interpretaci\'on tiene un solo elemento, y la condici\'on dice que es necesario tener m\'as de uno.
 
@@ -635,23 +637,14 @@ y tenemos las siguientes extensiones: $\{e_1, e_3\}, \{e_6\}, \{e_5\}, \{e_4\}, 
 Hay dos f\'ormulas que a\'un pueden ser refinadas, $\textsf{esfera} \wedge \textsf{yellow} \wedge \textsf{peque\~no}$ y $\textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}$ 
 debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo, while del algoritmo 1, en la l\'inea 4. Ahora es el turno de las relaciones, la primera de ellas es \textsf{leftof}, para cada f\'ormula $\varphi$ en ER trataremos de hacer add$_\el$ ($\exists \textsf{leftof}.\varphi$, RE). Notar que $\psi$ solo puede ser $\textsf{esfera} \wedge \textsf{yellow} \wedge \textsf{peque\~no}$ o $\textsf{cubo} \wedge \textsf{rojo} \wedge \textsf{peque\~no}$ porque esos son los que su interpretaci\'on tiene m\'as de un elemento. 
 
-\setlength{\unitlength}{1cm}
 
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo15.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo15.png}}\\[0pt]
-%\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``yellow''...}
-%\label{fig-modelo15}
-%\end{center}
-%\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo15.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``yellow''...}
+\label{fig-modelo15}
+\end{center}
+\end{figure}
 
 
 No hay
@@ -666,44 +659,23 @@ aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer ni
 %At this point we already have the target in a singleton set. So the formula for it is ``red and esfera'', and also for s6 which formula is ``yellow cubo''.\\
 %As we show this algorithm depends of the order of properties and relations.\\
 
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo16.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
-
-\setlength{\unitlength}{1cm}
-
-\newsavebox{\mybox} 
-\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo17.png}} 
- \begin{figure}
-   \begin{picture}(8,6)
-  \put(0,0){\usebox{\mybox}} 
-  %\put(2,2.5){\oval(6,5)}
-   \end{picture}   
- \end{figure} 
 
 
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo16.png}}\\[0pt]
-%\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo''...}
-%\label{fig-modelo16}
-%\end{center}
-%\end{figure}
-%
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo17.png}}\\[0pt]
-%\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo''...}
-%\label{fig-modelo17}
-%\end{center}
-%\end{figure}
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo16.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo''...}
+\label{fig-modelo16}
+\end{center}
+\end{figure}
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/modelo17.png}}\\[0pt]
+\caption{Cuadros indicando ``esfera'', ``cubo'', ``rojo'', ``amarillo''...}
+\label{fig-modelo17}
+\end{center}
+\end{figure}
 
 Las expresiones referenciales encontradas son:\\
 

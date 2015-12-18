@@ -5,40 +5,40 @@
 \usepackage{makeidx}
 \usepackage{amssymb}
 \usepackage{wasysym}
-%\usepackage{amsmath}
 \usepackage{latexsym}
-%\usepackage{eepic}
 \usepackage{xspace}
 \usepackage{mdwtab}
 \usepackage{mathenv}
-%\usepackage{stmaryrd}
 \usepackage{named}
-%\usepackage{url}
-%\usepackage{longtable}
-%\usepackage{proof}
-%\usepackage{color}
 
+\usepackage{stmaryrd}
+\usepackage{url}
+\usepackage{longtable}
+\usepackage{eepic}
+\usepackage{proof}
+\usepackage{color}
+%\usepackage{amsmath} errores
 % Packages used by me
-%\usepackage[silent,draft]{fixme}
-%\usepackage[silent]{fixme}
-%\renewcommand{\fixme}{\fxnote}
+\usepackage[silent,draft]{fixme}
+\usepackage[silent]{fixme}
+\renewcommand{\fixme}{\fxnote}
 %
 \usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
 %
-%\usepackage{lingmacros}
-%\usepackage{graphicx}
-%\usepackage{tikz}
-%\usetikzlibrary{snakes}
-%%\usepackage{bbding}
-%\usepgflibrary{arrows}
-%%\usepackage{hyperref}
-%\usepackage{soul}
-%\usetikzlibrary{trees}
-%\usetikzlibrary{shapes}
-%\usetikzlibrary{automata}
-%\usepackage{wrapfig}
-%\usepackage{marvosym}
-%\usepackage{dingbat}
+\usepackage{lingmacros}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{snakes}
+%\usepackage{bbding} errores
+\usepgflibrary{arrows}
+\usepackage{hyperref}
+%\usepackage{soul} errores
+\usetikzlibrary{trees}
+\usetikzlibrary{shapes}
+\usetikzlibrary{automata}
+\usepackage{wrapfig}
+\usepackage{marvosym}
+%\usepackage{dingbat} errores
 %Lu
 
 
@@ -71,13 +71,13 @@
 \usepackage{hyperref}
 \usepackage{xkeyval}
 %%%DE LACL
-
+\usepackage{algorithm2e}
 \newcommand{\nDog}{\mathit{dog}\xspace}
 \newcommand{\nCat}{\mathit{cat}\xspace}
 \newcommand{\aSmall}{\mathit{small}\xspace}
 \newcommand{\aSniffing}{\mathit{sniffs}\xspace}
 \newcommand{\nBreed}{\mathit{beagle}\xspace}
-
+\newcommand{\st}{\mathit{\tau}\xspace}
 \newcommand{\cset}[1]{\{#1\}}
 % esto controla la separación de los floats respecto al texto. necesitamos el espacio extra!
 \addtolength{\textfloatsep}{-13pt}
@@ -88,7 +88,7 @@
 
 % for compatibility with older versions of algorithm2e
 \providecommand{\LinesNumbered}{\linesnumbered}
-%\providecommand{\dontprintsemicolon}{\DontPrintSemicolon}
+\providecommand{\dontprintsemicolon}{\DontPrintSemicolon}
 
 \newcommand{\pr}[2]{{\it pre}_{#1}(#2)}
 \newcommand{\su}[2]{{\it suc}_{#1}(#2)}
@@ -106,7 +106,7 @@
 \newcommand{\EL}{\ensuremath{\mathcal{EL}}\xspace}
 \newcommand{\ELAN}{\ensuremath{{\mathcal{EL}^+}}\xspace}
 
-\newcommand{\st}{\mathit{\tau}\xspace}
+%\newcommand{\st}{\mathit{\tau}\xspace}
 
 \newcommand\+[1]{\mathcal{#1}}
 
@@ -231,8 +231,19 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 %\DeclareFloatFont{tiny}{\tiny}% "scriptsize" is defined by floatrow, "tiny" not
 %\floatsetup[table]{font=tiny}
 
-%\usepackage{algorithm}
+\usepackage{algorithm}
 \usepackage{algorithmic}
+
+\newenvironment{mycite}
+{\vspace{-3.5cm}%
+\begin{small}%
+\begin{flushright}%
+\it}
+{\end{flushright}%
+\end{small}%
+\vspace{.5cm}
+}
+
 
 \newcommand{\tup}[1]{\langle #1 \rangle}
 \newcommand{\puse}{\ensuremath{\textsf{p}_\textit{use}}}
@@ -267,8 +278,8 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \newcommand{\aRed}{\mathit{red}\xspace}
 \newcommand{\aYellow}{\mathit{yellow}\xspace}
 
-\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
-\usepackage[document]{ragged2e}
+%\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
+%\usepackage[document]{ragged2e}
 %\usepackage{amsmath, amssymb, xspace, enumerate}
 \newcommand{\nAlgorithm}{Algoritmo}
 
@@ -330,21 +341,12 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \renewcommand{\bibname}{Bibliograf{\'\i}a}
 %\renewcommand{\algorithmname}{Algoritmo}
 \include{1_intro} %trabajo previo
-
-\include{1_intro_logica}
-
 \include{2_seleccion}
-
-\include{3_metodologia}
-
+\include{1_intro_logica}
 \include{4_algoritmo}
-
 \include{4_b_learning}
-
 \include{5_corpus}
-
 \include{6_evaluacion}
-
 \include{7_conclusiones}
 \vskip 0.2in
  
