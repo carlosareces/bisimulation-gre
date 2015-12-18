@@ -194,13 +194,13 @@ Por ejemplo, la interpretaci\'on de la f\'ormula \emph{esfera}$\sqcap$ \emph{a-l
 
 \begin{algorithm}[H]
 \dontprintsemicolon
-\caption{add$_\el$(R, $\varphi$, \RE)} \label{algo:bisim-add-el-over}
+\caption{add$_\el$(R, $\varphi$, $\RE$)} \label{algo:bisim-add-el-over}
 %
 %\If(\tcp*[f]{\footnotesize primera iteraci\'on?}){\em FirstLoop?}{
     %Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
 %\lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
-%\For{\em $\psi \in$ \RE con $\#\interp{\psi} > 1$}{
-  %\If{\em $\psi \sqcap \exists$R.$\varphi$ no esta subsumida en \RE\ {\bf y} \tcp*[f]{\footnotesize no-redundante: no puede ser obtenida desde \RE?}\\
+%\For{\em $\psi \in \RE$ con $\#\interp{\psi} > 1$}{
+  %\If{\em $\psi \sqcap \exists$R.$\varphi$ no esta subsumida en $\RE$ \ {\bf y} \tcp*[f]{\footnotesize no-redundante: no puede ser obtenida desde \RE?}\\
     %\em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf y} \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}\\
      %\ \ \  \emph{Informativa}}{
     %y $\psi \sqcap \exists \mbox{R}.\varphi$ to $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a la clasificaci\'on} \;
