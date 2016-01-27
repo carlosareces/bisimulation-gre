@@ -449,3 +449,493 @@ Figura~\ref{s28t25} es un ejemplo para los que ambos jueces prefieren la expresi
 
 Figura~\ref{s307t21}~ilustra un caso en el que la ER del sistema era m\'as sobreespecificada que la ER humana; el sistema incluye ``con gafas'', mientras que el ser humano no lo hizo. En este caso un sujeto humano prefiere la ER del sistema y el otro la ER humano. La cantidad de sobreespecificaci\'on es una cuesti\'on subjetiva, donde los humanos mismos no est\'an de acuerdo. Una evaluaci\'on m\'as profunda donde las ERs se utilicen para resolver una tarea ser\'{i}a interesante para investigar este asunto.
 
+
+
+\section{Caso de estudio del ZOOM corpus}
+
+En esta secci\'on presentamos el estudio de dos casos particulares, los cuales son mucho m\'as naturales que los que hab\'iamos visto hasta el momento: la generaci\'on autom\'atica de ER para dos mapas del ZOOM corpus uno con zoom x y otro con zoom 2X del mismo target. El mapa singular usado se muestra en la Figura \ref{mapa-zoom} y el mapa con zoom 2X, se muestra en Figura \ref{mapa-zoom2x}. Veremos las diferencias entre ambos mapas a nivel de informaci\'on disponible, obtendremos a partir de la imagen el modelo y a partir de las ER's del corpus las probabilidades de uso para luego ejecutar el algoritmo.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/corpus/mapa6.png}\\[0pt]
+\caption{Imagen del ZOOM corpus}
+\label{mapa-zoom}
+\end{figure}
+
+Podemos notar que en la imagen con zoom se puede ver el target, el cual est\'a se\~nalado por una flecha roja, seg\'un la leyenda que se ubica a la derecha, podemos decir que se trata de una iglesia, en la imagen se ve el nombre de la iglesia, ``Parroquia de Santa Cruz'', otra cosa que se puede ver en el mapa con zoom es el nombre de la calle que esta abajo ``Calle de la Concepci\'on Jeronima'', en este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores, por lo tanto lo \'unico que se ve en la Calle de Santo Tom\'as es la iglesia target.
+
+En la Tabla \ref{freq-mapa} y \ref{freq-mapa-zoom} se muestran las ER dadas por las personas, y la frecuencia que cada una representa en el corpus, para ambos mapas respectivamente
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/corpus/mapa16.png}\\[0pt]
+\caption{Imagen con zoom 2X}
+\label{mapa-zoom2x}
+\end{figure}
+
+
+\begin{table}[h!]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+ER 					      & Cantidad &  Frecuencia \\ \hline \hline
+Iglesia en calle Santo Tomas frente al Ministerio de Asuntos Exteriores        &	11	&	0.1358\%  \\ \hline
+Iglesia en calle Santo Tomas cerca del Ministerio de Asuntos Exteriores        &	2   &	0.0246\%	\\ \hline
+Iglesia  frente al Ministerio de Asuntos Exteriores &11&0.1358\%\\ \hline
+Iglesia cerca del Ministerio de Asuntos Exteriores&1&0.0123\%\\ \hline
+Iglesia en calle Santo Tomas&15&0.185\%\\ \hline
+La Iglesia en Calle de Atocha&2&0.0246\%\\ \hline
+La iglesia (sub tipo I)&16&0.197\%\\ \hline
+Calle de santo tomas  (es er)&2&0.0246\%\\ \hline
+La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, & & \\ 
+frente al Ministerio de Asuntos Exteriores&1&0.0123\%\\ \hline
+La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha&2&0.0246\%\\ \hline
+NO-ERA-ER&18&0.222\%\\ \hline \hline
+Totales&81&100\%\\
+
+\hline
+\end{tabular}
+\caption{ER del corpus dadas por humanos para el mapa \ref{mapa-zoom}.}\label{freq-mapa}
+\end{center}
+\end{small}
+\end{table}
+
+
+\begin{table}[h!]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+ER 					      & Cantidad &  Frecuencia \\ \hline
+        &		&	\%  \\
+        &	  &	\%	\\
+	      &		&	\%	\\
+	      &		&	\%	\\
+				&	  &	\%	\\
+				&   &	\%	\\
+				&	  &	\%	\\
+				&		&	\%	\\
+				&		&	\%  \\
+        &	  &	\%	\\
+	      &		&	\%	\\
+	      &		&	\%	\\
+				&	  &	\%	\\
+				&   &	\%	\\
+				&	  &	\%	\\
+				&		&	\%	\\
+
+\hline
+Totales	&	&	100\%	\\
+
+\hline
+\end{tabular}
+\caption{ER del corpus dadas por humanos para el mapa \ref{mapa-zoom2x}.}\label{freq-mapa-zoom}
+\end{center}
+\end{small}
+\end{table}
+
+Necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo, lo cual no significa que usemos esas mismas palabras para la ER final, la misma palabra se podr\'ia realizar con diferentes expresiones. Por ejemplo la palabra ``in-front-of'' se podr\'ia realizar como ``frente a'', ``al frente de''. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es. Algunas personas dijeron ``en la esquina de...'', eso fue anotado como ``between'' y luego 2 calles, esta palabra no fue usada porque tiene 2 par\'ametros, en cambio usamos ``en'' para ambas calles, con esa modificaci\'on, no estamos perdiendo informaci\'on ya que si el algoritmo da ambas calles, lo podr\'iamos realizar como ``esquina''. El siguiente es el vocabulario final.
+
+
+church (iglesia)
+in (en)
+in-front-of (frente)
+near (cerca)
+MinisterioAsuntosExteriores
+CalleDeSantoTomas
+CalleDeAtocha
+
+
+y construir el modelo, el cual luego se muestra en formato XML:
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=5pt,node distance=4cm},
+    aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+			
+		
+	\node[n,label=below:$str17\nStreet$,label=below:{
+    \relsize{-2}}] (a) {};		
+			
+	\node[n,label=above:$str12\nStreet$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nCalle\\[-3pt] 
+      \nDe \\[-3pt] 
+			\nEl \\[-3pt] 
+      \nSalvador\end{array}$}, right of=a] (b) {};
+  
+	\node[n,label=below:$str16\nStreet$,label=above:{
+    \relsize{-2}}, right of=b] (m) {};		 
+
+\node[n,label=below:$str10\nStreet$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nCalle\\[-3pt] 
+      \nDe\\[-3pt] 
+			\nSanto\\[-3pt] 
+      \nTomas\end{array}$}, above of=b] (c) {};	
+				
+ \node[n,label=left:$min1\nBuilding$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nMinisterio\\[-3pt] 
+      \nDe\\[-3pt] 
+			\nAsuntos\\[-3pt] 
+      \nExteriores\end{array}$}, above of=a] (f) {};	
+					
+  \node[n,label=above:$church1\nChurch$,label=above:{
+    \relsize{-2}}, above of=f] (g) {};
+			
+ \node[n,label=above:$church2\nChurch$,label=below:{
+    \relsize{-2}}, right of=c] (d) {};
+			
+  \node[n,label=below:$rest3\nRestaurante$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nMedina\\[-3pt] 
+      \nMayrit\end{array}$}, above of=d] (h) {};			
+			
+ \node[n,label=below:$str9\nStreet$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nCalle\\[-3pt] 
+      \nDe\\[-3pt] 
+      \nAtocha\end{array}$}, above of=c] (e) {};		
+
+\node[n,label=below:$rest4\nRestaurante$,label=above:{
+    \relsize{-2}}, right of=m] (k) {};
+
+\node[n,label=above:$d$,label=below:{
+    \relsize{-2}}, right of=d] (i) {};
+		
+ \node[n,label=above:$str15\nStreet$,label=below:{
+    \relsize{-2}}, above of=i] (j) {};	
+
+%\node[n,label=below:$str17\nStreet$,label=above:{
+ %   \relsize{-2}}, below of=k] (n) {};				
+ \draw [aArrow,<->,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (f);
+% \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (g);
+
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=-20] (d) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+ %\draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (d);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (d);
+ %\draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nCerca$} (k);
+
+ \draw [aArrow,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+% \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (k);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (j);
+
+ \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (a);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (b); 
+
+ \draw [aArrow,bend right=5] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+%\draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
+
+ \end{tikzpicture}
+\caption{Grafo del contexto \ref{mapa-zoom}}
+\label{grafo-GRE3D7-stimulus}
+\end{figure}
+
+
+\begin{verbatim}
+
+<?xml version="1.0"?>
+<problem refer-to="church1">
+  <individual id="church1">
+    <related rel="in" to="str9" />
+    <related rel="in" to="str10" />
+    <related rel="frente" to="min1" />
+    <related rel="cerca" to="min1" />
+    <related rel="iglesia" to="c" />
+  </individual>
+  <individual id="church2">
+    <related rel="in" to="str16" />
+    <related rel="cerca" to="rest4" />
+    <related rel="frente" to="d" />
+<related rel="cerca" to="d" />
+    <related rel="iglesia" to="c" />
+  </individual>
+  <individual id="str10">
+    <related rel="street" to="c" />
+    <related rel="CalleDeSantoTomas" to="c" />
+  </individual>
+  <individual id="str15">
+    <related rel="street" to="c" />
+  </individual>
+  <individual id="str16">
+    <related rel="street" to="c" />
+  </individual>
+  <individual id="str17">
+    <related rel="street" to="c" />
+  </individual>
+  <individual id="str9">
+    <related rel="street" to="c"/>
+    <related rel="CalleDeAtocha" to="c" />
+  </individual>
+  <individual id="str12">
+    <related rel="street" to="c"/>
+    <related rel="CalleDeElSalvador" to="c" />
+  </individual>
+  <individual id="rest3">
+    <related rel="in" to="str9" />
+    <related rel="in" to="str15" />
+<related rel="MedinaMayrit" to="c" />
+    <related rel="restaurante" to="c" />
+  </individual>
+  <individual id="rest4">
+    <related rel="in" to="str16" />
+    <related rel="frente" to="d" />
+    <related rel="restaurante" to="c" />
+    <related rel="cerca" to="church2" />
+  </individual>
+  <individual id="min1">
+    <related rel="in" to="str10"/>
+    <related rel="in" to="str12"/>
+    <related rel="in" to="str9"/>
+    <related rel="in" to="str17"/>
+    <related rel="MinisterioAsuntosExteriores" to="c" />
+    <related rel="frente" to="church1" />
+    <related rel="cerca" to="church1" />
+		<related rel="building" to="c" />
+   </individual>
+   <individual id="c">
+    <related rel="terminal" to="c" />
+   </individual>
+   <individual id="d">
+    <related rel="in" to="str16"/>
+    <related rel="in" to="str9"/>
+    <related rel="frente" to="church2" />
+    <related rel="frente" to="rest4" />
+    <related rel="cerca" to="church2" />
+    <related rel="cerca" to="rest4" />
+    <related rel="terminal" to="d" />
+   </individual>
+</problem>
+\end{verbatim}
+
+
+Ahora vamos a mostrar el modelo del mapa \ref{mapa-zoom2x}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=5pt,node distance=4cm},
+    aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+			
+		
+	\node[n,label=below:$str17\nStreet$,label=below:{
+    \relsize{-2}}] (a) {};		
+			
+	%\node[n,label=above:$str12\nStreet$,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nCalle\\[-3pt] 
+      %\nDe \\[-3pt] 
+			%\nEl \\[-3pt] 
+      %\nSalvador\end{array}$}, right of=a] (b) {};
+   \node[n,label=below:$str20\nStreet$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nCalle\\[-3pt] 
+   		\nDe\\[-3pt] 
+			\nLa\\[-3pt] 
+			\nConcepcion\\[-3pt] 
+      \nJeronima\end{array}$}, below of=c] (q) {};
+	\node[n,label=below:$str16\nStreet$,label=above:{
+    \relsize{-2}}, right of=q] (m) {};		 
+
+\node[n,label=below:$str10\nStreet$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nCalle\\[-3pt] 
+      \nDe\\[-3pt] 
+			\nSanto\\[-3pt] 
+      \nTomas\end{array}$}, above of=q] (c) {};	
+				
+ \node[n,label=left:$min1\nBuilding$,label=above:{
+    \relsize{-2}}, above of=a] (f) {};	
+					
+  \node[n,label=left:$church1\nChurch$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nParroquia\\[-3pt] 
+      \nDe\\[-3pt] 
+			\nSanta\\[-3pt] 
+      \nCruz\end{array}$}, above of=f] (g) {};
+			
+ \node[n,label=above:$church2\nChurch$,label=below:{
+    \relsize{-2}}, right of=c] (d) {};
+			
+  \node[n,label=below:$rest3\nRestaurante$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nMedina\\[-3pt] 
+      \nMayrit\end{array}$}, above of=d] (h) {};			
+			
+ \node[n,label=below:$str9\nStreet$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nCalle\\[-3pt] 
+      \nDe\\[-3pt] 
+      \nAtocha\end{array}$}, above of=c] (e) {};		
+
+\node[n,label=below:$rest4\nRestaurante$,label=above:{
+    \relsize{-2}}, right of=m] (k) {};
+
+ \node[n,label=below:$rest6\nRestaurante$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nLa\\[-3pt] 
+      \nTagliatella\end{array}$}, below of=k] (p) {};		
+
+ \node[n,label=above:$thea0\nTheater$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nTeatro\\[-3pt] 
+      \nCalderon\end{array}$}, right of=d] (i) {};
+		
+ \node[n,label=above:$str15\nStreet$,label=below:{
+    \relsize{-2}}, above of=i] (j) {};	
+\node[n,label=above:$str21\nStreet$,label=below:{
+    \relsize{-2}}, above of=i] (r) {};	
+ \node[n,label=below:$str20\nStreet$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nCalle\\[-3pt] 
+   		\nDe\\[-3pt] 
+			\nLa\\[-3pt] 
+			\nConcepcion\\[-3pt] 
+      \nJeronima\end{array}$}, below of=c] (q) {};		
+%\node[n,label=below:$str17\nStreet$,label=above:{
+ %   \relsize{-2}}, below of=k] (n) {};
+
+ % g es church1				
+ \draw [aArrow,<->,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (f);
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (q);
+
+ % d es church2
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=-20] (d) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+ %\draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (d);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (d);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (p);
+
+
+ \draw [aArrow,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+% \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (k);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (j);
+
+ \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (a);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (q); 
+
+ \draw [aArrow,bend right=5] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+%\draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
+
+ \end{tikzpicture}
+\caption{Grafo del contexto \ref{mapa-zoom}}
+\label{grafo-GRE3D7-stimulus}
+\end{figure}
+
+
+
+y el xml 
+
+\begin{verbatim}
+<?xml version="1.0"?>
+<problem refer-to="church1">
+ <individual id="church1">
+    <related rel="in" to="str9" />
+    <related rel="in" to="str10" />
+    <related rel="in" to="str20" />
+    <related rel="frente" to="min1" />
+    <related rel="cerca" to="min1" />
+    <related rel="ParroquiaDeSantaCruz" to="c" />
+    <related rel="iglesia" to="c" />
+ </individual>
+ <individual id="church2">
+    <related rel="in" to="str16" />
+    <related rel="cerca" to="rest6" />
+    <related rel="frente" to="thea0" />
+    <related rel="cerca" to="thea0" />
+    <related rel="iglesia" to="c" />
+ </individual>
+ <individual id="str10">
+    <related rel="street" to="c" />
+    <related rel="CalleDeSantoTomas" to="c" />
+ </individual>
+ <individual id="str15">
+    <related rel="street" to="c" />
+ </individual>
+ <individual id="str16">
+    <related rel="street" to="c" />
+ </individual>
+ <individual id="str17">
+    <related rel="street" to="c" />
+ </individual>
+ <individual id="str9">
+    <related rel="street" to="c"/>
+    <related rel="CalleDeAtocha" to="c" />
+ </individual>
+ <individual id="str20">
+    <related rel="street" to="c"/>
+    <related rel="CalleDeLaConcepcionJeronima" to="c" />
+ </individual>
+ <individual id="str21">
+    <related rel="street" to="c"/>
+ </individual>
+ <individual id="rest3">
+    <related rel="in" to="str9" />
+    <related rel="in" to="str15" />
+    <related rel="restaurante" to="c" />
+ </individual>
+ <individual id="rest4">
+    <related rel="in" to="str16" />
+    <related rel="frente" to="thea0" />
+    <related rel="cerca" to="thea0" />
+    <related rel="restaurante" to="c" />
+    <related rel="cerca" to="rest6" />
+ </individual>
+ <individual id="rest6">
+    <related rel="in" to="str16" />
+    <related rel="frente" to="thea0" />
+    <related rel="cerca" to="thea0" />
+     <related rel="cerca" to="rest4" />
+    <related rel="restaurante" to="c" />
+    <related rel="LaTagliatella" to="c" />
+<related rel="cerca" to="church2" />
+ </individual>
+ <individual id="thea0">
+    <related rel="in" to="str9" />
+    <related rel="in" to="str16" />
+    <related rel="frente" to="rest6" />
+    <related rel="frente" to="rest4" />
+    <related rel="frente" to="church2" />
+    <related rel="cerca" to="rest6" />
+    <related rel="cerca" to="rest4" />
+    <related rel="cerca" to="church2" />
+    <related rel="theater" to="c" />
+    <related rel="TeatroCalderon" to="c" />
+ </individual>
+ <individual id="min1">
+    <related rel="in" to="str20"/>
+    <related rel="in" to="str10"/>
+    <related rel="in" to="str21"/>
+    <related rel="frente" to="church1" />
+    <related rel="cerca" to="church1" />
+    <related rel="building" to="c" />
+  </individual>
+  <individual id="c">
+    <related rel="terminal" to="c" />
+  </individual>
+</problem>
+\end{verbatim}
+
