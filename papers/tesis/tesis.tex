@@ -55,7 +55,9 @@
 \usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{tikz}
-\usetikzlibrary{shapes,arrows,automata,positioning,fit}
+\usetikzlibrary{arrows}
+
+\usetikzlibrary{shapes,arrows,automata,positioning,fit,decorations.markings,arrows.meta}
 \usepackage{relsize}
 \usepackage{wrapfig} 
 \usepackage{url}
@@ -70,6 +72,7 @@
 \usepackage{titling}
 \usepackage{hyperref}
 \usepackage{xkeyval}
+%\usepackage{arrowsnew}
 %%%DE LACL
 \usepackage{algorithm2e}
 \newcommand{\nDog}{\mathit{dog}\xspace}
@@ -163,7 +166,9 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \renewcommand{\tablename}{Tabla}
 \hyphenation{a-tri-bu-to}
 \hyphenation{a-tri-bu-tos}
+\hyphenation{ca-rac-te-r\'is-ti-cas}
 \hyphenation{con-ti-nuan-do}
+\hyphenation{con-si-de-re-mos}
 \hyphenation{co-rrec-to}
 \hyphenation{co-rres-pon-d\'ia}
 \hyphenation{co-rres-pon-dien-te}
@@ -172,8 +177,10 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \hyphenation{des-crip-ci\'on}
 \hyphenation{des-crip-cio-nes}
 \hyphenation{di-fe-ren-tes}
+\hyphenation{di-fe-ren-cia}
 \hyphenation{do-mi-nios}
 \hyphenation{e-va-lua-ci\'on}
+\hyphenation{exis-ten-te}
 \hyphenation{ex-pe-ri-men-to}
 \hyphenation{Fi-gu-ra}
 \hyphenation{Fi-gu-ras}
@@ -190,17 +197,21 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \hyphenation{landmark-}
 \hyphenation{ma-yo-r\'ia} 
 \hyphenation{mi-ni-ma-les}
+\hyphenation{m\'i-ni-ma}
+\hyphenation{mo-de-lo}
 \hyphenation{na-tu-ral} 
 \hyphenation{nues-tro} 
 \hyphenation{pro-ba-bi-li-da-des} 
 \hyphenation{pro-ba-bi-li-dad} 
 \hyphenation{pro-ble-ma} 
+\hyphenation{rea-li-za}
 \hyphenation{re-co-rrer}
+\hyphenation{rea-li-za-ci\'on}
 \hyphenation{re-fe-ren-cial}
 \hyphenation{re-fe-ren-cia}
 \hyphenation{re-fe-ren-cia-les}
 \hyphenation{res-pec-ti-va-men-te}
-\hyphenation{u-sa-re-mos}
+\hyphenation{re-pre-sen-ta-das}
 \hyphenation{sa-li-da}
 \hyphenation{sa-li-das}
 \hyphenation{second-landmark}
@@ -211,6 +222,7 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \hyphenation{so-bre-es-pe-ci-fi-ca-da}
 \hyphenation{su-pon-ga-mos}
 \hyphenation{su-pe-ra-do}
+\hyphenation{u-sa-re-mos}
 % Sin sangria
 %\parindent=0mm  
 
@@ -278,6 +290,7 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \newcommand{\aRed}{\mathit{red}\xspace}
 \newcommand{\aYellow}{\mathit{yellow}\xspace}
 \newcommand{\nChurch}{\mathit{(church)}\xspace}
+\newcommand{\nMinAsExt}{\mathit{MinAsExt}\xspace}
 \newcommand{\nMinisterio}{\mathit{Ministerio}\xspace}
 \newcommand{\nAsuntos}{\mathit{Asuntos}\xspace}
 \newcommand{\nExteriores}{\mathit{Exteriores}\xspace}
@@ -290,13 +303,13 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \newcommand{\nRestaurante}{\mathit{(restaurante)}\xspace}
 \newcommand{\nNearTo}{\mathit{Near to}\xspace}
 \newcommand{\nBuilding}{\mathit{(building)}\xspace}
-\newcommand{\nCalle}{\mathit{Calle}\xspace}
+\newcommand{\nCalleAtocha}{\mathit{CalleAtocha}\xspace}
 \newcommand{\nDe}{\mathit{de}\xspace}
 \newcommand{\nEl}{\mathit{el}\xspace}
 \newcommand{\nAtocha}{\mathit{Atocha}\xspace}
-\newcommand{\nSalvador}{\mathit{Salvador}\xspace}
+\newcommand{\nCalleDeElSalvador}{\mathit{CalleDeElSalvador}\xspace}
 \newcommand{\nStreet}{\mathit{(street)}\xspace}
-\newcommand{\nSanto}{\mathit{Santo}\xspace}
+\newcommand{\nCalleSantoTomas}{\mathit{CalleSantoTomas}\xspace}
 \newcommand{\nTomas}{\mathit{Tomas}\xspace}
 \newcommand{\nParroquia}{\mathit{Parroquia}\xspace}
 \newcommand{\nSanta}{\mathit{Santa}\xspace}
@@ -306,8 +319,8 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \newcommand{\nTheater}{\mathit{(theater)}\xspace}
 \newcommand{\nLa}{\mathit{La}\xspace}
 \newcommand{\nTagliatella}{\mathit{Tagliatella}\xspace}
-\newcommand{\nConcepcion}{\mathit{Concepcion}\xspace}
-\newcommand{\nJeronima}{\mathit{Jeronima}\xspace}
+\newcommand{\nConJer}{Calle de la concepcion jeronima}\xspace
+\newcommand{\nStreetConComa}{\mathit{Street,}\xspace}
 %\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
 %\usepackage[document]{ragged2e}
 %\usepackage{amsmath, amssymb, xspace, enumerate}
@@ -316,7 +329,7 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \newcommand{\gM}{\ensuremath{\mathcal{M}}}
 \newcommand{\gL}{\ensuremath{\mathcal{L}}}
 
-\newcommand{\C}{\ensuremath{\mathcal{C}}\xspace}
+%\newcommand{\C}{\ensuremath{\mathcal{C}}\xspace}
 \newcommand{\M}{\ensuremath{\mathcal{M}}\xspace}
 %\newcommand{\RE}{\ensuremath{\mathit{RE}}\xspace}
 
@@ -370,20 +383,20 @@ simulator set $S(v)$ such that $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \renewcommand{\figurename}{Figura}
 \renewcommand{\bibname}{Bibliograf{\'\i}a}
 %\renewcommand{\algorithmname}{Algoritmo}
-%\include{1_intro} %trabajo previo
-%\include{2_seleccion}
-%\include{1_intro_logica}
-%\include{4_algoritmo}
-%\include{4_b_learning}
-%\include{5_corpus}
+\include{1_intro} %trabajo previo
+\include{2_seleccion}
+\include{1_intro_logica}
+\include{4_algoritmo}
+\include{4_b_learning}
+\include{5_corpus}
 
 \include{6_evaluacion}
 
-%\include{7_conclusiones}
+\include{7_conclusiones}
 \vskip 0.2in
  
 \bibliographystyle{apalike}
-%\bibliography{bibliografia}
-%\include{apendice}
+\bibliography{bibliografia}
+\include{apendice}
 %http://vivaldi.ll.iac.es/sieinvens/siepedia/pmwiki.php?n=HOWTOs.LatexTesisEspanol
 \end{document}
