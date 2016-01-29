@@ -387,9 +387,9 @@ Corpora anterior de expresiones referenciales se han recogido en los dominios de
 La recopilaci\'on de corpus de un dominio que es directamente relevante para aplicaciones del mundo real plantea un reto importante no s\'olo para el proceso de recolecci\'on y anotaci\'on en s\'{i}, sino tambi\'en a los algoritmos GER existentes. Esto se hace evidente por la gran proporci\'on de las expresiones referenciales que deben ser desechadas desde nuestra base de datos porque no constituyen una ER para el objeto target. Esta proporci\'on es del 30\% de la parte portuguesa del copus y el 23 \% de la parte espa\~nola del corpus.
 
 
-Despu\'es de este proceso de limpieza de la parte portuguesa del corpus contiene todav\'{i}a un 19,3 \% de expresiones referenciales subespecificadas y la parte espa\~nola un 25\%. Un ejemplo de ER subespecificada se muestra en la figura~\ref{fig-interface}.; la ER ``el pub en Cowgate'' es subespecificada porque hay dos bares en la calle Cowgate en el mapa. El porcentaje de ER subespecificadas en el corpus Zoom es mucho mayor que lo reportado en la corpora descrito en el la secci\'on~\ref{sec:corpus-existente}, que no es mayor que el 5\%. Estudios psicoling\"u\'{i}sticos anteriores~\cite{Clark1986} han encontrado que m\'as del 20\% de las ER en el discurso de origen natural es subespecificada con respecto al contexto establecido. En los dominios suficientemente complejos,~\cite{Clark1986} se encontr\'o que los hablantes a menudo producen una ER subespecificada inicial, y luego agregan m\'as informaci\'on si es necesario en lugar de producir una descripci\'on que identifica de forma un\'{i}voca desde el principio. Como se discuti\'o en el apartado anterior, el dominio del ZOOM corpus es probable que contenga situaciones m\'as complejas de referencia si se compara con los corpus existentes de este tipo, es decir, las descripciones del ZOOM son en promedio m\'as largas, y tienen un uso de atributo medio m\'as bajo. Esto en nuestra opini\'on, puede explicar la alta proporci\'on de subespecificaci\'on en nuestros datos.
+Despu\'es de este proceso de limpieza de la parte portuguesa del corpus contiene todav\'{i}a un 19,3 \% de expresiones referenciales subespecificadas y la parte espa\~nola un 25\%. Un ejemplo de ER subespecificada se muestra en la figura~\ref{fig-interface}.; la ER ``el pub en Cowgate'' es subespecificada porque hay dos bares en la calle Cowgate en el mapa. El porcentaje de ER subespecificadas en el corpus Zoom es mucho mayor que lo reportado en la corpora descrito en el la secci\'on~\ref{sec:corpus2}, que no es mayor que el 5\%. Estudios psicoling\"u\'{i}sticos anteriores~\cite{Clark1986} han encontrado que m\'as del 20\% de las ER en el discurso de origen natural es subespecificada con respecto al contexto establecido. En los dominios suficientemente complejos,~\cite{Clark1986} se encontr\'o que los hablantes a menudo producen una ER subespecificada inicial, y luego agregan m\'as informaci\'on si es necesario en lugar de producir una descripci\'on que identifica de forma un\'{i}voca desde el principio. Como se discuti\'o en el apartado anterior, el dominio del ZOOM corpus es probable que contenga situaciones m\'as complejas de referencia si se compara con los corpus existentes de este tipo, es decir, las descripciones del ZOOM son en promedio m\'as largas, y tienen un uso de atributo medio m\'as bajo. Esto en nuestra opini\'on, puede explicar la alta proporci\'on de subespecificaci\'on en nuestros datos.
 
-La proporci\'on de expresiones referenciales subespecificada del corpus ZOOM es similar a la encontrada en el trabajo anterior. Sin embargo, la proporci\'on de las descripciones relacionales es actualmente superior. Descripciones relacionales constituyen un desaf\'{i}o para los algoritmos GER debido a la complejidad computacional asociada a su generaci\'on~\cite{survey}. Otro desaf\'{i}o que plantea el corpus ZOOM es el hecho de que contiene dos descripciones para cada objeto target bas\'andose en diferente - pero relacionados - modelos correspondientes a la misma ubicaci\'on en el mapa visto con diferentes niveles de zoom. Por ejemplo, un mapa con mayor nivel de zoom (2X) se ilustra en la Figura~\ref{fig-con-zoom}, y el mismo mapa con un menor nivel de zoom se muestra en la Figura~\ref{fig-interface}.
+La proporci\'on de expresiones referenciales subespecificada del corpus ZOOM es similar a la encontrada en el trabajo anterior. Sin embargo, la proporci\'on de las descripciones relacionales es actualmente superior. Descripciones relacionales constituyen un desaf\'{i}o para los algoritmos GER debido a la complejidad computacional asociada a su generaci\'on~\cite{survey}. Otro desaf\'{i}o que plantea el corpus ZOOM es el hecho de que contiene dos descripciones para cada objeto target bas\'andose en diferente - pero relacionados - modelos correspondientes a la misma ubicaci\'on en el mapa visto con diferentes niveles de zoom. Por ejemplo, un mapa con mayor nivel de zoom (2X) se ilustra en la Figura~\ref{fig-with-zoom}, y el mismo mapa con un menor nivel de zoom se muestra en la Figura~\ref{fig-interface}.
 
 \begin{figure}[ht]
 \begin{center}
@@ -449,7 +449,7 @@ Siguiendo \cite{thiago-svm}, construimos un modelo GER uso de m\'aquinas de vect
 %......................
 
 %Table \ref{tab-reg-results} summarizes the results obtained by the GER algorithm built from SVM classifiers, those obtained by a baseline system representing a relational extension of the Dale \& Reiter Incremental Algorithm, and by a Random selection strategy.  
-Tabla \ref{tab-reg-resultados} resume los resultados obtenidos por el algoritmo GER construido a partir de SVM clasificadores, los obtenidos mediante un sistema de l\'{i}nea de base que representa una extensi\'on relacional de la \& Reiter Incremental Algoritmo Dale, y por una estrategia de selecci\'on aleatoria.
+Tabla \ref{tab-reg-results} resume los resultados obtenidos por el algoritmo GER construido a partir de SVM clasificadores, los obtenidos mediante un sistema de l\'{i}nea de base que representa una extensi\'on relacional de la \& Reiter Incremental Algoritmo Dale, y por una estrategia de selecci\'on aleatoria.
 
 % these results are for SVM.All.VAR-   compared to the AEI- baseline
 \begin{table}[ht]
@@ -478,7 +478,7 @@ En lo que sigue se comparan precisi\'on resultados obtenidos por cada par algori
 
 En t\'erminos de precisi\'on global \footnote{Y tambi\'en en cuanto a las puntuaciones MASI, aunque actualmente no se discute m\'as.}, El m\'etodo SVM supera a ambas alternativas. La diferencia con el segundo algoritmo de mejor rendimiento (es decir, el enfoque incremental) es altamente significativo ($\chi^{2}=$ 79,87, df = 1, p$<$ 0,0001). S\'olo en cuanto a las puntuaciones de dice se observa el efecto contrario (T = 137570.5, p$=$0,01413).
 
-Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \ref{tab-svm-resultados} muestra estos resultados, medida por la precisi\'on (P), memoria (R), F1-medida (F1) y el \'area bajo la curva ROC (AUC).
+Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \ref{tab-svm-results} muestra estos resultados, medida por la precisi\'on (P), memoria (R), F1-medida (F1) y el \'area bajo la curva ROC (AUC).
 
 %these are the rsults for the training over the set of ALL speakers 
 \begin{table}[ht]
@@ -514,6 +514,554 @@ Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \
 A partir de estos resultados nos damos cuenta de que los atributos muy frecuentes (por ejemplo, el tipo y nombre) se clasificaron con gran precisi\'on, mientras que otros (por ejemplo, los atributos de varios valores y relaciones) no lo eran.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       >2
+
+
+
+
+
+
+\section{Caso de estudio del ZOOM corpus}
+
+En esta secci\'on presentamos el estudio de dos casos particulares, los cuales son mucho m\'as naturales que los que hab\'iamos visto hasta el momento: la generaci\'on autom\'atica de ER para dos mapas del ZOOM corpus uno con zoom x y otro con zoom 2X del mismo target. El mapa singular usado se muestra en la Figura \ref{mapa-zoom} y el mapa con zoom 2X, se muestra en Figura \ref{mapa-zoom2x}. Veremos las diferencias entre ambos mapas a nivel de informaci\'on disponible, obtendremos a partir de la imagen el modelo y a partir de las ER's del corpus las probabilidades de uso para luego ejecutar el algoritmo.
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/corpus/mapa6.png}\\[0pt]
+\caption{Imagen del ZOOM corpus}
+\label{mapa-zoom}
+\end{figure}
+
+Podemos notar que en la imagen con zoom se puede ver el target, el cual est\'a se\~nalado por una flecha roja, seg\'un la leyenda que se ubica a la derecha, podemos decir que se trata de una iglesia, en la imagen se ve el nombre de la iglesia, ``Parroquia de Santa Cruz'', otra cosa que se puede ver en el mapa con zoom es el nombre de la calle que esta abajo ``Calle de la Concepci\'on Jeronima'', en este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores, por lo tanto lo \'unico que se ve en la Calle de Santo Tom\'as es la iglesia target.
+
+En la Tabla \ref{freq-mapa} y \ref{freq-mapa-zoom} se muestran las ER dadas por las personas, y la frecuencia que cada una representa en el corpus, para ambos mapas respectivamente
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/corpus/mapa16.png}\\[0pt]
+\caption{Imagen con zoom 2X}
+\label{mapa-zoom2x}
+\end{figure}
+
+
+\begin{table}[h!]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+ER 					      & Cantidad &  Frecuencia & Minimal-Sobreespecificada\\ \hline \hline
+Iglesia en calle Santo Tomas frente al Ministerio de Asuntos Exteriores        &	11	&	0.1358\% & \\ \hline
+Iglesia en calle Santo Tomas cerca del Ministerio de Asuntos Exteriores        &	2   &	0.0246\% &	\\ \hline
+Iglesia  frente al Ministerio de Asuntos Exteriores &11&0.1358\% &\\ \hline
+Iglesia cerca del Ministerio de Asuntos Exteriores&1&0.0123\% &\\ \hline
+Iglesia en calle Santo Tomas&15&0.185\% &\\ \hline
+La Iglesia en Calle de Atocha&2&0.0246\% &\\ \hline
+La iglesia (sub tipo I)&16&0.197\% &\\ \hline
+Calle de santo tomas  (es er)&2&0.0246\% &\\ \hline
+La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, & & &\\ 
+frente al Ministerio de Asuntos Exteriores&1&0.0123\% &\\ \hline
+La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha&2&0.0246\% &\\ \hline
+NO-ERA-ER&18&0.222\% &\\ \hline \hline
+Totales&81&100\% &\\
+
+\hline
+\end{tabular}
+\caption{ER del corpus dadas por humanos para el mapa \ref{mapa-zoom}.}\label{freq-mapa}
+\end{center}
+\end{small}
+\end{table}
+
+
+\begin{table}[h!]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|c|c|}
+\hline
+ER 					      & Cantidad &  Frecuencia \\ \hline
+        &		&	\%  \\
+        &	  &	\%	\\
+	      &		&	\%	\\
+	      &		&	\%	\\
+				&	  &	\%	\\
+				&   &	\%	\\
+				&	  &	\%	\\
+				&		&	\%	\\
+				&		&	\%  \\
+        &	  &	\%	\\
+	      &		&	\%	\\
+	      &		&	\%	\\
+				&	  &	\%	\\
+				&   &	\%	\\
+				&	  &	\%	\\
+				&		&	\%	\\
+
+\hline
+Totales	&	&	100\%	\\
+
+\hline
+\end{tabular}
+\caption{ER del corpus dadas por humanos para el mapa \ref{mapa-zoom2x}.}\label{freq-mapa-zoom}
+\end{center}
+\end{small}
+\end{table}
+
+Necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo, lo cual no significa que usemos esas mismas palabras para la ER final, la misma palabra se podr\'ia realizar con diferentes expresiones. Por ejemplo la palabra ``in-front-of'' se podr\'ia realizar como ``frente a'', ``al frente de''. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es. Algunas personas dijeron ``en la esquina de...'', eso fue anotado como ``between'' y luego 2 calles, esta palabra no fue usada porque tiene 2 par\'ametros, en cambio usamos ``en'' para ambas calles, con esa modificaci\'on, no estamos perdiendo informaci\'on ya que si el algoritmo da ambas calles, lo podr\'iamos realizar como ``esquina''. El siguiente es el vocabulario final.
+
+
+church (iglesia)
+in (en)
+in-front-of (frente)
+near (cerca)
+MinisterioAsuntosExteriores
+CalleDeSantoTomas
+CalleDeAtocha
+
+\begin{tikzpicture}[
+    scale=5,
+    axis/.style={very thick, ->, >=stealth'},
+    important line/.style={thick},
+    dashed line/.style={dashed, thin},
+    pile/.style={thick, ->, >=stealth', shorten <=2pt, shorten
+    >=2pt},
+    every node/.style={color=black}
+    ]
+    % axis
+    \draw[axis] (-0.1,0)  -- (1.1,0) node(xline)[right]
+        {$G\uparrow/T\downarrow$};
+    \draw[axis] (0,-0.1) -- (0,1.1) node(yline)[above] {$E$};
+
+
+\end{tikzpicture}
+
+\tikzset{>=latex}
+\begin{tikzpicture}[<->]
+\draw [>=stealth,red] (1,.6) -- +(3,0);
+\draw [blue] (0,.3) -- +(1,0);
+\draw (0,0) -- +(1,0);
+\end{tikzpicture}
+y construir el modelo, el cual luego se muestra en formato XML:
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=5pt,node distance=4cm},
+    aArrow/.style={scale=10,->, >=stealth, thick,
+    shorten <= 1pt, shorten >= 1pt},
+  ]
+			
+
+	\node[n,label=left:$str17$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+     \nStreet\end{array}$}] (a) {};		
+			
+	\node[n,label=above:$str12$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleDeElSalvador\end{array}$}, right of=a] (b) {};
+  
+	\node[n,label=left:$str16$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\end{array}$}, right of=b] (m) {};		 
+
+\node[n,label=below:$str10$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleSantoTomas\end{array}$}, above of=b] (c) {};	
+				
+ \node[n,label=left:$min1$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nBuilding\\[-3pt] 
+      \nMinAsExt\end{array}$}, above of=a] (f) {};	
+					
+  \node[n,label=left:$church1$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+     \nChurch\end{array}$}, above of=f] (g) {};
+			
+ \node[n,label=left:$church2$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+     \nChurch\end{array}$}, right of=c] (d) {};
+			
+  \node[n,label=below:$rest3$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\\[-3pt] 
+      MedinaMayrit\end{array}$}, above of=d] (h) {};			
+			
+ \node[n,label=below:$str9$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleAtocha\end{array}$}, above of=c] (e) {};		
+
+\node[n,label=left:$rest4$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\end{array}$}, right of=m] (k) {};
+
+\node[n,label=above:$d$,label=below:{
+    \relsize{-2}}, right of=d] (i) {};
+		
+ \node[n,label=below:$str15$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\end{array}$}, above of=i] (j) {};	
+
+%\node[n,label=below:$str17\nStreet$,label=above:{
+ %   \relsize{-2}}, below of=k] (n) {};				
+ \draw [aArrow,<->,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (f);
+% \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (g);
+
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=-20] (d) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+ %\draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (d);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (d);
+ %\draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nCerca$} (k);
+
+ \draw [aArrow,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+% \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (k);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (j);
+
+ \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (a);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (b); 
+
+ \draw [aArrow,bend right=5] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+%\draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
+
+ \end{tikzpicture}
+\caption{Grafo del contexto \ref{mapa-zoom}}
+\label{grafo-GRE3D7-stimulus}
+\end{figure}
+
+
+%\begin{verbatim}
+%
+%<?xml version="1.0"?>
+%<problem refer-to="church1">
+  %<individual id="church1">
+    %<related rel="in" to="str9" />
+    %<related rel="in" to="str10" />
+    %<related rel="frente" to="min1" />
+    %<related rel="cerca" to="min1" />
+    %<related rel="iglesia" to="c" />
+  %</individual>
+  %<individual id="church2">
+    %<related rel="in" to="str16" />
+    %<related rel="cerca" to="rest4" />
+    %<related rel="frente" to="d" />
+%<related rel="cerca" to="d" />
+    %<related rel="iglesia" to="c" />
+  %</individual>
+  %<individual id="str10">
+    %<related rel="street" to="c" />
+    %<related rel="CalleDeSantoTomas" to="c" />
+  %</individual>
+  %<individual id="str15">
+    %<related rel="street" to="c" />
+  %</individual>
+  %<individual id="str16">
+    %<related rel="street" to="c" />
+  %</individual>
+  %<individual id="str17">
+    %<related rel="street" to="c" />
+  %</individual>
+  %<individual id="str9">
+    %<related rel="street" to="c"/>
+    %<related rel="CalleDeAtocha" to="c" />
+  %</individual>
+  %<individual id="str12">
+    %<related rel="street" to="c"/>
+    %<related rel="CalleDeElSalvador" to="c" />
+  %</individual>
+  %<individual id="rest3">
+    %<related rel="in" to="str9" />
+    %<related rel="in" to="str15" />
+%<related rel="MedinaMayrit" to="c" />
+    %<related rel="restaurante" to="c" />
+  %</individual>
+  %<individual id="rest4">
+    %<related rel="in" to="str16" />
+    %<related rel="frente" to="d" />
+    %<related rel="restaurante" to="c" />
+    %<related rel="cerca" to="church2" />
+  %</individual>
+  %<individual id="min1">
+    %<related rel="in" to="str10"/>
+    %<related rel="in" to="str12"/>
+    %<related rel="in" to="str9"/>
+    %<related rel="in" to="str17"/>
+    %<related rel="MinisterioAsuntosExteriores" to="c" />
+    %<related rel="frente" to="church1" />
+    %<related rel="cerca" to="church1" />
+		%<related rel="building" to="c" />
+   %</individual>
+   %<individual id="c">
+    %<related rel="terminal" to="c" />
+   %</individual>
+   %<individual id="d">
+    %<related rel="in" to="str16"/>
+    %<related rel="in" to="str9"/>
+    %<related rel="frente" to="church2" />
+    %<related rel="frente" to="rest4" />
+    %<related rel="cerca" to="church2" />
+    %<related rel="cerca" to="rest4" />
+    %<related rel="terminal" to="d" />
+   %</individual>
+%</problem>
+%\end{verbatim}
+
+%\draw[red,
+    %decoration={markings,mark=at position 1 with {\arrow[scale=4,blue]{>}}},
+    %postaction={decorate},
+    %shorten >=0.4pt
+    %]
+    %(0,1.0) -- (2,1.0);
+%
+%\draw[draw=red,-triangle 90,fill=blue]  (0,0.5) -- (2,0.5);
+%
+%\draw[red]  (0,0) -- (2,0);
+%\draw [-to,shorten >=-1pt,gray,ultra thick] (1.99,0) -- (2,0); 
+Ahora vamos a mostrar el modelo del mapa \ref{mapa-zoom2x}
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=3pt,node distance=4cm},
+    aArrow/.style={->, >=stealth, thick, shorten <= 1pt, shorten >= 1pt},	
+  ]
+	
+	\node[n,label=below:$str17\nStreet$,label=below:{
+    \relsize{-2}}] (a) {};		
+			
+	%\node[n,label=above:$str12\nStreet$,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nCalle\\[-3pt] 
+      %\nDe \\[-3pt] 
+			%\nEl \\[-3pt] 
+      %\nSalvador\end{array}$}, right of=a] (b) {};
+   %\node[n,label=below:$str20\nStreet$,label=above:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nStreetConComa\\[-3pt] 
+   		%\nConJer\end{array}$}, below of=c] (q) {};
+ \node[n,label=below:$str20$,label=right:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      CalleConJer\end{array}$}, below of=a] (q) {};		
+
+	\node[n,label=below:$str16$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\end{array}$}, right of=q] (m) {};		 
+
+  \node[n,label=below:$str10\nStreet$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+		  \nStreet\\[-3pt] 
+      \nCalleSantoTomas\end{array}$}, above of=q] (c) {};	
+				
+ \node[n,label=left:$min1\nBuilding$,label=above:{
+    \relsize{-2}}, above of=a] (f) {};	
+					
+  \node[n,label=left:$church1$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nChurch\\[-3pt] 
+      ParSantaCruz\end{array}$}, above of=f] (g) {};
+			
+ \node[n,label=above:$church2$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nChurch\end{array}$}, right of=c] (d) {};
+			
+  \node[n,label=below:$rest3$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\\[-3pt] 
+      MedinaMayrit\end{array}$}, above of=d] (h) {};			
+			
+ \node[n,label=below:$str9$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleAtocha\end{array}$}, above of=c] (e) {};		
+
+\node[n,label=below:$rest4$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\end{array}$}, right of=m] (k) {};
+
+ \node[n,label=below:$rest6$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\\[-3pt] 
+      LaTagliatella\end{array}$}, below of=k] (p) {};		
+
+ \node[n,label=above:$thea0$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nTheater\\[-3pt] 
+      TeatroCalderon\end{array}$}, right of=d] (i) {};
+		
+ \node[n,label=above:$str15$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\end{array}$}, above of=i] (j) {};	
+\node[n,label=above:$str21$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\end{array}$}, above of=i] (r) {};	
+ 
+%\node[n,label=below:$str17\nStreet$,label=above:{
+ %   \relsize{-2}}, below of=k] (n) {};
+
+ % g es church1				
+ \draw [aArrow,<->,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (f);
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (q);
+
+ % d es church2
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=-20] (d) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+ %\draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (d);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (d);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (p);
+
+
+ \draw [aArrow,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+% \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (k);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (j);
+
+ \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (a);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (q); 
+
+ \draw [aArrow,bend right=5] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+%\draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
+
+ \end{tikzpicture}
+\caption{Grafo del contexto \ref{mapa-zoom}}
+\label{grafo-GRE3D7-stimulus}
+\end{figure}
+
+
+
+%y el xml 
+%
+%\begin{verbatim}
+%<?xml version="1.0"?>
+%<problem refer-to="church1">
+ %<individual id="church1">
+    %<related rel="in" to="str9" />
+    %<related rel="in" to="str10" />
+    %<related rel="in" to="str20" />
+    %<related rel="frente" to="min1" />
+    %<related rel="cerca" to="min1" />
+    %<related rel="ParroquiaDeSantaCruz" to="c" />
+    %<related rel="iglesia" to="c" />
+ %</individual>
+ %<individual id="church2">
+    %<related rel="in" to="str16" />
+    %<related rel="cerca" to="rest6" />
+    %<related rel="frente" to="thea0" />
+    %<related rel="cerca" to="thea0" />
+    %<related rel="iglesia" to="c" />
+ %</individual>
+ %<individual id="str10">
+    %<related rel="street" to="c" />
+    %<related rel="CalleDeSantoTomas" to="c" />
+ %</individual>
+ %<individual id="str15">
+    %<related rel="street" to="c" />
+ %</individual>
+ %<individual id="str16">
+    %<related rel="street" to="c" />
+ %</individual>
+ %<individual id="str17">
+    %<related rel="street" to="c" />
+ %</individual>
+ %<individual id="str9">
+    %<related rel="street" to="c"/>
+    %<related rel="CalleDeAtocha" to="c" />
+ %</individual>
+ %<individual id="str20">
+    %<related rel="street" to="c"/>
+    %<related rel="CalleDeLaConcepcionJeronima" to="c" />
+ %</individual>
+ %<individual id="str21">
+    %<related rel="street" to="c"/>
+ %</individual>
+ %<individual id="rest3">
+    %<related rel="in" to="str9" />
+    %<related rel="in" to="str15" />
+    %<related rel="restaurante" to="c" />
+ %</individual>
+ %<individual id="rest4">
+    %<related rel="in" to="str16" />
+    %<related rel="frente" to="thea0" />
+    %<related rel="cerca" to="thea0" />
+    %<related rel="restaurante" to="c" />
+    %<related rel="cerca" to="rest6" />
+ %</individual>
+ %<individual id="rest6">
+    %<related rel="in" to="str16" />
+    %<related rel="frente" to="thea0" />
+    %<related rel="cerca" to="thea0" />
+     %<related rel="cerca" to="rest4" />
+    %<related rel="restaurante" to="c" />
+    %<related rel="LaTagliatella" to="c" />
+%<related rel="cerca" to="church2" />
+ %</individual>
+ %<individual id="thea0">
+    %<related rel="in" to="str9" />
+    %<related rel="in" to="str16" />
+    %<related rel="frente" to="rest6" />
+    %<related rel="frente" to="rest4" />
+    %<related rel="frente" to="church2" />
+    %<related rel="cerca" to="rest6" />
+    %<related rel="cerca" to="rest4" />
+    %<related rel="cerca" to="church2" />
+    %<related rel="theater" to="c" />
+    %<related rel="TeatroCalderon" to="c" />
+ %</individual>
+ %<individual id="min1">
+    %<related rel="in" to="str20"/>
+    %<related rel="in" to="str10"/>
+    %<related rel="in" to="str21"/>
+    %<related rel="frente" to="church1" />
+    %<related rel="cerca" to="church1" />
+    %<related rel="building" to="c" />
+  %</individual>
+  %<individual id="c">
+    %<related rel="terminal" to="c" />
+  %</individual>
+%</problem>
+%\end{verbatim}
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 \section{Notas finales y linkeo del cap\'itulo}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       >2
 \label{sec-final}

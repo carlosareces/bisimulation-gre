@@ -2,6 +2,15 @@
 \label{sec:seleccion}
 
 En este cap\'itulo emplicaremos los tipos de expresiones referenciales, daremos una introducci\'on a la generaci\'on autom\'atica de expresiones referenciales y a los tipos de algoritmos para generarlas, y luego explicaremos los algoritmos m\'as conocidos del \'area. %(ver si los divido por secciones a los algoritmos...)
+%ERORDENAR ESTO
+%\cite{arec2:2008:Areces}~mostraron que el algoritmo de refinamiento utilizando el lenguaje de descripci\'on \el como lenguaje formal es capaz de generar 67\% de
+%las ERs relacionales en el corpus ~\cite{viethen06:_algor_for_gener_refer_expres} cuando se consideran todos los posibles \'ordenes de las relaciones en el dominio. Esto est\'a en marcado contraste con el an\'alisis hecho en~\cite{viethen06:_algor_for_gener_refer_expres} sobre el cabinet corpus, de algoritmos basados en la propuesta original Dale y de Reiter.
+%Los resultados de cobertura reportados sobre Viethen and 
+%Dale's sobre el Cabinet corpus significan que~\emph{alg\'un orden} produce una razonablemente amplia cobertura. En otras palabras, se ha demostrado que los algoritmos de refinamiento tienen la capacidad de producir ERs similares a los producidos por los humanos, proporcionado una ordenaci\'on adecuada sobre las relaciones que aparecen
+%en la escena de entrada, pero no est\'a claro cu\'al de todos los \'ordenes posibles se debe utilizar. En esta tesis abordamos directamente esta cuesti\'on.
+
+
+
 
 \section{Tipos de ER}
 
@@ -55,9 +64,9 @@ A continuaci\'on daremos 2 ejemplos de diferentes maneras de modelar el contexto
 
 %El contexto que toma como input el algoritmo GRAPH \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto target que es el $e_5$, tiene propiedades large, red, ball y una flecha con la etiqueta rightof $e_4$, y $e_4$ tiene propiedades large, red, cube, y una flecha hacia $e_5$ con etiqueta leftof.\\
 
-El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto $e_5$, tiene propiedades grande, rojo, esfera y una flecha con la etiqueta a-la-der-de hacia $e_4$, y $e_4$ tiene propiedades grande, rojo, cubo, y una flecha hacia $e_5$ con etiqueta a-la-izq-de.\\
+El contexto que toma como input el algoritmo Graph \cite{graph08} el cual explicaremos en la Secci\'on \ref{graph}, para el Contexto \ref{GRE3D7-stimulus}, es un grafo dirigido y etiquetado como se muestra en Figura \ref{grafo-GRE3D7-stimulus}, el cual contiene la informaci\'on de las propiedades y relaciones de los objetos, por ejemplo podemos ver que el objeto $e_5$, tiene propiedades big, red, ball y una flecha con la etiqueta rightof hacia $e_4$, y $e_4$ tiene propiedades big, red, cube, y una flecha hacia $e_5$ con etiqueta leftof.\\
 
-Notaci\'on: a-la-der-de y a-la-izqu-de son relaciones las cuales significan ``a la derecha de'' y ``a la izquierda de'' respectivamente.\\
+Notaci\'on: rightof y leftof son relaciones las cuales significan ``a la derecha de'' y ``a la izquierda de'' respectivamente.\\
 
 \begin{figure}[ht]
 \centering
@@ -108,16 +117,15 @@ Notaci\'on: a-la-der-de y a-la-izqu-de son relaciones las cuales significan ``a 
  \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
  \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
  \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
- \draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
+ \draw[dotted] (-0.5,-1.4) rectangle (10.5,3.6);
 
  \end{tikzpicture}
 \caption{Grafo del contexto \ref{GRE3D7-stimulus}}
 \label{grafo-GRE3D7-stimulus}
 \end{figure}
 
-Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de Bisimulaci\'on el cual explicaremos en Secci\'on \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on del Contexto \ref{input-bisimulacion}. En este caso se representan las propiedades como relaciones a un objeto ficticio, terminal {\it c}, creado para modelar propiedades y relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que todos los objetos tienen ``id'' que es el identificador, salvo el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}. Con la etiqueta ``rel'', identificamos las relaciones y con la etiqueta ``to'' con que objeto esta relacionado. En este ejemplo el target tiene relaciones con c (grande, rojo, esfera) y con $e_4$ a-la-derecha-de.  
+Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo de Bisimulaci\'on el cual explicaremos en Secci\'on \ref{bisimulacion}, es un archivo con formato XML \footnote{XML, siglas en ingl\'es de eXtensible Markup Language ('lenguaje de marcas extensible'), es un lenguaje de marcas desarrollado por el World Wide Web Consortium (W3C) utilizado para almacenar datos en forma legible.} con la misma informaci\'on del Contexto \ref{input-bisimulacion}. En este caso se representan las propiedades como relaciones a un objeto ficticio, terminal {\it c}, creado para modelar propiedades y relaciones, como relaciones, como veremos luego esto va a servir para dar prioridad a las relaciones en algunos casos. En el XML podemos ver que todos los objetos tienen ``id'' que es el identificador, salvo el objeto target $e_5$ el cual tiene {\it refer-to} en vez de {\it id}. Con la etiqueta ``rel'', identificamos las relaciones y con la etiqueta ``to'' con que objeto esta relacionado. En este ejemplo el target tiene relaciones con c (big, red y ball) y con $e_4$ rightof.  
 %\'Este tiene las relaciones con c (large, red, ball) y con $e_4$ rightof.  
-\textcolor{blue}{aca tengo problemas en verbatim para escribir la enie de pequeino}
 \label{input-bisimulacion}
 
 %\include{xml}
@@ -126,22 +134,22 @@ Para el mismo Contexto \ref{GRE3D7-stimulus-conLetras}, el input del algoritmo d
 <?xml version="1.0"?>
 <problem id="e1">c
   <individual id="e1">
-    <related rel="pequeno" to="c" />
-    <related rel="amarillo" to="c" />
-    <related rel="esfera" to="c" />
+    <related rel="small" to="c" />
+    <related rel="yellow" to="c" />
+    <related rel="ball" to="c" />
   </individual>
   ...
   <individual id="e4">
-    <related rel="cubo" to="c" />
-    <related rel="rojo" to="c" />
-    <related rel="grande" to="c" />
-    <related rel="a-la-izq-de" to="e5" />
+    <related rel="cube" to="c" />
+    <related rel="red" to="c" />
+    <related rel="big" to="c" />
+    <related rel="leftof" to="e5" />
   </individual>
   <individual refer-to="e5">
-    <related rel="grande" to="c"/>
-    <related rel="esfera" to="c" />
-    <related rel="rojo" to="c" />
-    <related rel="a-la-der-de" to="e4" />
+    <related rel="big" to="c"/>
+    <related rel="ball" to="c" />
+    <related rel="red" to="c" />
+    <related rel="rightof" to="e4" />
   </individual>
   ...
   <individual id="c">
@@ -777,7 +785,7 @@ diferentes clases en el refinamiento.\\
  \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
  \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
 
- \draw[dotted] (-.6,-1.4) rectangle (12.5,4.5);
+ \draw[dotted] (-.6,-2.2) rectangle (12.5,5.3);
 
  \end{tikzpicture}
 \caption{Modelo relacional del Contexto \ref{GRE3D7-stimulus-cap2}}
@@ -1406,7 +1414,7 @@ Para medir la performance de los algoritmos podemos usar m\'etricas autom\'atica
 
 Si hay corpus disponible, una m\'etrica autom\'atica de evaluaci\'on es comparar la ER dada por el sistema para un target en un contexto dado con la ER (gold standar) dada por una persona para el mismo target y contexto. \\
 
-Esta comparaci\'on de ER puede estar dada a distintos niveles, podemos comparar si son iguales, si solo difieren en el orden de las palabras, si difieren en las palabras pero no en la cantidad de palabras que contienen, etc. En lo que sigue nombramos algunas m\'etricas de evaluaci\'on autom\'aticas.\\
+Esta comparaci\'on de ER puede estar dada a distintos niveles, podemos comparar si son iguales, si solo difieren en el orden de las palabras, si difieren en las palabras pero no en la cantidad de palabras que contienen, etc. En lo que sigue nombramos algunas m\'etricas de evaluaci\'on autom\'atica.\\
 
 La exactitud (Accuracy) se define como el porcentaje de coincidencias exactas entre cada RE producida por un ser humano y la producida por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta.\\
 
