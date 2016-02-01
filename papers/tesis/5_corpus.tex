@@ -615,29 +615,10 @@ MinisterioAsuntosExteriores
 CalleDeSantoTomas
 CalleDeAtocha
 
-\begin{tikzpicture}[
-    scale=5,
-    axis/.style={very thick, ->, >=stealth'},
-    important line/.style={thick},
-    dashed line/.style={dashed, thin},
-    pile/.style={thick, ->, >=stealth', shorten <=2pt, shorten
-    >=2pt},
-    every node/.style={color=black}
-    ]
-    % axis
-    \draw[axis] (-0.1,0)  -- (1.1,0) node(xline)[right]
-        {$G\uparrow/T\downarrow$};
-    \draw[axis] (0,-0.1) -- (0,1.1) node(yline)[above] {$E$};
 
 
-\end{tikzpicture}
 
-\tikzset{>=latex}
-\begin{tikzpicture}[<->]
-\draw [>=stealth,red] (1,.6) -- +(3,0);
-\draw [blue] (0,.3) -- +(1,0);
-\draw (0,0) -- +(1,0);
-\end{tikzpicture}
+
 y construir el modelo, el cual luego se muestra en formato XML:
 
 \begin{figure}[ht]
@@ -1036,10 +1017,125 @@ Ahora vamos a mostrar el modelo del mapa \ref{mapa-zoom2x}
 %\end{verbatim}
 
 
+Tambi\'en estudiamos para ``casi'' el mismo modelo que de la Figura \ref{mapa-zoom}, pero para uno con plural el mapa se muestra en la Figura \ref{mapa-zoom-plural}
+
+El modelo tiene las siguientes modificaciones, las cuales fueron necesarias para poder cubrir las ER dadas por las personas.  
+
+rest4 near rest3
+rest4 in CalleDeAtocha
+str15 CalleDeCarretas
+str16 CalleDeLaCruz
+
+Las probabilidades y el vocabulario se muestran a continuaci\'on:
+
+ParroquiaDeSantaCruz 66/73=0.904
+in 23/73=0.315
+CalleSantoTomas 22/73=0.301
+CalleDeAtocha 4/73=0.055
+CalleDeLaConcepcionJeronima 7/73=0.096
+church 6/73=0.082
+near 6/73=0.082
+MinisterioDeRelacionesExteriores 5/73=0.068 (notar que no esta en el modelo!)
+
+
+\begin{figure}[ht]
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,fill,draw,inner sep=5pt,node distance=4cm},
+    aArrow/.style={scale=10,->, >=stealth, thick,
+    shorten <= 1pt, shorten >= 1pt},
+  ]
+			
+
+	\node[n,label=left:$str17$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+     \nStreet\end{array}$}] (a) {};		
+			
+	\node[n,label=above:$str12$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleDeElSalvador\end{array}$}, right of=a] (b) {};
   
+	\node[n,label=left:$str16$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleDeLaCruz\end{array}$}, right of=b] (m) {};		 
 
+\node[n,label=below:$str10$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleSantoTomas\end{array}$}, above of=b] (c) {};	
+				
+ \node[n,label=left:$min1$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nBuilding\\[-3pt] 
+      \nMinAsExt\end{array}$}, above of=a] (f) {};	
+					
+  \node[n,label=left:$church1$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+     \nChurch\end{array}$}, above of=f] (g) {};
+			
+ \node[n,label=left:$church2$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+     \nChurch\end{array}$}, right of=c] (d) {};
+			
+  \node[n,label=below:$rest3$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\\[-3pt] 
+      MedinaMayrit\end{array}$}, above of=d] (h) {};			
+			
+ \node[n,label=below:$str9$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleAtocha\end{array}$}, above of=c] (e) {};		
 
+\node[n,label=left:$rest4$,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\end{array}$}, right of=m] (k) {};
 
+\node[n,label=above:$d$,label=below:{
+    \relsize{-2}}, right of=d] (i) {};
+		
+ \node[n,label=below:$str15$,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleDeCarretas\end{array}$}, above of=i] (j) {};	
+
+%\node[n,label=below:$str17\nStreet$,label=above:{
+ %   \relsize{-2}}, below of=k] (n) {};				
+ \draw [aArrow,<->,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (f);
+% \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (g);
+
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=-20] (d) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+ %\draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (d);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (d);
+ %\draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nCerca$} (k);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (h);
+
+ \draw [aArrow,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
+% \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (k);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (j);
+
+ \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (a);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (b); 
+
+ \draw [aArrow,bend right=5] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
+%\draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
+
+ \end{tikzpicture}
+\caption{Grafo del contexto \ref{mapa-zoom}}
+\label{grafo-GRE3D7-stimulus}
+\end{figure}
 
 
 
