@@ -522,8 +522,18 @@ A partir de estos resultados nos damos cuenta de que los atributos muy frecuente
 
 \section{Caso de estudio del ZOOM corpus}
 
-En esta secci\'on presentamos el estudio de tres casos particulares, los cuales son mucho m\'as naturales que los que hab\'iamos visto hasta el momento: la generaci\'on autom\'atica de ER para mapas del ZOOM corpus uno con zoom x, otro con zoom 2X del mismo target y otro de target plural, es decir con 2 targets. El mapa singular usado se muestra en la Figura \ref{mapa-zoom}, el mapa con zoom 2X, se muestra en Figura \ref{mapa-zoom2x} y el de targets plurales se muestra en Figura \ref{mapa-zoom-plural}. Veremos las diferencias entre esos mapas a nivel de informaci\'on disponible, obtendremos a partir de cada imagen el modelo subyacente que usar\'a el algoritmo y a partir de las ER's del corpus obtendremos las probabilidades de uso para luego ejecutar el algoritmo.
+En esta secci\'on presentamos el estudio de tres casos particulares, los cuales son mucho m\'as naturales que los que hab\'iamos visto hasta el momento: la generaci\'on autom\'atica de ER para mapas del ZOOM corpus uno con zoom x, otro con zoom 2X del mismo target y otro de target plural, es decir con 2 targets. El mapa singular usado se muestra en la Figura \ref{mapa-zoom}, el mapa con zoom 2X, se muestra en Figura \ref{mapa-zoom2x} y el de targets plurales se muestra en Figura \ref{mapa-zoom-plural}. Veremos las diferencias entre esos mapas a nivel de informaci\'on disponible, obtendremos a partir de cada imagen el modelo subyacente que usar\'a el algoritmo y a partir de las ER's del corpus obtendremos las probabilidades de uso de las palabras, para luego ejecutar el algoritmo.
 
+En cada uno de los mapas, el o los targets est\'an se\~nalados por flechas rojas, seg\'un la leyenda que se ubica a la derecha, podemos decir que si se trata de una iglesia, o restaurantes, etc. 
+
+
+\subsection{Singular sin zoom}
+En la Figura \ref{mapa-zoom2x} se ve el nombre de la iglesia, ``Parroquia de Santa Cruz'', lo cual no se ve en la Figura \ref{mapa-zoom}, otra cosa que se puede ver en el mapa con zoom2x es el nombre de la calle que esta abajo ``Calle de la Concepci\'on Jeronima'', en este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores, por lo tanto lo \'unico que se ve en la Calle de Santo Tom\'as es la iglesia target. El mapa de la Figura \ref{mapa-zoom-plural} coincide con el mapa de la Figura \ref{mapa-zoom} pero los targets son en ese caso 2 restaurantes.
+
+En las Tablas \ref{freq-mapa}, \ref{freq-mapa-zoom2x} y \ref{freq-mapa-zoom-plural} se muestran las ER dadas por las personas, la cantidad de veces que apareci\'o en el corpus, la frecuencia, y si es o no ER minimal, para los 3 mapas respectivamente.
+
+
+%\end{figure}
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{images/corpus/mapa6.png}\\[0pt]
@@ -531,117 +541,29 @@ En esta secci\'on presentamos el estudio de tres casos particulares, los cuales 
 \label{mapa-zoom}
 \end{figure}
 
-En cada uno de los mapas, el o los targets est\'an se\~nalados por flechas rojas, seg\'un la leyenda que se ubica a la derecha, podemos decir que si se trata de una iglesia, o restaurantes, etc. En la Figura \ref{mapa-zoom2x} se ve el nombre de la iglesia, ``Parroquia de Santa Cruz'', lo cual no se ve en la Figura \ref{mapa-zoom}, otra cosa que se puede ver en el mapa con zoom es el nombre de la calle que esta abajo ``Calle de la Concepci\'on Jeronima'', en este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores, por lo tanto lo \'unico que se ve en la Calle de Santo Tom\'as es la iglesia target. El mapa de la Figura \ref{mapa-zoom-plural} coincide con el mapa de la Figura \ref{mapa-zoom} pero los targets son en ese caso 2 restaurantes.
-
-En las Tablas \ref{freq-mapa}, \ref{freq-mapa-zoom} y \ref{freq-mapa-zoom-plural} se muestran las ER dadas por las personas, y la frecuencia que cada una representa en el corpus, para los 3 mapas respectivamente.
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{images/corpus/mapa16.png}\\[0pt]
-\caption{Imagen con zoom 2X, target singular}
-\label{mapa-zoom2x}
-\end{figure}
-
-\begin{figure}
-\centering
-\includegraphics[width=\textwidth]{images/corpus/mapa10.png}\\[0pt]
-\caption{Imagen sin zoom, target plural}
-\label{mapa-zoom-plural}
-\end{figure}
-
 
 \begin{table}[h!]
 \begin{small}
 \begin{center}
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|c|c|c|c|}
 \hline
-ER 					      & Cantidad &  Frecuencia & Minimal-Sobreespecificada\\ \hline \hline
-Iglesia en calle Santo Tomas frente al Ministerio de Asuntos Exteriores        &	11	&	0.1358\% & \\ \hline
-Iglesia en calle Santo Tomas cerca del Ministerio de Asuntos Exteriores        &	2   &	0.0246\% &	\\ \hline
-Iglesia  frente al Ministerio de Asuntos Exteriores &11&0.1358\% &\\ \hline
-Iglesia cerca del Ministerio de Asuntos Exteriores&1&0.0123\% &\\ \hline
-Iglesia en calle Santo Tomas&15&0.185\% &\\ \hline
-La Iglesia en Calle de Atocha&2&0.0246\% &\\ \hline
-La iglesia (sub tipo I)&16&0.197\% &\\ \hline
-Calle de santo tomas  (es er)&2&0.0246\% &\\ \hline
-La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, & & &\\ 
-frente al Ministerio de Asuntos Exteriores&1&0.0123\% &\\ \hline
-La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha&2&0.0246\% &\\ \hline
-NO-ERA-ER&18&0.222\% &\\ \hline \hline
-Totales&81&100\% &\\
-
-\hline
-\end{tabular}
-\caption{ER del corpus dadas por humanos para el mapa \ref{mapa-zoom}.}\label{freq-mapa}
-\end{center}
-\end{small}
-\end{table}
-
-
-\begin{table}[h!]
-\begin{small}
-\begin{center}
-\begin{tabular}{|l|c|c|}
-\hline
-ER 					      & Cantidad &  Frecuencia \\ \hline
-        &		&	\%  \\
-        &	  &	\%	\\
-	      &		&	\%	\\
-	      &		&	\%	\\
-				&	  &	\%	\\
-				&   &	\%	\\
-				&	  &	\%	\\
-				&		&	\%	\\
-				&		&	\%  \\
-        &	  &	\%	\\
-	      &		&	\%	\\
-	      &		&	\%	\\
-				&	  &	\%	\\
-				&   &	\%	\\
-				&	  &	\%	\\
-				&		&	\%	\\
-
-\hline
-Totales	&	&	100\%	\\
-
+ER 					      & Cantidad &  Frecuencia & SubE & SobreE\\ \hline \hline
+Iglesia en calle Santo Tomas frente al Ministerio de Asuntos Exteriores        &	11	&	0.1358\% & NO &SI\\ \hline
+Iglesia en calle Santo Tomas cerca del Ministerio de Asuntos Exteriores        &	2   &	0.0246\% &	NO&SI\\ \hline
+Iglesia  frente al Ministerio de Asuntos Exteriores &11&0.1358\% &SI&NO\\ \hline
+Iglesia cerca del Ministerio de Asuntos Exteriores&1&0.0123\% &SI&NO\\ \hline
+Iglesia en calle Santo Tomas&15&0.185\% &SI&NO\\ \hline
+La Iglesia en Calle de Atocha&2&0.0246\% &SI&NO\\ \hline
+La iglesia (sub tipo I)&16&0.197\% &NO&SI\\ \hline
+Calle de santo tomas  (es er)&2&0.0246\% &SI&NO\\ \hline
+La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, & 2&0.0246 &NO&SI\\ 
+frente al Ministerio de Asuntos Exteriores&1&0.0123\% & &\\ \hline
+La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha&2&0.0246\% &NO&SI\\ \hline
+NO-ERA-ER&18&0.222\% & &\\ \hline \hline
+Totales&81&100\% & &\\
 \hline
 \end{tabular}
-\caption{ER del corpus dadas por humanos para el mapa \ref{mapa-zoom2x}.}\label{freq-mapa-zoom}
-\end{center}
-\end{small}
-\end{table}
-
-\begin{table}[h!]
-\begin{small}
-\begin{center}
-\begin{tabular}{|l|c|c|}
-\hline
-ER 					      & Cantidad &  Frecuencia & Minimal \\ \hline
-Parroquia de Santa Cruz        												 &		44&	\%  & SI  \\
-Parroquia de Santa Cruz en Calle De Santo Tomas        &	 9  &	\%	& NO\\
-Parroquia de Santa Cruz en Calle De Santo Tomas        &	 3  &	\%	& NO\\
-entre Calle De Atocha y De La Concepci\'on Jer\'onima  &	    &			&  \\
-Calle De Santo Tomas	        												 &		1 &	\%	&SI\\
-Iglesia de la Parroquia de Santa Cruz	      					 &		2 &	\%	&NO\\
-Parroquia de Santa Cruz en Calle De Santo Tomas  			 &	  3 &	\%	&NO\\
-cerca de Ministerio de Asuntos Exteriores							 &	  &		&\\
-Parroquia de Santa Cruz en Calle De Santo Tomas y      &	 4 &	\%	& NO\\
-De La Concepci\'on Jer\'onima  &	  &					&\\
-Iglesia de la Parroquia de Santa Cruz	en Calle De Santo Tomas      &		2&	\%	&NO\\
-Iglesia cerca deL Ministerio de Asuntos Exteriores				&	 1 &		&SI\\
-Parroquia de Santa Cruz  &	  1&	\%	&NO\\
-cerca de Ministerio de Asuntos Exteriores				&	  &		&\\
-Parroquia de Santa Cruz en Calle De Atocha  &	  1&	\%	&NO\\
-cerca de Ministerio de Asuntos Exteriores				&	  &		&\\
-Iglesia				&  1 &	\%	&\\
-NO ERA ER				&	8  &	\%	&\\
-
-\hline
-Totales	&81	&	100\% &	\\
-
-\hline
-\end{tabular}
-\caption{ER del corpus dadas por humanos para el mapa \ref{mapa-zoom-plural}.}\label{freq-mapa-zoom-plural}
+\caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom}.}\label{freq-mapa}
 \end{center}
 \end{small}
 \end{table}
@@ -753,6 +675,49 @@ El modelo se muestra en la Figura \ref{modelo-mapa-zoom}
 \caption{Grafo del contexto \ref{mapa-zoom}}
 \label{modelo-mapa-zoom}
 \end{figure}
+
+\subsection{Singular con zoom 2x}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/corpus/mapa16.png}\\[0pt]
+\caption{Imagen con zoom 2X, target singular}
+\label{mapa-zoom2x}
+\end{figure}
+
+\begin{table}[h!]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|}
+\hline
+ER 					      & Cantidad &  Frecuencia & Minimal \\ \hline \hline
+Parroquia de Santa Cruz        												 &		44&	\%  & SI &NO \\ \hline
+Parroquia de Santa Cruz en Calle De Santo Tomas        &	 9  &	\%	& NO&NO\\ \hline
+Parroquia de Santa Cruz en Calle De Santo Tomas        &	 3  &	\%	& NO&NO\\
+entre Calle De Atocha y De La Concepci\'on Jer\'onima  &	    &			&  &\\  \hline
+Calle De Santo Tomas	        												 &		1 &	\%	&SI&NO\\  \hline
+Iglesia de la Parroquia de Santa Cruz	      					 &		2 &	\%	&NO&NO\\  \hline
+Parroquia de Santa Cruz en Calle De Santo Tomas  			 &	  3 &	\%	&NO&NO\\  
+cerca de Ministerio de Asuntos Exteriores							 &	  &		&\\  \hline
+Parroquia de Santa Cruz en Calle De Santo Tomas y      &	 4 &	\%	& NO&NO\\  
+De La Concepci\'on Jer\'onima  &	  &					&\\  \hline
+Iglesia de la Parroquia de Santa Cruz	en Calle De Santo Tomas      &		2&	\%	&NO&NO\\  \hline
+Iglesia cerca deL Ministerio de Asuntos Exteriores				&	 1 &		&SI&NO\\  \hline
+Parroquia de Santa Cruz  &	  1&	\%	&NO&NO\\  
+cerca de Ministerio de Asuntos Exteriores				&	  &		&&\\  \hline
+Parroquia de Santa Cruz en Calle De Atocha  &	  1&	\%	&NO&NO\\  
+cerca de Ministerio de Asuntos Exteriores				&	  &		&&\\  \hline
+Iglesia				&  1 &	\%	&NO&NO\\  \hline
+NO ERA ER				&	8  &	\%	& &\\  \hline
+\hline
+\hline
+Totales	&81	&	100\% &	3 minimales\\
+\hline
+\end{tabular}
+\caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom2x}.}\label{freq-mapa-zoom2x}
+\end{center}
+\end{small}
+\end{table}
 
 El vocabulario y las probabilidades de uso sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom2x} es el siguiente:
 
@@ -875,6 +840,60 @@ Y el modelo en el cual vamos a notar muchas diferencias con respecto al modelo d
 \end{figure}
 
 Notar que en el modelo no esta el Ministerio de Asuntos Exteriores, pero la probabilidad di\'o mayor que 0, esto se debe a que como en la obtenci\'on del corpus los mapas se mostraron aleatoriamente, algunas personas vieron el mapa sin zoom antes, y recordaron que ese edificio que se v\'e en el mapa, es el Ministerio de Asuntos Exteriores, como no todas las personas lo vieron es que no podemos agregarlo al modelo.
+
+
+\subsection{Plural sin zoom}
+
+\begin{figure}
+\centering
+\includegraphics[width=\textwidth]{images/corpus/mapa10.png}\\[0pt]
+\caption{Imagen sin zoom, target plural}
+\label{mapa-zoom-plural}
+\end{figure}
+
+\begin{table}[h!]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|c|c|c|}
+\hline
+ER 					      & Cantidad &  Frecuencia & minimal\\ \hline
+Medina Mayrit y el que esta cerca        &	11	&	\% &SI \\
+el de la calle Atocha y De La Cruz (SubEsp)      &	3  &	\%	&NO\\
+pr\'oximo a la iglesia (SubEsp)	      &1		&	\%	&NO\\
+Medina Mayrit y el que esta en Calle De Atocha	      &5		&	\%	&SI\\
+Calle De Atocha				&	10  &	\%	&\\
+Medina Mayrit en Calle de Atocha y el que esta cerca				& 3  &	\%	&NO\\
+cerca de la iglesia				&	  &	\%	&\\
+Medina Mayrit	(SubEsp)		&11		&	\%	&NO\\
+Medina Mayrit y el que esta cerca				&		&	\%  &\\
+en la calle Atocha y De La Cruz        &	1  &	\%	&\\
+El que esta en Calle De Atocha y Carretas, 	      &		&	\%	&\\
+y el de Atocha y de la Cruz	      &1		&	\%	&\\
+El que esta en Calle De Atocha y Carretas (SubEsp)					&	2  &	\%	&\\
+Medina Mayrit en Calle De Atocha y el que esta cerca  				&  1 &	\%	&NO\\
+Medina Mayrit y el que esta cerca				&		3 &	\%  &\\
+cerca de la iglesia				&	  &	\%	&\\
+Medina Mayrit y el que esta 	&	2	&	\%  &\\
+cerca de la iglesia				&	  &	\%	&\\
+Medina Mayrit en Calle de Atocha y el que esta cerca			&1  &	\%	&\\
+en Calle De La Cruz	&	  &	\%	&\\
+Medina Mayrit y el que esta cerca			&1  &	\%	&\\
+en Calle De Atocha	&	1  &	\%	&\\
+Medina Mayrit y el que esta cerca			&2  &	\%	&\\
+en Calle De La Cruz	&	  &	\%	&\\
+Calle De Atocha y Calle De La Cruz  (SubEsp)					&1  &	\%	&\\
+\hline
+Totales	&	&	100\%	\\
+
+\hline
+\end{tabular}
+\caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom-plural}.}\label{freq-mapa-zoom-plural}
+\end{center}
+\end{small}
+\end{table}
+
+
+
 
 Para el mapa de la Figura \ref{mapa-zoom-plural} el vocabulario y probabilidades de uso de las palabras es el siguiente:
 
