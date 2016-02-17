@@ -44,8 +44,12 @@ Luego en Secci\'on \ref{sec:tipos_algoritmos} explicaremos los diferentes tipos 
 %Dale's sobre el Cabinet corpus significan que~\emph{alg\'un orden} produce una razonablemente amplia cobertura. En otras palabras, se ha demostrado que los algoritmos de refinamiento tienen la capacidad de producir ERs similares a los producidos por los humanos, proporcionado una ordenaci\'on adecuada sobre las relaciones que aparecen
 %en la escena de entrada, pero no est\'a claro cu\'al de todos los \'ordenes posibles se debe utilizar. En esta tesis abordamos directamente esta cuesti\'on.
 
+\section{Clasificaciones b\'asicas de ER y algoritmos GER}
 
-\section{Tipos de ER}
+
+
+
+\subsection{Tipos de ER}
 \label{sec:tipos_er}
 \begin{figure}[ht]
 \centering
@@ -66,9 +70,9 @@ De acuerdo a las propiedades o relaciones que una expresi\'on referencial (ER) i
 
 \item Una ER es {\bf relacional}, cuando adem\'as de ser proposicional, contiene relaciones con otros objetos, entonces la ER incluye las descripciones de otros objetos con los cuales esta relacionada. Por ejemplo en la Figura \ref{GRE3D7-stimulus}: {\it La esfera que est\'a a la derecha del cubo}, {\it a la derecha de} lexicaliza una relaci\'on que necesita describir otro objeto adem\'as del target, en este caso {\it el cubo}.
 
-\item \label{sec:minimales} Se dice que una ER es {\bf minimal}, cuando incluye la m\'inima cantidad de propiedades con las cuales el objeto puede ser distinguido en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo en la Figura \ref{GRE3D7-stimulus} {\it La esfera roja} es una ER minimal, como as\'i tambi\'en lo es {\it La esfera grande}, o {\it La esfera a la derecha del cubo} ya que cada una de esas ER tienen propiedades que son necesarias para identificarlo. Para verificarlo intentemos sacar alguna propiedas, si de {\it La esfera roja} sacamos esfera, ya no tenemos al target, si sacamos roja, tampoco. Lo mismo pasa para {\it La esfera grande} no podemos sacar ni esfera ni grande. Veamos que pasa con {\it La esfera a la derecha del cubo}, si sacamos esfera tenemos otro objeto que tiene a la izquierda un cubo.
+\item \label{sec:minimales} Se dice que una ER es {\bf minimal}, cuando incluye la m\'inima cantidad de propiedades con las cuales el objeto puede ser distinguido en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo en la Figura \ref{GRE3D7-stimulus} {\it La esfera roja} es una ER minimal, como as\'i tambi\'en lo es {\it La esfera grande}, o {\it La esfera a la derecha del cubo} ya que cada una de esas ER tienen propiedades que son necesarias para identificarlo. Para verificarlo intentemos sacar alguna propiedas, si de {\it La esfera roja} sacamos esfera, ya no tenemos al target, si sacamos roja, tampoco. Lo mismo pasa para {\it La esfera grande} no podemos sacar ni esfera ni grande. Veamos que pasa con {\it La esfera a la derecha del cubo}, si sacamos {\it esfera} tenemos otro objeto adem\'as del target que tambi\'en tiene a la izquierda un cubo, por lo tanto la expresi\'on no identificar\'ia al target.
 
-\item Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguirlo de los dem\'as objetos en el contexto dado, se dice que la ER es {\bf sobreespecificada}. Por ejemplo: {\it La esfera roja grand} en la Figura \ref{GRE3D7-stimulus} es sobreespecificada.
+\item Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguirlo de los dem\'as objetos en el contexto dado, se dice que la ER es {\bf sobreespecificada}. Por ejemplo: {\it La esfera roja grande} en la Figura \ref{GRE3D7-stimulus} es sobreespecificada porque se le puede sacar {\it grande} y sigue siendo ER, o se le puede sacar {\it roja} y tambi\'en sigue siendo ER.
 
 \item Una expresi\'on es {\bf subespecificada} cuando no puede distinguir al target de los otros objetos en el contexto. Estos otros objetos son llamados {\it distractores}. Por ejemplo: {\it La esfera} en la Figura \ref{GRE3D7-stimulus} no alcanza para distinguir el objeto apuntado por la flecha, ya que hay otras 2 esferas. Una expresi\'on subespecificada identifica a un conjunto de objetos y ese conjunto no s\'olo incluye al target.
 
@@ -166,13 +170,16 @@ De acuerdo a las propiedades o relaciones que una expresi\'on referencial (ER) i
 
 %Los algoritmos tambi\'en se pueden diferenciar por la clase de ER que pueden generar, a continuaci\'on explicaremos los distintos tipos de algoritmos de GER. 
 
-\section{Tipos de algoritmos de GER}
+\subsection{Tipos de algoritmos de GER}
 \label{sec:tipos_algoritmos}
-Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales  puede ser: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, generar plurales, singulares o ambos,
- %usar disyunciones y conjunciones, o s\'olo conjunciones, 
-generar ER sobreespecificadas o minimales.  A continuaci\'on se describen cada uno de esos tipos.
 
-Un algoritmo es {\bf determin\'{i}stico} si dado un input (un contexto y un target), da siempre la misma ER de salida. En cambio un algoritmo es {\bf no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, por lo tanto los algoritmos no-determin\'isticos simulan el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos. Por ejemplo ser\'ia no determin\'istico si para la Figura \ref{GRE3D7-stimulus2} una vez genera {\it La esfera roja} y otra vez {\it La esfera grande}. En la Tabla \ref{er-gre3d7-stimulus} se muestran las ER dadas por las personas para la Figura \ref{GRE3D7-stimulus}, si el algoritmo es determin\'istico dar\'ia s\'olo una ER para la Figura \ref{GRE3D7-stimulus2}, esa ER que dar\'ia el algoritmo coincidir\'ia con alguna de las que dieron las personas?. Si el algoritmo es no-determin\'istico, podremos conseguir todos los diferentes tipos de ER que dieron las personas?.
+Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales es un programa que dado un input d\'a una ER para un target.
+
+Los algoritmos pueden ser de distintos tipos, seg\'un los tipos de ER que sean capaces de generar. Los distintos tipos de algoritmos son: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, generar plurales, singulares o ambos,
+ %usar disyunciones y conjunciones, o s\'olo conjunciones, 
+generar ER sobreespecificadas o minimales. A continuaci\'on se describen cada uno de esos tipos.
+
+Un algoritmo es {\bf determin\'{i}stico} si dado un input (un contexto y un target), d\'a siempre la misma ER de salida. En cambio un algoritmo es {\bf no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, por lo tanto los algoritmos no-determin\'isticos simulan el comportamiento de distintas personas, o incluso el de la misma persona en distintos momentos. Por ejemplo ser\'ia no determin\'istico si para la Figura \ref{GRE3D7-stimulus2} una vez genera {\it La esfera roja} y otra vez {\it La esfera grande}. En la Tabla \ref{er-gre3d7-stimulus} se muestran las ER dadas por las personas para la Figura \ref{GRE3D7-stimulus}, si el algoritmo es determin\'istico dar\'ia s\'olo una ER para la Figura \ref{GRE3D7-stimulus2}, esa ER que dar\'ia el algoritmo coincidir\'ia con alguna de las que dieron las personas?. Si el algoritmo es no-determin\'istico, podremos conseguir todos los diferentes tipos de ER que dieron las personas?.
 
 
 \begin{table}[h!]
@@ -201,7 +208,7 @@ red ball next-to large red cube & 1 \\ \hline
 
 Si el largo de la ER es finito, dado un contexto finito, existen finitas ER a generar, as\'i un algoritmo no-determin\'istico nos permitir\'ia explorar todas las ER posibles para un input dado.
 
-Un algoritmo es {\bf proposicional}, cuando las ER que genera contienen s\'olo atributos del target, es decir no contiene relaciones con otros atributos ni ER de otros objetos.  Por ejemplo para la Figura \ref{GRE3D7-stimulus2} {\it La esfera roja}.
+Un algoritmo es {\bf proposicional}, cuando las ER que genera contienen s\'olo atributos del target, es decir no contiene relaciones con otros atributos ni ER de otros objetos. Por ejemplo para la Figura \ref{GRE3D7-stimulus2} {\it La esfera roja}.
 
 Un algoritmo es {\bf relacional} si adem\'as de generar ER proposicionales genera ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar expresiones para el o los objetos relacionados. Por ejemplo para la Figura \ref{GRE3D7-stimulus2} la ER {\it La esfera roja a la derecha del cubo}. En este caso {\it el cubo} es una expresi\'on que se tuvo que dar como consecuencia de incluir la relaci\'on {\it a la derecha de}. En estos casos hay que asegurarse que el algoritmo termina, es decir que no entra en loops tratando de identificar objetos.
 
@@ -252,7 +259,7 @@ Para un algoritmo ser\'ia f\'acil hacer sobreespecificaci\'on simplemente podr\'
 %https://www.abdn.ac.uk/ncs/departments/computing-science/tunabibl-495.php
 
 
-En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, Graph, algoritmo Relacional y por \'ultimo Bisimulaci\'on. En la Tabla \ref{clasificacion_algoritmos} se muestra una clasificaci\'on de los algoritmos existentes en el \'area, siendo las columnas Det. - Determin\'istico, No-Det. - No-Determin\'istico, Prop. - Proposicional, Rel. - Relacional, Neg. - Genera Negativos, Plur. - Genera Plurales, Sob. - Genera sobreespecificaci\'on. 
+En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales, empezando por el algoritmo Full Brevity, el algoritmo de heur\'istica Greedy, siguiendo con el algoritmo Incremental, Graph, algoritmo Relacional y por \'ultimo Bisimulaci\'on. En la Tabla \ref{clasificacion_algoritmos} se muestra una clasificaci\'on seg\'un los tipos de algoritmos que vimos en la secci\'on anterior, de los algoritmos m\'as importantes del \'area, siendo las columnas Det. - Determin\'istico, No-Det. - No-Determin\'istico, Prop. - Proposicional, Rel. - Relacional, Neg. - Genera Negaciones, Plur. - Genera Plurales, Sob. - Genera sobreespecificaci\'on. 
 
 
 \begin{table}[h!]
@@ -265,13 +272,13 @@ En esta secci\'on vamos a hablar de los algoritmos de generaci\'on autom\'atica 
 Full Brevity &Si & No&Si&No&No&No& No \\
 Greedy&Si & No&Si&No&No&No& Si \\
 Incremental&Si & No&Si&No&No&No& No \\
-GRAPH&&&&&&& \\
+GRAPH&Si & No&Si&Si&No&Si& No \\
 Bisimulaci\'on&Si & No&Si&Si&Si&Si& No \\ \hline
 %Nuestra Propuesta&No & Si&Si&Si&No&Si& Si \\
 
 \end{tabular}
 %\vspace*{.1cm}
-\caption{Clasificaci\'on de algoritmos seg\'un el tipo y lo que generan.} 
+\caption{Clasificaci\'on de algoritmos seg\'un el tipo.} 
 \label{clasificacion_algoritmos}
 \vspace*{-.5cm}
 \end{center}
@@ -300,115 +307,62 @@ Bisimulaci\'on&Si & No&Si&Si&Si&Si& No \\ \hline
 %Full  Brevity  and  Greedy  Heuristic.
 El algoritmo {\it Full Brevity} \cite{Dale:1989:CUR:981623.981632} genera la descripci\'on m\'as corta que identifica al target. Para hacerlo, 
 busca si hay una propiedad del target que no sea propiedad de ning\'un distractor. Si no hay chequea todas las posibles combinaciones de 2 propiedades, si no la hay, busca de a 3 y as\'i sucesivamente. Por ejemplo para la Figura \ref{GRE3D7-stimulus2} se fijar\'ia en las propiedades del target {red, ball, large}, como ninguna de ellas aisladamente identifica s\'olo al target, probar\'ia con 2 propiedades {\it red ball} si identifica al target, devuelve {\it red ball} y finaliza.
-
 El problema es que encontrar la descripci\'on m\'as corta es computacionalmente caro, se observ\'o que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos \cite{Olson1970LangAndThought};  \cite{Sonnenschein1984}; \cite{Pechmann1989}; \cite{Engelhardt2006}.
-
 Una aproximaci\'on a Full Brevity es el algoritmo de heur\'istica {\it Greedy}, el cual iterativamente selecciona la propiedad que elimina m\'as distractores y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado no siempre genera expresiones referenciales m\'inimas.
-
-%which  iteratively  selects  the  property  which  rules  out  most  of  the  distractors
-%not  previously  ruled  out,  incrementally  augmenting  the  description  based  on  what
-%property has most discriminatory power at each stage (as a result, it does not always
-%generate  descriptions  of  minimal  size). 
 El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fue superado por el algoritmo {\it Incremental} y sus sucesores \cite{C92-1038}; \cite{Dale95computationalinterpretations}. El algoritmo Incremental fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, lo explicamos a continuaci\'on. Por ejemplo para la Figura \ref{GRE3D7-stimulus2} se fijar\'a que {\it ball} elimina 2 distractores {$e_{1}$, $e_{3}$}, {\it red} elimina 3 distractores {$e_{2}$, $e_{4}$, $e_{7}$} y {\it large} elimina 1 distractores {$e_{4}$}, entonces elegir\'a {\it red}, pero como no alcanza para ser ER, seguir\'a con {\it ball} que es la que elimina m\'as distractores luego de {\it red}, finalizar\'a porque {\it red ball} identifica s\'olo al target. Supongamos que hubiera otro objeto con propiedad {\it large}, entonces {\it large} eliminar\'ia tambi\'en 2 distractores, entonces el algoritmo devolver\'ia {\it large red ball}, y esa ER no es minimal, es sobreespecificada.
-% The  Greedy  Heuristic  algorithm  is  a  more
-%efficient  algorithm  than  the  Full  Brevity  one,  but  it  was  soon  eclipsed  by  another
-%algorithm    which  turned  out  to  be  the
-%most influential algorithm of the pre-2000 era. It is this later algorithm that came to be
-%known as``the'' Incremental Algorithm (IA).
-
-%\subsection{GREEDY}
-
-%El algoritmo GREEDY de Dale~\cite{dale89} busca sobre todo el conjunto de propiedades del target y elije el subconjunto m\'as chico posible que identifica un\'{i}vocamente al objeto target entre los distractores en la escena considerada como se muestra en el siguiente algoritmo.\\
-
-%\begin{figure}[ht]
-%\begin{center}
-%\includegraphics[width=8.5cm]{figures/greedy.png}\\[0pt]
-%\caption{Interface del experimento}
-%\label{fig-greedy}
-%\end{center}
-%\end{figure}
-
-%r - el objeto target\\
-%D = \{d|d es un distractor de r\}\\
-%KB - la base de conocimiento que contiene las propiedades de todos los objetos\\
-%$P_{r}$ = $\{p|p(r) \in KB\}$\\
-%L = $\{\}$ - la descripci\'on vac\'{i}a\\
-%\\
-%1. Chequea \'exito:\\
-%    \textbf{if} D = $\emptyset$ \textbf{then} return L como una ER que distingue al target r
-%    \textbf{elseif} $P_{r}$ = $\emptyset$ \textbf{then} fail
-%    
-%\textbf{else goto} Paso 2 \\
-%\\
-%2. Elegir Propiedad:
-% \textbf{for each} $p_{i}$ $\in$ $P_{r}$ \textbf{do}:
-%    $D_{i}$ $\leftarrow$ D$\cap$ \{x|x $\in$ D and $p_{i}$ (x) $\in$ KB\}
-%    Elegir la propiedad $p_{j}$ tal que $D_{j}$ es el conjunto m\'as chico (es decir la que elimina m\'as distractores) \textbf{goto} Paso 3\\
-%\\    
-%3. Agregar $p_{j}$ a la descripci\'on actual\\
-%L $\leftarrow$ L $\cup$ \{$p_{j}$\}\\
-%D $\leftarrow$ $D_{j}$\\
-%P $\leftarrow$ P -\{$p_{j}$\}\\
-%\textbf{goto} Paso 1\\
-
-
-
-%%Dado un dominio D que contiene un target referente r y un conjunto de distractores, una base de conocimiento KB que contiene las propiedades de los objetos.
-%%Un conjunto de propiedades verdaderas para r, y una descripcion L inicialmente vac\'{i}a.
-
-%Este algoritmo es de orden NP-complete
 
 \subsection{Incremental}
 
 %A continuaci\'on se describe el algoritmo Incremental de Dale \& Reiter el cual esta basado en el algoritmo GREEDY (el cual hac\'ia una b\'usqueda exaustiva y eleg\'ia la propiedad que m\'as distractores eliminaba en cada paso) pero \'este reduce la complejidad del algoritmo Greedy cambiando que en vez de chequear cual propiedad es la que elimina m\'as distractores, eligiendo la que sigue en la lista de propiedades ordenada seg\'un preferencia y que elimina al menos un distractor. Este algoritmo es de orden polinomial. Este algoritmo produce expresiones referenciales que pueden estar sobreespecificadas.\\
 
-\textcolor{blue}{error entorno matematico, pero no entiendo porque, y no puedo hacer que diga algoritmo en vez de algorithm}
-
-%\begin{figure}
-\begin{small}
-\begin{center}
-%\centering
-\begin{algorithm}[H]
-
-\dontprintsemicolon
-
-\captionsetup[algorithm]{name=Algoritmo}
-\caption{Incremental\label{algo:incremental}}
-%\caption{Incremental}\label{algo:incremental}
-\KwIn{\footnotesize \{r, D, Pref\} r es el target, D es el dominio, Pref lista de preferencia de propiedades ordenadas}
-\KwOut{\footnotesize L  - Descripci\'on de salida}
-{
-$\ L \leftarrow \emptyset $ \tcp*[f]{\footnotesize Inicialmente es vac\'io}\\
-$\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los objetos menos r }\\
-
-\For{\em $A_{i}$ $\in$ Pref }
- {
-	$V = Value(r,A_{i})$ \tcp*[f]{\footnotesize V es el valor de la propiedad $A_{i}$ para r }\\
-	\If(\tcp*[f]{\footnotesize Si elimina alg\'un distractor}){\em $C \cap RulesOut(\[A_{i}\],V) \neq \emptyset $}
-	{
-    $\ L \leftarrow L \cup \{A_{i},V\} $  \tcp*[f]{\footnotesize Agrega la propiedad $\ A_{i}$ a $\ L$ }\\z
-    $\ C \leftarrow C - RulesOut(\[A_{i}\],V) $ \tcp*[f]{\footnotesize Actualiza C sacando los objetos que no tienen V en $\ A_{i}$ } 
-  }
-  \If(\tcp*[f]{\footnotesize Si no quedan distractores}){\em $\ C = \emptyset $}
-	{
-     Return L 
-  }
- }
-Return Fallo
-}
-\end{algorithm}
-\end{center}
-%\end{figure}
-\end{small}
-
+%\textcolor{blue}{error entorno matematico, pero no entiendo porque, y no puedo hacer que diga algoritmo en vez de algorithm}
+%
+%%\begin{figure}
+%\begin{small}
+%\begin{center}
+%%\centering
+%\begin{algorithm}[H]
+%
+%\dontprintsemicolon
+%
+%\captionsetup[algorithm]{name=Algoritmo}
+%\caption{Incremental\label{algo:incremental}}
+%%\caption{Incremental}\label{algo:incremental}
+%\KwIn{\footnotesize \{r, D, Pref\} r es el target, D es el dominio, Pref lista de preferencia de propiedades ordenadas}
+%\KwOut{\footnotesize L  - Descripci\'on de salida}
+%{
+%$\ L \leftarrow \emptyset $ \tcp*[f]{\footnotesize Inicialmente es vac\'io}\\
+%$\ C \leftarrow D - \{r\} $ \tcp*[f]{\footnotesize C es el conjunto de todos los objetos menos r }\\
+%
+%\For{\em $A_{i}$ $\in$ Pref }
+ %{
+	%$V = Value(r,A_{i})$ \tcp*[f]{\footnotesize V es el valor de la propiedad $A_{i}$ para r }\\
+	%\If(\tcp*[f]{\footnotesize Si elimina alg\'un distractor}){\em $C \cap RulesOut(\[A_{i}\],V) \neq \emptyset $}
+	%{
+    %$\ L \leftarrow L \cup \{A_{i},V\} $  \tcp*[f]{\footnotesize Agrega la propiedad $\ A_{i}$ a $\ L$ }\\z
+    %$\ C \leftarrow C - RulesOut(\[A_{i}\],V) $ \tcp*[f]{\footnotesize Actualiza C sacando los objetos que no tienen V en $\ A_{i}$ } 
+  %}
+  %\If(\tcp*[f]{\footnotesize Si no quedan distractores}){\em $\ C = \emptyset $}
+	%{
+     %Return L 
+  %}
+ %}
+%Return Fallo
+%}
+%\end{algorithm}
+%\end{center}
+%%\end{figure}
+%\end{small}
+%
 \begin{figure}[ht]
 %\centering
 \includegraphics[width=0.4\textwidth]{images/algoritmoIncremental.png}
 %\caption{Algoritmo Incremental}
 \label{algoritmoIncremental}
+\caption{Figura 2 de \cite{survey}}
 \end{figure}
 
-Como podemos ver en el Algoritmo \ref{algoritmoIncremental}, el input es el objeto target \emph{r} que queremos identificar, \emph{D} es el dominio, y Pref una lista de propiedades ordenada seg\'un la preferencia. Vamos a ejemplificar la corrida del algoritmo con el ejemplo de la Figura \ref{GRE3D7-stimulus2}, y supongamos que la lista ordenada de propiedades es esta [ tipo, color, tama\~no ]. D inicialmente es el conjunto de todos los objetos del contexto: \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}.
+El input del Algoritmo \ref{algoritmoIncremental}, es el objeto target \emph{r} que queremos identificar, \emph{D} es el dominio, y Pref una lista de propiedades ordenada seg\'un la preferencia. Vamos a ejemplificar la corrida del algoritmo con el ejemplo de la Figura \ref{GRE3D7-stimulus2}, y supongamos que la lista ordenada de propiedades es esta [ tipo, color, tama\~no ]. D inicialmente es el conjunto de todos los objetos del contexto: \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}.
 En {\it Paso 1} se asigna a \emph{L} la descripci\'on vac\'{i}a, al finalizar la ejecuci\'on, \emph{L} tendr\'a el conjunto de propiedades con los cuales identificaremos a \emph{r}. Se inicializa \emph{C} con el conjunto de distractores de \emph{r} en nuestro ejemplo \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, en el {\it Paso 2}. 
 La idea del algoritmo es ir eliminando distractores, por eso, en el {\it Paso 3} recorre las propiedades $A_{i}$ de \emph{r} con el For del {\it Paso 4}. En {\it Paso 5} le asigna a \emph{V} el valor que tiene la propiedad $A_{i}$ para el target \emph{r}, $RulesOut(A_{i},V)$ es el conjunto de objetos que tienen diferente valor para la propiedad $A_{i}$ que el que tiene el objeto target, es decir si esa valor de esa propiedad elimina distractores. La primer propiedad de \emph{r} a considerar seg\'un el orden de preferencias \emph{Pref} es ``tipo'', el valor del target para tipo es {\it esfera}, entonces en {\it Paso 6}, pregunta si hay objetos que tengan tipo con valor distinto de esfera, y hay, ellos son \{$e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, entonces le asigna a \emph{C} \{$e_{1}$,$e_{3}$\}, es decir s\'olo las que son esferas. En {\it Paso 10} pregunta si \emph{C} es vac\'io, pero no lo es, por lo tanto continua con la siguiente propiedad, en este caso ``color'', el valor de color para el target es {\it rojo}, agrega {\it rojo} a \emph{L}, y actualiza \emph{C} con $\emptyset$ porque tanto $e_{1}$ como $e_{3}$ son amarillos, en {\it Paso 10} pregunta si \emph{C} es vac\'io, y si lo es, por lo tanto devuelve \{esfera, rojo\}. Lo cual se podr\'ia realizar como {\it La esfera roja}, y ser\'ia una ER para el target considerado.
 
@@ -496,7 +450,9 @@ El algoritmo Graph de \cite{Krahmer:2003} propone tratar la obtenci\'on de expre
 Dado un objeto target, conseguir una ER que distinga al objeto de lo dem\'as es equivalente a encontrar un subgrafo del grafo original que unicamente caracterize al target. Intuitivamente este subgrafo se puede poner sobre el target y no sobre ningun otro objeto del dominio considerado.
 
 %Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente al cual le llama grafo distintivo.% (distinguishing graph).\\
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, se realiza una b\'usqueda exhaustiva, pero comenzando a lo ancho. Utiliza una heur\'{i}stica basada en el costo (costo de incluir propiedades, relaciones) para podar el espacio de b\'usqueda. Y da el grafo de menor costo. 
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hallan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{grafo-survey}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} s\'olamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target.  
+
+El algoritmo sigue explorando grafos y siempre se queda con el de menor costo.
 %esto no se entiende nada
 %Informalmente, un subgrafo refiere al target si y s\'olo si puede ser
 %`Colocado sobre el gr\'afico de dominio de tal manera que el v\'ertice que representa subgrafo
@@ -506,7 +462,7 @@ Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al tar
 %un subgrafo distingue al target un\'ivocamente si y s\'olo si se puede `colocarlo sobre grafo original' y es exactamente el
 %v\'ertice target. La noci\'on informal de un gr\'afico que se coloca sobre otro corresponde al concepto te\'orico matem\'atico de isomorfismo de grafos.
 
-En teor\'{i}a de grafos, un isomorfismo entre dos grafos G y H es una biyecci\'on f entre los conjuntos de sus v\'ertices $f:V(G) \rightarrow V(H)$ que preserva la relaci\'on de adyacencia. Es decir, cualquier par de v\'ertices u y v de G son adyacentes si y solo si lo son sus im\'agenes, $f(u)$ y $f(v)$, en H.
+%En teor\'{i}a de grafos, un isomorfismo entre dos grafos G y H es una biyecci\'on f entre los conjuntos de sus v\'ertices $f:V(G) \rightarrow V(H)$ que preserva la relaci\'on de adyacencia. Es decir, cualquier par de v\'ertices u y v de G son adyacentes si y solo si lo son sus im\'agenes, $f(u)$ y $f(v)$, en H.
 
 %\textcolor{blue}{aca quiero poner un ejemplo que muestre una imagen y el modelo como grafo}
 La funci\'on de costo esta definida sobre las aristas y v\'ertices del grafo dominio. El costo de un subgrafo se define como la suma sobre todas las aristas y v\'ertices que contiene el grafo.
@@ -514,27 +470,27 @@ El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que re
 
 La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cuando estas se hacen m\'as costosas que el grafo de menor costo encontrado hasta el momento. Esta funci\'on hace que se prefieran propiedades sobre otras que tienen mayor costo.
 
-Por ejemplo, 
-Los algoritmos discutidos por Dale y Reiter (1995) pueden ser vistos como
-diferentes instancias de un algoritmo de b\'usqueda (Bohnet y Dale 2005; Gatt de 2007).
-Todos ellos, b\'asicamente, buscan a trav\'es de un mismo espacio de estados, compuestos por tres componentes: conjunto de cosas verdaderas para el target, un conjunto de distractores, y un conjunto de propiedades del target que a\'un no han sido consideradas. El estado inicial se puede formalizar como la tripla ($\emptyset$, C, P) 
-(no hay descripci\'on del target constru\'ida, no se han descartado distractores, y todas las propiedades P del target todav\'ia est\'an disponibles), y el estado final como
-(L, $\emptyset$, P'), se ha encontrado una descripci\'on que distingue al target,
-el conjunto de distractores est\'a vac\'io, y pueden o no quedar propiedades del target en P'. Todos los otros estados en el espacio de b\'usqueda son intermedios,
-a trav\'es de cuales un algoritmo podr\'ia moverse en funci\'on de su estrategia de b\'usqueda. 
-Por ejemplo 
-cuando buscamos de una descripci\'on distintiva de $e_{5}$ del Contexto\ref{GRE3D7-stimulus2}, un estado intermedio podr\'ia ser
-s = ({[forma, esfera],[color,rojo]},{$e_{5}$}, {[taman\~o, grande],[a-la-der-de, $e_4$]})
-
-Los algoritmos discutidos anteriormente difieren en el m\'etodo de creaci\'on de los estados, y en el orden en que estos estados son recorridos. Full Brevity, por ejemplo, utiliza un m\'etodo de expansi\'on, que crea un nuevo estado para cada atributo
-del target no contemplado antes (y que excluye al menos un distractor). 
-
-
-Comenzando desde el estado inicial y aplicando a nuestro ejemplo de contexto, este m\'etodo ser\'ia dar\'ia lugar a tres nuevos estados, la creaci\'on de descripciones, incluyendo la informaci\'on de forma, el color, y el taman\~o, respectivamente. Estos estados son chequeados mediante un m\'etodo de amplitud-primero. 
-El IA, por el contrario, utiliza un m\'etodo diferente para ampliar el grafo, cada vez que crea
-un nuevo estado, lo hace de acuerdo con un orden de preferencia predeterminado. As\'i, en
-el estado inicial, y suponiendo que (como antes) que escribe es el atributo m\'as preferido, el
-ampliar m\'etodo ser\'ia crear un solo nuevo estado: s = {[forma, esfera]}, siempre hay 1 solo nuevo estado elegido por el orden de preferencia.
+%Por ejemplo, 
+%Los algoritmos discutidos por Dale y Reiter (1995) pueden ser vistos como
+%diferentes instancias de un algoritmo de b\'usqueda (Bohnet y Dale 2005; Gatt de 2007).
+%Todos ellos, b\'asicamente, buscan a trav\'es de un mismo espacio de estados, compuestos por tres componentes: conjunto de cosas verdaderas para el target, un conjunto de distractores, y un conjunto de propiedades del target que a\'un no han sido consideradas. El estado inicial se puede formalizar como la tripla ($\emptyset$, C, P) 
+%(no hay descripci\'on del target constru\'ida, no se han descartado distractores, y todas las propiedades P del target todav\'ia est\'an disponibles), y el estado final como
+%(L, $\emptyset$, P'), se ha encontrado una descripci\'on que distingue al target,
+%el conjunto de distractores est\'a vac\'io, y pueden o no quedar propiedades del target en P'. Todos los otros estados en el espacio de b\'usqueda son intermedios,
+%a trav\'es de cuales un algoritmo podr\'ia moverse en funci\'on de su estrategia de b\'usqueda. 
+%Por ejemplo 
+%cuando buscamos de una descripci\'on distintiva de $e_{5}$ del Contexto\ref{GRE3D7-stimulus2}, un estado intermedio podr\'ia ser
+%s = ({[forma, esfera],[color,rojo]},{$e_{5}$}, {[taman\~o, grande],[a-la-der-de, $e_4$]})
+%
+%Los algoritmos discutidos anteriormente difieren en el m\'etodo de creaci\'on de los estados, y en el orden en que estos estados son recorridos. Full Brevity, por ejemplo, utiliza un m\'etodo de expansi\'on, que crea un nuevo estado para cada atributo
+%del target no contemplado antes (y que excluye al menos un distractor). 
+%
+%
+%Comenzando desde el estado inicial y aplicando a nuestro ejemplo de contexto, este m\'etodo ser\'ia dar\'ia lugar a tres nuevos estados, la creaci\'on de descripciones, incluyendo la informaci\'on de forma, el color, y el taman\~o, respectivamente. Estos estados son chequeados mediante un m\'etodo de amplitud-primero. 
+%El IA, por el contrario, utiliza un m\'etodo diferente para ampliar el grafo, cada vez que crea
+%un nuevo estado, lo hace de acuerdo con un orden de preferencia predeterminado. As\'i, en
+%el estado inicial, y suponiendo que (como antes) que escribe es el atributo m\'as preferido, el
+%ampliar m\'etodo ser\'ia crear un solo nuevo estado: s = {[forma, esfera]}, siempre hay 1 solo nuevo estado elegido por el orden de preferencia.
 
 
 

@@ -5,7 +5,7 @@
 %En este cap\'itulo daremos una introducci\'on al problema de la generaci\'on autom\'atica de expresiones referenciales, contaremos las contribuciones de este trabajo y mostraremos como est\'a organizada la tesis.
 
 
-La generaci\'on de lenguaje natural (GLN) es el proceso de construcci\'on de un texto en lenguaje natural, para la comunicaci\'on con fines espec\'ificos. El proceso de convertir autom\'aticamente la informaci\'on no ling\"u\'{i}stica (por ejemplo, a partir de una base de datos como se muestra en la Tabla \ref{tabla-propiedades}) a texto en lenguaje natural, es \'util para aplicaciones pr\'acticas que van desde la generaci\'on de pron\'osticos del tiempo, a resumir informaci\'on m\'edica~\cite{dale2000}. La generaci\'on autom\'atica de expresiones referenciales es una sub\'area de la generaci\'on de lenguaje natural, la cual es una rama principal de la inteligencia artificial. Cuando hablamos, nos referimos a cosas, es decir usamos expresiones referenciales, un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales.
+La generaci\'on de lenguaje natural (GLN) es el proceso de construcci\'on de un texto en lenguaje natural, para la comunicaci\'on con fines espec\'ificos. El proceso de convertir autom\'aticamente la informaci\'on no ling\"u\'{i}stica (por ejemplo, a partir de una base de datos como se muestra en la Tabla \ref{tabla-propiedades}) a texto en lenguaje natural, es \'util para aplicaciones pr\'acticas que van desde la generaci\'on de pron\'osticos del tiempo, a resumir informaci\'on m\'edica~\cite{dale2000}. La generaci\'on autom\'atica de expresiones referenciales es una sub\'area de la generaci\'on de lenguaje natural, la cual est\'a dentro de el \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial. Cuando hablamos, nos referimos a cosas, es decir usamos expresiones referenciales, un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales.
 
 
 Un sistema de generaci\'on autom\'atica de texto en lenguaje natural deber\'ia incluir m\'inimamante 
@@ -46,7 +46,7 @@ esfera roja que est\'a al lado del cubo rojo}, o {\it la bola grande} o {\it el 
 
 Ahora imaginemos una computadora que se enfrenta a la misma
 tarea, ella necesitar\'a tener a los objetos identificados y las propiedades de cada uno de ellos, una forma de identificar a los objetos se muestra en la Figura~\ref{GRE3D7-stimulus2}. Suponiendo que tiene acceso a una base de datos que contiene todas
-las propiedades relevantes de los objetos de la escena, como se muestra en la Tabla \ref{tabla-propiedades}, la tarea de encontrar una ER para el objeto $e_5$ es lo mismo que encontrar alguna combinaci\'on de propiedades que se aplica \'unicamente a $e_5$, y no a los otros objetos.\\
+las propiedades relevantes de los objetos de la escena, como se muestra en la Tabla \ref{tabla-propiedades}, la tarea de encontrar una ER para el objeto $e_5$ es lo mismo que encontrar alguna combinaci\'on de valores de propiedades y quiz\'as relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos.\\
 
 
 \begin{table}[h!]
@@ -67,7 +67,7 @@ $e_7$ & cubo & rojo & chico & $e_6$ & - & -\\
 \hline
 \end{tabular}
 %\vspace*{.1cm}
-\caption{Propiedades de los objeto de la Figura \ref{GRE3D7-stimulus2}.}
+\caption{Propiedades de los objetos de la Figura \ref{GRE3D7-stimulus2}.}
 \vspace*{-.5cm}
 \label{tabla-propiedades}
 \end{center}
@@ -77,7 +77,7 @@ $e_7$ & cubo & rojo & chico & $e_6$ & - & -\\
 
 Esta tarea de encontrar las propiedades que aplican a un objeto y no a los otros, se llama selecci\'on de contenido de una expresi\'on referencial.  
 
-Imaginemos una computadora con la informaci\'on de la Tabla \ref{tabla-propiedades} queriendo distinguir a $e_5$, puede que haya m\'as de una forma en la que $e_5$ puede ser distinguido del resto ({\it la esfera roja grande}, {\it la esfera que esta al lado del cubo grande}, {\it la esfera roja}), la computadora tiene que decidir cu\'al de esas expresiones referenciales es \'optima en el contexto dado. Por otra parte, el concepto de \'optimo puede significar diferentes cosas.
+Imaginemos una computadora con la informaci\'on de la Tabla \ref{tabla-propiedades} queriendo distinguir a $e_5$, puede que haya m\'as de una forma en la que el objeto $e_5$ puede ser distinguido del resto --- {\it la esfera roja grande}, {\it la esfera que esta al lado del cubo grande}, {\it la esfera roja}, la computadora tiene que decidir cu\'al de esas expresiones referenciales es \'optima en el contexto dado. Por otra parte, el concepto de \'optimo puede significar diferentes cosas.
 
 Se podr\'{i}a pensar, por ejemplo, que las referencias son \'optimas cuando son m\'{i}nimas en longitud, es decir, 
 que contiene s\'olo la informaci\'on suficiente para identificar el objeto target. Pero, como veremos, la b\'usqueda de referencias m\'{i}nimas
@@ -86,11 +86,11 @@ es computacionalmente cara, y no es necesariamente lo que los hablantes hacen, n
 De todas las subtareas de GLN, la Generaci\'on de Expresiones Referenciales (GER) es
 una de las que ha recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los
 sistemas NLG, con independencia de su finalidad, contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
-en vista del papel central que las expresiones referenciales en la comunicaci\'on. Un sistema que proporciona
-consejos sobre los viajes a\'ereos \cite{white2010generating} ha de hacer referencia a los vuelos (``el
-vuelo m\'as barato'', ``un vuelo directo''), un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
-necesita para generar descripciones espaciales para las \'areas (``tomar el puente junto a la iglesia a la derecha''),
-y un sistema de di\'alogo de un robot que ensambla piezas de juguetes, junto con un usuario humano~\cite{foster-etal-ijcai2009} ha de hacer referencia a los componentes (``inserte el perno verde hasta el final en el cubo rojo'').
+en vista del papel central que las expresiones referenciales tienen en la comunicaci\'on. Un sistema que proporciona
+consejos sobre los viajes a\'ereos \cite{white2010generating} ha de hacer referencia a los vuelos --- {\it el
+vuelo m\'as barato}, {\it un vuelo directo}, un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
+necesita para generar descripciones espaciales para las \'areas --- {\it tomar el puente junto a la iglesia a la derecha},
+y un sistema de di\'alogo de un robot que ensambla piezas de juguetes, junto con un usuario humano~\cite{foster-etal-ijcai2009} ha de hacer referencia a los componentes --- {\it inserte el perno verde hasta el final en el cubo rojo}.
 
 El {\bf dominio} define los tipos de entidades que est\'an siendo contemplados, en algunos
 casos incluso un determinado conjunto de entidades con todas sus propiedades.
@@ -98,21 +98,21 @@ casos incluso un determinado conjunto de entidades con todas sus propiedades.
 El {\bf contexto} contiene un subconjunto de las entidades del dominio, por ejemplo, los puntos de referencia visibles en un cierto punto de la ruta para la que estamos dando direcciones, un subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un entorno visual, el contexto, incluyendo las
 propiedades de sus objetos y su configuraci\'on espacial, se puede llamar escena. 
 
-Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas, valores de esas propiedades, y relaciones con otros objetos.
+Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas, valores de esas propiedades, y puede tener relaciones con otros objetos.
 
-Una {\bf propiedad} es una caracter\'istica de una entidad particular por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto, cada entidad puede tener muchas propiedades, e incluso puede tener relaciones, as\'i como las relaciones familiares, las relaciones con respecto a la posici\'on f\'isica, por ejemplo: el hecho de estar situado al lado de otro objeto.
+Una {\bf propiedad} es una caracter\'istica de una entidad particular por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto, cada entidad puede tener muchas propiedades, e incluso puede tener relaciones, por ejemplo respecto a la posici\'on f\'isica, el hecho de estar situado al lado de otro objeto.
 
-El {\bf target} (u objetivo), es el objeto al cual queremos referirnos. En la escena de nuestro ejemplo en la Figura \ref{GRE3D7-stimulus1} es el se\~nalado por la flecha.
+El {\bf target} (u objetivo), es el conjunto de objeto a los cuales queremos referirnos. En la escena de nuestro ejemplo en la Figura \ref{GRE3D7-stimulus1} es el se\~nalado por la flecha. En este caso el target es un singleton, es decir tiene 1 s\'olo objeto.
 
-Los {\bf distractores} son objetos que se encuentran en el contexto considerado, y por los cuales es necesario hacer una expresi\'on referencial para identificar a nuestro target. 
+Los {\bf distractores} son objetos que se encuentran en el contexto considerado, y por los cuales es necesario hacer una expresi\'on referencial para identificar al target. 
 
-Un {\bf algoritmo} para la generaci\'on autom\'atica de expresiones referenciales (GER), es un procedimiento que toma alg\'un tipo de base de datos que representa un contexto y un target, y d\'a como resultado una expresi\'on referencial.
+Un {\bf algoritmo} para la generaci\'on autom\'atica de expresiones referenciales (GER), es un procedimiento que toma al menos alg\'un tipo de base de datos que representa un contexto y un target, y d\'a como resultado una expresi\'on referencial si dicha expresi\'on existe.
+
+A lo largo de la tesis diremos expresi\'on referencial estando o no lexicalizada.
 
 Un algoritmo para la GER es {\bf no-determin\'istico} si puede dar diferentes ER para el mismo contexto y target en sucesivas ejecuciones.
 En esta tesis estudiamos la generaci\'on autom\'atica de expresiones referenciales, 
 primero mostramos c\'omo podemos a\~nadir no determinismo a los algoritmos estudiados. Los algoritmos de refinamiento estudiados, tienen un orden fijo en el cual consideran las propiedades y relaciones, y la naturalidad de las expresiones referenciales que generan depende de este orden particular considerado, nosotros proponemos reemplazar ese orden fijo sobre las propiedades y/o relaciones de la escena de entrada por una~\emph{probabilidad de uso} para cada propiedad y/o relaci\'on, y modificar los algoritmos para que tengan en cuenta esas propiedades. De esta manera, cada llamada al algoritmo puede producir diferentes ERs para la misma escena y target de entrada. 
-
-Nuestra aproximaci\'on es emp\'irica, en el sentido de que para evaluar nuestros resultados, usaremos corpus (colecciones de datos) de expresiones referenciales hechas por humanos.
 
 Es decir nuestra meta, no s\'olo ser\'a crear algoritmos para la generaci\'on autom\'atica de expresiones referenciales, sino crearlos de tal manera que podamos imitar en gran medida lo que dir\'ian las personas.
 
@@ -124,9 +124,7 @@ Mostraremos que dado un corpus (como el corpus GRE3D7 o el TUNA de los cuales ha
 \section{Descripci\'on del problema}
 \label{sec:problema}
 
-En ling\"u\'{i}stica, una expresi\'on referencial ER (que viene de la expresi\'on en ingl\'es referring expression (RE)) es una expresi\'on que identifica un\'ivocamente a un objeto para un interlocutor particular, desde un conjunto de posibles distractores. Por ejemplo si nosotros queremos identificar a un cierto animal \texttt{d} de un conjunto de mascotas, la expresi\'on ``el perro'' ser\'a una ER si \texttt{d} es el \'unico perro en el conjunto, y si nosotros estamos seguros que nuestro interlocutor identificar\'a a \texttt{d} como un perro. Para una persona esto ser\'ia una tarea f\'acil de realizar, pensemos ahora como lo har\'ia una computadora, supongamos que queremos conseguir un algoritmo que genere autom\'aticamente esas expresiones referenciales que la gente genera.\\
-
-
+En ling\"u\'{i}stica, una expresi\'on referencial ER (que viene de la expresi\'on en ingl\'es referring expression (RE)) es una expresi\'on que identifica un\'ivocamente a un objeto para un interlocutor particular, desde un conjunto de posibles distractores. Por ejemplo si nosotros queremos identificar a un cierto animal \texttt{d} de un conjunto de mascotas, la expresi\'on ``el perro'' ser\'a una ER si \texttt{d} es el \'unico perro en el conjunto, y si nosotros estamos seguros que nuestro interlocutor identificar\'a a \texttt{d} como un perro. Para una persona esto ser\'ia una tarea f\'acil de realizar, pensemos ahora como lo har\'ia una computadora, supongamos que queremos conseguir un algoritmo que genere autom\'aticamente esas expresiones referenciales que las personas dan.
 
  Para que una computadora pueda generar las ER generadas por las personas, primero deber\'ia seleccionar las propiedades y/o relaciones que se incluir\'an en la ER, deber\'a tener una base de datos conteniendo las propiedades y relaciones relevantes de la escena, podemos imaginar que una computadora podr\'a generar muchas m\'as expresiones referenciales que una persona, este es un desaf\'io que direccionaremos en esta tesis, nuestra meta ser\'a imitar al humano en la generaci\'on de expresiones referenciales. 
 
@@ -137,42 +135,42 @@ En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro inter
 
 En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.
  
-Las propiedades y relaciones de los objetos de la escena forman una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.\\
+Las propiedades y relaciones de los objetos de la escena forman una base de conocimento (KB), estos datos se pueden organizar en jerarqu\'ias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.
 
 Hay diferentes tipos de propiedades, por ejemplo taxon\'omicas (las que tiene el objeto, por ejemplo tipo, color), relacionales (las que necesitan dar una ER de otro objeto, por ejemplo {\it estar al lado de...}), vagas (son las m\'as dif\'iciles de identificar, ejemplo: chico, grande, no son propiedades absolutas, ya que necisitan un contexto, con respecto a qu\'e algo es chico o grande?).
 
-Si el objeto target tiene la propiedad de medir 1.80 de alto, y est\'a en un grupo donde los dem\'as son m\'as peque\~nos, es m\'as natural decir el m\'as alto, que el que mide 1.80.\\
+Si el objeto target tiene la propiedad de medir 1.80 de alto, y est\'a en un grupo donde los dem\'as son m\'as peque\~nos, es m\'as natural decir el m\'as alto, que el que mide 1.80.
 
-Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identicar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran seg\'un la cantidad de informaci\'on que dan, si dan la m\'inima informaci\'on para identificarlas un\'ivocamente ser\'an minimales, si dan m\'as informaci\'on estar\'an sobreespecificadas, pero en el caso de dar m\'as de la m\'inima informaci\'on... cu\'anta m\'as dar?, intentaremos imitar lo que hacen las personas cuando dan expresiones referenciales para responder este tipo de preguntas.\\
-
+Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identicar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran seg\'un la cantidad de informaci\'on que dan, si dan la m\'inima informaci\'on para identificarlas un\'ivocamente ser\'an minimales, si dan m\'as informaci\'on estar\'an sobreespecificadas, pero en el caso de dar m\'as de la m\'inima informaci\'on... cu\'anta m\'as dar?, intentaremos imitar lo que hacen las personas cuando dan expresiones referenciales para responder este tipo de preguntas.
 %El sistema deber\'ia tener una lista del orden de preferencia de los atributos a usar.\\ 
 
-Ciertos tipos de atributos pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir {\it grande} y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.\\
+Ciertos tipos de atributos pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir {\it grande} y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.
 
 %NO NO Las primeras investigaciones en GER no voy a poner esto porque no quiero pasar por alto shrdlu de vinogran 1969
 \cite{C92-1038}; \cite{Dale95computationalinterpretations} hicieron una serie de supuestos simplificadores, por ejemplo no usaban relaciones, el target era un s\'olo objeto, y como resultado los primeros
 algoritmos GER s\'olo pod\'ian generar una variedad limitada de expresiones referenciales. Cuando
 los investigadores comenzaron a levantar algunos de estos supuestos, esto di\'o lugar a algoritmos de GER
-con un repertorio m\'as amplio, siendo capaces de generar, por ejemplo, plurales y expresiones relacionales. \\
+con un repertorio m\'as amplio, siendo capaces de generar, por ejemplo, plurales y expresiones relacionales. 
 
 Este movimiento ha creado una serie de nuevos desaf\'ios, sin embargo. Por ejemplo, el
 n\'umero de formas en las que uno puede referirse a un conjunto de objetos de destino aumenta, por lo que la elecci\'on de una
-buena expresi\'on referencial es m\'as dif\'icil.\\
+buena expresi\'on referencial es m\'as dif\'icil.
 
 Del mismo modo, incluso propuestas recientes tienden a asumir que no es problem\'atico para determinar qu\'e informaci\'on
 es compartida entre el hablante y el oyente.
- (a) C\'omo se representa la informaci\'on del dominio?
-(b) C\'omo se representa el contenido sem\'antico de una expresi\'on referencial? y (c) C\'omo se pueden encontrar descripciones distintivas?.\\
+(a) C\'omo se representa la informaci\'on del dominio?\\
+(b) C\'omo se representa el contenido sem\'antico de una expresi\'on referencial? \\
+(c) C\'omo se pueden encontrar descripciones distintivas?.\\
 
  En los contextos de los corpus analizados en esta tesis, nos encontramos con cuatro tipos diferentes de atributos:
-tipos de objetos, atributos absolutos, atributos relativos y atributos espaciales incluidas las relaciones y atributos de localizaci\'on.\\
+tipos de objetos, atributos absolutos, atributos relativos y atributos espaciales incluidas las relaciones y atributos de localizaci\'on.
 
 El tipo de un objeto constituye un caso especial, ya que es muy rara vez omite
 en la expresi\'on referencial. En consecuencia, la mayor\'ia de los algoritmos tratan de
-considerarlo por separado para asegurarse de que se a\~nade a cada expresi\'on referencial. \\
+considerarlo por separado para asegurarse de que se a\~nade a cada expresi\'on referencial. 
 
 Una explicaci\'on parcial para esta condici\'on especial es que las expresiones referenciales consiguen realizarse como sintagmas nominales,
-cada sintagma nominal requiere un sustantivo, y por lo general es el tipo del referente dado que es el sustantivo principal.\\
+cada sintagma nominal requiere un sustantivo, y por lo general es el tipo del referente dado que es el sustantivo principal.
 
 %\section{Contribuciones de esta tesis}
 %\label{sec:contribiciones}
@@ -216,7 +214,7 @@ Despu\'es vemos que una forma de acercarnos m\'as a la generaci\'on autom\'atica
 %Habiendo ya decidido cuales son los tipos de expresiones referenciales que queremos generar en el Cap\'itulo \ref{sec:seleccion} y ya teniendo 
 %claro el lenguaje \EL que hemos seleccionado en el Cap\'itulo \ref{sec:intro_logica}, en el 
 
-\paragraph{Cap\'itulo~\ref{sec:intro_logica}: ``Introducci\'on a la L-simulaci\'on''} En este cap\'itulo nuestra meta es seleccionar una l\'ogica cuyo lenguaje sea apropiado a nuestro problema de generaci\'on de expresiones referenciales que imite el comportamiento humano. Cada l\'ogica tiene una sem\'antica particular, la cual genera un cierto lenguaje. Partimos desde la l\'ogica de primer orden (\FOL), la m\'as amplia, explicamos el lenguaje asociado, para darnos una idea de cuales son las f\'ormulas que el lenguaje puede generar, vemos una serie de ejemplos de f\'ormulas que se pueden generar con ese lenguaje y si podemos compararlas con las expresiones referenciales que dar\'ia un humano. Luego vemos l\'ogicas con menos poder expresivo como \EPFOL (\FOL sin negaci\'on), \ALC, \EL(\ALC sin negaci\'on), \ELAN \textcolor{blue}{ACA FALTA!!} y seleccionamos como nuestro lenguaje el \EL y justificamos nuestra selecci\'on. Daremos definiciones b\'asicas de modelo, interpretaci\'on, f\'ormula, hablaremos de la noci\'on de similaridad de 2 elementos u y v del modelo la cual dice que son L-similares ($u \simil{\+L} v$ en el lenguaje $L$), cuando para toda f\'ormula $\gamma \in L$, tenemos que $\{u,v\} \subseteq \interp{\gamma}$, se dice que no podemos identificarlos por separado, ya que no hay una f\'ormula que satisfaga uno y no el otro, es decir es lo que usaremos para saber cuales son las propiedades y relaciones de una ER para un target particular. Veremos un teorema que acota el ``para todo'' antes mencionado, el cual nos permitir\'a chequear un conjunto finito de f\'ormulas para saber que hay una ER para el target, es decir que no existe otro elemento en el modelo el cual sea una $\simil{\+L}$ al target. 
+\paragraph{Cap\'itulo~\ref{sec:intro_logica}: ``Introducci\'on a la L-simulaci\'on''} En este cap\'itulo nuestra meta es seleccionar una l\'ogica cuyo lenguaje sea apropiado a nuestro problema de generaci\'on de expresiones referenciales que imite el comportamiento humano. Cada l\'ogica tiene una sem\'antica particular, la cual genera un cierto lenguaje. Partimos desde la l\'ogica de primer orden (\FOL), la m\'as amplia, explicamos el lenguaje asociado, para darnos una idea de cuales son las f\'ormulas que el lenguaje puede generar, vemos una serie de ejemplos de f\'ormulas que se pueden generar con ese lenguaje y si podemos compararlas con las expresiones referenciales que dar\'ia un humano. Luego vemos l\'ogicas con menos poder expresivo como \EPFOL (\FOL sin negaci\'on), \ALC (\FOL sin desigualdad), \EL(\ALC sin negaci\'on), \ELAN (\ALC con negaci\'on solo para proposicionales) y seleccionamos como nuestro lenguaje el \EL y justificamos nuestra selecci\'on. Daremos definiciones b\'asicas de modelo, interpretaci\'on, f\'ormula, hablaremos de la noci\'on de similaridad de 2 elementos u y v del modelo la cual dice que son L-similares ($u \simil{\+L} v$ en el lenguaje $L$), cuando para toda f\'ormula $\gamma \in L$, tenemos que $\{u,v\} \subseteq \interp{\gamma}$, se dice que no podemos identificarlos por separado, ya que no hay una f\'ormula que satisfaga uno y no el otro, es decir es lo que usaremos para saber cuales son las propiedades y relaciones de una ER para un target particular. Veremos un teorema que acota el ``para todo'' antes mencionado, el cual nos permitir\'a chequear un conjunto finito de f\'ormulas para saber que hay una ER para el target, es decir que no existe otro elemento en el modelo el cual sea una $\simil{\+L}$ al target. 
 %Si pudieramos identificar a un elemento de los dem\'as con una f\'ormula diremos que es la expresi\'on referencial para ese elemento en ese 
 %lenguaje. \cite{arec:usin11} dicen que dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ and $\tup{\Delta_2,
 %\interp{\cdot}_2}$, consideremos las siguiente
