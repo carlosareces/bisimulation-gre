@@ -491,36 +491,50 @@ en la Tabla~\ref{tab:simuls}. Por ejemplo, una relacion binaria no-vac\'ia que s
 $u \sim v$. El siguiente es un resultado fundamentar del modelo-teor\'etico  result:%~\cite{ebbi:math96,KR99,BRV01}
 
 \begin{table}[t]
-$$
-\begin{array}{c|cccccc}
-  \+L & \atomL & \atomR & \zig & \zag & \injL & \injR \\
-  \hline
-  \FOL   & \times & \times & \times & \times & \times & \times\\
-  \EPFOL & \times & & \times && \times &\\
-  \ALC   & \times & \times & \times & \times&&\\
-  \EL    & \times & &  \times & &\\
-  \ELAN  & \times & \times &  \times & &\\
-\end{array}
-$$
-\caption{$\+L$-simulaciones para varios lenguajes l\'ogicas.}\label{tab:simuls}
-\end{table}
 
-
-\begin{table}[t]
-\begin{array}{l|l}
-  Algoritmo de GER & Variante de LD\\
+\begin{tabular}{|l|l|cccccc|l|}
+\hline
+  $\+L$ & Descripci\'on &$\atomL$ & $\atomR$ & $\zig$ & $\zag$ & $\injL$ & $\injR$ & Comp.\\
   \hline
-  Dale and Reiter (1995) & \CL \\
-  van Deemter (2002) & \PL \\
-  Dale and Haddock (1991)   & \EL \\
-  Kelleher and Kruijff    & \EL \\
-  Gardent  & \ELUNEG \\
-\end{array}
+  $\FOL$ & (l\'ogica de primer orden)  & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & $\times$ & NP\\ \hline
+  $\EPFOL$ & ($\FOL$ sin negaci\'on) & $\times$ & & $\times$ && $\times$ & & NP\\ \hline 
+  $\ALC$   & ($\FOL$ sin desigualdad) & $\times$ & $\times$ & $\times$ & $\times$&& & P\\ \hline
+  $\EL$   & ($\ALC$ sin negaci\'on) & $\times$ & &  $\times$ & & & &P\\ \hline
+	$\ELUNEG$ & ($\EL$ m\'as disyunci\'on y  & $\times$ & $\times$ &  $\times$ & & & &P\\ 
+	&negaci\'on proposicional)&&&&&&&\\ \hline
+  $\ELAN$ & ($\EL$ con negaci\'on & $\times$ & $\times$ &  $\times$ & & & &P\\ 
+	&proposicional) &&&&&&& \\ \hline
+	$\CL$ & (prop. conj. sin negaci\'on)& $\times$ &  &  & & & &P\\ \hline
+	$\PL$ & ($\ALC$ sin existencial --- & $\times$ & $\times$ & & & & &P\\ 
+	&conj. dis. neg. prop.)&&&&&&&\\ 
+\hline	
+\end{tabular}
 
 \caption{$\+L$-simulaciones para varios lenguajes l\'ogicas.}\label{tab:simuls}
 \end{table}
 
 
+Una l\'ogica sim\'etrica cumple  $\atomL$ y $\atomR$ como se ve en la Tabla \ref{tab:simuls}. 
+
+
+\begin{table}[h!]
+\begin{tabular}{l|l}
+  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (DL)\\
+  \hline
+  Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+  GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
+														& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
+  Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
+	& y proposicionales)\\
+  Kelleher and Kruijff (2006)   & $\EL$ \\
+  Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
+\end{tabular}
+
+\caption{$\+L$-simulaciones para varios lenguajes l\'ogicas.}\label{tab:simuls}
+\end{table}
+\textcolor{blue}{
+\ALC tiene negacion de formulas, conjunciones y existenciales, proposicionales
+}
 \begin{theorem} \label{thm:simulation}
 If  $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ and $\+M_2 =
 \tup{\Delta_2, \interp{\cdot}_2}$ son modelos finitos, $u \in

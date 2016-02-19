@@ -212,8 +212,8 @@ Un algoritmo es {\bf proposicional}, cuando las ER que genera contienen s\'olo a
 
 Un algoritmo es {\bf relacional} si adem\'as de generar ER proposicionales genera ER relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar expresiones para el o los objetos relacionados. Por ejemplo para la Figura \ref{GRE3D7-stimulus2} la ER {\it La esfera roja a la derecha del cubo}. En este caso {\it el cubo} es una expresi\'on que se tuvo que dar como consecuencia de incluir la relaci\'on {\it a la derecha de}. En estos casos hay que asegurarse que el algoritmo termina, es decir que no entra en loops tratando de identificar objetos.
 
+Muchos algoritmos ten\'ian el problema de regresi\'on infinita, tratando de escribir al landmark haciendo referencia al target, y al target haciendo referencia al landmark infinitamente, como en {\it el libro en la mesa la cual soporta un libro en la mesa... }
 
-DAR CITAS EXPLICAR MEJOR PORQ puede entrar en loops
 
 One early paper does discuss relational descriptions,making a number of important
 observations about them (Dale and Haddock 1991). First, it is possible to identify an
@@ -359,7 +359,7 @@ El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero
 \includegraphics[width=0.4\textwidth]{images/algoritmoIncremental.png}
 %\caption{Algoritmo Incremental}
 \label{algoritmoIncremental}
-\caption{Figura 2 de \cite{survey}}
+\caption{Figura 2 de \ref{survey}}
 \end{figure}
 
 El input del Algoritmo \ref{algoritmoIncremental}, es el objeto target \emph{r} que queremos identificar, \emph{D} es el dominio, y Pref una lista de propiedades ordenada seg\'un la preferencia. Vamos a ejemplificar la corrida del algoritmo con el ejemplo de la Figura \ref{GRE3D7-stimulus2}, y supongamos que la lista ordenada de propiedades es esta [ tipo, color, tama\~no ]. D inicialmente es el conjunto de todos los objetos del contexto: \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}.
