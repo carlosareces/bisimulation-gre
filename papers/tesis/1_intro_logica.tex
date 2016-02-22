@@ -35,7 +35,7 @@ nociones de expresividad.
 
 Las estructuras relacionales son muy adecuadas para la representaci\'on de situaciones o escenas. La estructura relacional (tambi\'en llamado ``el modelo relacional'') es un conjunto no vac\'io de objetos -el dominio- junto con una colecci\'on de relaciones, cada una con una aridad fija.
 Formalmente, asumimos un vocabulario fijo y finito (pero arbitrario) de
-s\'imbolos de relaci\'on n-aria (las constantes y s\'imbolos de funci\'ones pueden ser representados como relaciones de aridad adecuada). 
+s\'imbolos de relaci\'on n-aria (las constantes y s\'imbolos de funciones pueden ser representadas como relaciones de aridad adecuada). 
 
 
 Un modelo relacional $\+M$ es una tupla 
@@ -48,12 +48,12 @@ $\#\Delta + \#\interp{\cdot}$, donde $\#\Delta$ es la cardinalidad
 de $\Delta$ y $\#\interp{\cdot}$ es la suma de todas las aridades de las
 relaciones en $\interp{\cdot}$.
 
-Vamos a presentar 2 ejemplos, uno en el que los tenemos agentes (perros y gatos),y otro en el que el dominio son cosas es decir, es de alguna manera est\'atico.
+Vamos a presentar 2 ejemplos, uno en el que tenemos agentes (perros y gatos), y otro en el que el dominio son cosas es decir, es de alguna manera est\'atico.
 
 El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos representado una escena
-como un modelo relacional. Intuitivamente, $a$, $b$ y $d$ son dogs, mientras que 
-$c$ y $e$ are cats;  $d$ es un small beagle;
- $b$ y $c$ son tambi\'en small.
+como un modelo relacional. Intuitivamente, $a$, $b$ y $d$ son 'dogs', mientras que 
+$c$ y $e$ son 'cats';  $d$ es un 'small beagle';
+ $b$ y $c$ son tambi\'en 'small'.
  Leeremos $\aSniffing(d,e)$ como ``{\em $d$ is sniffing $e$}''.\\
 
  \begin{figure}
@@ -102,9 +102,9 @@ $\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
 
 
 
-El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} en el que hemos representado el Contexto \ref{GRE3D7-stimulus1} 
-como un modelo relacional. $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$ y $e_7$, son 'cube', mientras que 
-$e_1$, $e_3$ y $e_6$ son 'yellow', $e_2$, $e_4$, $e_5$, $e_7$ son 'red';\\
+El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} en el que hemos representado la Figura \ref{GRE3D7-stimulus1} 
+como un modelo relacional, $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$ y $e_7$, son 'cube', mientras que 
+$e_1$, $e_3$ y $e_6$ son 'yellow', $e_2$, $e_4$, $e_5$, $e_7$ son 'red'.
 
 %Para las relaciones tenemos $\Ontop(e_3,e_2)$ como ``{\em $e_3$ on top of $e_2$}''.
 %$\Rightof(e_4,e_5)$, $\Rightof(e_6,e_7)$, $\Lefttof(e_5,e_4)$,$\Leftof(e_7,e_6)$. $e_4$ y $e_5$ son 'large', los dem\'as 'small'.
@@ -194,10 +194,10 @@ $\interp{\nOntop}$     & = & $\cset{(e_3,e_2)}$\\
  \end{figure}
 
 
-Los languajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relacional. 
+Los lenguajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relacional. 
 
 Por ejemplo, el lenguaje cl\'asico
-de la l\'ogica de primer-orden (con desigualdad), \FOL, dado por:
+de la l\'ogica de primer-orden (con desigualdad), \FOL, est\'a dado por:
 $$
   \top \mid x_i \not\approx x_j \mid  r (\bar x) \mid \lnot \gamma \mid \gamma \land \gamma' \mid \exists x_i . \gamma
 $$
@@ -207,7 +207,7 @@ $r$ es un s\'imbolo de relaci\'on $n$-aria y $\bar x$ es una tupla de $n$ variab
 Como es usual, $\gamma \lor \gamma'$ y $\forall x . \gamma$ son las versiones cortas de
 $\lnot(\lnot\gamma \land \lnot\gamma')$ y $\lnot\exists x . \lnot\gamma$, respectivamente.
 F\'ormulas de la forma $\top$, $x_i \not\approx x_j$ y $r(\bar
-x)$ son llamados \emph{atomos}.%
+x)$ son llamados \emph{\'atomos}.%
   \footnote{%
     Por razones t\'ecnicas, incluimos el s\'imbolo de desigualdad symbol $\not \approx$ como
     primitivo. La igualdad puede ser definida usando negaci\'on.
@@ -215,10 +215,10 @@ x)$ son llamados \emph{atomos}.%
 Dado un modelo relacional $\+M = \tup{\Delta,\interp{\cdot}}$ y una
 f\'ormula $\gamma$ con variables libres%
 \footnote{%
-    W.l.o.g.\ asumimos que cada variable no puede aparecer libre y ligada a la vez, que una variable no esta ligada 2 veces,
+    W.l.o.g.\ asumimos que cada variable no puede aparecer libre y ligada a la vez, que una variable no est\'a ligada 2 veces,
     y que el \'indice de las variables crece en la f\'ormula de izquierda a derecha.%
 }
-entre $x_1\ldots x_n$, inductivamente definimos la \emph{extensi\'on} o
+$x_1\ldots x_n$, inductivamente definimos la \emph{extensi\'on} o
 \emph{interpretaci\'on} de $\gamma$ como el conjunto de $n$-tuplas
  $\interp{\gamma}^n \subseteq \Delta^n$ que satisface:
 
@@ -260,7 +260,7 @@ Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente defi
 $\interp{\varphi} = T$ si existe, y $\bot$ caso contrario.\\ \hline
 \end{tabular}
 \end{center}}
-Cuando el output es no $\bot$, decimos que $\phi$ es una
+Cuando la salida no es $\bot$, decimos que $\phi$ es una
 \emph{expresi\'on referencial en $\+L$ (ER-$\+L$) para $T$ en $\+M$}.
 
 La salida de el problema $\+L$-GRE es una f\'ormula de
@@ -271,26 +271,20 @@ esa f\'ormula existe.
 % Esta definici\'on aplica incluso a la GRE para
 %objetos  de el dominio teniendo un conjunto singleton como target.
 
-Consideramos solo modelos relacionales con s\'imbolos de relaciones unarios y binarios, usaremos $p$ para las proposiciones (propiedades) y $r$ para los s\'imbolos de relaci\'on binarias.
+Consideramos s\'olo modelos relacionales con s\'imbolos de relaciones unarios y binarios, usaremos $p$ para las proposiciones (propiedades) y $r$ para los s\'imbolos de relaci\'on binarias.
 
 
-Seleccionando el lenguaje apropiado...
-
-Dado un modelo M, podr\'ia haber un infinito n\'umero de f\'ormulas que de forma \'unica
+Como dijimos anteriormente, dado un modelo M, podr\'ia haber un infinito n\'umero de f\'ormulas que de forma \'unica
 describan al target (incluso f\'ormulas que no son l\'ogicamente equivalentes podr\'ian tener
-la misma interpretaci\'on una vez al modelo este fijo). 
+la misma interpretaci\'on una vez que el modelo este fijo). 
 
-
-Por ejemplo en el Contexto \ref{GRE3D7-stimulus1} $\aLarge \nBall$ y $\aRed \nBall$ son diferentes f\'ormulas pero tienen la misma interpretaci\'on en $+M$.
+Por ejemplo en la Figura \ref{GRE3D7-stimulus1} $\aLarge \nBall$ y $\aRed \nBall$ son diferentes f\'ormulas pero tienen la misma interpretaci\'on en $+M$.
 
 Como es bien conocido en la comunidad de generaci\'on autom\'atica de lenguaje natural, diferentes
 realizaciones del mismo contenido podr\'ian dar lugar a expresiones referenciales que son m\'as o menos
 apropiadas en el contexto dado. 
 
-Argumentamos que la generaci\'on de contenido usando lenguajes con diferente poder expresivo puede tener un impacto en la estapa posterior
-de realizaci\'on sint\'actica (surface realization).
-
-F\'ormulas que identifican a $b$ en nuestro primer ejemplo
+Vamos a argumentar que la generaci\'on de contenido usando lenguajes con diferente poder expresivo puede tener un impacto en la estapa posterior de realizaci\'on sint\'actica. Para eso, veamos las f\'ormulas que identifican a $b$ en nuestro primer ejemplo.
 
 \begin{table}
 $$
@@ -312,7 +306,8 @@ $$
 \caption{Descripciones alternativas para el objeto $b$ en el modelo mostrado en Figura~\ref{fig:cat-dog-1}.}\label{tab:gammas}
 \end{table}
 
-Restringiendo la determinaci\'on de contenido a FO-, aseguramos que f\'ormulas como  $\gamma_2$ no se generar\'an. Si prohibimos el distinto del lenguaje  $\gamma_3$ tambi\'en queda exclu\'ida.
+Notar que hay f\'omulas de todo tipo, hay negaci\'on de \'atomos y de relaciones, hay existencial, para todo, conjunci\'on, disyunci\'on, desigualdad, es decir son f\'ormulas de \FOL.
+Restringiendo la l\'ogica a \EPFOL, aseguramos que f\'ormulas como  $\gamma_2$ no se generar\'an. Si prohibimos el distinto del lenguaje  $\gamma_3$ tambi\'en queda exclu\'ida.
 
 El hecho de que el lenguaje de representaci\'on utilizado tiene un impacto sobre la determinaci\'on de contenido es obvio, pero no ha recibido la atenci\'on que merece. Areces et al. [1] usaron diferentes l\'ogicas de descripci\'on (una familia de lenguajes formales utilizado en representaci\'on del conocimiento, vea [2]) para clasificar y dar un marco formal para
 trabajo previo sobre GRE. Vamos a presentar r\'apidamente algunas de estos lenguajes ya que los mencionaremos en las siguientes secciones. Usando l\'ogicas de descripci\'on en lugar de fragmentos de FO es s\'olo una cuesti\'on de notaci\'on, como la mayor\'ia de l\'ogicas descriptivas se pueden ver
