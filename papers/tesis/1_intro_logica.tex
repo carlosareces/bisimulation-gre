@@ -1,33 +1,8 @@
 \chapter{Introducci\'on a la L-simulaci\'on}
 \label{sec:intro_logica}
 
-mover a intro... y linkear con est capitulo...
+De acuerdo a lo que queremos permitir en una ER, tendremos un lenguaje asociado, el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica como partiendo de \FOL podemos ir restringiendo la l\'ogica y con ello el lenguaje, siendo la complejidad un tema interesante abordar, ya que por ejemplo sistemas de tiempo real necesitan conseguir ER r\'apidamente, daremos las complejidad de las distintas l\'ogicas, y veremos que l\'gica aplica a cada uno de los algoritmos del \'area
 
-No existe un acuerdo general sobre la representaci\'on b\'asica de
-tanto la entrada y la salida del problema de GER; esto se maneja m\'as bien de manera ad-hoc
-por cada nueva propuesta.
-
-%\cite{Krahmer2003} usan grafos dirigidos etiquetados en el contexto de este problema: los grafos son lo suficientemente abstractos 
-%para expresar un gran n\'umero de dominios y hay muchos algoritmos conocidos para tratar
-%con este tipo de estructuras. 
-%
-%De hecho, no se trata de otra cosa que una representaci\'on alternativa de los modelos relacionales, usada t\'ipicamente 
-%para proporcionar sem\'antica a los lenguajes formales como el de primer orden y l\'ogicas de orden superior, l\'ogicas modales, etc.
-%
-%
-%Exactamente debido a su generalidad, los grafos no definen por s\'i mismos, una \'unica noci\'on de igualdad. Cu\'ando decimos 
-%que dos nodos en el grafo pueden o no pueden ser
-%referenciados de forma \'unica en t\'erminos de sus propiedades? Esta pregunta s\'olo tiene sentido una vez que ya hemos 
-%fijado un cierto nivel de expresividad el cual determina cuando dos grafos, o dos elementos en el mismo gr\'afo, son equivalentes.
-%
-%La expresividad se puede formalizar usando las relaciones estructurales de los grafos (isomorfismos, etc.) o, alternativamente, 
-%lenguajes l\'ogicos. 
-
-%Ambas formas se presentan en Secci\'on \ref{sec:estructurales}, donde tambi\'en 
-En este cap\'itulo discutiremos la noci\'on de impacto de expresividad del lenguaje elegido, 
-en los casos que el problema GRE tiene soluci\'on; la complejidad computacional de los algoritmos GER involucrados; 
-y la complejidad computacional del problema de la realizaci\'on. Luego investigamos el problema GER en t\'erminos de diferentes 
-nociones de expresividad. 
 
 
 \section{Seleccionando el lenguaje}
@@ -97,10 +72,6 @@ $\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
  \end{center}
  \caption{Representaci\'on de escenas de Graph $\+S$.\label{fig:cat-dog-1}}
  \end{figure}
-
-
-
-
 
 El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} en el que hemos representado la Figura \ref{GRE3D7-stimulus1} 
 como un modelo relacional, $e_1$,$e_3$,$e_5$, son 'ball', $e_2$, $e_6$ y $e_7$, son 'cube', mientras que 
@@ -341,7 +312,7 @@ evitar\'iamos f\'ormulas como
 $\gamma_3$ (sin igualdad) y
 $\gamma_4$ (aparece cuanti elemento ed
 siempre en segunda posici\'on de argumento).
-Generaci\'on se discute en ~\cite{AKS08}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
+Generaci\'on se discute en ~\cite{arec2:2008:Areces}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
 y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, considerando por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
 lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
 
@@ -380,7 +351,7 @@ $$
 Notar que $\gamma_2$ y $\gamma_3$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas.
 $\gamma_4$ se puede realizar como ``Large red ball right-of large red cube''. Esta f\'ormula junto con $\gamma_1$, $\gamma_2$ y $\gamma_3$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y solo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpus ~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}.
 
-Bueno, pero entonces podemos elegir otra l\'ogca cuyo lenguaje este restringido a las ER que queremos generar.
+Bueno, pero entonces podemos elegir otra l\'ogica cuyo lenguaje este restringido a las ER que queremos generar.
 
 Restringiendo la determinaci\'on de contenido a FO-, aseguramos que f\'ormulas como  $\gamma_5$ no se generar\'an. 
 Si prohibimos el distinto del lenguaje  $\gamma_6$ tambi\'en queda exclu\'ida.
@@ -450,7 +421,7 @@ Intuitivamente, dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un 
 $\+M_1$ es similar en $\+L$ a otro objeto
  $v$ en el model $\+M_2$ para cualquier $\+L$-f\'ormulas que son satisfechas por $u$ tambi\'en son satisfechas por $v$. Formalmente,
 %let $\+L$ stand for any of the languages discussed so far, and
-Sea $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 = \tup{\Delta_2, \interp{\cdot}_2}$ 2 modelos relacionales con $u \in \Delta_1$ y $v \in \Delta_2$; seguimos la terminolog\'ia de~\cite{AKS08} y decimos que
+Sea $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 = \tup{\Delta_2, \interp{\cdot}_2}$ 2 modelos relacionales con $u \in \Delta_1$ y $v \in \Delta_2$; seguimos la terminolog\'ia de~\cite{areces08} y decimos que
 \emph{$u$ es $\+L$-similar a $v$}  (notaci\'on $u \simil{\+L} v$) si para toda $\gamma \in \+L$, $u \in \interp{\gamma}_1$ implica
 $v \in \interp{\gamma}_2$. Es facil mostrar que
 $\+L$-similaridad es reflexiva para todo $\+L$, y simm\'etrica  para languajes que contienen negaci\'on.
@@ -499,9 +470,10 @@ $u \sim v$. El siguiente es un resultado fundamentar del modelo-teor\'etico  res
 	&negaci\'on proposicional)&&&&&&&\\ \hline
   $\ELAN$ & ($\EL$ con negaci\'on & $\times$ & $\times$ &  $\times$ & & & &P\\ 
 	&proposicional) &&&&&&& \\ \hline
-	$\CL$ & (prop. conj. sin negaci\'on)& $\times$ &  &  & & & &P\\ \hline
 	$\PL$ & ($\ALC$ sin existencial --- & $\times$ & $\times$ & & & & &P\\ 
-	&conj. dis. neg. prop.)&&&&&&&\\ 
+	&conj. dis. neg. prop.)&&&&&&&\\ \hline
+	$\CL$ & (prop. conj. sin negaci\'on)& $\times$ &  &  & & & &P\\ 
+	
 \hline	
 \end{tabular}
 
@@ -516,6 +488,8 @@ Una l\'ogica sim\'etrica cumple  $\atomL$ y $\atomR$ como se ve en la Tabla \ref
 \begin{tabular}{l|l}
   Algoritmo de GER & Variante de L\'ogica de Descripci\'on (DL)\\
   \hline
+	  Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+		Heuristica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
   Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
   GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
 														& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
@@ -525,7 +499,7 @@ Una l\'ogica sim\'etrica cumple  $\atomL$ y $\atomR$ como se ve en la Tabla \ref
   Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
 \end{tabular}
 
-\caption{$\+L$-simulaciones para varios lenguajes l\'ogicas.}\label{tab:simuls}
+\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:simuls}
 \end{table}
 \textcolor{blue}{
 \ALC tiene negacion de formulas, conjunciones y existenciales, proposicionales
@@ -571,7 +545,7 @@ $\nDog(x)\wedge\lnot\aSmall(x)$.
 As we will discuss in the next section, simulation gives us an
 efficient, computationally feasible approach to the $\+L$-GRE
 problem. Algorithms to compute many kinds of $\+L$-simulations are
-well known (see, \cite{H71,PT87,HHK95,DPP03}), and for many
+well known (see, \cite{H71,areces08,HHK95,DPP03}), and for many
 languages  (e.g., \ALC, \ALC with inverse relations,  \ELAN and \EL)
 they run in polynomial time (on the other hand, no polynomial
 algorithm for \FOL- or \EPFOL-simulation is known and even the exact
@@ -632,7 +606,7 @@ computar $\simset_\+L$ para cualquier otro languaje $\+L$. En particular,
 lo podemos usar para computar $\simset_\EL$ en tiempo polinomial which will
 give us the basic algorithm for establishing an upper bound to the
 complexity of the \EL-GRE problem --this will answer an open
-question of~\cite{AKS08}. The pseudo-code is shown in
+question of~\cite{areces08}. The pseudo-code is shown in
 Algorithm~\ref{alg:schematic-gen-sim}, which uses the following
 notation: $\+P$ is a fixed set of unary relation symbols,  for $v\in
 \Delta$, let $\unary(v)=\{p\in\+P\mid v\in\interp{p}\}$ and let also
