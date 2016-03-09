@@ -1,26 +1,89 @@
 \chapter{Recolecci\'on y an\'alisis del corpus ZOOM}
 \label{sec:corpus}
 
-\textcolor{blue}{tengo el problema de que empezamos a hacer el corpus para 3 idiomas, y lo terminamos haciendo para 2, no se si explicarlo... o sacar de la imagen de la pagina la parte ingles}
-
-El corpus ZOOM fue un experimento realizado en un trabajo conjunto con la Universidad de S\H ao Paulo Brasil, a fin de crear un corpus de expresiones referenciales (ER) bilingual y con 2 niveles de zoom de un dominio mucho m\'as natural a las aplicaciones del mundo real que los existentes hasta el momento.\\
+El corpus ZOOM fue un experimento realizado en un trabajo conjunto con la Universidad de S\H ao Paulo (Brasil). El objetivo del experimento fue crear un corpus de expresiones referenciales de un dominio m\'as complejo y m\'as cercano a las aplicaciones del mundo real, que los corpus existentes hasta el momento. Este corpus contiene referencias a singulares y plurales y hace gran uso de propiedades relacionales. M\'as a\'un las descripciones del ZOOM corpus fueron producidas por hablantes humanos de espan\~ol y portugues, lo cual va a permitir (por primera vez, seg\'un nuestro conocimiento) un estudio comprensivo de la realizaci\'on ling\"u\'istica en estos lenguajes, y permite investigar la variaci\'on entre humanos en GER \cite{trainable-speaker,romina-coling,non-det}. \\
 
 En esta tesis se quiere mostrar que el algoritmo de bisimulaci\'on con probabilidades de uso de las palabras a partir de corpus podr\'a generar ER en un dominio que es directamente aplicable a aplicaciones de inteligencia artificial.\\
-\textcolor{blue}{reescribir cuando este terminado}
-En este Cap\'itulo se describe el dominio y las caracter\'isticas del corpus, luego en Secci\'on~\ref{corpus-voluntarios} se dar\'an estad\'isticas de las personas que completaron el experimento, en la Secci\'on~\ref{corpus-metodo} se explicar\'a en detalle que se le pidi\'o a las personas involucradas en el experimento, en la Secci\'on~\ref{corpus-materiales} se mostrar\'an los materiales usados, y en la Secci\'on~\ref{corpus-anotacion} se hablar\'a de como se anot\'o el corpus, que expresiones se descartaron. Para finalizar el Cap\'itulo discutiremos la fiabilidad de obtener expresiones con este m\'etodo en la Secci\'on~\ref{corpus-discusion} y luego haremos una evaluaci\'on en Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos.\\
+
+En este Cap\'itulo se describe el dominio y las caracter\'isticas del corpus, luego en Secci\'on~\ref{corpus-voluntarios} se dar\'an estad\'isticas de las personas que completaron el experimento, en la Secci\'on~\ref{corpus-metodo} se explicar\'a en detalle que se le pidi\'o a las personas involucradas en el experimento, en la Secci\'on~\ref{corpus-materiales} se mostrar\'an los materiales usados, y en la Secci\'on~\ref{corpus-anotacion} se hablar\'a de como se anot\'o el corpus, que expresiones se descartaron. Para finalizar el Cap\'itulo discutiremos la fiabilidad de obtener expresiones con este m\'etodo en la Secci\'on~\ref{corpus-discusion} y luego haremos una evaluaci\'on en Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos. La evaluaci\'on realizada motiv\'o al caso de estudio de la Secci\'on \ref{sec:caso_estudio} en la que mostramos un caso particular.\\
 
 \section{M\'etodo de recolecci\'on del corpus}
 
 %\subsection{Caracter\'isticas del corpus}
 %\label{corpus-caracteristicas}
 
-La recolecci\'on se llevo a cabo mediante una p\'agina web en la que registramos 20 ER dichas por cada persona. Cada persona di\'o 22 ER de mapas distintos, los primeros 2 mapas eran solamente para que la persona se acostumbre a usar el sistema, 11 de los cuales ten\'{i}an target singular, es decir s\'olo 1 target y los otros 11 target plural, es decir ten\'{i}an 2 targets.
+%La recolecci\'on se llevo a cabo mediante una p\'agina web en la que registramos 20 ER dichas por cada persona. Cada persona di\'o 22 ER de mapas distintos, los primeros 2 mapas eran solamente para que la persona se acostumbre a usar el sistema, 11 de los cuales ten\'{i}an target singular, es decir s\'olo 1 target y los otros 11 target plural, es decir ten\'{i}an 2 targets.
+En colaboraci\'on con el grupo de investigadores de procesamiento de lenguaje natural de la Universidad de S\H ao Paulo Brasil, (EACH-USP) dise\~namos un experimento en la web para recolectar descripciones de ubicaciones en mapas. Las descripciones se recolectaron tanto en espa\~nol como en portugu\'es. El conjunto de datos obtenidos constituye un corpus de expresiones referenciales para investigaci\'on en GER y campos relacionados. El paper \cite{DBLP:conf/acl/AltamiranoFPB15} fue presentado en ``The 53rd Annual Meeting of the Association for Computational Linguistics and The 7th International Joint Conference on Natural Language Processing of the Asian Federation of Natural Language Processing (ACL-IJCNLP 2015)'', la cual se llev\'o a cabo en Beijing (China), desde el 26 al 31 de julio de 2015, y ya despert\'o el inter\'es de la comunidad internacional de investigaci\'on en GER.
 
-%Se dise\~n\'o un experimento basado en la web para recopilar descripciones en lenguaje natural de ubicaciones de mapas en espa\~nol y en portugu\'es. 
-El conjunto de datos obtenidos constituye un corpus de expresiones referenciales para investigaci\'on en GER y campos relacionados.
+Las situaciones de referencia en cuesti\'on hacen uso de mapas con dos grados de detalle (representados por los niveles de zoom), e incluyen descripciones singulares y plurales.
 
-Las situaciones de referencia en cuesti\'on hacen uso de mapas con dos grados de detalle (representados por los niveles de zoom X y 2X), pedimos descripciones en singular y plural, tuvimos en cuenta un gran n\'umero de personas (unos 100 hablantes de cada idioma).
 
+
+%.....................................
+\subsection{Sobre las personas que completaron el experimento}
+%.....................................
+\label{corpus-voluntarios}
+
+Las ER fueron hechas por personas voluntarias a las cuales se les envi\'o una invitaci\'on por correo electr\'onico o redes sociales. La parte en Portugu\'es del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 hombres (69,4 \%) y 26 mujeres (30,6 \%).
+\textcolor{blue}{aca puedo agregar informacion estadistica, como ser edades desde hasta, mayormente de tal pais}
+%.....................................
+\subsection{Procedimiento}
+%.....................................
+\label{corpus-metodo}
+
+Las personas voluntarias recibieron un link a la interfaz del experimento, como se muestra en la Figura~\ref{fig-pagPrincipal} esa p\'agina conten\'{i}a las instrucciones en 3 idiomas: Ingl\'es, Portugu\'es y Espa\~{n}ol, y un link para completar el experimento en el idioma seleccionado, luego de seleccionar el idioma se mostraba la siguiente p\'agina, que recolectaba informaci\'on demogr\'afica, luego se mostraban los t\'erminos y condiciones \footnote{%
+    ``Acepto de que los datos ingresados en este cuestionario sean usados an\'onimamente para investigaci\'on''
+  }. 
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[width=13cm]{images/pagPrincipal.png}\\[0pt]
+\caption{Link del experimento}
+\label{fig-pagPrincipal}
+\end{center}
+\end{figure}
+
+Si la persona completaba los datos y aceptaba se comenzaba el experimento mostrando, por ejemplo, la Figura~\ref{fig-interface} que tambi\'en conten\'{i}a las instrucciones, con solo pasar el mouse por la palabra instrucciones se mostraban las mismas.
+
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=15cm]{images/primerImagen.png}}\\[0pt]
+\caption{Interface del experimento}
+\label{fig-interface}
+\end{center}
+\end{figure}
+
+%Las instrucciones dec\'ian lo siguiente:\\
+%``Su tarea es describir el o los lugares (restaurantes, iglesias, etc) indicados por una o dos flechas rojas en una serie de mapas, completando la frase; ``Es interesante visitar...'' como si estuviera dando indicaciones a un amigo. Intente ser preciso en sus respuestas no escribiendo solamente ``el restaurante'' o ``las iglesias'', pero no se preocupe en dar una descripci\'on demasiado detallada: s\'olo tiene que seguir su primera intuici\'on''
+
+ En la Figura~\ref{fig-pagPrincipal} se ven las intrucciones en cada idioma, con ejemplos simples. Lo que se pretend\'ia con esas instrucciones era por un lado que la persona de una expresi\'on referencial del objeto o los objetos se\~nalados que sea un sintagma nominal, que dicha expresi\'on fuera natural como le dar\'ia a un amigo y por otro lado, no incentivar a la gente a hacer ER ni minimales ni sobreespecificadas, es decir, conseguir una expresi\'on natural. 
+
+El experimento ped\'ia completar la frase ``Ser\'ia interesante visitar...'' porque a dicha frase le falta un sintagma nominal para ser una oraci\'on gramaticalmente completa. Como las ER se realizan como sintagmas nominales, esa fue la contrucci\'on gramatical generada por casi todas las personas que completaron el experimento.
+
+La p\'agina ten\'{i}a una barra indicadora de progreso. Los mapas fueron mostrados en forma aleatoria y al final del experimento se mostraba un mensaje de agradecimiento.
+
+Cada mapa mostraba un lugar determinado (por ejemplo, un restaurante, pub, teatro, etc.) se\~nalado por una flecha como se ve en la Figura \ref{fig-interface}, donde el lugar se~nalado por la flecha es un teatro (o dos flechas, en el caso de los plurales) como se ve en la Figura \ref{mapa20}, donde los lugares se\~nalados por las flechas son restaurantes. Despu\'es de completar la expresi\'on la persona deb\'ia pulsar el bot\'on Siguiente, entonces se seleccionaba otro est\'{i}mulo al azar y as\'{i} hasta el final del experimento. Las primeras 2 im\'agenes fueron mostradas s\'olo para que los participantes se sintieran familiar con el entorno del experimento y las respuestas dadas no fueron guardadas.
+
+
+\hspace*{0cm}
+\begin{minipage}[b]{0.5\linewidth}
+\centering
+\includegraphics[width=\textwidth]{images/corpus/mapa20.png}\\[0pt]
+\caption{Imagen del corpus ZOOM}
+\label{mapa20}
+\end{figure}
+
+Cada vez que se presionaba el bot\'on ``Siguiente'' la p\'agina evaluaba las siguientes cosas: si hab\'ia respuesta, en el caso de no haber, aparec\'ia un cartel que dec\'ia ``Falta respuesta''.
+%Si la persona escrib\'ia ``teatro'' o ``el teatro'' la p\'agina le daba el mensaje: ``No se entiende a que teatro se est\'a refiriendo. Por favor sea m\'as espec\'ifico'', estas excepciones concretas fueron manejadas a trav\'ez del c\'odigo  de la p\'agina, pero no hubo ning\'un an\'alisis de la expresi\'on ingresada, solo la comparaci\'on con cadenas est\'aticas.
+%Las dos primeras im\'agenes eran rellenos exclusivamente destinados para que los voluntarios se familiarizaran con el entorno del experimento, y no se registraron las respuestas correspondientes. 
+
+Las descripciones mal formadas fueron descartadas siguiendo los siguientes criterios. A pesar de que las personas ten\'{i}an que completar la frase ``Ser\'{i}a interesante visitar ...'' con un sintagma nominal que describe la ubicaci\'on se\~nalada por la flecha (o las flechas, en los casos plurales), algunas de las expresiones no eran frases nominales, sino frases completas, por ejemplo, \emph{``Vamos a ir a pizza express, es realmente barato''}, \emph{``No me gusta la comida r\'apida''}. Dichas frases fueron descartadas por no ser sintagmas nominales. Por otra parte, algunas personas completaron el experimento con frases como . Del mismo modo, se eliminaron todas las expresiones que describen un objeto que no sea el target previsto, las que utilizaban propiedades que no eran ciertas para el target, y las situaciones en que la persona ten\'{i}a que describir dos objetos pero describ\'ian s\'olo uno.
+
+
+
+%.....................................
+\subsection{Materiales}
+%.....................................
+\label{corpus-materiales}
 
 El origen de los mapas usados es openstreetmaps, de ah\'i obtuvimos fragmentos de las ciudades Lisboa y Madrid.\\
 
@@ -31,21 +94,21 @@ Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para target
 
 \begin{figure}
 
-\begin{minipage}[b]{0.5\linewidth}
+%\begin{minipage}[b]{0.5\linewidth}
 \centering
 \includegraphics[width=\textwidth]{figures/rest-singular.png}\\[0pt]
 \vspace*{.1cm}
 \caption{Target singular con zoom X}
 \label{rest-singular}
-\end{minipage}
-\hspace*{0cm}
-\begin{minipage}[b]{0.5\linewidth}
-\centering
-\includegraphics[width=\textwidth]{figures/rest-plural.png}\\[0pt]
-\vspace*{.1cm}
-\caption{Target plural con zoom X}
-\label{rest-plural}
-\end{minipage}
+%\end{minipage}
+%\hspace*{0cm}
+%\begin{minipage}[b]{0.5\linewidth}
+%\centering
+%\includegraphics[width=\textwidth]{figures/rest-plural.png}\\[0pt]
+%\vspace*{.1cm}
+%\caption{Target plural con zoom X}
+%\label{rest-plural}
+%\end{minipage}
 \end{figure}
 
 \begin{figure}
@@ -65,45 +128,8 @@ Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para target
 \end{figure}
 
 
-
-%.....................................
-\subsection{Sobre las personas que completaron el experimento}
-%.....................................
-\label{corpus-voluntarios}
-
-Las ER fueron hechas por personas voluntarias a las cuales se les envi\'o una invitaci\'on por correo electr\'onico o redes sociales. La parte en Portugu\'es del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 hombres (69,4 \%) y 26 mujeres (30,6 \%).
-\textcolor{blue}{aca puedo agregar informacion estadistica, como ser edades desde hasta, mayormente de tal pais}
-%.....................................
-\subsection{Procedimiento}
-%.....................................
-\label{corpus-metodo}
-
-Las personas voluntarias recibieron un link a la interfaz del experimento, como se muestra en la Figura~\ref{fig-pagPrincipal} esa p\'agina conten\'{i}a las instrucciones en 3 idiomas: Ingl\'es, Portugu\'es y Espa\~{n}ol, y un link para completar el experimento en el idioma seleccionado, luego de seleccionar el idioma se mostraba la siguiente p\'agina, como en la Figura~\ref{fig-nacionalidadGenero} en la que se ped\'{i}a completar, nacionalidad, edad, g\'enero, y se mostraban los t\'erminos y condiciones ``Acepto de que los datos ingresados en este cuestionario sean usados an\'onimamente para investigaci\'on'', si la persona completaba los datos y aceptaba se comenzaba el emperimento mostrando una imagen similar a la Figura~\ref{fig-interface} que tambi\'en conten\'{i}a las instrucciones, con solo pasar el mouse por la palabra instrucciones se mostraban las mismas.
-Las instrucciones dec\'ian lo siguiente:\\
-``Su tarea es describir el o los lugares (restaurantes, iglesias, etc) indicados por una o dos flechas rojas en una serie de mapas, completando la frase; ``Es interesante visitar...'' como si estuviera dando indicaciones a un amigo. Intente ser preciso en sus respuestas no escribiendo solamente ``el restaurante'' o ``las iglesias'', pero no se preocupe en dar una descripci\'on demasiado detallada: s\'olo tiene que seguir su primera intuici\'on''
-
-Lo que se pretend\'ia con esas instrucciones era por un lado que la persona de una expresi\'on referencial del objeto o los objetos se\~nalados que sea un sintagma nominal, que dicha expresi\'on fuera natural como le dar\'ia a un amigo.
-
-La p\'agina tambi\'en ten\'{i}a una barra indicadora de progreso. Los mapas fueron mostrados en forma aleatoria y al final del experimento se mostraba un mensaje de agradecimiento.
-
-Cada mapa mostraba un lugar determinado (por ejemplo, un restaurante, pub, teatro, etc.) se\~nalado por una flecha (o dos, en el caso de los plurales). Despu\'es de completar la expresi\'on la persona deb\'ia pulsar el bot\'on 'Siguiente', entonces se seleccionaba otro est\'{i}mulo al azar y as\'{i} hasta el final del experimento.
-
-
-Cada vez que se presionaba el bot\'on ``Siguiente'' la p\'agina evaluaba las siguientes cosas: si hab\'ia respuesta, en el caso de no haber, aparec\'ia un cartel que dec\'ia ``Falta respuesta''.
-Si la persona escrib\'ia ``teatro'' o ``el teatro'' la p\'agina le daba el mensaje: ``No se entiende a que teatro se est\'a refiriendo. Por favor sea m\'as espec\'ifico'', estas excepciones concretas fueron manejadas a trav\'ez del c\'odigo  de la p\'agina, pero no hubo ning\'un an\'alisis de la expresi\'on ingresada, solo la comparaci\'on con cadenas est\'aticas.
-%Las dos primeras im\'agenes eran rellenos exclusivamente destinados para que los voluntarios se familiarizaran con el entorno del experimento, y no se registraron las respuestas correspondientes. 
-
-Las descripciones mal formadas fueron descartadas siguiendo los criterios que explicamos aqu\'{i}. Como se ve en la Figura~\ref{fig-interface} las personas ten\'{i}an que completar la frase ``Ser\'{i}a interesante visitar ...'' con un sintagma nominal que describe la ubicaci\'on se\~nalada por la flecha (o las flechas en los casos plurales). Sin embargo, algunas de las expresiones que dieron las personas no eran frases nominales, sino frases completas. Por ejemplo, las respuestas tales como ``Vamos a ir a pizza express, es realmente barato'' fueron descartadas debido a que la persona ten\'{i}a en mente un objetivo comunicativo que no era la identificaci\'on del objetivo. Por otra parte, algunas personas completaron el experimento con frases como ``No me gusta la comida r\'apida''. Del mismo modo, hemos eliminado todas las expresiones que describen un objeto que no sea el target previsto, las que utilizaban propiedades que no eran ciertas para el target, todas las situaciones en que la persona ten\'{i}a que describir dos objetos pero describ\'ian s\'olo uno, y todas las descripciones que contienen s\'olo el b\'asico tipo de atributo como en ``la iglesia''.
-
-
-
-%.....................................
-\subsection{Materiales}
-%.....................................
-\label{corpus-materiales}
-
-El experimento hizo uso de la p\'agina especialmente dise\~nada la cual se muestra en la Figura~\ref{fig-interface}. En esa p\'agina se observa el texto ``Es interesante visitar...'', abajo hay un espacio para que la persona ingrese la expresi\'on referencial, al lado esta el bot\'on ``Siguiente'' que  al presionarlo se guardaban los datos ingresados para el est\'imulo actual y se continuaba con el siguiente est\'imulo, de el lado derecho hab\'ia una barra de estado que mostraba el progreso hasta el momento, cada vez que se presionaba el bot\'on ``Siguiente'' la barra se actualizaba llen\'andose con color verde y mostrando el porcentaje que luego de 22 mapas llegaba al 100\%, debajo del indicador de progreso hab\'ia un link que dec\'ia ``Instrucciones'', el cual al pasar el cursor del mouse desplegaba las instrucciones mostradas al inicio.
-Del lado derecho del mapa se encontraba la leyenda, que mostraba para un conjunto de \'iconos del mapa que objetos significaban, se mostraron los siguientes (biblioteca, teatro, bar, caf\'e, fast-food, restaurante, farmacia, pub, iglesia, cajero, banco), esto se realiz\'o a fin de evitar confusi\'on a las personas que daban las expresiones referenciales, ya que se not\'o por ejemplo que los \'iconos de cajero y banco podr\'ian llegar a ser identificados como la misma palabra para distintas personas. 
+%El experimento hizo uso de la p\'agina especialmente dise\~nada la cual se muestra en la Figura~\ref{fig-interface}. En esa p\'agina se observa el texto ``Es interesante visitar...'', abajo hay un espacio para que la persona ingrese la expresi\'on referencial, al lado esta el bot\'on ``Siguiente'' que  al presionarlo se guardaban los datos ingresados para el est\'imulo actual y se continuaba con el siguiente est\'imulo, de el lado derecho hab\'ia una barra de estado que mostraba el progreso hasta el momento, cada vez que se presionaba el bot\'on ``Siguiente'' la barra se actualizaba llen\'andose con color verde y mostrando el porcentaje que luego de 22 mapas llegaba al 100\%, debajo del indicador de progreso hab\'ia un link que dec\'ia ``Instrucciones'', el cual al pasar el cursor del mouse desplegaba las instrucciones mostradas al inicio.
+%Del lado derecho del mapa se encontraba la leyenda, que mostraba para un conjunto de \'iconos del mapa que objetos significaban, se mostraron los siguientes (biblioteca, teatro, bar, caf\'e, fast-food, restaurante, farmacia, pub, iglesia, cajero, banco), esto se realiz\'o a fin de evitar confusi\'on a las personas que daban las expresiones referenciales, ya que se not\'o por ejemplo que los \'iconos de cajero y banco podr\'ian llegar a ser identificados como la misma palabra para distintas personas. 
 
 El mapa conten\'ia \'iconos de lugares o cosas, calles, nombres de lugares, por ejemplo podemos ver en el mapa de la Figura~\ref{fig-interface} la Calle Mayor, ah\'i se pueden ver cajeros, restaurantes, fast-foods, cafe, tel\'efonos, correos, farmacias, sem\'aforos. Notar que algunos \'iconos tienen nombre, por ejemplo el fast-food McDonald's. Algunos edificios o plazas tambi\'en tienen nombre como la Real Casa de Correos y la Plaza de Pontejos. En el mapa tambi\'en podemos ver algunos objetos sin nombre.
 
@@ -120,7 +146,7 @@ La mitad de las im\'agenes mostraron una sola flecha que apunta a un objeto en e
 \subsection{Anotaci\'on del corpus}
 \label{corpus-anotacion}
 
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/mapa-con-ids2.png}\\[0pt]
 \caption{Mapa con Id's usado para la anotaci\'on}
@@ -196,7 +222,7 @@ street & calle del marquez viudo de pontejos & & str19\\
 \end{small}
 \end{table}
 
-Para cada imagen se construy\'o una tabla con los id's de los objetos que se ven, como por ejemplo para la imagen~\ref{} la tabla correspondiente es la Tabla~\ref{tabla-ids} al mapa se le agregaron los id's de algunos objetos del mapa, estos identificadores eran \'unicos. Por ejemplo {\it pub1} es el que esta siendo apuntado por la fecha roja en la Figura~\ref{mapa-con-ids}. A cada calle tambi\'en se le asign\'o un identificador \'unico pero estos se anotaron en una tabla, como se ve en la Tabla~\ref{tabla-ids}. Dicha tabla tiene 4 columnas para cada objeto se puso ``tipo'', ``nombre'', ``en'' y ``id'', el tipo es por ejemplo, restaurante, bar, street (estos nombres de tipos se pusieron en Ingl\'es), ``nombre'', el nombre propio del objeto, si ten\'ia, (se mantuvieron en el idioma original, espa\~nol o portugu\'es), ``en'', conten\'ia la calle en la que estaba situado el objeto, y si era una calle no conten\'ia nada e ``id'' que fue compuesto por 3 o 4 primeras letras del tipo del objeto m\'as un n\'umero para identificarlo un\'ivocamente, por ejemplo para los restaurantes ``rest1'', ``rest2''.\\
+Para cada imagen se construy\'o una tabla con los id's de los objetos que se ven, como por ejemplo para la imagen~\ref{mapa-con-ids} la tabla correspondiente es la Tabla~\ref{tabla-ids} al mapa se le agregaron los id's de algunos objetos del mapa, estos identificadores eran \'unicos. Por ejemplo {\it pub1} es el que esta siendo apuntado por la fecha roja en la Figura~\ref{mapa-con-ids}. A cada calle tambi\'en se le asign\'o un identificador \'unico pero estos se anotaron en una tabla, como se ve en la Tabla~\ref{tabla-ids}. Dicha tabla tiene 4 columnas para cada objeto se puso ``tipo'', ``nombre'', ``en'' y ``id'', el tipo es por ejemplo, restaurante, bar, street (estos nombres de tipos se pusieron en Ingl\'es), ``nombre'', el nombre propio del objeto, si ten\'ia, (se mantuvieron en el idioma original, espa\~nol o portugu\'es), ``en'', conten\'ia la calle en la que estaba situado el objeto, y si era una calle no conten\'ia nada e ``id'' que fue compuesto por 3 o 4 primeras letras del tipo del objeto m\'as un n\'umero para identificarlo un\'ivocamente, por ejemplo para los restaurantes ``rest1'', ``rest2''.\\
 
 %- Los valores de los atributos se anotaron en Ingl\'es (por ejemplo, restaurant, pub, street, etc.), pero los nombres propios (para calles, etc.) se mantuvieron en su forma original, tal cual se v\'e en el mapa (Espa\~{n}ol, Portugu\'es).
 
@@ -521,6 +547,7 @@ A partir de estos resultados nos damos cuenta de que los atributos muy frecuente
 
 
 \section{Caso de estudio del ZOOM corpus}
+\label{sec:caso_estudio}
 
 En esta secci\'on presentamos el estudio de tres casos particulares, los cuales son mucho m\'as naturales que los que hab\'iamos visto hasta el momento: la generaci\'on autom\'atica de ER para mapas del ZOOM corpus. Dividimos el estudio en 3 partes, el la Secci\'on \ref{sec:sinzoom} veremos un mapa sin zoom el cual se muestra en la Figura \ref{mapa-zoom} y con target singular. En la Secci\'on \ref{sec:conzoom} veremos el mismo target pero con zoom 2X, el mapa usado se muestra en Figura \ref{mapa-zoom2x} y en la Secci\'on \ref{sec:plural} veremos el mismo mapa de la Secci\'on \ref{sec:sinzoom} pero con target plural, es decir con 2 targets, el mapa se muestra en Figura \ref{mapa-zoom-plural}.  Veremos las diferencias entre esos mapas a nivel de informaci\'on disponible, obtendremos a partir de cada imagen el modelo subyacente que usar\'a el algoritmo y a partir de las ER's del corpus obtendremos las probabilidades de uso de las palabras, para luego ejecutar el algoritmo. Compararemos las ER's dadas por el algoritmo con las que dieron las personas.
 

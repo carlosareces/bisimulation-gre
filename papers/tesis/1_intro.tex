@@ -623,17 +623,16 @@ a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes 
 generaci\'on en f\'ormulas $\ALC$ (o equivalentemente, el fragmento correspondiente de \FOL)
 evitar\'iamos f\'ormulas como
 $\phi_3$ (sin igualdad) y
-$\phi_4$ (aparece cuanti elemento ed
-siempre en segunda posici\'on de argumento).
+$\phi_4$ (siempre aparece cuantificado el elemento en la segunda posici\'on de argumento).
 Generaci\'on se discute en ~\cite{areces08}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
-y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, considerando por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
-lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
+y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese paper, considerando por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
+lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto particular considerado.
 
 
 
 
 Para el segundo ejemplo: \\
-Supongamos que queremos identificar a $e_5$ del Contexto \ref{GRE3D7-stimulus-conLetras}, las siguientes son f\'ormulas que identifican a un\'ivocamente a $e_5$ en el contexto considerado.
+Supongamos que queremos identificar a $e_5$ de la Figura \ref{GRE3D7-stimulus2}, las siguientes son f\'ormulas que identifican a un\'ivocamente a $e_5$ en el contexto considerado.
 
 \begin{table}
 $$
@@ -658,15 +657,15 @@ $$
   %ex 4
  \end{array}
 $$
-\caption{Descripciones alternativas para el objeto $e_5$ del Contexto~\ref{GRE3D7-stimulus-conLetras}.}\label{tab:phis}
+\caption{Descripciones alternativas para el objeto $e_5$ de la Figura~\ref{GRE3D7-stimulus2}.}\label{tab:phis}
 \end{table}
 
 Notar que $\phi_2$ y $\phi_3$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas.
 $\phi_4$ se puede realizar como ``Large red ball right-of large red cube''. Esta f\'ormula junto con $\phi_1$, $\phi_2$ y $\phi_3$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y solo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpus ~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}.
 
-Bueno, pero entonces podemos elegir otra l\'ogica cuyo lenguaje este restringido a las ER que queremos generar.
+Bueno, pero entonces como dijimos reci\'en podemos elegir otra l\'ogica cuyo lenguaje este restringido a las ER que queremos generar.
 
-Restringiendo la determinaci\'on de contenido a FO-, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. 
+Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. 
 Si prohibimos el distinto del lenguaje  $\phi_6$ tambi\'en queda exclu\'ida.
 
 %El hecho de que el lenguaje de representaci\'on utilizado tiene un impacto sobre la determinaci\'on de contenido es obvio, 
@@ -675,47 +674,23 @@ Si prohibimos el distinto del lenguaje  $\phi_6$ tambi\'en queda exclu\'ida.
 %representaci\'on del conocimiento, vea [2]) para clasificar y dar un marco formal para
 %trabajo previo sobre GRE. 
 
-Usar l\'ogicas de descripci\'on en lugar de fragmentos de \FOL es s\'olo una cuesti\'on de notaci\'on, como la mayor\'ia de l\'ogicas 
-descriptivas se pueden ver como
-fragmentos de \FOL. Por ejemplo, el lenguaje de la l\'ogica de descripci\'on ALC, se define sint\'acticamente como el conjunto de f\'ormulas,
-$$
-\top \mid p \mid \neg \phi \mid \phi \wedge \phi' \mid  \exists r. \phi
-$$
-(donde $p$ es un s\'imbolo proposicional, $r$ s\'imbolo relacional binario, y $\phi,\phi' \in \ALC$) corresponde al fragmento 
-sint\'actico de
-\FOL sin $\not\approx$, como es mostrado por la traducci\'on est\'andar $\st_x$:
 
-\begin{center}
-\begin{tabular}{rcl@{\hspace{1cm}}rcl}
-$ \st_{x_i}(\top)$ &$=$& $\top$
-&
-$\st_{x_i}(\phi_1 \land \phi_2)$ &$=$& $\st_{x_i}(\phi_1) \land \st_{x_i}(\phi_2)$
-\\
-  $\st_{x_i}(p)$ &$=$& $p(x_i)$
-&
-$\st_{x_i}(\exists r . \phi)$ &$=$& $\exists x_{i+1} . (r(x_i,x_{i+1}) \land \st_{x_{i+1}}(\phi))$
-\\
- $\st_{x_i}(\lnot \phi)$ &$=$& $\lnot\st_{x_i}(\phi)$
-&
-\end{tabular}
-\end{center}
-
-En efecto, dado un modelo relacional $\+M$, la extensi\'on de una f\'ormula \ALC en $\+M$ coincide exactamente con la extensi\'on
- de $\st_{x_1}(\varphi)$ (v\'ease, por ejemplo, ~\cite{baad:desc03}). Gracias
-a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes podemos definir 
-$\interp{\varphi} = \interp{\st_{x_1}(\varphi)}$.
-
-
-
-
- Volviendo a nuestro ejemplo anterior, mediante la restricci\'on de la generaci\'on de contenido
-a f\'ormulas de $\ALC$ (o equivalentemente, el fragmento correspondiente de \FOL)
-evitar\'iamos f\'ormulas como
-$\phi_5$ (sin igualdad) y
-
-$\phi_4$ (aparece cuanti elemento ed
-siempre en segunda posici\'on de argumento). ESTE EJ NO LO PUSE... ver si consigo alguno interesante
-
+%En efecto, dado un modelo relacional $\+M$, la extensi\'on de una f\'ormula \ALC en $\+M$ coincide exactamente con la extensi\'on
+ %de $\st_{x_1}(\varphi)$ (v\'ease, por ejemplo, ~\cite{baad:desc03}). Gracias
+%a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes podemos definir 
+%$\interp{\varphi} = \interp{\st_{x_1}(\varphi)}$.
+%
+%
+%
+%
+ %Volviendo a nuestro ejemplo anterior, mediante la restricci\'on de la generaci\'on de contenido
+%a f\'ormulas de $\ALC$ (o equivalentemente, el fragmento correspondiente de \FOL)
+%evitar\'iamos f\'ormulas como
+%$\phi_5$ (sin igualdad) y
+%
+%$\phi_4$ (aparece cuanti elemento ed
+%siempre en segunda posici\'on de argumento). ESTE EJ NO LO PUSE... ver si consigo alguno interesante
+%
 
 %Generaci\'on se discute en ~\cite{AKS08}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
 %y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, consideando por ejemplo \ELAN 
@@ -746,7 +721,7 @@ referenciales!}. Explicamos conceptos b\'asicos que usaremos a lo largo de la te
 se puede tener para el mismo objeto target en el mismo contexto.
 Introducimos la teor\'ia de modelos, describimos diversos lenguajes formales (i.e, l\'ogicos) y su impacto si se usan para el problema de generaci\'on autom\'atica de expresiones referenciales.  Partimos desde la l\'ogica de primer orden (\FOL), la m\'as expresiva, explicamos el lenguaje asociado, para darnos una idea de cu\'ales son las f\'ormulas que el lenguaje puede generar, vemos una serie de ejemplos de f\'ormulas que se pueden generar con ese lenguaje y las comparamos con expresiones referenciales dadas por personas. Luego vemos l\'ogicas con menos poder expresivo como \EPFOL (\FOL sin negaci\'on), \ALC (\FOL sin desigualdad), \EL(\ALC sin negaci\'on), \ELAN (\ALC con negaci\'on s\'olo para proposiciones).
 
-\paragraph{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} Est\'a dividido en 3 secciones, en la primer secci\'on formalizamos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas, luego comentamos en que se basan la teor\'ia de \cite{clark1992arenas}, \cite{Clark-Marshall81} y como son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area varios de los cuales usaremos a lo largo de la tesis, viendo la simplicidad de estos corpus, por un lado podemos ver la complejidad de la tarea, ya que si para corpus tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, el cual usa im\'agenes de mapas de ciudades como contexto. Para finalizar damos una introducci\'on a las m\'etricas de evaluaci\'on. . En la segunda secci\'on damos los diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se comparan esos algoritmos en cuanto al tipo de algoritmos y salida que producen. Se explican algunos algoritmos en detalle dejando el algoritmo de bisimulaci\'on para un cap\'itulo posterior ya es que el algoritmo en el cual basamos los aportes de esta tesis. Y luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on algunas de las cuales usan corpus para comparar las salidas de los algoritmos con ER dadas por humanos, algunas de ellas son autom\'aticas y otras manuales. 
+\paragraph{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} Est\'a dividido en 3 secciones, en la primer secci\'on formalizamos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas, luego comentamos en que se basan la teor\'ia de \cite{clark1992arenas}, \cite{Clark-Marshall81} y como son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area varios de los cuales usaremos a lo largo de la tesis, viendo la simplicidad de estos corpus, por un lado podemos ver la complejidad de la tarea, ya que si para corpus tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, el cual usa im\'agenes de mapas de ciudades como contexto. Para finalizar damos una introducci\'on a las m\'etricas de evaluaci\'on. En la segunda secci\'on damos los diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se comparan esos algoritmos en cuanto al tipo de algoritmos y salida que producen. Se explican algunos algoritmos en detalle dejando el algoritmo de bisimulaci\'on para un cap\'itulo posterior ya es que el algoritmo en el cual basamos los aportes de esta tesis. Y luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on algunas de las cuales usan corpus para comparar las salidas de los algoritmos con ER dadas por humanos, algunas de ellas son autom\'aticas y otras manuales. 
 %Luego se explica la historia de los algoritmos del \'area de generaci\'on autom\'atica
 % de expresiones referenciales. 
 
