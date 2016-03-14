@@ -1,7 +1,7 @@
 \chapter{L-simulaci\'on en acci\'on}
 \label{sec:intro_logica}
 
-De acuerdo a lo que queremos permitir en una ER, tendremos un lenguaje asociado, el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica como partiendo de \FOL podemos ir restringiendo la l\'ogica y con ello el lenguaje, siendo la complejidad un tema interesante abordar, ya que por ejemplo sistemas de tiempo real necesitan conseguir ER r\'apidamente, daremos las complejidad de las distintas l\'ogicas, y veremos que l\'gica aplica a cada uno de los algoritmos del \'area
+De acuerdo a lo que queremos permitir en una ER, tendremos un lenguaje asociado, el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica como partiendo de \FOL podemos ir restringiendo la l\'ogica y con ello el lenguaje, siendo la complejidad un tema interesante abordar, ya que por ejemplo sistemas de tiempo real necesitan conseguir ER r\'apidamente, daremos las complejidad de las distintas l\'ogicas, y veremos que l\'ogica aplica a los algoritmos estudiados del \'area
 
 
 
@@ -13,23 +13,33 @@ De acuerdo a lo que queremos permitir en una ER, tendremos un lenguaje asociado,
 
 Intuitivamente, dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
 $\+M_1$ es similar en $\+L$ a otro objeto
- $v$ en el model $\+M_2$ para cualquier $\+L$-f\'ormulas que son satisfechas por $u$ tambi\'en son satisfechas por $v$. Formalmente,
+ $v$ en el modelo $\+M_2$ si para cualquier f\'ormula en $\+L$ que es satisfecha por $u$ tambi\'en es satisfecha por $v$. Formalmente,
 %let $\+L$ stand for any of the languages discussed so far, and
 Sea $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 = \tup{\Delta_2, \interp{\cdot}_2}$ 2 modelos relacionales con $u \in \Delta_1$ y $v \in \Delta_2$; seguimos la terminolog\'ia de~\cite{areces08} y decimos que
 \emph{$u$ es $\+L$-similar a $v$}  (notaci\'on $u \simil{\+L} v$) si para toda $\gamma \in \+L$, $u \in \interp{\gamma}_1$ implica
 $v \in \interp{\gamma}_2$. Es facil mostrar que
-$\+L$-similaridad es reflexiva para todo $\+L$, y simm\'etrica  para languajes que contienen negaci\'on.
+$\+L$-similaridad es reflexiva para todo $\+L$, y sim\'etrica  para languajes que contienen negaci\'on.
 
 
-Observe que la $\+L$-similitud captura la noci\'on de ``capacidad de identificar en $\+L$''. Si tomamos $\+M_1$ y $\+M_2$ a ser del mismo modelo, un objeto $u$ en el modelo identificarse un\'ivocamente en $\+L$ si no hay ning\'un objeto $v$ diferente de $u$ tal que $u \simil{\+L} v$. En otras palabras, si hay dos objetos $u$ y $v$ en un modelo $\+M$  tal que
-$u \simil{\+L} v$, entonces el problema $\+L$-GRE con entrada de $\+M$ y destino $T=\{u\}$ no tendr\'a \'exito ya que para todas las f\'ormulas $\gamma \in L$ tenemos que $\{u,v\} \subseteq \interp{\gamma} \not = \{u\}$.
+Observe que la $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$''. Si tomamos $\+M_1$ y $\+M_2$ a ser del mismo modelo, un objeto $u$ en el modelo puede identificarse un\'ivocamente en $\+L$ si no hay ning\'un otro objeto $v$ diferente de $u$ tal que $u \simil{\+L} v$. En otras palabras, si hay dos objetos $u$ y $v$ en un modelo $\+M$  tal que
+$u \simil{\+L} v$, entonces el problema $\+L$-GRE con input $\+M$ y target $T=\{u\}$ no tendr\'a \'exito ya que para todas las f\'ormulas $\gamma \in L$ tenemos que $\{u,v\} \subseteq \interp{\gamma} \not = \{u\}$.
 
-La noci\'on de $\+L$-similitud entonces, nos permite manejar el problema de  $\+L$-GRE.
-Por otra parte, podemos reformular esta de noci\'on de una manera estructural, por lo que no lo hacemos
-que considerar en muchos $\+L$-f\'ormulas infinitamente decidir si $u$ es $\+L$- similar a $v$. Podemos reinterpretar $\+L$-similitud en t\'erminos de nociones de teor\'ia de modelos estandares
-como isomorfismos o bisimulaciones que describen las propiedades estructurales del modelo. Dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ and $\tup{\Delta_2,
+
+%\begin{convention}\label{conv:signature}
+%We will only consider relational models with unary and binary relation
+%symbols (i.e., labeled graphs).  We will consistently use $p$ for a unary relation
+%symbol (and called it a \emph{proposition}) and $r$ for a binary relation symbol.
+%\end{convention}
+
+
+
+La noci\'on de $\+L$-similaridad entonces, nos permite manejar el problema de  $\+L$-GRE.
+Por otra parte, podemos reformular esta de noci\'on de una manera estructural, para no considerar infinitas $\+L$-f\'ormulas y poder decidir si $u$ es $\+L$-similar a $v$. Podemos reinterpretar $\+L$-similaridad en t\'erminos de nociones de teor\'ia de modelos est\'andares
+como isomorfismos o bisimulaciones que describen las propiedades estructurales de los modelos. Dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ and $\tup{\Delta_2,
 \interp{\cdot}_2}$, considere las siguiente
-propiedades de una relaci\'on binaria ${\sim} \subseteq \Delta_1 \times \Delta_2$ (cf.~Convention~\ref{conv:signature}):
+propiedades de una relaci\'on binaria ${\sim} \subseteq \Delta_1 \times \Delta_2$ 
+(vamos a considerar s\'olo modelos relacionales con relaciones unarias y binarias, ---es decir grafos etiquetados--- Usaremos $p$ para s\'imbolos unarios es decir proposicionales, y $r$ para s\'imbolos de relaciones binarias):
+%(cf.~Convention~\ref{conv:signature}):
 \smallskip 
 
 \newcommand{\simdef}[2]{\noindent\ \ #1\hfill:\ \parbox[t]{.87\textwidth}{#2}\par}
@@ -44,11 +54,11 @@ propiedades de una relaci\'on binaria ${\sim} \subseteq \Delta_1 \times \Delta_2
 \simdef{$\injR$}{$\sim^{-1}$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
 \smallskip
 
-Diremos que una relacion binaria no-vac\'ia $\sim$ es una 
-\emph{$\+L$-simulation} cuando satisface las propiedades indicadas
-en la Tabla~\ref{tab:simuls}. Por ejemplo, una relacion binaria no-vac\'ia que satisface $\atomL$, y $\zig$ es una $\EL$-simulation, como es indicado en fila~4 de la Tabla~\ref{tab:simuls}. M\'as a\'un, diremos que un objeto
-\emph{$v$ $\+L$-simulates $u$} (notaci\'on $u \simul{\+L} v$) si hay una relaci\'on $\sim$ que satisface el correspondiente propiedad tal que
-$u \sim v$. El siguiente es un resultado fundamentar del modelo-teor\'etico  result:%~\cite{ebbi:math96,KR99,BRV01}
+Diremos que una relaci\'on binaria no-vac\'ia $\sim$ es una 
+\emph{$\+L$-simulaci\'on} cuando satisface las propiedades indicadas
+en la Tabla~\ref{tab:simuls}. Por ejemplo, una relacion binaria no-vac\'ia que satisface $\atomL$, y $\zig$ es una $\EL$-simulaci\'on, como es indicado en fila~4 de la Tabla~\ref{tab:simuls}. M\'as a\'un, diremos que un objeto
+\emph{$v$ $\+L$-simula $u$} (notaci\'on $u \simul{\+L} v$) si hay una relaci\'on $\sim$ que satisface el correspondiente propiedad tal que
+$u \sim v$. El siguiente es un resultado fundamentar del modelo-teorico:%~\cite{ebbi:math96,KR99,BRV01}
 
 \begin{table}[t]
 
@@ -96,13 +106,13 @@ Una l\'ogica sim\'etrica cumple  $\atomL$ y $\atomR$ como se ve en la Tabla \ref
 \caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:simuls}
 \end{table}
 \textcolor{blue}{
-\ALC tiene negacion de formulas, conjunciones y existenciales, proposicionales
+\ALC tiene negacion de f\'ormulas, conjunciones y existenciales, proposicionales
 }
 \begin{theorem} \label{thm:simulation}
-If  $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ and $\+M_2 =
+Si  $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ and $\+M_2 =
 \tup{\Delta_2, \interp{\cdot}_2}$ son modelos finitos, $u \in
-\Delta_1$ and $v \in \Delta_2$, then $u \simil{\+L} v$ iff $u
-\simul{\+L} v$ (for $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$).
+\Delta_1$ y $v \in \Delta_2$, entonces $u \simil{\+L} v$ si y s\'olo si $u
+\simul{\+L} v$ (para $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$).
 \end{theorem}
 %\begin{proof}
 Algunos resultados son bien conocidos: $\simul{\FOL}$ es isomorfismo en
@@ -111,59 +121,55 @@ noci\'on de bisimulaci\'on~\cite[Def.~2.16]{BRV01}; $\simul{\EL}$ es una
 simulaci\'on definida en~\cite[Def.~2.77]{BRV01}. Los restantes son variaciones de estos.
 %\end{proof}
 
+Por lo tanto, en los modelos finitos \footnote{finitud no es la hip\'otesis m\'as d\'ebil,
+pero es suficiente para nuestro desarrollo.} las simulaciones capturar exactamente el concepto de similaridad.
+La implicaci\'on de derecha a izquierda no se mantiene en general sobre modelos infinitos.
 
-Therefore, on finite models\footnote{Finiteness is not the weakest hypothesis,
-but it is enough for our development.} simulations capture exactly the notion of similarity.
-The right to left implication does not hold in general on infinite
-models.
+$\+L$-simulaciones nos permiten determinar, de una manera eficaz,
+cuando un objeto no se puede distinguir de otro en un modelo dado con respecto a $\+L$.
 
-$\+L$-simulations allow us to determine, in an effective way,
-when an object is indistinguishable from another in a given model with respect to $\+L$.
-
-For example, we can verify that $a \simul{\EL} b$ in the model of
-Figure~\ref{fig:cat-dog-1} (the relation ${\sim} = \{(a,a), (a, b) \}
+Por ejemplo, podemos comprobar que $a \simul{\EL} b$ en el modelo de la 
+Figura~\ref{fig:cat-dog-1} (la relaci\'on ${\sim} = \{(a,a), (a, b) \}
 %\cup\{ (x,x) \mid x \in \Delta\}
-$ satisfies $\atomL$ and $\zig$).
-Using Theorem~\ref{thm:simulation}
-we conclude that there is no \EL-description for $a$, since for any \EL-formula $\gamma$,
-if $a\in\interp{\gamma}$, then $b\in\interp{\gamma}$.
-Observe that $b \not\simul{\EL} a$, since
-(again applying Theorem~\ref{thm:simulation}), $b\in\interp{\aSmall(x)}$ but
+$ satisface $\atomL$ y $\zig$).
+Usando el Teorema~\ref{thm:simulation} conclu\'imos que no hay
+ \EL-descripci\'on para $a$, desde que para cualquier \EL-f\'ormula $\gamma$,
+si $a\in\interp{\gamma}$, entonces $b\in\interp{\gamma}$.
+Observe que $b \not\simul{\EL} a$, desde que
+(aplicando de nuevo el Teorema~\ref{thm:simulation}), $b\in\interp{\aSmall(x)}$ pero
 $a\notin\interp{\aSmall(x)}$.
 %
-If one chooses a language richer than $\EL$, such as $\ELAN$, one may be
-able to describe $a$: take, for instance the $\ELAN$-formula
+
+Si se opta por un lenguaje m\'as rico que $\EL$, tal como $\ELAN$, uno puede ser
+capaz de describir a $a$: toma, por ejemplo, la $\ELAN$-f\'ormula 
 $\nDog(x)\wedge\lnot\aSmall(x)$.
 
 
-As we will discuss in the next section, simulation gives us an
-efficient, computationally feasible approach to the $\+L$-GRE
-problem. Algorithms to compute many kinds of $\+L$-simulations are
-well known (see, \cite{H71,areces08,HHK95,DPP03}), and for many
-languages  (e.g., \ALC, \ALC with inverse relations,  \ELAN and \EL)
-they run in polynomial time (on the other hand, no polynomial
-algorithm for \FOL- or \EPFOL-simulation is known and even the exact
-complexity of the problem in these cases is open
-\cite{gare:comp79}).
+Como veremos en la siguiente secci\'on, la simulaci\'on nos d\'a un
+enfoque eficiente, computacionalmente factible para atacar el problema $\+L$-GRE. Algoritmos para calcular muchos tipos de $\+L$-simulaciones son
+bien conocidos (vea, \cite{H71,areces08,HHK95,DPP03}), y para muchos
+lenguajes (por ejemplo, \ALC, \ALC con las relaciones inversas, \ELAN y \EL)
+se ejecutan en tiempo polinomial (por otro lado, es conocido que no hay algoritmo polinomial 
+ para \FOL- o \EPFOL-simulaci\'on, incluso la exacta
+complejidad del problema en estos casos est\'a abierta \cite{gare:comp79}).
 
-\section{GRE via Simulator Sets}\label{sec:simulation}
+\section{GRE v\'ia conjuntos de simulaci\'on}\label{sec:simulation}
 
 En esta secci\'on discutiremos como resolver el problema $\+L$-GRE
-usando simulation. Dado a model $\+M = \tup{\Delta,
-\interp{\cdot}}$, Theorema~\ref{thm:simulation} nos dice que si 2 elementos distintos $u$ y $v$ en $\Delta$ son tales que $u
+usando simulaci\'on. Dado un modelo $\+M = \tup{\Delta,
+\interp{\cdot}}$, el Teorema~\ref{thm:simulation} nos dice que si 2 elementos distintos $u$ y $v$ en $\Delta$ son tales que $u
 \simul{\+L} v$ entonces para toda $\+L$-f\'ormula que es verdadera para $u$ es tambi\'en verdadera para $v$. No hay f\'ormula en $\+L$ que pueda identificar un\'ivocamente a $u$. Desde esta perspectiva, conociendo cuando el modelo contiene un elemento que es $\gL$-similar pero distinto de $u$ es
-equivalente a decidir hay una $\+L$-RE for $u$.
+equivalente a decidir si hay una expresi\'on referencial en $\+L$ para $u$.
 
 
-Asumamos un lenguaje fixo $\+L$ y un modelo $\+M$.  Supongamos que queremos referirnos a un elemento $u$ del dominio de $\+M$. Queremos computar \emph{simulator set} de $u$ definidas como
+Asumamos un lenguaje fijo $\+L$ y un modelo $\+M$. Supongamos que queremos referirnos a un elemento $u$ del dominio de $\+M$. Queremos computar el \emph{conjunto de simulaci\'on} de $u$ definido como
 $\simset_{\+L}^{\+M}(u) = \cset{v \in \Delta \mid u \simul{\+L} v}$.
-Cuando un modelo $\+M$ is clear from the context, we just write
-$\simset_{\+L}$.
- If $\simset_{\+L}^{\+M}(u)$ no es singleton $\cset{u}$,
-el problem $\+L$-GRE con target $\{u\}$ en $\+M$ fallar\'a.
+Cuando un modelo $\+M$ es claro de el contexto, simplemente escribimos $\simset_{\+L}$.
+ Si $\simset_{\+L}^{\+M}(u)$ no es singleton $\cset{u}$,
+el problema $\+L$-GRE con target $\{u\}$ en $\+M$ fallar\'a.
 
 \iffullversion
-Es facil de ver que la union de 2 $\+L$-simulations es
+Es facil de ver que la union de 2 $\+L$-simulaciones 
 es tambi\'en una $\+L$-simulation. Podemos entonces definir el \emph{maximal
 auto $\+L$-simulation} (notaci\'on, $\simmax_{\+L}$) sobre un modelo $\+M$ como la union de todos los
 auto $\+L$-simulations sobre $\+M$. Ya que
@@ -173,9 +179,9 @@ para computar $\simmax_{\+L}$ tambi\'en computa $\simset_{\+L}(u)$.
 \fi
 
 \iffullversion
-If $P$ es reflexiva y transitiva entonces tambi\'en lo es $\simmax_P$. En
+Si $P$ es reflexiva y transitiva entonces tambi\'en lo es $\simmax_P$. En
 particular, $\simmax$ es reflexiva y transitiva.
-\fixme{Are reflexivity and transitivity important? Check.}
+%\fixme{Are reflexivity and transitivity important? Check.}
 \else
 \fi
 
@@ -191,21 +197,485 @@ $\+M=\tup{\Delta,\interp{\cdot}}$
 %}
 en tiempo $O(\size{\Delta}\times\size{{\interp{\cdot}}})$.
 Intuitivamente, este algoritmo
-define $S(v)$ como un conjunto de candidatos para simuolar $v$ y
-sucesivamente refina este borrando aquellos los cuales falla en simular $v$.
+define $S(v)$ como un conjunto de candidatos para simular $v$ y
+sucesivamente refina este conjunto borrando aquellos elementos los cuales fallan en simular $v$.
 %Since we never put new vertices into $\simset(v)$, all the deletions
 %from $\simset(v)$ are permanent.
 Al final, $S(v)=\simset_\ELAN(v)$. El algoritmo puede ser adaptado para
 computar $\simset_\+L$ para cualquier otro languaje $\+L$. En particular,
-lo podemos usar para computar $\simset_\EL$ en tiempo polinomial which will
-give us the basic algorithm for establishing an upper bound to the
-complexity of the \EL-GRE problem --this will answer an open
-question of~\cite{areces08}. The pseudo-code is shown in
-Algorithm~\ref{alg:schematic-gen-sim}, which uses the following
-notation: $\+P$ is a fixed set of unary relation symbols,  for $v\in
-\Delta$, let $\unary(v)=\{p\in\+P\mid v\in\interp{p}\}$ and let also
-$\su{r}{v}=\{u\in\Delta\mid(v,u)\in\interp{r}\}$ for $r$ a binary
-relation symbol.
+lo podemos usar para computar $\simset_\EL$ en tiempo polinomial y nos dar\'a un l\'imite superior a la
+complejidad del algoritmo b\'asico para establecer un l\'imite superior a la complejidad de el problema \EL-GRE 
+--esto responder\'ia la pregunta abierta~\cite{areces08}. El pseudo-c\'odigo es mostrado en el
+Algoritmo~\ref{alg:schematic-gen-sim}, el cual usa la siguiente
+notaci\'on: $\+P$ es un conjunto fijo de s\'imbolos de relaciones unarias, para $v\in
+\Delta$, sea $\unary(v)=\{p\in\+P\mid v\in\interp{p}\}$ y sea tambi\'en
+$\su{r}{v}=\{u\in\Delta\mid(v,u)\in\interp{r}\}$ para $r$ un s\'imbolo de relaci\'on binaria.
+
+%%ROMI
+\begin{algorithm} \small
+\caption{\small Computando \EL-similaridad}\label{alg:schematic-gen-sim}
+\SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
+\Input{un modelo finito $\+M=\tup{\Delta,\interp{\cdot}}$}
+\Output{$\forall v\in \Delta$, el conjunto de simulaciones
+$\simset_\EL^{\+M}(v)=S(v)$} \BlankLine
+
+\ForEach{$v\in \Delta$}{$S(v):=\{u\in \Delta \mid \unary(v)
+\subseteq \unary(u) \}$}
+
+\While{\guard}{$S(u):=S(u)\setminus\{w\}$}
+\end{algorithm}
+
+
+%First some notation. For any $v\in \Delta$ and any binary relation
+%$r$, let
+%\begin{eqnarray*}
+%\unary(v)&=&\{p\mid \mbox{$p$ is a unary rel.\ and
+%$v\in\interp{p}$}\}\\
+%%\pr{r}{v}&=&\{u\in\Delta\mid(u,v)\in\interp{r}\}\\
+%\su{r}{v}&=&\{u\in\Delta\mid(v,u)\in\interp{r}\}
+%\end{eqnarray*}
+%%The last two extend to sets $V\subseteq\Delta$ as usual:
+%%$\pr{r}{V}=\bigcup_{v\in V}\pr{r}{v}$ and $\su{r}{V}=\bigcup_{v\in
+%%V}\su{r}{v}$.
+
+%
+
+%The algorithm is fairly straightforward. We initialize $S(v)$ with
+%the set of all elements $u\in\Delta$ such that $\unary(v)\subseteq
+%\unary(u)$, i.e., the set of all elements satisfying at least the
+%same unary relations as $v$ (this guarantees that property $\atomL$ holds).
+%At each step, if there are three elements $u$, $v$ and $w$ such that
+%for some relation $r$, $(u,v) \in \interp{r}$, $w\in S(u)$
+%(i.e., $w$ is a candidate to simulate $u$) but $\su{r}{w}\cap S(v) = \emptyset$
+%(there is no element $w'$ such that $(w, w') \in \interp{r}$
+%and $w'\in S(v)$) then clearly condition $\zig$ is not satisfied
+%under the supposition that $\simset_\EL=S$. $S$ is `too big' because
+%$w$ cannot simulate $u$. Hence $w$ is removed from $S(u)$.
+
+El algoritmo es bastante sencillo. Inicializamos $S(v)$ con
+el conjunto de todos los elementos $u\in\Delta$ tal que $\unary(v)\subseteq
+\unary(u)$, es decir, el conjunto de todos los elementos que cumplan al menos las
+mismas relaciones unarias que $v$ (esto garantiza que la propiedad $\atomL$ se mantiene).
+En cada paso, si hay tres elementos $u$, $v$ y $w$ tales que
+por alguna relaci\'on $r$, $(u,v) \in \interp{r}$, $w\in S(u)$
+(Es decir, $w$ es un candidato para simular $u$) pero $\su{r}{w}\cap S(v) = \emptyset$
+(No hay ning\'un elemento $w'\in S(v)$) tal que $(w, w') \in \interp{r}$
+y $w'\in S(v)$) entonces es claro que la condici\'on $\zig$ no se cumple
+bajo la suposici\'on de que $\simset_\EL=S$. $S$ es 'demasiado grande' porque
+$w$ no puede simular $u$. Por lo tanto $w$ se borra de $S(u)$.
+
+
+El Algoritmo~\ref{alg:schematic-gen-sim} nos dir\'a cuanco \EL-RE para alg\'un elemento $u$ existe (esto es, cuando
+$\simset_{\EL}(u) = \cset{u}$ o no). No computa ninguna \EL-f\'ormula $\varphi$ que identifique \'univocamente a $v$. Pero
+podemos adaptarlo para obtener tal f\'ormula.
+La estrategia principal del Algoritmo~\ref{alg:schematic-gen-sim} para computar simulaciones es sucesivamente refinar una aproximaci\'on al conjunto de simulaci\'on.
+%is to successively
+%refine an over-approximation of the simulator sets.
+La ``raz\'on'' detr\'as de cada refinamiento puede ser codificada usando una \EL-f\'ormula.
+%Using this insight, 
+Uno puede transformar un algoritmo que computa un conjunto de $\+L$-simulaci\'on con una estrategia similar, en uno que adem\'as compute una $\+L$-RE para cada conjunto.
+
+
+El Algoritmo~\ref{alg:schematic-GRE} muestra una versi\'on transformada del 
+Algoritmo~\ref{alg:schematic-gen-sim}. La idea es que cada nodo
+$v\in\Delta$ es ahora etiquetado con una f\'ormula
+$F(v)$ de \EL. Las f\'ormulas $F(v)$ son actualizadas a trav\'ez de la ejecusi\'on del ciclo cuyo invariante asegura que $v \in
+\interp{F(v)}$ y $\interp{F(u)} \subseteq S(u)$ se mantienen para
+$u,v\in\Delta$.
+
+%\begin{algorithm}
+%\small
+%%\LinesNumbered
+%\io
+%
+%\ForEach{$v\in \Delta$}
+%{ 
+		%$S(v):=\{u\in \Delta \mid \unary(v) \subseteq \unary(u) \}$ \label{alg:line:init1}
+%
+		%$F(v):=\bigwedge \unary(v)$ \label{alg:line:init2}
+%}
+%
+%\While{\guard}
+%{
+ %%$\{\ I: \mbox{\bf assert }(\forall u,v)\ \interp{F(u)} \subseteq S(u)\wedge v \in \interp{F(v)} \ \}$
+ %\KwSty{invariant} $\forall u,v: \interp{F(u)} \subseteq S(u)\wedge v \in \interp{F(v)}$\\
+%$S(u):=S(u)\setminus\{w\}$\;\label{alg:line:loop-body-begin}
+%
+%\If{$\diam F(v)$ is not a conjunct of $F(u)$}
+	%{ 
+		%$F(u):=F(u)\wedge \diam F(v)$ \label{alg:line:loop-body-end-1} 
+	%}
+%} \caption{\small Computing $\EL$-similarity and \posre} 
+%\label{alg:schematic-GRE}
+%\end{algorithm}
+
+
+%%ESTE TRADUCIDO!!!
+\begin{algorithm}\small
+%\LinesNumbered
+\io
+
+\ForEach{$v\in \Delta$}{ $S(v):=\{u\in \Delta \mid \unary(v)
+\subseteq \unary(u) \}$ \label{alg:line:init1}
+
+$F(v):=\bigwedge \unary(v)$ \label{alg:line:init2} }
+
+\While{\guard}
+{
+ %$\{\ I: \mbox{\bf assert }(\forall u,v)\ \interp{F(u)} \subseteq S(u)\wedge v \in \interp{F(v)} \ \}$
+ \KwSty{invariante} $\forall u,v: \interp{F(u)} \subseteq S(u)\wedge v \in \interp{F(v)}$\\
+$S(u):=S(u)\setminus\{w\}$ \label{alg:line:loop-body-begin}
+
+\If{$\diam F(v)$ no es conjunci\'on de $F(u)$}{ $F(u):=F(u)\wedge
+\diam F(v)$ \label{alg:line:loop-body-end-1} }} \caption{\small
+Computando $\EL$-similaridad y \posre}\label{alg:schematic-GRE}
+\end{algorithm}
+
+Inicialmente $F(v)$ es la conjunci\'on de todas las relaciones unarias que
+satisfacen $v$ (si no hay ninguna, entonces $F(v)=\top$).
+el algoritmo busca elementos $r,u,v,w$ tales que
+$(u,v)\in\interp{r}$, $w\in S(u)$ y $\su{r}{w}\cap
+S(v)=\emptyset$, actualiza $F(u)$ a $F(u)\wedge\diam F(v)$.
+De nuevo, \'esta nueva f\'ormula $\phi$ est\'a en $\pos$ y se puede mostrar que
+$v\in\interp{\phi}$ y $w\notin\interp{\phi}$, por lo tanto hay testigos de que $v\simil{\EL} w$ es falso.
+
+%As we will see in Theorem~\ref{thm:correctness-schematic-GRE}, this
+%formula is true in $v$ but false in $w$, hence witnessing that $w$
+%does not simulate $v$.
+
+
+%It is clear that Algorithm \ref{alg:schematic-GRE} terminates.
+%
+%\iffullversion One wants to know whether a given set $V\subseteq W$
+%has an \posre. How do we interpret the output of Algorithm
+%\ref{alg:schematic-GRE}? Here is the answer: $V\subseteq W$ has an
+%\EL-RE iff there is a node $v\in V$ such that $V=\{u\in W\colon
+%v\in\simset_\subseteq(u) \wedge u\in\simset_\subseteq(v)\}$. In
+%other words, $V$ has an \EL-RE iff $V$ is the set of nodes which are
+%\emph{bisimilar} to some node of $V$. Here we say that $u$ and $v$
+%are \emph{bisimilar} if $u\in\simset_\subseteq(v)$ and
+%$v\in\simset_\subseteq(u)$. In case $V=\{v_1,\dots,v_n\}$ has an
+%\posre, any $F(v_i)$ is a valid \posre, so one can pick any of them.
+
+\iffullversion Uno quiere saber si un determinado conjunto  $V\subseteq W$
+tiene un \posre. ¿C\'omo interpretar la salida del algoritmo
+\ref{alg:schematic-GRE}`? Aqu\'i est\'a la respuesta: $V\subseteq W$ tiene una
+\EL-RE si y s\'olo si hay un nodo $v\in V$ tal que  $V=\{u\in W\colon
+v\in\simset_\subseteq(u) \wedge u\in\simset_\subseteq(v)\}$. En
+Es decir, $V$ tiene un \EL-RE si y s\'olo si $V$ es el conjunto de nodos que son
+\emph{bisimilar} a alg\'un nodo de $V$. Aqu\'i decimos que $u$ y $v$
+son \emph{bisimilar} si $u\in\simset_\subseteq(v)$ y
+$v\in\simset_\subseteq(u)$. En caso  $V=\{v_1,\dots,v_n\}$ tiene una
+\posre, ninguna $F(v_i)$ es un \posre v\'alida, por lo que uno puede elegir cualquiera de ellas.
+
+%
+%In particular, $v$ has an \EL-RE if and only if $\simset_\subseteq(v)=\{v\}$
+%and in case $v$ has a \EL-referring expression then $F(v)$ is a
+%valid one. If $v$ does not have an \posre then the algorithm may be
+%used to approximate an \posre. Indeed, since every formula true at
+%$v$ is also true at all nodes in $\simset_\subseteq(v)$ and $F(v)$
+%is true at every node of $\simset_\subseteq(v)$ then $F(v)$ is a
+%reasonable approximation of an \EL-RE for $v$.
+
+En particular, $v$ tiene un \EL-RE si y s\'olo si $\simset_\subseteq(v)=\{v\}$
+y en caso de $v$ tiene una expresi\'on \EL-expresi\'on referencial, $F(v)$ es una v\'alida. Si $v$ no tiene un \posre entonces el algoritmo puede ser
+utilizado para aproximar una \posre. De hecho, ya que cada f\'ormula en cierta en $v$
+tambi\'en es cierto en todos los nodos de $\simset_\subseteq(v)$ y $F(v)$
+es cierto en todos los nodos de $\simset_\subseteq(v)$ entonces $F(v)$ es una
+aproximaci\'on razonable de un \EL-RE por $v$.
+
+\begin{ex}
+Sea $\gG$ el siguiente modelo
+\begin{center}
+\begin{tikzpicture}[>=latex]
+  \node (n1) at (0,0) [shape=circle,draw,inner sep=2pt, label=right:$$] {$1$} ;
+  \node (n2) at (2,0) [shape=circle,draw,inner sep=2pt, label=right:$$] {$2$} ;
+  \node (n4) at (0,1) [shape=circle,draw,inner sep=2pt, label=right:$p$] {$3$} ;
+  \node (n5) at (2,1) [shape=circle,draw,inner sep=2pt, label=right:$p{,}q$] {$4$} ;
+  \draw [->] (n1) -- (n4);
+  \draw [->] (n2) -- (n5);
+\end{tikzpicture}
+\end{center}
+%
+donde $\rg\ l=\cset{p,q}$ y la valuaci\'on es definida como
+$l(3)=\cset{p}, l(4)=\cset{p,q}, l(1)=l(2)=\cset{}$. Los valores iniciales de $S$ y $F$ son los que se muestran en
+Tabla~\ref{tab:example}.
+
+\begin{table}[ht]
+\centering
+{\footnotesize
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+&\multicolumn{2}{|c|}{Initial}&\multicolumn{2}{|c|}{Final}\\
+$v$ & $S(v)$ & $F(v)$ & $S(v)$&$F(v)$\\
+\hline
+$1$ & $\{1,2,3,4\}$ & $\top$ & $\{1,2\}$&$\top\wedge\diam p$\\
+$2$ & $\{1,2,3,4\}$ & $\top$ & $\{2\}$&$\top\wedge\diam(p\wedge q)$\\
+$3$ & $\{3,4\}$ & $p$ & $\{3,4\}$ &$p$\\
+$4$ & $\{4\}$ & $p\wedge q$ & $\{4\}$&$p\wedge q$\\
+\hline
+\end{tabular}
+\caption{Valores iniciales y finales de $F$ y $S$}\label{tab:example}
+}
+\end{table}
+
+Supongamos la siguiente ejecuci\'on:
+\begin{enumerate}
+\item Elegir $u=2,v=4,w=1$: detect that $1$ no simula $2$; set $S(2)=\{2,3,4\}$ y $F(2)=\top\wedge\diam(p\wedge q)$
+\item Elegir $u=2,v=4,w=3$: detecta que $3$ no simula $2$; set $S(2)=\{2,4\}$ y $F(2)=\top\wedge\diam(p\wedge q)$
+\item Elegir $u=2,v=4,w=4$: detecta que $4$ no simula $2$; set $S(2)=\{2\}$ y $F(2)=\top\wedge\diam(p\wedge q)$
+\item Elegir $u=1,v=3,w=3$: detecta que $3$ no simula $1$; set $S(1)=\{1,2,4\}$ y $F(1)=\top\wedge\diam p$
+\item Elegir $u=1,v=3,w=4$: detecta que $4$ no simula $1$; set $S(1)=\{1,2\}$ y $F(1)=\top\wedge\diam p$
+\end{enumerate}
+%After the fifth iteration it terminates. The final output is shown
+%in Table~\ref{tab:example}. From this output one may conclude that,
+%since $\simset_\subseteq(4)=\{4\}$, node $4$ has an \posre, namely
+%$p\wedge q$. Node $2$ also has the \EL-RE $\top\wedge\diam(p\wedge
+%q)$. In contrast $3$ does not have an \EL-RE because every
+%$\pos$-formula true at $3$ is also true at $4$ (in this case, the
+%only such possible formula is $p$ itself, or logically equivalent
+%formulas such as $\top\wedge p\wedge p$). Nor $3$ has an \posre.
+
+Despu\'es de la quinta iteraci\'on termina. Se muestra el resultado final
+En la Tabla~\ref{tab:example}. A partir de esta salida se puede concluir que,
+ya que$\simset_\subseteq(4)=\{4\}$, el nodo $4$ tiene un \posre, a saber,
+$p\wedge q$. Nodo $2$ tambi\'en tiene la \EL-RE $\top\wedge\diam(p\wedge
+q)$. En contraste $3$ no tiene un \EL-RE, porque cada
+$\pos$-f\'ormula verdadera en $3$ tambi\'en es cierta en $4$ (en este caso, el
+S\'olo tales f\'ormula posible es $p$ en s\'i mismos o equivalentes
+f\'ormulas como $\top\wedge p\wedge p$). Tampoco $3$ tiene un \posre.
+
+\end{ex}
+\fi
+
+\iffullversion
+\begin{theorem}\label{thm:correctness-schematic-GRE}
+Sea $S$ y $F$ la salida del Algoritmo
+\ref{alg:schematic-GRE} con input $\gG=\tup{N,\to,l}$. Entonces para cada
+nodo $v\in N$, $\interp{F(v)} = S(v) = \simset_\subseteq(v)$
+\end{theorem}
+\fi
+
+\iffullversion
+\begin{proof}
+Es claro que para cada nodo $v\in N$,
+$\simset_\subseteq(v)=S(v)$. Para la segunda parte, proponemos el siguiente invariante en el loop principal:
+\begin{itemize}
+\item[$I_1$:] para cada $v\in N$, $v \in \interp{F(v)}$
+\item[$I_2$:] para cada $u,v\in N$, $\interp{F(u)} \subseteq S(u)$
+\end{itemize}
+
+Vamos a analizar el estado despu\'es de la inicializaci\'on, antes de la l\'inea~\ref{alg:line:loop-begin} se ejecuta por primera vez. En el uno
+parte, es claro que para cualquier nodo $v\in N$, $v \in \interp{F(v)}$, as\'i
+$I_1$ es verificado. Por otro lado, si $v\notin S(u)$ entonces
+$l(u)\not\subseteq l(v)$ y hay un s\'imbolo proposicional $p$ tal que $p \in l(u)$ y $p \notin l(v)$. Desde que $v\notin\interp{p}$
+entonces $v\notin\interp{\bigwedge l(u)}$ y as\'i
+$v\notin \interp{F(u)}$.
+
+Supongamos que $I_1$ y $I_2$ son verdaderos antes de ejecutar la 
+l\'inea~\ref{alg:line:loop-body-begin}. Para todo $v\in N$ sea $S(v)=S_v$ y
+$F(v)=\phi_v$ en este estado. Sean $u,v,w$ los nodos elegidos. Mostramos que el invariante es reestablesido luego de ejecutar la l\'inea
+\ref{alg:line:loop-body-end-1}. Desde que $F$ y $S$ s\'olo cambian para $u$, 
+es suficiente mostrar
+\begin{itemize}
+\item[$I_1'$:] $u \in \interp{\phi_u\wedge\diam \phi_v}$
+\item[$I_2'$:] $\forall v\in N, \interp{\phi_u\wedge\diam \phi_v} \subseteq S_u\setminus\{w\}$
+\end{itemize}
+Para$I_1'$, es claro de $I_1$ que $u \in \interp{\phi_u}$ y $v \in \interp{\phi_v}$. Desde que $u\to v$ conclu\'imos que $u \in \interp{\diam
+\phi_v}$.
+
+Para $I_2'$ mostramos que para cualquier $v$, si $v\notin S_u\setminus\{w\}$
+entonces $v\notin \interp{\phi_u\wedge\diam \phi_v}$. Si $v\notin S_u$,
+por $I_2$ conocemos que $v\notin \interp{\phi_u}$ y entonces $v\notin
+\interp{\phi_u\wedge\diam \phi_v}$. Supongamos que $v=w$ y, por
+contradicci\'on, asumimos $v \in \interp{\phi_u\wedge\diam \phi_v}$.
+Hay $w'\in N$ tal que $v\to w'$ y $w' \in
+\interp{\phi_v}$. Por $I_2$ esto implica $w'\in S_v$. Aqu\'i $w'\in\su(w)\cap S_v$ y esto contradice la elecci\'on de $u,v,w$.
+
+Cuando el algoritmo termina, $S=\simset_\subseteq$ y
+el invariante $I_2$ implica que para cada $u,v\in N$,
+$F(u) \subseteq \simset_\subseteq(u)$. Por otro lado, $I_1$
+implica que $u \in \interp{F(u)}$ y por Proposici\'on \ref{prop:equiv} tenemos que si
+ $v\in \simset_\subseteq(u)$ entonces $v \in \interp{F(u)}$.
+
+Por lo tanto para cada $u,v\in N$, $\interp{F(u)} = \simset_\subseteq(u)$. 
+As\'i que definiendo $\form:=F$ obtenemos el resultado deseado.
+\end{proof}
+\else
+\fi
+
+\iffullversion
+\begin{theorem}
+Algoritmo~\ref{alg:schematic-GRE} con input $\gG = \tup{N,\to,l}$
+termina en tiempo
+$O(\size{{\to}}^2\cdot\size{N}^3+\size{N}\cdot\size{\rg\ l})$.
+\end{theorem}
+\fi
+
+\iffullversion
+\begin{proof}
+Para una implementaci\'on ingenua, el bucle principal se ejecuta en la mayor\'ia $\size{N}^2$ 
+muchos pasos y para encontrar $u,v,w$ en
+la l\'inea~\ref{alg:line:loop-begin} necesitamos $O(\size{N}\cdot\size{{\to}}^2)$
+
+muchos pasos. El tiempo de ejecuci\'on del cuerpo del bucle es absorbida por este
+\'ultima cantidad. Por lo tanto, en el tiempo total de ejecuci\'on del bucle principal es $O(\size{{\to}}^2\cdot\size{N}^3)$. Para cada $v\in N$, necesitamos
+$O(\size{\rg\ l})$muchos pasos para las l\'ineas~\ref{alg:line:init1} y~\ref{alg:line:init2}. 
+As\'i que en total, la inicializaci\'on toma $O(\size{N}\cdot\size{\rg\ l})$ 
+muchos pasos.
+\end{proof}
+\else
+\fi
+
+\iffullversion
+\begin{algorithm} \small
+\io
+
+\ForEach{$v\in \Delta$}{ $\prevS(v):=\Delta$
+
+\If{para toda $r$ binaria, $\su{r}{v}=\emptyset$}{$S(v):=\{u\in \Delta
+\mid \unary(v)\ \subseteq \unary(u) \}$
+
+$F(v):=\bigwedge\unary(v)$ } \Else{ sea $r$ una relaci\'on binaria tal que $\su{r}{v}\not=\emptyset$
+
+ $S(v):=\{u\in \Delta \colon
+\unary(v) \subseteq \unary(u)\wedge\su{r}{u}\not=\emptyset \}$
+
+$F(v):=\diam\top\wedge\bigwedge P(v)$ }}
+
+\While{$\exists\ v\in \Delta:S(v)\not=\prevS(v)$}{
+
+$\{\ I_1:\mbox{\bf assert\ }(\forall v)\ S(v)\subseteq\prevS(v)\ \}$
+
+$\{\ I_2:\mbox{\bf assert\ }(\forall r,u,v,w)\
+[(u,v)\in\interp{r}\wedge w\in
+S(u)]\Rightarrow[\su{r}{w}\cap\prevS(v)\not=\emptyset]\ \}$
+
+\ForEach{\mbox{\rm relaci\'on binaria $r$ y $u\in \pr{r}{v}$}}{
+
+$remove := \pr{r}{\prevS(v)}\setminus\pr{r}{S(v)}$
+
+$S(u):=S(u)\setminus remove$
+
+\If{$\diam F(v)$ no es conjunci\'on de $F(u)$}{ $F(u):=F(u)\wedge
+\diam F(v)$\label{alg:line:loop-body-end-2} } }
+
+$\prevS(v)=S(v)$
+
+} \caption{\small refinado $\EL$-similaridad y
+\posre}\label{alg:refined-GRE}
+\end{algorithm}
+\fi
+
+Algoritmo \ref{alg:schematic-GRE} se puede modificar f\'acilmente para
+calcular la \ELAN-RE de cada conjunto de simulaci\'on $\simset_{\ELAN}$ 
+ajustando la inicializaci\'on: reemplazando $\subseteq$ por $=$ en la
+inicializaci\'on de $S(v)$ e inicializando $F(v)$ como
+$\bigwedge\left(\unary(v)\cup\overline \unary(v)\right)$,
+donde $\overline \unary(v)=\{\lnot p\mid v\notin\interp{p}\}$.
+
+
+Una implementaci\'on ingenua del Algorithm~\ref{alg:schematic-GRE}
+ejecuta en tiempo $O(\size{\Delta}^3\times$
+$\size{\interp{\cdot}}^2)$
+%\fixme{Santi: chequear la complejidad}
+dando una soluci\'on polinomial a los problemas \EL y \ELAN-GRE.
+El Algoritmo~\ref{alg:schematic-gen-sim} puede ser transformado para ejecutar con a una menor complejidad como se muestra en
+~\cite{HHK95}; m\'as a\'un \'esta versi\'on del algoritmo puede ser adaptada para
+computar \EL- y \ELAN-RE para un arbitrario subconjunto del dominio de $\tup{\Delta,\interp{\cdot}}$
+ en $O(\size{\Delta}\times\size{\interp{\cdot}})$ pasos. 
+
+
+%Given $\gG = \tup{N,\to,l}$,
+%the
+%
+%$F$, the set of \posre, and $S$, the simulator sets s.t.\ $(\forall
+%v\in \Delta)\ \interp{F(v)}=S(v)=\simset_\EL(v)$
+
+%
+\begin{theorem}\label{thm:complexity-EL-GRE}
+Los problemas \EL y \ELAN-GRE sobre $\gM=\tup{\Delta,\interp{\cdot}}$ tienen complejidad
+$O(\size{\Delta}\times\size{\interp{\cdot}})$.
+\end{theorem}
+
+%Theorem~\ref{thm:complexity-EL-GRE} answers a question left open
+%in~\cite{AKS08}: the \EL-GRE problem can be solved in polynomial
+%time. Note, however, that this  result assumes a convenient representation of
+%formulas like, for example, directed acyclic graphs, to ensure that
+%each step of the formula construction can be done in $O(1)$. In
+%\sect{size} we will take a closer look at the issue and its relation to
+%the size of the smallest $\+L$-RE.
+
+
+El Teorema~\ref{thm:complexity-EL-GRE} responde a una pregunta dejada abierta
+en~\cite{areces08}: el problema \EL-GRE se puede resolver en tiempo polinomial. N\'otese, sin embargo, que este resultado supone una representaci\'on conveniente de
+f\'ormulas como, por ejemplo, grafos ac\'iclicos dirigidos, para asegurar que
+cada paso de la construcci\'on de la f\'ormula puede hacerse en $O(1)$. %En
+%\sect{size} vamos a echar un vistazo m\'as de cerca el tema y su relaci\'on con
+%el tamaño de los m\'as pequeños $\+L$-RE.
+
+%Theorem~\ref{thm:complexity-EL-GRE} shows that there are efficient
+%GRE algorihtms for \EL and \ELAN; languages which are --as discussed
+%in \sect{choosinglanguage}-- generally simple to realize. The
+%methods presented here, together with previous results
+%of~\cite{AKS08} indicate that algorithms for computing
+%$\+L$-simulator sets can, in many cases, be adapted to solve the
+%$\+L$-GRE problem at no extra complexity cost.
+
+%
+%Algorithm~\ref{alg:schematic-GRE} was obtained by adding formula annotations
+%to a standard `\EL-simulation-minimization' algorithm. Given an
+%$\+L$-simulation-minimization, we can typically adapt it in an analogous
+%way to obtain an $\+L$-GRE algorithm.
+%The obtained algorithm computes $\+L$-REs for \emph{every} element of the
+%domain simultaneously.
+%This will make it particularly suitable for applications with
+%static domains requiring references to many objects.
+
+
+El Algoritmo~\ref{alg:schematic-GRE} se obtuvo mediante la adici\'on de anotaciones de f\'ormulas
+a un algoritmo est\'andar `minimizaci\'on de \EL-simulaciones'. Dada una minimizaci\'on de
+$\+L$-Simulaci\'on, podemos adaptarlo normalmente en una an\'aloga
+manera de obtener un algoritmo $\+L$-GRE.
+El algoritmo calcula obtenido $\+L$-REs para \emph{todos} los elementos de la
+dominio simult\'aneamente.
+Esto har\'a que sea especialmente adecuado para aplicaciones con
+dominios est\'aticos que requieren referencias a muchos objetos.
+
+% but given its low complexity
+%and the fact that termination is ensured (no risk of infinite regression, see~\cite{dale91:_gener_refer_expres_invol_relat}),
+%it seems suitable for most applications.
+ %Moreover, the algorithm can be adapted
+%to dynamic domains by using techniques used to recompute simulations (see~\cite{saha:incre07}),
+%so that only those RE that were affected by a change in the domain need to be
+%recomputed.
+
+Por otra parte, el algoritmo se puede adaptar
+a los dominios din\'amicos mediante el uso de t\'ecnicas que se utilizan para volver a calcular las simulaciones (see~\cite{saha:incre07}),
+de modo que s\'olo los RE que se ve afectada por un cambio en el dominio necesita ser
+recalculado.
+
+%We have not addressed so far other relevant issues of the
+%GRE problem besides computational complexity. In particular,
+%Algorithm~\ref{alg:schematic-GRE} pays no attention to the use of
+%preferences among relations when generating an RE (i.e., preferring
+%the selection of certain attributes over others, when possible).
+%While there is room for improvement (e.g., making a weighted choice
+%instead of the non-deterministic choice when choosing elements
+%in the main loop of the algorithm), support for preferences is not
+%one of the strong points of this family of algorithms.
+%We consider algorithms with strong support for preferences in the following section.
+
+No hemos abordado hasta el momento otras cuestiones relevantes de la
+problema GRE adem\'as de la complejidad computacional. En particular,
+Algoritmo~\ref{alg:schematic-GRE} no presta atenci\'on a la utilizaci\'on de
+preferencias entre las relaciones cuando se genera una ER (es decir, prefiriendo
+la selecci\'on de ciertos atributos por encima de otros, cuando sea posible).
+Si bien no hay margen de mejora (por ejemplo, hacer una elecci\'on ponderada
+en lugar de la elecci\'on no determinista la hora de elegir los elementos
+en el bucle principal del algoritmo), el apoyo para las preferencias no es
+uno de los puntos fuertes de esta familia de algoritmos.
+Consideramos algoritmos con un fuerte apoyo a las preferencias en la siguiente secci\'on.
 
 
 \section{Bisimulaci\'on}
@@ -488,7 +958,7 @@ reificaci\'on, si es necesario).
 Tras la resoluci\'on, el algoritmo calcula lo que se llama la
 $\mathcal{L}$ - clases de semejanza del modelo de entrada de $\gM$.\\
 
-%There is many $\mathcal{L}$, we will name $\alc$ and $\el$
+%There is many $\mathcal{L}$, we will name $\alc$ y $\el$
 
 %ACA VOY A PONER gramatica para generar... ALC y EL no quedaria bien aca, hay que ver lo agregamos antes o no hace falta
 %In what follows, we use formulas of the $\el$ description logic
