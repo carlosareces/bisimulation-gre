@@ -5,24 +5,29 @@
 %En este cap\'itulo daremos una introducci\'on al problema de la generaci\'on autom\'atica de expresiones referenciales, contaremos las contribuciones de este trabajo y mostraremos como est\'a organizada la tesis.
 
 
-La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso de construcci\'on de un texto en lenguaje natural, para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural, es \'util para aplicaciones pr\'acticas en las que es necesario hacer accesible grandes vol\'umenes de informaci\'on, como por ejemplo para generar recomendaciones de restaurantes personalizadas, resumir informaci\'on m\'edica~\cite{dale2000}. La generaci\'on de lenguaje natural, est\'a dentro de el \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial. De todas las subtareas de GLN, la generaci\'on de expresiones referenciales (GER) es una de las que ha recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los
-sistemas NLG, con independencia de su finalidad, contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
+La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso de construcci\'on de un texto en lenguaje natural, para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural, es \'util para aplicaciones pr\'acticas en las que es necesario hacer accesible grandes vol\'umenes de informaci\'on posiblemente t\'ecnica. Por ejemplo, la GLN se puede usar para generar recomendaciones de restaurantes personalizadas, resumir informaci\'on m\'edica~\cite{dale2000}, etc. La generaci\'on de lenguaje natural, est\'a dentro de el \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial. 
+
+De todas las subtareas de GLN, la \textbf {generaci\'on de expresiones referenciales (GER)} es una de las que ha recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los
+sistemas GLN, con independencia de su finalidad, contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
 en vista del papel central que las expresiones referenciales tienen en la comunicaci\'on. Un sistema que proporciona
-consejos sobre los viajes a\'ereos \cite{white2010generating} ha de hacer referencia a los vuelos --- {\it el
-vuelo m\'as barato}, {\it un vuelo directo}, un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
-necesita para generar descripciones espaciales para las \'areas --- {\it tomar el puente junto a la iglesia a la derecha},
-y un sistema de di\'alogo de un robot que ensambla piezas de juguetes, junto con un usuario humano~\cite{foster-etal-ijcai2009} ha de hacer referencia a los componentes --- {\it inserte el perno verde hasta el final en el cubo rojo}.
+consejos sobre los viajes a\'ereos \cite{white2010generating} tiene que hacer referencia a los vuelos --- {\it el
+vuelo m\'as barato}, {\it un vuelo directo}---, un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
+necesita generar descripciones espaciales ---{\it tomar el puente junto a la iglesia a la derecha}---,
+y un sistema de di\'alogo de un robot que ensambla piezas de juguetes, junto con un usuario humano~\cite{foster-etal-ijcai2009} hace referencia a los componentes --- {\it inserte el perno verde hasta el final en el cubo rojo}.
 
-Cuando hablamos, nos referimos a cosas, es decir usamos expresiones referenciales, un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales. La {\bf Generaci\'on autom\'atica de expresiones referenciales} (GER) es una sub\'area de la GLN y es el tema de esta tesis.
+Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\'ivocamente a un objeto en un contexto y para un interlocutor particular. Si quisieramos referirnos al objeto se\~nalado por la flecha en la Figura~\ref{figura-er} podr\'iamos hacerlo con alguna de las expresiones referenciales que se muestran en la misma figura.% \ref{er-figura1}.
 
-Una {\bf expresi\'on referencial} es un sintagna nominal que identifica un\'ivocamente a un objeto en un contexto considerado y para un interlocutor particular. Si quisieramos referirnos al objeto se\~nalado por la flecha en la Figura~\ref{GRE3D7-stimulus1} podr\'iamos hacerlo con alguna de las expresiones referenciales que se muestran en la Figura \ref{er-figura1}
+Cuando hablamos, nos referimos a cosas (tangibles como un puente, o intangibles como una fecha), es decir usamos expresiones referenciales. Por lo tanto un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales. La {\bf Generaci\'on autom\'atica de expresiones referenciales} es el tema de esta tesis.
+
+
  %{\it la esfera roja que est\'a al lado del cubo rojo}, {\it la bola grande}, {\it el objeto que esta al lado del cubo grande}, {\it la bola roja}, {\it la pelota a la izquierda del cubo amarillo}. 
 \begin{figure}[!ht]
 \begin{minipage}[t]{0.5\linewidth}
 \centering
+
 \includegraphics[width=\textwidth]{images/22sinletras.jpg}
-\caption{Ejemplo de contexto}
-\label{GRE3D7-stimulus1}
+%\caption{Ejemplo de contexto}
+
 
 \end{minipage}
 \hspace*{0cm}
@@ -33,38 +38,52 @@ Una {\bf expresi\'on referencial} es un sintagna nominal que identifica un\'ivoc
 %\begin{table}
 
 \begin{tabular}{l}
- {\it la esfera roja que est\'a al lado del cubo rojo} \\
+ {\it La esfera grande}\\
 
- {\it la bola grande}\\
+ {\it La esfera roja que est\'a al lado del cubo rojo} \\
 
- {\it el objeto que esta al lado del cubo grande}\\
+ {\it El objeto que esta al lado del cubo grande}\\
 
- {\it la bola roja}\\
+ {\it La bola roja}\\
 
- {\it la pelota a la izquierda del cubo amarillo}\\
+ {\it La pelota a la izquierda del cubo amarillo}\\
 
- {\it la esfera grande}\\
+ {\it La bola grande}\\
 
  {\it la esfera que esta a la derecha del cubo rojo y a }\\
 {\it la izquierda del cubo amarillo}\\
 
  {\it la cosa que esta a la derecha del cubo del medio}\\
 
+  {\it ...}
  \end{tabular}
 \vspace*{0.4cm}
-\caption{Ejemplos de expresiones referenciales para la Figura \ref{GRE3D7-stimulus1}}
- \label{er-figura1}
+
+ \label{er-figura1}\ref{GRE3D7-stimulus1}
 %\end{table}
 \end{minipage}
+\caption{Ejemplos de expresiones referenciales }
+\label{figura-er}
 \end{figure}
 
-Un sistema de generaci\'on autom\'atica de texto en lenguaje natural deber\'ia incluir 
-las tareas de {\bf determinaci\'on de contenido} ---qu\'e decir---, {\bf lexicalizaci\'on} ---con qu\'e palabras---, y la {\bf realizaci\'on ling\"{u}\'istica} ---armar el sintagma nominal en lenguaje natural; es decir agregar los art\'iculos, preposiciones y dem\'as lexemas necesarios y ordenarlos de forma tal que la frase nominal resultante sea gramaticalmente aceptable. 
 
-En generaci\'on autom\'atica de expresiones referenciales, tenemos esas 3 partes tambi\'en: la determinaci\'on de contenido ---decide qu\'e propiedades o relaciones del objeto se incluir\'an en la expresi\'on referencial---, la lexicalicalizaci\'on, ---es decir las palabras que vamos a usar para nombrar las propiedades y relaciones--- y la realizaci\'on ling\"u\'istica, ---que se encarga de armar el sintagma nominal para que sea gramaticalmente correcto.
+%\begin{figure}[H]
+%\centering
+%\subfigure[a]{\includegraphics[width=40mm]{images/22sinletras.jpg}\label{Fig1-a}}
+%\hspace{2cm}
+%\subfigure[b]{\includegraphics[width=40mm]{images/22sinletras.jpg}\label{Fig1-b}}
+%\caption{Emplazamiento}
+%\label{fig.emplazamiento}
+%\end{figure}
 
-Por ejemplo para el contexto de la Figura \ref{GRE3D7-stimulus1} se puede decidir incluir las propiedades {\it tama\~no} y {\it forma}, las palabras que se usar\'an ser\'an {\it grande} y {\it esfera} y la realizaci\'on ling\"u\'istica decidir\'a agregar el art\'iculo {\it la} antes de {\it esfera}, y con respecto al orden de las palabras decidir\'a que el sustantivo {\it esfera} va antes que el adjetivo {\it grande}, quedando la ER {\it La esfera grande}. Otra realizaci\'on ling\"u\'istica podr\'ia ser {\it La esfera m\'as grande}.
+
+Un sistema de GLN incluye 3 etapas, {\bf determinaci\'on de contenido} ---qu\'e decir--- {\bf lexicalizaci\'on} ---con qu\'e palabras--- y {\bf realizaci\'on ling\"{u}\'istica} ---como decirlo. La lexicalizaci\'on elije que lexemas usar para comunicar el contenido determinado por la etapa anterior, y la realizaci\'on arma la oraci\'on agregando los art\'iculos, preposiciones, y dem\'as lexemas necesarios y ordenandolos de forma tal que la frase resultante sea gramaticalmente aceptable. 
+
+En la GER, tenemos esas 3 etapas tambi\'en: la determinaci\'on de contenido ---decide qu\'e propiedades o relaciones del objeto se incluir\'an en la expresi\'on referencial---, la lexicalicalizaci\'on, ---elije las palabras que se van a usar para nombrar las propiedades y relaciones--- y la realizaci\'on ling\"u\'istica, ---se encarga de armar el sintagma nominal para que sea gramaticalmente correcto.
+
+Por ejemplo, para el contexto de la Figura \ref{GRE3D7-stimulus1} y la primer ER de la Figura \ref{er-figura1} se decidi\'o incluir las propiedades {\it tama\~no} y {\it forma}, las palabras que se usar\'an ser\'an {\it grande} y {\it esfera} y la realizaci\'on ling\"u\'istica decidir\'a agregar el art\'iculo {\it la} antes de {\it esfera}, y con respecto al orden de las palabras decidir\'a que el sustantivo {\it esfera} va antes que el adjetivo {\it grande}, quedando la ER {\it La esfera grande}. Otra realizaci\'on de las mismas propiedades ---es decir, la misma sem\'antica--- podr\'ia ser {\it La bola de mayor tama\~no}.
  
+A lo largo de la tesis usaremos el t\'ermino ``expresi\'on referencial'' estando o no lexicalizadas las palabras y realizada ling\"u\'isticamente la ER.
 
 
 %\setlength{\unitlength}{1cm}
@@ -80,21 +99,98 @@ Por ejemplo para el contexto de la Figura \ref{GRE3D7-stimulus1} se puede decidi
 
 
 
+%\begin{figure}[!ht]
+%\begin{minipage}[t]{0.5\linewidth}
+%\centering
+%\includegraphics[width=\textwidth]{images/22sinLetras.jpg}\\[0pt]
+%\caption{Contexto de una persona}
+%\label{GRE3D7-stimulus}
+%\vspace*{.1cm}
+%\end{minipage}
+%\hspace*{0cm}
+%\begin{minipage}[t]{0.5\linewidth}
+%\centering
+%\includegraphics[width=\textwidth]{images/22.jpg}\\[0pt]
+%\caption{Contexto de un algoritmo}
+%\label{GRE3D7-stimulus-conLetras}
+%\end{minipage}
+%\end{figure}
+En lo que sigue introduciremos terminolog\'ia b\'asica, relacionada con la GER que nos servir\'a a lo largo de toda la tesis para entendernos.
+
+%\section{Conceptos b\'asicos}
+
+El {\bf dominio} de una ER define los tipos de entidades que est\'an siendo contemplados, en algunos
+casos incluso un determinado conjunto de entidades con todas sus propiedades. Por ejemplo el dominio de la Figura \ref{GRE3D7-stimulus1} son figuras geom\'etricas en 3 dimensiones. En particular el dominio incluye cubos y esferas de colores rojo y amarillo, algunas grandes y otras peque\~nas, situadas en un entorno 3D.
+
+El {\bf contexto} contiene un subconjunto de las entidades del dominio. La Figura \ref{GRE3D7-stimulus1} muestra un contexto con 7 entidades del dominio. Los puntos de referencia visibles en un cierto momento del camino para el que estamos dando direcciones, un subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un entorno visual, el contexto, incluyendo las propiedades de sus objetos y su configuraci\'on espacial, se puede llamar escena. %El contexto de la Figura \ref{GRE3D7-stimulus1} son los todos los objetos visibles con sus propiedades.
+
+Cada {\bf entidad} del contexto (tambi\'en conocido como objeto o elemento) tiene un tipo ---por ejemplo esfera---, ciertas propiedades o caracter\'isticas ---pòr ejemplo color---, valores de esas propiedades ---por ejemplo rojo---, y puede tener relaciones con otros objetos ---por ejemplo a la derecha de. Una {\bf propiedad} es una caracter\'istica de una entidad particular. Por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto, cada entidad puede tener muchas propiedades, e incluso puede tener relaciones, por ejemplo respecto a la posici\'on f\'isica, como estar situado al lado de otro objeto. 
+
+El {\bf target} (u objetivo), es el subconjunto de objetos de un contexto a los cuales queremos referirnos. En la escena del ejemplo de la Figura \ref{GRE3D7-stimulus1}, el target es el objeto se\~nalado por la flecha. En este caso el target es un conjunto singleton, es decir tiene un s\'olo elemento.
+
+Dado un contexto, un target y una descripci\'on (parcial) del target, los {\bf distractores} son otros elementos que se encuentran en el contexto, y que tambi\'en cumplen con la descripci\'on parcial. Si la descripci\'on parcial es {\it esfera} las esferas que no son el target de la Figura \ref{GRE3D7-stimulus1} distractores, y por ello es necesario seguir agregando propiedades o relaciones.
+
+Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos, alg\'un tipo de representaci\'on de un contexto y un target, y d\'a como resultado una (o m\'as) expresi\'on(es) referencial(es) para el target considerado, si puede identificarlo un\'ivocamente en el contexto.
+
+
 \begin{figure}[!ht]
-\begin{minipage}[t]{0.49\linewidth}
+\begin{minipage}[t]{0.40\linewidth}
 \centering
+\vspace*{1cm}
 \includegraphics[width=\textwidth]{images/22.jpg}
-\caption{Ejemplo de contexto con objetos etiquetados}
-\label{GRE3D7-stimulus2}
+%\caption{Ejemplo de contexto con objetos etiquetados}
+
 %\end{figure}
 
 %\begin{figure}
 \end{minipage}
-\begin{minipage}[t]{0.49\linewidth}
-%\begin{flushleft}
-%\vspace*{-2cm}
-\vspace*{-3.5cm}
-\begin{picture}(120,50)
+\begin{minipage}[t]{0.59\linewidth}
+
+\vspace*{0.5cm}
+%\begin{table}[h!]
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+%Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
+Ob.& 	Type		&	Color	&	Size & right & on top	& bellow	\\
+   &  	    	&	    	&	     & of    & of	    & of	\\
+\hline
+$e_1$ & ball & yellow & small & - & - & -\\
+$e_2$ & cube & red & small & - & - & $e_3$\\
+$e_3$ & ball & yellow & small & - & $e_2$ & -\\
+$e_4$ & cube & red & large & $e_5$ & - & -\\
+$e_5$ & ball & red & large & $e_4$ & - & -\\
+$e_6$ & cube & yellow & small & $e_7$ & - & -\\
+$e_7$ & cube & red & small & $e_6$ & - & -\\
+
+\hline
+\end{tabular}
+%\vspace*{.1cm}
+%\caption{Propiedades de los objetos de la figura.}\label{GRE3D7-stimulus2}
+\vspace*{-.5cm}
+\label{tabla-propiedades}
+\end{center}
+%\end{table}
+%\vspace*{-.5cm}
+\end{minipage} 
+\caption{Propiedades de los objetos de la figura.}\label{GRE3D7-stimulus2}
+
+%\caption{Representaci\'on del contexto de la Figura \ref{GRE3D7-stimulus1}}
+\end{figure}
+
+
+Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos y las propiedades de cada uno de ellos. En la Figura~\ref{formulas-stimulus1} se muestra una posible forma de representar los objetos, sus propiedades y relaciones. La representaci\'on ilustrada en la Figura~\ref{GRE3D7-stimulus2} es equivalente a la mostrada en la Tabla \ref{tabla-propiedades}, una base de datos que contiene todas
+las propiedades relevantes de los objetos de la escena. Entonces, la tarea de encontrar una ER para el objeto $e_5$ es la misma que la de encontrar alguna combinaci\'on de valores de propiedades y quiz\'as relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Esta tarea de encontrar las propiedades y relaciones que aplican a un objeto y no a los otros, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}.
+
+
+\begin{figure}[H]
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+%\includegraphics[width=\textwidth]{images/22sinletras.jpg}
+%%\caption{Ejemplo de contexto}
+%\label{GRE3D7-stimulus1-b}
+%\vspace*{-3.5cm}
+\begin{picture}(250,50)
 \put(0,-50){\begin{tikzpicture}
   [
     n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
@@ -111,8 +207,7 @@ Por ejemplo para el contexto de la Figura \ref{GRE3D7-stimulus1} se puede decidi
       \nRed\\[-3pt] 
       \nCube\end{array}$}, right of=a] (b) {};
  \node[n,label=below:$e_3$,label=above:{
-    \relsize{-2}$\begin{array}{c}
-      \nTop\\[-3pt]      
+    \relsize{-2}$\begin{array}{c}     
       \nSmall\\[-3pt] 
       \nYellow\\[-3pt] 
       \nBall\end{array}$}, above of=b] (c) {};
@@ -143,83 +238,145 @@ Por ejemplo para el contexto de la Figura \ref{GRE3D7-stimulus1} se puede decidi
  \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
  \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
  %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
- \draw[dotted] (-0.5,-1.5) rectangle (8,3.3);
+ \draw[dotted] (-0.5,-1.5) rectangle (8,2.8);
  \end{tikzpicture}}
  \end{picture}
  %\end{flushleft}
-\vspace*{1.75cm}
- \caption{Representaci\'on del contexto de la Figura \ref{GRE3D7-stimulus1}}
+%\vspace*{1.75cm}
+ 
  \label{modelo-gre3d7-stimulus}
-\end{minipage} 
+
+\end{minipage}
+\hspace*{0cm}
+%\vspace*{-5cm}
+\begin{minipage}[t]{0.5\linewidth}
+\centering
+%\vspace*{-5cm}
+%\begin{table}
+
+\begin{tabular}{l}
+ {\it ball and grande}\\
+
+ {\it ball and red and Ex.right-of (cube and red)} \\
+
+ {\it Ex.(T) and Ex.right-of (large and cube)}\\
+
+ {\it red and ball}\\
+
+ {\it ball and Ex.left-of (yellow and cube)}\\
+
+ {\it large and ball}\\
+
+ {\it ball and Ex.right-of (red and cube and}\\
+ {\it Ex.left-of (yellow cube)}\\
+ %{\it Ex.(T) and Ex.right-of o}\\
+
+ {\it ...}
+ 
+
+ \end{tabular}
+\vspace*{0.4cm}
+
+ \label{er-figura1-b}
+%\end{table}
+\end{minipage}
+\caption{Ejemplos de ER en \EL para la Figura \ref{GRE3D7-stimulus1-b}}
+\label{formulas-stimulus1}
 \end{figure}
 
+En la pr\'oxima secci\'on veremos porqu\'e la tarea GER es m\'as compleja de lo que parece a primera vista y en la siguiente introduciremos c\'omo herramientas de teor\'ia de modelos nos pueden ayudar.
+
 %\begin{figure}[!ht]
-%\begin{minipage}[t]{0.5\linewidth}
-%\centering
-%\includegraphics[width=\textwidth]{images/22sinLetras.jpg}\\[0pt]
-%\caption{Contexto de una persona}
-%\label{GRE3D7-stimulus}
-%\vspace*{.1cm}
+%\begin{minipage}[t]{0.49\linewidth}
+%\vspace*{-3.5cm}
+%\begin{picture}(120,50)
+%\put(0,-50){\begin{tikzpicture}
+  %[
+    %n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
+		 %aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  %]
+ %\node[n,label=above:$e_1$,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nSmall\\[-3pt] 
+      %\nYellow \\[-3pt] 
+      %\nBall\end{array}$}] (a) {};
+ %\node[n,label=above:$e_2$,label=below:{
+    %\relsize{-2}$\begin{array}{c}     
+      %\nSmall\\[-3pt] 
+      %\nRed\\[-3pt] 
+      %\nCube\end{array}$}, right of=a] (b) {};
+ %\node[n,label=below:$e_3$,label=above:{
+    %\relsize{-2}$\begin{array}{c}     
+      %\nSmall\\[-3pt] 
+      %\nYellow\\[-3pt] 
+      %\nBall\end{array}$}, above of=b] (c) {};
+ %\node[n,label=right:$e_4$,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nLarge\\[-3pt] 
+      %\nRed\\[-3pt] 
+      %\nCube\end{array}$}, right of=b] (d) {};
+ %\node[n,label=left:$e_5$,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nLarge\\[-3pt] 
+      %\nRed\\[-3pt] 
+      %\nBall\end{array}$}, right of=d] (e) {};
+ %\node[n,label=right:$e_6$,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nSmall\\[-3pt] 
+      %\nYellow\\[-3pt] 
+      %\nCube\end{array}$}, right of=e] (f) {};
+ %\node[n,label=left:$e_7$,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nSmall\\[-3pt]
+      %\nRed\\[-3pt] 
+      %\nCube\end{array}$},  right of=f] (g) {};
+ %\draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
+ %\draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
+ %\draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
+ %\draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+ %\draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
+ %\draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
+ %%\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
+ %\draw[dotted] (-0.5,-1.5) rectangle (8,3.3);
+ %\end{tikzpicture}}
+ %\end{picture}
+ %%\end{flushleft}
+%\vspace*{1.75cm}
+ %
+ %\label{modelo-gre3d7-stimulus}
 %\end{minipage}
-%\hspace*{0cm}
-%\begin{minipage}[t]{0.5\linewidth}
-%\centering
-%\includegraphics[width=\textwidth]{images/22.jpg}\\[0pt]
-%\caption{Contexto de un algoritmo}
-%\label{GRE3D7-stimulus-conLetras}
-%\end{minipage}
-%\end{figure}
-En lo que sigue daremos algunos conceptos b\'asicos que nos servir\'an a lo largo de toda la tesis.
-
-%\section{Conceptos b\'asicos}
-
-El {\bf dominio} define los tipos de entidades que est\'an siendo contemplados, en algunos
-casos incluso un determinado conjunto de entidades con todas sus propiedades. Por ejemplo el dominio de la Figura \ref{GRE3D7-stimulus1} son figuras en 3 dimensiones, particularmente cubos y esferas, rojas y amarillas, algunas grandes y otras peque\~nas situadas en un entorno 3D.
-
-El {\bf contexto} contiene un subconjunto de las entidades del dominio, por ejemplo, los puntos de referencia visibles en un cierto punto de la ruta para la que estamos dando direcciones, un subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un entorno visual, el contexto, incluyendo las propiedades de sus objetos y su configuraci\'on espacial, se puede llamar escena. El contexto de la Figura \ref{GRE3D7-stimulus1} son los todos los objetos visibles con sus propiedades.
-
-Cada objeto o entidad tiene un tipo, ciertas propiedades o caracter\'isticas, valores de esas propiedades, y puede tener relaciones con otros objetos.
-
-Una {\bf propiedad} es una caracter\'istica de una entidad particular por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto, cada entidad puede tener muchas propiedades, e incluso puede tener relaciones, por ejemplo respecto a la posici\'on f\'isica, el hecho de estar situado al lado de otro objeto. En la Figura \ref{GRE3D7-stimulus1} el objeto se\~nalado por la flecha tiene propiedad forma con valor {\it esfera}.
-
-El {\bf target} (u objetivo), es el conjunto de objetos a los cuales queremos referirnos. En la escena del ejemplo de la Figura \ref{GRE3D7-stimulus1}, el target es el se\~nalado por la flecha. En este caso el target es un singleton, es decir tiene 1 s\'olo objeto.
-
-Los {\bf distractores} son objetos que se encuentran en el contexto considerado, y por los cuales es necesario hacer una expresi\'on referencial para identificar al target. En la Figura \ref{GRE3D7-stimulus1} todos los dem\'as objetos que no est\'an se\~nalados son distractores, ya que si decimos {\it cosa}, no sabemos a cual objeto nos estamos refiriendo, en cambio si decimos {\it esfera}, s\'olo las dem\'as esferas del contexto son los distractores.
-
-Un {\bf algoritmo} para la generaci\'on autom\'atica de expresiones referenciales, es un procedimiento que toma al menos alg\'un tipo de base de datos que representa un contexto y un target, y d\'a como resultado una expresi\'on referencial para el target considerado, si dicha expresi\'on existe.
-
-Dijimos que la lexicalizaci\'on es el procedimiento por el cual se seleccionan las palabras que van a ir en la ER de salida, y la realizaci\'on ling\"u\'istica la encargada de dar un sintagma nominal aceptable, a lo largo de la tesis usaremos el t\'ermino ``expresi\'on referencial'' estando o no lexicalizadas las palabras y realizada ling\"u\'isticamente la ER.
-
-Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos y las propiedades de cada uno de ellos. En la Figura~\ref{GRE3D7-stimulus2} se muestra una posible forma de representar los objetos, sus propiedades y relaciones. La representaci\'on ilustrada en la Figura~\ref{GRE3D7-stimulus2} es equivalente a la mostrada en la Tabla \ref{tabla-propiedades}, una base de datos que contiene todas
-las propiedades relevantes de los objetos de la escena. Entonces, la tarea de encontrar una ER para el objeto $e_5$ es la misma que la de encontrar alguna combinaci\'on de valores de propiedades y quiz\'as relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Esta tarea de encontrar las propiedades y relaciones que aplican a un objeto y no a los otros, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}. En la pr\'oxima secci\'on veremos porqu\'e esta tarea es m\'as compleja de lo que parece a primera vista y en la siguiente introduciremos c\'omo herramientas de l\'ogica nos pueden ayudar.
-
-
-\begin{table}[h!]
-\begin{center}
-\begin{tabular}{|l|c|c|c|c|c|c|}
-\hline
-%Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
-Objeto& 	Forma		&	Color	&	Tama\~no & Al lado de & Arriba de	& Abajo de	\\
-\hline
-$e_1$ & esfera & amarillo & chico & - & - & -\\
-$e_2$ & cubo & rojo & chico & - & - & $e_3$\\
-$e_3$ & esfera & amarillo & chico & - & $e_2$ & -\\
-$e_4$ & cubo & rojo & grande & $e_5$ & - & -\\
-$e_5$ & esfera & rojo & grande & $e_4$ & - & -\\
-$e_6$ & cubo & amarillo & chico & $e_7$ & - & -\\
-$e_7$ & cubo & rojo & chico & $e_6$ & - & -\\
-
-\hline
-\end{tabular}
-%\vspace*{.1cm}
-\caption{Propiedades de los objetos de la Figura \ref{GRE3D7-stimulus2}.}
-\vspace*{-.5cm}
-\label{tabla-propiedades}
-\end{center}
-\end{table}
+%\begin{minipage}[t]{0.49\linewidth}
+%
+%%\begin{table}[h!]
+%\begin{center}
+%\begin{tabular}{|l|c|c|c|c|c|c|}
+%\hline
+%%Figure & Model \puse &  Learning \puse & Random \puse &  Uniform \puse \\
+%Objeto& 	Tipo		&	Color	&	Tama\~no & Al lado de & Arriba de	& Abajo de	\\
+%\hline
+%$e_1$ & ball & yellow & small & - & - & -\\
+%$e_2$ & cube & red & small & - & - & $e_3$\\
+%$e_3$ & ball & yellow & small & - & $e_2$ & -\\
+%$e_4$ & cube & red & large & $e_5$ & - & -\\
+%$e_5$ & ball & red & large & $e_4$ & - & -\\
+%$e_6$ & cube & yellow & small & $e_7$ & - & -\\
+%$e_7$ & cube & red & small & $e_6$ & - & -\\
+%
+%\hline
+%\end{tabular}
+%%\vspace*{.1cm}
+%\caption{Propiedades de los objetos de la Figura \ref{GRE3D7-stimulus2}.}
 %\vspace*{-.5cm}
+%\label{tabla-propiedades}
+%\end{center}
+%%\end{table}
+%%\vspace*{-.5cm}
+%\end{minipage} 
+%\caption{Representaci\'on del contexto de la Figura \ref{GRE3D7-stimulus1}}
+%\end{figure}
 
-\section{Generaci\'on de expresiones referenciales bajo incertidumbre}
+
+\section{Generaci\'on de expresiones referenciales en el mundo real, es decir, bajo incertidumbre}
 \label{sec:gre-incertidumbre}
 
 
@@ -230,17 +387,26 @@ $e_7$ & cubo & rojo & chico & $e_6$ & - & -\\
 %un objetivo es un objetivo que se puede aproximar, pero rara vez alcanzado (Turner et al., 2008;
 %Turner, Sripada, y Reiter 2009) .Es en tales dominios que prominencia (especialmente en el
 %sentido no lingüístico) se convierte en un problema crítico. 
-Cuando la referencia se lleva a cabo en la vida real
-a diferencia de un experimento t\'ipico de la psicoling\"u\'istica
-a menudo es poco claro de qu\'e depende la inclusi\'on o no de propiedades. Podr\'ia ser que la prominencia de algunas propiedades dependan del hablante, y que esto es
-una de las causas de la variaci\'on individual considerable que existe entre diferentes
-hablantes \cite{speaker-dependent}.
+Cuando la generaci\'on de expresiones referenciales ocurre en la vida real
+en lugar de ocurrir en un experimento controlado de psicoling\"u\'istica---como es el caso de la GER ilustrada en la Figura \ref{GRE3D7-stimulus1}--- las fuentes de \textbf{incertidumbre} que afectan al proceso se multiplican. En trabajo reciente en el \'area de REG \cite{turner2008} y \cite{turner2009} se discute que, al intentar usar algoritmos de GER en dominios grandes y realistas -(como por ejemplo, la descripci\'on de regiones en mapas), la identificaci\'on precisa del target es una tarea que puede ser aproximada pero raramente lograda. Los autores argumentan que esto se debe, en parte, a que las representaciones geogr\'aficas son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce incertidumbre ---por ejemplo, es realmente el \'unico restaurant de esa calle o es el \'unico que aparece en el mapa?.
+Cuando la informaci\'on del contexto proviene de datos de sensores, como es el caso de robots o de otros aut\'omatas, las entradas del algoritmo de GER son inevitablemente ruidosas. Es decir, estas entradas contienen no s\'olo informaci\'on incompleta pero tambi\'en posiblemente incorrecta. 
+En estos dominios, e
+incluso en contexto tan simples como el de la Figura \ref{GRE3D7-stimulus1} hay incertidumbre. '?Estamos seguros que la Figura \ref{formulas-stimulus1} representa toda la informaci\'on del contexto? Algunos podemos opinar que s\'i, otros que no. En efecto, la persona que gener\'o la ER \textbf{la pelota a la izquierda del cubo amarillo} opina que no: la relaci\'on \emph{a la izquierda de} discutiblemente existente entre el target y el cubo amarillo no esta representada en el grafo. Un algoritmo de GER con este grafo como input nunca generar\'ia la expresi\'on referencial de la que venimos hablando. Esta falta de informaci\'on no s\'olo impide la generaci\'on de ER v\'alidas, si no que tambi\'en permitir\'ia la generaci\'on de ER claramente incorrectas como, \emph{la esfera roja que no tiene nada a la derecha}.
+Y aunque no hablemos ni de incompletitud ni de incorrectitud tambi\'en hay incertidumbre en \textbf{cu\'al} ER un sistema de GER de elegir. Si tuvieramos que elegir la mejor ER para la Figura \ref{GRE3D7-stimulus1}, c\'omo lo har\'iamos? Se podr\'ia argumentar que tendr\'iamos tantas respuestas distintas como el n\'umero de personas a las cuales les preguntaramos. Y parte de raz\'on hay en eso. Por ejemplo seguramente hay personas que preferir\'an usar la palabra esfera o pelota, antes que bola. Para gustos hay colores. Y seguramente no falte quien diga que LA mejor expresi\'on referencial ni si quiera aparece en la Figura \ref{GRE3D7-stimulus1}. Sin embargo, seguramente habr\'a una tendencia como se muestra en estudios previos \cite{viet:gene11}. Nadie preferir\'a una ER que use 21 propiedades y 6 relaciones para describir al target de la Figura \ref{GRE3D7-stimulus1}. El largo de una ER affecta su calidad.
 
-Como vemos en la Figura \ref{er-figura1} hay m\'as de una forma en la que el objeto $e_5$ puede ser distinguido del resto, la computadora tiene que decidir cu\'al de esas expresiones referenciales es \'optima en el contexto dado. Por otra parte, el concepto de \'optimo puede significar diferentes cosas.
+
+%a menudo es poco claro de qu\'e depende la inclusi\'on o no de propiedades. Podr\'ia ser que la prominencia de algunas propiedades dependan del hablante, y que esto es
+%una de las causas de la variaci\'on individual considerable que existe entre diferentes
+%hablantes \cite{speaker-dependent}.
+
+%Como vemos en la Figura \ref{er-figura1} hay m\'as de una forma en la que el objeto $e_5$ puede ser distinguido del resto, la computadora tiene que decidir cu\'al de esas expresiones referenciales es \'optima en el contexto dado. Por otra parte, el concepto de \'optimo puede significar diferentes cosas.
 
 Se podr\'{i}a pensar, por ejemplo, que las referencias son \'optimas cuando son m\'{i}nimas en longitud, es decir, 
-que contiene s\'olo la informaci\'on suficiente para identificar el objeto target. Pero, como veremos, la b\'usqueda de referencias m\'{i}nimas
-es computacionalmente cara, y no es necesariamente lo que los hablantes hacen, ni lo que es m\'as \'util para los oyentes.
+contienen s\'olo la informaci\'on suficiente para identificar el objeto target y nada m\'as. Pero, la generaci\'on de referencias m\'{i}nimas
+no es necesariamente lo que los hablantes hacen, ni lo que es m\'as \'util para los oyentes. Y ni si quiera nos resuelve el problema de elegir una ER. {\it La bola grande} y {\it La esfera roja} son ER de la Figura \ref{GRE3D7-stimulus1} y tienen exactamente la misma longitud.
+Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede hacer es que un algoritmo de GER devuelva un ranking de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cuan buena es esa ER para el input.
+
+Para poder dar ese ranking del cual estuvimos hablando bastar\'ia correr un algoritmo {\bf no-determin\'istico} una cantidad 'suficiente'{\footnotesize depender\'a del grado de detalle que queremos conseguir} de veces.
 
 Un algoritmo para la GER es {\bf no-determin\'istico} si puede dar diferentes ER para el mismo contexto y target en sucesivas ejecuciones.
 En esta tesis estudiamos la generaci\'on autom\'atica de expresiones referenciales, 
