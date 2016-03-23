@@ -170,7 +170,7 @@ Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como desc
 \end{figure}
 
 \begin{table}[!t]
-\begin{small}
+{\footnotesize
 \begin{center}
 \begin{tabular}{|l|r|r|r|}
 \hline
@@ -235,7 +235,8 @@ street & calle del marquez viudo de pontejos & & str19\\
 \caption{Objetos identificados de la Figura~\ref{mapa-con-ids}\label{tabla-ids}}
 \vspace*{-.5cm}
 \end{center}
-\end{small}
+%\end{small}
+}
 \end{table}
 
 Para cada imagen se construy\'o una tabla con los id's de los objetos que se ven, como por ejemplo para la imagen~\ref{mapa-con-ids} la tabla correspondiente es la Tabla~\ref{tabla-ids} al mapa se le agregaron los id's de algunos objetos del mapa, estos identificadores eran \'unicos. Por ejemplo {\it pub1} es el que esta siendo apuntado por la fecha roja en la Figura~\ref{mapa-con-ids}. A cada calle tambi\'en se le asign\'o un identificador \'unico pero estos se anotaron en una tabla, como se ve en la Tabla~\ref{tabla-ids}. Dicha tabla tiene 4 columnas para cada objeto se puso ``tipo'', ``nombre'', ``en'' y ``id'', el tipo es por ejemplo, restaurante, bar, street (estos nombres de tipos se pusieron en Ingl\'es), ``nombre'', el nombre propio del objeto, si ten\'ia, (se mantuvieron en el idioma original, espa\~nol o portugu\'es), ``en'', conten\'ia la calle en la que estaba situado el objeto, y si era una calle no conten\'ia nada e ``id'' que fue compuesto por 3 o 4 primeras letras del tipo del objeto m\'as un n\'umero para identificarlo un\'ivocamente, por ejemplo para los restaurantes ``rest1'', ``rest2''.
@@ -486,7 +487,7 @@ Siguiendo \cite{thiago-svm}, construimos un modelo GER uso de m\'aquinas de vect
 Tabla \ref{tab-reg-results} resume los resultados obtenidos por el algoritmo GER construido a partir de SVM clasificadores, los obtenidos mediante un sistema de l\'{i}nea de base que representa una extensi\'on relacional de la \& Reiter Incremental Algoritmo Dale, y por una estrategia de selecci\'on aleatoria.
 
 % these results are for SVM.All.VAR-   compared to the AEI- baseline
-\begin{table}[ht]
+\begin{table}[H]
 \begin{center}
 \caption{Resultados de la GER}
 \label{tab-reg-results}
@@ -515,7 +516,7 @@ En t\'erminos de precisi\'on global \footnote{Y tambi\'en en cuanto a las puntua
 Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \ref{tab-svm-results} muestra estos resultados, medida por la precisi\'on (P), memoria (R), F1-medida (F1) y el \'area bajo la curva ROC (AUC).
 
 %these are the rsults for the training over the set of ALL speakers 
-\begin{table}[ht]
+\begin{table}[H]
 \begin{center}
 \footnotesize{
 \caption{Resultados del clasificador}
@@ -557,232 +558,173 @@ A partir de estos resultados nos damos cuenta de que los atributos muy frecuente
 \section{Caso de estudio del ZOOM corpus}
 \label{sec:caso_estudio}
 
-En esta secci\'on presentamos el estudio de tres casos particulares, los cuales son mucho m\'as naturales que los que hab\'iamos visto hasta el momento: la generaci\'on autom\'atica de ER para mapas del ZOOM corpus. Dividimos el estudio en 3 partes, el la Secci\'on \ref{sec:sinzoom} veremos un mapa sin zoom el cual se muestra en la Figura \ref{mapa-zoom} y con target singular. En la Secci\'on \ref{sec:conzoom} veremos el mismo target pero con zoom 2X, el mapa usado se muestra en Figura \ref{mapa-zoom2x} y en la Secci\'on \ref{sec:plural} veremos el mismo mapa de la Secci\'on \ref{sec:sinzoom} pero con target plural, es decir con 2 targets, el mapa se muestra en Figura \ref{mapa-zoom-plural}.  Veremos las diferencias entre esos mapas a nivel de informaci\'on disponible, obtendremos a partir de cada imagen el modelo subyacente que usar\'a el algoritmo y a partir de las ER's del corpus obtendremos las probabilidades de uso de las palabras, para luego ejecutar el algoritmo. Compararemos las ER's dadas por el algoritmo con las que dieron las personas.
+En esta secci\'on presentamos el estudio de tres casos de estudio particulares, de generaci\'on autom\'atica de ER para mapas del ZOOM corpus. Dividimos el estudio en 3 partes, en la Secci\'on \ref{sec:sinzoom} veremos un mapa sin zoom el cual se muestra en la Figura \ref{mapa-zoom} y cuyo target es singular. En la Secci\'on \ref{sec:conzoom} analizaremos la GER con el mismo target pero ahora con zoom 2X, el mapa usado se muestra en la Figura \ref{mapa-zoom2x}. En la Secci\'on \ref{sec:plural} veremos el mismo mapa de la Secci\'on \ref{sec:sinzoom} pero con target plural, es decir con 2 targets, el mapa se muestra en Figura \ref{mapa-zoom-plural}.
 
-En cada uno de los mapas, el o los targets est\'an se\~nalados por flechas rojas, seg\'un la leyenda que se ubica a la derecha, podemos decir que si se trata de una iglesia, o restaurantes, etc. 
+%  Veremos las diferencias entre esos mapas a nivel de informaci\'on disponible, obtendremos a partir de cada imagen el modelo subyacente que usar\'a el algoritmo y a partir de las ER's del corpus obtendremos las probabilidades de uso de las palabras, para luego ejecutar el algoritmo. Compararemos las ER's dadas por el algoritmo con las que dieron las personas.
 
-\textcolor{blue}{
-Podria explicar un poco porque restringimos el modelo... a parte de lo que se ve en el mapa. paper Incremental generation of spacial referring expressions in situated dialog cuenta un poco como generar las ER de un robot en tiempo real, van acotando el entorno. Tambien hablan de las preferencias pero ponen nombres raros topologial constrstivem topological relative topological proyective contrastive proyective relative. (Bryant et al. 1992 Gapp 1995) above/below sobre in front of/behind y de esta sobre to the right of / to the left of
-}
+%En cada uno de los mapas, el o los targets est\'an se\~nalados por flechas rojas, seg\'un la leyenda que se ubica a la derecha, podemos decir que si se trata de una iglesia, o restaurantes, etc. 
+%
+%\textcolor{blue}{
+%Podria explicar un poco porque restringimos el modelo... a parte de lo que se ve en el mapa. paper Incremental generation of spacial referring expressions in situated dialog cuenta un poco como generar las ER de un robot en tiempo real, van acotando el entorno. Tambien hablan de las preferencias pero ponen nombres raros topologial constrstivem topological relative topological proyective contrastive proyective relative. (Bryant et al. 1992 Gapp 1995) above/below sobre in front of/behind y de esta sobre to the right of / to the left of
+%}
 
 
 \subsection{Singular sin zoom}
 \label{sec:sinzoom}
 
 
-En la Tabla \ref{freq-mapa}, se muestran las ER dadas por las personas para el mapa de la Figura \ref{mapa-zoom}, la cantidad de veces que aparecieron en el corpus, la frecuencia, la columna SubE representa si es subespecificada y la columna SobreE si es sobreespecificada, notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales.
+En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as frecuentes generadas por las personas que participaron en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom} se indica la cantidad de veces que aparecieron en el corpus, que equivale a la cantidad de distintas personas que independientemente decidieron usar la misma ER para referirse al target. Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales.
 
 
 %\end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=\textwidth]{images/corpus/mapa6.png}\\[0pt]
+\includegraphics[width=\textwidth]{images/corpus/mapa6-prob.png}\\[0pt]
 \caption{Imagen del ZOOM corpus con target singular}
 \label{mapa-zoom}
 \end{figure}
 
 
-\begin{table}[h!]
-\begin{small}
+%\DeclareFloatFont{tiny}{\tiny}% "scriptsize" is defined by floatrow, "tiny" not
+
+\begin{table}[H]
+{\footnotesize
+%\texttiny
+%\floatsetup[table]{font=tiny}
 \begin{center}
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|l|c|c|c|c|}
 \hline
-ER 					      & Cantidad &  Frecuencia & SubE & SobreE\\ \hline \hline
-La iglesia 																																		 &16&0.197\%  & SI &NO \\ \hline
-Iglesia en calle Santo Tomas																									 &15&0.185\% 	& NO &NO \\ \hline
-Iglesia en calle Santo Tomas frente al Ministerio de         &11&0.1358\% & NO &SI \\ 
-Asuntos Exteriores& &&&\\ \hline
-Iglesia  frente al Ministerio de Asuntos Exteriores 													 &11&0.1358\% & NO &NO \\ \hline
-Iglesia en calle Santo Tomas cerca del Ministerio de         &2 &0.0246\% & NO &SI \\ 
-Asuntos Exteriores& & & & \\ \hline
-La Iglesia en Calle de Atocha																									 &2&0.0246\%  & NO &NO \\ \hline
-Calle de santo tomas 																													 &2&0.0246\% 	& SI &NO \\ \hline
-La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, 									 &2&0.0246\%	& NO &SI \\ 
-frente al Ministerio de Asuntos Exteriores																		 &&&& \\ \hline
-La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha										 &2&0.0246\% 	& NO &SI \\ \hline
-Iglesia cerca del Ministerio de Asuntos Exteriores														 &1&0.0123\% 	& NO &NO \\ \hline
-NO-ERA-ER&18&0.222\% & &\\ \hline \hline
-Totales&81&100\% & &\\
+&ER 					      & \# &  \% & SubE & SobreE\\ \hline \hline
+1&La iglesia 																																		 &16&19.7\%  & X & \\ \hline
+2&Iglesia en calle Santo Tomas																									 &15&18.5\% 	&  & \\ \hline
+3&Iglesia en calle Santo Tomas frente al Ministerio de         &11&13.6\% &  &X \\ 
+&Asuntos Exteriores& &&&\\ \hline
+4&Iglesia frente al Ministerio de Asuntos Exteriores 													 &11&13\% &  & \\ \hline
+5&Iglesia en calle Santo Tomas cerca del Ministerio de         &2 &2.5\% &  &X \\ 
+&Asuntos Exteriores& & & & \\ \hline
+6&La Iglesia en Calle de Atocha																									 &2&2.5\%  &  & \\ \hline
+7&Calle de santo tomas 																													 &2&2.5\% 	& X & \\ \hline
+8&La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, 									 &2&2.5\%	&  &X \\ 
+&frente al Ministerio de Asuntos Exteriores																		 &&&& \\ \hline
+9&La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha										 &2&2.5\% 	&  &X \\ \hline
+10&Iglesia cerca del Ministerio de Asuntos Exteriores														 &1&1.2\% 	&  & \\ \hline
 \hline
 \end{tabular}
-\caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom}.}\label{freq-mapa}
+\caption{10 ER m\'as frecuentes del corpus para el mapa de la Figura \ref{mapa-zoom}.}\label{freq-mapa}
 \end{center}
-\end{small}
+}%\end{tiny}
 \end{table}
 
 
-Necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo, lo cual no significa que usemos esas mismas palabras para la ER final, la misma palabra se podr\'ia realizar con diferentes expresiones. Por ejemplo la palabra ``in-front-of'' se podr\'ia realizar como ``frente a'', ``al frente de''. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es. Algunas personas dijeron ``en la esquina de...'', eso fue anotado como ``between'' y luego 2 calles, esta palabra no fue usada para correr el algoritmo porque tiene 2 par\'ametros, en cambio usamos ``en'' para ambas calles, con esa modificaci\'on, no estamos perdiendo informaci\'on ya que si el algoritmo da ambas calles, lo podr\'iamos realizar como ``esquina''. Se muestra el vocabulario y las probabilidades de uso de las palabras del vocabulario, sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom}.
-Para calcular las probabilidades de uso se tuvieron en cuenta las ER que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ER fueron las que cumpl\'ian con esas condiciones. Se cont\'o la cantidad de veces que aparec\'ia la palabra, teniendo en cuenta que si aparec\'ia 2 veces se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63.
+Necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es. Algunas personas dijeron ``en la esquina de...'', eso fue anotado como ``between'' y luego 2 calles, esta palabra no fue usada para correr el algoritmo porque tiene 2 par\'ametros, en cambio usamos ``in'' para ambas calles, con esa modificaci\'on, no estamos perdiendo informaci\'on ya que si el algoritmo da ambas calles, lo podr\'iamos realizar como ``esquina''. Se muestra el vocabulario y las probabilidades de uso de las palabras del vocabulario, sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom}.
+Para calcular las probabilidades de uso se tuvieron en cuenta las ER que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ER fueron las que cumpl\'ian con esas condiciones. Se cont\'o la cantidad de veces que aparec\'ia la palabra, teniendo en cuenta que si aparec\'ia 2 veces en la misma ER se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63 que fueron la cantidad de ER que eran v\'alidas.
 
-church = 61/63 = 0.968\\
-in = 32/63 = 0.5079\\
-in-front-of = 23/63 = 0.365\\
-near = 3/63 = 0.0476\\
-MinisterioAsuntosExteriores = 26/63 = 0.41\\
-CalleDeSantoTomas = 32/63 = 0.5079\\
-CalleDeAtocha = 4/63 = 0.06
+\begin{table}[H]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Palabra 					      &  Probabilidad\\ \hline \hline
 
-El modelo se muestra en la Figura \ref{modelo-mapa-zoom}
+church & 0.968\\
+in & 0.5079\\
+in-front-of & 0.365\\
+near & 0.0476\\
+MinisterioAsuntosExteriores & 0.41\\
+CalleDeSantoTomas & 0.5079\\
+CalleDeAtocha & 0.06\\
+\hline
+\end{tabular}
+\caption{Probabilidad de las palabras del dominio.}\label{prob-vocabulario}
+\end{center}
+\end{small}
+\end{table}
+%\begin{table}[H]
+%\begin{small}
+%\begin{center}
+%\begin{tabular}{|l|}
+%\hline
+%Palabra 					     Probabilidad\\ \hline \hline
+%
+%church  0.968\\
+%in 0.5079\\
+%in-front-of 0.365\\
+%near 0.0476\\
+%MinAsExt  0.41\\
+%CalleSantoTomas 0.5079\\
+%CalleAtocha 0.06\\
+%\hline
+%\end{tabular}
+%\caption{Probabilidad de las palabras del dominio.}\label{prob-vocabulario}
+%\end{center}
+%\end{small}
+%\end{table}
 
-%\begin{figure}[ht]
-%\centering
-%\begin{tikzpicture}
-  %[
-    %n/.style={circle,fill,draw,inner sep=5pt,node distance=4cm},
-    %aArrow/.style={scale=10,->, >=stealth, thick,
-    %shorten <= 1pt, shorten >= 1pt},
-  %]
-			%
-%
-	%\node[n,label=left:$str17$,label=below:{
-    %\relsize{-2}$\begin{array}{c}
-     %\nStreet\end{array}$}] (a) {};		
-			%
-	%\node[n,label=above:$str12$,label=below:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nStreet\\[-3pt] 
-      %\nCalleDeElSalvador\end{array}$}, right of=a] (b) {};
-  %
-	%\node[n,label=left:$str16$,label=below:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nStreet\end{array}$}, right of=b] (m) {};		 
-%
-%\node[n,label=below:$str10$,label=above:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nStreet\\[-3pt] 
-      %\nCalleSantoTomas\end{array}$}, above of=b] (c) {};	
-				%
- %\node[n,label=left:$min1$,label=above:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nBuilding\\[-3pt] 
-      %\nMinAsExt\end{array}$}, above of=a] (f) {};	
-					%
-  %\node[n,label=left:$church1$,label=below:{
-    %\relsize{-2}$\begin{array}{c}
-     %\nChurch\end{array}$}, above of=f] (g) {};
-			%
- %\node[n,label=left:$church2$,label=below:{
-    %\relsize{-2}$\begin{array}{c}
-     %\nChurch\end{array}$}, right of=c] (d) {};
-			%
-  %\node[n,label=below:$rest3$,label=above:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nRestaurante\\[-3pt] 
-      %MedinaMayrit\end{array}$}, above of=d] (h) {};			
-			%
- %\node[n,label=below:$str9$,label=above:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nStreet\\[-3pt] 
-      %\nCalleAtocha\end{array}$}, above of=c] (e) {};		
-%
-%\node[n,label=left:$rest4$,label=below:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nRestaurante\end{array}$}, right of=m] (k) {};
-%
-%\node[n,label=above:$d$,label=below:{
-    %\relsize{-2}}, right of=d] (i) {};
-		%
- %\node[n,label=below:$str15$,label=above:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nStreet\end{array}$}, above of=i] (j) {};	
-%
-%%\node[n,label=below:$str17\nStreet$,label=above:{
- %%   \relsize{-2}}, below of=k] (n) {};				
- %\draw [aArrow,<->,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (f);
-%% \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (g);
-%
- %\draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
- %\draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
-%
- %\draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
- %\draw [aArrow,<->,bend right=-20] (d) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
- %%\draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (d);
- %\draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nCerca$} (d);
- %%\draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nCerca$} (k);
-%
- %\draw [aArrow,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
- %\draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-3}$\nFrenteCerca$} (i);
-%% \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nFrente$} (k);
- %\draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
- %\draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-3}$\nIn$} (j);
-%
- %\draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (c);
- %\draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
- %\draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (a);
- %\draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nIn$} (b); 
-%
- %\draw [aArrow,bend right=5] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (e);
- %\draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-3}$\nIn$} (m);
-%%\draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
-%
- %\end{tikzpicture}
-%\caption{Grafo del contexto \ref{mapa-zoom}}
-%\label{modelo-mapa-zoom}
-%\end{figure}
+El modelo que representa el fragmento del mapa de la Figura \ref{mapa-zoom}, al sur de la Calle de Atocha, se muestra en la Figura \ref{modelo-mapa-zoom}
 
 \begin{figure}[ht]
 \centering
 \begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=5pt,node distance=4cm},
+    n/.style={circle,draw,inner sep=5pt,node distance=4cm},
     aArrow/.style={scale=10,->, >=stealth, thick,
     shorten <= 1pt, shorten >= 1pt},
   ]
 			
 
-	\node[n,label=left:$str17$,label=below:{
+	\node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
-     \nStreet\end{array}$}] (a) {};		
+     \nStreet\end{array}$}] (a) {$str17$};		
 			
-	\node[n,label=above:$str12$,label=below:{
+	\node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nStreet\\[-3pt] 
-      \nCalleDeElSalvador\end{array}$}, right of=a] (b) {};
+      \nCalleDeElSalvador\end{array}$}, right of=a] (b) {$str12$};
   
-	\node[n,label=left:$str16$,label=below:{
+	\node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nStreet\\[-3pt] 
-      \nCalleDeLaCruz\end{array}$}, right of=b] (m) {};		 
+      \nCalleDeLaCruz\end{array}$}, right of=b] (m) {$str16$};		 
 
-\node[n,label=below:$str10$,label=above:{
+\node[n,label=above:{
     \relsize{-2}$\begin{array}{c}
       \nStreet\\[-3pt] 
-      \nCalleSantoTomas\end{array}$}, above of=b] (c) {};	
+      \nCalleSantoTomas\end{array}$}, above of=b] (c) {$str10$};	
 				
- \node[n,label=left:$min1$,label=above:{
+ \node[n,label=above:{
     \relsize{-2}$\begin{array}{c}
       \nBuilding\\[-3pt] 
-      \nMinAsExt\end{array}$}, above of=a] (f) {};	
+      \nMinAsExt\end{array}$}, above of=a] (f) {$min1$};	
 					
-  \node[n,label=left:$church1$,label=below:{
+  \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
-     \nChurch\end{array}$}, above of=f] (g) {};
+     \nChurch\end{array}$}, above of=f] (g) {$church1$};
 			
- \node[n,label=left:$church2$,label=below:{
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
-     \nChurch\end{array}$}, right of=c] (d) {};
+     \nChurch\end{array}$}, right of=c] (d) {$church2$};
 			
-  \node[n,label=below:$rest3$,label=above:{
+  \node[n,label=above:{
     \relsize{-2}$\begin{array}{c}
       \nRestaurante\\[-3pt] 
-      MedinaMayrit\end{array}$}, above of=d] (h) {};			
+      MedinaMayrit\end{array}$}, above of=d] (h) {$rest3$};			
 			
- \node[n,label=below:$str9$,label=above:{
+ \node[n,label=above:{
     \relsize{-2}$\begin{array}{c}
       \nStreet\\[-3pt] 
-      \nCalleAtocha\end{array}$}, above of=c] (e) {};		
+      \nCalleAtocha\end{array}$}, above of=c] (e) {$str9$};		
 
-\node[n,label=left:$rest4$,label=below:{
+\node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
-      \nRestaurante\end{array}$}, right of=m] (k) {};
+      \nRestaurante\end{array}$}, right of=m] (k) {$rest4$};
 
-\node[n,label=above:$d$,label=below:{
-    \relsize{-2}}, right of=d] (i) {};
+\node[n,label=below:{
+    \relsize{-2}}, right of=d] (i) {$d$};
 		
- \node[n,label=below:$str15$,label=above:{
+ \node[n,label=above:{
     \relsize{-2}$\begin{array}{c}
       \nStreet\\[-3pt] 
-      \nCalleDeCarretas\end{array}$}, above of=i] (j) {};	
+      \nCalleDeCarretas\end{array}$}, above of=i] (j) {$str15$};	
 
 %\node[n,label=below:$str17\nStreet$,label=above:{
  %   \relsize{-2}}, below of=k] (n) {};				
@@ -833,7 +775,7 @@ La f\'ormula (1) ``Ex-iglesia.(T) \& Ex-in.(Ex-CalleDeSantoTomas.(T))'' se podr\
 
 
 \begin{table}[H]
-\begin{small}
+{\footnotesize
 \begin{center}
 \begin{tabular}{|l|c|c|}
 \hline
@@ -855,7 +797,7 @@ Totales& &\\
 \end{tabular}
 \caption{Comparaci\'on ER del corpus y las dadas por el algoritmo.}\label{compara-corpus-alg}
 \end{center}
-\end{small}
+}
 \end{table}
 
 Notar que las personas dieron 10 tipos de ER, de los cuales 2 son subespecificadas, al ser subespecificadas, el algoritmo no las gener\'o, son las que est\'an marcadas en la Tabla \ref{compara-corpus-alg} con '-'. La segunda m\'as frecuente dada por las personas, que en realidad fue la primer ER m\'as frecuente, tambi\'en fue la m\'as frecuente dada por el algoritmo. Consideramos que el algoritmo no gener\'o las ER ``La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, frente al Ministerio de Asuntos Exteriores'' y ``La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha'' por tener CalleDeAtocha una probabilidad de uso muy baja 0.06.
@@ -876,7 +818,7 @@ En la Figura \ref{mapa-zoom2x} se ve el nombre de la iglesia, ``Parroquia de San
 \end{figure}
 
 \begin{table}[H]
-\begin{small}
+{\footnotesize
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
@@ -907,7 +849,7 @@ Totales	&81	&	100\% &	3 minimales &\\
 \end{tabular}
 \caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom2x}.}\label{freq-mapa-zoom2x}
 \end{center}
-\end{small}
+}
 \end{table}
 
 El vocabulario y las probabilidades de uso sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom2x} es el siguiente:
@@ -1047,7 +989,7 @@ En la Tabla \ref{freq-mapa-zoom-plural} se muestran las ER, la cantidad de ocurr
 
 
 \begin{table}[H]
-\begin{small}
+{\footnotesize
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
@@ -1085,7 +1027,7 @@ Totales	&	&	100\%	&&\\
 \end{tabular}
 \caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom-plural}.}\label{freq-mapa-zoom-plural}
 \end{center}
-\end{small}
+}
 \end{table}
 
 
