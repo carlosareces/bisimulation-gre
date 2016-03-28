@@ -558,7 +558,7 @@ A partir de estos resultados nos damos cuenta de que los atributos muy frecuente
 \section{Caso de estudio del ZOOM corpus}
 \label{sec:caso_estudio}
 
-En esta secci\'on presentamos el estudio de tres casos de estudio particulares, de generaci\'on autom\'atica de ER para mapas del ZOOM corpus. Dividimos el estudio en 3 partes, en la Secci\'on \ref{sec:sinzoom} veremos un mapa sin zoom el cual se muestra en la Figura \ref{mapa-zoom} y cuyo target es singular. En la Secci\'on \ref{sec:conzoom} analizaremos la GER con el mismo target pero ahora con zoom 2X, el mapa usado se muestra en la Figura \ref{mapa-zoom2x}. En la Secci\'on \ref{sec:plural} veremos el mismo mapa de la Secci\'on \ref{sec:sinzoom} pero con target plural, es decir con 2 targets, el mapa se muestra en Figura \ref{mapa-zoom-plural}.
+En esta secci\'on presentamos tres casos de estudio particulares, de generaci\'on autom\'atica de ER para mapas del ZOOM corpus. Dividimos el estudio en 3 partes, en la Secci\'on \ref{sec:sinzoom} veremos un mapa sin zoom el cual se muestra en la Figura \ref{mapa-zoom} y cuyo target es singular. En la Secci\'on \ref{sec:conzoom} analizaremos la GER con el mismo target pero ahora con zoom 2X, el mapa usado se muestra en la Figura \ref{mapa-zoom2x}. En la Secci\'on \ref{sec:plural} veremos el mismo mapa de la Secci\'on \ref{sec:sinzoom} pero con target plural, es decir con 2 targets, el mapa se muestra en Figura \ref{mapa-zoom-plural}.
 
 %  Veremos las diferencias entre esos mapas a nivel de informaci\'on disponible, obtendremos a partir de cada imagen el modelo subyacente que usar\'a el algoritmo y a partir de las ER's del corpus obtendremos las probabilidades de uso de las palabras, para luego ejecutar el algoritmo. Compararemos las ER's dadas por el algoritmo con las que dieron las personas.
 
@@ -573,7 +573,11 @@ En esta secci\'on presentamos el estudio de tres casos de estudio particulares, 
 \label{sec:sinzoom}
 
 
-En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as frecuentes generadas por las personas que participaron en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom} se indica la cantidad de veces que aparecieron en el corpus, que equivale a la cantidad de distintas personas que independientemente decidieron usar la misma ER para referirse al target. Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales.
+En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as frecuentes generadas por las personas que participaron 
+en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom}. Se indica la cantidad de veces que aparecieron en el corpus, 
+que equivale al n\'umero de distintas personas que independientemente decidieron usar la misma ER para referirse al target. 
+Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son 
+ni subespecificadas, ni sobreespecificadas, son minimales.
 
 
 %\end{figure}
@@ -596,19 +600,18 @@ En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as f
 \hline
 &ER 					      & \# &  \% & SubE & SobreE\\ \hline \hline
 1&La iglesia 																																		 &16&19.7\%  & X & \\ \hline
-2&Iglesia en calle Santo Tomas																									 &15&18.5\% 	&  & \\ \hline
-3&Iglesia en calle Santo Tomas frente al Ministerio de         &11&13.6\% &  &X \\ 
-&Asuntos Exteriores& &&&\\ \hline
+2&Iglesia en la calle de Santo Tom\'as																									 &15&18.5\% 	&  & \\ \hline
+3&Iglesia en la calle de Santo Tom\'as frente al Ministerio de Asuntos Exteriores        &11&13.6\% &  &X \\ \hline
+%&Asuntos Exteriores& &&&\\ \hline
 4&Iglesia frente al Ministerio de Asuntos Exteriores 													 &11&13\% &  & \\ \hline
-5&Iglesia en calle Santo Tomas cerca del Ministerio de         &2 &2.5\% &  &X \\ 
-&Asuntos Exteriores& & & & \\ \hline
-6&La Iglesia en Calle de Atocha																									 &2&2.5\%  &  & \\ \hline
-7&Calle de santo tomas 																													 &2&2.5\% 	& X & \\ \hline
-8&La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, 									 &2&2.5\%	&  &X \\ 
-&frente al Ministerio de Asuntos Exteriores																		 &&&& \\ \hline
-9&La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha										 &2&2.5\% 	&  &X \\ \hline
+5&Iglesia en la calle Santo Tom\'as cerca del Ministerio de Asuntos Exteriores        &2 &2.5\% &  &X \\ \hline
+%&Asuntos Exteriores& & & & \\ \hline
+6&Iglesia en la calle de Atocha																									 &2&2.5\%  &  & \\ \hline
+7&En calle de Santo Tom\'as 																													 &2&2.5\% 	& X & \\ \hline
+8&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, frente al 									 &2&2.5\%	&  &X \\ 
+&Ministerio de Asuntos Exteriores																		 &&&& \\ \hline
+9&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha										 &2&2.5\% 	&  &X \\ \hline
 10&Iglesia cerca del Ministerio de Asuntos Exteriores														 &1&1.2\% 	&  & \\ \hline
-\hline
 \end{tabular}
 \caption{10 ER m\'as frecuentes del corpus para el mapa de la Figura \ref{mapa-zoom}.}\label{freq-mapa}
 \end{center}
@@ -616,7 +619,9 @@ En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as f
 \end{table}
 
 
-Necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es. Algunas personas dijeron ``en la esquina de...'', eso fue anotado como ``between'' y luego 2 calles, esta palabra no fue usada para correr el algoritmo porque tiene 2 par\'ametros, en cambio usamos ``in'' para ambas calles, con esa modificaci\'on, no estamos perdiendo informaci\'on ya que si el algoritmo da ambas calles, lo podr\'iamos realizar como ``esquina''. Se muestra el vocabulario y las probabilidades de uso de las palabras del vocabulario, sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom}.
+Para ejecutar el algoritmo necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es. 
+
+%Algunas personas dijeron ``en la esquina de...'', eso fue anotado como ``between'' y luego 2 calles, esta palabra no fue usada para correr el algoritmo porque tiene 2 par\'ametros, en cambio usamos ``in'' para ambas calles, con esa modificaci\'on, no estamos perdiendo informaci\'on ya que si el algoritmo da ambas calles, lo podr\'iamos realizar como ``esquina''. Se muestra el vocabulario y las probabilidades de uso de las palabras del vocabulario, sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom}.
 Para calcular las probabilidades de uso se tuvieron en cuenta las ER que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ER fueron las que cumpl\'ian con esas condiciones. Se cont\'o la cantidad de veces que aparec\'ia la palabra, teniendo en cuenta que si aparec\'ia 2 veces en la misma ER se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63 que fueron la cantidad de ER que eran v\'alidas.
 
 \begin{table}[H]
@@ -630,9 +635,9 @@ church & 0.968\\
 in & 0.5079\\
 in-front-of & 0.365\\
 near & 0.0476\\
-MinisterioAsuntosExteriores & 0.41\\
-CalleDeSantoTomas & 0.5079\\
-CalleDeAtocha & 0.06\\
+ministerioAsuntosExteriores & 0.41\\
+calleDeSantoTomas & 0.5079\\
+calleDeAtocha & 0.06\\
 \hline
 \end{tabular}
 \caption{Probabilidad de las palabras del dominio.}\label{prob-vocabulario}
@@ -670,8 +675,6 @@ El modelo que representa el fragmento del mapa de la Figura \ref{mapa-zoom}, al 
     aArrow/.style={scale=10,->, >=stealth, thick,
     shorten <= 1pt, shorten >= 1pt},
   ]
-			
-
 	\node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
      \nStreet\end{array}$}] (a) {$str17$};		
@@ -761,7 +764,30 @@ El modelo que representa el fragmento del mapa de la Figura \ref{mapa-zoom}, al 
 \label{modelo-mapa-zoom}
 \end{figure}
 
-Se ejecut\'o el algoritmo 1000 veces, las 5 f\'ormulas m\'as frecuentes, y la frecuencia dada por el algoritmo fueron las siguientes:
+Se ejecut\'o el algoritmo 1000 veces, las 10 f\'ormulas m\'as frecuentes, y la frecuencia dada por el algoritmo fueron las que se muestran en la Tabla \ref{freq-mapa-algoritmo}
+
+
+\begin{tabular}{|l|l|c|c|}
+\hline
+ &Posible realizaci\'on de la ER &  \# & \% \\ \hline
+1&Iglesia en la calle de Santo Tom\'as   & & \\ \hline
+2&Iglesia en la calle de Santo Tom\'as frente al Ministerio de Asuntos Exteriores        & &13.6\%  \\ \hline
+%&Asuntos Exteriores& &&&\\ \hline
+3&Iglesia frente al Ministerio de Asuntos Exteriores                                   & & \\ \hline                                        
+4&Iglesia en la calle Santo Tom\'as cerca del Ministerio de Asuntos Exteriores        & &2.5\%  \\ \hline
+%&Asuntos Exteriores& & & & \\ \hline
+5&Iglesia en la calle de Atocha                                                       & & \\ \hline                                           
+6&En calle de Santo Tom\'as                                                                        & & \\ \hline                                
+7&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha,                                       & &\% \\ \hline
+&frente al Ministerio de Asuntos Exteriores                                         && \\ \hline                                            
+8&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha                           & & \\ \hline
+9&Iglesia cerca del Ministerio de Asuntos Exteriores                                 & & \\ \hline                                              
+\end{tabular}
+\caption{10 ER m\'as frecuentes dadas por el algoritmo para el grafo de la Figura \ref{modelo-mapa-zoom}.}\label{freq-mapa-algoritmo}
+\end{center}
+}%\end{tiny}
+\end{table}
+
 
 \begin{enumerate}
 \item Ex-iglesia.(T) \& Ex-in.(Ex-CalleDeSantoTomas.(T))->234
