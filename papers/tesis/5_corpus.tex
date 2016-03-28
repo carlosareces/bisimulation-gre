@@ -815,13 +815,16 @@ Se ejecut\'o el algoritmo 1000 veces, con input el modelo mostrado en la Figura 
 \hline
 \end{tabular}
 
-\caption{10 f\'ormulas m\'as frecuentes dadas por el algoritmo para el modelo \protect\ref{modelo-mapa-zoom}.}\label{formulas-mapa-zoom}
+\caption{Las 10 f\'ormulas m\'as frecuentes dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom}.}\label{formulas-mapa-zoom}
 \end{center}
 \end{table}
 
-Discusi\'on porque aparece el $\exists \nIn$ ... es una tautolog\'ia se podr\'ia hacer 2 cosas: una ser\'ia eliminarlos directamente, y la otra opci\'on ser\'ia agregarle el nombre de la calle en el que se encuentra, aqu\'i habr\'ia que tener cuidado, y pensar que puede ser una construcci\'on que puede incluir hasta 4 calles, por ejemplo si es la manzana completa. La pregunta que quedar\'ia entonces ser\'ia, si tiene m\'as de una calle, cual ponemos?, las ponemos a todas?.
-
-$\exists \nFront .(\exists \nFront .(\exists \nChurch))$
+Vemos que entre las f\'ormulas de la Figura \ref{formulas-mapa-zoom} hay algunas que tienen como subf\'ormula $\exists \nIn$, lo que significa es que 
+el elemento est\'a en una calle, pero esto es una tautolog\'ia ya que vale para todo elemento del modelo, \'estan cosas se podr\'ian tratar de varias maneras: una de ellas ser\'ia eliminar los $\exists \nIn$ cuando no haya un nombre de la calle del lado derecho del existencial, 
+otra opci\'on ser\'ia agregarle el nombre de la calle en el que se encuentra, tomando esta opci\'on habr\'ia que tener cuidado, 
+y pensar que puede ser una construcci\'on que puede incluir hasta 4 calles, por ejemplo si es la manzana completa. La pregunta que quedar\'ia abierta
+entonces ser\'ia, si tiene m\'as de una calle, cual ponemos?, las ponemos a todas?.
+Otra subf\'ormula rara que vemos es $\exists \nFront .(\exists \nFront .(\exists \nChurch))$, que por ser un algoritmo l\'ogico tambi\'en podr\'iamos eliminarlos, teniendo en cuenta que $\exists \nFront .(\exists \nFront .(\exists \nChurch))$ es igual a decir $\exists \nChurch$.
 
 \begin{table}[H]
 \begin{small}
@@ -829,54 +832,58 @@ $\exists \nFront .(\exists \nFront .(\exists \nChurch))$
 
 \begin{tabular}{|l|l|c|c|}
 \hline
- &Posible realizaci\'on de la ER dada en misma posici\'on de \protect\ref{formulas-mapa-zoom}&  \# & \% \\ \hline
-1&Iglesia en la calle de Santo Tom\'as   & & \\ \hline
-2&Iglesia en la calle de Santo Tom\'as frente al Ministerio de Asuntos Exteriores        & &13.6\%  \\ \hline
-%&Asuntos Exteriores& &&&\\ \hline
-3&Iglesia frente al Ministerio de Asuntos Exteriores                                   & & \\ \hline                                        
-4&Iglesia en la calle Santo Tom\'as cerca del Ministerio de Asuntos Exteriores        & &2.5\%  \\ \hline
+ &Posible realizaci\'on de la ER dada en misma posici\'on de la Tabla \protect\ref{formulas-mapa-zoom}&  \# & \% \\ \hline
+1-5&Iglesia en la calle de Santo Tom\'as   & & \\ \hline
+2&La que est\'a frente al Ministerio de Asuntos Exteriores & & \\ \line
+3&Iglesia en la calle de Atocha & & \\ \hline
+4&La que est\'a cerca al Ministerio de Asuntos Exteriores & & \\ \line
+5&Iglesia frente al Ministerio de Asuntos Exteriores                                   & & \\ \hline                                        
+6&Iglesia frente al Ministerio de Asuntos Exteriores y que est\'a en una calle        & &2.5\%  \\ \hline
 %&Asuntos Exteriores& & & & \\ \hline
-5&Iglesia en la calle de Atocha                                                       & & \\ \hline                                           
+7&Iglesia que est\'a en una calle y que tiene al frete algo que esta en la Calle de Santo Tom\'as & & \\ \hline                                
 6&En calle de Santo Tom\'as                                                                        & & \\ \hline                                
-7&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha,                                       & &\% \\ \hline
-&frente al Ministerio de Asuntos Exteriores                                         && \\ \hline                                            
-8&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha                           & & \\ \hline
-9&Iglesia cerca del Ministerio de Asuntos Exteriores                                 & & \\ \hline                                              
+7&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha,                                       & &\% \\ 
+8&Al frente al Ministerio de Asuntos Exteriores que est\'a en una calle                          && \\ \hline                               
+9&Cerca del Ministerio de Asuntos Exteriores que est\'a en una calle                            & & \\ \hline
+%10&                                 & & \\ \hline                                              
 \end{tabular}
-\caption{Posibles realizaciones de las 10 ER m\'as frecuentes dadas por el algoritmo para el grafo de la Figura \protect\ref{modelo-mapa-zoom}.}\label{freq-mapa-algoritmo}
+\caption{Posibles realizaciones de las 10 ER m\'as frecuentes dadas por el algoritmo para el grafo de 
+la Figura \protect\ref{modelo-mapa-zoom}.}\label{freq-mapa-algoritmo}
 \end{center}
 \end{small}
 \end{table}
 
-\begin{enumerate}
-\item Ex-iglesia.(T) \& Ex-in.(Ex-CalleDeSantoTomas.(T))->234
-\item Ex-frente.(Ex-MinisterioAsuntosExteriores.(T))->202
-\item Ex-iglesia.(T) \& Ex-in.(Ex-CalleDeAtocha.(T))->87
-\item Ex-cerca.(Ex-MinisterioAsuntosExteriores.(T))->79
-\item Ex-frente.(Ex-frente.(Ex-iglesia.(T))) \& Ex-in.(Ex-CalleDeSantoTomas.(T)): church1->74
-\end{enumerate}
+%Ex-frente.(Ex-frente.(Ex-iglesia.(T))) & Ex-in.(Ex-CalleDeSantoTomas.(T)): church1->74 va a 1
+%Ex-cerca.(Ex-MinisterioAsuntosExteriores.(T) & Ex-in.(T)): church1->15
 
-La f\'ormula (1) ``Ex-iglesia.(T) \& Ex-in.(Ex-CalleDeSantoTomas.(T))'' se podr\'ia realizar como ``La iglesia que est\'a en la Calle De Santo Tom\'as''. La f\'ormula (2) se podr\'ia realizar como ``La que est\'a al frente del Ministerio de Asuntos Exteriores''. La f\'ormula (3) como ``La iglesia de la Calle De Atocha''. La f\'ormula (4) con ``Una que esta cerca del Ministerio de Asuntos Exteriores'' y la (5) ``La que esta en Calle de Santo Tomas al frente de algo que tiene al frente una iglesia''. Este \'ultimo tipo de f\'ormulas son las menos deseadas y las menos naturales, podemos ver que en este caso la di\'o el 7\% de las veces, lo cual no es muy alto. Todas las f\'ormulas que di\'o el algoritmo en 1000 ejecusiones con sus respectivas frecuencias se muestran en el Ap\'endice en Secci\'on \ref{er-mapa-zoom}.
+
+%La f\'ormula (1) ``Ex-iglesia.(T) \& Ex-in.(Ex-CalleDeSantoTomas.(T))'' se podr\'ia realizar como ``La iglesia que est\'a en la Calle 
+%De Santo Tom\'as''. La f\'ormula (2) se podr\'ia realizar como ``La que est\'a al frente del Ministerio de Asuntos Exteriores''. 
+%La f\'ormula (3) como ``La iglesia de la Calle De Atocha''. La f\'ormula (4) con ``Una que esta cerca del Ministerio de Asuntos Exteriores''
+% y la (5) ``La que esta en Calle de Santo Tomas al frente de algo que tiene al frente una iglesia''. 
+%Este \'ultimo tipo de f\'ormulas son las menos deseadas y las menos naturales, podemos ver que en este caso la di\'o el 7\% de las veces, 
+%lo cual no es muy alto. Todas las f\'ormulas que di\'o el algoritmo en 1000 ejecusiones con sus respectivas frecuencias se muestran 
+%en el Ap\'endice en Secci\'on \ref{er-mapa-zoom}.
 
 
 \begin{table}[H]
 {\footnotesize
 \begin{center}
-\begin{tabular}{|l|c|c|}
+\begin{tabular}{|l|l|c|c|}
 \hline
-ER 					      &  Frecuencia & Frecuencia-Alg\\ \hline \hline
-La iglesia 																																		 &0.197\%  &  -\\ \hline
-Iglesia en calle Santo Tomas																									 &0.185\% 	& 0.197\%  \\ \hline
-Iglesia en calle Santo Tomas frente al Ministerio de Asuntos Exteriores        &0.1358\% & 0.001\% \\ \hline
-Iglesia  frente al Ministerio de Asuntos Exteriores 													 &0.1358\% & 0.071\%  \\ \hline
-Iglesia en calle Santo Tomas cerca del Ministerio de Asuntos Exteriores        &0.0246\% & 0.00\%  \\ \hline
-La Iglesia en Calle de Atocha																									 &0.0246\%  &0.087\%  \\ \hline
-Calle de santo tomas 																													 &0.0246\% 	& -  \\ \hline
-La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, 									 &0.0246\%	& 0.00\% \\ 
-frente al Ministerio de Asuntos Exteriores																		 && \\ \hline
-La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha										 &0.0246\% 	& 0.00\%  \\ \hline
-Iglesia cerca del Ministerio de Asuntos Exteriores														 &0.0123\% 	& 0.004\%  \\ \hline
-NO-ERA-ER																																			 &0.222\%  &\\ \hline \hline
+&ER 					      &  Frecuencia & Frecuencia-Alg\\ \hline \hline
+1&La iglesia 								 &0.197\%  &  -\\ \hline
+2&Iglesia en calle Santo Tomas						 &0.185\% 	& 0.197\%  \\ \hline
+3&Iglesia en calle Santo Tomas frente al Ministerio de Asuntos Exteriores        &0.1358\% & 0.001\% \\ \hline
+4&Iglesia  frente al Ministerio de Asuntos Exteriores 			 &0.1358\% & 0.071\%  \\ \hline
+5&Iglesia en calle Santo Tomas cerca del Ministerio de Asuntos Exteriores        &0.0246\% & 0.00\%  \\ \hline
+6&La Iglesia en Calle de Atocha							&0.0246\%  &0.087\%  \\ \hline
+7&Calle de santo tomas 							&0.0246\% 	& -  \\ \hline
+8&La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, 	 &0.0246\%	& 0.00\% \\ 
+&frente al Ministerio de Asuntos Exteriores						 && \\ \hline
+9&La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha			 &0.0246\% 	& 0.00\%  \\ \hline
+10&Iglesia cerca del Ministerio de Asuntos Exteriores				 &0.0123\% 	& 0.004\%  \\ \hline
+%NO-ERA-ER								 &0.222\%  &\\ \hline \hline
 Totales& &\\
 \hline
 \end{tabular}
@@ -885,7 +892,13 @@ Totales& &\\
 }
 \end{table}
 
-Notar que de los 10 tipos diferentes de ER que dieron las personas las cuales se muestran en la Tabla \ref{freq-mapa}, 2 son subespecificadas, al ser subespecificadas, el algoritmo no las gener\'o. La segunda m\'as frecuente dada por las personas, que en realidad fue la primer ER m\'as frecuente, tambi\'en fue la m\'as frecuente dada por el algoritmo como se muestra en la Tabla \ref{freq-mapa-algoritmo}. Consideramos que el algoritmo no gener\'o las ER \it{ La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, frente al Ministerio de Asuntos Exteriores} y \it{La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha} por tener CalleAtocha una probabilidad de uso muy baja 0.06, por otro lado nuestro algoritmo d\'a poca sobreespecificaci\'on, solo en el primer ciclo intenta sobreespecificar.
+Notar que de los 10 tipos diferentes de ER que m\'as dieron las personas las cuales se muestran en la Tabla \ref{freq-mapa}, 
+2 son subespecificadas, al ser subespecificadas, el algoritmo no las gener\'o. 
+La segunda m\'as frecuente dada por las personas, que en realidad fue la primer ER m\'as frecuente, 
+tambi\'en fue la m\'as frecuente dada por el algoritmo como se muestra en la Tabla \ref{freq-mapa-algoritmo} y con un porcentaje bastante parecido
+al dado por las personas. 
+
+Consideramos que el algoritmo no gener\'o las ER \it{ La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, frente al Ministerio de Asuntos Exteriores} y \it{La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha} por tener CalleAtocha una probabilidad de uso muy baja 0.06, por otro lado nuestro algoritmo d\'a poca sobreespecificaci\'on, solo en el primer ciclo intenta sobreespecificar.
 
 
 
