@@ -58,7 +58,7 @@ Un sistema de GLN incluye 3 etapas, {\bf determinaci\'on de contenido} ---qu\'e 
 
 Un sistema de GER, tiene esas 3 etapas tambi\'en: la determinaci\'on de contenido ---decide qu\'e propiedades o relaciones del objeto se incluir\'an en la expresi\'on referencial---, la lexicalizaci\'on, ---elije las palabras que se van a usar para nombrar las propiedades y relaciones--- y la realizaci\'on ling\"u\'istica, ---se encarga de armar el sintagma nominal para que sea gramaticalmente correcto.
 
-Por ejemplo, la primer ER de la Figura \ref{figura-er} incluye las propiedades {\it tama\~no} y {\it forma} del objeto se\~nalado por la flecha, lexicalizadas como {\it grande} y {\it esfera} respectivamente y realizadas agregando el art\'iculo {\it la} antes de {\it esfera}, e incluyendo el sustantivo {\it esfera} antes que el adjetivo {\it grande}; formando as\'i el sintagma nominal {\it La esfera grande} que es correcto en espa\~nol. Otra lexicalizaci\'on y realizaci\'on de las mismas propiedades ---es decir, de la misma sem\'antica--- podr\'ia ser {\it La bola de gran tama\~no}. A lo largo de esta tesis usaremos el t\'ermino \bf{expresi\'on referencial} para nombrar la salida de cualquiera de las 3 etapas de la GER. Es decir, llamaremos expresi\'on referencial al conjunto de propiedades y relaciones que refieren un\'ivocamente a un objeto aunque no est\'en lexicalizadas o realizadas.
+Por ejemplo, la primer ER de la Figura \ref{figura-er} incluye las propiedades {\it tama\~no} y {\it forma} del objeto se\~nalado por la flecha, lexicalizadas como {\it grande} y {\it esfera} respectivamente y realizadas agregando el art\'iculo {\it la} antes de {\it esfera}, e incluyendo el sustantivo {\it esfera} antes que el adjetivo {\it grande}; formando as\'i el sintagma nominal {\it La esfera grande} que es correcto en espa\~nol. Otra lexicalizaci\'on y realizaci\'on de las mismas propiedades ---es decir, de la misma sem\'antica--- podr\'ia ser {\it La bola de gran tama\~no}. A lo largo de esta tesis usaremos el t\'ermino {\bf expresi\'on referencial} para nombrar la salida de cualquiera de las 3 etapas de la GER. Es decir, llamaremos expresi\'on referencial al conjunto de propiedades y relaciones que refieren un\'ivocamente a un objeto aunque no est\'en lexicalizadas o realizadas.
 
 En lo que sigue introduciremos terminolog\'ia b\'asica, relacionada con la GER que nos servir\'a a lo largo de toda la tesis para entendernos.
 
@@ -72,29 +72,26 @@ El {\bf target} (u objetivo), es el subconjunto de objetos de un contexto a los 
 
 Dado un contexto, un target y una descripci\'on (parcial) del target, los {\bf distractores} son otros elementos que se encuentran en el contexto, y que tambi\'en cumplen con la descripci\'on parcial. Si la descripci\'on parcial es {\it esfera} las esferas que no son el target de la Figura \ref{GRE3D7-stimulus1} son  distractores, y por ello es necesario seguir agregando propiedades o relaciones para identificar un\'ivocamente al target.
 
-Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos, alg\'un tipo de representaci\'on de un contexto y un target, y d\'a como resultado una (o m\'as) expresi\'on(es) referencial(es) para el target considerado, si puede identificarlo un\'ivocamente en el contexto.\\
+Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos, alg\'un tipo de representaci\'on de un contexto y un target, y d\'a como resultado una (o m\'as) expresi\'on(es) referencial(es) para el target considerado, si puede identificarlo un\'ivocamente en el contexto.
 
 \begin{figure}[H]
-\begin{subfigure}{.50\textwidth}
+\begin{subfigure}{.5\textwidth}
   \centering
 	\vspace*{-.2cm}
 \includegraphics[width=\textwidth]{images/22.jpg}
   \caption{}\label{GRE3D7-stimulus1-ids}
-\end{subfigure}%
-\hspace*{.1cm}
-\begin{subfigure}{.50\textwidth}
+\end{subfigure}
+\begin{subfigure}{1\textwidth}
  \centering
 \begin{center}
-\vspace*{-.5cm}
+\hspace*{-8cm}
+\begin{scriptsize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|}
 
 \hline
-{\tiny \textbf {id}}& 	{\tiny \textbf {type}}		&	{\tiny \textbf {color}	}&	{\tiny \textbf {size}}& {\tiny \textbf {rigthof}} &{\tiny \textbf {leftof}} &{\tiny \textbf {ontopof}}	& {\tiny \textbf {belowof}}	\\
-%  {\tiny jeto} &     	&	    	&	 {\tiny \~no}    & {\tiny cha de}    & {\tiny de}   & {\tiny de}\\
-%Ob.& 	Type		&	Color	&	Size & right & on top	& bellow	\\
-%   &  	    	&	    	&	     & of    & of	    & of	\\
-\hline
-\begin{tiny}
+\textbf {id}& 	\textbf {type}		&	\textbf {color}	&	\textbf {size}& \textbf {rigth} & \textbf {left} & \textbf {ontop}	& \textbf {below}	\\
+   	   &  	    			&	    		&	     		&  \textbf {of}   		 &  \textbf {of}	    &  \textbf {of}	&  \textbf {of}\\
+\hline \hline
 $e_1$ & ball & yellow & small & - & - & - & - \\
 $e_2$ & cube & red & small & - & - &- & $e_3$ \\
 $e_3$ & ball & yellow & small & - & - & $e_2$ & -\\
@@ -102,30 +99,14 @@ $e_4$ & cube & red & large & - & $e_5$ & - & -\\
 $e_5$ & ball & red & large & $e_4$ & - & - & -\\
 $e_6$ & cube & yellow & small & - & $e_7$ & - & -\\
 $e_7$ & cube & red & small & $e_6$ & - & - & -\\
-\end{tiny}
 \hline
-%\small
- 
 \end{tabular}
-%\vspace*{.1cm}
-%\caption{Propiedades de los objetos de la figura.}\label{GRE3D7-stimulus2}
-%\vspace*{-.5cm}
-\normalsize
-\caption{}\label{tabla-propiedades}
+\end{scriptsize}
+\centering \caption{}\label{tabla-propiedades}
 \end{center}
-%\end{table}
-%\vspace*{-.5cm}
-%\end{minipage} 
 \end{subfigure}
-%\caption{Ejemplos de expresiones referenciales}
-%\label{figura-er}
-%\end{figure}
-
 \caption{Posible formalizaci\'on de las propiedades de la Figura \ref{figura-er} en una tabla de doble entrada.}\label{contexto-tabla-propiedades}
-
-%\caption{Representaci\'on del contexto de la Figura \ref{GRE3D7-stimulus1}}
 \end{figure}
-
 
 Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ incluye encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}.
 Como una primera intuici\'on podemos ver que las ER dadas por las personas para la Figura \ref{GRE3D7-stimulus1} que son las que est\'an dadas en la Figura \ref{er-figura1} son muchas m\'as de las que mostramos en las f\'ormulas de la Figura \ref{er-figura1-b}, esto nos lleva a pensar que un algoritmo puede que no consiga la variedad que las personas dan. La representaci\'on ilustrada en la Figura~\ref{representacion-modelo} es equivalente a la mostrada en la Tabla \ref{tabla-propiedades}.
@@ -247,23 +228,39 @@ Como una primera intuici\'on podemos ver que las ER dadas por las personas para 
 %Turner, Sripada, y Reiter 2009) .Es en tales dominios que prominencia (especialmente en el
 %sentido no lingüístico) se convierte en un problema crítico. 
 Cuando la generaci\'on de expresiones referenciales ocurre en la vida real
-en lugar de ocurrir en un experimento controlado las fuentes de \textbf{incertidumbre} que afectan al proceso se multiplican. En trabajo reciente en el \'area de GER \cite{turner2008} , \cite{turner2009} se discute que, al intentar usar algoritmos de GER en dominios grandes y realistas -(como por ejemplo, la descripci\'on de regiones en mapas), la identificaci\'on precisa del target es una tarea que puede ser aproximada pero raramente lograda. Los autores argumentan que esto se debe, en parte, a que las representaciones geogr\'aficas son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce incertidumbre ---por ejemplo, es realmente el \'unico restaurant de esa calle o es el \'unico que aparece en el mapa?.
-Cuando la informaci\'on del contexto proviene de datos de sensores, como es el caso de robots o de otros aut\'omatas, las entradas del algoritmo de GER son inevitablemente ruidosas. Es decir, estas entradas contienen no s\'olo informaci\'on incompleta pero tambi\'en posiblemente incorrecta. 
-En estos dominios, e
-incluso en contexto tan simples como el de la Figura \ref{GRE3D7-stimulus1} hay incertidumbre. ?`Estamos seguros que la Figura \ref{representacion-modelo} representa toda la informaci\'on del contexto?. Algunos podemos opinar que s\'i, otros que no. En efecto, la persona que gener\'o la ER \textbf{la pelota a la izquierda del cubo amarillo} opina que no: la relaci\'on \emph{a la izquierda de} discutiblemente existente entre el target y el cubo amarillo no est\'a representada en el grafo. Un algoritmo de GER con este grafo como input nunca generar\'ia la expresi\'on referencial de la que venimos hablando. Esta falta de informaci\'on no s\'olo impide la generaci\'on de ER v\'alidas, si no que tambi\'en permitir\'ia la generaci\'on de ER claramente incorrectas como, \emph{la esfera roja que no tiene nada a la derecha}.
-Y aunque no hablemos ni de incompletitud ni de incorrectitud tambi\'en hay incertidumbre en \textbf{cu\'al} ER un sistema de GER de elegir. Si tuvieramos que elegir la mejor ER para la Figura \ref{GRE3D7-stimulus1}, c\'omo lo har\'iamos?. Se podr\'ia argumentar que tendr\'iamos tantas respuestas distintas como el n\'umero de personas a las cuales les preguntaramos. Y parte de raz\'on hay en eso. Por ejemplo seguramente hay personas que preferir\'an usar la palabra esfera o pelota, antes que bola. Para gustos hay colores. Y seguramente no falte quien diga que LA mejor expresi\'on referencial ni si quiera aparece en la Figura \ref{er-figura1}. Sin embargo, seguramente habr\'a una tendencia como se muestra en estudios previos \cite{viet:gene11}. Nadie preferir\'a una ER que use 21 propiedades y 6 relaciones para describir al target de la Figura \ref{GRE3D7-stimulus1}. El largo de una ER afecta su calidad.
+en lugar de ocurrir en un experimento controlado las fuentes de \textbf{incertidumbre} que afectan al proceso se multiplican. En trabajo 
+reciente en el \'area de GER \cite{turner2008} , \cite{turner2009} se discute que, al intentar usar algoritmos de GER en dominios grandes 
+y realistas -(como por ejemplo, la descripci\'on de regiones en mapas), la identificaci\'on precisa del target es una tarea que puede ser 
+aproximada pero raramente lograda. Los autores argumentan que esto se debe, en parte, a que las representaciones geogr\'aficas 
+son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce incertidumbre ---por ejemplo ?`es realmente el \'unico restaurant 
+de esa calle o es el \'unico que aparece en el mapa?.
+Cuando la informaci\'on del contexto proviene de datos de sensores, las entradas del algoritmo de GER son inevitablemente ruidosas. Es decir, 
+contienen informaci\'on no s\'olo incompleta sino tambi\'en posiblemente {\bf incorrecta}. Incluso en contextos tan simples como el de la 
+Figura \ref{figura-er} hay incertidumbre. ?`Estamos seguros que la Figura \ref{representacion-modelo} representa toda la informaci\'on del 
+contexto?. Algunos podemos opinar que s\'i, otros que no. En efecto, la persona que gener\'o la ER {\emph la pelota a la izquierda del cubo 
+amarillo} opina que no: la relaci\'on \emph{a la izquierda de} entre el target y el cubo amarillo no est\'a representada en el grafo. Un 
+algoritmo de GER con este grafo como input no puede generar esta expresi\'on referencial. El grafo puede completarse para que sea posible
+generar la expresi\'on referencial. El grafo resultante se ilustra en la Figura \ref{grafo-completo}. Sin embargo, este grafo tampoco es completo, 
+de hecho, la ER {\emph la cosa que est\'a a la derecha del cubo del medio} no se podr\'ia generar con este grafo. La informaci\'on no s\'olo 
+impide la generaci\'on de ER v\'alidas, sino que tambi\'en permite la generaci\'on de ER claramente incorrectas como \emph{la esfera roja 
+que no tiene nada a la derecha}.
 
+Aunque no hablemos ni de incompletitud ni de incorrectitud tambi\'en hay incertidumbre en \textbf{cu\'al} de todas las posibles ERs un sistema de GER debe 
+elegir. Por ejemplo seguramente hay personas que preferir\'an ERs que usen la palabra {\emph esfera}, antes que {\emph bola}. Y seguramente 
+no falte quien diga que {\emph la} mejor expresi\'on referencial ni si quiera aparece en la Figura \ref{figura-er}. Sin embargo, seguramente 
+habr\'a una tendencia como se muestra en estudios previos \cite{viet:gene11}. Nadie preferir\'a una ER que use 21 propiedades y 6 relaciones 
+para describir al target de la Figura \ref{figura-er}.
 
-%a menudo es poco claro de qu\'e depende la inclusi\'on o no de propiedades. Podr\'ia ser que la prominencia de algunas propiedades dependan del hablante, y que esto es
-%una de las causas de la variaci\'on individual considerable que existe entre diferentes
-%hablantes \cite{speaker-dependent}.
+El largo de una ER afecta su calidad. Se podr\'{i}a pensar, por ejemplo, que las referencias son \'optimas cuando son {\textbf m\'{i}nimas}
+ en longitud, es decir, cuando 
+contienen s\'olo informaci\'on suficiente para identificar el objeto target y nada m\'as. Pero la generaci\'on de referencias m\'{i}nimas
+no es lo que las personas hacen ni lo que es m\'as \'util para los oyentes, como se muestra en trabajo previo \cite{sasha-lu}. Y ni si quiera 
+nos resuelve el problema de elegir una ER. {\it La bola grande} y {\it La esfera roja} son dos ERs de la Figura \ref{figura-er} y tienen 
+exactamente la misma longitud.
 
-%Como vemos en la Figura \ref{er-figura1} hay m\'as de una forma en la que el objeto $e_5$ puede ser distinguido del resto, la computadora tiene que decidir cu\'al de esas expresiones referenciales es \'optima en el contexto dado. Por otra parte, el concepto de \'optimo puede significar diferentes cosas.
-
-Se podr\'{i}a pensar, por ejemplo, que las referencias son \'optimas cuando son m\'{i}nimas en longitud, es decir, 
-contienen s\'olo la informaci\'on suficiente para identificar el objeto target y nada m\'as. Pero, la generaci\'on de referencias m\'{i}nimas
-no es necesariamente lo que los hablantes hacen, ni lo que es m\'as \'util para los oyentes. Y ni si quiera nos resuelve el problema de elegir una ER. {\it La bola grande} y {\it La esfera roja} son ER de la Figura \ref{GRE3D7-stimulus1} y tienen exactamente la misma longitud.
-Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede hacer es que un algoritmo de GER devuelva un ranking de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cuan buena es esa ER para el input.
+Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede hacer es que un algoritmo de GER devuelva un {\textbf ranking}
+ de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cu\'an buena es esa ER para 
+el input.
 
 Para poder dar ese ranking del cual estuvimos hablando bastar\'ia correr un algoritmo {\bf no-determin\'istico} una cantidad 'suficiente' \footnote{Depender\'a del grado de detalle que queremos conseguir, a mayor cantidad de veces, mayor variedad tendremos} de veces.
 
