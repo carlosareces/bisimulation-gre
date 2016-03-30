@@ -796,7 +796,7 @@ Se ejecut\'o el algoritmo 1000 veces, con input el modelo mostrado en la Figura 
 
 2 & $\exists \nFront . (\exists \nMinAsExt)$&202 \\ \hline
 
-3& $\exists \nChurch \land \exists \nMinAsExt .(\exists \nCalleAtocha)$&87 \\ \hline
+3& $\exists \nChurch \land \exists \nIn .(\exists \nCalleAtocha)$&87 \\ \hline
 
 4& $\exists \nNear .(\exists \nMinAsExt)$&79 \\ \hline
 
@@ -824,7 +824,7 @@ el elemento est\'a en una calle, pero esto es una tautolog\'ia ya que vale para 
 otra opci\'on ser\'ia agregarle el nombre de la calle en el que se encuentra, tomando esta opci\'on habr\'ia que tener cuidado, 
 y pensar que puede ser una construcci\'on que puede incluir hasta 4 calles, por ejemplo si es la manzana completa. La pregunta que quedar\'ia abierta
 entonces ser\'ia, si tiene m\'as de una calle, cual ponemos?, las ponemos a todas?.
-Otra subf\'ormula rara que vemos es $\exists \nFront .(\exists \nFront .(\exists \nChurch))$, que por ser un algoritmo l\'ogico tambi\'en podr\'iamos eliminarlos, teniendo en cuenta que $\exists \nFront .(\exists \nFront .(\exists \nChurch))$ es igual a decir $\exists \nChurch$.
+Otra subf\'ormula rara que vemos es $\exists \nFront .(\exists \nFront .(\exists \nChurch))$, es igual a decir $\exists \nChurch$, pero el algoritmo no se da cuenta de esas cosas, al ser un algoritmo l\'ogico podr\'iamos definir esas cosas y eliminarlas autom\'aticamente.
 
 \begin{table}[H]
 \begin{small}
@@ -832,19 +832,17 @@ Otra subf\'ormula rara que vemos es $\exists \nFront .(\exists \nFront .(\exists
 
 \begin{tabular}{|l|l|c|c|}
 \hline
- &Posible realizaci\'on de la ER dada en misma posici\'on de la Tabla \protect\ref{formulas-mapa-zoom}&  \# & \% \\ \hline
-1-5&Iglesia en la calle de Santo Tom\'as   & & \\ \hline
-2&La que est\'a frente al Ministerio de Asuntos Exteriores & & \\ \line
+ &Posible realizaci\'on de la ER dada en misma posici\'on de la Tabla \protect\ref{formulas-mapa-zoom}&  \# & \% \\ \hline \hline
+1, 5&Iglesia en la calle de Santo Tom\'as   & & \\ \hline
+2&La que est\'a frente al Ministerio de Asuntos Exteriores & & \\ \hline
 3&Iglesia en la calle de Atocha & & \\ \hline
-4&La que est\'a cerca al Ministerio de Asuntos Exteriores & & \\ \line
-5&Iglesia frente al Ministerio de Asuntos Exteriores                                   & & \\ \hline                                        
-6&Iglesia frente al Ministerio de Asuntos Exteriores y que est\'a en una calle        & &2.5\%  \\ \hline
+4&La que est\'a cerca al Ministerio de Asuntos Exteriores & & \\ \hline
+6&Iglesia frente al Ministerio de Asuntos Exteriores                                   & & \\ \hline                                        
+7&Iglesia frente al (Ministerio de Asuntos Exteriores que est\'a en una calle)       & &2.5\%  \\ \hline
 %&Asuntos Exteriores& & & & \\ \hline
-7&Iglesia que est\'a en una calle y que tiene al frete algo que esta en la Calle de Santo Tom\'as & & \\ \hline                                
-6&En calle de Santo Tom\'as                                                                        & & \\ \hline                                
-7&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha,                                       & &\% \\ 
-8&Al frente al Ministerio de Asuntos Exteriores que est\'a en una calle                          && \\ \hline                               
-9&Cerca del Ministerio de Asuntos Exteriores que est\'a en una calle                            & & \\ \hline
+8&Iglesia que est\'a en una calle y que tiene al frente algo que est\'a en la Calle de Santo Tom\'as & & \\ \hline                                
+9 &La que est\'a al frente del (Ministerio de Asuntos Exteriores que est\'a en una calle)                          && \\ \hline                               
+10&La que est\'a cerca del (Ministerio de Asuntos Exteriores que est\'a en una calle)                            & & \\ \hline
 %10&                                 & & \\ \hline                                              
 \end{tabular}
 \caption{Posibles realizaciones de las 10 ER m\'as frecuentes dadas por el algoritmo para el grafo de 
@@ -852,19 +850,6 @@ la Figura \protect\ref{modelo-mapa-zoom}.}\label{freq-mapa-algoritmo}
 \end{center}
 \end{small}
 \end{table}
-
-%Ex-frente.(Ex-frente.(Ex-iglesia.(T))) & Ex-in.(Ex-CalleDeSantoTomas.(T)): church1->74 va a 1
-%Ex-cerca.(Ex-MinisterioAsuntosExteriores.(T) & Ex-in.(T)): church1->15
-
-
-%La f\'ormula (1) ``Ex-iglesia.(T) \& Ex-in.(Ex-CalleDeSantoTomas.(T))'' se podr\'ia realizar como ``La iglesia que est\'a en la Calle 
-%De Santo Tom\'as''. La f\'ormula (2) se podr\'ia realizar como ``La que est\'a al frente del Ministerio de Asuntos Exteriores''. 
-%La f\'ormula (3) como ``La iglesia de la Calle De Atocha''. La f\'ormula (4) con ``Una que esta cerca del Ministerio de Asuntos Exteriores''
-% y la (5) ``La que esta en Calle de Santo Tomas al frente de algo que tiene al frente una iglesia''. 
-%Este \'ultimo tipo de f\'ormulas son las menos deseadas y las menos naturales, podemos ver que en este caso la di\'o el 7\% de las veces, 
-%lo cual no es muy alto. Todas las f\'ormulas que di\'o el algoritmo en 1000 ejecusiones con sus respectivas frecuencias se muestran 
-%en el Ap\'endice en Secci\'on \ref{er-mapa-zoom}.
-
 
 \begin{table}[H]
 {\footnotesize
@@ -909,9 +894,14 @@ Consideramos que el algoritmo no gener\'o las ER \it{ La iglesia que est\'a en l
 
 \subsection{Singular con zoom 2x}
 \label{sec:conzoom}
-En la Figura \ref{mapa-zoom2x} se ve el nombre de la iglesia, ``Parroquia de Santa Cruz'', lo cual no se ve en la Figura \ref{mapa-zoom}, otra cosa que se puede ver en el mapa con zoom2x es el nombre de la calle que esta abajo ``Calle de la Concepci\'on Jeronima'', en este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores, por lo tanto lo \'unico que se ve en la Calle de Santo Tom\'as es la iglesia target. 
+Como el mapa que analizaremos en esta secci\'on (Figura \ref{mapa-zoom2x}) tiene zoom, se ve el nombre de la iglesia:
+ ``Parroquia de Santa Cruz''. Este nombre no se v\'e en el mapa que analizamos en la secci\'on anterior (Figura \ref{mapa-zoom}). Otra cosa 
+que se puede ver en el mapa con zoom es el nombre de una calle: ``Calle de la Concepci\'on Jeronima''.
+En este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores que si se ve\'ia en el mapa que vimos en la secci\'on anterior (Figura \ref{mapa-zoom}), 
+por lo tanto lo \'unico que se ve en la Calle de Santo Tom\'as es la iglesia target. 
 
- En la Tabla \ref{freq-mapa-zoom2x} se muestran las ER, la cantidad de ocurrencia en el corpus
+En la Tabla \ref{freq-mapa-zoom2x} se muestran las 10 ER m\'as frecuentes dadas por los participantes que completaron el experimento en la recolecci\'on del corpus
+, y la cantidad de ocurrencias en el corpus.
 
 \begin{figure}
 \centering
@@ -923,31 +913,29 @@ En la Figura \ref{mapa-zoom2x} se ve el nombre de la iglesia, ``Parroquia de San
 \begin{table}[H]
 {\footnotesize
 \begin{center}
-\begin{tabular}{|l|c|c|c|c|}
+\begin{tabular}{|l|l|c|c|c|c|}
 \hline
-ER 					      & Cantidad &  Frecuencia & SubE&SobreE \\ \hline \hline
-Parroquia de Santa Cruz        												 &		44&	\%  & NO &NO \\ \hline
-Parroquia de Santa Cruz en Calle De Santo Tomas        &	 9  &	\%	& NO&SI\\ \hline
-Parroquia de Santa Cruz en Calle De Santo Tomas        &	 3  &	\%	& NO&SI\\
-entre Calle De Atocha y De La Concepci\'on Jer\'onima  &	    &			&  &\\  \hline
-Calle De Santo Tomas	        												 &		1 &	\%	&SI&NO\\  \hline
-Iglesia de la Parroquia de Santa Cruz	      					 &		2 &	\%	&NO&SI\\  \hline
-Parroquia de Santa Cruz en Calle De Santo Tomas  			 &	  3 &	\%	&NO&SI\\  
-cerca de Ministerio de Asuntos Exteriores							 &	  &		& &\\  \hline
-Parroquia de Santa Cruz en Calle De Santo Tomas y      &	 4 &	\%	& NO&SI\\  
-De La Concepci\'on Jer\'onima  												 &	  &					& &\\  \hline
-Iglesia de la Parroquia de Santa Cruz	en       &		2&	\%	&NO&SI\\  
-Calle De Santo Tomas													 				 &		 &	    &  & \\ \hline
-Iglesia cerca deL Ministerio de Asuntos Exteriores				&	 1 &		&NO&SI\\  \hline
-Parroquia de Santa Cruz  &	  1&	\%	&NO&SI\\  
-cerca de Ministerio de Asuntos Exteriores				&	  &		&&\\  \hline
-Parroquia de Santa Cruz en Calle De Atocha  &	  1&	\%	&NO&SI\\  
-cerca de Ministerio de Asuntos Exteriores				&	  &		&&\\  \hline
-Iglesia				&  1 &	\%	&SI&NO\\  \hline
-NO ERA ER				&	8  &	\%	& &\\  \hline
-\hline
-\hline
-Totales	&81	&	100\% &	3 minimales &\\
+&ER 					      & Cantidad &  Frecuencia & SubE&SobreE \\ \hline \hline
+1&Parroquia de Santa Cruz        												 &		44&	\%  & NO &NO \\ \hline
+2&Parroquia de Santa Cruz en Calle De Santo Tom\'as        &    9 &	\%	& NO&SI\\ \hline
+3&Parroquia de Santa Cruz en Calle De Santo Tom\'as y      &    4 &     \%      & NO&SI\\
+&De La Concepci\'on Jer\'onima                             &      &             & & \\ \hline
+4&Parroquia de Santa Cruz en Calle De Santo Tom\'as        &    3 &     \%      &NO&SI\\
+&cerca de Ministerio de Asuntos Exteriores                 &      &             & &\\  \hline
+5&Parroquia de Santa Cruz en Calle De Santo Tom\'as        &	3 &	\%	& NO&SI\\
+&entre Calle De Atocha y De La Concepci\'on Jer\'onima     &	  &			&  &\\  \hline
+6&Iglesia de la Parroquia de Santa Cruz			   &	2 &	\%	&NO&SI\\  \hline
+7&Iglesia de la Parroquia de Santa Cruz	en      	   &	2 &	\%	&NO&SI\\  
+&Calle De Santo Tom\'as													 				 &		 &	    &  & \\ \hline
+8&Iglesia cerca del Ministerio de Asuntos Exteriores       &	1 &		&NO&NO\\  \hline
+9&Calle De Santo Tom\'as                                   &    1 &     \%      &SI&NO\\  \hline
+
+10&Parroquia de Santa Cruz  				   &    1 &	\%	&NO&SI\\  
+&cerca de Ministerio de Asuntos Exteriores		   &	  &		&&\\  \hline
+11&Parroquia de Santa Cruz en Calle De Atocha  		   &	1 &	\%	&NO&SI\\  
+&cerca de Ministerio de Asuntos Exteriores		   &	  &		&&\\  \hline
+12&Iglesia						   &    1 &	\%	&SI&NO\\  \hline
+NO ERA ER				   		   &	8 &	\%	& &\\  \hline
 \hline
 \end{tabular}
 \caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom2x}.}\label{freq-mapa-zoom2x}
@@ -955,19 +943,51 @@ Totales	&81	&	100\% &	3 minimales &\\
 }
 \end{table}
 
-El vocabulario y las probabilidades de uso sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom2x} es el siguiente:
 
-ParroquiaDeSantaCruz 66/73=0.904\\
-in 23/73=0.315\\
-CalleSantoTomas 22/73=0.301\\
-CalleDeAtocha 4/73=0.055\\
-CalleDeLaConcepcionJeronima 7/73=0.096\\
-iglesia 6/73=0.082\\
-cerca 6/73=0.082\\
-MinisterioDeRelacionesExteriores 5/73=0.068 
+Cabe notar que algunas personas dijeron ``Ministerio de Asuntos Exteriores'' (exactamente 6 personas), siendo que el nombre del Ministerio no se v\'e en el mapa, la 
+explicaci\'on que damos a esto es que la personas vieron el mapa sin zoom antes de ver este mapa. Como explicamos en la parte \ref{recoleccion-corpus} los mapas se dieron de manera aleatoria, esa aleatoriedad hizo que algunas personas recuerden lo que vieron en otros mapas. Esto es una caracter\'istica del corpus, y no es muy deseada, ya que las personas dijeron cosas que no est\'an en el modelo. D\'a como una sensaci\'on de desigualdad del experimento.
+44/81 ER son {\it Parroquia de Santa Cruz}. De las 12 ER dadas en la Tabla \ref{freq-mapa-zoom2x}, 9 contienen ``Parroquia de Santa Cruz'', y las 3 restantes tambi\'en fueron dadas
+para el mapa de la Figura \ref{mapa-zoom}, las cuales son {\it Iglesia} la cual era mucho m\'as frecuente en el mapa sin zoom, {\it Iglesia cerca del Ministerio de Asuntos Exteriores} la cual se di\'o 1 vez en el mapa con zoom, es decir tambi\'en era m\'as frecuente en el mapa sin zoom y {\it Calle de Santo tom\'as} la cual se di\'o 1 vez en el mapa con zoom.
+Es interesante notar que si bien hubo personas que nombraron el Ministerio de Asuntos exteriores ninguna persona dijo ``frente al ministerio...'', lo que hace que la probabilidad de frente sea 0 en este modelo.
 
 
-Y el modelo en el cual vamos a notar muchas diferencias con respecto al modelo de la Figura \ref{mapa-zoom} y esto se debe a que al acercar el zoom del mapa, se ven m\'as detalladamente algunas cosas, por ejemplo se ve que la Iglesia no est\'a en la Calle De Atocha como parec\'ia en el mapa mostrado en la Figura \ref{mapa-zoom}. Se agrega la Calle De La Concepci\'on Jer\'onima que no se ve\'ia en el mapa anterior. Notar que no se ve el nombre del Ministerio de Asuntos Exteriores. Se agrega el nombre ``Parroquia de Santa Cruz'' que no se ve\'ia en el otro mapa. Aparece una nueva calle la que esta en la parte superior de la manzana de la iglesia, de la cual no sabemos el nombre, el identificador ser\'a str25. Aparece el nombre de la calle (Calle de Carretas, cuyo identificar es str15) en la que esta el restaurant Medina Mayrit, pero desaparece el nombre del mismo. El building con identificar d, en este mapa se ve que es un teatro, el Teatro Calderón, tambi\'en aparece en el mapa el restaurante ``La Tagliatela'' al lado de un restaurante sin nombre, uno de esos restaurantes se pod\'a ver en el mapa sin zoom. Vamos a suponer que el que se pod\'ia ver en el mapa sin zoom era ``La Tagliatela'' a fin de conservar los mismos identificadores. Notar que dejamos de ver el nombre de la calle en la cual se ubica el teatro y los restaurantes reci\'en nombrados.
+
+El vocabulario y las probabilidades de uso sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom2x} se ven en el mismo mapa.
+
+
+
+\begin{table}[H]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|}
+\hline
+Palabra                                             Probabilidad\\ \hline \hline
+\textbf{\texttt{ParSantaCruz 0.90}}\\
+\textbf{\texttt{in 23/73=0.32}}\\
+\textbf{\texttt{CalleSantoTomas 0.30}}\\
+\textbf{\texttt{CalleAtocha 0.06}}\\
+\textbf{\texttt{CalleConJer 0.10}}\\
+\textbf{\texttt{church 0.08}}\\
+\textbf{\texttt{near 0.08}}\\
+\textbf{\texttt{MinisterioDeRelacionesExteriores 0.07}}\\
+\hline
+\end{tabular}
+\caption{Probabilidad de las palabras del dominio.}\label{prob-vocabulario-zoom}
+\end{center}
+\end{small}
+\end{table}
+
+
+En el modelo de la Figura \ref{modelo-mapa-zoom2x} (con zoom) se ven varias diferencias con respecto al modelo de la Figura \ref{mapa-zoom} 
+(sin zoom) y esto se debe a que al acercar el zoom del mapa, algunas cosas aparecen y otras desaparecen. Se ve que la iglesia target no est\'a
+ en la calle ee Atocha como parec\'ia en el mapa mostrado en la Figura \ref{mapa-zoom}. Se agrega el nombre de la Calle De La Concepci\'on 
+Jer\'onima que no se ve\'ia en el mapa anterior. No se ve el nombre del Ministerio de Asuntos Exteriores. Se agrega el nombre Parroquia de Santa Cruz que no se ve\'ia en el otro mapa. Aparece una nueva calle que est\'a en la parte superior de la manzana de la iglesia, 
+de la cual no sabemos el nombre, pero le asignamos el identificador {\texttt str25}. Aparece el nombre de la Calle de Carretas, 
+cuyo identificador
+ es {\texttt str15} en la que est\'a el restaurant {\it Medina Mayrit}, pero desaparece el nombre del restaurante. 
+El edificio con identificador {\texttt d}, en este mapa se ve que es un teatro, el Teatro Calder\'on, tambi\'en aparece en el mapa el restaurante {\it La Tagliatela} al lado
+ de un restaurante sin nombre, uno de esos restaurantes se pod\'ia ver en el mapa sin zoom. Vamos a suponer que el que se pod\'ia ver en el mapa sin zoom era {\it La Tagliatela} a fin de conservar los mismos identificadores. Notar que dejamos de ver el nombre de la calle 
+en la cual se ubica el teatro y los restaurantes reci\'en nombrados.
 
 \begin{figure}[ht]
 \centering
@@ -1075,7 +1095,9 @@ Y el modelo en el cual vamos a notar muchas diferencias con respecto al modelo d
 \label{modelo-mapa-zoom2x}
 \end{figure}
 
-Notar que en el modelo no esta el Ministerio de Asuntos Exteriores, pero la probabilidad di\'o mayor que 0, esto se debe a que como en la obtenci\'on del corpus los mapas se mostraron aleatoriamente, algunas personas vieron el mapa sin zoom antes, y recordaron que ese edificio que se v\'e en el mapa, es el Ministerio de Asuntos Exteriores, como no todas las personas lo vieron es que no podemos agregarlo al modelo.
+Como dijimos el nombre del Ministerio de Asuntos Exteriores no se ve en el mapa, sin embargo 6 personas lo usaron en sus ERs, 
+esto se debe a que como en la obtenci\'on del corpus los mapas se mostraron aleatoriamente, algunas personas vieron el mapa sin zoom antes, 
+y recordaron que ese edificio que se v\'e en el mapa, es el Ministerio de Asuntos Exteriores. Como no est\'a visible en el mapa, no aparece en el modelo.
 
 
 \subsection{Plural sin zoom}
@@ -1097,32 +1119,32 @@ En la Tabla \ref{freq-mapa-zoom-plural} se muestran las ER, la cantidad de ocurr
 \begin{tabular}{|l|c|c|c|c|}
 \hline
 ER 					      & Cantidad &  Frecuencia & SubE & SobreE\\ \hline \hline
-Medina Mayrit y el que esta cerca        &	11	&	\% & NO & NO \\ \hline
-el de la calle Atocha y De La Cruz       &	3  &	\%	&SI & NO\\  \hline
-pr\'oximo a la iglesia 	      &1		&	\%	&SI &\\ \hline
-Medina Mayrit y el que esta en Calle De Atocha	      &5		&	\%	&SI&NO\\ \hline
-Calle De Atocha				&	2  &	\%	&SI&NO\\ \hline
-Restaurantes de Calle De Atocha				&	8  &	\%	&SI&NO\\ \hline
-Medina Mayrit en Calle de Atocha y el que esta cerca				& 3  &	\%	&NO&SI\\
+Medina Mayrit y el que esta cerca        &	11	&	\% &  &  \\ \hline
+el de la calle Atocha y De La Cruz       &	3  &	\%	&X & \\  \hline
+pr\'oximo a la iglesia 	      &1		&	\%	&X &\\ \hline
+Medina Mayrit y el que esta en Calle De Atocha	      &5		&	\%	&X&\\ \hline
+Calle De Atocha				&	2  &	\%	&X&\\ \hline
+Restaurantes de Calle De Atocha				&	8  &	\%	&X&\\ \hline
+Medina Mayrit en Calle de Atocha y el que esta cerca				& 3  &	\%	&&X\\
 cerca de la iglesia				&	  &	\%	&&\\ \hline
-Medina Mayrit			&11		&	\%	&SI&NO\\  \hline
-Medina Mayrit y el que esta cerca				&	1	&	\%  &NO&SI\\
+Medina Mayrit			&11		&	\%	&X&\\  \hline
+Medina Mayrit y el que esta cerca				&	1	&	\%  &&X\\
 en la calle Atocha y De La Cruz        &	  &	&&\\ \hline
-El que esta en Calle De Atocha y Carretas, 	      &		&	\%	&NO&NO\\
+El que esta en Calle De Atocha y Carretas, 	      &		&	\%	&&\\
 y el de Atocha y de la Cruz	      &1		&	&&\\ \hline
-El que esta en Calle De Atocha y Carretas 					&	2  &	\%	&SI&NO\\ \hline
-Medina Mayrit en Calle De Atocha y el que esta cerca  				&  1 &	\%	&NO&SI\\ \hline
-Medina Mayrit y el que esta cerca				&		3 &	\%  &NO &SI\\
+El que esta en Calle De Atocha y Carretas 					&	2  &	\%	&X&\\ \hline
+Medina Mayrit en Calle De Atocha y el que esta cerca  				&  1 &	\%	&&X\\ \hline
+Medina Mayrit y el que esta cerca				&		3 &	\%  & &X\\
 cercano a la iglesia				&	  &	&&\\ \hline
-Medina Mayrit y el que esta 	&	2	&	\%  &NO&SI\\
+Medina Mayrit y el que esta 	&	2	&	\%  &&X\\
 cerca de la iglesia				&	  &	&&\\ \hline
-Medina Mayrit en Calle de Atocha y el que esta cerca			&1  &	\%	&NO&SI\\
+Medina Mayrit en Calle de Atocha y el que esta cerca			&1  &	\%	&&X\\
 en Calle De La Cruz	&	  &		&&\\ \hline
-Medina Mayrit y el que esta cerca			&1  &	\%	&NO&SI\\
+Medina Mayrit y el que esta cerca			&1  &	\%	&&X\\
 en Calle De Atocha	&	1  &		&&\\ \hline
-Medina Mayrit y el que esta cerca			&2  &	\%	&NO&SI\\
+Medina Mayrit y el que esta cerca			&2  &	\%	&&X\\
 en Calle De La Cruz	&	  &		&&\\ \hline
-Calle De Atocha y Calle De La Cruz  					&1  &	\%	&SI&NO\\
+Calle De Atocha y Calle De La Cruz  					&1  &	\%	&X&\\
 \hline \hline
 Totales	&	&	100\%	&&\\
 
