@@ -5,7 +5,7 @@
 %En este cap\'itulo daremos una introducci\'on al problema de la generaci\'on autom\'atica de expresiones referenciales, contaremos las contribuciones de este trabajo y mostraremos como est\'a organizada la tesis.
 
 
-La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso de construcci\'on de un texto en lenguaje natural de forma autom\'atica (o semi autom\'atica), para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural, es \'util para aplicaciones pr\'acticas en las que, por ejemplo, es necesario hacer accesible grandes vol\'umenes de informaci\'on posiblemente t\'ecnica. La GLN se ha usado para generar recomendaciones de restaurantes personalizadas, resumir informaci\'on m\'edica, etc~\cite{dale2000}. La generaci\'on de lenguaje natural, est\'a dentro de el \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial. 
+La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso de construcci\'on de un texto en lenguaje natural de forma autom\'atica (o semi autom\'atica), para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural, es \'util para aplicaciones pr\'acticas en las que, por ejemplo, es necesario hacer accesible grandes vol\'umenes de informaci\'on posiblemente t\'ecnica. La GLN se ha usado para generar recomendaciones de restaurantes personalizadas, resumir informaci\'on m\'edica, etc.~\cite{dale2000}. La generaci\'on de lenguaje natural, est\'a dentro de el \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial.
 
 La \textbf {generaci\'on de expresiones referenciales (GER)} entre todas las subtareas de GLN, es una de las que ha recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los sistemas GLN, con independencia de su finalidad, contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
 en vista del papel central que las expresiones referenciales tienen en la comunicaci\'on. Un sistema que proporciona
@@ -15,7 +15,11 @@ necesita generar descripciones espaciales ---{\it tomar el puente junto a la igl
 y un robot que ensambla piezas de juguetes junto con un usuario humano~\cite{foster-etal-ijcai2009} debe hacer referencia a los componentes --- {\it inserte el perno verde hasta el final en el cubo rojo}. Cuando hablamos, nos referimos a cosas (tangibles como un puente, o intangibles como una fecha), es decir generamos expresiones referenciales. Un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales. La generaci\'on autom\'atica de expresiones referenciales es el tema de esta tesis.
 
 Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\'ivocamente a un objeto en un contexto y para un interlocutor particular. Si quisieramos referirnos al objeto se\~nalado por la flecha en la Figura~\ref{GRE3D7-stimulus1}, podr\'iamos hacerlo con alguna de las expresiones referenciales que se muestran en la Figura \ref{er-figura1}.
-
+%\captionsetup{
+%  font=footnotesize,
+%  justification=raggedright,
+%  singlelinecheck=false
+%}
 \begin{figure}[H]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -40,18 +44,21 @@ Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\
 
  {\it La bola grande}\\
 
- {\it la esfera que est\'a a la derecha del cubo rojo y a }\\
-{\it la izquierda del cubo amarillo}\\
+ {\it La esfera que est\'a a la derecha del cubo rojo y a }\\
+{\it La izquierda del cubo amarillo}\\
 
- {\it la cosa que est\'a a la derecha del cubo del medio}\\
+ {\it La cosa que est\'a a la derecha del cubo del medio}\\
 
   {\it ...}
  \end{tabular}
-\vspace*{-0.3cm}
-\caption{.}\label{er-figura1}
+%\vspace*{-1cm}
+\hspace*{-30cm}
+\centering\caption{}\label{er-figura1}
 \end{subfigure}
+\begin{centering}
 \caption{Ejemplos de expresiones referenciales que identifican un\'ivocamente al objeto se\~nalado por la flecha en la im\'agen.}
 \label{figura-er}
+\end{centering}
 \end{figure}
 
 Un sistema de GLN incluye 3 etapas, {\bf determinaci\'on de contenido} ---qu\'e decir--- {\bf lexicalizaci\'on} ---con qu\'e palabras--- y {\bf realizaci\'on ling\"{u}\'istica} ---c\'omo decirlo. La lexicalizaci\'on elije que lexemas usar para comunicar el contenido determinado por la etapa anterior. Y la realizaci\'on arma la oraci\'on agregando los art\'iculos, preposiciones, y dem\'as lexemas necesarios y orden\'andolos de forma tal que la frase resultante sea gramaticalmente aceptable. 
@@ -64,7 +71,7 @@ En lo que sigue introduciremos terminolog\'ia b\'asica, relacionada con la GER q
 
 El {\bf dominio} de una ER define los tipos de entidades que est\'an siendo contemplados. Por ejemplo el dominio de la Figura \ref{figura-er} son las figuras geom\'etricas en 3 dimensiones. En particular, el dominio incluye cubos y esferas de colores rojo y amarillo, algunas grandes y otras peque\~nas, situadas en un entorno con perspectiva.
 
-El {\bf contexto} de una ER contiene un subconjunto de las entidades del dominio. La Figura \ref{figura-er} muestra un contexto con 7 entidades del dominio, 4 rojas y 3 amarillas. Los puntos de referencia visibles en un cierto momento del camino para el que estamos dando direcciones, un subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un dominio visual, el contexto, incluyendo las propiedades de sus objetos y su configuraci\'on espacial, se puede llamar escena. %El contexto de la Figura \ref{GRE3D7-stimulus1} son los todos los objetos visibles con sus propiedades.
+El {\bf contexto} de una ER contiene un subconjunto de las entidades del dominio. La Figura \ref{figura-er} muestra un contexto con 7 entidades del dominio, 4 rojas y 3 amarillas. Otros ejemplos son los puntos de referencia visibles en un cierto momento en un camino para el que estamos dando direcciones, un subconjunto de las fotograf\'ias utilizadas en una configuraci\'on experimental, o los ingredientes de cocina que ya se han mencionado en una receta. En un dominio visual, el contexto, incluyendo las propiedades de sus objetos y su configuraci\'on espacial, se puede llamar escena. %El contexto de la Figura \ref{GRE3D7-stimulus1} son los todos los objetos visibles con sus propiedades.
 
 Cada {\bf entidad} del contexto (tambi\'en conocido como objeto o elemento) tiene un tipo ---\emph{esfera}--- ciertas propiedades o caracter\'isticas ---\emph{color}---valores de esas propiedades ---\emph{rojo}---, y puede tener relaciones con otros objetos ---\emph{a la derecha de}. Una {\bf propiedad} (unaria) es una caracter\'istica de una entidad particular. Por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto. Cada entidad puede tener muchas propiedades, y puede tener relaciones (tambi\'en llamadas: propiedades binarias), por ejemplo con respecto a la posici\'on f\'isica, como estar situado al lado de otro objeto. 
 
@@ -75,7 +82,7 @@ Dado un contexto, un target y una descripci\'on (parcial) del target, los {\bf d
 Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos, alg\'un tipo de representaci\'on de un contexto y un target, y d\'a como resultado una (o m\'as) expresi\'on(es) referencial(es) para el target considerado, si puede identificarlo un\'ivocamente en el contexto.
 
 \begin{figure}[H]
-\begin{subfigure}{.5\textwidth}
+\begin{subfigure}{.4\textwidth}
   \centering
 	\vspace*{-.2cm}
 \includegraphics[width=\textwidth]{images/22.jpg}
@@ -83,7 +90,7 @@ Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos
 \end{subfigure}
 \begin{subfigure}{1\textwidth}
  \centering
-\begin{center}
+\begin{centering}
 \hspace*{-8cm}
 \begin{scriptsize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|}
@@ -102,8 +109,9 @@ $e_7$ & cube & red & small & $e_6$ & - & - & -\\
 \hline
 \end{tabular}
 \end{scriptsize}
-\centering \caption{}\label{tabla-propiedades}
-\end{center}
+
+\caption{}\label{tabla-propiedades}
+\end{centering}
 \end{subfigure}
 \caption{Posible formalizaci\'on de las propiedades de la Figura \ref{figura-er} en una tabla de doble entrada.}\label{contexto-tabla-propiedades}
 \end{figure}
@@ -121,44 +129,44 @@ Como una primera intuici\'on podemos ver que las ER dadas por las personas para 
 \begin{picture}(250,50)
 \put(0,-50){\begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
   ]
- \node[n,label=above:$e_1$,label=below:{
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nSmall\\[-3pt] 
       \nYellow \\[-3pt] 
-      \nBall\end{array}$}] (a) {};
- \node[n,label=above:$e_2$,label=below:{
+      \nBall\end{array}$}] (a) {$e_1$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}     
       \nSmall\\[-3pt] 
       \nRed\\[-3pt] 
-      \nCube\end{array}$}, right of=a] (b) {};
- \node[n,label=below:$e_3$,label=above:{
+      \nCube\end{array}$}, right of=a] (b) {$e_2$};
+ \node[n,label=above:{
     \relsize{-2}$\begin{array}{c}     
       \nSmall\\[-3pt] 
       \nYellow\\[-3pt] 
-      \nBall\end{array}$}, above of=b] (c) {};
- \node[n,label=right:$e_4$,label=below:{
+      \nBall\end{array}$}, above of=b] (c) {$e_3$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nLarge\\[-3pt] 
       \nRed\\[-3pt] 
-      \nCube\end{array}$}, right of=b] (d) {};
- \node[n,label=left:$e_5$,label=below:{
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nLarge\\[-3pt] 
       \nRed\\[-3pt] 
-      \nBall\end{array}$}, right of=d] (e) {};
- \node[n,label=right:$e_6$,label=below:{
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nSmall\\[-3pt] 
       \nYellow\\[-3pt] 
-      \nCube\end{array}$}, right of=e] (f) {};
- \node[n,label=left:$e_7$,label=below:{
+      \nCube\end{array}$}, right of=e] (f) {$e_6$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nSmall\\[-3pt]
       \nRed\\[-3pt] 
-      \nCube\end{array}$},  right of=f] (g) {};
+      \nCube\end{array}$},  right of=f] (g) {$e_7$};
  \draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
  \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
  \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
@@ -166,7 +174,7 @@ Como una primera intuici\'on podemos ver que las ER dadas por las personas para 
  \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
  \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
  %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
- \draw[dotted] (-0.5,-1.5) rectangle (8,2.8);
+ \draw[dotted] (-0.5,-1.5) rectangle (8,3);
  \end{tikzpicture}}
  \end{picture}
  %\end{flushleft}
@@ -183,40 +191,186 @@ Como una primera intuici\'on podemos ver que las ER dadas por las personas para 
 %\centering
 %\vspace*{-5cm}
 %\begin{table}
+
+%\begin{subfigure}{.5\textwidth}
+%  \centering
+%\includegraphics[width=\textwidth]{images/22sinletras.jpg}
+%%\caption{Ejemplo de contexto}
+%\label{GRE3D7-stimulus1-b}
+\centering
+%\vspace*{-2cm}
+\begin{picture}(190,50)
+\put(40,-50){\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+ %\node[n,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nRed\\[-3pt] 
+      %\nCube\end{array}$}, right of=b] (d) {$e_4$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+
+% \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
+ %\draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+
+ %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
+ %\draw[dotted] (-0.5,1) rectangle (8,3);
+ \end{tikzpicture}}
+ \end{picture}
+ %\end{flushleft}
+
+\vspace*{1.5cm} 
+ \caption{Subgrafo \it{ball and large}} \label{formula-subgrafo2}
+
+\vspace*{-1cm}
+\begin{picture}(150,50)
+\put(10,-50){\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRed\\[-3pt] 
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+
+% \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
+ \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+
+ %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
+ %\draw[dotted] (-0.5,2) rectangle (8,5);
+ \end{tikzpicture}}
+ \end{picture}
+ %\end{flushleft}
+
+\vspace*{2cm} 
+ \caption{Subgrafo \it{ball and red and} \it{Ex.right-of (cube and red)}} \label{formula-subgrafo}
+
+
+
 \vspace*{0.5cm}
-\begin{tabular}{l}
- {\it ball and large}\\
+%\begin{tabular}{l}
+ %{\it ball and large}\\
+%
+ %{\it ball and red and Ex.right-of (cube and red)} \\
+%
+ %{\it Ex.(T) and Ex.right-of (large and cube)}\\
+%
+ %{\it red and ball}\\
+%
+%% {\it ball and Ex.left-of (yellow and cube)}\\
+%
+ %{\it large and ball}\\
+%
+ %%{\it ball and Ex.right-of (red and cube and}\\
+ %%{\it Ex.left-of (yellow cube)}\\
+ %%{\it Ex.(T) and Ex.right-of o}\\
+%
+ %{\it ...}
+ %
+%
+ %\end{tabular}
 
- {\it ball and red and Ex.right-of (cube and red)} \\
 
- {\it Ex.(T) and Ex.right-of (large and cube)}\\
 
- {\it red and ball}\\
-
-% {\it ball and Ex.left-of (yellow and cube)}\\
-
- {\it large and ball}\\
-
- %{\it ball and Ex.right-of (red and cube and}\\
- %{\it Ex.left-of (yellow cube)}\\
- %{\it Ex.(T) and Ex.right-of o}\\
-
- {\it ...}
- 
-
- \end{tabular}
 \vspace*{1cm}
 
- \caption{ER como f\'ormulas l\'ogicas para el objeto $e_5$.}\label{er-figura1-b}
+ %\caption{ER como f\'ormulas l\'ogicas para el objeto $e_5$.}\label{er-figura1-b}
 %\end{table}
 %\end{minipage}
 \end{subfigure}%
 \caption{Ejemplos de ER en f\'ormulas l\'ogicas para la Figura \ref{GRE3D7-stimulus1-ids}.}
 \label{formulas-stimulus1}
 \end{figure}
+
+
+
+\begin{figure}[H]
+%\begin{subfigure}{.5\textwidth}
+\centering
+%\includegraphics[width=\textwidth]{images/22sinletras.jpg}
+%%\caption{Ejemplo de contexto}
+%\label{GRE3D7-stimulus1-b}
+\vspace*{1cm}
+\begin{picture}(250,50)
+\put(0,-50){\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nSmall\\[-3pt] 
+      \nYellow \\[-3pt] 
+      \nBall\end{array}$}] (a) {$e_1$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}     
+      \nSmall\\[-3pt] 
+      \nRed\\[-3pt] 
+      \nCube\end{array}$}, right of=a] (b) {$e_2$};
+ \node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}     
+      \nSmall\\[-3pt] 
+      \nYellow\\[-3pt] 
+      \nBall\end{array}$}, above of=b] (c) {$e_3$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt] 
+      \nRed\\[-3pt] 
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt] 
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nSmall\\[-3pt] 
+      \nYellow\\[-3pt] 
+      \nCube\end{array}$}, right of=e] (f) {$e_6$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nSmall\\[-3pt]
+      \nRed\\[-3pt] 
+      \nCube\end{array}$},  right of=f] (g) {$e_7$};
+ \draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
+ \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
+ \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
+ 
+ \draw [aArrow,bend right=40] (a) to node[auto,swap]{} (b);
+ \draw [aArrow,bend right=40] (b) to node[auto,swap]{} (a);
+
+ \draw [aArrow,bend right=40] (b) to node[auto,swap]{} (d);
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{} (b);
+
+\draw [aArrow,bend right=40] (e) to node[auto,swap]{} (f);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{} (e);
+ %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
+ \draw[dotted] (-0.5,-1.5) rectangle (8,3);
+ \end{tikzpicture}}
+ \end{picture}
+ %\end{flushleft}
+
+\vspace*{2cm} 
+ \caption{Representaci\'on de contexto m\'as completo.}\label{representacion-modelo-completo}
+\end{figure}
+
+
+
  En la pr\'oxima secci\'on veremos porqu\'e la tarea GER es m\'as compleja de lo que parece a primera vista y en la siguiente introduciremos c\'omo herramientas de teor\'ia de modelos nos pueden ayudar.
 
-\section{Generaci\'on de expresiones referenciales bajo incertidumbre}
+\section{Expresiones referenciales bajo incertidumbre}
 \label{sec:gre-incertidumbre}
 
 
@@ -262,58 +416,65 @@ Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede 
  de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cu\'an buena es esa ER para 
 el input.
 
-Para poder dar ese ranking del cual estuvimos hablando bastar\'ia correr un algoritmo {\bf no-determin\'istico} una cantidad 'suficiente' \footnote{Depender\'a del grado de detalle que queremos conseguir, a mayor cantidad de veces, mayor variedad tendremos} de veces.
+`?Como podemos generar un ranking de ER?.
+Un algoritmo naive generar\'ia primero todas las ER posibles y luego las ordenar\'ia con alg\'un criterio. ESto es posible porque la cantidad de ER es finitra dado un modelo finito pero esta cantidad puede ser muy grande, exponencial en el tama\~{n}o del modelo y la gran mayor\'ia de estas ER no se llegar\'ian a usar en una aplicaci\'on dada. Una aplicaci\'on s\'olo usar\'a las mejores ER de un target considerado.
+Una forma m\'as eficiente de generar un ranking de ER es dise\~{n}ar un algoritmo no determin\'istico y correrlo una cantidad de veces suficientepara la aplicaci\'on.
 
-Un algoritmo para la GER es {\bf no-determin\'istico} si puede dar diferentes ER para el mismo contexto y target en sucesivas ejecuciones.
-En esta tesis estudiamos la generaci\'on autom\'atica de expresiones referenciales, 
-primero mostramos c\'omo podemos a\~nadir no determinismo a los algoritmos estudiados. Los algoritmos de refinamiento estudiados, tienen un orden fijo en el cual consideran las propiedades y relaciones, y la naturalidad de las expresiones referenciales que generan depende de este orden particular considerado, nosotros proponemos reemplazar ese orden fijo sobre las propiedades y/o relaciones de la escena de entrada por una~\emph{probabilidad de uso} para cada propiedad y/o relaci\'on, y modificar los algoritmos para que tengan en cuenta esas propiedades. De esta manera, cada llamada al algoritmo puede producir diferentes ERs para la misma escena y target de entrada. 
+Un algoritmo para la GER es {\bf no-determin\'istico} si puede dar diferentes ER para el mismo contexto y target en sucesivas ejecuciones. 
+Para producir un ranking de las mejores ERs para un target el no determinismo debe estar guiado de alguna forma de que elija buenas propiedades y relaciones. Llamaremos a esta gu\'ia: probabilidad de uso de una propiedad o relaci\'on. Esta probabilidad se puede ver afectada por caracter\'isticas de la propiedad o relaci\'on (tipos de propiedades) o por caracter\'isticas de qui\'en interpretar\'a la ER (el interlocutor).
 
-Es decir nuestra meta, no s\'olo ser\'a crear algoritmos para la generaci\'on autom\'atica de expresiones referenciales, sino crearlos de tal manera que podamos imitar en gran medida lo que dir\'ian las personas.
+Hay diferentes \textbf{tipos de propiedades}, por ejemplo taxon\'omicas (las que tiene el objeto, por ejemplo tipo, color), relacionales (las que necesitan dar una expresi\'on de otro objeto, por ejemplo {\it estar al lado de}), vagas (son las m\'as dif\'iciles de identificar, ejemplo: chico, grande, no son propiedades absolutas, ya que necesitan un contexto, con respecto a qu\'e algo es chico o grande?).
 
-Mostraremos que dado un corpus (como el corpus GRE3D7 o el TUNA de los cuales hablaremos en Cap\'itulo~\ref{sec:seleccion}) podemos estimar estas probabilidades de uso de manera que las ER se generen con una distribuci\'on de probabilidad que coincide en gran medida con las que se encuentra en el corpus.
+Ciertos tipos de atributos pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir {\it grande} y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.
+%En esta tesis estudiamos la generaci\'on autom\'atica de expresiones referenciales, 
+%primero mostramos c\'omo podemos a\~nadir no determinismo a los algoritmos estudiados. Los algoritmos de refinamiento estudiados, tienen un orden fijo en el cual consideran las propiedades y relaciones, y la naturalidad de las expresiones referenciales que generan depende de este orden particular considerado, nosotros proponemos reemplazar ese orden fijo sobre las propiedades y/o relaciones de la escena de entrada por una~\emph{probabilidad de uso} para cada propiedad y/o relaci\'on, y modificar los algoritmos para que tengan en cuenta esas propiedades. De esta manera, cada llamada al algoritmo puede producir diferentes ERs para la misma escena y target de entrada. 
 
-Esta selecci\'on de la ER m\'as apropiada tambi\'en debe tener en cuenta al interlocutor, es natural que los humanos demos distintas ER a distintos interlocutores.
+%Es decir nuestra meta, no s\'olo ser\'a crear algoritmos para la generaci\'on autom\'atica de expresiones referenciales, sino crearlos de tal manera que podamos imitar en gran medida lo que dir\'ian las personas.
+%
+%Mostraremos que dado un corpus (como el corpus GRE3D7 o el TUNA de los cuales hablaremos en Cap\'itulo~\ref{sec:seleccion}) podemos estimar estas probabilidades de uso de manera que las ER se generen con una distribuci\'on de probabilidad que coincide en gran medida con las que se encuentra en el corpus.
+
+Esta selecci\'on de la ER m\'as apropiada tambi\'en debe tener en cuenta al \textbf {interlocutor}, es natural que los humanos demos distintas ER a distintos interlocutores.
 % En el \'area muchas veces se habla de optimalidad de la ER, pero con diferentes significados, para algunos una ER \'optima es aquella que dice lo m\'inimo necesario para identificar al objeto target, para otros es la menos esfuerzo requiere del interlocutor para identificarlo.
 La selecci\'on de qu\'e propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial. Una expresi\'on referencial ser\'a muy distinta si nuestro objetivo es dar la m\'inima informaci\'on que identifique al objeto que si nuestro objetivo es ayudar al interlocutor a que identifique el objeto.
 
-En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de duda nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir, pero cuando queremos hacer esa generaci\'on autom\'atica normalmente no poseemos esa clase de informaci\'on.
+En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de duda nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir...
 
-En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.
- 
-Las propiedades y relaciones de los objetos de la escena forman una base de conocimento, estos datos se pueden organizar en jerarqu\'ias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.
+\textbf{FALTA CIERRE A ESTA SECCION!}
 
-Hay diferentes tipos de propiedades, por ejemplo taxon\'omicas (las que tiene el objeto, por ejemplo tipo, color), relacionales (las que necesitan dar una expresi\'on de otro objeto, por ejemplo {\it estar al lado de...}), vagas (son las m\'as dif\'iciles de identificar, ejemplo: chico, grande, no son propiedades absolutas, ya que necesitan un contexto, con respecto a qu\'e algo es chico o grande?).
-
-Si el objeto target tiene la propiedad de medir 1.80 de alto, y est\'a en un grupo donde los dem\'as son m\'as peque\~nos, es m\'as natural decir el m\'as alto, que el que mide 1.80.
-Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identificar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran seg\'un la cantidad de informaci\'on que contienen, si contienen la m\'inima informaci\'on para identificarlas un\'ivocamente ser\'an minimales, si contienen m\'as informaci\'on estar\'an sobreespecificadas, pero en el caso de contener m\'as de la m\'inima informaci\'on para identificarlas un\'ivocamente... cu\'anta m\'as dar?, intentaremos imitar lo que hacen las personas cuando dan expresiones referenciales para responder este tipo de preguntas.
+%En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.
+ %
+%Las propiedades y relaciones de los objetos de la escena forman una base de conocimento, estos datos se pueden organizar en jerarqu\'ias, por ejemplo: conjunto de animales, conjunto de mamiferos, conjunto de insectos. Algunos conjuntos pueden estar contenidos en otros, es decir algunos objetos o entidades pueden compartir caracter\'isticas.
+%
+%Si el objeto target tiene la propiedad de medir 1.80 de alto, y est\'a en un grupo donde los dem\'as son m\'as peque\~nos, es m\'as natural decir el m\'as alto, que el que mide 1.80.
+%Si tenemos 100 caracter\'isticas de una persona, y con esas caracter\'isticas se pudiera identificar un\'ivocamente a una persona, un sistema que diera que las 100 caracter\'isticas no ser\'ia un sistema que suene muy natural, ya que una persona no dar\'ia 100 propiedades para identificar a una persona particular. As\'i podr\'iamos decir que las expresiones referenciales variaran seg\'un la cantidad de informaci\'on que contienen, si contienen la m\'inima informaci\'on para identificarlas un\'ivocamente ser\'an minimales, si contienen m\'as informaci\'on estar\'an sobreespecificadas, pero en el caso de contener m\'as de la m\'inima informaci\'on para identificarlas un\'ivocamente... cu\'anta m\'as dar?, intentaremos imitar lo que hacen las personas cuando dan expresiones referenciales para responder este tipo de preguntas.
 %El sistema deber\'ia tener una lista del orden de preferencia de los atributos a usar.\\ 
 
-Ciertos tipos de atributos pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir {\it grande} y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.
+
 
 %NO NO Las primeras investigaciones en GER no voy a poner esto porque no quiero pasar por alto shrdlu de vinogran 1969
-\cite{C92-1038}; \cite{Dale95computationalinterpretations} hicieron una serie de supuestos simplificadores, por ejemplo no usaban relaciones, el target era un s\'olo objeto, y como resultado los primeros
-algoritmos GER s\'olo pod\'ian generar una variedad limitada de expresiones referenciales. Cuando
-los investigadores comenzaron a levantar algunos de estos supuestos, esto di\'o lugar a algoritmos de GER
-con un repertorio m\'as amplio, siendo capaces de generar, por ejemplo, plurales y expresiones relacionales. 
-
-Este movimiento ha creado una serie de nuevos desaf\'ios, sin embargo. Por ejemplo, el
-n\'umero de formas en las que uno puede referirse a un conjunto de objetos de destino aumenta, por lo que la elecci\'on de una
-buena expresi\'on referencial es m\'as dif\'icil.
-
-Del mismo modo, incluso propuestas recientes tienden a asumir que no es problem\'atico para determinar qu\'e informaci\'on
-es compartida entre el hablante y el oyente.\\
-(a) C\'omo se representa la informaci\'on del dominio?\\
-(b) C\'omo se representa el contenido sem\'antico de una expresi\'on referencial? \\
-(c) C\'omo se pueden encontrar descripciones distintivas?
-
-En los contextos de los corpus analizados en esta tesis, nos encontramos con cuatro tipos diferentes de atributos:
-tipos de objetos, atributos absolutos, atributos relativos, atributos espaciales incluidas las relaciones y atributos de localizaci\'on.
-
-El tipo de un objeto constituye un caso especial, ya que es muy rara vez omite
-en la expresi\'on referencial. En consecuencia, la mayor\'ia de los algoritmos tratan de
-considerarlo por separado para asegurarse de que se a\~nade a cada expresi\'on referencial. Una explicaci\'on parcial para esta condici\'on especial es que las expresiones referenciales se realizan como sintagmas nominales,
-cada sintagma nominal requiere un sustantivo, y por lo general es el tipo del referente dado que es el sustantivo principal.
-
+%\cite{C92-1038}; \cite{Dale95computationalinterpretations} hicieron una serie de supuestos simplificadores, por ejemplo no usaban relaciones, el target era un s\'olo objeto, y como resultado los primeros
+%algoritmos GER s\'olo pod\'ian generar una variedad limitada de expresiones referenciales. Cuando
+%los investigadores comenzaron a levantar algunos de estos supuestos, esto di\'o lugar a algoritmos de GER
+%con un repertorio m\'as amplio, siendo capaces de generar, por ejemplo, plurales y expresiones relacionales. 
+%
+%Este movimiento ha creado una serie de nuevos desaf\'ios, sin embargo. Por ejemplo, el
+%n\'umero de formas en las que uno puede referirse a un conjunto de objetos de destino aumenta, por lo que la elecci\'on de una
+%buena expresi\'on referencial es m\'as dif\'icil.
+%
+%Del mismo modo, incluso propuestas recientes tienden a asumir que no es problem\'atico para determinar qu\'e informaci\'on
+%es compartida entre el hablante y el oyente.\\
+%(a) C\'omo se representa la informaci\'on del dominio?\\
+%(b) C\'omo se representa el contenido sem\'antico de una expresi\'on referencial? \\
+%(c) C\'omo se pueden encontrar descripciones distintivas?
+%
+%En los contextos de los corpus analizados en esta tesis, nos encontramos con cuatro tipos diferentes de atributos:
+%tipos de objetos, atributos absolutos, atributos relativos, atributos espaciales incluidas las relaciones y atributos de localizaci\'on.
+%
+%El tipo de un objeto constituye un caso especial, ya que es muy rara vez omite
+%en la expresi\'on referencial. En consecuencia, la mayor\'ia de los algoritmos tratan de
+%considerarlo por separado para asegurarse de que se a\~nade a cada expresi\'on referencial. Una explicaci\'on parcial para esta condici\'on especial es que las expresiones referenciales se realizan como sintagmas nominales,
+%cada sintagma nominal requiere un sustantivo, y por lo general es el tipo del referente dado que es el sustantivo principal.
+%
 %\section{Contribuciones de esta tesis}
 %\label{sec:contribiciones}
 %\textcolor{blue}{Esta parte se va?}
@@ -334,7 +495,7 @@ cada sintagma nominal requiere un sustantivo, y por lo general es el tipo del re
 
 
 
-\section{Generaci\'on de expresiones referenciales usando teor\'ia de modelos}
+\section{Expresiones referenciales usando teor\'ia de modelos}
 \label{sec:gre-teoria-modelos}
 
 Una de las cuestiones importantes a la hora de representar la informaci\'on de una escena en un modelo, es como decidir cu\'ales aspectos representar.
@@ -383,18 +544,18 @@ $\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
 \begin{picture}(90,30)
 \put(0,-40){\begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
     aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
   ]
- \node[n,label=above:$a$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}] (a) {};
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}] (a) {$a$};
 
- \node[n,label=above:$b$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \aSmall \end{array}$}, right of=a] (b) {};
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \aSmall \end{array}$}, right of=a] (b) {$b$};
 
- \node[n,label=above:$c$,label=below:{\relsize{-1}$\begin{array}{c}\nCat\\ \aSmall\end{array}$}, right of=b] (c) {};
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nCat\\ \aSmall\end{array}$}, right of=b] (c) {$c$};
 
- \node[n,label=above left:$d$,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \nBreed\\  \aSmall \end{array}$}, right of=c] (d) {};
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \nBreed\\  \aSmall \end{array}$}, right of=c] (d) {$d$};
 
- \node[n,label=above right:$e$,,label=below:{\relsize{-1}$\begin{array}{c}\nCat\end{array}$},right of=d] (e) {};
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nCat\end{array}$},right of=d] (e) {$e$};
 
  \draw [aSniffing,loop left] (a) to node[above,xshift=-5pt]{\relsize{-1}$\aSniffing$} (a);
 
@@ -439,7 +600,7 @@ $\interp{\nTop}$       & = & $\cset{e_3}$\\
 \begin{picture}(120,50)
 \put(0,-50){\begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
     %aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
   ]
@@ -448,42 +609,42 @@ $\interp{\nTop}$       & = & $\cset{e_3}$\\
 %    n/.style={circle,fill,draw,inner sep=3pt,node distance=2cm},
 %    aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
 %  ]
- \node[n,label=above:$e_1$,label=below:{
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nSmall\\[-3pt] 
       \nYellow \\[-3pt] 
-      \nBall\end{array}$}] (a) {};
- \node[n,label=above:$e_2$,label=below:{
+      \nBall\end{array}$}] (a) {$e_1$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}     
       \nSmall\\[-3pt] 
       \nRed\\[-3pt] 
-      \nCube\end{array}$}, right of=a] (b) {};
- \node[n,label=below:$e_3$,label=above:{
+      \nCube\end{array}$}, right of=a] (b) {$e_2$};
+ \node[n,,label=above:{
     \relsize{-2}$\begin{array}{c}
       \nTop\\[-3pt]      
       \nSmall\\[-3pt] 
       \nYellow\\[-3pt] 
-      \nBall\end{array}$}, above of=b] (c) {};
- \node[n,label=right:$e_4$,label=below:{
+      \nBall\end{array}$}, above of=b] (c) {$e_3$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nLarge\\[-3pt] 
       \nRed\\[-3pt] 
-      \nCube\end{array}$}, right of=b] (d) {};
- \node[n,label=left:$e_5$,label=below:{
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nLarge\\[-3pt] 
       \nRed\\[-3pt] 
-      \nBall\end{array}$}, right of=d] (e) {};
- \node[n,label=right:$e_6$,label=below:{
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+ \node[n,,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nSmall\\[-3pt] 
       \nYellow\\[-3pt] 
-      \nCube\end{array}$}, right of=e] (f) {};
- \node[n,label=left:$e_7$,label=below:{
+      \nCube\end{array}$}, right of=e] (f) {$e_6$};
+ \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
       \nSmall\\[-3pt]
       \nRed\\[-3pt] 
-      \nCube\end{array}$},  right of=f] (g) {};
+      \nCube\end{array}$},  right of=f] (g) {$e_7$};
  \draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
  \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
  \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
@@ -520,7 +681,7 @@ $\lnot(\lnot\phi \land \lnot\phi')$ y $\lnot\exists x . \lnot\phi$, respectivame
 F\'ormulas de la forma $\top$, $x_i \not\approx x_j$ y $r(\bar
 x)$ son llamados \emph{\'atomos}.%
   \footnote{%
-    Por razones t\'ecnicas, inclu\'imos el s\'imbolo de desigualdad symbol $\not \approx$ como
+    Por claridad, inclu\'imos el s\'imbolo de desigualdad symbol $\not \approx$ como
     primitivo. La igualdad puede ser definida usando negaci\'on.
   }
 Dado un modelo relacional $\+M = \tup{\Delta,\interp{\cdot}}$ y una

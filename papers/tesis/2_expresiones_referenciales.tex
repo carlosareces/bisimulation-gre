@@ -96,6 +96,8 @@ De acuerdo a las propiedades o relaciones que una ER incluya, se clasifica en di
 \subsection{?`C\'omo generamos expresiones referenciales?}
 \label{sec:psicolinguistica}
 
+\textbf{ACA FALTA...}
+
 Como usamos el lenguaje para trasmitir y entender intenciones? En la teor\'ia propuesta por \cite{clark1992arenas}, \cite{Clark-Marshall81} una de las principales cosas que se cree es que el hablante usa un principio de dise\~no \'optimo, es decir, los hablantes dise\~nan sus oraciones de tal manera que sus interlocutores tengan suficiente informaci\'on para entenderles, pero no m\'as de la necesaria, hacen esto confiando en informaci\'on que ellos creen mutuamente que es parte del conocimiento mutuo, creencias mutuas y suposiciones mutuas. Y los oyentes conf\'ian en que van a recibir expresiones no ambiguas y concisas. 
 
 En la investigaci\'on \cite{keysar:Curr98} han descubierto que bajo ciertas condiciones el hablante y el interloculor dejan de usar el principio de dise\~no \'optimo. %Cuando las personas conocen la motivaci\'on de un corportamiento ambiguo, lo ven menos ambiguo.
@@ -124,6 +126,45 @@ En \cite{do-speakers} tambi\'en se estudia la sobreespecificaci\'on, un experime
 %Nuestras observaciones verifican \'este hecho, y veremos m\'as adelante en este cap\'itulo que en un ejemplo de la Figura \ref{GRE3D7-stimulus} m\'as del 50\% de las ER dadas por personas fueron sobreespecificadas.
 
 \cite{Lu_sasha2015} estudiaron el rol que la cantidad de informaci\'on juega en la adquisici\'on de nuevo vocabulario para un idioma extranjero en un entorno virtual. Experimentaron con 2 conjuntos de personas, a un conjunto se les dieron ER sobreespecificadas, y al otro minimales. Concluyeron que las ER sobreespecificadas ayudaron m\'as que las minimales a aprender palabras nuevas en idioma ruso.
+
+
+Paraboni et al. en su paper \cite{acl-Paraboni15} estudian la sobreespecificaci\'on de las ERs, en particular de las ERs relacionales.
+  Se enfocan en qu\'e propiedad agregar a las descripci\'on del landmark. Toma como precisas:
+que se ha decidido que se va a sobreespecificar la descripci\'on del landmark
+y que existe una propiedad de alto poder de discriminaci\'on del landmark.
+La hip\'otesis que quieren probar es la siguiente
+
+\begin{displayquote}h1: Dado el objetivo de sobre-especificar una descripci\'on relacional usando una propiedad p extra para el landmark, p deber\'ia corresponder a la propiedad m\'as discriminatoria que est\'a disponible en el contexto. 
+\end{displayquote}
+La salida de la mayor\'ia de los algoritmos GER es la m\'inima ER que distingue al target \shortcite{dale91:gener}; \shortcite{krahmer}; \shortcite{graph}; pero esto no es lo que hacen los humanos, los humanos son redundantes, generan ER sobreespecificadas \shortcite{Engelhardt_Bailey_Ferreira_2006}; \shortcite{Arts_Maes_Noordman_Jansen_2011}; \shortcite{factors-overspec}; \shortcite{engelhardt2011over}. La discriminaci\'on de una propiedad (calculada como 1 si es el \'unico objeto que tiene la propiedad en el contexto considerado o 0 si no la tiene) juega un rol central en la tarea de desambiguaci\'on. En el art\'iculo buscan probar que la discriminaci\'on tambi\'en es importante cuando no hay nada para desambiguar, como es el caso de la sobreespecificaci\'on.
+
+
+%Supongamos que queremos obtener una expresión referecial para el objeto se\~nalado por la flecha en la Figura\ref{GRE3D7-stimulus7} del GRE3D7 
+
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=0.6\textwidth]{images/7.jpg}
+\caption{Ejemplo de contexto del corpus GRE3D7}
+\label{GRE3D7-stimulus7}
+\end{figure}
+
+Seg\'un \cite{pechmann} el color de un objeto es una propiedad preferida en ER minimales y sobreespecificadas. Y, en particular, en expresiones sobre-especificadas, \cite{time-course} muestran evidencia emp\'irica de que color es preferida antes que la propiedad de tama\~no.
+Filtrando las ER que no son relacionales de 3 corpus seleccionados, \cite{gre3d3}, \cite{gre3d7} y Stars2 y habiendo una propiedad o relaci\'on discriminativa del landmark (siempre la hay en stars2), esta propiedad o relaci\'on es preferida para sobreespecificar la descripci\'on del landmark.
+Usa el algoritmo incremental con relaciones \cite{incremental}, el cual da siempre una ER minimal, incluye relaciones como \'ultimo recurso cuando no pueden distinguir al target con las propiedades at\'omicas. Otro algoritmo que luego de hacer lo que hace el anterior, selecciona 1 propiedad m\'as para el landmark y \'esta, es la propiedad m\'as frecuente en la parte de entrenamiento de un corpus del dominio. Propone un algoritmo igual al primero al que luego le agrega una propiedad m\'as al landmark, la de mayor poder discriminativo. En caso de empate entre varias propiedades, selecciona la m\'as frecuente del corpus de entrenamiento y en caso de no haber propiedades discriminatorias, no selecciona ninguna, quedando como el primer algoritmo. Compara \cite{dice}, y Accuracy para los 3 algoritmos, para 2 de 3 corpus consigue que el tercer algoritmo mejore ambos, pero no para el GRE3D7. 
+Explica que por la naturaleza del corpus GRE3D7, ya que solo el 50\% de los landmarks m\'as cercanos tiene una propiedad con alto nivel discriminativo, en vez en el corpus Stars2 todas tienen una propiedad con alto nivel discriminativo. Concluye que la propiedad o relaci\'on m\'as discriminativa ser\'a la propiedad preferida para el landmark cuando se ha decidido hacer sobreespecificaci\'on.
+
+Dicen que como trabajo futuro se podr\'ia usar grados de discernibilidad, y esto es lo que usamos en esta tesis, luego en la Secci\'on \ref{sec:learning} usaremos la discernibilidad calculada como 1 sobre la cantidad de objetos que tienen la propiedad, en el contexto y la usaremos para calcular las probabilidades de uso de las palabras que le daremos al algoritmo.
+
+%En nuestro trabajo para calcular las prob de uso de las palabras en el GRE3D7 , una de las propiedades fue la discriminacion, nosotros no encontramos tal correlación,  quizás por el mismo motivo q el dice (naturaleza del corpus)
+%
+%Me pregunto porque lo acotó a solo 1 propiedad y solo a la descripción del landmark
+%Me gustaría probar q las prob de uso en el Start2, tienen fuerte correlación con la discriminacion.
+%Me hubiera gustado q otro baseline en su trabajo fuera nuestro algoritmo...(me parece q tenia miedo)
+%Nosotros tenemos una probabilidad de uso que nos sirve para agregar sobreespecificacion a la descripción del target y de los landmarks , no tenemos restricción de cantidad, podemos agregar varias.
+%Los n\'umeros no son directamente comparables, ya q el filtro solo las relacionales y uso el total del corpus y nosotros usamos la mitad del corpus (solo verde, azul)
+
+
 
 \subsection{Corpora de GER existente}
 \label{sec:corpus2}
@@ -296,13 +337,11 @@ Un algoritmo puede generar ER para un conjunto de objetos en el contexto conside
 
 Un algoritmo que genera ER {\bf minimales} (que se explicaron en la Secci\'on \ref{sec:minimales}), es un algoritmo que d\'a ERs que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target. Por ejemplo, en la Tabla \ref{er-gre3d7-stimulus} las ER 2 y 4 son minimales. Normalmente, si el algoritmo es determin\'istico entonces un orden preferencial de las propiedades tomado como input hace que el algoritmo pueda decidir cu\'al ER dar en caso de tener varias minimales.
 
-Un algoritmo que haga {\bf sobreespecificaci\'on} tiene la caracter\'istica de poder dar m\'as atributos o relaciones con otros objetos que las m\'inimas necesarias para identificar al target. Por ejemplo, para la Figura \ref{GRE3D7-stimulus} la ER {\it La esfera roja, grande que esta a la derecha del cubo rojo grande} es una ER sobreespecificada porque (como ya mencionamos) podr\'iamos sacarle algunas propiedades o la relaci\'on y seguir\'ia siendo una ER. Sacando {\it roja} de las propiedades del target, la expresi\'on {\it La esfera grande que esta a la derecha del cubo rojo grande} sigue siendo una ER, tambi\'en podr\'iamos sacar la relaci\'on con {\it el cubo rojo grande}, quedando {\it La esfera roja, grande} y sigue siendo una ER.
+Un algoritmo que haga {\bf sobreespecificaci\'on} tiene la caracter\'istica de poder dar m\'as atributos o relaciones con otros objetos que las m\'inimas necesarias para identificar al target. Por ejemplo, para la Figura \ref{GRE3D7-stimulus} la ER {\it La esfera roja, grande que esta a la derecha del cubo rojo grande} es una ER sobreespecificada porque (como ya mencionamos) podr\'iamos sacarle algunas propiedades o la relaci\'on y seguir\'ia siendo una ER. Sacando {\it roja} de las propiedades del target, la expresi\'on {\it La esfera grande que esta a la derecha del cubo rojo grande} sigue siendo una ER, tambi\'en podr\'iamos sacar la relaci\'on con {\it el cubo rojo grande}, quedando {\it La esfera roja, grande} y sigue siendo una ER. Viendo la Tabla \ref{er-gre3d7-stimulus} podemos notar que la ER de mayor frecuencia, es {\it large red ball} y es sobreespecificada, ya que {\it red ball} o {\it large ball}, son ERs minimales para el target de la Figura \ref{GRE3D7-stimulus}. En la tabla hay 58 ER minimales y 82 sobreespecificadas. Es decir, el 58\% son sobreespecificadas y el 41\% minimales.
 
-Viendo la Tabla \ref{er-gre3d7-stimulus} podemos notar que la ER de mayor frecuencia, es {\it large red ball} y es sobreespecificada, ya que {\it red ball} o {\it large ball}, son ERs minimales para el target de la Figura \ref{GRE3D7-stimulus}. En la tabla hay 58 ER minimales y 82 sobreespecificadas. Es decir, el 58\% son sobreespecificadas y el 41\% minimales.
+Hay una forma trivial de que un algoritmo sobreespecifique: agregar todas las propiedades y relaciones del target con otros objetos. Por ejemplo para la Figura \ref{GRE3D7-stimulus} la ER ser\'ia {\it Large red ball left-of (large red cube right-of large red ball)}. Pero, como vemos en la Tabla \ref{er-gre3d7-stimulus}, esto no es lo que hace la gente. En esta tesis, uno de los temas que investigamos es c\'omo hacer para el que un algoritmo sobreespecifique imitando el comportamiento humano lo m\'as posible. 
 
-Para un algoritmo ser\'ia f\'acil hacer sobreespecificaci\'on simplemente podr\'ia agregar todas las propiedades y relaciones con todos los dem\'as objetos que tiene y esa ser\'ia una ER sobreespecificada, pero esto no es lo que hace la gente, no sonar\'ia muy natural, por lo tanto lo que se estudia en esta tesis, es como hacer para el que el algoritmo sobreespecifique de cierto modo imitando el comportamiento humano lo m\'as posible. 
-
-Los algoritmos no generan expresiones parciales ni subespecificadas, ya que ninguna de ellas es ER del target.
+Los algoritmos no generan expresiones parciales ni subespecificadas, ya que no sirven para identificar al target. La identificaci\'on del target es el objetivo de la GER.
 
 
 %\section{Algoritmos importantes en el \'area}
@@ -311,7 +350,10 @@ Los algoritmos no generan expresiones parciales ni subespecificadas, ya que ning
 %https://www.abdn.ac.uk/ncs/departments/computing-science/tunabibl-495.php
 
 
-Ahora vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresiones referenciales del \'area, empezando por el algoritmo Full Brevity, siguiendo con el algoritmo de heur\'istica Greedy, luego Incremental, Graph, algoritmo Relacional y por \'ultimo Bisimulaci\'on. En la Tabla \ref{clasificacion_algoritmos} se muestra una clasificaci\'on seg\'un los tipos de algoritmos que vimos en la secci\'on anterior, considerando si es determin\'istico o no-determin\'istico, proposicional o relacional, si genera negaciones, plurales, genera sobreespecificaci\'on. Notar que si no generan sobreespecificaci\'on, generan minimales. \\
+Ahora vamos a hablar de una selecci\'on de algoritmos de generaci\'on autom\'atica de expresiones referenciales del \'area. En la Tabla \ref{clasificacion_algoritmos} se muestra una clasificaci\'on seg\'un los tipos de algoritmos que vimos en la secci\'on anterior, considerando si es determin\'istico o no-determin\'istico, proposicional o relacional, si genera negaciones, plurales, si genera sobreespecificaci\'on. Notar que si no generan sobreespecificaci\'on, generan ERs minimales.
+
+\subsection{Primeros algoritmos}
+
 \label{sec:algoritmos_area}
 
 \begin{table}[h!]
@@ -326,8 +368,8 @@ Ahora vamos a hablar de los algoritmos de generaci\'on autom\'atica de expresion
 Full Brevity &Si & No&Si&No&No&No& No \\
 Greedy&Si & No&Si&No&No&No& Si \\
 Incremental&Si & No&Si&No&No&No& No \\
-GRAPH&Si & No&Si&Si&No&Si& No \\
-Bisimulaci\'on&Si & No&Si&Si&Si&Si& No \\ \hline
+GRAPH&Si & No&Si&Si&No&Si& Si \\
+%Bisimulaci\'on&Si & No&Si&Si&Si&Si& No \\ \hline
 %Nuestra Propuesta&No & Si&Si&Si&No&Si& Si \\
 
 \end{tabular}
@@ -343,24 +385,21 @@ Bisimulaci\'on&Si & No&Si&Si&Si&Si& No \\ \hline
 %survey
 %http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.227.8284&rep=rep1&type=pdf
 
-\subsection{Full brevity}
 
-El algoritmo {\bf Full Brevity} \cite{Dale:1989:CUR:981623.981632} genera la descripci\'on m\'as corta que identifica al target. Para hacerlo, 
+\paragraph{Full brevity:} El algoritmo {\bf Full Brevity} \cite{Dale:1989:CUR:981623.981632} genera la descripci\'on m\'as corta que identifica al target. Para hacerlo, 
 busca si hay una propiedad del target que no sea propiedad de ning\'un distractor. Si no hay chequea todas las posibles combinaciones de 2 propiedades, si no la hay, busca de a 3 y as\'i sucesivamente. Por ejemplo para la Figura \ref{GRE3D7-stimulus} se fijar\'ia en las propiedades del target {red, ball, large}, como ninguna de ellas aisladamente identifica s\'olo al target, probar\'ia con 2 propiedades {\it red ball} si identifica al target, devuelve {\it red ball} y finaliza.
 
-\subsection{Heur\'istica Greedy}
+\paragraph{Heur\'istica Greedy:} Una aproximaci\'on a Full Brevity es el algoritmo de {\bf Heur\'istica Greedy}, el cual iterativamente selecciona la propiedad que elimina m\'as distractores y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado no siempre genera expresiones referenciales m\'inimas.
 
-Una aproximaci\'on a Full Brevity es el algoritmo de {\bf Heur\'istica Greedy}, el cual iterativamente selecciona la propiedad que elimina m\'as distractores y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado no siempre genera expresiones referenciales m\'inimas.
-
-El problema es que encontrar la descripci\'on m\'as corta es computacionalmente caro, se observ\'o que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos \cite{Olson1970LangAndThought};  \cite{Sonnenschein1984}; \cite{Pechmann1989}; \cite{Engelhardt2006}.
+El problema es que encontrar la descripci\'on m\'as corta es computacionalmente caro, se observ\'o que las personas dan expresiones que no son minimales, esto fue confirmado por estudios psycoling\"uisticos \cite{Olson1970LangAndThought};  \cite{Sonnenschein1984}; \cite{Pechmann1989}.
 
 El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero pronto fue superado por el algoritmo {\it Incremental} y sus sucesores \cite{C92-1038}; \cite{Dale95computationalinterpretations}. El algoritmo Incremental fue y sigue siendo uno de los algoritmos m\'as importantes del \'area, lo explicamos a continuaci\'on. Por ejemplo para la Figura \ref{GRE3D7-stimulus} se fijar\'a que {\it ball} elimina 2 distractores {$e_{1}$, $e_{3}$}, {\it red} elimina 3 distractores {$e_{2}$, $e_{4}$, $e_{7}$} y {\it large} elimina 1 distractores {$e_{4}$}, entonces elegir\'a {\it red}, pero como no alcanza para ser ER, seguir\'a con {\it ball} que es la que elimina m\'as distractores luego de {\it red}, finalizar\'a porque {\it red ball} identifica al target. Supongamos que hubiera otro objeto con propiedad {\it large}, entonces {\it large} eliminar\'ia tambi\'en 2 distractores, entonces el algoritmo devolver\'ia {\it large red ball}, y esa ER no es minimal, es sobreespecificada.
 
-\subsection{Incremental}
+\paragraph{Incremental:}
 
 \begin{figure}[ht]
 %\centering
-\includegraphics[width=0.5\textwidth]{images/algoritmoIncremental.png}
+\includegraphics[width=.5\textwidth]{images/algoritmoIncremental.png}
 %\caption{Algoritmo Incremental}
 \label{algoritmoIncremental}
 \caption{Figura 2 de \protect\cite{survey}}
@@ -377,6 +416,28 @@ El algoritmo de heur\'istica Greedy es m\'as eficiente que el Full Brevity, pero
 El input del {\bf Algoritmo Incremental}, es el target \emph{r}, que queremos identificar, $e_{5}$, \emph{D} es el dominio, y \emph{Pref} una lista de propiedades ordenada seg\'un la preferencia. Vamos a ejemplificar la corrida del algoritmo con el ejemplo de la Figura \ref{GRE3D7-stimulus-conLetras}, y supongamos que la lista ordenada de propiedades es \'esta [ tipo, color, tama\~no ]. \emph{D} inicialmente es el conjunto de todos los objetos del contexto: \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}.
 En {\it Paso 2} se asigna a \emph{L} la descripci\'on vac\'{i}a, al finalizar la ejecuci\'on, \emph{L} tendr\'a el conjunto de propiedades con los cuales identificaremos a \emph{r}. Se inicializa \emph{C} con el conjunto de distractores de \emph{r} en nuestro ejemplo \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, en el {\it Paso 3}. 
 La idea del algoritmo es ir eliminando distractores, por eso, en el {\it Paso 4} recorre las propiedades $A_{i}$ de \emph{r}. En {\it Paso 5} le asigna a \emph{V} el valor que tiene la propiedad $A_{i}$ para el target \emph{r}, $RulesOut(A_{i},V)$ es el conjunto de objetos que tienen diferente valor para la propiedad $A_{i}$ que el que tiene el  target, la funci\'on se fija si el valor de esa propiedad elimina distractores. La primer propiedad de \emph{r} a considerar seg\'un el orden de preferencias \emph{Pref} es ``tipo'', el valor del target para tipo es {\it esfera}, entonces en {\it Paso 6}, pregunta si hay objetos en \emph{C} que tengan tipo con valor distinto de esfera, y hay, ellos son \{$e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, entonces le asigna a \emph{C} \{$e_{1}$,$e_{3}$\}, es decir s\'olo las que son esferas. En {\it Paso 10} pregunta si \emph{C} es vac\'io, es decir si ya se eliminaron todos los distractores, pero no lo es, por lo tanto continua con la siguiente propiedad, en este caso ``color'', el valor de color para el target es {\it rojo}, agrega {\it rojo} a \emph{L}, y actualiza \emph{C} con $\emptyset$ porque tanto $e_{1}$ como $e_{3}$ son amarillos, en {\it Paso 10} pregunta si \emph{C} es vac\'io, y si lo es, por lo tanto devuelve \{esfera, rojo\}. Lo cual se podr\'ia realizar como {\it La esfera roja}, y ser\'ia una ER para el target considerado.
+
+
+Otros Algoritmos: Luego se propusieron extensiones del algoritmo Incremental, por ejemplo 
+Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia teniendo en cuenta la prominencia discurso del target \cite{Krahmer:2010:EMN:1880370}; \cite{krahmer-theune:2002a}; 
+y un segundo algoritmo que permite producir expresiones referenciales que contienen relaciones con otros objetos. El enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con el enfoque / tema distinci\'on por \cite{hajicova-1993} y la teor\'ia de centrado \cite{Grosz:1995:CFM:211190.211198}. Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando hay un distractor que es tanto o m\'as relevante que el target.
+No todas las propiedades tienen la misma relevancia. Las diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura GER por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de otras propiedades sobre las
+propiedades vagas como peque\~no y grande dependen del contexto en el que se utilizan, mientras que, por ejemplo, el color de un objeto es absoluta. 
+
+\paragraph{Algoritmos relacionales}
+
+Various researchers have attempted to extend the IA by allowing relational descriptions
+(Horacek 1996; Krahmer and Theune 2002; Kelleher and Kruijff 2006), often based
+on the assumption that relational properties (like ``x is on y'') are less preferred than
+non-relational ones (like ``x is white''). If a relation is required to distinguish the target
+x, the basic algorithm is applied iteratively to y. It seems, however, that these attempts
+were only partly successful. One of the basic problems is that relational descriptions
+just like references to sets, but for different reasons do not seem to fit in well with an
+incremental generation strategy. In addition, it is far from clear that relational properties
+are always less preferred than non-relational ones (Viethen and Dale 2008). Viethen
+and Dale suggest that even in simple scenes, where objects can easily be distinguished
+without relations, participants still use relations frequently (in about one third of the
+trials).
 
 
 \subsection{Algoritmo de b\'usqueda en Grafo}
@@ -463,28 +524,7 @@ La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cu
 %ampliar m\'etodo ser\'ia crear un solo nuevo estado: s = {[forma, esfera]}, siempre hay 1 solo nuevo estado elegido por el orden de preferencia.
 
 
-\subsection{Relacional}
 
-Various researchers have attempted to extend the IA by allowing relational descriptions
-(Horacek 1996; Krahmer and Theune 2002; Kelleher and Kruijff 2006), often based
-on the assumption that relational properties (like ``x is on y'') are less preferred than
-non-relational ones (like ``x is white''). If a relation is required to distinguish the target
-x, the basic algorithm is applied iteratively to y. It seems, however, that these attempts
-were only partly successful. One of the basic problems is that relational descriptions
-just like references to sets, but for different reasons do not seem to fit in well with an
-incremental generation strategy. In addition, it is far from clear that relational properties
-are always less preferred than non-relational ones (Viethen and Dale 2008). Viethen
-and Dale suggest that even in simple scenes, where objects can easily be distinguished
-without relations, participants still use relations frequently (in about one third of the
-trials).
-
-\subsection{Otros Algoritmos}
-
-Luego se propusieron extensiones del algoritmo Incremental, por ejemplo 
-Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia teniendo en cuenta la prominencia discurso del target \cite{Krahmer:2010:EMN:1880370}; \cite{krahmer-theune:2002a}; 
-y un segundo algoritmo que permite producir expresiones referenciales que contienen relaciones con otros objetos. El enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con el enfoque / tema distinci\'on por \cite{hajicova-1993} y la teor\'ia de centrado \cite{Grosz:1995:CFM:211190.211198}. Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando hay un distractor que es tanto o m\'as relevante que el target.
-No todas las propiedades tienen la misma relevancia. Las diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura GER por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de otras propiedades sobre las
-propiedades vagas como peque\~no y grande dependen del contexto en el que se utilizan, mientras que, por ejemplo, el color de un objeto es absoluta. 
 %Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad l\'ogica del ia en t\'erminos de los operadores booleanos de negaci\'on y disyunci\'on. \'el la extendi\'o a
 %ser capaz de generar expresiones referenciales que contienen propiedades, tales como Ejemplo (2.3) negado, y las descripciones de conjuntos de objetos, tales como Ejemplo (2.4), o incluso (2,5), que contiene una disyunci\'on l\'ogica de propiedades. Sus algoritmo procede
 %en etapas, tratando m\'as y disyunciones m\'as largos de propiedades, si las propiedades at\'omicas
@@ -497,49 +537,8 @@ propiedades vagas como peque\~no y grande dependen del contexto en el que se uti
 %Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia con la subsiguiente ia teniendo en cuenta la prominencia discurso del referente objetivo (Krahmer y Theune, 1998; Theune, 2000; Krahmer y Theune, 2002), y un segundo uno que permite la IA para producir expresiones referenciales que contener relaciones binarias a otros objetos (Theune, 2000; Krahmer y Theune, 2002). Voy a volver a su extensi\'on relacional en la Secci\'on 2.3. Enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con la enfoque / tema distinci\'on por Hajicova (1993) y el centrado Theory (Grosz et al., 1995). Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando aqu\'i hay izquierda distractor que es tan o m\'as relevante que el referente de destino.
 %No todas las propiedades son las mismas. Las Diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura reg por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de propiedades orgradable vagos como peque\~nos y grandes depende del contexto en el que se utilizan, mientras que, Por ejemplo, el color de un objeto es absoluta. Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad l\'ogica del ia en t\'erminos de los operadores booleanos de negaci\'on y disyunci\'on. \'el la extendi\'o a ser capaz de generar expresiones que se refieren que contienen propiedades, tales como Ejemplo (2.3) negado, y las descripciones de conjuntos de objetos, tales como Ejemplo (2.4), o incluso (2,5), que contiene una disyunci\'on l\'ogica de propiedades. Sus algoritmo procede en etapas, tratando m\'as y disyunciones m\'as largos de propiedades, si las propiedades at\'omicas y disyunciones m\'as cortos no son suficientes para distinguir el conjunto de destino .. que funciona en referencia a conjuntos fue tomada adem\'as por Gatt y van Deemter (2005, 2006), que han presentado los algoritmos m\'as maduros en este espacio para la fecha. Utilizaron un procedimiento similar al de las otras cosas en que sus algoritmos se basan en el procesamiento incremental de un orden de preferencia de las propiedades. Sus algoritmos agregar una gran cantidad de maquinaria compleja para el procedimiento b\'asico para asegurar que las propiedades se eligen de manera que maximiza la coherencia dentro del conjunto de objetos descritos por las expresiones que se refieren. Por ejemplo, su enfoque intentar\'a utilizar propiedades del mismo tipo para todos los referentes de un conjunto. As\'i, ser\'ia producir Ejemplos descripciones tales como (2,6) o (2,7) en lugar de Ejemplo (2.8) o ..
 
-ESTo hay que pasarlo a algun lugar donde se discutan cosas de SOBREESPECIFICACION no se bien donde todavia
 
-Paraboni et al. en su paper \cite{acl-Paraboni15} estudian la sobreespecificaci\'on de las ERs, en particular de las ERs relacionales.
-  Se enfocan en qu\'e propiedad agregar a las descripci\'on del landmark. Toma como precisas:
-que se ha decidido que se va a sobreespecificar la descripci\'on del landmark
-y que existe una propiedad de alto poder de discriminaci\'on del landmark.
-La hip\'otesis que quieren probar es la siguiente
-
-\begin{displayquote}h1: Dado el objetivo de sobre-especificar una descripci\'on relacional usando una propiedad p extra para el landmark, p deber\'ia corresponder a la propiedad m\'as discriminatoria que est\'a disponible en el contexto. 
-\end{displayquote}
-La salida de la mayor\'ia de los algoritmos GER es la m\'inima ER que distingue al target \shortcite{dale91:gener}; \shortcite{krahmer}; \shortcite{graph}; pero esto no es lo que hacen los humanos, los humanos son redundantes, generan ER sobreespecificadas \shortcite{Engelhardt_Bailey_Ferreira_2006}; \shortcite{Arts_Maes_Noordman_Jansen_2011}; \shortcite{factors-overspec}; \shortcite{engelhardt2011over}. La discriminaci\'on de una propiedad (calculada como 1 si es el \'unico objeto que tiene la propiedad en el contexto considerado o 0 si no la tiene) juega un rol central en la tarea de desambiguaci\'on. En el art\'iculo buscan probar que la discriminaci\'on tambi\'en es importante cuando no hay nada para desambiguar, como es el caso de la sobreespecificaci\'on.
-
-
-%Supongamos que queremos obtener una expresión referecial para el objeto se\~nalado por la flecha en la Figura\ref{GRE3D7-stimulus7} del GRE3D7 
-
-
-\begin{figure}[ht]
-\centering
-\includegraphics[width=0.6\textwidth]{images/7.jpg}
-\caption{Ejemplo de contexto del corpus GRE3D7}
-\label{GRE3D7-stimulus7}
-\end{figure}
-
-Seg\'un \cite{pechmann} el color de un objeto es una propiedad preferida en ER minimales y sobreespecificadas. Y, en particular, en expresiones sobre-especificadas, \cite{time-course} muestran evidencia emp\'irica de que color es preferida antes que la propiedad de tama\~no.
-Filtrando las ER que no son relacionales de 3 corpus seleccionados, \cite{gre3d3}, \cite{gre3d7} y Stars2 y habiendo una propiedad o relaci\'on discriminativa del landmark (siempre la hay en stars2), esta propiedad o relaci\'on es preferida para sobreespecificar la descripci\'on del landmark.
-Usa el algoritmo incremental con relaciones \cite{incremental}, el cual da siempre una ER minimal, incluye relaciones como \'ultimo recurso cuando no pueden distinguir al target con las propiedades at\'omicas. Otro algoritmo que luego de hacer lo que hace el anterior, selecciona 1 propiedad m\'as para el landmark y \'esta, es la propiedad m\'as frecuente en la parte de entrenamiento de un corpus del dominio. Propone un algoritmo igual al primero al que luego le agrega una propiedad m\'as al landmark, la de mayor poder discriminativo. En caso de empate entre varias propiedades, selecciona la m\'as frecuente del corpus de entrenamiento y en caso de no haber propiedades discriminatorias, no selecciona ninguna, quedando como el primer algoritmo. Compara \cite{dice}, y Accuracy para los 3 algoritmos, para 2 de 3 corpus consigue que el tercer algoritmo mejore ambos, pero no para el GRE3D7. 
-Explica que por la naturaleza del corpus GRE3D7, ya que solo el 50\% de los landmarks m\'as cercanos tiene una propiedad con alto nivel discriminativo, en vez en el corpus Stars2 todas tienen una propiedad con alto nivel discriminativo. Concluye que la propiedad o relaci\'on m\'as discriminativa ser\'a la propiedad preferida para el landmark cuando se ha decidido hacer sobreespecificaci\'on.
-
-Dicen que como trabajo futuro se podr\'ia usar grados de discernibilidad, y esto es lo que usamos en esta tesis, luego en la Secci\'on \ref{sec:learning} usaremos la discernibilidad calculada como 1 sobre la cantidad de objetos que tienen la propiedad, en el contexto y la usaremos para calcular las probabilidades de uso de las palabras que le daremos al algoritmo.
-
-%En nuestro trabajo para calcular las prob de uso de las palabras en el GRE3D7 , una de las propiedades fue la discriminacion, nosotros no encontramos tal correlación,  quizás por el mismo motivo q el dice (naturaleza del corpus)
-%
-%Me pregunto porque lo acotó a solo 1 propiedad y solo a la descripción del landmark
-%Me gustaría probar q las prob de uso en el Start2, tienen fuerte correlación con la discriminacion.
-%Me hubiera gustado q otro baseline en su trabajo fuera nuestro algoritmo...(me parece q tenia miedo)
-%Nosotros tenemos una probabilidad de uso que nos sirve para agregar sobreespecificacion a la descripción del target y de los landmarks , no tenemos restricción de cantidad, podemos agregar varias.
-%Los n\'umeros no son directamente comparables, ya q el filtro solo las relacionales y uso el total del corpus y nosotros usamos la mitad del corpus (solo verde, azul)
-
-
-La investigaci\'on presentada en \cite{viethen-phd} se basa en dos premisas fundamentales: que la investigaci\'on
-en la generaci\'on autom\'atica de expresiones referenciales debe esforzarse por lograr
-sistemas que den salidas tan similar a la humana como sea posible; y que, para ello, debemos
-esforzarnos para modelar el comportamiento humano como se puede observar en corpora.
+\textbf{PONER TITULOS....}
 
 La adopci\'on de estas premisas sirve para dos fines: en primer lugar, mejora la adecuaci\'on
 de la salida de algoritmos de GER para el objeto target imitando la capacidad humana
@@ -647,8 +646,16 @@ Van Deemter 2001 extiende algoritmo incremental para plurales con negacion, conj
 
 
 
-\section{M\'etricas de evaluaci\'on/comparaci\'on con corpus}
+\section{Evaluaci\'on y comparaci\'on con corpus}
+
 \label{sec:metricas_evaluacion}
+
+La investigaci\'on presentada en \cite{viethen-phd} se basa en dos premisas fundamentales: que la investigaci\'on
+en la generaci\'on autom\'atica de expresiones referenciales debe esforzarse por lograr
+sistemas que den salidas tan similar a la humana como sea posible; y que, para ello, debemos
+esforzarnos para modelar el comportamiento humano como se puede observar en corpora.
+
+
 Jordan y Walker usaron 25 veces la validaci\'on cruzada en 393 expresiones referenciales
 de 13 de la Coco di\'alogos para probar diferentes combinaciones de caracter\'isticas. Ellos
 medido la precisi\'on absoluta, siendo \'esta la proporci\'on de expresiones referenciales
