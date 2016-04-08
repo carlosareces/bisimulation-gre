@@ -80,7 +80,7 @@ El {\bf target} (u objetivo), es el subconjunto de objetos de un contexto a los 
 Dado un contexto, un target y una descripci\'on (parcial) del target, los {\bf distractores} son otros elementos que se encuentran en el contexto, y que tambi\'en cumplen con la descripci\'on parcial. Si la descripci\'on parcial es {\it esfera} las esferas que no son el target de la Figura \ref{GRE3D7-stimulus1} son  distractores, y por ello es necesario seguir agregando propiedades o relaciones para identificar un\'ivocamente al target.
 
 Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos, alg\'un tipo de representaci\'on de un contexto y un target, y d\'a como resultado una (o m\'as) expresi\'on(es) referencial(es) para el target considerado, si puede identificarlo un\'ivocamente en el contexto.
-
+\vspace*{-1.5cm}
 \begin{figure}[H]
 \begin{subfigure}{.4\textwidth}
   \centering
@@ -91,10 +91,9 @@ Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos
 \begin{subfigure}{1\textwidth}
  \centering
 \begin{centering}
-\hspace*{-8cm}
+\hspace*{-6cm}
 \begin{scriptsize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|}
-
 \hline
 \textbf {id}& 	\textbf {type}		&	\textbf {color}	&	\textbf {size}& \textbf {rigth} & \textbf {left} & \textbf {ontop}	& \textbf {below}	\\
    	   &  	    			&	    		&	     		&  \textbf {of}   		 &  \textbf {of}	    &  \textbf {of}	&  \textbf {of}\\
@@ -109,14 +108,13 @@ $e_7$ & cube & red & small & $e_6$ & - & - & -\\
 \hline
 \end{tabular}
 \end{scriptsize}
-
 \caption{}\label{tabla-propiedades}
 \end{centering}
 \end{subfigure}
 \caption{Posible formalizaci\'on de las propiedades de la Figura \ref{figura-er} en una tabla de doble entrada.}\label{contexto-tabla-propiedades}
 \end{figure}
 
-Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ incluye encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}.
+\vspace*{-2cm}Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ incluye encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}.
 Como una primera intuici\'on podemos ver que las ER dadas por las personas para la Figura \ref{GRE3D7-stimulus1} que son las que est\'an dadas en la Figura \ref{er-figura1} son muchas m\'as de las que mostramos en las f\'ormulas de la Figura \ref{er-figura1-b}, esto nos lleva a pensar que un algoritmo puede que no consiga la variedad que las personas dan. La representaci\'on ilustrada en la Figura~\ref{representacion-modelo} es equivalente a la mostrada en la Tabla \ref{tabla-propiedades}.
 
 \begin{figure}[H]
