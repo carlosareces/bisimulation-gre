@@ -314,7 +314,7 @@ Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es
 %sentido no lingüístico) se convierte en un problema crítico. 
 Cuando la generaci\'on de expresiones referenciales ocurre en la vida real
 en lugar de ocurrir en un experimento controlado las fuentes de \textbf{incertidumbre} que afectan al proceso se multiplican. En trabajo 
-reciente en el \'area de GER \cite{turner2008} , \cite{turner2009} se discute que, al intentar usar algoritmos de GER en dominios grandes 
+reciente en el \'area de GER \cite{turner2008}, \cite{turner2009} se discute que, al intentar usar algoritmos de GER en dominios grandes 
 y realistas -(como por ejemplo, la descripci\'on de regiones en mapas), la identificaci\'on precisa del target es una tarea que puede ser 
 aproximada pero raramente lograda. Los autores argumentan que esto se debe, en parte, a que las representaciones geogr\'aficas 
 son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce incertidumbre ---por ejemplo ?`es realmente el \'unico restaurant 
@@ -421,16 +421,16 @@ Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede 
  de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cu\'an buena es esa ER para 
 el input.
 
-`?Como podemos generar un ranking de ER?.
-Un algoritmo naive generar\'ia primero todas las ER posibles y luego las ordenar\'ia con alg\'un criterio. Esto es posible porque la cantidad de ER es finita dado un modelo finito, pero esta cantidad puede ser muy grande, exponencial en el tama\~{n}o del modelo y la gran mayor\'ia de estas ER no se llegar\'ian a usar en una aplicaci\'on dada. Una aplicaci\'on s\'olo usar\'a las mejores ER de un target considerado.
+'?Como podemos generar un ranking de ER?.
+Un algoritmo naive generar\'ia primero todas las ER posibles y luego las ordenar\'ia con alg\'un criterio. Esto es posible porque la cantidad de ER es finita dado un modelo finito, pero esta cantidad puede ser muy grande, exponencial en el tama\~{n}o del modelo y la gran mayor\'ia de estas ER no se llegar\'ian a usar en una aplicaci\'on real. Una aplicaci\'on s\'olo usar\'a las mejores ER de un target considerado.
 Una forma m\'as eficiente de generar un ranking de ER es dise\~{n}ar un algoritmo no determin\'istico y correrlo una cantidad de veces suficiente para la aplicaci\'on.
 
 Un algoritmo para la GER es {\bf no-determin\'istico} si puede dar diferentes ER para el mismo contexto y target en sucesivas ejecuciones. 
 Para producir un ranking de las mejores ERs para un target, el no determinismo debe estar guiado de alguna forma de que elija buenas propiedades y relaciones. Llamaremos a esta gu\'ia: probabilidad de uso de una propiedad o relaci\'on. Esta probabilidad se puede ver afectada por caracter\'isticas de la propiedad o relaci\'on (tipos de propiedades) o por caracter\'isticas de qui\'en interpretar\'a la ER (el interlocutor).
 
-Hay diferentes \textbf{tipos de propiedades}, por ejemplo taxon\'omicas (las que tiene el objeto, por ejemplo tipo, color), relacionales (las que necesitan dar una expresi\'on de otro objeto, por ejemplo {\it estar al lado de}), vagas (son las m\'as dif\'iciles de identificar, ejemplo: chico, grande, no son propiedades absolutas, ya que necesitan un contexto, con respecto a qu\'e algo es chico o grande?).
+Hay diferentes \textbf{tipos de propiedades}, por ejemplo taxon\'omicas (las que tiene el objeto, como el tipo, o el color), relacionales (las que necesitan dar una expresi\'on de otro objeto, por ejemplo {\it estar al lado de}), vagas (son las m\'as dif\'iciles de identificar, ejemplo: chico, grande, no son propiedades absolutas, ya que necesitan un contexto, con respecto a qu\'e algo es chico o grande?).
 
-Ciertos tipos de atributos pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no. Notar que cuando decimos el tama\~no podemos decir {\it grande} y tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.
+Ciertos valores de propiedades pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no grande de un objeto. Notar que cuando decimos el tama\~no, tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.
 %En esta tesis estudiamos la generaci\'on autom\'atica de expresiones referenciales, 
 %primero mostramos c\'omo podemos a\~nadir no determinismo a los algoritmos estudiados. Los algoritmos de refinamiento estudiados, tienen un orden fijo en el cual consideran las propiedades y relaciones, y la naturalidad de las expresiones referenciales que generan depende de este orden particular considerado, nosotros proponemos reemplazar ese orden fijo sobre las propiedades y/o relaciones de la escena de entrada por una~\emph{probabilidad de uso} para cada propiedad y/o relaci\'on, y modificar los algoritmos para que tengan en cuenta esas propiedades. De esta manera, cada llamada al algoritmo puede producir diferentes ERs para la misma escena y target de entrada. 
 
@@ -504,7 +504,7 @@ En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro inter
 \label{sec:gre-teoria-modelos}
 
 Una de las cuestiones importantes a la hora de representar la informaci\'on de una escena en un modelo, es como decidir cu\'ales aspectos representar.
-Es l\'ogico que el algoritmo no pueda generar cosas que no tiene representadas de alguna manera, ni referirse a objetos que no est\'an en el modelo, pero representar todo todo, puede ser llevar a tener un modelo muy complejo, quiz\'as innecesario. La noci\'on de foco de atenci\'on puede ser usada para restringir el modelo. (hay un paper que habla sobre esto ver si pongo cita aca-ER robot en tiempo real)
+Es l\'ogico que el algoritmo no pueda generar cosas que no tiene representadas de alguna manera, ni referirse a objetos que no est\'an en el modelo, pero representar todo todo, puede llevar a tener un modelo muy complejo, quiz\'as innecesario. La noci\'on de foco de atenci\'on puede ser usada para restringir el modelo. %(hay un paper que habla sobre esto ver si pongo cita aca-ER robot en tiempo real)
 
 En \cite{survey} sugieren como futura investigaci\'on mirar a un grafo como un modelo de Kripke, y resolver el problema con l\'ogicas h\'ibridas, esto es precisamente lo que hacemos en esta tesis. 
 
