@@ -179,7 +179,7 @@ Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es
  %\end{flushleft}
 
 \vspace*{2cm} 
- \caption{Representaci\'on de contexto.}\label{representacion-modelo}
+ \caption{}\label{representacion-modelo}
 
 \end{subfigure}%
 \begin{subfigure}{.6\textwidth}
@@ -227,7 +227,7 @@ Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es
  %\end{flushleft}
 
 \vspace*{1.5cm} 
- \caption{Subgrafo \it{ball and red}} \label{formula-subgrafo}
+ \caption{Subgrafo $\nBall \land \nRed$} \label{formula-subgrafo}
 
 \vspace*{-1cm}
 \begin{picture}(150,50)
@@ -255,7 +255,7 @@ Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es
  %\end{flushleft}
 
 \vspace*{2cm} 
- \caption{Subgrafo \it{ball and red and} \it{$\exists \nRightof . (cube and red)$}} \label{formula-subgrafo2}
+ \caption{Subgrafo $\nBall \land \nRed \land \exists \nRightof . (\nCube  \land \nRed)$} \label{formula-subgrafo2}
 
 
 
@@ -731,6 +731,7 @@ Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente defi
 $\interp{\varphi} = T$ si existe, y $\bot$ caso contrario.\\ \hline
 \end{tabular}
 \end{center}}
+
 Cuando la salida no es $\bot$, decimos que $\phi$ es una
 \emph{expresi\'on referencial en $\+L$ (ER-$\+L$) para $T$ en $\+M$}, y cuando es $\bot$ puede ser que la l\'ogica elegida no sea lo suficientemente expresiva para identificar al target, o que el modelo que le hemos dado no tiene suficiente detalle.
 
@@ -809,7 +810,7 @@ Generaci\'on se discute en ~\cite{areces08}, en t\'erminos de diferentes l\'ogic
 y \EL (\ALC sin negaci\'on). Tambi\'en considemos por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), la cuesti\'on principal no es si se debe utilizar una u otra l\'ogica para la determinaci\'on de contenido, sino que son diferentes sem\'anticas a tener en cuenta. Esto no s\'olo determina el formalismo l\'ogico requerido sino que tambi\'en impacta tanto en la determinaci\'on de contenido como en la siguiente etapa de realizaci\'on sint\'actica. Cada
 lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto particular considerado.
 
-Para el segundo ejemplo, supongamos que queremos identificar a $e_5$ de la Figura \ref{GRE3D7-stimulus2}, Algunas f\'ormulas posibles que identifican a un\'ivocamente a $e_5$ en el modelo se muestran en la Tabla \ref{tab:phis}.
+Para el segundo ejemplo, supongamos que queremos identificar a $e_5$ de la Figura \ref{figura-er}, Algunas f\'ormulas posibles que identifican a un\'ivocamente a $e_5$ en el modelo se muestran en la Tabla \ref{tab:phis}.
 
 \begin{table}
 $$
@@ -834,7 +835,7 @@ $$
   %ex 4
  \end{array}
 $$
-\caption{Descripciones alternativas para el objeto $e_5$ de la Figura~\ref{GRE3D7-stimulus2}, con lenguaje de \FOL.}\label{tab:phis}
+\caption{Descripciones alternativas para el objeto $e_5$ de la Figura~\ref{figura-er}, con lenguaje de \FOL.}\label{tab:phis}
 \end{table}
 
 Notar que $\phi_2$ y $\phi_3$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas.
