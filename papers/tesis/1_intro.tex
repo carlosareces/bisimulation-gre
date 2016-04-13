@@ -255,7 +255,7 @@ Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es
  %\end{flushleft}
 
 \vspace*{2cm} 
- \caption{Subgrafo \it{ball and red and} \it{\exist right-of . (cube and red)}} \label{formula-subgrafo2}
+ \caption{Subgrafo \it{ball and red and} \it{$\exists \nRightof . (cube and red)$}} \label{formula-subgrafo2}
 
 
 
@@ -534,7 +534,7 @@ El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos r
 como un modelo relacional. Intuitivamente, $a$, $b$ y $d$ son 'dogs', mientras que 
 $c$ y $e$ son 'cats';  $d$ es un 'small beagle';
  $b$ y $c$ son tambi\'en 'small'.
- Leeremos $\aSniffing(d,e)$ como ``{\em $d$ is sniffing $e$}''. La interpreraci\'on de $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos 'dogs' de la escena. La interpreraci\'on de $\aSniffing$ son el conjunto de pares de elementos que cumplan $\aSniffing$, por ejemplo ($a,a$) ya que $a$ is sniffing $a$ en el modelo.
+ Leeremos $\aSniffing(d,e)$ como ``{\em $d$ is sniffing $e$}''. La interpreraci\'on de $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos 'dogs' de la escena. La interpreraci\'on de $\aSniffing$ es el conjunto de pares de elementos que cumplen $\aSniffing$, por ejemplo ($a,a$) ya que ``$a$ is sniffing $a$'' est\'a en el modelo.
 
  \begin{figure}[!ht]
  %\begin{center}
@@ -575,14 +575,11 @@ $\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
  \end{picture}
 
  %\end{center}
- \caption{Representaci\'on de escena como un modelo relacional.\label{fig:cat-dog-1}}
+ \caption{Representaci\'on de escena como un modelo relacional e interpretaci\'on de sus propiedades y relaciones.\label{fig:cat-dog-1}}
  \end{figure}
 
 El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} en el que hemos representado la Figura \ref{GRE3D7-stimulus1} 
-como un modelo relacional, el dominio $\Delta$  = $\cset{e_1,e_2,e_3,e_4,e_5,e_6,e_7}$. La interpretaci\'on de $\nBall$ es $e_1$, $e_3$ y $e_5$, ya que estos objetos son 'ball', la de $\nCube$ es $\interp{\nCube}$ =$e_2$, $e_4$, $e_6$ y $e_7$, ya que esos objetos son 'cube'. Tenemos la relaci\'on $\nRightof$, cuya interpretaci\'on $\interp{\nRightof}$ es $\cset{(e_5,e_4),(e_7,e_6)}$, ya que $e_5$ is $\nRightof$ $e_4$ y $e_7$ is $\nRightof$ $e_6$. Notar que hemos representado s\'olo los que est\'an pegados. La relaci\'on $\nLeftof$ es sim\'etrica a $\nRightof$. Notar que no hemos representado $\nBelowof$ que ser\'ia la sim\'etrica de $\nOntop$. Estas decisiones las tomamos viendo los ejemplos de ER del corpus. Al no haber ER que nombraran esas cosas consideramos que no era necesario agregarlas. Veremos que no siempre esto es cierto, en la Secci\'on \ref{sec:caso_estudio}.
-
-%Para las relaciones tenemos $\Ontop(e_3,e_2)$ como ``{\em $e_3$ on top of $e_2$}''.
-%$\Rightof(e_4,e_5)$, $\Rightof(e_6,e_7)$, $\Lefttof(e_5,e_4)$,$\Leftof(e_7,e_6)$. $e_4$ y $e_5$ son 'large', los dem\'as 'small'.
+como un modelo relacional, el dominio $\Delta$  = $\cset{e_1,e_2,e_3,e_4,e_5,e_6,e_7}$. La interpretaci\'on de $\nBall$ es $e_1$, $e_3$ y $e_5$, ya que estos objetos son 'ball', la de $\nCube$ es $\interp{\nCube}$ =$e_2$, $e_4$, $e_6$ y $e_7$, ya que esos objetos son 'cube'. Tenemos las relaciones $\nRightof$, $\nLeftof$, $\nBelowof$ y $\nOntop$, cuyas interpretaciones se muestran en la Figura \ref{grafo-GRE3D7-stimulus_b}. Hemos decidido solamente representar las relaciones cuyos objetos se est\'an tocando, argumentado que como no est\'an en el corpus no son necesarias, veremos que no siempre es cierto, en la Secci\'on \ref{sec:caso_estudio}.
 
 \begin{figure}
 \begin{flushleft}
@@ -599,7 +596,7 @@ $\interp{\aLarge}$    & = & $\cset{e_4,e_5}$\\
 $\interp{\nRightof}$   & = & $\cset{(e_4,e_5),(e_6,e_7)}$\\
 $\interp{\nLeftof}$    & = & $\cset{(e_5,e_4),(e_7,e_6)}$\\
 $\interp{\nOntop}$     & = & $\cset{(e_3,e_2)}$\\
-$\interp{\nTop}$       & = & $\cset{e_3}$\\
+$\interp{\nBelow}$     & = & $\cset{(e_2,e_3)}$\\
 
  \end{tabular}
 \begin{picture}(120,50)
@@ -626,7 +623,6 @@ $\interp{\nTop}$       & = & $\cset{e_3}$\\
       \nCube\end{array}$}, right of=a] (b) {$e_2$};
  \node[n,,label=above:{
     \relsize{-2}$\begin{array}{c}
-      \nTop\\[-3pt]      
       \nSmall\\[-3pt] 
       \nYellow\\[-3pt] 
       \nBall\end{array}$}, above of=b] (c) {$e_3$};
@@ -656,7 +652,8 @@ $\interp{\nTop}$       & = & $\cset{e_3}$\\
  \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
  \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
  \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
- %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
+ 
+%\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
 
 % \end{tikzpicture}
 %\caption{Grafo del contexto \ref{GRE3D7-stimulus}}
@@ -665,16 +662,13 @@ $\interp{\nTop}$       & = & $\cset{e_3}$\\
  \end{tikzpicture}}
  \end{picture}
  \end{flushleft}
- \caption{Representaci\'on del Contexto \ref{GRE3D7-stimulus1}}
+ \caption{Representaci\'on del Contexto \ref{GRE3D7-stimulus1} como un modelo relacional e interpretaci\'on de sus propiedades y relaciones}
  \label{grafo-GRE3D7-stimulus_b}
  \end{figure}
 
-Con lo que hemos mostrado resolvimos el problema de la representaci\'on, hasta cierto punto, ya que siempre habr\'a cuestiones que deberemos decidir en el contexto considerado si incluir o no. Ahora vamos a abordar la cuestion de conseguir una ER para identificar al target usando los modelos que acabamos de describir. Ahora veremos lenguajes de distintas l\'ogicas y como las f\'ormulas l\'ogicas pueden representar ER.
-
-Los lenguajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relacional. 
-
-Por ejemplo, el lenguaje cl\'asico
-de la l\'ogica de primer-orden (con desigualdad), \FOL, est\'a dado por $\top$ que es como decir 'cosa', todo elemento satisface $\top$, la desigualdad entre 2 elementos $ x_i$ y $x_j$, relaciones de tuplas, la negaci\'on de f\'ormulas, la conjunci\'on de f\'ormulas, y el existencial de una variable ligada en la f\'ormula:
+Con lo que hemos mostrado resolvimos el problema de la representaci\'on, hasta cierto punto, ya que siempre habr\'a cuestiones que deberemos decidir en el contexto considerado si incluir o no. Ahora nos enfocaremos en conseguir ERs para identificar al target usando los modelos que acabamos de describir. Veremos lenguajes de distintas l\'ogicas y como las f\'ormulas l\'ogicas pueden representar ERs.
+%Los lenguajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relacional. 
+El lenguaje cl\'asico de la l\'ogica de primer orden (con desigualdad), \FOL, est\'a dado por $\top$ que es como decir 'cosa', todo elemento satisface $\top$, la desigualdad entre 2 elementos $ x_i$ y $x_j$, relaciones de tuplas, la negaci\'on de f\'ormulas de \FOL, la conjunci\'on de f\'ormulas de \FOL, y el existencial de una variable ligada en la f\'ormula de \FOL:
 $$
   \top \mid x_i \not\approx x_j \mid  r (\bar x) \mid \lnot \gamma \mid \gamma \land \gamma' \mid \exists x_i . \phi
 $$
@@ -692,7 +686,7 @@ x)$ son llamados \emph{\'atomos}.%
 Dado un modelo relacional $\+M = \tup{\Delta,\interp{\cdot}}$ y una
 f\'ormula $\phi$ con variables libres%
 \footnote{%
-    W.l.o.g.\ asumimos que cada variable no puede aparecer libre y ligada a la vez, que una variable no est\'a ligada 2 veces,
+    Asumimos que cada variable no puede aparecer libre y ligada a la vez, que una variable no est\'a ligada 2 veces,
     y que el \'indice de las variables crece en la f\'ormula de izquierda a derecha.%
 }
 $x_1\ldots x_n$, inductivamente definimos la \emph{extensi\'on} o
@@ -738,13 +732,13 @@ $\interp{\varphi} = T$ si existe, y $\bot$ caso contrario.\\ \hline
 \end{tabular}
 \end{center}}
 Cuando la salida no es $\bot$, decimos que $\phi$ es una
-\emph{expresi\'on referencial en $\+L$ (ER-$\+L$) para $T$ en $\+M$}, y cuando es $\bot$ puede ser que la l\'ogica elegida no sea lo suficientemente expresiva para identificar al target, o que el modelo que le hemos dado no tiene sufiente detalle.
+\emph{expresi\'on referencial en $\+L$ (ER-$\+L$) para $T$ en $\+M$}, y cuando es $\bot$ puede ser que la l\'ogica elegida no sea lo suficientemente expresiva para identificar al target, o que el modelo que le hemos dado no tiene suficiente detalle.
 
-La salida de el problema $\+L$-GRE es una f\'ormula de
+La salida del problema $\+L$-GRE es una f\'ormula de
 $\+L$ cuya interpretaci\'on en el modelo de input $\gM$ es el conjunto target $T$, si
 esa f\'ormula existe. 
 
-Consideramos s\'olo modelos relacionales con s\'imbolos de relaciones unarios y binarios, usaremos $p$ para las proposiciones (propiedades) y $r$ para los s\'imbolos de relaci\'on binarias.
+Consideramos s\'olo modelos relacionales con s\'imbolos de relaciones unarias y binarias, usaremos $p$ para las proposiciones (propiedades) y $r$ para los s\'imbolos de relaci\'on binarias.
 
 Como dijimos anteriormente, dado un modelo $\gM$, podr\'ia haber un infinito n\'umero de f\'ormulas que de forma \'unica
 describan al target (incluso f\'ormulas que no son l\'ogicamente equivalentes podr\'ian tener
@@ -756,7 +750,7 @@ Como es bien conocido en la comunidad de generaci\'on autom\'atica de lenguaje n
 realizaciones del mismo contenido podr\'ian dar lugar a expresiones referenciales que son m\'as o menos
 apropiadas en el contexto dado. 
 
-Vamos a argumentar que la generaci\'on de contenido usando lenguajes con diferente poder expresivo puede tener un impacto en la estapa posterior de realizaci\'on sint\'actica. Para eso, veamos las f\'ormulas que identifican a $b$ en nuestro primer ejemplo.
+Es importante tener en cuenta que la determinaci\'on de contenido usando lenguajes con diferente poder expresivo puede tener un impacto en la etapa posterior de realizaci\'on sint\'actica. Para eso, veamos las f\'ormulas que identifican a $b$ en nuestro primer ejemplo.
 
 \begin{table}[h]
 $$
@@ -775,53 +769,47 @@ $$
   %
  \end{array}
 $$
-\caption{Descripciones alternativas para el objeto $b$ en el modelo mostrado en Figura~\ref{fig:cat-dog-1}.}\label{tab:gammas}
+\caption{Descripciones alternativas para el objeto $b$ del modelo mostrado en Figura~\ref{fig:cat-dog-1}.}\label{tab:gammas}
 \end{table}
 
-Notar que hay f\'omulas de todo tipo, hay negaci\'on de \'atomos y de relaciones, hay existencial, para todo, conjunci\'on, disyunci\'on, desigualdad, es decir son f\'ormulas de \FOL. Pero en realidad no queremos todas esas f\'ormulas, ya que ser\'ian dif\'iciles de realizar por ejemplo $\phi_2$ podr\'a realizarse como {\it small dog that sniffs only dogs}. $\phi_3$ podr\'ia realizarse como {\it dog that sniffs dogs that are not him self}. $\phi_4$ {\it the dog that is sniffed by a small cat}. El s\'imbolo distinto y la voz pasiva pueden ser dificil de realizar, o quedar no natural en una ER.
+Notar que hay f\'omulas de todo tipo, hay negaci\'on de \'atomos y de relaciones, hay existencial, para todo, conjunci\'on, disyunci\'on, desigualdad, es decir son f\'ormulas de \FOL. Pero en realidad no queremos todas esas f\'ormulas, ya que ser\'ian dif\'iciles de realizar por ejemplo $\phi_2$ podr\'a realizarse como {\it Small dog that sniffs only dogs}. $\phi_3$ podr\'ia realizarse como {\it Dog that sniffs dogs that are not him self}, $\phi_4$ como {\it The dog that is sniffed by a small cat}. El s\'imbolo distinto y la voz pasiva pueden ser dif\'iciles de realizar, o quedar no natural en una ER.
 
 Como nuestra meta es hacer ER semejantes a las que los humanos hacen, veremos como restringiendo la l\'ogica, nos podemos acercar m\'as a la meta, si restringimos a \EPFOL, aseguramos que f\'ormulas como  $\phi_2$ no se generar\'an. Si prohibimos el distinto del lenguaje  $\phi_3$ tambi\'en queda exclu\'ida.
 %El hecho de que el lenguaje de representaci\'on utilizado tiene un impacto sobre la determinaci\'on de contenido es obvio, pero no ha recibido la atenci\'on que merece. 
 %Areces et al. [1] usaron diferentes l\'ogicas de descripci\'on (una familia de lenguajes formales utilizado en representaci\'on del conocimiento, vea [2]) para clasificar y dar un marco formal para trabajo previo sobre GRE. 
-Vamos a presentar r\'apidamente algunas de estos lenguajes ya que los mencionaremos en las siguientes secciones. Usando l\'ogicas de descripci\'on en lugar de fragmentos de $\FOL$ es s\'olo una cuesti\'on de notaci\'on, como la mayor\'ia de l\'ogicas descriptivas se pueden ver
-fragmentos como impl\'icitas de $\FOL$. Por ejemplo, el lenguaje de la l\'ogica de descripci\'on $\ALC$, se define sint\'acticamente como el conjunto de f\'ormulas,
+Ahora presentamos algunas l\'ogicas cuyos lenguajes naremos en las siguientes secciones. Usando l\'ogicas de descripci\'on en lugar de fragmentos de $\FOL$ es s\'olo una cuesti\'on de notaci\'on, como la mayor\'ia de l\'ogicas descriptivas se pueden ver
+fragmentos como impl\'icitas de $\FOL$. Por ejemplo, el lenguaje de la l\'ogica de descripci\'on $\ALC$, se define sint\'acticamente como el conjunto de f\'ormulas:
 $$
 \top \mid p \mid \neg \phi \mid \phi \wedge \phi' \mid  \exists r. \phi
 $$
-(donde $p$ es un s\'imbolo proposicional, $r$ s\'imbolo relacional binario, y $\phi,\phi' \in \ALC$) corresponde al fragmento sint\'actico de
-\FOL sin $\not\approx$, como es mostrado por la traducci\'on est\'andar $\st_x$:
-
-\begin{center}
-\begin{tabular}{rcl@{\hspace{1cm}}rcl}
-$ \st_{x_i}(\top)$ &$=$& $\top$
-&
-$\st_{x_i}(\phi_1 \land \phi_2)$ &$=$& $\st_{x_i}(\phi_1) \land \st_{x_i}(\phi_2)$
-\\
-  $\st_{x_i}(p)$ &$=$& $p(x_i)$
-&
-$\st_{x_i}(\exists r . \phi)$ &$=$& $\exists x_{i+1} . (r(x_i,x_{i+1}) \land \st_{x_{i+1}}(\phi))$
-\\
- $\st_{x_i}(\lnot \phi)$ &$=$& $\lnot\st_{x_i}(\phi)$
-&
-\end{tabular}
-\end{center}
-
-En efecto, dado un modelo relacional $\+M$, la extensi\'on de una f\'ormula \ALC en $\gM$ coincide exactamente con la extensi\'on de $\st_{x_1}(\varphi)$ (v\'ease, por ejemplo, ~\cite{baad:desc03}). Gracias
-a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes podemos definir $\interp{\varphi} = \interp{\st_{x_1}(\varphi)}$.
- Volviendo a nuestro ejemplo anterior, mediante la restricci\'on de contenido
-generaci\'on en f\'ormulas $\ALC$ (o equivalentemente, el fragmento correspondiente de \FOL)
-evitar\'iamos f\'ormulas como
-$\phi_3$ (sin igualdad) y
-$\phi_4$ (siempre aparece cuantificado el elemento en la segunda posici\'on de argumento).
+donde $p$ es un s\'imbolo proposicional, $r$ s\'imbolo relacional binario, y $\phi,\phi' \in \ALC$
+%corresponde al fragmento sint\'actico de
+%\FOL sin $\not\approx$, como es mostrado por la traducci\'on est\'andar $\st_x$:
+%
+%\begin{center}
+%\begin{tabular}{rcl@{\hspace{1cm}}rcl}
+%$ \st_{x_i}(\top)$ &$=$& $\top$
+%&
+%$\st_{x_i}(\phi_1 \land \phi_2)$ &$=$& $\st_{x_i}(\phi_1) \land \st_{x_i}(\phi_2)$
+%\\
+  %$\st_{x_i}(p)$ &$=$& $p(x_i)$
+%&
+%$\st_{x_i}(\exists r . \phi)$ &$=$& $\exists x_{i+1} . (r(x_i,x_{i+1}) \land \st_{x_{i+1}}(\phi))$
+%\\
+ %$\st_{x_i}(\lnot \phi)$ &$=$& $\lnot\st_{x_i}(\phi)$
+%&
+%\end{tabular}
+%\end{center}
+%
+%En efecto, dado un modelo relacional $\+M$, la extensi\'on de una f\'ormula \ALC en $\gM$ coincide exactamente con la extensi\'on de $\st_{x_1}(\varphi)$ (v\'ease, por ejemplo, ~\cite{baad:desc03}). Gracias
+%a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes podemos definir $\interp{\varphi} = \interp{\st_{x_1}(\varphi)}$.
+ Mediante la restricci\'on de seleci\'on de contenido usando f\'ormulas de $\ALC$ (que es un fragmento de \FOL)
+evitar\'iamos f\'ormulas como $\phi_3$ (sin igualdad) y $\phi_4$ (siempre aparece cuantificado el elemento en la segunda posici\'on de argumento).
 Generaci\'on se discute en ~\cite{areces08}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
-y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese paper, considerando por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
+y \EL (\ALC sin negaci\'on). Tambi\'en considemos por ejemplo \ELAN (\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), la cuesti\'on principal no es si se debe utilizar una u otra l\'ogica para la determinaci\'on de contenido, sino que son diferentes sem\'anticas a tener en cuenta. Esto no s\'olo determina el formalismo l\'ogico requerido sino que tambi\'en impacta tanto en la determinaci\'on de contenido como en la siguiente etapa de realizaci\'on sint\'actica. Cada
 lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto particular considerado.
 
-
-
-
-Para el segundo ejemplo: \\
-Supongamos que queremos identificar a $e_5$ de la Figura \ref{GRE3D7-stimulus2}, las siguientes son f\'ormulas que identifican a un\'ivocamente a $e_5$ en el contexto considerado.
+Para el segundo ejemplo, supongamos que queremos identificar a $e_5$ de la Figura \ref{GRE3D7-stimulus2}, Algunas f\'ormulas posibles que identifican a un\'ivocamente a $e_5$ en el modelo se muestran en la Tabla \ref{tab:phis}.
 
 \begin{table}
 $$
@@ -846,16 +834,13 @@ $$
   %ex 4
  \end{array}
 $$
-\caption{Descripciones alternativas para el objeto $e_5$ de la Figura~\ref{GRE3D7-stimulus2}.}\label{tab:phis}
+\caption{Descripciones alternativas para el objeto $e_5$ de la Figura~\ref{GRE3D7-stimulus2}, con lenguaje de \FOL.}\label{tab:phis}
 \end{table}
 
 Notar que $\phi_2$ y $\phi_3$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas.
-$\phi_4$ se puede realizar como ``Large red ball right-of large red cube''. Esta f\'ormula junto con $\phi_1$, $\phi_2$ y $\phi_3$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y solo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpus ~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}.
+$\phi_4$ se puede realizar como ``Large red ball right-of large red cube''. Esta f\'ormula junto con $\phi_1$, $\phi_2$ y $\phi_3$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y solo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpus ~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Bueno, pero entonces como dijimos reci\'en podemos elegir otra l\'ogica cuyo lenguaje este restringido a las ER que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje $\phi_6$ tambi\'en queda exclu\'ida. La l\'ogica que se corresponde con esas restricciones es \EL. 
 
-Bueno, pero entonces como dijimos reci\'en podemos elegir otra l\'ogica cuyo lenguaje este restringido a las ER que queremos generar.
-
-Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. 
-Si prohibimos el distinto del lenguaje  $\phi_6$ tambi\'en queda exclu\'ida.
+\textbf{ME GUSTARIA PONER ALGUN CIERRE A ESTA SECCION QUE LINKEE UN POCO...CON LO QUE SIGUE}
 
 %El hecho de que el lenguaje de representaci\'on utilizado tiene un impacto sobre la determinaci\'on de contenido es obvio, 
 %pero no ha recibido la atenci\'on que merece. 
@@ -887,13 +872,6 @@ Si prohibimos el distinto del lenguaje  $\phi_6$ tambi\'en queda exclu\'ida.
 %lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
 
 
-
-
-
-----
-Argumento a favor EL
-----
-
 \section{Mapa de la tesis}
 \label{sec:mapadetesis}
 \paragraph{Cap\'itulo~\ref{sec:intro}: ``Introducci\'on''} Situamos a la generaci\'on autom\'atica de expresiones 
@@ -908,9 +886,9 @@ sistemas de apoyo para la contrucci\'on de juguetes... en fin... {\it D\'igame u
 referenciales!}. Explicamos conceptos b\'asicos que usaremos a lo largo de la tesis, como ser el de {\it dominio}, {\it contexto}, 
 {\it propiedad}, {\it target}, {\it distractor} y {\it algoritmo}. Dimos una introducci\'on a la variedad de expresiones referenciales que 
 se puede tener para el mismo objeto target en el mismo contexto.
-Introducimos la teor\'ia de modelos, describimos diversos lenguajes formales (i.e, l\'ogicos) y su impacto si se usan para el problema de generaci\'on autom\'atica de expresiones referenciales.  Partimos desde la l\'ogica de primer orden (\FOL), la m\'as expresiva, explicamos el lenguaje asociado, para darnos una idea de cu\'ales son las f\'ormulas que el lenguaje puede generar, vemos una serie de ejemplos de f\'ormulas que se pueden generar con ese lenguaje y las comparamos con expresiones referenciales dadas por personas. Luego vemos l\'ogicas con menos poder expresivo como \EPFOL (\FOL sin negaci\'on), \ALC (\FOL sin desigualdad), \EL(\ALC sin negaci\'on), \ELAN (\ALC con negaci\'on s\'olo para proposiciones).
+Introducimos la teor\'ia de modelos, describimos diversos lenguajes formales (i.e, l\'ogicos) y su impacto si se usan para el problema de generaci\'on autom\'atica de expresiones referenciales.  Partimos desde la l\'ogica de primer orden (\FOL), la m\'as expresiva, explicamos el lenguaje asociado, para darnos una idea de cu\'ales son las f\'ormulas que el lenguaje puede generar, vimos una serie de ejemplos de f\'ormulas que se pueden generar con ese lenguaje y las comparamos con expresiones referenciales dadas por personas. Luego vemos l\'ogicas con menos poder expresivo como \EPFOL (\FOL sin negaci\'on), \ALC (\FOL sin desigualdad), \EL(\ALC sin negaci\'on), \ELAN (\ALC con negaci\'on s\'olo para proposiciones).
 
-\paragraph{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} Est\'a dividido en 3 secciones, en la primer secci\'on formalizamos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas, luego comentamos en que se basan la teor\'ia de \cite{clark1992arenas}, \cite{Clark-Marshall81} y como son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area varios de los cuales usaremos a lo largo de la tesis, viendo la simplicidad de estos corpus, por un lado podemos ver la complejidad de la tarea, ya que si para corpus tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, el cual usa im\'agenes de mapas de ciudades como contexto. Para finalizar damos una introducci\'on a las m\'etricas de evaluaci\'on. En la segunda secci\'on damos los diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se comparan esos algoritmos en cuanto al tipo de algoritmos y salida que producen. Se explican algunos algoritmos en detalle dejando el algoritmo de bisimulaci\'on para un cap\'itulo posterior ya es que el algoritmo en el cual basamos los aportes de esta tesis. Y luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on algunas de las cuales usan corpus para comparar las salidas de los algoritmos con ER dadas por humanos, algunas de ellas son autom\'aticas y otras manuales. 
+\paragraph{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} Est\'a dividido en 4 secciones, en la primer secci\'on formalizamos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas, luego comentamos en que se basan la teor\'ia de \cite{clark1992arenas}, \cite{Clark-Marshall81} y como son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area, varios de los cuales usaremos a lo largo de la tesis, viendo la simplicidad de estos corpus, por un lado podemos ver la complejidad de la tarea, ya que si para corpus tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, el cual usa im\'agenes de mapas de ciudades como contexto. Para finalizar damos una introducci\'on a las m\'etricas de evaluaci\'on. En la segunda secci\'on damos los diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se comparan esos algoritmos en cuanto al tipo de algoritmos y salida que producen. Se explican algunos algoritmos en detalle dejando el algoritmo de bisimulaci\'on para un cap\'itulo posterior ya es que el algoritmo en el cual basamos los aportes de esta tesis. Luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on algunas de las cuales usan corpus para comparar las salidas de los algoritmos con ER dadas por humanos, algunas de ellas son autom\'aticas y otras manuales. Para finalizar el cap\'itulo damos un resumen y como se linkea con los dem\'as cap\'itulos.
 %Luego se explica la historia de los algoritmos del \'area de generaci\'on autom\'atica
 % de expresiones referenciales. 
 
