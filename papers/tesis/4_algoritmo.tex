@@ -1,9 +1,8 @@
 \chapter{Nuestra propuesta}
 \label{sec:algoritmo}
-\section{Agregando probabilidades a un algoritmo existente}
+%\section{Agregando probabilidades a un algoritmo existente}
 
-En este cap\'itulo se presentan nuevos algoritmos basados en teor\'ia de modelos y L-simulaciones como los descriptos en el Cap\'itulo \ref{sec:intro_logica}. Pero que a diferencia de estos usan una distribuci\'on de probabilidad finita para generar no una sino un ranking de ERs.
-de~\cite{arec2:2008:Areces} donde el orden fijo de las propiedades de
+En este cap\'itulo se presentan nuevos algoritmos basados en teor\'ia de modelos y L-simulaciones como los descriptos en el Cap\'itulo \ref{sec:intro_logica}. Pero que a diferencia de estos usan una distribuci\'on de probabilidad finita para generar no una ER sino un ranking de ERs donde el orden fijo de las propiedades de
 la escena de entrada se sustituye por una distribuci\'on de probabilidad finita. 
 
 Consiguiendo as\'i 3 caracter\'isticas nuevas de los algoritmos:
@@ -21,7 +20,7 @@ es posible calcular una distribuci\'on de probabilidad adecuada para las propied
 las ERs generadas para el modelo simule el que se observa en corpora.
 \end{itemize}
 
-El cap\'itulo est\'a diivdido en 4 secciones, en la primer secci\'on explicaremos el input y output del algoritmo. En la Seccion \ref{sec:learning} mostraremos como obtener la distribuci\'on de probabilidad finita que es input del algoritmo. Luego en la Secci\'on \ref{sec:algoritmo_probabilistico} mostraremos el algoritmo en detalle, daremos el vocabulario necesario para entenderlo y un ejemplo de ejecuci\'on paso a paso. Explicaremos c\'omo conseguimos asegurar terminaci\'on, c\'omo se generan las ER no-determin\'isticamente, c\'omo conseguimos mayor control sobre la sobreespecificaci\'on. Finalmente en la Secci\'on \ref{sec:link_algoritmo} daremos un res\'umen y comentaremos como se linkea el cap\'itulo con el resto de la tesis.
+El cap\'itulo est\'a diivdido en 5 secciones, en la primer secci\'on explicaremos el input y output del algoritmo. En la Seccion \ref{sec:learning} mostraremos como obtener la distribuci\'on de probabilidad finita que es input del algoritmo. Luego en la Secci\'on \ref{sec:algoritmo_probabilistico} mostraremos el algoritmo en detalle, daremos el vocabulario necesario para entenderlo y un ejemplo de ejecuci\'on paso a paso. Explicaremos c\'omo conseguimos asegurar terminaci\'on, c\'omo se generan las ER no-determin\'isticamente, c\'omo conseguimos mayor control sobre la sobreespecificaci\'on. Finalmente en la Secci\'on \ref{sec:link-algoritmo} daremos un res\'umen y comentaremos como se linkea el cap\'itulo con el resto de la tesis.
 
 \section{Entrada y salida del algoritmo probabil\'istico}
 \label{input_algo}
@@ -98,7 +97,7 @@ El sistema toma como input el contexto representado por el modelo $\+M$ como por
  \caption{}\label{representacion-modelo-y-figura}
 
 \end{subfigure}%
-\caption{Modelo que representa la figura}.}
+\caption{Modelo que representa la figura}.
 \label{figura-y-modelo}
 \end{figure}
 
@@ -163,20 +162,19 @@ relaci\'on R a una cierta probabilidad de uso R.\puse\ ordenada de mayor a menor
 \footnotesize{
 \caption{Distribuci\'on de probabilidad de las propiedades y relaciones de la figura de ejemplo}
 \label{probabilidades-escena}
-\begin{tabular} {  l c c c c c c c c c c c c}
+\begin{tabular} {  l c c c c c c c c c c c c c}
 \hline
 %\multicolumn{1}{c}{}
 %&\multicolumn{1}{c}{Domain}
 %&\multicolumn{3}{c}{Descriptions}\\
-R				&ball			& cube			& red	& large & ontop & yellow & small & izquierda & derecha & leftof & rightof & belowof\\
+R				&ball			& cube	& red	  & large & ontop & yellow & small & left & top   & right & leftof & rightof & belowof\\
 \hline
-R.\puse	& 1.0				& 1.0				& 0.978	& 0.257  & 0.178 & 0.15 & 0.107 & 0.007 & 0.007 & 0 &0&0&0\\
+R.\puse	& 1.0			& 1.0		& 0.978	& 0.257 & 0.178 & 0.15   & 0.107 & 0.007& 0.007 & 0 		 &0			 &0				 &0\\
 \hline
 \end{tabular}
 }
 \end{center}
 \end{table}
-
 %esfera 1.0, \\
 %cube 1.0,\\
 %rojo 0.978,\\ 
@@ -329,55 +327,55 @@ $\REL = \{green, ball, small, ontop, red, large, cube, blue, left, top\} $
 \centering
 \begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=3pt,node distance=2cm},
+    n/.style={circle,draw,inner sep=3pt,node distance=2cm},
     aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
   ]
- \node[n,label=above:$e_1$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nLeft\\[-2pt]
       \nSmall\\[-2pt] 
       \nBlue\\[-2pt]
-      \nBall\end{array}$}] (a) {};
+      \nBall\end{array}$}] (a) {$e_1$};
 
- \node[n,label=above:$e_2$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nLeft\\[-2pt]
       \nBig\\[-2pt] 
       \nBlue\\[-2pt]
-      \nCube\end{array}$}, right of=a] (b) {};
+      \nCube\end{array}$}, right of=a] (b) {$e_2$};
 
- \node[n,label=below:$e_3$,label=above:{
+ \node[n,label=above:{
     \relsize{-1}$\begin{array}{c}
       \nTop\\[-2pt]      
 			\nLeft\\[-2pt]
       \nSmall\\[-2pt]      
 			\nGreen\\[-2pt]
-      \nBall\end{array}$}, above of=b] (c) {};
+      \nBall\end{array}$}, above of=b] (c) {$e_3$};
 
- \node[n,label=above:$e_4$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nSmall\\[-2pt] 
       \nGreen\\[-2pt] 
-      \nCube\end{array}$}, right of=b] (d) {};
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
 
- \node[n,label=above:$e_5$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nBig\\[-2pt] 
       \nBlue\\[-2pt] 
-      \nBall\end{array}$}, right of=d] (e) {};
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
 
- \node[n,label=above:$e_6$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nBig\\[-2pt] 
       \nGreen\\[-2pt] 
-      \nCube\end{array}$}, right of=e] (f) {};
+      \nCube\end{array}$}, right of=e] (f) {$e_6$};
 
- \node[n,label=below:$e_7$,label=above:{
+ \node[n,label=above:{
     \relsize{-1}$\begin{array}{c}
       \nTop\\[-2pt]
       \nSmall\\[-2pt]
       \nBlue\\[-2pt]
-      \nCube\end{array}$}, above of=f] (g) {};
+      \nCube\end{array}$}, above of=f] (g) {$e_7$};
 
  \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
  \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
@@ -1237,6 +1235,6 @@ y $e_5$ ball, red
 
 
 \section{Res\'umen y linkeo del cap\'itulo}
-{sec:link_algoritmo}
+{sec:link-algoritmo}
 
 En este cap\'itulo se explic\'o la entrada y salida de un algoritmo probabil\'istico el cual toma con entrada el modelo, el cual es una representaci\'on de la figura considerada, una distribuci\'on de probabilidad finita, la cual explicamos como obtenerla en 2 casos: en el caso que hay corpus disponible para la escena considerada y en casos donde al no haber corpus disponible proponemos una aproximaci\'on usando aprendizaje autom\'atico. Se explic\'o el algoritmo en detalle y se ilustr\'o con un ejemplo de ejecuci\'on. Se explic\'o como hace el algoritmo para conseguir las siguientes caracter\'isticas: asegurar terminaci\'on, generar ER relacionales, generar ER no-determin\'isticas, generar sobreespecificaci\'on, generar ER para plurales.
