@@ -2,32 +2,36 @@
 \label{sec:intro_logica}
 
 De acuerdo a lo que queremos permitir en una ER, tendremos un lenguaje asociado, el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica como partiendo de \FOL podemos ir restringiendo la l\'ogica y con ello el lenguaje, es interesante evaluar la complejidad dependiendo de la l\'ogica seleccionada, ya que por ejemplo sistemas de tiempo real necesitan conseguir ER r\'apidamente, daremos las complejidad de las distintas l\'ogicas, y veremos que l\'ogica aplica a los algoritmos estudiados del \'area.
-El cap\'itulo esta dividido en 4 secciones, las cuales son: {\emph seleccionando el lenguaje}, en la cual daremos de ejemplos de tipos de ER que queremos conseguir y qu\'e l\'ogicas nos pueden ayudar, en {\emph GRE v\'ia conjuntos de simulaci\'on} veremos algunos algoritmos ya acercandonos a la implementaci\'on de un sistema que nos dar\'a ER. En {\emph Bisimulaci\'on} explicaremos la base de nuestro algoritmo, y para finalizar en {\emph Notas finales y linkeo del cap\'itulo} daremos un resumen de lo expuesto en este cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
+El cap\'itulo esta dividido en 4 secciones, las cuales son: \ref{sec:seleccionandoLenguaje}, en la cual daremos de ejemplos de tipos de ER que queremos conseguir y qu\'e l\'ogicas nos pueden ayudar, en \ref{sec:greViaSimulacion} veremos algunos algoritmos ya acerc\'andonos a la implementaci\'on de un sistema que nos dar\'a ERs. En \ref{sec:bisimulacion} explicaremos la base de nuestro algoritmo, y para finalizar en \ref{sec:notasFinales} daremos un resumen de lo expuesto en este cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
 
 
-\section{Seleccionando el lenguaje}
+\section{Similaridad entre objetos en un lenguaje particular}
+\label{sec:seleccionandoLenguaje}
 
-Intuitivamente, dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
+Dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
 $\+M_1$ es similar en $\+L$ a otro objeto
  $v$ en el modelo $\+M_2$ si para cualquier f\'ormula en $\+L$ que es satisfecha por $u$ tambi\'en es satisfecha por $v$. Formalmente,
 %let $\+L$ stand for any of the languages discussed so far, and
 Sean $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 = \tup{\Delta_2, \interp{\cdot}_2}$ modelos relacionales con $u \in \Delta_1$ y $v \in \Delta_2$; seguimos la terminolog\'ia de~\cite{areces08} y decimos que
 \emph{$u$ es $\+L$-similar a $v$}  (notaci\'on $u \simil{\+L} v$) si para toda f\'ormula $\gamma \in \+L$, $u \in \interp{\gamma}_1$ implica
-$v \in \interp{\gamma}_2$. Es f\'acil mostrar que
-$\+L$-similaridad es reflexiva para todo lenguaje l\'ogico $\+L$ (ya que si cumple para toda f\'ormula $\gamma \in \+L$, $u \in \interp{\gamma}_1$, en particular cumple $u \simil{\+L} u$), y sim\'etrica  para languajes que contienen negaci\'on.
-
-
-Observe que la $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$''. Si tomamos $\+M_1$ y $\+M_2$ a ser del mismo modelo, un objeto $u$ en el modelo puede identificarse un\'ivocamente en $\+L$ si no hay ning\'un otro objeto $v$ diferente de $u$ tal que $u \simil{\+L} v$. En otras palabras, si hay dos objetos $u$ y $v$ en un modelo $\+M$  tal que
+$v \in \interp{\gamma}_2$. 
+La $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$''. Si tomamos $\+M_1$ y $\+M_2$ a ser del mismo modelo, un objeto $u$ en el modelo puede identificarse un\'ivocamente en $\+L$ si no hay ning\'un otro objeto $v$ diferente de $u$ tal que $u \simil{\+L} v$. En otras palabras, si hay dos objetos $u$ y $v$ en un modelo $\+M$  tal que
 $u \simil{\+L} v$, entonces el problema $\+L$-GRE con input $\+M$ y target $T=\{u\}$ no tendr\'a \'exito ya que para todas las f\'ormulas $\gamma \in L$ tenemos que $\{u,v\} \subseteq \interp{\gamma} \not = \{u\}$.
 
+Considere la Figura \ref{target_mapa_3ball}, y sea $\+L$ tal que s\'olo se puede tener conjunciones de propiedades proposicionales, sin negaci\'on, sin relaciones. Sea $\Delta$ = ${\nLarge, \nRed, \nBall, \nCube, \nYellow}$.
+\begin{figure}[H]
+\centering
+\includegraphics[width=.6\textwidth]{images/22paraRelacional.jpg}
+\caption{Ejemplo de target.}
+\label{target_mapa_3ball}
+\end{figure}
 
-%\begin{convention}\label{conv:signature}
-%We will only consider relational models with unary and binary relation
-%symbols (i.e., labeled graphs).  We will consistently use $p$ for a unary relation
-%symbol (and called it a \emph{proposition}) and $r$ for a binary relation symbol.
-%\end{convention}
+Se cumple que  $e_1 \simil{\+L} e_5$, $e_3 \simil{\+L} e_5$ y $e_1 \simil{\+L} e_3$ ya que para toda f\'omula $\phi$, la $\interp \phi$ es ${e_1, e_3, e_5}$. 
+$\phi_1$: $\nRed \land \aBall$ tenemos que $\interp \phi_1$ = ${e_1, e_3, e_5}$
+$\phi_2$: $\nLarge \land \aBall$, $\interp \phi_2$ = ${e_1, e_3, e_5}$ 
+$\phi_3$: $\nRed \land \nLarge \land \aBall$, $\interp \phi_3$ = ${e_1, e_3, e_5}$ 
 
-
+Esto nos dice que con ese lenguaje elegido $\+L$ la tarea GER no tiene soluci\'on.
 
 La noci\'on de $\+L$-similaridad entonces, nos permite manejar el problema de  $\+L$-GRE.
 Por otra parte, podemos reformular esta de noci\'on de una manera estructural, para no considerar infinitas $\+L$-f\'ormulas y poder decidir si $u$ es $\+L$-similar a $v$. Podemos reinterpretar $\+L$-similaridad en t\'erminos de nociones de teor\'ia de modelos est\'andares
@@ -77,33 +81,11 @@ $u \sim v$. El siguiente es un resultado fundamental del modelo te\'orico:%~\cit
 \hline	
 \end{tabular}
 
-\caption{$\+L$-simulaciones para varios lenguajes l\'ogicas.}\label{tab:simuls}
+\caption{$\+L$-simulaciones para varios lenguajes l\'ogicos.}\label{tab:simuls}
 \end{table}
 
 
 %$Una l\'ogica sim\'etrica cumple  $\atomL$ y $\atomR$ como se ve en la Tabla \ref{tab:simuls}. 
-
-
-\begin{table}[h!]
-\begin{tabular}{l|l}
-  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (DL)\\
-  \hline
-	  Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-		Heuristica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-  Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-  GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
-														& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
-  Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
-	& y proposicionales)\\
-  Kelleher and Kruijff (2006)   & $\EL$ \\
-  Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
-\end{tabular}
-
-\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:simuls}
-\end{table}
-\textcolor{blue}{
-\ALC tiene negacion de f\'ormulas, conjunciones y existenciales, proposicionales
-}
 \begin{theorem} \label{thm:simulation}
 Si  $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 =
 \tup{\Delta_2, \interp{\cdot}_2}$ son modelos finitos, $u \in
@@ -117,7 +99,7 @@ noci\'on de bisimulaci\'on~\cite[Def.~2.16]{BRV01}; $\simul{\EL}$ es una
 simulaci\'on definida en~\cite[Def.~2.77]{BRV01}. Los restantes son variaciones de estos.
 %\end{proof}
 
-Por lo tanto, en los modelos finitos\footnote{finitud no es la hip\'otesis m\'as d\'ebil,
+Por lo tanto, en los modelos finitos\footnote{Que el modelo sea finito no es la hip\'otesis m\'as d\'ebil,
 pero es suficiente para nuestro desarrollo.}, las simulaciones capturan exactamente el concepto de similaridad.
 La implicaci\'on de derecha a izquierda no se mantiene en general sobre modelos infinitos.
 
@@ -140,17 +122,35 @@ Si se opta por un lenguaje m\'as rico que $\EL$, tal como $\ELAN$, uno puede ser
 capaz de describir a $a$: toma, por ejemplo, la f\'ormula de $\ELAN$
 $\nDog(x)\wedge\lnot\aSmall(x)$.
 
+En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
+\begin{table}[h!]
+\begin{tabular}{l|l}
+  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (DL)\\
+  \hline
+	  Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+		Heuristica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+  Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+  GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
+														& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
+  Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
+	& y proposicionales)\\
+  Kelleher and Kruijff (2006)   & $\EL$ \\
+  Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
+\end{tabular}
+\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:algoritmosLogicas}
+\end{table}
+
 
 Como veremos en la siguiente subsecci\'on, la simulaci\'on nos d\'a un
-enfoque eficiente, computacionalmente factible para atacar el problema $\+L$-GRE. Algoritmos para calcular muchos tipos de $\+L$-simulaciones son
+enfoque eficiente, computacionalmente factible para atacar el problema $\+L$-GER. Algoritmos para calcular muchos tipos de $\+L$-simulaciones son
 bien conocidos (vea, \cite{H71,areces08,HHK95,DPP03}), y para muchos
 lenguajes (por ejemplo, \ALC, \ALC con negaci\'on de relaciones, \ELAN y \EL)
 se ejecutan en tiempo polinomial (por otro lado, es conocido que no hay algoritmo polinomial 
  para simulaci\'on con \FOL- o \EPFOL, incluso la exacta
 complejidad del problema en estos casos est\'a abierta \cite{gare:comp79}).
 
-\section{GRE v\'ia conjuntos de simulaci\'on}\label{sec:simulation}
-
+\section{GER v\'ia conjuntos de simulaci\'on}\label{sec:simulation}
+\label{sec:greViaSimulacion}
 En esta secci\'on discutiremos como resolver el problema $\+L$-GRE
 usando simulaci\'on. Dado un modelo $\+M = \tup{\Delta,
 \interp{\cdot}}$, el Teorema~\ref{thm:simulation} nos dice que si 2 elementos distintos $u$ y $v$ en $\Delta$ son tales que $u
@@ -162,7 +162,7 @@ Asumamos un lenguaje fijo $\+L$ y un modelo $\+M$. Supongamos que queremos refer
 $\simset_{\+L}^{\+M}(u) = \cset{v \in \Delta \mid u \simul{\+L} v}$.
 Cuando un modelo $\+M$ es claro de el contexto, simplemente escribimos $\simset_{\+L}$.
  Si $\simset_{\+L}^{\+M}(u)$ no es singleton $\cset{u}$,
-el problema $\+L$-GRE con target $\{u\}$ en $\+M$ fallar\'a.
+el problema $\+L$-GER con target $\{u\}$ en $\+M$ fallar\'a.
 
 %\iffullversion
 %Es facil de ver que la union de 2 $\+L$-simulaciones 
@@ -210,7 +210,7 @@ $\su{r}{v}=\{u\in\Delta\mid(v,u)\in\interp{r}\}$ para $r$ un s\'imbolo de relaci
 La Figura \ref{22_para_relacional} no pertenece al corpus GRE3D7, fue intencionalmente modificada para mostrar un caso en el que las propiedades proposicionales no alcanzan para dar una ER del objeto se\~nalado por la flecha. Para esa figura el algoritmo podr\'ia empezar con $S(v)$ = large, red, ball y luego el \'unico sucesor ser\'ia el red cube con la relaci\'on right-of, lo cual borra los dem\'as distractores.
 
 
-\begin{figure}[!ht]
+\begin{figure}[Ht]
 \centering
 \includegraphics[width=0.5]{images/22paraRelacional.jpg}
 \caption{Ejemplo de contexto}
@@ -1429,7 +1429,7 @@ $w\in\{b,d\}$; y ambos (iii) y (iv) se refieren \'unicamente a $(b, G)$. Notar
 que (i) -- (iv) pueden realizarse, como  ``{\em a dog}'',
 ``{\em a dog that sniffs something}'', ``{\em a small dog that
 sniffs a dog}'' respectivamente ($\gamma_1$ en la Tabla~\ref{tab:gammas}) y ``{\em the dog that is sniffed by a small cat}'' ($\gamma_4$ en
-Table~\ref{tab:gammas
+Table~\ref{tab:gammas}
 
 % \fxnote{\tiny Reescribir los siguientes dos parrafos. Decir algo como, 'once
 % more we'll try to remain as close as possible to the algorithms of the original
@@ -1576,9 +1576,9 @@ $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L} n}$\;
   \end{minipage}%
 \end{center}
 
-Estos algoritmos son param\'etricos en $\+L$;; para hacerlos concretos, uno
-tiene que proporcionar versiones adecuadas de \instFun{buildF}{\+L} y
-\instFun{extend}{\+L}. El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\+L$-RE {\em
+Estos algoritmos son param\'etricos en $\+L$; para hacerlos concretos, uno
+tiene que proporcionar versiones adecuadas de $\instFun{buildF}{\+L}$ y
+$\instFun{extend}{\+L}$. El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\+L$-RE {\em
 f\'ormula para} $v$; \'este \'ultimo nos dice c\'omo extender $H$ en cada paso
 del bucle principal del algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a diferencia de la
 presentaci\'on de~\cite{Krahmer2003}, \instFun{makeRE}{\+L} computa
@@ -1879,3 +1879,4 @@ General: El modelo construido en el primer caso puede ser exponencialmente
 
 %%ROMI---
 \section{Notas finales y linkeo del cap\'itulo}
+\label{sec:notasFinales}
