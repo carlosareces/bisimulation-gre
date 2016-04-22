@@ -5,21 +5,10 @@
 %En este cap\'itulo daremos una introducci\'on al problema de la generaci\'on autom\'atica de expresiones referenciales, contaremos las contribuciones de este trabajo y mostraremos como est\'a organizada la tesis.
 
 
-La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso de construcci\'on de un texto en lenguaje natural de forma autom\'atica (o semi autom\'atica), para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural, es \'util para aplicaciones pr\'acticas en las que, por ejemplo, es necesario hacer accesible grandes vol\'umenes de informaci\'on posiblemente t\'ecnica. La GLN se ha usado para generar recomendaciones de restaurantes personalizadas, resumir informaci\'on m\'edica, etc.~\cite{dale2000}. La generaci\'on de lenguaje natural, est\'a dentro de el \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial.
-
-La \textbf {generaci\'on de expresiones referenciales (GER)} entre todas las subtareas de GLN, es una de las que ha recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los sistemas GLN, con independencia de su finalidad, contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
-en vista del papel central que las expresiones referenciales tienen en la comunicaci\'on. Un sistema que proporciona
-consejos sobre los viajes a\'ereos \cite{white2010generating} tiene que hacer referencia a los vuelos --- {\it el
-vuelo m\'as barato}, {\it un vuelo directo}---, un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
-necesita generar descripciones espaciales ---{\it tomar el puente junto a la iglesia, a la derecha}---,
-y un robot que ensambla piezas de juguetes junto con un usuario humano~\cite{foster-etal-ijcai2009} debe hacer referencia a los componentes --- {\it inserte el perno verde hasta el final en el cubo rojo}. Cuando hablamos, nos referimos a cosas (tangibles como un puente, o intangibles como una fecha), es decir generamos expresiones referenciales. Un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales. La generaci\'on autom\'atica de expresiones referenciales es el tema de esta tesis.
+La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso autom\'atico (o semi autom\'atico) de construcci\'on de un texto en lenguaje natural, para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural, es \'util para aplicaciones pr\'acticas en las que, por ejemplo, es necesario hacer accesible grandes vol\'umenes de informaci\'on posiblemente t\'ecnica. La GLN se ha usado para generar recomendaciones de restaurantes personalizadas, para resumir informaci\'on m\'edica, etc.~\cite{dale2000}. La generaci\'on de lenguaje natural, est\'a dentro de el \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial.
 
 Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\'ivocamente a un objeto en un contexto y para un interlocutor particular. Si quisieramos referirnos al objeto se\~nalado por la flecha en la Figura~\ref{GRE3D7-stimulus1}, podr\'iamos hacerlo con alguna de las expresiones referenciales que se muestran en la Figura \ref{er-figura1}.
-%\captionsetup{
-%  font=footnotesize,
-%  justification=raggedright,
-%  singlelinecheck=false
-%}
+
 \begin{figure}[H]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -28,9 +17,6 @@ Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\
 \end{subfigure}%
 \begin{subfigure}{.5\textwidth}
  \centering
-%\vspace*{-5cm}
-%\begin{table}
-
 \begin{tabular}{l}
  {\it La esfera grande}\\
 
@@ -51,21 +37,27 @@ Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\
 
   {\it ...}
  \end{tabular}
-%\vspace*{-1cm}
 \hspace*{-30cm}
 \centering\caption{}\label{er-figura1}
 \end{subfigure}
 \begin{centering}
-\caption{Ejemplos de expresiones referenciales que identifican un\'ivocamente al objeto se\~nalado por la flecha en la im\'agen.}
+\caption{Expresiones referenciales que identifican al objeto se\~nalado por la flecha.}
 \label{figura-er}
 \end{centering}
 \end{figure}
 
-Un sistema de GLN incluye 3 etapas, {\bf determinaci\'on de contenido} ---qu\'e decir--- {\bf lexicalizaci\'on} ---con qu\'e palabras--- y {\bf realizaci\'on ling\"{u}\'istica} ---c\'omo decirlo. La selecci\'on de contenido, elije que informaci\'on incluir en la ER. La lexicalizaci\'on elije que lexemas usar para comunicar el contenido determinado por la etapa anterior. Y la realizaci\'on arma la oraci\'on agregando los art\'iculos, preposiciones, y dem\'as lexemas necesarios y orden\'andolos de forma tal que la frase resultante sea gramaticalmente aceptable. 
+La \textbf {generaci\'on de expresiones referenciales (GER)} entre todas las subtareas de GLN, es una de las que ha recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los sistemas GLN, con independencia de su finalidad, contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
+en vista del papel central que las expresiones referenciales tienen en la comunicaci\'on. Un sistema que proporciona
+consejos sobre los viajes a\'ereos \cite{white2010generating} tiene que hacer referencia a los vuelos --- {\it el
+vuelo m\'as barato}, {\it un vuelo directo}---, un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
+necesita generar descripciones espaciales ---{\it tomar el puente junto a la iglesia, a la derecha}---,
+y un robot que ensambla piezas de juguetes junto con un usuario humano~\cite{foster-etal-ijcai2009} debe hacer referencia a los componentes --- {\it inserte el perno verde hasta el final en el cubo rojo}. Cuando hablamos, nos referimos a cosas (tangibles como un puente, o intangibles como una fecha), es decir generamos expresiones referenciales. Un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales. La generaci\'on autom\'atica de expresiones referenciales es el tema de esta tesis.
 
-Un sistema de GER, tiene esas 3 etapas tambi\'en: la determinaci\'on de contenido ---decide qu\'e propiedades o relaciones del objeto se incluir\'an en la expresi\'on referencial---, la lexicalizaci\'on, ---elije las palabras que se van a usar para nombrar las propiedades y relaciones--- y la realizaci\'on ling\"u\'istica, ---se encarga de armar el sintagma nominal para que sea gramaticalmente correcto.
+Un sistema de GLN incluye 3 etapas: {\bf determinaci\'on de contenido} ---qu\'e decir--- {\bf lexicalizaci\'on} ---con qu\'e palabras--- y {\bf realizaci\'on ling\"{u}\'istica} ---c\'omo decirlo. La selecci\'on de contenido, elige qu\'e informaci\'on incluir en la oraci\'on. La lexicalizaci\'on elige qu\'e lexemas usar para comunicar el contenido determinado por la etapa anterior. Y la realizaci\'on arma la oraci\'on agregando los art\'iculos, preposiciones, y dem\'as palabras funcionales necesarias y orden\'andolos de forma tal que la frase resultante sea gramaticalmente aceptable. 
 
-Por ejemplo, la primer ER de la Figura \ref{figura-er} incluye las propiedades {\it tama\~no} y {\it forma} del objeto se\~nalado por la flecha, lexicalizadas como {\it grande} y {\it esfera} respectivamente y realizadas agregando el art\'iculo {\it la} antes de {\it esfera}, e incluyendo el sustantivo {\it esfera} antes que el adjetivo {\it grande}; formando as\'i el sintagma nominal {\it La esfera grande} que es correcto en espa\~nol. Otra lexicalizaci\'on y realizaci\'on de las mismas propiedades ---es decir, de la misma sem\'antica--- podr\'ia ser {\it La bola de gran tama\~no}. A lo largo de esta tesis usaremos el t\'ermino {\bf expresi\'on referencial} para nombrar la salida de cualquiera de las 3 etapas de la GER. Es decir, llamaremos expresi\'on referencial al conjunto de propiedades y relaciones que refieren un\'ivocamente a un objeto aunque no est\'en lexicalizadas o realizadas.
+Un sistema de GER, tiene esas 3 etapas tambi\'en: {\bf determinaci\'on de contenido} ---decide qu\'e propiedades o relaciones del objeto a describir se incluir\'an en la expresi\'on referencial--- {\bf lexicalizaci\'on} ---elige las palabras que se van a usar para nombrar las propiedades y relaciones--- y {\bf realizaci\'on ling\"u\'istica} ---se encarga de armar el sintagma nominal para que sea gramaticalmente correcto.
+
+Por ejemplo, la primer ER de la Figura \ref{figura-er} incluye las propiedades {\it tama\~no} y {\it forma} del objeto se\~nalado por la flecha, lexicalizadas como {\it grande} y {\it esfera} respectivamente y realizadas agregando el art\'iculo {\it la} antes de {\it esfera}, e incluyendo el sustantivo {\it esfera} antes que el adjetivo {\it grande}; formando as\'i el sintagma nominal {\it La esfera grande} que es correcto en espa\~nol. Otra lexicalizaci\'on y realizaci\'on de las mismas propiedades ---es decir, de la misma sem\'antica--- podr\'ia ser {\it La bola de gran tama\~no}. A lo largo de esta tesis usaremos el t\'ermino {\bf expresi\'on referencial} (ER) para nombrar la salida de cualquiera de las 3 etapas de la GER. Es decir, llamaremos expresi\'on referencial al conjunto de propiedades y relaciones que refieren un\'ivocamente a un objeto aunque no est\'en lexicalizadas o realizadas.
 
 En lo que sigue introduciremos terminolog\'ia b\'asica, relacionada con la GER que nos servir\'a a lo largo de toda la tesis para entendernos.
 
@@ -75,12 +67,17 @@ El {\bf contexto} de una ER contiene un subconjunto de las entidades del dominio
 
 Cada {\bf entidad} del contexto (tambi\'en conocido como objeto o elemento) tiene un tipo ---\emph{esfera}--- ciertas propiedades o caracter\'isticas ---\emph{color}---, valores de esas propiedades ---\emph{rojo}---, y puede tener relaciones con otros objetos ---\emph{a la derecha de}. Una {\bf propiedad} (unaria) es una caracter\'istica de una entidad particular. Por ejemplo, la raza de un perro, el tener o no tener bigotes para un hombre, o el color para un objeto. Cada entidad puede tener muchas propiedades, y puede tener relaciones (tambi\'en llamadas: propiedades binarias), por ejemplo con respecto a la posici\'on f\'isica, como estar situado al lado de otro objeto. 
 
-El {\bf target} (u objetivo), es el subconjunto de objetos de un contexto a los cuales queremos referirnos. En la escena del ejemplo de la Figura \ref{figura-er}, el target es el objeto se\~nalado por la flecha. En este caso, el target es un conjunto singleton, es decir tiene un s\'olo elemento. Si el target tiene m\'as de un elemento, las ER que lo identifican ser\'an plurales.
+El {\bf target} (u objetivo), es el subconjunto de objetos de un contexto a los cuales queremos referirnos. En la escena del ejemplo de la Figura \ref{figura-er}, el target es el objeto se\~nalado por la flecha. En este caso, el target es un conjunto singleton, es decir tiene un s\'olo elemento. Si el target tiene m\'as de un elemento, las ERs que lo identifican ser\'an plurales.
 
 Dado un contexto, un target y una descripci\'on (parcial) del target, los {\bf distractores} son otros elementos que se encuentran en el contexto, y que tambi\'en cumplen con la descripci\'on parcial. Si la descripci\'on parcial es {\it esfera} las esferas que no son el target de la Figura \ref{GRE3D7-stimulus1} son  distractores, y por ello es necesario seguir agregando propiedades o relaciones para identificar un\'ivocamente al target.
 
 Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos, alg\'un tipo de representaci\'on de un contexto y un target, y d\'a como resultado una (o m\'as) expresi\'on(es) referencial(es) para el target considerado, si puede identificarlo un\'ivocamente en el contexto.
-\vspace*{-1.5cm}
+
+Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos de la Figura \ref{figura-er} y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ involucra encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Como dijimos, esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}. Mirando la tabla \ref{tabla-propiedades} podemos decir que {\it Red ball}, {\it Large ball} y {Large red ball} son algunas ERs del objeto $e_5$, cuyas realizaciones en espa\~{n}ol podr\'ian ser: {\it La bola roja}, {\it La esfera grande} y {\it La esfera grande y roja}. {\it La bola roja} y {\it La esfera grande} aparecen entre las ERs dadas por las personas listadas en la Figura \ref{figura-er}.
+%Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es un subrafo de la Figura \ref{representacion-modelo} que identifica un\'ivocamente al target, representa la cuarta ER mostrada en la Figura \ref{er-figura1}. Y la Figura \ref{formula-subgrafo2} tambi\'en identifica al target un\'ivocamente y representa la segunda ER mostrada en \ref{er-figura1}.
+%que est\'an dadas en la Figura \ref{er-figura1} son muchas m\'as de las que mostramos en las f\'ormulas de la Figura \ref{er-figura1-b}, esto nos lleva a pensar que un algoritmo puede que no consiga la variedad que las personas dan. La representaci\'on ilustrada en la Figura~\ref{representacion-modelo} es equivalente a la mostrada en la Tabla \ref{tabla-propiedades}.
+
+%\vspace*{-1.5cm}
 \begin{figure}[H]
 \begin{subfigure}{.4\textwidth}
   \centering
@@ -111,19 +108,52 @@ $e_7$ & cube & red & small & $e_6$ & - & - & -\\
 \caption{}\label{tabla-propiedades}
 \end{centering}
 \end{subfigure}
-\caption{Posible formalizaci\'on de las propiedades de la Figura \ref{figura-er} en una tabla de doble entrada.}\label{contexto-tabla-propiedades}
+\caption{Formalizaci\'on de las propiedades de la Figura \ref{figura-er} en una tabla de doble entrada.}\label{contexto-tabla-propiedades}
 \end{figure}
 
-\vspace*{-2cm}Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ incluye encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}.
-Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es un subrafo de la Figura \ref{representacion-modelo} que identifica un\'ivocamente al target, representa la cuarta ER mostrada en la Figura \ref{er-figura1}. Y la Figura \ref{formula-subgrafo2} tambi\'en identifica al target un\'ivocamente y representa la segunda ER mostrada en \ref{er-figura1}.
-%que est\'an dadas en la Figura \ref{er-figura1} son muchas m\'as de las que mostramos en las f\'ormulas de la Figura \ref{er-figura1-b}, esto nos lleva a pensar que un algoritmo puede que no consiga la variedad que las personas dan. La representaci\'on ilustrada en la Figura~\ref{representacion-modelo} es equivalente a la mostrada en la Tabla \ref{tabla-propiedades}.
+%\vspace*{-2cm}
+
+
+
+
+
+
+
+ En la pr\'oxima secci\'on veremos porqu\'e la tarea GER es m\'as compleja de lo que parece a primera vista y en la siguiente introduciremos c\'omo herramientas de teor\'ia de modelos nos pueden ayudar.
+
+\section{Expresiones referenciales bajo incertidumbre}
+\label{sec:gre-incertidumbre}
+
+
+%Los conjuntos son dif\'icil para referirse a, por ejemplo, y algoritmos
+%diseñado para tratar con ellos lograr una menor semejanza humana cuando se refiere a los conjuntos de
+%a los objetos individuales (van Deemter et al., en prensa). Los recientes esfuerzos para dejar que los algoritmos REG
+%referirse a las regiones espaciales sugieren que en dominios grandes, realista, identificación precisa de
+%un objetivo es un objetivo que se puede aproximar, pero rara vez alcanzado (Turner et al., 2008;
+%Turner, Sripada, y Reiter 2009) .Es en tales dominios que prominencia (especialmente en el
+%sentido no lingüístico) se convierte en un problema crítico. 
+Cuando la generaci\'on de expresiones referenciales ocurre en la vida real
+en lugar de ocurrir en un experimento controlado las fuentes de \textbf{incertidumbre} que afectan al proceso se multiplican. En trabajo 
+reciente en el \'area de GER \cite{turner2008,turner2009} se discute que, al intentar usar algoritmos de GER en dominios grandes 
+y realistas (como por ejemplo la descripci\'on de regiones en mapas) la identificaci\'on precisa del target es una tarea que puede ser 
+aproximada pero raramente lograda. Los autores argumentan que esto se debe, en parte, a que las representaciones geogr\'aficas 
+son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce incertidumbre (por ejemplo, el restaurante se\~nalado por la flecha en la Figura \ref{target_mapa}, ?`es realmente el \'unico restaurant de esa calle o es el \'unico que aparece en el mapa?).
 
 \begin{figure}[H]
-\begin{subfigure}{.5\textwidth}
+\centering
+\includegraphics[width=0.6\textwidth]{images/corpus/mapa15.png}
+\caption{Ejemplo de target en mapa}
+\label{target_mapa}
+\end{figure}
+
+Cuando la informaci\'on del contexto proviene de datos de sensores, las entradas del algoritmo de GER son inevitablemente ruidosas. Es decir, 
+contienen informaci\'on no s\'olo incompleta sino tambi\'en posiblemente {\bf incorrecta}. Incluso en contextos tan simples como el de la 
+Figura \ref{figura-er} hay incertidumbre. ?`La Figura \ref{representacion-modelo} representa toda la informaci\'on del 
+contexto?. Algunos podemos opinar que s\'i, otros que no. 
+
+\begin{figure}[H]
+%\begin{subfigure}{.5\textwidth}
   \centering
-%\includegraphics[width=\textwidth]{images/22sinletras.jpg}
-%%\caption{Ejemplo de contexto}
-%\label{GRE3D7-stimulus1-b}
 \vspace*{1cm}
 \begin{picture}(250,50)
 \put(0,-50){\begin{tikzpicture}
@@ -179,156 +209,19 @@ Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es
  %\end{flushleft}
 
 \vspace*{2cm} 
- \caption{}\label{representacion-modelo}
+% \caption{}\label{representacion-modelo}
 
-\end{subfigure}%
-\begin{subfigure}{.6\textwidth}
- \centering
-%\hspace*{0cm}
-%\vspace*{-5cm}
-%\begin{minipage}[t]{0.5\linewidth}
-%\centering
-%\vspace*{-5cm}
-%\begin{table}
-
-
-
-
-
-%\begin{subfigure}{.5\textwidth}
-%  \centering
-%\includegraphics[width=\textwidth]{images/22sinletras.jpg}
-%%\caption{Ejemplo de contexto}
-%\label{GRE3D7-stimulus1-b}
-\centering
-%\vspace*{-2cm}
-\begin{picture}(190,50)
-\put(40,-50){\begin{tikzpicture}
-  [
-    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
-		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
-  ]
- %\node[n,label=below:{
-    %\relsize{-2}$\begin{array}{c}
-      %\nRed\\[-3pt] 
-      %\nCube\end{array}$}, right of=b] (d) {$e_4$};
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nRed\\[-3pt] 
-      \nBall\end{array}$}, right of=d] (e) {$e_5$};
-
-% \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
- %\draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
-
- %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
- %\draw[dotted] (-0.5,1) rectangle (8,3);
- \end{tikzpicture}}
- \end{picture}
- %\end{flushleft}
-
-\vspace*{1.5cm} 
- \caption{Subgrafo $\nBall \land \nRed$} \label{formula-subgrafo}
-
-\vspace*{-1cm}
-\begin{picture}(150,50)
-\put(10,-50){\begin{tikzpicture}
-  [
-    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
-		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
-  ]
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nRed\\[-3pt] 
-      \nCube\end{array}$}, right of=b] (d) {$e_4$};
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nRed\\[-3pt] 
-      \nBall\end{array}$}, right of=d] (e) {$e_5$};
-
-% \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
- \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
-
- %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
- %\draw[dotted] (-0.5,2) rectangle (8,5);
- \end{tikzpicture}}
- \end{picture}
- %\end{flushleft}
-
-\vspace*{2cm} 
- \caption{Subgrafo $\nBall \land \nRed \land \exists \nRightof . (\nCube  \land \nRed)$} \label{formula-subgrafo2}
-
-
-
-\vspace*{0.5cm}
-%\begin{tabular}{l}
- %{\it ball and large}\\
-%
- %{\it ball and red and Ex.right-of (cube and red)} \\
-%
- %{\it Ex.(T) and Ex.right-of (large and cube)}\\
-%
- %{\it red and ball}\\
-%
-%% {\it ball and Ex.left-of (yellow and cube)}\\
-%
- %{\it large and ball}\\
-%
- %%{\it ball and Ex.right-of (red and cube and}\\
- %%{\it Ex.left-of (yellow cube)}\\
- %%{\it Ex.(T) and Ex.right-of o}\\
-%
- %{\it ...}
- %
-%
- %\end{tabular}
-
-
-
-\vspace*{1cm}
-
- %\caption{ER como f\'ormulas l\'ogicas para el objeto $e_5$.}\label{er-figura1-b}
-%\end{table}
-%\end{minipage}
-\end{subfigure}%
-\caption{Ejemplos de ER en f\'ormulas l\'ogicas para la Figura \ref{GRE3D7-stimulus1-ids}.}
+%\end{subfigure}%
+\caption{Formalizaci\'on de las propiedades}
 \label{formulas-stimulus1}
 \end{figure}
 
 
-
-
-
-
- En la pr\'oxima secci\'on veremos porqu\'e la tarea GER es m\'as compleja de lo que parece a primera vista y en la siguiente introduciremos c\'omo herramientas de teor\'ia de modelos nos pueden ayudar.
-
-\section{Expresiones referenciales bajo incertidumbre}
-\label{sec:gre-incertidumbre}
-
-
-%Los conjuntos son dif\'icil para referirse a, por ejemplo, y algoritmos
-%diseñado para tratar con ellos lograr una menor semejanza humana cuando se refiere a los conjuntos de
-%a los objetos individuales (van Deemter et al., en prensa). Los recientes esfuerzos para dejar que los algoritmos REG
-%referirse a las regiones espaciales sugieren que en dominios grandes, realista, identificación precisa de
-%un objetivo es un objetivo que se puede aproximar, pero rara vez alcanzado (Turner et al., 2008;
-%Turner, Sripada, y Reiter 2009) .Es en tales dominios que prominencia (especialmente en el
-%sentido no lingüístico) se convierte en un problema crítico. 
-Cuando la generaci\'on de expresiones referenciales ocurre en la vida real
-en lugar de ocurrir en un experimento controlado las fuentes de \textbf{incertidumbre} que afectan al proceso se multiplican. En trabajo 
-reciente en el \'area de GER \cite{turner2008}, \cite{turner2009} se discute que, al intentar usar algoritmos de GER en dominios grandes 
-y realistas -(como por ejemplo, la descripci\'on de regiones en mapas), la identificaci\'on precisa del target es una tarea que puede ser 
-aproximada pero raramente lograda. Los autores argumentan que esto se debe, en parte, a que las representaciones geogr\'aficas 
-son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce incertidumbre ---por ejemplo ?`es realmente el \'unico restaurant 
-de esa calle o es el \'unico que aparece en el mapa?.
-Cuando la informaci\'on del contexto proviene de datos de sensores, las entradas del algoritmo de GER son inevitablemente ruidosas. Es decir, 
-contienen informaci\'on no s\'olo incompleta sino tambi\'en posiblemente {\bf incorrecta}. Incluso en contextos tan simples como el de la 
-Figura \ref{figura-er} hay incertidumbre. ?`Estamos seguros que la Figura \ref{representacion-modelo} representa toda la informaci\'on del 
-contexto?. Algunos podemos opinar que s\'i, otros que no. En efecto, la persona que gener\'o la ER {\emph la pelota a la izquierda del cubo 
-amarillo} opina que no: la relaci\'on \emph{a la izquierda de} entre el target y el cubo amarillo no est\'a representada en el grafo. Un 
-algoritmo de GER con este grafo como input no puede generar esta expresi\'on referencial. El grafo puede completarse para que sea posible
-generar la expresi\'on referencial. El grafo resultante se ilustra en la Figura \ref{representacion-modelo-completo}. Sin embargo, este grafo tampoco es completo, 
-de hecho, la ER {\emph la cosa que est\'a a la derecha del cubo del medio} no se podr\'ia generar con este grafo. La informaci\'on no s\'olo 
-impide la generaci\'on de ER v\'alidas, sino que tambi\'en permite la generaci\'on de ER claramente incorrectas como \emph{la esfera roja 
+En efecto, la persona que gener\'o la ER {\it La pelota a la izquierda del cubo amarillo} opina que no: la relaci\'on \emph{a la izquierda de} entre el target y el cubo amarillo no est\'a representada en el grafo. Un algoritmo de GER con este grafo como input no puede generar esta expresi\'on referencial. La informaci\'on disponible no s\'olo impide la generaci\'on de ER v\'alidas, sino que tambi\'en permite la generaci\'on de ER claramente incorrectas como \emph{La esfera roja 
 que no tiene nada a la derecha}.
+El grafo puede completarse para que sea posible
+generar la expresi\'on referencial. El grafo resultante se ilustra en la Figura \ref{representacion-modelo-completo}. Sin embargo, este grafo tampoco es completo, 
+de hecho, la ER {\it la cosa que est\'a a la derecha del cubo del medio} no se podr\'ia generar con este grafo. 
 
 \begin{figure}[H]
 %\begin{subfigure}{.5\textwidth}
@@ -405,32 +298,30 @@ que no tiene nada a la derecha}.
 
 
 Aunque no hablemos ni de incompletitud ni de incorrectitud tambi\'en hay incertidumbre en \textbf{cu\'al} de todas las posibles ERs un sistema de GER debe 
-elegir. Por ejemplo seguramente hay personas que preferir\'an ERs que usen la palabra {\emph esfera}, antes que {\emph bola}. Y seguramente 
-no falte quien diga que {\emph la} mejor expresi\'on referencial ni si quiera aparece en la Figura \ref{figura-er}. Sin embargo, seguramente 
+elegir. Por ejemplo seguramente hay personas que preferir\'an ERs que usen la palabra \emph{esfera}, antes que \emph{bola}. Y seguramente 
+no falte quien diga que \emph{la} mejor expresi\'on referencial ni si quiera aparece en la Figura \ref{figura-er}. Sin embargo, seguramente 
 habr\'a una tendencia como se muestra en estudios previos \cite{viet:gene11}. Nadie preferir\'a una ER que use 21 propiedades y 6 relaciones 
 para describir al target de la Figura \ref{figura-er}.
 
-El largo de una ER afecta su calidad. Se podr\'{i}a pensar, por ejemplo, que las referencias son \'optimas cuando son {\textbf m\'{i}nimas}
+El largo de una ER afecta su calidad. Se podr\'{i}a pensar, por ejemplo, que las referencias son \'optimas cuando son \textbf{m\'{i}nimas}
  en longitud, es decir, cuando 
 contienen s\'olo informaci\'on suficiente para identificar el objeto target y nada m\'as. Pero la generaci\'on de referencias m\'{i}nimas
 no es lo que las personas hacen ni lo que es m\'as \'util para los oyentes, como se muestra en trabajo previo \cite{Lu_sasha2015}. Y ni si quiera 
 nos resuelve el problema de elegir una ER. {\it La bola grande} y {\it La esfera roja} son dos ERs de la Figura \ref{figura-er} y tienen 
 exactamente la misma longitud.
 
-Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede hacer es que un algoritmo de GER devuelva un {\textbf ranking}
+Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede hacer es que un algoritmo de GER devuelva un \textbf{ranking}
  de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cu\'an buena es esa ER para 
 el input.
 
 ?`Como podemos generar un ranking de ER?.
-Un algoritmo naive generar\'ia primero todas las ER posibles y luego las ordenar\'ia con alg\'un criterio. Esto es posible porque la cantidad de ER es finita dado un modelo finito, pero esta cantidad puede ser muy grande, exponencial en el tama\~{n}o del modelo y la gran mayor\'ia de estas ER no se llegar\'ian a usar en una aplicaci\'on real. Una aplicaci\'on s\'olo usar\'a las mejores ER de un target considerado.
+Un algoritmo naive generar\'ia primero todas las ERs posibles y luego las ordenar\'ia con alg\'un criterio. Esto es posible porque la cantidad de ERs es finita dado un modelo finito, pero esta cantidad puede ser muy grande, exponencial en el tama\~{n}o del modelo y la gran mayor\'ia de estas ERs no se llegar\'ian a usar en una aplicaci\'on real. Una aplicaci\'on s\'olo usar\'a las mejores ERs de un target considerado.
 Una forma m\'as eficiente de generar un ranking de ER es dise\~{n}ar un algoritmo no determin\'istico y correrlo una cantidad de veces suficiente para la aplicaci\'on.
 
-Un algoritmo para la GER es {\bf no-determin\'istico} si puede dar diferentes ER para el mismo contexto y target en sucesivas ejecuciones. 
+Un algoritmo para la GER es {\bf no-determin\'istico} si puede dar diferentes ERs para el mismo contexto y target en sucesivas ejecuciones. 
 Para producir un ranking de las mejores ERs para un target, el no determinismo debe estar guiado de alguna forma de que elija buenas propiedades y relaciones. Llamaremos a esta gu\'ia: probabilidad de uso de una propiedad o relaci\'on. Esta probabilidad se puede ver afectada por caracter\'isticas de la propiedad o relaci\'on (tipos de propiedades) o por caracter\'isticas de qui\'en interpretar\'a la ER (el interlocutor).
 
-Hay diferentes \textbf{tipos de propiedades}, por ejemplo taxon\'omicas (las que tiene el objeto, como el tipo, o el color), relacionales (las que necesitan dar una expresi\'on de otro objeto, por ejemplo {\it estar al lado de}), vagas (son las m\'as dif\'iciles de identificar, ejemplo: chico, grande, no son propiedades absolutas, ya que necesitan un contexto, con respecto a qu\'e algo es chico o grande?).
-
-Ciertos valores de propiedades pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no grande de un objeto. Notar que cuando decimos el tama\~no, tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.
+Hay diferentes \textbf{tipos de propiedades}, por ejemplo taxon\'omicas (las que tiene el objeto, como \emph{esfera}, o \emph{roja}), relacionales (las que necesitan dar una expresi\'on de otro objeto, por ejemplo {\it estar al lado de}), vagas (son las m\'as dif\'iciles de identificar, por ejemplo: \emph{chico}, \emph{grande}, no son propiedades absolutas, ya que necesitan un contexto, con respecto a qu\'e algo es chico o grande?). Ciertos valores de propiedades pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no grande de un objeto. Notar que cuando decimos el tama\~no, tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.
 %En esta tesis estudiamos la generaci\'on autom\'atica de expresiones referenciales, 
 %primero mostramos c\'omo podemos a\~nadir no determinismo a los algoritmos estudiados. Los algoritmos de refinamiento estudiados, tienen un orden fijo en el cual consideran las propiedades y relaciones, y la naturalidad de las expresiones referenciales que generan depende de este orden particular considerado, nosotros proponemos reemplazar ese orden fijo sobre las propiedades y/o relaciones de la escena de entrada por una~\emph{probabilidad de uso} para cada propiedad y/o relaci\'on, y modificar los algoritmos para que tengan en cuenta esas propiedades. De esta manera, cada llamada al algoritmo puede producir diferentes ERs para la misma escena y target de entrada. 
 
@@ -442,9 +333,10 @@ Esta selecci\'on de la ER m\'as apropiada tambi\'en debe tener en cuenta al \tex
 % En el \'area muchas veces se habla de optimalidad de la ER, pero con diferentes significados, para algunos una ER \'optima es aquella que dice lo m\'inimo necesario para identificar al objeto target, para otros es la menos esfuerzo requiere del interlocutor para identificarlo.
 La selecci\'on de qu\'e propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial. Una expresi\'on referencial ser\'a muy distinta si nuestro objetivo es dar la m\'inima informaci\'on que identifique al objeto que si nuestro objetivo es ayudar al interlocutor a que identifique el objeto.
 
-En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de duda nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir...
-
-\textbf{FALTA CIERRE A ESTA SECCION!}
+La generaci\'on de expresiones referenciales en el mundo real sufre de diversas fuentes de incertidumbre. En esta tesis proponemos formas para modelar esta incertidumbre partiendo de t\'ecnicas de representaci\'on de conocimiento basadas en teor\'ia de modelos.
+%En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro interlocutor identific\'o el objeto target, como ser la expresi\'on de duda nos dar\'ia una pauta de que no esta entendiendo lo que le queremos decir...
+%
+%\textbf{FALTA CIERRE A ESTA SECCION!}
 
 %En esta tesis nos vamos a enfocar en la selecci\'on de contenidos de las expresiones referenciales, y el objetivo ser\'ia simular el comportamiento humano, para ello vamos a usar corpus de expresiones referenciales para aprender como realizan esta tarea las personas.
  %
@@ -505,6 +397,48 @@ En la vida real hay muchas cosas que nos ayudan a darnos cuenta si nuestro inter
 
 Una de las cuestiones importantes a la hora de representar la informaci\'on de una escena en un modelo, es como decidir cu\'ales aspectos representar.
 Es l\'ogico que el algoritmo no pueda generar cosas que no tiene representadas de alguna manera, ni referirse a objetos que no est\'an en el modelo, pero representar todo todo, puede llevar a tener un modelo muy complejo, quiz\'as innecesario. La noci\'on de foco de atenci\'on puede ser usada para restringir el modelo. %(hay un paper que habla sobre esto ver si pongo cita aca-ER robot en tiempo real)
+
+\begin{figure}%{.6\textwidth}
+ \centering
+\begin{picture}(190,50)
+\put(40,-50){\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+ \end{tikzpicture}}
+ \end{picture}
+\vspace*{1.5cm} 
+ \caption{Subgrafo $\nBall \land \nRed$} \label{formula-subgrafo}
+\vspace*{-1cm}
+\begin{picture}(150,50)
+\put(10,-50){\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRed\\[-3pt] 
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+ \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+ \end{tikzpicture}}
+ \end{picture}
+\vspace*{2cm} 
+ \caption{Subgrafo $\nBall \land \nRed \land \exists \nRightof . (\nCube  \land \nRed)$} \label{formula-subgrafo2}
+\vspace*{0.5cm}
+\vspace*{1cm}
+\end{figure}%
+
+
 
 En \cite{survey} sugieren como futura investigaci\'on mirar a un grafo como un modelo de Kripke, y resolver el problema con l\'ogicas h\'ibridas, esto es precisamente lo que hacemos en esta tesis. 
 
@@ -728,7 +662,7 @@ Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente defi
 \textsc{Problema $\gL$-GRE }}\\ \hline
 \ \ Input: & un modelo $\gM=\tup{\Delta,\interp{\cdot}}$ y un conjunto target no vac\'io $T \subseteq \Delta$.\\
 \ \ Output: & una f\'ormula $\varphi \in \gL$ tal que
-$\interp{\varphi} = T$ si existe, y $\bot$ caso contrario.\\ \hline
+$\interp{\varphi} = T$ si existe, y $\bot$ caso contrario.\\ %\hline
 \end{tabular}
 \end{center}}
 
@@ -917,12 +851,12 @@ claro el lenguaje \EL que hemos seleccionado en el Cap\'itulo \ref{sec:intro_log
 explicamos nuestra propuesta de agregar probabilidades de uso a las palabras de la signatura del modelo, adaptando un algoritmo existente 
 \cite{arec2:2008:Areces} el cual introducimos en \ref{sec:seleccion}, modificamos el algoritmo permitiendo sobreespecificaci\'on, 
 pero asegurando terminaci\'on y agregamos un componente aleatorio para conseguir no-determinismo. Mostramos en detalle el input que toma el
- nuevo algoritmo, dejando como caja negra de d\'onde la sacamos las probabilidades de uso, tema que abordaremos en el siguiente cap\'itulo. 
+ nuevo algoritmo. Explicamos como obtener las probabilidades de uso usadas por el algoritmo a partir de corpus cuando hay disponible o una aproximaci\'on usando aprendizaje autom\'atico cuando no hay corpus disponible para la escena y target considerados. Para aprendizaje autom\'atico usamos caracter\'isticas simples y vemos que son buenas, es decir conseguimos probabilidades de uso que hacen que las ejecusiones del algoritmo consigan ERs como las del corpus 
 Mostramos la salida del algoritmo, explicamos c\'omo conseguimos no-determinismo en las distintas ejecusiones del algoritmo, como aseguramos 
 terminaci\'on. Adem\'as mostramos completitud, es decir que siempre conseguimos la expresi\'on referencial si existe. Explicamos como agregamos sobreespecificaci\'on a las expresiones referenciales. Luego damos un ejemplo de ejecuci\'on. 
 
 
-\paragraph{Cap\'itulo~\ref{sec:learning}: ``Probabilidades de uso''} Explicamos como obtener las probabilidades de uso usadas por el algoritmo del Cap\'itulo \ref{sec:algoritmo} a partir de corpus cuando hay disponible o una aproximaci\'on usando aprendizaje autom\'atico cuando no hay corpus disponible para la escena y target considerados. Para aprendizaje autom\'atico usamos caracter\'isticas simples y vemos que son buenas, es decir conseguimos probabilidades de uso que hacen que las ejecusiones del algoritmo consigan ERs como las del corpus, pero tambi\'en descubrimos cosas que no podemos aprender, como por ejemplo que \textcolor{blue}{ACA FALTA!! }
+%\paragraph{Cap\'itulo~\ref{sec:learning}: ``Probabilidades de uso''} Explicamos como obtener las probabilidades de uso usadas por el algoritmo del Cap\'itulo \ref{sec:algoritmo} a partir de corpus cuando hay disponible o una aproximaci\'on usando aprendizaje autom\'atico cuando no hay corpus disponible para la escena y target considerados. Para aprendizaje autom\'atico usamos caracter\'isticas simples y vemos que son buenas, es decir conseguimos probabilidades de uso que hacen que las ejecusiones del algoritmo consigan ERs como las del corpus, pero tambi\'en descubrimos cosas que no podemos aprender, como por ejemplo que \textcolor{blue}{ACA FALTA!! }
 
 \paragraph{Cap\'itulo~\ref{sec:evaluacion}: ``Evaluaci\'on de rankings de expresiones referenciales''} En esta tesis se estudiaron las m\'etricas de evaluaci\'on tanto autom\'aticas como manuales. Evaluamos nuestro algoritmo, teniendo en cuenta ambos tipos de m\'etricas. La evaluaci\'on esta dividida en 2 partes. Una parte en la cual comparamos la salida del algoritmo para modelos de los 2 corpus estudiados en la Secci\'on \ref{sec:corpus2} con las expresiones referenciales dadas por los humanos, con ejecusiones del algoritmo tomando probabilidades de uso sacadas del mismo corpus, obtenidas con aprendizaje autom\'atico a partir del corpus, aleatorias y con la distribuci\'on uniforme de las ER dadas por las personas, mostramos la entrop\'ia cruzada entre ellos. Vemos como las probabilidades aprendidas del corpus y con aprendizaje autom\'atico se acercan mucho m\'as al corpus, que las random o unifomes. Y la otra parte una evaluaci\'on manual en la cual pusimos a 2 jueces a decidir cual ER era mejor, o pod\'ian considerarlas igual de buenas, si la del corpus, o la generada por el algoritmo, es interesante notar como muchas veces las ER generadas por el algoritmo eran mejores que las humanas!, el algoritmo tiene la ventaja que siempre da una ER si existe, en cambio los humanos muchas veces dan expresiones ambiguas que no son referenciales. Notamos que al usar las probabilidades aprendidas desde el corpus el algoritmo da ER que son las del top ranking de las personas.
 
