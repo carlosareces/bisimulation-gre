@@ -1,22 +1,22 @@
 \chapter{L-simulaci\'on en acci\'on}
 \label{sec:intro_logica}
 
-De acuerdo a lo que queremos permitir en una ER, tendremos un lenguaje asociado, el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica como partiendo de \FOL podemos ir restringiendo la l\'ogica y con ello el lenguaje, es interesante evaluar la complejidad dependiendo de la l\'ogica seleccionada, ya que por ejemplo sistemas de tiempo real necesitan conseguir ER r\'apidamente, daremos las complejidad de las distintas l\'ogicas, y veremos que l\'ogica aplica a los algoritmos estudiados del \'area.
-El cap\'itulo esta dividido en 4 secciones, las cuales son: \ref{sec:seleccionandoLenguaje}, en la cual daremos de ejemplos de tipos de ER que queremos conseguir y qu\'e l\'ogicas nos pueden ayudar, en \ref{sec:greViaSimulacion} veremos algunos algoritmos ya acerc\'andonos a la implementaci\'on de un sistema que nos dar\'a ERs. En \ref{sec:bisimulacion} explicaremos la base de nuestro algoritmo, y para finalizar en \ref{sec:notasFinales} daremos un resumen de lo expuesto en este cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
+De acuerdo a lo que queremos permitir en una ER, tendremos un lenguaje asociado, el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica como partiendo de f\'ormulas de primer orden (\FOL) podemos ir restringiendo la l\'ogica y con ello el lenguaje, es interesante evaluar la complejidad dependiendo de la l\'ogica seleccionada, ya que por ejemplo sistemas de tiempo real necesitan conseguir ER r\'apidamente, daremos la complejidad de las distintas l\'ogicas, y veremos que l\'ogica aplica a los algoritmos estudiados del \'area.
+El cap\'itulo esta dividido en 4 secciones, las cuales son: Secci\'on\ref{sec:seleccionandoLenguaje}, en la cual daremos de ejemplos de tipos de ER que queremos conseguir y qu\'e l\'ogicas nos pueden ayudar, en la Secci\'on \ref{sec:greViaSimulacion} veremos algunos algoritmos ya acerc\'andonos a la implementaci\'on de un sistema que nos dar\'a ERs. En la Secci\'on \ref{sec:bisimulacion} explicaremos la base de nuestro algoritmo, y para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un resumen de lo expuesto en este cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
 
 
 \section{Similaridad entre objetos en un lenguaje particular}
 \label{sec:seleccionandoLenguaje}
 
 Dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
-$\+M_1$ es similar en $\+L$ a otro objeto
+$\+M_1$ es {\bf similar} en $\+L$ a otro objeto
  $v$ en el modelo $\+M_2$ si para cualquier f\'ormula en $\+L$ que es satisfecha por $u$ tambi\'en es satisfecha por $v$. Formalmente,
 %let $\+L$ stand for any of the languages discussed so far, and
 Sean $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 = \tup{\Delta_2, \interp{\cdot}_2}$ modelos relacionales con $u \in \Delta_1$ y $v \in \Delta_2$; seguimos la terminolog\'ia de~\cite{areces08} y decimos que
 \emph{$u$ es $\+L$-similar a $v$}  (notaci\'on $u \simil{\+L} v$) si para toda f\'ormula $\gamma \in \+L$, $u \in \interp{\gamma}_1$ implica
 $v \in \interp{\gamma}_2$. 
 La $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$''. Si tomamos $\+M_1$ y $\+M_2$ a ser del mismo modelo, un objeto $u$ en el modelo puede identificarse un\'ivocamente en $\+L$ si no hay ning\'un otro objeto $v$ diferente de $u$ tal que $u \simil{\+L} v$. En otras palabras, si hay dos objetos $u$ y $v$ en un modelo $\+M$  tal que
-$u \simil{\+L} v$, entonces el problema $\+L$-GRE con input $\+M$ y target $T=\{u\}$ no tendr\'a \'exito ya que para todas las f\'ormulas $\gamma \in L$ tenemos que $\{u,v\} \subseteq \interp{\gamma} \not = \{u\}$.
+$u \simil{\+L} v$, entonces el problema $\+L$-GER con input $\+M$ y target $T=\{u\}$ no tendr\'a \'exito ya que para todas las f\'ormulas $\gamma \in \+L$ tenemos que $\{u,v\} \subseteq \interp{\gamma} \not = \{u\}$.
 
 Considere la Figura \ref{target_mapa_3ball}, y sea $\+L$ tal que s\'olo se puede tener conjunciones de propiedades proposicionales, sin negaci\'on, sin relaciones. Sea $\Delta$ = ${\nLarge, \nRed, \nBall, \nCube, \nYellow}$.
 \begin{figure}[H]
@@ -26,14 +26,18 @@ Considere la Figura \ref{target_mapa_3ball}, y sea $\+L$ tal que s\'olo se puede
 \label{target_mapa_3ball}
 \end{figure}
 
-Se cumple que  $e_1 \simil{\+L} e_5$, $e_3 \simil{\+L} e_5$ y $e_1 \simil{\+L} e_3$ ya que para toda f\'omula $\phi$, la $\interp \phi$ es ${e_1, e_3, e_5}$. 
-$\phi_1$: $\nRed \land \aBall$ tenemos que $\interp \phi_1$ = ${e_1, e_3, e_5}$
-$\phi_2$: $\nLarge \land \aBall$, $\interp \phi_2$ = ${e_1, e_3, e_5}$ 
-$\phi_3$: $\nRed \land \nLarge \land \aBall$, $\interp \phi_3$ = ${e_1, e_3, e_5}$ 
 
-Esto nos dice que con ese lenguaje elegido $\+L$ la tarea GER no tiene soluci\'on.
 
-La noci\'on de $\+L$-similaridad entonces, nos permite manejar el problema de  $\+L$-GRE.
+Se cumple que  $e_1 \simil{\+L} e_5$, $e_3 \simil{\+L} e_5$ y $e_1 \simil{\+L} e_3$ ya que para toda f\'omula $\phi$, la {\bf interpretaci\'on de la f\'ormula} ($\interp \phi$) es $\{e_1, e_3, e_5\}$. 
+$\phi_1$: $\nRed \land \nBall$ tenemos que $\interp {\phi_1} $= $\{e_1, e_3, e_5\}$
+
+$\phi_2$: $\nLarge \land \nBall$, $\interp {\phi_2} $ = $\{e_1, e_3, e_5\}$
+
+$\phi_3$: $\nRed \land \nLarge \land \nBall$, $\interp {\phi_3}$ = $\{e_1, e_3, e_5\}$
+
+Esto nos dice que con ese lenguaje elegido $\+L$ la tarea GER con target $e_5$ no tiene soluci\'on.
+
+La noci\'on de $\+L$-similaridad entonces, nos permite manejar el problema de  $\+L$-GER.
 Por otra parte, podemos reformular esta de noci\'on de una manera estructural, para no considerar infinitas $\+L$-f\'ormulas y poder decidir si $u$ es $\+L$-similar a $v$. Podemos reinterpretar $\+L$-similaridad en t\'erminos de nociones de teor\'ia de modelos est\'andares
 como isomorfismos o bisimulaciones que describen las propiedades estructurales de los modelos. Dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ y $\tup{\Delta_2,
 \interp{\cdot}_2}$, considere las siguientes
@@ -46,18 +50,18 @@ propiedades de una relaci\'on binaria ${\sim} \subseteq \Delta_1 \times \Delta_2
 
 \simdef{$\atomL$}{If $u_1{\sim} u_2$, entonces $u_1 \in \interp{p}_1 \Rightarrow u_2 \in \interp{p}_2$}
 \simdef{$\atomR$}{If $u_1{\sim} u_2$, entonces $u_2 \in \interp{p}_2 \Rightarrow u_1 \in \interp{p}_1$}
-\simdef{$\zig$}{If $u_1{\sim} u_2$ y $(u_1,v_1) \in \interp{r}_1$, entonces $\exists v_2$ s.t.\ $v_1{\sim}v_2$
+\simdef{$\zig$}{If $u_1{\sim} u_2$ y $(u_1,v_1) \in \interp{r}_1$, entonces $\exists v_2$ tal que\ $v_1{\sim}v_2$
   y $(u_2,v_2) \in \interp{r}_2$}
-\simdef{$\zag$}{If $u_1{\sim}u_2$ y $(u_2,v_2) \in \interp{r}_2$, entonces $\exists v_1$ s.t.\ $u_1{\sim}v_1$ y
+\simdef{$\zag$}{If $u_1{\sim}u_2$ y $(u_2,v_2) \in \interp{r}_2$, entonces $\exists v_1$ tal que\ $u_1{\sim}v_1$ y
  $(u_1,v_1) \in \interp{r}_1$}
 \simdef{$\injL$}{$\sim$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
 \simdef{$\injR$}{$\sim^{-1}$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
 \smallskip
 
 Diremos que una relaci\'on binaria no vac\'ia $\sim$ es una 
-\emph{$\+L$-simulaci\'on} cuando satisface las propiedades indicadas
+{\bf $\+L$-simulaci\'on} cuando satisface las propiedades indicadas
 en la Tabla~\ref{tab:simuls}. Por ejemplo, una relaci\'on binaria no vac\'ia que satisface $\atomL$, y $\zig$ es una $\EL$-simulaci\'on, como es indicado en fila~4 de la Tabla~\ref{tab:simuls}. M\'as a\'un, diremos que un objeto
-\emph{$v$ $\+L$-simula $u$} (notaci\'on $u \simul{\+L} v$) si hay una relaci\'on $\sim$ que satisface el correspondiente propiedad tal que
+{\bf $v$ $\+L$-simula $u$} ($u \simul{\+L} v$) si hay una relaci\'on $\sim$ que satisface la correspondiente propiedad tal que
 $u \sim v$. El siguiente es un resultado fundamental del modelo te\'orico:%~\cite{ebbi:math96,KR99,BRV01}
 
 \begin{table}[t]
@@ -84,14 +88,14 @@ $u \sim v$. El siguiente es un resultado fundamental del modelo te\'orico:%~\cit
 \caption{$\+L$-simulaciones para varios lenguajes l\'ogicos.}\label{tab:simuls}
 \end{table}
 
-
+\newtheorem{teorema}{Teorema}
 %$Una l\'ogica sim\'etrica cumple  $\atomL$ y $\atomR$ como se ve en la Tabla \ref{tab:simuls}. 
-\begin{theorem} \label{thm:simulation}
+\begin{teorema} \label{thm:simulation}
 Si  $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 =
 \tup{\Delta_2, \interp{\cdot}_2}$ son modelos finitos, $u \in
 \Delta_1$ y $v \in \Delta_2$, entonces $u \simil{\+L} v$ si y s\'olo si $u
 \simul{\+L} v$ (para $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$).
-\end{theorem}
+\end{teorema}
 %\begin{proof}
 Algunos resultados son bien conocidos: $\simul{\FOL}$ es isomorfismo en
 grafos etiquetados~\cite{ebbi:math96}; $\simul{\ALC}$ corresponde a la
@@ -103,13 +107,13 @@ Por lo tanto, en los modelos finitos\footnote{Que el modelo sea finito no es la 
 pero es suficiente para nuestro desarrollo.}, las simulaciones capturan exactamente el concepto de similaridad.
 La implicaci\'on de derecha a izquierda no se mantiene en general sobre modelos infinitos.
 
-$\+L$-simulaciones nos permiten determinar, de una manera eficaz,
+Las $\+L$-simulaciones nos permiten determinar, de una manera eficaz,
 cuando un objeto no se puede distinguir de otro en un modelo dado con respecto a $\+L$.
 
 Por ejemplo, podemos probar que $a \simul{\EL} b$ en el modelo de la 
-Figura~\ref{fig:cat-dog-1} (la relaci\'on ${\sim} = \{(a,a), (a, b) \}
+Figura~\ref{fig:cat-dog-1} ya que la relaci\'on ${\sim} = \{(a,a), (a, b) \}
 %\cup\{ (x,x) \mid x \in \Delta\}
-$ satisface $\atomL$ y $\zig$).
+$ satisface $\atomL$ y $\zig$.
 Usando el Teorema~\ref{thm:simulation} conclu\'imos que no hay
  \EL-descripci\'on para $a$, desde que para cualquier \EL-f\'ormula $\gamma$,
 si $a\in\interp{\gamma}$, entonces $b\in\interp{\gamma}$.
@@ -125,10 +129,10 @@ $\nDog(x)\wedge\lnot\aSmall(x)$.
 En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
 \begin{table}[h!]
 \begin{tabular}{l|l}
-  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (DL)\\
+  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (LD)\\
   \hline
 	  Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-		Heuristica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+		Heur\'istica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
   Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
   GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
 														& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
@@ -151,14 +155,14 @@ complejidad del problema en estos casos est\'a abierta \cite{gare:comp79}).
 
 \section{GER v\'ia conjuntos de simulaci\'on}\label{sec:simulation}
 \label{sec:greViaSimulacion}
-En esta secci\'on discutiremos como resolver el problema $\+L$-GRE
+En esta secci\'on discutiremos como resolver el problema $\+L$-GER
 usando simulaci\'on. Dado un modelo $\+M = \tup{\Delta,
 \interp{\cdot}}$, el Teorema~\ref{thm:simulation} nos dice que si 2 elementos distintos $u$ y $v$ en $\Delta$ son tales que $u
 \simul{\+L} v$ entonces para toda $\+L$-f\'ormula que es verdadera para $u$ es tambi\'en verdadera para $v$. No hay f\'ormula en $\+L$ que pueda identificar un\'ivocamente a $u$. Desde esta perspectiva, conociendo cuando el modelo contiene un elemento que es $\gL$-similar pero distinto de $u$ es
 equivalente a decidir si hay una expresi\'on referencial en $\+L$ para $u$.
 
 
-Asumamos un lenguaje fijo $\+L$ y un modelo $\+M$. Supongamos que queremos referirnos a un elemento $u$ del dominio de $\+M$. Queremos computar el \emph{conjunto de simulaci\'on} de $u$ definido como
+Asumamos un lenguaje fijo $\+L$ y un modelo $\+M$. Supongamos que queremos referirnos a un elemento $u$ del dominio de $\+M$. Queremos computar el {\bf conjunto de simulaci\'on} de $u$ definido como
 $\simset_{\+L}^{\+M}(u) = \cset{v \in \Delta \mid u \simul{\+L} v}$.
 Cuando un modelo $\+M$ es claro de el contexto, simplemente escribimos $\simset_{\+L}$.
  Si $\simset_{\+L}^{\+M}(u)$ no es singleton $\cset{u}$,
@@ -183,7 +187,7 @@ el problema $\+L$-GER con target $\{u\}$ en $\+M$ fallar\'a.
 
 
 
-Un algoritmo para computar $\simset_{\ELAN}(v)$ es dado en~\cite{HHK95} para cada
+Un algoritmo para computar $\simset_{\ELAN}(v)$ es dado en~\cite{HHK95}. Para cada
 elemento $v$ de un modelo dado finito
 $\+M=\tup{\Delta,\interp{\cdot}}$
 %\footnote{%
@@ -200,28 +204,23 @@ sucesivamente refina este conjunto borrando aquellos elementos los cuales fallan
 Al final, $S(v)=\simset_\ELAN(v)$. El algoritmo puede ser adaptado para
 computar $\simset_\+L$ para cualquier otro languaje $\+L$. En particular,
 lo podemos usar para computar $\simset_\EL$ en tiempo polinomial y nos dar\'a un l\'imite superior a la
-complejidad del algoritmo b\'asico para establecer un l\'imite superior a la complejidad de el problema \EL-GRE 
+complejidad del algoritmo b\'asico para establecer un l\'imite superior a la complejidad de el problema \EL-GER 
 --esto responder\'ia la pregunta abierta~\cite{areces08}. El pseudo-c\'odigo es mostrado en el
 Algoritmo~\ref{alg:schematic-gen-sim}, el cual usa la siguiente
 notaci\'on: $\+P$ es un conjunto fijo de s\'imbolos de relaciones unarias, para $v\in
 \Delta$, sea $\unary(v)=\{p\in\+P\mid v\in\interp{p}\}$ y sea tambi\'en
 $\su{r}{v}=\{u\in\Delta\mid(v,u)\in\interp{r}\}$ para $r$ un s\'imbolo de relaci\'on binaria.
 
-La Figura \ref{22_para_relacional} no pertenece al corpus GRE3D7, fue intencionalmente modificada para mostrar un caso en el que las propiedades proposicionales no alcanzan para dar una ER del objeto se\~nalado por la flecha. Para esa figura el algoritmo podr\'ia empezar con $S(v)$ = large, red, ball y luego el \'unico sucesor ser\'ia el red cube con la relaci\'on right-of, lo cual borra los dem\'as distractores.
+La Figura \ref{target_mapa_3ball} no pertenece al corpus GRE3D7, fue intencionalmente modificada para mostrar un caso en el que las propiedades proposicionales no alcanzan para dar una ER del objeto se\~nalado por la flecha. Para esa figura el algoritmo podr\'ia empezar con $S(v)$ = large, red, ball y luego el \'unico sucesor ser\'ia el red cube con la relaci\'on right-of, lo cual borra los dem\'as distractores.
 
-
-\begin{figure}[Ht]
-\centering
-\includegraphics[width=0.5]{images/22paraRelacional.jpg}
-\caption{Ejemplo de contexto}
-\label{22_para_relacional}
-\end{figure}
-
-
-
+%\newtheorem{algoritmo}{Algoritmo}
 %%ROMI
+
+
+
+%\floatname{algorithm}{Procedure}
 \begin{algorithm}
-%\captionsetup[algorithm]{name=Algoritmo}
+\floatname{algorithm}{Algoritmo}
 \small
 \caption{ Computando \EL-similaridad\label{alg:schematic-gen-sim}}
 %\captionsetup[algorithm]{name=Algoritmo}
@@ -276,7 +275,7 @@ bajo la suposici\'on de que $\simset_\EL=S$. $S$ es 'demasiado grande' porque
 $w$ no puede simular $u$. Por lo tanto $w$ se borra de $S(u)$.
 
 
-El Algoritmo~\ref{alg:schematic-gen-sim} nos dir\'a cuando \EL-RE para alg\'un elemento $u$ existe (esto es, cuando
+El Algoritmo~\ref{alg:schematic-gen-sim} nos dir\'a cuando hay una expresi\'on referencial en \EL (\EL-ER) para alg\'un elemento $u$ (esto es, cuando
 $\simset_{\EL}(u) = \cset{u}$ o no). No computa ninguna \EL-f\'ormula $\varphi$ que identifique \'univocamente a $v$. Pero
 podemos adaptarlo para obtener tal f\'ormula.
 La estrategia principal del Algoritmo~\ref{alg:schematic-gen-sim} para computar simulaciones es sucesivamente refinar una aproximaci\'on al conjunto de simulaci\'on.
@@ -284,7 +283,7 @@ La estrategia principal del Algoritmo~\ref{alg:schematic-gen-sim} para computar 
 %refine an over-approximation of the simulator sets.
 La ``raz\'on'' detr\'as de cada refinamiento puede ser codificada usando una \EL-f\'ormula.
 %Using this insight, 
-Uno puede transformar un algoritmo que computa un conjunto de $\+L$-simulaci\'on con una estrategia similar, en uno que adem\'as compute una $\+L$-RE para cada conjunto.
+Uno puede transformar un algoritmo que computa un conjunto de $\+L$-simulaci\'on con una estrategia similar, en uno que adem\'as compute una $\+L$-ER para cada conjunto.
 
 
 El Algoritmo~\ref{alg:schematic-GRE} muestra una versi\'on transformada del 
@@ -323,6 +322,7 @@ $u,v\in\Delta$.
 
 %%ESTE TRADUCIDO!!!
 \begin{algorithm}\small
+\floatname{algorithm}{Algoritmo}
 %\LinesNumbered
 \io
 
@@ -388,7 +388,7 @@ $v\in\simset_\subseteq(u)$. En caso  $V=\{v_1,\dots,v_n\}$ tiene una
 %is true at every node of $\simset_\subseteq(v)$ then $F(v)$ is a
 %reasonable approximation of an \EL-RE for $v$.
 
-En particular, $v$ tiene un \EL-RE si y s\'olo si $\simset_\subseteq(v)=\{v\}$
+En particular, $v$ tiene un \EL-ER si y s\'olo si $\simset_\subseteq(v)=\{v\}$
 y en caso de $v$ tiene una expresi\'on \EL-expresi\'on referencial, $F(v)$ es una v\'alida. Si $v$ no tiene un \posre entonces el algoritmo puede ser
 utilizado para aproximar una \posre. De hecho, ya que cada f\'ormula en cierta en $v$
 tambi\'en es cierto en todos los nodos de $\simset_\subseteq(v)$ y $F(v)$
@@ -539,7 +539,7 @@ muchos pasos.
 \fi
 
 \iffullversion
-\begin{algorithm} \small
+\begin{algorithm} \floatname{algorithm}{Algoritmo}\small
 \io
 
 \ForEach{$v\in \Delta$}{ $\prevS(v):=\Delta$
@@ -590,7 +590,7 @@ Una implementaci\'on ingenua del Algorithm~\ref{alg:schematic-GRE}
 ejecuta en tiempo $O(\size{\Delta}^3\times$
 $\size{\interp{\cdot}}^2)$
 %\fixme{Santi: chequear la complejidad}
-dando una soluci\'on polinomial a los problemas \EL y \ELAN-GRE.
+dando una soluci\'on polinomial a los problemas \EL y \ELAN-GER.
 El Algoritmo~\ref{alg:schematic-gen-sim} puede ser transformado para ejecutar con a una menor complejidad como se muestra en
 ~\cite{HHK95}; m\'as a\'un \'esta versi\'on del algoritmo puede ser adaptada para
 computar \EL- y \ELAN-RE para un subconjunto arbitrario del dominio de $\tup{\Delta,\interp{\cdot}}$
@@ -600,17 +600,17 @@ computar \EL- y \ELAN-RE para un subconjunto arbitrario del dominio de $\tup{\De
 %Given $\gG = \tup{N,\to,l}$,
 %the
 %
-%$F$, the set of \posre, and $S$, the simulator sets s.t.\ $(\forall
+%$F$, the set of \posre, and $S$, the simulator sets tal que\ $(\forall
 %v\in \Delta)\ \interp{F(v)}=S(v)=\simset_\EL(v)$
 
 %
 \begin{theorem}\label{thm:complexity-EL-GRE}
-Los problemas \EL y \ELAN-GRE sobre $\gM=\tup{\Delta,\interp{\cdot}}$ tienen complejidad
+Los problemas \EL y \ELAN-GER sobre $\gM=\tup{\Delta,\interp{\cdot}}$ tienen complejidad
 $O(\size{\Delta}\times\size{\interp{\cdot}})$.
 \end{theorem}
 
-%Theorem~\ref{thm:complexity-EL-GRE} answers a question left open
-%in~\cite{AKS08}: the \EL-GRE problem can be solved in polynomial
+%Theorem~\ref{thm:complexity-EL-GER} answers a question left open
+%in~\cite{AKS08}: the \EL-GER problem can be solved in polynomial
 %time. Note, however, that this  result assumes a convenient representation of
 %formulas like, for example, directed acyclic graphs, to ensure that
 %each step of the formula construction can be done in $O(1)$. In
@@ -619,7 +619,7 @@ $O(\size{\Delta}\times\size{\interp{\cdot}})$.
 
 
 El Teorema~\ref{thm:complexity-EL-GRE} responde a una pregunta dejada abierta
-en~\cite{areces08}: el problema \EL-GRE se puede resolver en tiempo polinomial. N\'otese, sin embargo, que este resultado supone una representaci\'on conveniente de
+en~\cite{areces08}: el problema \EL-GER se puede resolver en tiempo polinomial. N\'otese, sin embargo, que este resultado supone una representaci\'on conveniente de
 f\'ormulas como, por ejemplo, grafos ac\'iclicos dirigidos, para asegurar que
 cada paso de la construcci\'on de la f\'ormula puede hacerse en $O(1)$. %En
 %\sect{size} vamos a echar un vistazo m\'as de cerca el tema y su relaci\'on con
@@ -647,8 +647,8 @@ cada paso de la construcci\'on de la f\'ormula puede hacerse en $O(1)$. %En
 El Algoritmo~\ref{alg:schematic-GRE} se obtuvo mediante la adici\'on de anotaciones de f\'ormulas
 a un algoritmo est\'andar `minimizaci\'on de \EL-simulaciones'. Dada una minimizaci\'on de
 $\+L$-Simulaci\'on, podemos adaptarlo normalmente en una an\'aloga
-manera de obtener un algoritmo $\+L$-GRE.
-El algoritmo calcula obtenido $\+L$-REs para \emph{todos} los elementos de la
+manera de obtener un algoritmo $\+L$-GER.
+El algoritmo calcula obtenido $\+L$-ERs para \emph{todos} los elementos de la
 dominio simult\'aneamente.
 Esto har\'a que sea especialmente adecuado para aplicaciones con
 dominios est\'aticos que requieren referencias a muchos objetos.
@@ -678,7 +678,7 @@ recalculado.
 %We consider algorithms with strong support for preferences in the following section.
 
 No hemos abordado hasta el momento otras cuestiones relevantes de la
-problema GRE adem\'as de la complejidad computacional. En particular,
+problema GER adem\'as de la complejidad computacional. En particular,
 Algoritmo~\ref{alg:schematic-GRE} no presta atenci\'on a la utilizaci\'on de
 preferencias entre las relaciones cuando se genera una ER (es decir, prefiriendo
 la selecci\'on de ciertos atributos por encima de otros, cuando sea posible).
@@ -873,52 +873,52 @@ diferentes clases en el refinamiento.\\
     n/.style={circle,fill,draw,inner sep=3pt,node distance=2.6cm},
     aArrow/.style={->, >=stealth, semithick, shorten <= 2pt, shorten >= 2pt},
   ]
- \node[n,label=above:$e_1$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nLeft\\[-2pt]
       \nSmall\\[-2pt] 
       \nBlue \\[-2pt] 
-      \nBall\end{array}$}] (a) {};
+      \nBall\end{array}$}] (a) {$e_1$};
 
- \node[n,label=above:$e_2$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nLeft\\[-2pt]
       \nBig\\[-2pt] 
       \nBlue\\[-2pt] 
-      \nCube\end{array}$}, right of=a] (b) {};
+      \nCube\end{array}$}, right of=a] (b) {$e_2$};
 
- \node[n,label=below:$e_3$,label=above:{
+ \node[n,label=above:{
     \relsize{-1}$\begin{array}{c}
       \nTop\\[-2pt]
       \nLeft\\[-2pt]
       \nSmall\\[-2pt] 
       \nGreen\\[-2pt] 
-      \nBall\end{array}$}, above of=b] (c) {};
+      \nBall\end{array}$}, above of=b] (c) {$e_3$};
 
- \node[n,label=above:$e_4$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nSmall\\[-2pt] 
       \nGreen\\[-2pt] 
-      \nCube\end{array}$}, right of=b] (d) {};
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
 
- \node[n,label=above:$e_5$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nBig\\[-2pt] 
       \nBlue\\[-2pt] 
-      \nBall\end{array}$}, right of=d] (e) {};
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
 
- \node[n,label=above:$e_6$,label=below:{
+ \node[n,label=below:{
     \relsize{-1}$\begin{array}{c}
       \nBig\\[-2pt] 
       \nGreen\\[-2pt] 
-      \nCube\end{array}$}, right of=e] (f) {};
+      \nCube\end{array}$}, right of=e] (f) {$e_6$};
 
- \node[n,label=below:$e_7$,label=above:{
+ \node[n,label=above:{
     \relsize{-1}$\begin{array}{c}
       \nTop\\[-2pt]
       \nSmall\\[-2pt] 
       \nBlue\\[-2pt] 
-      \nCube\end{array}$}, above of=f] (g) {};
+      \nCube\end{array}$}, above of=f] (g) {$e_7$};
 
  \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
  \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
@@ -1283,8 +1283,8 @@ distinguir a $e$ de los otros nodos.
 
 Ahora identificaremos la noci\'on de expresividad subyacente y como se puede extender.
 Para mantener la terminolog\'ia de~\cite{Krahmer2003}, en lo que sigue
-podemos hablar alternativamente de\emph{grafos etiquetados} en lugar de modelos relacionales.
-El lector debe observar que son esencialmente el mismo objeto matemático, pero codifican las propiedades proposicionales utilizando
+podemos hablar alternativamente de \emph{grafos etiquetados} en lugar de modelos relacionales.
+El lector debe observar que son esencialmente el mismo objeto matem\'atico, pero codifican las propiedades proposicionales utilizando
 loops de relaciones binarias (por ejemplo, escriben $\nDog(e,e)$ en vez de $\nDog(e)$).
 
 The main ideas of their algorithm can be
@@ -1518,7 +1518,7 @@ Aqu\'i est\'a el enlace clave entre el m\'etodo basado en grafo
 de~\cite{Krahmer2003} y nuestra perspectiva orientada a la l\'ogica: en
 modelos relacionales finitos, isomorfismo subgrafo corresponde a
 \EPFOL-simulaciones, en el sentido de que da dos nodos $u,v$ de
-$G$, existe un subgrafo isomorfo a G $ $ $ f $ a través, que contiene $ u $ y
+$G$, existe un subgrafo isomorfo a G $ $ $ f $ a trav\'es, que contiene $ u $ y
 $v$, y tal que $f(u)=v$ si y s\'olo si $u \simul{\+\EPFOL} v$.
 %
 Despu\'es de haber explicitado esta noci\'on de igualdad y, con ella, la de
@@ -1528,7 +1528,7 @@ ordenar a la salida de una f\'ormula en lugar de un grafo. Esto se muestra en lo
 Algoritmos~\ref{alg:makeRE} y~\ref{alg:find}.
 %
 \begin{center}\begin{minipage}[t]{5.1cm}%
-\begin{algorithm}[H]\small
+\begin{algorithm}[H]\floatname{algorithm}{Algoritmo}\small
 \SetKwFunction{makeRE}{makeRE$_\+L$}
 \SetKwFunction{findGraph}{find$_\+L$}
 \SetKwFunction{init}{init_$\+L$}
@@ -1540,7 +1540,7 @@ Algoritmos~\ref{alg:makeRE} y~\ref{alg:find}.
 
 \SetKwInOut{Input}{input}\SetKwInOut{Output}{output}
 \Input{an implicit finite $G=\tup{\Delta_G,\interp{\cdot}}$ and $v\in\Delta_G$}
-\Output{an $\+L$-RE for $v$ in $G$ if there is one, or else $\bot$}
+\Output{an $\+L$-ER for $v$ in $G$ if there is one, or else $\bot$}
 \BlankLine
 
 \vspace{3.0pt}
@@ -1561,12 +1561,10 @@ $H'$ := \findGraph($v, \bot, H, f$)\;
 \SetKwFunction{extendGraph}{extend$_\+L$}
 
 
-\caption{\small \texttt{find}$_\+L$($v, \mathit{best},
-H,f$)}\label{alg:find}
+\caption{\small \texttt{find}$_\+L$($v, \mathit{best},H,f$)}\label{alg:find}
 
 \If{$\mathit{best} \neq \bot \land \cost(\mathit{best}) \leq
-\cost(H)$}{\Return $\mathit{best}$} $\mathit{distractors}$ :=
-$\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L} n}$\;
+\cost(H)$}{\Return $\mathit{best}$} $\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L} n}$\;
 \If{$\mathit{distractors} = \emptyset$}{\Return $H$}
 \ForEach{$\tup{H',f'} \in \extendGraph(H,f)$}{
   $I$ := \findGraph($v,\mathit{best},H', f'$)\;
@@ -1578,11 +1576,11 @@ $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L} n}$\;
 
 Estos algoritmos son param\'etricos en $\+L$; para hacerlos concretos, uno
 tiene que proporcionar versiones adecuadas de $\instFun{buildF}{\+L}$ y
-$\instFun{extend}{\+L}$. El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\+L$-RE {\em
+$\instFun{extend}{\+L}$. El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\+L$-ER {\em
 f\'ormula para} $v$; \'este \'ultimo nos dice c\'omo extender $H$ en cada paso
 del bucle principal del algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a diferencia de la
-presentaci\'on de~\cite{Krahmer2003}, \instFun{makeRE}{\+L} computa
-no sólo un grafo $H$, sino tambi\'en un $\+L$-Simulación de $f$.
+presentaci\'on de~\cite{graph}, \instFun{makeRE}{\+L} computa
+no s\'olo un grafo $H$, sino tambi\'en un $\+L$-Simulaci\'on de $f$.
 
 %
 % \begin{algorithm}\small
@@ -1636,7 +1634,7 @@ $\FOL$-simulaciones se utilizaran en su lugar, habr\'ia que incluir tambi\'en
 el que las relaciones unarias y binarias que \emph{no} estan en $H'$.
 %
 \begin{center}\begin{minipage}[t]{6.3cm}%
-\begin{algorithm}[H]\small
+\begin{algorithm}[H]\floatname{algorithm}{Algoritmo}\small
 \caption{\small
 \texttt{buildF}$_\EPFOL(H',v)$}\label{alg:build-form-epfol}
 \textbf{let}
@@ -1654,7 +1652,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 \end{minipage}
 \hspace{.2cm}
 \begin{minipage}[t]{5.2cm}
-\begin{algorithm}[H]\small
+\begin{algorithm}[H]\floatname{algorithm}{Algoritmo}\small
 \SetKwFunction{extendGraph}{extend$_\EPFOL$}
 
 \caption{\small
@@ -1692,12 +1690,12 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 %to $H$, just like is done in the original algorithm.
 
 
-En cuanto a la función que se extiende el gráfico dado en todo posible
+En cuanto a la funci\'on que se extiende el gr\'afico dado en todo posible
 formas (Algoritmo~\ref{alg:extend-epfol}, desde $ H $
   es un subgrafo de $G$, $f$ es el
-trivial función identidad $\mathit{id(x)} = x$. Veremos la necesidad
-por $ f $ cuando se discute el caso de las lógicas menos expresivos como \EL.
-En \instFun{extend}{\EPFOL} seguimos la notación
+trivial funci\'on identidad $\mathit{id(x)} = x$. Veremos la necesidad
+por $ f $ cuando se discute el caso de las l\'ogicas menos expresivos como \EL.
+En \instFun{extend}{\EPFOL} seguimos la notaci\'on
 de~\cite{Krahmer2003} y escribir, para un modelo relacional
 $G = \tup{\Delta,
 \interp{\cdot}}$,  $G + p(u)$ para denotar el modelo de $\tup{\Delta
@@ -1706,8 +1704,8 @@ $G = \tup{\Delta,
 Del mismo modo, $G + r(u,v)$ denota el modelo de $\tup{\Delta \cup
 \cset{u,v},\interp{\cdot}'}$ tal que $\interp{r}' = \interp{r}
 \cup \{(u,v)\}$ y $\interp{q}' = \interp{q}$ cuando $q \neq r$. Eso
-Está claro, entonces, que esta función está regresando todo el
-\emph{extensions} de $H$ mediante la adición de un atributo o relación que falta
+Est\'a claro, entonces, que esta funci\'on est\'a regresando todo el
+\emph{extensions} de $H$ mediante la adici\'on de un atributo o relaci\'on que falta
 a $H$, al igueal que se hace en el algoritmo original.
 
 \paragraph{The case of $\EL$.}
@@ -1727,17 +1725,16 @@ Observe that \instFun{find}{\EL} uses an \EL-simulation, and any
 %definition.}. Hence, although subgraph isomorphism get along with
 %$\EPFOL$, it is too strong to deal with 
 
-Se podría, en principio, sólo tiene que utilizar \instFun{extend}{\EPFOL} también para EPFOL
-\EL. Si hacemos esto, el resultado de \instFun{find}{\EL} será una
-subgrafo $ H $ de $ G $ tal que para cada \ EL-simulación \EL-simulation $\sim$, $u
+Se podr\'ia, en principio, s\'olo tiene que utilizar \instFun{extend}{\EPFOL} tambi\'en para EPFOL
+\EL. Si hacemos esto, el resultado de \instFun{find}{\EL} ser\'a una
+subgrafo $ H $ de $ G $ tal que para cada \ EL-simulaci\'on \EL-simulation $\sim$, $u
 \sim v$ iff $u = v$ El problema es que este subgrafo $ H $ puede
 contener ciclos y, como es bien sabido, \EL (incluso \ALC) son
 incapaz de distinguir un ciclo de su {\em
-desmoronamiento} \footnote {Informalmente, la desintegración de $ G $, es un nuevo
-gráfica, cuyos puntos son trayectorias de $ G $ desde un nodo de partida dado.
-Es decir, secuencias de transición en $ G $ están representados explícitamente como
-los nodos en el modelo de desenredado. Ver~\cite{BRV01} por un oficial
-definición.}. Por lo tanto, aunque isomorfismo subgrafo llevarse bien con
+desmoronamiento} \footnote {Informalmente, la desintegraci\'on de $ G $, es un nuevo
+gr\'afica, cuyos puntos son trayectorias de $ G $ desde un nodo de partida dado.
+Es decir, secuencias de transici\'on en $ G $ est\'an representados expl\'icitamente como
+los nodos en el modelo de desenredado. Vea en~\cite{BRV01} la definici\'on.}. Por lo tanto, aunque isomorfismo subgrafo llevarse bien con
 $\EPFOL$, es demasiado fuerte como para hacer frente a \EL.
 %
 %
@@ -1755,8 +1752,8 @@ $\EPFOL$, es demasiado fuerte como para hacer frente a \EL.
 
 Un resultado bien conocido establece que cada modelo relacional $ \ + M $ es
 equivalente, con respecto a \EL-formulas,\footnote{En realidad, las
-resultado es válido incluso para \ALC-fórmulas.} a la desintegración de $\+M$.
-Es decir, cualquier modelo y su desintegración satisfacen exactamente los mismos \EL-fórmulas.
+resultado es v\'alido incluso para \ALC-f\'ormulas.} a la desintegraci\'on de $\+M$.
+Es decir, cualquier modelo y su desintegraci\'on satisfacen exactamente los mismos \EL-f\'ormulas.
 % \fxnote{\tiny tendriamos que introducir mejor
 % (intuitvamente) que es el unraveling. Ademas de depender de Khramer
 % estamos haciendo cambios usando cosas que no definimos bien.  Esta
@@ -1773,20 +1770,20 @@ Es decir, cualquier modelo y su desintegración satisfacen exactamente los mismo
 %shown in Algorithm~\ref{alg:extend-el}.
 
 
-Por otra parte, la desintegración de $\+M$ es
-Siempre un árbol, y como mostramos en el algoritmo ~\ref{alg:build-form-el}},
-es sencillo para extraer una \ EL-fórmula adecuada de un árbol.
+Por otra parte, la desintegraci\'on de $\+M$ es
+Siempre un \'arbol, y como mostramos en el algoritmo ~\ref{alg:build-form-el},
+es sencillo para extraer una \ EL-f\'ormula adecuada de un \'arbol.
 
 Por lo tanto, tenemos que \instFun{extend}{\EL} para volver todo lo posible
-`` Extensiones '' de $ H $. Ahora `` extensión '' no significa ser una
-subgrafo del original gráfico de $ G $ más. Nosotros hacemos esto
-ya sea agregando una nueva proposición o una nueva ventaja
-que está presente en la desintegración de $ G $, pero no en $ H $. Esto es
+`` Extensiones '' de $ H $. Ahora `` extensi\'on '' no significa ser una
+subgrafo del original gr\'afico de $ G $ m\'as. Nosotros hacemos esto
+ya sea agregando una nueva proposici\'on o una nueva ventaja
+que est\'a presente en la desintegraci\'on de $ G $, pero no en $ H $. Esto es
 se muestra en el Algoritmo~\ref{alg:extend-el}.
 
 %
 \begin{center}\begin{minipage}{5cm}%
-\begin{algorithm}[H] \small
+\begin{algorithm}[H]\floatname{algorithm}{Algoritmo} \small
 \SetKwFunction{buildF}{buildF$_\EL$} \caption{\small
 \texttt{buildF}$_\EL(H',v)$}\label{alg:build-form-el} \mbox{{\bf
 requires} $H'$ to be a tree}
@@ -1800,7 +1797,7 @@ $\gamma$ := $\cset{\exists r.\buildF(H',u) \mid$
 \end{algorithm}
 \end{minipage}
 \begin{minipage}{7cm}%
-\begin{algorithm}[H]\small
+\begin{algorithm}[H]\floatname{algorithm}{Algoritmo}\small
 \SetKwFunction{extendGraph}{extend$_\EL$} \caption{\small
 \texttt{extend}$_\EL(H,f)$}\label{alg:extend-el}
 
@@ -1828,9 +1825,9 @@ $A$ :=\\
 %breadth-first way may lead to non-termination (since
 %\instFun{find}{\EL} may loop exploring an infinite branch).
 Observe que el comportamiento de \instFun{find}{\EL} es bastante sensata
-a la función de costos empleada. Por ejemplo, en los modelos cíclicos,
-a {\ tt} costo función que no garantiza la desintegración se explora en una
-forma en amplitud puede conducir a la no terminación (ya
+a la funci\'on de costos empleada. Por ejemplo, en los modelos c\'iclicos,
+a {\ tt} costo funci\'on que no garantiza la desintegraci\'on se explora en una
+forma en amplitud puede conducir a la no terminaci\'on (ya
 \instFun{find}{\EL} puede explorar una rama de bucle infinito).
 %It is also possible to use modal model-theoretical results to put a
 %bound check that avoids generating an unraveling of infinite depth
@@ -1867,13 +1864,13 @@ forma en amplitud puede conducir a la no terminación (ya
 %larger --it is an unraveling, after all. We will come back to this
 %in~\sect{size}.
 Como nota final sobre la complejidad, aunque el conjunto de \EL-distractores
-puede calcularse con más eficiencia que \EPFOL-distractores (desde
-\EL-distractores se pueden calcular en tiempo polinómico, y la computación
-\EPFOL-distractores parece requerir una solución al subgrafo
+puede calcularse con m\'as eficiencia que \EPFOL-distractores (desde
+\EL-distractores se pueden calcular en tiempo polin\'omico, y la computaci\'on
+\EPFOL-distractores parece requerir una soluci\'on al subgrafo
 problema de isomorfismo, que NP-completo), no podemos concluir que
-\instFun{find}{\EL} es más eficiente que \instFun{find}{\EPFOL}
+\instFun{find}{\EL} es m\'as eficiente que \instFun{find}{\EPFOL}
 General: El modelo construido en el primer caso puede ser exponencialmente
---es más grande es un desenlace, después de todo. %Vamos a volver a este
+--es m\'as grande es un desenlace, despu\'es de todo. %Vamos a volver a este
 %en ~ \ secta {tamaño}.
 
 

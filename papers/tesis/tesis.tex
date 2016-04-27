@@ -1,6 +1,6 @@
 
 \documentclass[12pt]{myillcdiss}
-
+\usepackage{mathtools}
 % Packages used by Carlos
 %\usepackage{floatrow}
 \usepackage{makeidx}
@@ -76,6 +76,7 @@
 %\usepackage{arrowsnew}
 %%%DE LACL
 \usepackage{algorithm2e}
+\newcommand{\instFun}[2]{\texttt{#1}\ensuremath{_{#2}}\xspace}
 \newcommand{\nDog}{\mathit{dog}\xspace}
 \newcommand{\nCat}{\mathit{cat}\xspace}
 \newcommand{\aSmall}{\mathit{small}\xspace}
@@ -144,6 +145,8 @@
 \newcommand{\posre}{$\pos$-RE\xspace}
 \newcommand{\Id}{{\rm Id}}
 \renewcommand{\phi}{\varphi}
+%\newcommand{\phi}[1]{{\varphi}_{#1}}
+
 \newcommand{\simmax}{\sim^m}
 \newcommand{\dom}{{\rm dom}}
 \newcommand{\remove}{{\it remove}}
@@ -178,6 +181,7 @@ simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \hyphenation{a-tri-bu-to}
 \hyphenation{a-tri-bu-tos}
 \hyphenation{ca-rac-te-r\'is-ti-cas}
+\hyphenation{cons-tru-ir}
 \hyphenation{con-ti-nuan-do}
 \hyphenation{con-si-de-re-mos}
 \hyphenation{con-si-de-ra-do}
@@ -387,6 +391,7 @@ simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \newcommand{\simm}{\textsf{sim}}
 \newcommand{\rel}{\ensuremath{\mathsf{rel}}\xspace}
 \newcommand{\propm}{\ensuremath{\mathsf{prop}^\gM\xspace}}
+%\newcommand{\interp}[2]{|\!|#1_#2|\!|}
 
 \newcommand{\interp}[1]{|\!|#1|\!|}
 
