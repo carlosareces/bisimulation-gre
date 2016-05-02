@@ -462,8 +462,8 @@ A continuaci\'on vamos a presentar 2 ejemplos de modelos relacionales, uno en el
 
 El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos representado un contexto
 como un modelo relacional. Intuitivamente, $a$, $b$ y $d$ son perros, mientras que 
-$c$ y $e$ son gatos;  $d$ es un beagle peque\~no; $b$ y $c$ son tambi\'en peque\~nos.
- Leeremos $\aSniffing(d,e)$ como ``{\em $d$ huele a $e$}''. La interpretaci\'on del s\'imbolo relacional $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos perros del contexto. La interpretaci\'on de $\aSniffing$ es el conjunto de pares de elementos que cumplen $\aSniffing$. Por ejemplo ($a,a$) pertenece al conjunto dado que $a$ es un perro que se huele a si mismo en el modelo.
+$c$ y $e$ son gatos;  $d$ es un peque\~no beagle; $b$ y $c$ tambi\'en son peque\~nos.
+ Leeremos $\aSniffing(d,e)$ como ``{\em $d$ huele a $e$}''. La interpretaci\'on del s\'imbolo relacional $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos perros del contexto. La interpretaci\'on de $\aSniffing$ es el conjunto de pares de elementos que cumplen $\aSniffing$. Por ejemplo ($a,a$) pertenece al conjunto dado que $a$ es un perro que se huele a s\'i mismo en el modelo.
 
  \begin{figure}[!ht]
  %\begin{center}
@@ -595,20 +595,19 @@ $\interp{\nBelow}$     & = & $\cset{(e_2,e_3)}$\\
  \label{grafo-GRE3D7-stimulus_b}
  \end{figure}
 
-Ahora nos enfocaremos en conseguir ERs para identificar a targets dados usando los modelos que acabamos de describir. Veremos lenguajes de distintas l\'ogicas y como las f\'ormulas l\'ogicas pueden representar las ERs.
+Ahora nos enfocaremos en conseguir ERs para identificar a targets dados usando los modelos que acabamos de describir. Veremos lenguajes de distintas l\'ogicas y c\'omo las f\'ormulas l\'ogicas pueden representar las ERs.
 %Los lenguajes l\'ogicos son \'utiles para la tarea de describir (formalmente) elementos de una estructura relacional. 
 A continuaci\'on definimos el lenguaje cl\'asico de la l\'ogica de primer orden (con desigualdad), \FOL. Dicho lenguaje se define inductivamente como sigue. Una f\'ormula $\phi$ es una f\'ormula de \FOL si es de alguna de las siguientes formas:
 
 % *2 est\'a dado por $\top$ que es como decir 'cosa', todo elemento satisface $\top$, la desigualdad entre 2 elementos $ x_i$ y $x_j$, relaciones de tuplas, la negaci\'on de f\'ormulas de \FOL, la conjunci\'on de f\'ormulas de \FOL, y el existencial de una variable ligada en la f\'ormula de \FOL:
 \begin{enumerate}
-$$
-  \item \top Es como decir \it{cosa}, todo elemento satisface \top.
-	\item x_i \not\approx x_j La desigualdad entre dos elementos x_i y x_j.
-	\item r (\bar x) Relaciones de tuplas.
-	\item \lnot \gamma Negaci\'on de f\'ormulas.
-	\item \gamma \land \gamma' Conjunci\'on de f\'ormulas.
-	\item \exists x_i . \gamma Existencial de una variable ligada en la f\'ormula de \FOL \gamma.
-$$
+  \item $\top$ Es como decir \it{cosa}, todo elemento satisface $\top$.
+  \item $x_i \not\approx x_j$ La desigualdad entre dos elementos $x_i$ y $x_j$.
+  \item $r (\bar x)$ Relaciones de tuplas.
+  \item $\lnot \gamma$ Negaci\'on de f\'ormulas.
+  \item $\gamma \land \gamma'$ Conjunci\'on de f\'ormulas.
+  \item $\exists x_i . \gamma$ Existencial de una variable ligada en la f\'ormula de $\gamma$ de $\FOL$.
+\end{enumerate}
 %
 donde $\gamma,\gamma' \in \FOL$,
 $r$ es un s\'imbolo de relaci\'on $n$-aria y $\bar x$ es una tupla de $n$ variables.
@@ -639,7 +638,7 @@ $x_1\ldots x_n$, inductivamente definimos la \emph{extensi\'on} o
 
 \item $\interp{\delta \land \theta}^n$ $=$ $\interp{\delta}^n \cap \interp{\theta}^n$
 
-\item $\interp{\exists x_{l}.\delta}^n$ $=$ $\cset{\bar a \mid \bar a  e  \in \interp{\delta'}^{n+1}\ \text{for some $e$}}$
+\item $\interp{\exists x_{l}.\delta}^n$ $=$ $\cset{\bar a \mid \bar a  e  \in \interp{\delta'}^{n+1}\ \text{para alg\'un elemento $e$}}$
 
 \end{enumerate}
 
@@ -651,7 +650,7 @@ $x_{n+1}$.
 %escribiremos $\interp{\phi}$ en lugar de
 %$\interp{\phi}^n$.
 
-Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente definir el problema de $\gL$-GRE para un conjunto target de elementos $T$. $\gL$ es el lenguaje de la l\'ogica elegida, en este caso hemos explicado la l\'ogica de primer orden $\FOL$, y en el Cap\'itulo \ref{sec:intro_logica} que sigue restringiremos esa l\'ogica para obtener ER m\'as cercanas a las que aparecen en corpura y para conseguir algoritmos computacionalmente m\'as eficientes.
+Con una sintaxis y sem\'antica de un lenguaje en mente, podemos formalmente definir el problema de $\gL$-GRE para un conjunto target de elementos $T$. $\gL$ es el lenguaje de la l\'ogica elegida, en este caso hemos explicado la l\'ogica de primer orden $\FOL$, y en el Cap\'itulo \ref{sec:intro_logica} restringiremos esa l\'ogica para obtener ERs m\'as cercanas a las que aparecen en corpora y para conseguir algoritmos computacionalmente m\'as eficientes.
 
 \medskip
 \noindent
@@ -666,42 +665,43 @@ $\interp{\varphi} = T$ si existe, y $\bot$ caso contrario.\\ %\hline
 \end{tabular}
 \end{center}}
 
-La salida del problema $\+L$-GRE es una f\'ormula de
+La salida del problema $\+L$-GER es una f\'ormula de
 $\+L$ cuya interpretaci\'on en el modelo de input $\gM$ es el conjunto target $T$, si
 esa f\'ormula existe. 
 Cuando la salida no es $\bot$, decimos que $\phi$ es una
-\emph{expresi\'on referencial en $\+L$ (ER-$\+L$) para $T$ en $\+M$}, y cuando es $\bot$ puede ser que la l\'ogica elegida no sea lo suficientemente expresiva para identificar al target, o que el modelo que le hemos dado no tiene suficiente detalle.
+\emph{expresi\'on referencial en $\+L$ (ER-$\+L$) para $T$ en $\+M$}, y cuando es $\bot$ puede ser que la l\'ogica elegida no sea lo suficientemente expresiva para identificar al target, o que el modelo dado no tenga suficiente detalle.
 Consideramos s\'olo modelos relacionales con s\'imbolos de relaciones unarias y binarias, usaremos $p$ para las proposiciones (propiedades) y $r$ para los s\'imbolos de relaci\'on binarias.
 Como dijimos anteriormente, dado un modelo $\gM$, podr\'ia haber un n\'umero muy grande de f\'ormulas que de forma un\'ivoca
 describan al target (incluso f\'ormulas que no son l\'ogicamente equivalentes podr\'ian tener
-la misma interpretaci\'on una vez que el modelo este fijo). Por ejemplo, en el modelo $\+M$} de la Figura \ref{grafo-GRE3D7-stimulus_b} las f\'ormulas $\aLarge \land \nBall$ y $\aRed \land \nBall$ no son l\'ogicamente equivalentes tienen la misma interpretaci\'on en $\gM$ ya que $\interp{\aLarge \land \nBall}$ = $e_5$ y $\interp{\aRed \land \nBall}$ = $e_5$.
-Como ya discutimos diferentes ERs
+la misma interpretaci\'on una vez que el modelo este fijo). Por ejemplo, en el modelo $\+M$ de la Figura \ref{grafo-GRE3D7-stimulus_b} las f\'ormulas $\aLarge \land \nBall$ y $\aRed \land \nBall$ no son l\'ogicamente equivalentes tienen la misma interpretaci\'on en $\gM$ ya que $\interp{\aLarge \land \nBall}$ = $e_5$ y $\interp{\aRed \land \nBall}$ = $e_5$.
+Diferentes ERs
 del mismo target podr\'ian ser m\'as o menos apropiadas en el contexto dado. Pero tambi\'en es importante tener en cuenta que la determinaci\'on de contenido usando lenguajes con diferente poder expresivo puede tener un impacto en la complejidad computacional de la GER y en la etapa posterior de realizaci\'on sint\'actica. Para ilustrar eso, veamos las f\'ormulas que identifican al elemento target $b$ en la Figura \ref{fig:cat-dog-1}.
 
-%\begin{table}[h]
+\begin{figure}[H]
 $$
-\begin{array}{cl}
+\begin{array}{ll}
  \phi_1:  \nDog(x) \land \aSmall(x) \land
-   \exists y . (\aSniffing(x,y) \land \nDog(y))
+   \exists y . (\aSniffing(x,y) \land \nDog(y))\\
   %
   \phi_2:  \nDog(x) \land \aSmall(x) \land
-  \forall y . (\neg \nCat(y) \lor \neg \aSniffing(x,y))
+  \forall y . (\neg \nCat(y) \lor \neg \aSniffing(x,y))\\
   %
   \phi_3:  \nDog(x) \land
-  \exists y . (x \not\approx y \land \nDog(y)  \land \aSniffing(x,y))
+  \exists y . (x \not\approx y \land \nDog(y)  \land \aSniffing(x,y))\\
   %
   \phi_4:  \nDog(x) \land
   \exists y . (\nCat(y) \land \aSmall(y) \land \aSniffing(y,x))
   %
  \end{array}
 $$
-\caption{Descripciones alternativas para el objeto $b$ del modelo mostrado en Figura~\ref{fig:cat-dog-1}.}\label{tab:gammas}
-%\end{table}
+\caption{Descripciones alternativas para el objeto $b$ del modelo mostrado en Figura~\protect\ref{fig:cat-dog-1}.}\label{tab:gammas}
+\end{figure}
 
-Notar que las f\'ormulas mostradas, hacen uso de diferentes operadores de la l\'ogica \FOL: hay negaci\'on de \'atomos y de relaciones, hay cuantificaci\'on existencial, y universal, conjunci\'on, disyunci\'on y desigualdad. La realizaci\'on sint\'actica de alguna de \'estas f\'ormulas pueden involucrar estructuras gramaticales complejas como voz pasiva como por ejemplo la f\'ormula $\phi_4$ podr\'ia realizarse como {\it El perro que es olido por un gato peque\~no}, verbos reflexivos como en la f\'ormula $\nDog(x) \land \exists y . (x \approx y \land \nDog(y)  \land \aSniffing(x,y))$ que representa al target $a$ de la Figura \ref{fig:cat-dog-1} y puede realizarse como {\it El perro que se huele a si mismo}, negaciones, etc. o de lexemas dif\'iciles de caracterizar sem\'anticamente (como s\'olo) en $\phi_2$ que podr\'ia realizarse como {\it El perro que huele s\'olo perros que no son el mismo}
+Notar que las f\'ormulas mostradas, hacen uso de diferentes operadores de la l\'ogica \FOL: hay negaci\'on de \'atomos y de relaciones, hay cuantificaci\'on existencial, y universal, conjunci\'on, disyunci\'on y desigualdad. La realizaci\'on sint\'actica de algunas de \'estas f\'ormulas pueden involucrar estructuras gramaticales complejas como voz pasiva como por ejemplo la f\'ormula $\phi_4$ podr\'ia realizarse como {\it El perro que es olido por un gato peque\~no}, verbos reflexivos como en la f\'ormula $\nDog(x) \land \exists y . (x \approx y \land \nDog(y)  \land \aSniffing(x,y))$ que representa al target $a$ de la Figura \ref{fig:cat-dog-1} y puede realizarse como {\it El perro que se huele a si mismo}, negaciones, etc. o de lexemas dif\'iciles de caracterizar sem\'anticamente (como s\'olo) en $\phi_2$ que podr\'ia realizarse como {\it El perro que huele s\'olo perros que no son el mismo}.
  
 %por ejemplo $\phi_2$ podr\'a realizarse como {\it Small dog that sniffs only dogs}. $\phi_3$ podr\'ia realizarse como {\it Dog that sniffs dogs that are not him self}, $\phi_4$ como {\it The dog that is sniffed by a small cat}.
-Como nuestra meta es hacer un ranking de las mejores expresiones referenciales restringiendo la l\'ogica, nos podemos acercar m\'as a la meta. Si restringimos a \EPFOL, aseguramos que f\'ormulas como $\phi_2$ no se generar\'an. Si sacaramos el operador distinto ($\not\approx$) del lenguaje, $\phi_3$ tambi\'en queda exclu\'ida.
+Como nuestra meta es hacer un ranking de las mejores expresiones referenciales,
+ restringiendo la l\'ogica, nos podemos acercar m\'as a esa meta. Si restringimos a \EPFOL, aseguramos que f\'ormulas como $\phi_2$ no se generar\'an. Si sacaramos el operador distinto ($\not\approx$) del lenguaje, $\phi_3$ tambi\'en queda exclu\'ida.
 %El hecho de que el lenguaje de representaci\'on utilizado tiene un impacto sobre la determinaci\'on de contenido es obvio, pero no ha recibido la atenci\'on que merece. 
 %Areces et al. [1] usaron diferentes l\'ogicas de descripci\'on (una familia de lenguajes formales utilizado en representaci\'on del conocimiento, vea [2]) para clasificar y dar un marco formal para trabajo previo sobre GRE. 
 A continuaci\'on presentamos fragmentos de $\FOL$ conocidos como l\'ogicas para la descripci\'on. Por ejemplo, el lenguaje de la l\'ogica para la descripci\'on $\ALC$, se define sint\'acticamente como el conjunto de f\'ormulas:
@@ -732,12 +732,12 @@ donde $p$ es un s\'imbolo proposicional, $r$ es un s\'imbolo relacional binario,
  Mediante la restricci\'on a f\'ormulas de $\ALC$ 
 evitar\'iamos f\'ormulas como $\phi_3$ (es decir con desigualdad). Tambi\'en evitar\'iamos f\'omulas como $\phi_4$ que puede realizarse como {\it El perro que es olido por un peque\~no gato} en el cual tenemos que realizar la parte del existencial como una voz pasiva al aparecer la variable cuantificada $x$ en segundo lugar.
 
-(siempre aparece cuantificado el elemento en la segunda posici\'on de argumento).
+%(siempre aparece cuantificado el elemento en la segunda posici\'on de argumento).
 Cada lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. Para la tarea de GER el uso de un lenguaje u otro debe depender del contexto particular considerado y del target a describir.
 
 Para el segundo ejemplo, supongamos que queremos identificar a $e_5$ de la Figura \ref{grafo-GRE3D7-stimulus_b}. Algunas f\'ormulas posibles que identifican a un\'ivocamente a $e_5$ en el modelo se muestran en la Tabla \ref{tab:phis}.
 
-\begin{table}
+\begin{figure}[H]
 $$
 \begin{array}{cl}
  \phi_1: & \aRed(x) \land \nBall(x)\\[3pt]
@@ -760,32 +760,32 @@ $$
   %ex 4
  \end{array}
 $$
-\caption{Descripciones alternativas para el objeto $e_5$ de la Figura~\ref{figura-er}, con lenguaje de \FOL.}\label{tab:phis}
-\end{table}
+\caption{Descripciones alternativas para el objeto $e_5$ de la Figura~\protect\ref{figura-er}, con lenguaje de $\FOL$.}\label{tab:phis}
+\end{figure}
 
-\begin{table}
-$$
+\begin{figure}[H]
+
 \begin{array}{cl}
- \phi_1: & Esfera roja\\[3pt]
+ ${\phi_1}$: & Esfera roja\\[3pt]
   %
- \phi_2: & Esfera grande\\[3pt]
+ ${\phi_2}$: & Esfera grande\\[3pt]
   %
- \phi_3: & Esfera grande y roja\\[3pt]
+ ${\phi_3}$: & Esfera grande y roja\\[3pt]
   %
- \phi_4: & Esfera grande y roja que est\'a a la derecha de un cubo grande rojo\\[3pt]
+ ${\phi_4}$: & Esfera grande y roja que est\'a a la derecha de un cubo grande rojo\\[3pt]
   %ex1
- \phi_5: & Esfera grande y roja \land
+ ${\phi_5}$: & Esfera grande y roja \land
   \forall y . (\neg \nBall(y) \lor \neg \nRightof(x,y))\\[3pt]
   %ex 2
- \phi_6: & Esfera grande y roja \land
+ ${\phi_6}$: & Esfera grande y roja \land
   \exists y . (x \not\approx y \land \nCube(y) \land \nRightof(x,y))\\[3pt]
   %ex 3
- \phi_7: & Esfera grande y roja que tiene un cubo rojo a la izquierda
+ ${\phi_7}$: & Esfera grande y roja que tiene un cubo rojo a la izquierda
   %ex 4
  \end{array}
 $$
 \caption{Posibles realizaciones de las f\'ormulas dadas en \protect\ref{tab:phis}}\label{tab:realizaciones-phis}
-\end{table}
+\end{figure}
 
 Notar que $\phi_2$ y $\phi_3$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas.
 $\phi_4$ se puede realizar como {\it Esfera grande y roja que est\'a a la derecha de un cubo grande rojo}. Esta f\'ormula junto con $\phi_1$, $\phi_2$ y $\phi_3$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y solo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs ~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Bueno, pero entonces como dijimos reci\'en podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ER que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje $\phi_6$ tambi\'en queda exclu\'ida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL. 
