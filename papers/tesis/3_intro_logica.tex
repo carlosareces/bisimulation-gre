@@ -1,8 +1,16 @@
 \chapter{Usando teor\'ia de modelos}
 \label{sec:intro_logica}
 
-De acuerdo a lo que queremos permitir en una ER, tendremos un lenguaje asociado, el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica como partiendo de f\'ormulas de primer orden (\FOL) podemos ir restringiendo la l\'ogica y con ello el lenguaje, es interesante evaluar la complejidad dependiendo de la l\'ogica seleccionada, ya que por ejemplo sistemas de tiempo real necesitan conseguir ER r\'apidamente, daremos la complejidad de las distintas l\'ogicas, y veremos que l\'ogica aplica a los algoritmos estudiados del \'area.
-El cap\'itulo esta dividido en 4 secciones, las cuales son: Secci\'on\ref{sec:seleccionandoLenguaje}, en la cual daremos de ejemplos de tipos de ER que queremos conseguir y qu\'e l\'ogicas nos pueden ayudar, en la Secci\'on \ref{sec:greViaSimulacion} veremos algunos algoritmos ya acerc\'andonos a la implementaci\'on de un sistema que nos dar\'a ERs. En la Secci\'on \ref{sec:bisimulacion} explicaremos la base de nuestro algoritmo, y para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un resumen de lo expuesto en este cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
+De acuerdo a la complejidad de las estructuras gramaticales que querramos permitir en las ERs, tendremos un lenguaje asociado, 
+el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica como partiendo de f\'ormulas de primer orden (\FOL) 
+podemos ir restringiendo la l\'ogica y con ello el lenguaje, es interesante evaluar la complejidad dependiendo de la l\'ogica seleccionada, 
+ya que por ejemplo sistemas de tiempo real necesitan conseguir ERs r\'apidamente. Daremos la complejidad de las distintas l\'ogicas, 
+y veremos que l\'ogica aplica a los algoritmos estudiados del \'area.
+
+El cap\'itulo esta dividido en 4 secciones, las cuales son: Secci\'on\ref{sec:seleccionandoLenguaje}, en la cual daremos ejemplos 
+de tipos de ERs que queremos conseguir y qu\'e l\'ogicas nos pueden ayudar, en la Secci\'on \ref{sec:greViaSimulacion} veremos 
+algunos algoritmos ya acerc\'andonos a la implementaci\'on de un sistema que nos dar\'a ERs. En la Secci\'on \ref{sec:bisimulacion} 
+explicaremos el algoritmo base de nuestra propuesta, y para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un resumen de lo expuesto en este cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
 
 
 \section{Similaridad entre objetos en un lenguaje particular}
@@ -10,23 +18,26 @@ El cap\'itulo esta dividido en 4 secciones, las cuales son: Secci\'on\ref{sec:se
 
 Dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
 $\+M_1$ es {\bf similar} en $\+L$ a otro objeto
- $v$ en el modelo $\+M_2$ si para cualquier f\'ormula en $\+L$ que es satisfecha por $u$ tambi\'en es satisfecha por $v$. Formalmente,
+ $v$ en el modelo $\+M_2$ si para cualquier f\'ormula en $\+L$ que es satisfecha por $u$ tambi\'en es satisfecha por $v$. 
+
 %let $\+L$ stand for any of the languages discussed so far, and
 Sean $\+M_1 = \tup{\Delta_1, \interp{\cdot}_1}$ y $\+M_2 = \tup{\Delta_2, \interp{\cdot}_2}$ modelos relacionales con $u \in \Delta_1$ y $v \in \Delta_2$; seguimos la terminolog\'ia de~\cite{areces08} y decimos que
 \emph{$u$ es $\+L$-similar a $v$}  (notaci\'on $u \simil{\+L} v$) si para toda f\'ormula $\gamma \in \+L$, $u \in \interp{\gamma}_1$ implica
 $v \in \interp{\gamma}_2$. 
-La $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$''. Si tomamos $\+M_1$ y $\+M_2$ a ser del mismo modelo, un objeto $u$ en el modelo puede identificarse un\'ivocamente en $\+L$ si no hay ning\'un otro objeto $v$ diferente de $u$ tal que $u \simil{\+L} v$. En otras palabras, si hay dos objetos $u$ y $v$ en un modelo $\+M$  tal que
-$u \simil{\+L} v$, entonces el problema $\+L$-GER con input $\+M$ y target $T=\{u\}$ no tendr\'a \'exito ya que para todas las f\'ormulas $\gamma \in \+L$ tenemos que $\{u,v\} \subseteq \interp{\gamma} \not = \{u\}$.
+La $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$''. Si tomamos $\+M_1$ y $\+M_2$ a ser del 
+mismo modelo, un objeto $u$ en el modelo puede identificarse un\'ivocamente en $\+L$ si no hay ning\'un otro objeto $v$ diferente de $u$ 
+tal que $u \simil{\+L} v$. En otras palabras, si hay dos objetos $u$ y $v$ en un modelo $\+M$  tal que
+$u \simil{\+L} v$, entonces el problema $\+L$-GER con input $\+M$ y target $T=\{u\}$ no tendr\'a \'exito ya que para cualquier 
+f\'ormula $\gamma \in \+L$ tenemos que $\{u,v\} \subseteq \interp{\gamma} \not = \{u\}$.
 
-Considere la Figura \ref{target_mapa_3ball}, y sea $\+L$ tal que s\'olo se puede tener conjunciones de propiedades proposicionales, sin negaci\'on, sin relaciones. Sea $\Delta$ = ${\nLarge, \nRed, \nBall, \nCube, \nYellow}$.
+Considere la Figura \ref{target_mapa_3ball}, y sea $\+L$ tal que s\'olo se puede tener conjunciones de propiedades proposicionales, 
+sin negaci\'on, sin relaciones. Sea $\Delta$ = ${\nLarge, \nRed, \nBall, \nCube, \nYellow}$.
 \begin{figure}[H]
 \centering
 \includegraphics[width=.6\textwidth]{images/22paraRelacional.jpg}
 \caption{Ejemplo de target.}
 \label{target_mapa_3ball}
 \end{figure}
-
-
 
 Se cumple que  $e_1 \simil{\+L} e_5$, $e_3 \simil{\+L} e_5$ y $e_1 \simil{\+L} e_3$ ya que para toda f\'omula $\phi$, la {\bf interpretaci\'on de la f\'ormula} ($\interp \phi$) es $\{e_1, e_3, e_5\}$. 
 $\phi_1$: $\nRed \land \nBall$ tenemos que $\interp {\phi_1} $= $\{e_1, e_3, e_5\}$
@@ -39,10 +50,13 @@ Esto nos dice que con ese lenguaje elegido $\+L$ la tarea GER con target $e_5$ n
 
 La noci\'on de $\+L$-similaridad entonces, nos permite manejar el problema de  $\+L$-GER.
 Por otra parte, podemos reformular esta de noci\'on de una manera estructural, para no considerar infinitas $\+L$-f\'ormulas y poder decidir si $u$ es $\+L$-similar a $v$. Podemos reinterpretar $\+L$-similaridad en t\'erminos de nociones de teor\'ia de modelos est\'andares
-como isomorfismos o bisimulaciones que describen las propiedades estructurales de los modelos. Dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ y $\tup{\Delta_2,
+como isomorfismos o bisimulaciones que describen las propiedades estructurales de los modelos. 
+
+Dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ y $\tup{\Delta_2,
 \interp{\cdot}_2}$, considere las siguientes
 propiedades de una relaci\'on binaria ${\sim} \subseteq \Delta_1 \times \Delta_2$ 
-(vamos a considerar s\'olo modelos relacionales con relaciones unarias y binarias, ---es decir grafos etiquetados--- Usaremos $p$ para s\'imbolos unarios es decir proposicionales, y $r$ para s\'imbolos de relaciones binarias):
+(vamos a considerar s\'olo modelos relacionales con relaciones unarias y binarias, ---es decir grafos etiquetados---, usaremos $p$ para 
+s\'imbolos unarios ---proposicionales---, y $r$ para s\'imbolos de relaciones binarias):
 %(cf.~Convention~\ref{conv:signature}):
 \smallskip 
 
@@ -60,7 +74,8 @@ propiedades de una relaci\'on binaria ${\sim} \subseteq \Delta_1 \times \Delta_2
 
 Diremos que una relaci\'on binaria no vac\'ia $\sim$ es una 
 {\bf $\+L$-simulaci\'on} cuando satisface las propiedades indicadas
-en la Tabla~\ref{tab:simuls}. Por ejemplo, una relaci\'on binaria no vac\'ia que satisface $\atomL$, y $\zig$ es una $\EL$-simulaci\'on, como es indicado en fila~4 de la Tabla~\ref{tab:simuls}. M\'as a\'un, diremos que un objeto
+en la Tabla~\ref{tab:simuls}. Por ejemplo, una relaci\'on binaria no vac\'ia que satisface $\atomL$, y $\zig$ es una $\EL$-simulaci\'on, 
+como es indicado en fila~4 de la Tabla~\ref{tab:simuls}. M\'as a\'un, diremos que un objeto
 {\bf $v$ $\+L$-simula $u$} ($u \simul{\+L} v$) si hay una relaci\'on $\sim$ que satisface la correspondiente propiedad tal que
 $u \sim v$. El siguiente es un resultado fundamental del modelo te\'orico:%~\cite{ebbi:math96,KR99,BRV01}
 
@@ -126,23 +141,23 @@ Si se opta por un lenguaje m\'as rico que $\EL$, tal como $\ELAN$, uno puede ser
 capaz de describir a $a$: toma, por ejemplo, la f\'ormula de $\ELAN$
 $\nDog(x)\wedge\lnot\aSmall(x)$.
 
-En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
-\begin{table}[h!]
-\begin{tabular}{l|l}
-  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (LD)\\
-  \hline
-	  Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-		Heur\'istica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-  Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-  GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
-														& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
-  Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
-	& y proposicionales)\\
-  Kelleher and Kruijff (2006)   & $\EL$ \\
-  Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
-\end{tabular}
-\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:algoritmosLogicas}
-\end{table}
+%En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
+%\begin{table}[h!]
+%\begin{tabular}{l|l}
+%  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (LD)\\
+%  \hline
+%	  Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+%		Heur\'istica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+%  Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+%  GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
+%								& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
+%  Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
+%	& y proposicionales)\\
+%  Kelleher and Kruijff (2006)   & $\EL$ \\
+%  Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
+%\end{tabular}
+%\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:algoritmosLogicas}
+%\end{table}
 
 
 Como veremos en la siguiente subsecci\'on, la simulaci\'on nos d\'a un

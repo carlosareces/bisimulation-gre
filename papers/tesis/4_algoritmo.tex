@@ -20,7 +20,7 @@ es posible calcular una distribuci\'on de probabilidad adecuada para las propied
 las ERs generadas para el modelo simule el que se observa en corpora.
 \end{itemize}
 
-El cap\'itulo est\'a diivdido en 5 secciones, en la primer secci\'on explicaremos el input y output del algoritmo. En la Seccion \ref{sec:learning} mostraremos como obtener la distribuci\'on de probabilidad finita que es input del algoritmo. Luego en la Secci\'on \ref{sec:algoritmo_probabilistico} mostraremos el algoritmo en detalle, daremos el vocabulario necesario para entenderlo y un ejemplo de ejecuci\'on paso a paso. Explicaremos c\'omo conseguimos asegurar terminaci\'on, c\'omo se generan las ER no-determin\'isticamente, c\'omo conseguimos mayor control sobre la sobreespecificaci\'on. Finalmente en la Secci\'on \ref{sec:link-algoritmo} daremos un res\'umen y comentaremos como se linkea el cap\'itulo con el resto de la tesis.
+El cap\'itulo est\'a dividido en 5 secciones, en la primer secci\'on explicaremos el input y output del algoritmo. En la Seccion \ref{sec:learning} mostraremos como obtener la distribuci\'on de probabilidad finita que es input del algoritmo. Luego en la Secci\'on \ref{sec:algoritmo_probabilistico} mostraremos el algoritmo en detalle, daremos el vocabulario necesario para entenderlo y un ejemplo de ejecuci\'on paso a paso. Explicaremos c\'omo conseguimos asegurar terminaci\'on, c\'omo se generan las ER no-determin\'isticamente, c\'omo conseguimos mayor control sobre la sobreespecificaci\'on. Finalmente en la Secci\'on \ref{sec:link-algoritmo} daremos un res\'umen y comentaremos como se linkea el cap\'itulo con el resto de la tesis.
 
 \section{Entrada y salida del algoritmo probabil\'istico}
 \label{input_algo}
@@ -1238,3 +1238,54 @@ y $e_5$ ball, red
 {sec:link-algoritmo}
 
 En este cap\'itulo se explic\'o la entrada y salida de un algoritmo probabil\'istico el cual toma con entrada el modelo, el cual es una representaci\'on de la figura considerada, una distribuci\'on de probabilidad finita, la cual explicamos como obtenerla en 2 casos: en el caso que hay corpus disponible para la escena considerada y en casos donde al no haber corpus disponible proponemos una aproximaci\'on usando aprendizaje autom\'atico. Se explic\'o el algoritmo en detalle y se ilustr\'o con un ejemplo de ejecuci\'on. Se explic\'o como hace el algoritmo para conseguir las siguientes caracter\'isticas: asegurar terminaci\'on, generar ER relacionales, generar ER no-determin\'isticas, generar sobreespecificaci\'on, generar ER para plurales.
+
+Lu, pidio agregar... escribir bien, y ver como integrar
+
+ way we introduce overspecification is inspired by the work of Keysar et al. (1998) on
+egocentrism and a natural language production. Keysar et al. When producing argue That language,
+Considering hearers point of view is not done from the outset but it is rather an afterthought;
+adult speakers produce REs egocentrically, just like children do, but then a REs So THAT adjust the
+addressee is reliable to identify identity unequivocally the target. The first, egocentric, step is a heuristic
+based process in a model of saliency of the scene That contains the target. Our definition of
+p
+use
+Intended is to capture the saliences of the properties for different scenes and targets. The
+p
+use
+Changes of a relation to the scene ACCORDING. This is in contrast With previous work Where
+the saliency of a property is in a constant domain. Keysar et al. Argue That the reason for esta
+generate-and-adjust procedure May Have To Do With Limitations of the information processing
+mind: if the heuristic That guides the egocentric phase is well tunned, it Succeeds with a suitable
+RE in most cases and seldom requires Adjustments. Interestingly, we observe a similar behavior
+With our algorithm: when
+p
+use
+Learned from the domain values are used, the algorithm is not only more accurate but much faster than Present When using random
+p
+use
+values
+---
+ introducimos manera sobrevaloraci\'on se inspira en la obra de Keysar et al. (1998) sobre
+egocentrismo y la producci\'on del lenguaje natural. Keysar et al. argumentar que cuando se produce el lenguaje,
+considerando oyentes punto de vista no se lleva a cabo desde el principio, pero es m\'as bien una idea de \'ultimo momento;
+hablantes adultos producen RE egoc\'entricamente, al igual que hacen los ni\~nos, pero luego se ajustan de modo que el RE
+destinatario es capaz de identificar la diana de manera inequ\'ivoca. La primera, egoc\'entricos, es un paso heur\'istico
+proceso basado en un modelo de la prominencia de la escena que contiene el destino. Nuestra definici\'on de
+p
+utilizar
+est\'a destinado a capturar las prominencias de las propiedades de diferentes escenas y objetivos. los
+p
+utilizar
+de un cambio de relaci\'on seg\'un la escena. Esto est\'a en contraste con el trabajo previo donde
+la prominencia de una propiedad es constante en un dominio. Keysar et al. argumentar que la raz\'on de esto
+generate-and-ajuste procedimiento puede tener que ver con las limitaciones de procesamiento de informaci\'on de la
+mente: si la heur\'istica que gu\'ia la fase egoc\'entrica est\'a bien sintonizados, lo consigue con una adecuada
+Re en la mayor\'ia de los casos y rara vez requiere ajustes. Curiosamente, se observa un comportamiento similar
+con nuestro algoritmo: cuando
+p
+utilizar
+valores aprendidos del dominio se utilizan, el algoritmo no es
+s\'olo es m\'as precisa, pero tambi\'en mucho m\'as r\'apido que cuando se utiliza al azar
+p
+utilizar
+valores

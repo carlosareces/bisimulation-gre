@@ -735,7 +735,8 @@ evitar\'iamos f\'ormulas como $\phi_3$ (es decir con desigualdad). Tambi\'en evi
 %(siempre aparece cuantificado el elemento en la segunda posici\'on de argumento).
 Cada lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. Para la tarea de GER el uso de un lenguaje u otro debe depender del contexto particular considerado y del target a describir.
 
-Para el segundo ejemplo, supongamos que queremos identificar a $e_5$ de la Figura \ref{grafo-GRE3D7-stimulus_b}. Algunas f\'ormulas posibles que identifican a un\'ivocamente a $e_5$ en el modelo se muestran en la Tabla \ref{tab:phis}.
+Para el segundo ejemplo, supongamos que queremos identificar a $e_5$ de la Figura \ref{grafo-GRE3D7-stimulus_b}. Algunas f\'ormulas posibles
+ que identifican a un\'ivocamente a $e_5$ en el modelo se muestran en la Figura \ref{tab:phis}.
 
 \begin{figure}[H]
 $$
@@ -765,26 +766,30 @@ $$
 
 \begin{figure}[H]
 
-\begin{array}{cl}
- ${\phi_1}$: & Esfera roja\\[3pt]
+%\begin{array}{cl}
+ $\phi_1$: La esfera roja \\[3pt]
+
   %
- ${\phi_2}$: & Esfera grande\\[3pt]
+ $\phi_2$: La esfera grande\\[3pt]
+
   %
- ${\phi_3}$: & Esfera grande y roja\\[3pt]
+ $\phi_3$: La esfera grande y roja\\[3pt]
+
   %
- ${\phi_4}$: & Esfera grande y roja que est\'a a la derecha de un cubo grande rojo\\[3pt]
+ $\phi_4$: La esfera grande y roja que est\'a a la derecha de un cubo grande y rojo\\[3pt]
+
   %ex1
- ${\phi_5}$: & Esfera grande y roja \land
-  \forall y . (\neg \nBall(y) \lor \neg \nRightof(x,y))\\[3pt]
+ $\phi_5$: La esfera grande y roja, y los dem\'as elementos o no son esferas o no est\'an a mi lado\\[3pt]
+
   %ex 2
- ${\phi_6}$: & Esfera grande y roja \land
-  \exists y . (x \not\approx y \land \nCube(y) \land \nRightof(x,y))\\[3pt]
+ $\phi_6$: La esfera grande y roja, y est\'a a la derecha de un cubo\\[3pt]
+ % (x \not\approx y \land \nCube(y) \land \nRightof(x,y))
   %ex 3
- ${\phi_7}$: & Esfera grande y roja que tiene un cubo rojo a la izquierda
+ $\phi_7$: La esfera grande y roja que tiene un cubo rojo a la izquierda
   %ex 4
- \end{array}
-$$
-\caption{Posibles realizaciones de las f\'ormulas dadas en \protect\ref{tab:phis}}\label{tab:realizaciones-phis}
+% \end{array}
+%%$$
+\caption{Posibles realizaciones de las f\'ormulas dadas en la Figura \protect\ref{tab:phis}}\label{tab:realizaciones-phis}
 \end{figure}
 
 Notar que $\phi_2$ y $\phi_3$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas.
@@ -820,6 +825,24 @@ En el Cap\'itulo \ref{sec:intro_logica} describimos c\'omo los operadores l\'ogi
 %(\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
 %lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
 
+En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
+\begin{table}[h!]
+\begin{tabular}{l|l}
+  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (LD)\\
+  \hline
+          Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+                Heur\'istica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+  Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+  GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
+                                                                & ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
+  Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
+        & y proposicionales)\\
+  Kelleher and Kruijff (2006)   & $\EL$ \\
+  Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
+\end{tabular}
+\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:algoritmosLogicas}
+\end{table}
+
 
 \section{Mapa de la tesis}
 \label{sec:mapadetesis}
@@ -844,7 +867,13 @@ Est\'a dividido en 4 secciones, en la primer secci\'on formalizamos los diferent
 %Cada l\'ogica tiene una sem\'antica particular, la cual genera un cierto lenguaje.
 
 \subsection{Cap\'itulo~\ref{sec:intro_logica}: ``Usando teor\'ia de modelos: expresividad versus complejidad''} 
-Una vez seleccionado como nuestro lenguaje el \EL y justificamos nuestra selecci\'on. Daremos definiciones b\'asicas de modelo, interpretaci\'on, f\'ormula, hablaremos de la noci\'on de similaridad de 2 elementos u y v del modelo la cual dice que son L-similares ($u \simil{\+L} v$ en el lenguaje $L$), cuando para toda f\'ormula $\phi \in L$, tenemos que $\{u,v\} \subseteq \interp{\phi}$, se dice que no podemos identificarlos por separado, ya que no hay una f\'ormula que satisfaga uno y no el otro, es decir es lo que usaremos para saber cuales son las propiedades y relaciones de una ER para un target particular. Veremos un teorema que acota el ``para todo'' antes mencionado, el cual nos permitir\'a chequear un conjunto finito de f\'ormulas para saber que hay una ER para el target, es decir que no existe otro elemento en el modelo el cual sea una $\simil{\+L}$ al target. 
+Una vez seleccionado como nuestro lenguaje el \EL y justificamos nuestra selecci\'on. Daremos definiciones b\'asicas de modelo, 
+interpretaci\'on, f\'ormula, hablaremos de la noci\'on de similaridad de 2 elementos $u$ y $v$ del modelo la cual dice que son 
+similares en $\+L$ ($u \simil{\+L} v$ en el lenguaje $L$), cuando para toda f\'ormula $\phi \in \+L$, tenemos que 
+$\{u,v\} \subseteq \interp{\phi}$, se dice que no podemos identificarlos por separado, ya que no hay una f\'ormula que satisfaga uno 
+y no el otro.%, es lo que usaremos para saber cuales son las propiedades y relaciones de una ER para un target particular. 
+Veremos un teorema que acota el ``para todo'' antes mencionado, el cual nos permitir\'a chequear un conjunto finito de f\'ormulas 
+para saber si hay una ER para el target, es decir que no existe otro elemento en el modelo el cual sea una $\simil{\+L}$ al target. 
 %Si pudieramos identificar a un elemento de los dem\'as con una f\'ormula diremos que es la expresi\'on referencial para ese elemento en ese 
 %lenguaje. \cite{arec:usin11} dicen que dados dos modelos$\tup{\Delta_1, \interp{\cdot}_1}$ and $\tup{\Delta_2,
 %\interp{\cdot}_2}$, consideremos las siguiente
@@ -871,10 +900,35 @@ terminaci\'on. Adem\'as mostramos completitud, es decir que siempre conseguimos 
 %\subsection{Cap\'itulo~\ref{sec:learning}: ``Probabilidades de uso''} Explicamos como obtener las probabilidades de uso usadas por el algoritmo del Cap\'itulo \ref{sec:algoritmo} a partir de corpus cuando hay disponible o una aproximaci\'on usando aprendizaje autom\'atico cuando no hay corpus disponible para la escena y target considerados. Para aprendizaje autom\'atico usamos caracter\'isticas simples y vemos que son buenas, es decir conseguimos probabilidades de uso que hacen que las ejecusiones del algoritmo consigan ERs como las del corpus, pero tambi\'en descubrimos cosas que no podemos aprender, como por ejemplo que \textcolor{blue}{ACA FALTA!! }
 
 \subsection{Cap\'itulo~\ref{sec:evaluacion}: ``Evaluaci\'on de rankings de expresiones referenciales sobre benchmarks''} 
-En esta tesis se estudiaron las m\'etricas de evaluaci\'on tanto autom\'aticas como manuales. Evaluamos nuestro algoritmo, teniendo en cuenta ambos tipos de m\'etricas. La evaluaci\'on esta dividida en 2 partes. Una parte en la cual comparamos la salida del algoritmo para modelos de los 2 corpus estudiados en la Secci\'on \ref{sec:corpus2} con las expresiones referenciales dadas por los humanos, con ejecusiones del algoritmo tomando probabilidades de uso sacadas del mismo corpus, obtenidas con aprendizaje autom\'atico a partir del corpus, aleatorias y con la distribuci\'on uniforme de las ER dadas por las personas, mostramos la entrop\'ia cruzada entre ellos. Vemos como las probabilidades aprendidas del corpus y con aprendizaje autom\'atico se acercan mucho m\'as al corpus, que las random o unifomes. Y la otra parte una evaluaci\'on manual en la cual pusimos a 2 jueces a decidir cual ER era mejor, o pod\'ian considerarlas igual de buenas, si la del corpus, o la generada por el algoritmo, es interesante notar como muchas veces las ER generadas por el algoritmo eran mejores que las humanas!, el algoritmo tiene la ventaja que siempre da una ER si existe, en cambio los humanos muchas veces dan expresiones ambiguas que no son referenciales. Notamos que al usar las probabilidades aprendidas desde el corpus el algoritmo da ER que son las del top ranking de las personas.
+En esta tesis se estudiaron las m\'etricas de evaluaci\'on tanto autom\'aticas como manuales. Evaluamos los algoritmos presentados 
+en el Cap\'itulo \ref{sec:algoritmo}, teniendo en cuenta ambos tipos de m\'etricas. La evaluaci\'on esta dividida en 2 partes. 
+Una parte en la cual comparamos la salida del algoritmo para modelos de los 2 corpus estudiados en la Secci\'on \ref{sec:corpus2} con
+ las expresiones referenciales dadas por los humanos, con ejecusiones del algoritmo tomando probabilidades de uso sacadas del mismo corpus, 
+obtenidas con aprendizaje autom\'atico a partir del corpus, aleatorias y con la distribuci\'on uniforme de las ER dadas por las personas, 
+mostramos la entrop\'ia cruzada entre ellos. Vemos como las probabilidades aprendidas del corpus y con aprendizaje autom\'atico se acercan 
+mucho m\'as a las del corpus, que las random o unifomes. Y la otra parte una evaluaci\'on manual en la cual 2 jueces humanos decidieron cual
+ ER era mejor entre la del corpus y la generada por el algoritmo, o pod\'ian considerarlas igual de buenas, es interesante notar como muchas 
+veces las ERs generadas por el algoritmo fueron juzgadas por los jueces como mejores que las humanas!. El algoritmo tiene la ventaja que
+ siempre da una ER si existe, en cambio los humanos muchas veces dan expresiones ambiguas que no son referenciales. Notamos que al usar 
+las probabilidades aprendidas desde el corpus el algoritmo d\'a ERs que son las del top ranking de las personas.
 
-\subsection{Cap\'itulo~\ref{sec:corpus}: ``ZOOM: Recolecci\'on y evaluaci\'on en un dominio real\'istico''} Introducimos un nuevo corpus, el ZOOM corpus, el cual fue recolectado en un trabajo conjunto con la Universidad de S\H ao Paulo Brasil, para tener un corpus m\'as natural de expresiones refenciales ya que el corpus nombrado tiene expresiones referenciales de mapas. Los mapas son fragmentos de las ciudades de Madrid y Lisboa. Este corpus fue recolectado en 2 idiomas, espa\~nol y portugues. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el experimento, se explica la manera en que se anot\'o el corpus y se da una evaluaci\'on del corpus conseguido. caso de estudio de 3 mapas del ZOOM corpus explicado en Cap\'itulo \ref{sec:corpus}, en el cual estudiamos un mapa con 1 target sin zoom, el mismo mapa pero zoom 2X, y el mismo mapa pero como 2 targets. Mostramos como funciona el algoritmo para un caso tan real y natural como son los mapas del ZOOM corpus. 
+\subsection{Cap\'itulo~\ref{sec:corpus}: ``ZOOM: Recolecci\'on y evaluaci\'on en un dominio real\'istico''} Introducimos un nuevo corpus, 
+el ZOOM corpus, el cual fue recolectado en un trabajo conjunto con la Universidad de S\H ao Paulo Brasil, 
+para tener un corpus de un dominio m\'as natural de expresiones refenciales ya que el corpus nombrado tiene expresiones referenciales 
+de puntos de interes en mapas. Los mapas son fragmentos de las ciudades de Madrid y Lisboa. Este corpus fue recolectado en 2 idiomas, 
+espa\~nol y portugu\'es. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el 
+experimento, se explica la manera en que se anot\'o el corpus y se eval\'ua un caso de estudio de 3 mapas del ZOOM corpus explicado en
+ Cap\'itulo \ref{sec:corpus}, en el cual estudiamos un mapa con 1 target sin zoom, el mismo mapa pero zoom 2X, y el mismo mapa pero 
+como 2 targets. Mostramos como funciona el algoritmo para un caso tan real y natural como son los mapas del ZOOM corpus. 
 
 
-\subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones''} Se resumen lo estudiado y realizado en esta tesis, se explican las cosas aprendidas, y dan l\'ineas de trabajo futuro. \textcolor{blue}{ACA FALTA!! }
+\subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones''} Se resumen lo estudiado y realizado en esta tesis, se explican las cosas 
+aprendidas, y dan l\'ineas de trabajo futuro. \textcolor{blue}{ACA FALTA!! }
 
+parte trabajo futuro...
+
+Aca agregar trabajo de chico de doctorado de Lu...
+Ejecuci\'on del algoritmo con todos los mapas del corpus ZOOM. Generaci\'on de la distribuci\'on de probabilidades de uso de las palabras
+ mediante aprendizaje autom\'atico y evaluaci\'on de las ERs resultantes.
+El ZOOM corpus, se puede ampliar al idioma ingl\'es, habr\'ia que conseguir hablantes nativos para que completen el experimento, 2 anotadores
+ y un juez que realice la anotaci\'on final.
