@@ -48,10 +48,10 @@ Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\
 
 La \textbf {generaci\'on de expresiones referenciales (GER)} entre todas las subtareas de GLN, es una de las que ha recibido m\'as atenci\'on. En la pr\'actica, la mayor\'ia de los sistemas GLN, con independencia de su finalidad, contiene un m\'odulo GER de alg\'un tipo~\cite{Mellish2004}. Esto no es sorprendente
 en vista del papel central que las expresiones referenciales tienen en la comunicaci\'on. Un sistema que proporciona
-consejos sobre los viajes a\'ereos \cite{white2010generating} tiene que hacer referencia a los vuelos --- {\it el
+consejos sobre los viajes a\'ereos \cite{white2010generating} tiene que hacer referencia a los vuelos ---{\it el
 vuelo m\'as barato}, {\it un vuelo directo}---, un sistema de navegaci\'on para autom\'oviles~\cite{Drager:2012:GLN:2380816.2380908}
 necesita generar descripciones espaciales ---{\it tomar el puente junto a la iglesia, a la derecha}---,
-y un robot que ensambla piezas de juguetes junto con un usuario humano~\cite{foster-etal-ijcai2009} debe hacer referencia a los componentes --- {\it inserte el perno verde hasta el final en el cubo rojo}. Cuando hablamos, nos referimos a cosas (tangibles como un puente, o intangibles como una fecha), es decir generamos expresiones referenciales. Un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales. La generaci\'on autom\'atica de expresiones referenciales es el tema de esta tesis.
+y un robot que ensambla piezas de juguetes junto con un usuario humano~\cite{foster-etal-ijcai2009} debe hacer referencia a los componentes ---{\it inserte el perno verde hasta el final en el cubo rojo}. Cuando hablamos, nos referimos a cosas (tangibles como un puente, o intangibles como una fecha), es decir generamos expresiones referenciales. Un sistema que genera texto, tambi\'en deber\'a generar expresiones referenciales. La generaci\'on autom\'atica de expresiones referenciales es el tema de esta tesis.
 
 Un sistema de GLN incluye 3 etapas: {\bf determinaci\'on de contenido} ---qu\'e decir--- {\bf lexicalizaci\'on} ---con qu\'e palabras--- y {\bf realizaci\'on ling\"{u}\'istica} ---c\'omo decirlo. La selecci\'on de contenido, elige qu\'e informaci\'on incluir en la oraci\'on. La lexicalizaci\'on elige qu\'e lexemas usar para comunicar el contenido determinado por la etapa anterior. Y la realizaci\'on arma la oraci\'on agregando los art\'iculos, preposiciones, y dem\'as palabras funcionales necesarias y orden\'andolos de forma tal que la frase resultante sea gramaticalmente aceptable. 
 
@@ -212,7 +212,7 @@ contexto?. Algunos podemos opinar que s\'i, otros que no.
 % \caption{}\label{representacion-modelo}
 
 %\end{subfigure}%
-\caption{Formalizaci\'on de las propiedades}
+\caption{Formalizaci\'on de las propiedades de la Figura \ref{er-figura1} como un grafo etiquetado}
 \label{representacion-modelo}
 \end{figure}
 
@@ -394,47 +394,6 @@ La generaci\'on de expresiones referenciales en el mundo real sufre de diversas 
 
 \section{Expresiones referenciales usando teor\'ia de modelos}
 \label{sec:gre-teoria-modelos}
-
-\begin{figure}%{.6\textwidth}
- \centering
-\begin{picture}(190,50)
-\put(40,-50){\begin{tikzpicture}
-  [
-    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
-		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
-  ]
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nRed\\[-3pt] 
-      \nBall\end{array}$}, right of=d] (e) {$e_5$};
- \end{tikzpicture}}
- \end{picture}
-\vspace*{1.5cm} 
- \caption{Subgrafo $\nBall \land \nRed$} \label{formula-subgrafo}
-\vspace*{-1cm}
-\begin{picture}(150,50)
-\put(10,-50){\begin{tikzpicture}
-  [
-    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
-		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
-  ]
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nRed\\[-3pt] 
-      \nCube\end{array}$}, right of=b] (d) {$e_4$};
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nRed\\[-3pt] 
-      \nBall\end{array}$}, right of=d] (e) {$e_5$};
- \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
- \end{tikzpicture}}
- \end{picture}
-\vspace*{2cm} 
- \caption{Subgrafo $\nBall \land \nRed \land \exists \nRightof . (\nCube  \land \nRed)$} \label{formula-subgrafo2}
-\vspace*{0.5cm}
-\vspace*{1cm}
-\end{figure}%
-
 
 Los \textbf{modelos relacionales} tambi\'en conocidos como \textbf{modelos de kripke} y \textbf{modelos de primer orden} son muy utilizados para la representaci\'on de situaciones o escenas. 
 Los modelos relacionales son grafos etiquetados y pueden verse tambi\'en como aut\'omatas finitos. Estas estructuras matem\'aticas han sido muy estudiadas y tienen muchas propiedades bien conocidas \ref{arec:hybr05b}. En esta tesis se adaptan algoritmos cl\'asicos de minimizaci\'on de aut\'omatas aplicados a la caracterizaci\'on de modelos relacionales.
@@ -740,7 +699,7 @@ Para el segundo ejemplo, supongamos que queremos identificar a $e_5$ de la Figur
 
 \begin{figure}[H]
 $$
-\begin{array}{cl}
+\begin{array}{ll}
  \phi_1: & \aRed(x) \land \nBall(x)\\[3pt]
   %
  \phi_2: & \aLarge(x) \land \nBall(x)\\[3pt]
@@ -761,8 +720,95 @@ $$
   %ex 4
  \end{array}
 $$
-\caption{Descripciones alternativas para el objeto $e_5$ de la Figura~\protect\ref{figura-er}, con lenguaje de $\FOL$.}\label{tab:phis}
+\caption{F\'ormulas alternativas para el objeto $e_5$ de la Figura~\protect\ref{figura-er}, con lenguaje de $\FOL$.}\label{tab:phis}
 \end{figure}
+
+En la Figura \ref{tab:realizaciones-phis}, se muestran algunas realizaciones posibles de las f\'ormulas mostradas en la Figura \ref{tab:phis}, 2 grafos de f\'ormulas se muestran en la Figura \ref{grafos-formulas}, el de la izquierda pertenece a la f\'ormula $\phi_1$ y el de la derecha a la f\'ormula $\phi$.
+
+ \begin{figure}[!ht]
+ %\begin{center}
+\hspace*{1.5cm} 
+\begin{picture}(0,60)
+\put(80,0){\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+ \end{tikzpicture}}
+\end{picture}
+\begin{picture}(0,100)
+%\hspace*{3.5cm} 
+%\vspace*{5.5cm} 
+
+\put(180,0){\begin{tikzpicture}
+   [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt] 
+		  \nRed\\[-3pt] 
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+ \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+ \end{tikzpicture}}
+ \end{picture}
+%\end{subfigure}
+\caption{Subgrafos que representan las f\'ormulas $\phi_1$ y $\phi_4$}
+\end{figure}
+
+%\begin{figure}%{.6\textwidth}
+ %\centering
+%\begin{subfigure}{.5\textwidth}
+%\put(5,-50){
+%\begin{tikzpicture}
+  %[
+    %n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 %aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  %]
+ %\node[n,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nRed\\[-3pt] 
+      %\nBall\end{array}$}, right of=d] (e) {$e_5$};
+ %\end{tikzpicture}}
+ %
+%%\vspace*{1.5cm} 
+ %\caption{Subgrafo $\nBall \land \nRed$} \label{formula-subgrafo}
+%%\vspace*{-1cm}
+%\end{subfigure}
+%\begin{subfigure}{.5\textwidth}
+%
+%\put(20,-50){\begin{tikzpicture}
+  %[
+    %n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 %aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  %]
+ %\node[n,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nRed\\[-3pt] 
+      %\nCube\end{array}$}, right of=b] (d) {$e_4$};
+ %\node[n,label=below:{
+    %\relsize{-2}$\begin{array}{c}
+      %\nRed\\[-3pt] 
+      %\nBall\end{array}$}, right of=d] (e) {$e_5$};
+ %\draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+ %\end{tikzpicture}}
+%\end{subfigure}
+%\vspace*{-2cm} 
+ %\caption{Subgrafo $\nBall \land \nRed \land \exists \nRightof . (\nCube  \land \nRed)$} \label{formula-subgrafo2}
+%\vspace*{0.5cm}
+%\vspace*{1cm}
+%\end{figure}%
+
+
 
 \begin{figure}[H]
 
