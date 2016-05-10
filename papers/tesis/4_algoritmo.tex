@@ -366,12 +366,12 @@ small		 &0.1499	 &0.1755	  &0.3918 * target-tiene + 0.2478 * landmark-tiene -\\
 				 &				 &					&0.0913\\
 \hline
 \hline
-left-of  &0.0041	 &0.0094	  &0.0131 * target-tiene +\\
+leftof  &0.0041	 &0.0094	  &0.0131 * target-tiene +\\
 				 &				 &					&0.0253 * adj-target-tiene - 0.0507\\
 \hline
-on-top	 &0.0706	 &0.1594	  &0.2942 * target-tiene \\
+ontop	 &0.0706	 &0.1594	  &0.2942 * target-tiene \\
 \hline
-right-of &0.0029	 &0.0049	  &0.0153 * target-tiene + 0.001\\
+rightof &0.0029	 &0.0049	  &0.0153 * target-tiene + 0.001\\
 \hline
 \hline
 left		 &0.0068	 &0.0101	  &0.0346 * adj-target-tiene - 0.0653\\
@@ -389,7 +389,7 @@ center	 &0.0023	 &0.0037	  &0.0047 * target-tiene + 0.0047 * adj-target-tiene +\
 \end{center}
 \end{table}
 
-Las palabras {\it red}, {\it yellow} y {\it top} no aparecen en la Tabla \ref{tabla-linear-regresion-all} porque no aparec\'ian en las ERs del corpus de las im\'agenes consideradas (las que conten\'ian colores verdes y azules).
+Las palabras {\it red} y {\it yellow} no aparecen en la Tabla \ref{tabla-linear-regresion-all} porque no aparec\'ian en las ERs del corpus de las im\'agenes consideradas (las que conten\'ian colores verdes y azules).
 
 %\textbf{A ESTA TABLA LE FALTAN 3... DEBERIA AGREGARLAS!}
 
@@ -682,14 +682,14 @@ si su interpretaci\'on coincide o no con el target. Por ejemplo la interpretaci\
 del contexto. En el contexto de la Figura \ref{figura-y-modelo} ser\'ian: $e_1$, $e_3$ y $e_5$  as\'i como $\interp{\texttt{ball} \land \texttt{yellow}}$ es: $e_1$ y $e_3$.
 Como dijimos anteriormente la \textbf{interpretaci\'on de una f\'ormula} es el conjunto de elementos que satisfacen la f\'ormula. A la interpretaci\'on de una f\'ormula tambi\'en la llamaremos \textbf{clase}.
 Una f\'ormula es \textbf{Informativa} cuando tiene m\'as informaci\'on que las f\'ormulas que hay hasta el momento, es decir, la clase de 
-la f\'ormula est\'a inclu\'ida en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas \texttt{esfera} y \textttt{cubos} y 
+la f\'ormula est\'a inclu\'ida en alguna otra f\'ormula y no es igual. Por ejemplo si tenemos las f\'ormulas \texttt{esfera} y \texttt{cubos} y 
 queremos saber si \texttt{esfera roja} es informativa, si lo es, ya que $e_5$ es una \texttt{esfera roja} y existen otras que no son rojas,
  es decir divide el conjunto de esferas, por lo tanto si es informativa. 
 
 Una f\'ormula es \textbf{subsumida} si ya tenemos subf\'ormulas con m\'as informaci\'on que cubren todo el conjunto de objetos que 
 la f\'ormula cubr\'ia. Por ejemplo, $\top$ que es la f\'ormula a la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen 
-las f\'ormulas \texttt{ball} y \texttt{cube} ya que todos los elementos del contexto \ref{figura-y-modelo} son o esferas o cubos, 
-es decir ya tenemos informaci\'on m\'as precisa de los objetos que $\top$. Mir\'andolo como conjuntos $\interp{\top}$ = \{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_6$, $e_7$\}, y los conjuntos \interp{ball}=\{$e_1$,$e_3$,$e_5$\} y la \interp{cube}=\{$e_2$,$e_4$,$e_6$,$e_7$\}. La union de los conjuntos $\interp{ball}$ y $\interp{cube}$ dan exactamente $\interp{\top}$.
+las f\'ormulas \texttt{ball} y \texttt{cube} ya que todos los elementos de la Figura \ref{figura-y-modelo} son o esferas o cubos, 
+es decir ya tenemos informaci\'on m\'as precisa de los objetos que $\top$. Mir\'andolo como conjuntos $\interp{\top}$ = \{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_6$, $e_7$\}, y los conjuntos \interp{\texttt{ball}}=\{$e_1$,$e_3$,$e_5$\} y la \interp{\textt{cube}}=\{$e_2$,$e_4$,$e_6$,$e_7$\}. La union de los conjuntos $\interp{\texttt{ball}}$ y $\interp{\texttt{cube}}$ dan exactamente $\interp{\top}$.
 
 \textbf{Redundante} es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el 
 contexto de la Figura \ref{figura-y-modelo}, si ya tenemos la f\'ormula \texttt{red ball}, la f\'ormula \texttt{large red ball} es redundante, ya 
@@ -773,7 +773,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 \end{figure}
 
 El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento
-y es inicializado por la descripci\'on m\'as general $\top$.\\
+y es inicializado por la descripci\'on m\'as general $\top$.
 
 Recorremos Rs, para cada R (relaciones de la signatura del dominio REL), primero calculamos R.\randomuse, un n\'umero aleatorio en [0,1], y R.incuse que ser\'a (1 -R.puse) / MaxIterations, siendo MaxIterations el n\'umero m\'aximo de iteraciones del ciclo principal que queremos permitir.
 
@@ -809,8 +809,8 @@ eliminadas.
 
 \section{Ejemplo de ejecuci\'on}
 
-En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el contexto de la Figura \ref{}, considerando la probabilidades de uso mostradas en la Tabla\ref{}, y el modelo que introducimos en la Secci\'on \ref{} el cual se muestra en la Figura \ref{}. Mostraremos la ejecusi\'on del algoritmo sin dar un target singleton, es decir el conjunto de todos los elementos del modelo, son el target. Al finalizar esperamos tener una ER para cada elemento del modelo.
-En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
+En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el contexto y modelo de la Figura \ref{fig4-9}, considerando la probabilidades de uso mostradas en la Tabla\ref{}. Mostraremos la ejecusi\'on del algoritmo sin dar un target singleton, es decir el conjunto de todos los elementos del modelo, son el target. Al finalizar esperamos tener una ER para cada elemento del modelo.
+En el comienzo RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
 
 \begin{figure}[H]
 \begin{subfigure}{0.5\linewidth}
@@ -883,9 +883,10 @@ En el comienzo ER=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6
  %\end{flushleft}
 
 %\vspace*{2cm} 
- %\caption{}\label{representacion-modelo-y-figura}
+
 
 \end{subfigure}
+\caption{Contexto y modelo del ejemplo de ejecuci\'on.}\label{fig4-9}
 \end{figure}
 %\setlength{\unitlength}{1cm}
 %
@@ -1118,7 +1119,7 @@ Por lo tanto, la ER resultante podr\'{i}a ser sobreespecificada. Este es el mism
 que permite el algoritmo incremental. Pero se ha argumentado~\cite{Engelhardt_Bailey_Ferreira_2006}, \cite{Arts_Maes_Noordman_Jansen_2011} que
 un grado mucho mayor de sobreespecificaci\'on se encuentra generalmente en corpora, y esto
 es de hecho lo que se ve en el corpus \textit{GRE3D7}. Como podemos ver en la tabla~\ref{corpus-distribution},
-el target es descripto 16,43 \% de las veces como \texttt{small green ball} cuando \texttt{green ball} ya es una ER. Con el uso de los valores de \puse\ aprendidos con el c\'alculo explicado en la secci\'on anterior, el algoritmo original no pueden simular este comportamiento.\\
+el target es descripto 16,43 \% de las veces como \texttt{small green ball} cuando \texttt{green ball} ya es una ER. Con el uso de los valores de \puse\ aprendidos con el c\'alculo explicado en la secci\'on anterior, el algoritmo original no pueden simular este comportamiento.
 
 Debido a que la idea fundamental del algoritmo es la sem\'antica, la manipulaci\'on sobreespecificaci\'on en
 una forma natural es dif\'{i}cil de obtener. Si dos propiedades tienen la misma interpretaci\'on en un determinado
@@ -1126,7 +1127,7 @@ modelo, entonces una vez que la primera ha sido considerada, la segunda no refin
 obtenidas hasta el momento, y por lo tanto, el algoritmo no la incluir\'a en las descripciones generadas.
 Por otro lado, si hacemos caso omiso de la condici\'on de la restricci\'on de informatividad (es decir,
 el hecho de que la adici\'on de una relaci\'on debe refinar la clase, eliminando algunos de
-los elementos que contiene), entonces corremos el riesgo de generar descripciones como \texttt{bola green green}.\\
+los elementos que contiene), entonces corremos el riesgo de generar descripciones como \texttt{bola green green}.
 
 --No me gusta esta parte--
 Como soluci\'on de compromiso, consideramos la siguiente variaci\'on del algoritmo
@@ -1138,6 +1139,23 @@ lista de probabilidades Rs, se permitir\'a la inclusi\'on de todas las relacione
 descripci\'on (es decir, la clase asociada no est\'a vac\'{i}a). Debido a que esto se hace s\'olo durante
 el primer bucle, sabemos que las propiedades repetidas no aparecer\'an en las ER generadas.
 En los bucles restantes, se a\~nadir\'an propiedades adicionales s\'olo si son de car\'acter informativo.\\
+
+
+La sobreespecificaci\'on est\'a inspirada en la obra de Keysar et al. \cite{keysar:Curr98} sobre el egocentrismo y la producci\'on del lenguaje natural. 
+Keysar et al. argumentar que cuando se produce el lenguaje, la consideraci\'on del interlocutor no se lleva a cabo desde el principio, 
+es m\'as bien un ajuste de \'ultimo momento; Los hablantes adultos producen ERs egoc\'entricamente, al igual que hacen los ni\~nos, 
+pero luego las ajustan de modo que el destinatario de la ER sea capaz de identificarla. El primer paso, egoc\'entrico, es un proceso
+heur\'istico basado en un modelo de la prominencia de la propiedades de la escena que contiene el target. Nuestra definici\'on de
+\puse\ est\'a destinada a capturar las prominencias de las propiedades de diferentes escenas y targets. Los valores de \puse\
+cambian en relaci\'on a la escena considerada. Esto est\'a en contraste con el trabajo previo donde
+la prominencia de una propiedad es constante en un dominio. Keysar et al. argumentar que la raz\'on del procedimiento de 
+generar-y-ajustar puede tener que ver con las limitaciones de procesamiento de informaci\'on de la
+mente: si la heur\'istica que gu\'ia la fase egoc\'entrica est\'a bien sintonizada, consigue una adecuada ER al principio
+y rara vez requerir\'a ajustes. Curiosamente, se observa un comportamiento similar
+con nuestro algoritmo: cuando los valores de \puse\ son
+aprendidos del dominio, el algoritmo no es
+s\'olo es m\'as preciso, sino que tambi\'en es mucho m\'as r\'apido que cuando se utilizan valores de \puse\ aleatorios.
+
 
 \subsection{Generando ER para plurales}
 
@@ -1155,53 +1173,24 @@ y $e_5$ ball, red
 
 En este cap\'itulo se explic\'o la entrada y salida de un algoritmo probabil\'istico el cual toma con entrada el modelo, el cual es una representaci\'on de la figura considerada, una distribuci\'on de probabilidad finita, la cual explicamos como obtenerla en 2 casos: en el caso que hay corpus disponible para la escena considerada y en casos donde al no haber corpus disponible proponemos una aproximaci\'on usando aprendizaje autom\'atico. Se explic\'o el algoritmo en detalle y se ilustr\'o con un ejemplo de ejecuci\'on. Se explic\'o como hace el algoritmo para conseguir las siguientes caracter\'isticas: asegurar terminaci\'on, generar ER relacionales, generar ER no-determin\'isticas, generar sobreespecificaci\'on, generar ER para plurales.
 
-Lu, pidio agregar... escribir bien, y ver como integrar
 
- way we introduce overspecification is inspired by the work of Keysar et al. (1998) on
-egocentrism and a natural language production. Keysar et al. When producing argue That language,
-Considering hearers point of view is not done from the outset but it is rather an afterthought;
-adult speakers produce REs egocentrically, just like children do, but then a REs So THAT adjust the
-addressee is reliable to identify identity unequivocally the target. The first, egocentric, step is a heuristic
-based process in a model of saliency of the scene That contains the target. Our definition of
-p
-use
-Intended is to capture the saliences of the properties for different scenes and targets. The
-p
-use
-Changes of a relation to the scene ACCORDING. This is in contrast With previous work Where
-the saliency of a property is in a constant domain. Keysar et al. Argue That the reason for esta
-generate-and-adjust procedure May Have To Do With Limitations of the information processing
-mind: if the heuristic That guides the egocentric phase is well tunned, it Succeeds with a suitable
-RE in most cases and seldom requires Adjustments. Interestingly, we observe a similar behavior
-With our algorithm: when
-p
-use
-Learned from the domain values are used, the algorithm is not only more accurate but much faster than Present When using random
-p
-use
-values
----
- introducimos manera sobrevaloraci\'on se inspira en la obra de Keysar et al. (1998) sobre
-egocentrismo y la producci\'on del lenguaje natural. Keysar et al. argumentar que cuando se produce el lenguaje,
-considerando oyentes punto de vista no se lleva a cabo desde el principio, pero es m\'as bien una idea de \'ultimo momento;
-hablantes adultos producen RE egoc\'entricamente, al igual que hacen los ni\~nos, pero luego se ajustan de modo que el RE
-destinatario es capaz de identificar la diana de manera inequ\'ivoca. La primera, egoc\'entricos, es un paso heur\'istico
-proceso basado en un modelo de la prominencia de la escena que contiene el destino. Nuestra definici\'on de
-p
-utilizar
-est\'a destinado a capturar las prominencias de las propiedades de diferentes escenas y objetivos. los
-p
-utilizar
-de un cambio de relaci\'on seg\'un la escena. Esto est\'a en contraste con el trabajo previo donde
-la prominencia de una propiedad es constante en un dominio. Keysar et al. argumentar que la raz\'on de esto
-generate-and-ajuste procedimiento puede tener que ver con las limitaciones de procesamiento de informaci\'on de la
-mente: si la heur\'istica que gu\'ia la fase egoc\'entrica est\'a bien sintonizados, lo consigue con una adecuada
-Re en la mayor\'ia de los casos y rara vez requiere ajustes. Curiosamente, se observa un comportamiento similar
-con nuestro algoritmo: cuando
-p
-utilizar
-valores aprendidos del dominio se utilizan, el algoritmo no es
-s\'olo es m\'as precisa, pero tambi\'en mucho m\'as r\'apido que cuando se utiliza al azar
-p
-utilizar
-valores
+Podemos ver por ejemplo que {\it ball} tiene una \puse\ alta, es natural ya que en el corpus todos los targets son {\it ball}, como se v\'e en la Figura \ref{verde-azul}, en cambio se puede ver que {\it cube} no es tan alta y depende de la discernibilidad, este n\'umero en la \puse\ debe leerse como la probabilidad de usar {\it cube} en la descripci\'on del landmark. En los casos de {\it blue} y {\it green} el valor de \puse\ depende de si el target es {\it blue} o {\it green}, entonces si el target es {\it blue}, le d\'a un valor alto a {\it blue} y bajo a {\it green} y viceversa, no depende del valor de discernibilidad en el modelo. En la tabla tambi\'en podemos ver que relaciones como {\it small} y {\it large} tienen un error mucho m\'as alto que el resto de las relaciones, esto se debe a que ellas son propiedades vagas. Este tipo de propiedades no son absolutas y dependen del contexto considerado.
+Las relaciones {\it ontop}, {\it leftof} y {\it rightof} dependen fuertemente si el target tiene o no esa relaci\'on y en caso de tenerla igualmente la \puse\ no es muy alta, esto indica que en un porcentaje del 30\% por ejemplo se usa {\it ontop} y en menos del 3\% {\it leftof} o {\it rightof}, esta observaci\'on fue reportada en (Viethen, 2011). Una caracter\'istica interesante que vemos y que no fue mencionada en trabajo previo es que tama\~no es m\'as frecuente usado para sobreespecificaci\'on cuando el target y el landmark tienen el mismo tama\~no 
+(es usado en ERs sobreespecificadas el 49\% cuando el target y el landmark comparten el tama\~no, y s\'olo el 25\% cuando no lo comparten).
+omo resultado hay algunas relaciones complejas
+entre las caracter\'{i}sticas de las escenas que no es capaz de
+capturar. La caracter\'{i}stica m\'as importante del dominio \textit{GRE3D7}
+que no somos capaces de aprender, y tiene un impacto en nuestro desempe\~no, es que
+las propiedades de tama\~no (es decir, small y large) se utilizan mucho
+m\'as cuando el target no puede ser identificado s\'olo con las propiedades taxon\'omicas absolutas 
+(verde y azul) y (ball y cube). En otras palabras, en el corpus \textit{GRE3D7} se utiliza el tama\~no con m\'as frecuencia (90,2 \%)
+cuando la ER resultante no es sobreespecificada y cuando si es sobreespecificada el (34 \%). 
+Puede que no sea posible aprender esta caracter\'{i}stica de los
+datos del \textit{GRE3D7} ya que incluso con las funciones que dependen de dominio definidos
+en~\cite[Cap\'{i}tulo 6] {viet:gene11}, no pod\'{i}a ser aprendido por \'arboles decisi\'on. 
+Como resultado podemos ver en la Tabla~\ref{probability-of-use} de la Figura 13, el valor estimado para 
+\emph{large} no est\'a cerca de la
+valor calculado a partir de corpus. \textit{En el caso de la TUNA-corpus
+  mostramos que no podemos aprender la dependencia de la dimensi\'on-X y
+  dimensi\'on-y, es decir, cuando una persona a\~nade dimensi\'on-x es altamente
+  probable que incluya la dimensi\'on-y en su expresi\'on referencial.}
