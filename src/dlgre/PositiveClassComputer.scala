@@ -20,6 +20,8 @@ class PositiveClassComputer(carpeta: String,iteration:Int, graph: GraphT[String,
 		rolesOrdenados: List[String],
 		categorias: HashMap[String, String],
 		categoriasAdmitidas: Set[String],
+		targets: HashSet[String],
+		targetAll: Boolean,
 		debugPrint: Boolean) {
 	val classes = new ClassContainer(graph, debugPrint);
 
@@ -59,7 +61,9 @@ class PositiveClassComputer(carpeta: String,iteration:Int, graph: GraphT[String,
 		var todasProb1:Boolean = false; //todas las prob son igual a 1
 		var over:Boolean = true;
 		var allSingletons: Boolean = false;
-
+		//agregue esto
+		var isTarget: Boolean = false;
+		
 		while (!termino) {
 
 			if (!agregoAlgo) { 
@@ -121,9 +125,11 @@ class PositiveClassComputer(carpeta: String,iteration:Int, graph: GraphT[String,
 			if (allSingletons == false) {
 				allSingletons = classes.isAllSingletons;
 			}
-			
+			//agregue esto
+			isTarget=classes.isTarget(targets);
 			if (termino == false) {
-				termino = allSingletons || (!agregoAlgo && todasProb1);
+			  //agregue aca
+				termino = allSingletons || (!agregoAlgo && todasProb1) || isTarget;
 				//if (termino)
 				//	rolesToProbUse = rolesToProbUseOrig;
 			}

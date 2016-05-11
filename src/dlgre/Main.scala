@@ -4,29 +4,53 @@ package dlgre;
 import java.io._
 import Double._
 import scala.xml.parsing.ConstructingParser
-import grapht._;
-import scala.collection.JavaConversions;
+import grapht._
+import scala.collection.JavaConversions
 import scala.collection.mutable.Queue
 import scala.collection.mutable.Set
 import dlgre.formula._
-import grapht._;
+import grapht._
 import java.util.ArrayList
-import org.jgrapht.graph._;
-import scala.collection.mutable._;
-import util.StringUtils.join;
+import org.jgrapht.graph._
+import scala.collection.mutable._
+import util.StringUtils.join
 import scala.util.Random;
+import com.sun.org.apache.xalan.internal.xsltc.compiler.ForEach
 
 object Main {//1
   def main(args : Array[String]) : Unit = {//2
+	//args.foreach(r => {
+	//	println(r);
+	//});
+	
+	val current = new java.io.File( "." ).getCanonicalPath();
+   // println("Current dir: " + current);
+
    	val positiveMode = (args(0) == "positive");
     val maxIteration = args(4);
    	val target = args(3);
    	
+   	var targetAll:Boolean=(args(3) =="all");
+   	val targets:HashSet[String]= new HashSet[String];
+
+   	if( !targetAll){
+	    var sp_target = target.split(",");
+	    sp_target.foreach( tar => {//3
+	    	targets += tar.trim;
+	    	//println (tar);
+	    })
+   	}
+   	//println (targets.toString());
+   	//exit();
+   	
+   	
+   	
+   	
    	//este archivo va a tener las palabras permitidas para overspecificacion
    	val cat = scala.io.Source.fromFile(args(5));
    	//aca reemplace 6 por 5 es el directorio donde se ponen los resultados
-   	val fw = new FileWriter(args(6)+"formula.txt") ;
-   	val fw2 = new FileWriter(args(6)+"texto.txt") ;
+   	val fw = new FileWriter(args(6)+"formula.txt");
+   	val fw2 = new FileWriter(args(6)+"texto.txt");
     var informative:Boolean = false;
 
     val graph = readGraph(args(1));
@@ -62,7 +86,7 @@ object Main {//1
     	num = num + 1;
       }	
       
-      catch { case e: Exception => println("Fail input "+args(2) +" file" + e + line); }
+      catch { case e: Exception => println("Fail input "+args(2) +", " + e + line); }
     })//fin 3
     
     cat.getLines.foreach( line => {//3
@@ -128,7 +152,7 @@ object Main {//1
         	})
         }
         val debugPrint = false;
-        val result = new PositiveClassComputer(args(6),iteration, graph, rolesToProbUse, /*rolesToProbDisc,*/ rolesOrdenados, categorias, categoriasAdmitidas, debugPrint).compute;
+        val result = new PositiveClassComputer(args(6),iteration, graph, rolesToProbUse, /*rolesToProbDisc,*/ rolesOrdenados, categorias, categoriasAdmitidas, targets, targetAll, debugPrint).compute;
         //println("\n-----------------------------------------------------------------------------"+iteration+"\n");
         //println(" done, " + (System.currentTimeMillis - start) + " ms.");
         //println("\nBisimulation classes with their concepts (positive mode):");
@@ -155,13 +179,13 @@ object Main {//1
               result.foreach { 
             	entry2 => entry2.e2.foreach {
             		entry =>
-            			if (entry.extension.asScalaCollection.contains(target)){
+            			//if (entry.extension.asScalaCollection.contains(target)){
 		                  //println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
-		                  //println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
+		                  println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                  fw.write("\n" + entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                  
 		                  fw2.write("\n" + entry.formula.removeConjunctionsWithTop.toString() + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
-		                }
+		                //}
             		}
              
               	}
@@ -187,7 +211,14 @@ object Main {//1
     val result = new BisimulationClassesComputer(graph, List[String](), rolesToProbUse).compute;
 
     var tiempo = System.currentTimeMillis - start;
-    
+   /* println("iglesia->"+Math.abs(new Random().nextFloat()));
+    println("in->"+Math.abs(new Random().nextFloat()));
+    println("CalleDeSantoTomas->"+Math.abs(new Random().nextFloat()));
+    println("MinisterioAsuntosExteriores->"+Math.abs(new Random().nextFloat()));
+    println("frente->"+Math.abs(new Random().nextFloat()));
+    println("CalleDeAtocha->"+Math.abs(new Random().nextFloat()));
+    println("cerca->"+Math.abs(new Random().nextFloat()));
+    */
 
       //println("\nBisimulation classes with their concepts:");
       //result.foreach { fmla => println(simplifier.simplify(fmla).prettyprint + ": " + util.StringUtils.join(fmla.extension(graph).asScalaCollection,",")) };
@@ -225,9 +256,8 @@ object Main {//1
     val ret =  new GraphT[String, String]
     val p = ConstructingParser.fromFile(new File(filename), true)
     val doc: xml.Document = p.document
-
-  
-  
+    //(p.document \ "individual").foreach { indiv =>
+   //modifique ESTO:30-12
   (doc \ "individual").foreach { indiv =>
           val node = mygetattr(indiv, "id");
          
@@ -247,9 +277,11 @@ object Main {//1
     
     ret
   }
-  
+ 
   private def mygetattr(node : scala.xml.Node, attr : String) = {
-    node.attribute(attr) match { 
+     //modifique esto 30-12
+      node.attribute(attr) match {
+      //scala.xml.Node.attribute(attr) match { 
       case Some(a) => a.last.text; 
       case _ => throw new Exception("Undefined attribute " + attr + " in node " + node); 
     }

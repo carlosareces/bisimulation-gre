@@ -113,6 +113,14 @@ def isAllSingletons = {
 		getClasses.forall { cl => cl.e1.extension.size == 1 } //Solamente me fijo en formulas fi_O
 }
 
+def isTarget(targets:HashSet[String])= {
+		var esta: Boolean = false;
+		//var found: Boolean = false;
+		getClasses.foreach { cl => if (cl.e1.extension == targets){esta=true;} }; //Solamente me fijo en formulas fi_O
+		esta
+//classesGraph.getAllNodes.foreach { node => if (node.e1.equals(newEntry1)) { found = true; } };
+}
+
 // Devuelve true, si se agrega nueva formula. Para esto se fija si la formula
 // representa un subconjunto mas chico de elementos (pero no vacio).
 def addAmbos(f1: Formula, set2: Set[Formula]) = {
