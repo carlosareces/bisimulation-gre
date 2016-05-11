@@ -95,7 +95,7 @@ De acuerdo a las propiedades o relaciones que una ER incluya, se clasifica en di
 \subsection{?`\emph{C\'omo} generamos expresiones referenciales?}
 \label{sec:psicolinguistica}
 
-?`C\'omo usamos el lenguaje para trasmitir y entender expresiones referenciales? En la teor\'ia propuesta por \cite{clark1992arenas}} se asume que el hablante usa un principio de dise\~no \'optimo, es decir, los hablantes dise\~nan sus oraciones de tal manera que sus interlocutores tengan suficiente informaci\'on para entenderles, pero no m\'as de la necesaria. Para hacer esto modelan la informaci\'on que es parte del conocimiento mutuo, creencias mutuas y suposiciones mutuas. 
+?`C\'omo usamos el lenguaje para trasmitir y entender expresiones referenciales? En la teor\'ia propuesta por \cite{clark1992arenas} se asume que el hablante usa un principio de dise\~no \'optimo, es decir, los hablantes dise\~nan sus oraciones de tal manera que sus interlocutores tengan suficiente informaci\'on para entenderles, pero no m\'as de la necesaria. Para hacer esto modelan la informaci\'on que es parte del conocimiento mutuo, creencias mutuas y suposiciones mutuas. 
 
 En la investigaci\'on \cite{keysar:Curr98} se discute que bajo ciertas condiciones los interloculores dejan de usar el principio de dise\~no \'optimo. %Cuando las 
 
@@ -125,7 +125,7 @@ La hip\'otesis que eval\'uan es la siguiente:
 \end{displayquote}
 \end{it}
 
-Un \textbf{landmark} de un target en un contexto dado, es un objeto del contexto que est\'a relacionado con el target a trav\'es de una relaci\'on particularmente saliente. Por ejemplo en la Figura \ref{fig-2-2}} el cubo rojo grande que est\'a bajo el target, es el landmark.
+Un \textbf{landmark} de un target en un contexto dado, es un objeto del contexto que est\'a relacionado con el target a trav\'es de una relaci\'on particularmente saliente. Por ejemplo en la Figura \ref{fig-2-2} el cubo rojo grande que est\'a bajo el target, es el landmark.
 Una propiedad o relaci\'on es m\'as \textbf{discriminatoria} que otra cuando, al ser agregada a una ER, elimina m\'as distractores. Por ejemplo, en la Figura \ref{fig-2-2}, el tama\~no del landmark es m\'as discriminatoria que su color: agregar \emph{grande} a la expresi\'on \emph{cubo} elimina 3 distractores, mientras que agregar \emph{rojo} s\'olo elimina 2.
 
 De acuerdo a los resultados de trabajo previo (ver \cite{Pechmann1989}) se asume que se prefiere incluir el color en una ER antes de incluir el tama\~no de un objeto. 
@@ -464,7 +464,7 @@ Vamos a ejemplificar la corrida del algoritmo con el ejemplo de la Figura \ref{f
 ordenada de propiedades es \'esta [tipo, color, tama\~no]. \emph{D} inicialmente es el conjunto de todos los objetos del contexto: 
 \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}.
 En {\it Paso 2} se asigna a \emph{L} la descripci\'on vac\'{i}a, al finalizar la ejecuci\'on, \emph{L} tendr\'a el conjunto de propiedades 
-con los cuales identificaremos a $e_5$, es decir la ER. Se inicializa \emph{C} con el conjunto de distractores de \ȩmph{r}, y $e_5$ en nuestro ejemplo \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, en el {\it Paso 3}. 
+con los cuales identificaremos a $e_5$, es decir la ER. Se inicializa \emph{C} con el conjunto de distractores de \emph{r}, y $e_5$ en nuestro ejemplo \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, en el {\it Paso 3}. 
 La idea del algoritmo es ir eliminando distractores usando las propiedades $A_{i}$ del target en el orden de preferencia \emph{Pref}, por eso, en el {\it Paso 4} recorre las propiedades $A_{i}$. En {\it Paso 5} 
 le asigna a \emph{V} el valor que tiene la propiedad $A_{i}$ para el target \emph{r}, en nuestro ejemplo $e_5$. $RulesOut(A_{i},V)$ es el 
 conjunto de objetos que tienen 
@@ -474,7 +474,7 @@ es {\it esfera}. En el {\it Paso 6}, identifica los objetos en \emph{C} que teng
 es vac\'io, es decir si ya se eliminaron todos los distractores, pero no lo es, por lo tanto contin\'ua con la siguiente propiedad, 
 en este caso con el color, el valor de color para el target es {\it rojo}, agrega {\it rojo} a \emph{L}, y actualiza \emph{C} con 
 $\emptyset$ porque tanto $e_{1}$ como $e_{3}$ son amarillos, en {\it Paso 10} pregunta si \emph{C} es vac\'io, y si lo es, 
-por lo tanto devuelve \{{\it esfera}, \it{rojo}\}. Lo cual se podr\'ia realizar como {\it La esfera roja}, y ser\'ia una ER para el target considerado.
+por lo tanto devuelve \{{\it esfera}, {\it rojo}\}. Lo cual se podr\'ia realizar como {\it La esfera roja}, y ser\'ia una ER para el target considerado.
 
 
 Luego se propusieron extensiones del algoritmo Incremental, por ejemplo, una extensi\'on que permite la generaci\'on de referencia teniendo 
