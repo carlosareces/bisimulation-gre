@@ -98,79 +98,7 @@ El sistema toma como entrada el contexto representado por el modelo $\+M$, como 
 \caption{Modelo que representa a la figura.}
 \label{figura-y-modelo}
 \end{figure}
-\newpage
 
-
-\vspace*{10cm}
-\begin{figure}[H]
-  \centering
-%\includegraphics[width=\textwidth]{images/22sinletras.jpg}
-%%\caption{Ejemplo de contexto}
-%\label{GRE3D7-stimulus1-b}
-\vspace*{1cm}
-\begin{picture}(250,0)
-\put(0,-50){\begin{tikzpicture}
-  [
-    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
-		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
-  ]
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-		  \nLeft\\[-3pt]
-      \nSmall\\[-3pt] 
-      \nYellow \\[-3pt] 
-      \nBall\end{array}$}] (a) {$e_1$};
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}     
-		  \nLeft\\[-3pt]
-      \nSmall\\[-3pt] 
-      \nRed\\[-3pt] 
-      \nCube\end{array}$}, right of=a] (b) {$e_2$};
- \node[n,label=above:{
-    \relsize{-2}$\begin{array}{c}     
-      \nTop\\[-3pt] 
-			\nLeft\\[-3pt] 
-			\nSmall\\[-3pt] 
-      \nYellow\\[-3pt] 
-      \nBall\end{array}$}, above of=b] (c) {$e_3$};
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nLarge\\[-3pt] 
-      \nRed\\[-3pt] 
-      \nCube\end{array}$}, right of=b] (d) {$e_4$};
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nLarge\\[-3pt] 
-      \nRed\\[-3pt] 
-      \nBall\end{array}$}, right of=d] (e) {$e_5$};
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nSmall\\[-3pt] 
-      \nYellow\\[-3pt] 
-      \nCube\end{array}$}, right of=e] (f) {$e_6$};
- \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}
-      \nSmall\\[-3pt]
-      \nRed\\[-3pt] 
-      \nCube\end{array}$},  right of=f] (g) {$e_7$};
- \draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
- \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
- \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
- \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
- \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
- \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
- %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
- %\draw[dotted] (-0.5,-1.5) rectangle (8,3);
- \end{tikzpicture}}
- \end{picture}
- %\end{flushleft}
-
-%\vspace*{2cm} 
- %\caption{}\label{representacion-modelo-y-figura}
-
-\end{figure}
-
-\newpage
 El algoritmo tambi\'en toma como entrada una distribuci\'on de probabilidad de las propiedades y relaciones de la signatura del modelo. Esta lista de probabilidades Rs, es una lista de pares de tuplas (R, R.\puse) que vinculan a cada relaci\'on R a una cierta probabilidad de uso R.\puse\ ordenada de mayor a menor por \puse\ . La distribuci\'on de probabilidad para el modelo del ejemplo se ilustra en la Figura \ref{probabilidades-escena}, hay algunas relaciones que no se nombran por tener probabilidad de uso 0, en la escena considerada. Desde ahora en adelante llamaremos R ya sea a las propiedades o a las relaciones, es decir trataremos de la misma manera a todas, como si fueran relaciones binarias, y para que el algoritmo pueda tratar tanto a las propiedades unarias como a las relaciones binarias de la misma forma, a las unarias las relacionamos con un elemento adicional ficticio agregado al contexto. Por ejemplo, se codifica el hecho de que $e_1$ es \emph{yellow} diciendo que est\'a relacionado con el elemento ficticio por la relaci\'on binaria \emph{yellow}. 
 
 \begin{table}[H]
@@ -718,9 +646,10 @@ que est\'an a la izquierda de alg\'un cubo.
 \begin{algorithm}[H]
 \floatname{algorithm}{Algoritmo}
 
-\floatname{algorithm}{Algoritmo}
+%\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
 \caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
+\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \KwIn{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
  de relaciones con sus valores de \puse\, odenados por \puse}
 \KwOut{\footnotesize Un conjunto de f\'ormulas \RE tal que
@@ -814,13 +743,13 @@ eliminadas.
 \section{Ejemplo de ejecuci\'on}
 
 En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el contexto y modelo de la Figura \ref{fig4-9}, considerando la probabilidades de uso mostradas en la Tabla\ref{}. Mostraremos la ejecusi\'on del algoritmo sin dar un target singleton, es decir el conjunto de todos los elementos del modelo, son el target. Al finalizar esperamos tener una ER para cada elemento del modelo.
-En el comienzo RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$ como se puede ver en la Figura~\ref{fig-modelo}.\\
-
+En el comienzo RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$.
+\vspace*{1cm}
 \begin{figure}[H]
 \begin{subfigure}{0.5\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/22.jpg}
-\vspace*{1cm}
+%\vspace*{1cm}
 %\caption{Input scene}
 \label{GRE3D7-stimulus-22}
 \end{subfigure}
@@ -839,11 +768,13 @@ En el comienzo RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6
   ]
  \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
+		  \nLeft\\[-3pt]
       \nSmall\\[-3pt] 
       \nYellow \\[-3pt] 
       \nBall\end{array}$}] (a) {$e_1$};
  \node[n,label=below:{
-    \relsize{-2}$\begin{array}{c}     
+    \relsize{-2}$\begin{array}{c} 
+		  \nLeft\\[-3pt]
       \nSmall\\[-3pt] 
       \nRed\\[-3pt] 
       \nCube\end{array}$}, right of=a] (b) {$e_2$};
@@ -881,41 +812,14 @@ En el comienzo RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6
  \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
  \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
  %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
- \draw[dotted] (-0.5,-1.5) rectangle (8,3);
+ \draw[dotted] (-0.5,-1.8) rectangle (8,3.7);
  \end{tikzpicture}}
  \end{picture}
- %\end{flushleft}
-
-%\vspace*{2cm} 
-
-
+%\end{flushleft}
+\vspace*{-2cm} 
 \end{subfigure}
 \caption{Contexto y modelo del ejemplo de ejecuci\'on.}\label{fig4-9}
 \end{figure}
-%\setlength{\unitlength}{1cm}
-%
-%\newsavebox{\mybox} 
-%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo2.png}} 
- %\begin{figure}
-   %\begin{picture}(8,6)
-  %\put(0,0){\usebox{\mybox}} 
-  %%\put(2,2.5){\oval(6,5)}
-   %\end{picture}   
- %\end{figure} 
-%
-%\begin{figure}[ht]
-%\begin{center}
-%\frame{\includegraphics[width=8cm]{images/modelo2.png}}\\[0pt]
-%\caption{Propiedades proposicionales en cuadro rojo, las del primer ciclo del algoritmo}
-%\label{fig-modelo2}
-%\end{center}
-%\end{figure}
-%
-%La primer relaci\'on a considerar es 'esfera', 
-%
-%La f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on tiene al menos un elemento, a continuaci\'on, para cada f\'ormula
- %$\psi$ en ER la conjunci\'on
-%$\varphi  \wedge \psi$ no necesita estar subsumida in ER, la $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\psi}$. Luego las f\'ormulas subsumidas se borran.
 
 La primer relaci\'on a considerar es \texttt{ball}, recordemos que la f\'ormula $\varphi$ se a\~nadir\'a a ER si su interpretaci\'on 
 tiene al menos un elemento, $\interp{\varphi \cup \psi}$ no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta 
@@ -923,22 +827,10 @@ de $\interp{\psi}$.
 
 ER = \{$\top$, \texttt{ball}\}, se ven los elementos de la f\'ormula \texttt{ball} en un recuadro en la Figura~\ref{fig-modelo3}.
 
-%\setlength{\unitlength}{1cm}
-%
-%\newsavebox{\mybox} 
-%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo3.png}} 
- %\begin{figure}
-   %\begin{picture}(8,6)
-  %\put(0,0){\usebox{\mybox}} 
-  %%\put(2,2.5){\oval(6,5)}
-   %\end{picture}   
- %\end{figure} 
-
-
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo3.png}}\\[0pt]
-\caption{El cuadro indica los elementos que satisfacen la f\'ormula \texttt{ball}.}
+\frame{\includegraphics[width=8cm]{ejecucion/1-ball.jpg}}\\[0pt]
+\caption{Elementos que satisfacen la f\'ormula \texttt{ball}.}
 \label{fig-modelo3}
 \end{center}
 \end{figure}
@@ -959,7 +851,7 @@ $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, quedando las particiones co
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo4.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{ejecucion/2.jpg}}\\[0pt]
 \caption{Cuadros indicando \texttt{ball} y \texttt{cube}.}
 \label{fig-modelo4}
 \end{center}
@@ -969,21 +861,10 @@ $\interp{\texttt{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on
 $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red}\}$, 
 las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
 
-%\setlength{\unitlength}{1cm}
-%
-%\newsavebox{\mybox} 
-%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo9.png}} 
- %\begin{figure}
-   %\begin{picture}(8,6)
-  %\put(0,0){\usebox{\mybox}} 
-  %%\put(2,2.5){\oval(6,5)}
-   %\end{picture}   
- %\end{figure} 
-
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo9.png}}\\[0pt]
-\caption{Cuadros indicando \texttt{ball}, \texttt{cube} y texttt{red}.}
+\frame{\includegraphics[width=8cm]{ejecucion/3.jpg}}\\[0pt]
+\caption{Cuadros indicando \texttt{ball}, \texttt{cube} y \texttt{red}.}
 \label{fig-modelo9}
 \end{center}
 \end{figure}
@@ -993,20 +874,9 @@ Siguiendo con \texttt{yellow}, tenemos, $\interp{\texttt{yellow}}$ = $\{e_1, e_3
 Note que aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, y la f\'ormula \texttt{cube} tambi\'en. 
 Se muestran particiones resultantes, en Figura~\ref{fig-modelo10}.
 
-%\setlength{\unitlength}{1cm}
-%
-%\newsavebox{\mybox} 
-%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo10.png}} 
- %\begin{figure}
-   %\begin{picture}(8,6)
-  %\put(0,0){\usebox{\mybox}} 
-  %%\put(2,2.5){\oval(6,5)}
-   %\end{picture}   
- %\end{figure} 
-
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo10.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{ejecucion/4.jpg}}\\[0pt]
 \caption{Cuadros indicando \texttt{ball}, \texttt{cube}, \texttt{red} y \texttt{yellow}.}
 \label{fig-modelo10}
 \end{center}
@@ -1177,24 +1047,11 @@ y $e_5$ ball, red
 
 En este cap\'itulo se explic\'o la entrada y salida de un algoritmo probabil\'istico el cual toma con entrada el modelo, el cual es una representaci\'on de la figura considerada, una distribuci\'on de probabilidad finita, la cual explicamos como obtenerla en 2 casos: en el caso que hay corpus disponible para la escena considerada y en casos donde al no haber corpus disponible proponemos una aproximaci\'on usando aprendizaje autom\'atico. Se explic\'o el algoritmo en detalle y se ilustr\'o con un ejemplo de ejecuci\'on. Se explic\'o como hace el algoritmo para conseguir las siguientes caracter\'isticas: asegurar terminaci\'on, generar ER relacionales, generar ER no-determin\'isticas, generar sobreespecificaci\'on, generar ER para plurales.
 
-
-Podemos ver por ejemplo que {\it ball} tiene una \puse\ alta, es natural ya que en el corpus todos los targets son {\it ball}, como se v\'e en la Figura \ref{verde-azul}, en cambio se puede ver que {\it cube} no es tan alta y depende de la discernibilidad, este n\'umero en la \puse\ debe leerse como la probabilidad de usar {\it cube} en la descripci\'on del landmark. En los casos de {\it blue} y {\it green} el valor de \puse\ depende de si el target es {\it blue} o {\it green}, entonces si el target es {\it blue}, le d\'a un valor alto a {\it blue} y bajo a {\it green} y viceversa, no depende del valor de discernibilidad en el modelo. En la tabla tambi\'en podemos ver que relaciones como {\it small} y {\it large} tienen un error mucho m\'as alto que el resto de las relaciones, esto se debe a que ellas son propiedades vagas. Este tipo de propiedades no son absolutas y dependen del contexto considerado.
-Las relaciones {\it ontop}, {\it leftof} y {\it rightof} dependen fuertemente si el target tiene o no esa relaci\'on y en caso de tenerla igualmente la \puse\ no es muy alta, esto indica que en un porcentaje del 30\% por ejemplo se usa {\it ontop} y en menos del 3\% {\it leftof} o {\it rightof}, esta observaci\'on fue reportada en (Viethen, 2011). Una caracter\'istica interesante que vemos y que no fue mencionada en trabajo previo es que tama\~no es m\'as frecuente usado para sobreespecificaci\'on cuando el target y el landmark tienen el mismo tama\~no 
-(es usado en ERs sobreespecificadas el 49\% cuando el target y el landmark comparten el tama\~no, y s\'olo el 25\% cuando no lo comparten).
-omo resultado hay algunas relaciones complejas
-entre las caracter\'{i}sticas de las escenas que no es capaz de
+En el c\'alculo de probabilidades de uso de las palabras con nuestra versi\'on simplista, podemos ver cosas interesantes como por ejemplo que {\it ball} tiene una \puse\ alta, ya que en el corpus considerado todos los targets son {\it ball}, en cambio la probabilidad de {\it cube} no es tan alta y depende de la discernibilidad, si aparece, aparece en la descripci\'on del landmark. Para {\it blue} y {\it green} el valor de \puse\ depende de si el target es {\it blue} o {\it green}, entonces si el target es {\it blue}, le d\'a un valor alto a {\it blue} y bajo a {\it green} y viceversa. Las relaciones {\it ontop}, {\it leftof} y {\it rightof} dependen fuertemente si el target tiene o no esa relaci\'on y en caso de tenerla igualmente la \puse\ no es muy alta, esto indica que en un porcentaje del 30\% por ejemplo se usa {\it ontop} y en menos del 3\% {\it leftof} o {\it rightof}, ya reportado en trabajo previo. Vimos que el tama\~no es m\'as frecuente usado para sobreespecificaci\'on cuando el target y el landmark tienen el mismo tama\~no (es usado en ERs sobreespecificadas el 49\% cuando el target y el landmark comparten el tama\~no, y s\'olo el 25\% cuando no lo comparten).
+Hay algunas relaciones complejas entre las caracter\'{i}sticas de las escenas que no somos capaces de
 capturar. La caracter\'{i}stica m\'as importante del dominio \textit{GRE3D7}
 que no somos capaces de aprender, y tiene un impacto en nuestro desempe\~no, es que
 las propiedades de tama\~no (es decir, small y large) se utilizan mucho
 m\'as cuando el target no puede ser identificado s\'olo con las propiedades taxon\'omicas absolutas 
 (verde y azul) y (ball y cube). En otras palabras, en el corpus \textit{GRE3D7} se utiliza el tama\~no con m\'as frecuencia (90,2 \%)
 cuando la ER resultante no es sobreespecificada y cuando si es sobreespecificada el (34 \%). 
-Puede que no sea posible aprender esta caracter\'{i}stica de los
-datos del \textit{GRE3D7} ya que incluso con las funciones que dependen de dominio definidos
-en~\cite[Cap\'{i}tulo 6] {viet:gene11}, no pod\'{i}a ser aprendido por \'arboles decisi\'on. 
-Como resultado podemos ver en la Tabla~\ref{probability-of-use} de la Figura 13, el valor estimado para 
-\emph{large} no est\'a cerca de la
-valor calculado a partir de corpus. \textit{En el caso de la TUNA-corpus
-  mostramos que no podemos aprender la dependencia de la dimensi\'on-X y
-  dimensi\'on-y, es decir, cuando una persona a\~nade dimensi\'on-x es altamente
-  probable que incluya la dimensi\'on-y en su expresi\'on referencial.}
