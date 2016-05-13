@@ -1,22 +1,20 @@
 \chapter{Evaluaci\'on de rankings sobre benchmarks}
 \label{sec:evaluacion}
 
-En esta secci\'on se presenta una evaluaci\'on del algoritmo propuesto. En particular, se muestra que el algoritmo de refinamiento probabil\'{i}stico con sobreespecificaci\'on es capaz de generar una distribuci\'on similar a la observada en los corpus. 
+En esta secci\'on se presenta una evaluaci\'on del algoritmo propuesto en la secci\'on anterior. En particular, se muestra que el algoritmo de refinamiento probabil\'{i}stico con sobreespecificaci\'on es capaz de generar un ranking de ERs que es similar a la distribuci\'on de frecuencias de las ERs observada en corpora. 
 
-Este cap\'itulo esta dividido en tres secciones, en la primera secci\'on se muestran comparaciones de rankings de ERs dadas por nuestro algoritmos con 3 diferentes distribuciones de probabilidades como entrada, contra las ERs humanas existentes en el corpus. El corpus usado para la comparaci\'on es el GRE3D7 ya que ese corpus tiene un ranking de ERs dadas por humanos para cada escena.
+Este cap\'itulo esta dividido en tres secciones, en la primera secci\'on se muestra un ejemplo de ranking de ERs del corpus GRE3D7 comparado con el ranking de ERs generadas por el algoritmo de refinamiento probabil\'istico, usando probabilidades de uso aprendidas desde las dem\'as im\'agenes del GRE3D7. Se comparan ambos rankings y se d\'a la presici\'on, es decir el porcentaje de matcheo perfecto. Se muestran las ERs generadas por el algoritmo que no estan en el corpus, y se argumenta que son buenas para identificar al target igual que las dem\'as. Luego en la Secci\'on \ref{sec:compara-varias} explicamos la misma comparaci\'on pero teniendo en cuenta todas las escenas verde-azules del corpus GRE3D7 y hacemos comparaciones de rankings de ERs dadas por nuestro algoritmos con 3 diferentes distribuciones de probabilidades como entrada, contra las ERs humanas existentes en el corpus. Mostramos la entrop\'ia cruzada entre las distribuciones propuestas y la del corpus. El corpus usado para la comparaci\'on es el GRE3D7 ya que ese corpus tiene un ranking de ERs dadas por humanos para cada escena.
 %, Incluso cuando no se dispone de corpus espec\'{i}fica para un objeto de destino determinado.
 
 %Se discuten en detalle los experimentos ejecutados para la escena que se muestra en la Figura~\ref{GRE3D7-stimulus},  %(escena 3 en el corpus GRE3D7)
 %a continuaci\'on, un resumen de los resultados de las otras siete escenas que utilizamos para las pruebas.
 %https://docs.google.com/spreadsheets/d/1Hn2fqQZBqkJscUE62UakNsKmMKOvLodvLoAbztT6kV4/edit#gid=6 en drive
 
-\section{Precici\'on del ranking de expresiones referenciales}
+\section{Precisi\'on del ranking de expresiones referenciales}
 \label{sec:compara}
 
-En esta secci\'on mostraremos una comparaci\'on del ranking de ERs dadas por el algoritmo con las probabilidades de uso calculadas como se describe en la Secci\'on~\ref{sec:learning}, es decir con aprendizaje autom\'atico a partir de las dem\'as im\'agenes del corpus y ejecutando nuestro algoritmo 10000 veces (este n\'umero es excesivamente grande en comparaci\'on con 140 que es el n\'umero de ER que tiene el corpus para la im\'agen considerada. Como el algoritmo es muy r\'apido, poner un n\'umero grande no ayuda a obtener una amplia variedad de ERs, o que las mismas se acumulen un poco m\'as, para poder ver tendencias.), obtuvimos 14 expresiones referenciales diferentes para la Figura~\ref{GRE3D7-stimulus}, el corpus tiene 12 ERs diferentes.
+En esta secci\'on mostraremos una comparaci\'on del ranking de ERs dadas por el algoritmo con las probabilidades de uso calculadas como se describe en la Secci\'on~\ref{sec:learning}, es decir con aprendizaje autom\'atico a partir de las dem\'as im\'agenes del corpus y ejecutando nuestro algoritmo 10000 veces (este n\'umero es excesivamente grande en comparaci\'on con 140 que es el n\'umero de ER que tiene el corpus para la im\'agen considerada. Como el algoritmo es muy r\'apido, poner un n\'umero grande nos ayuda a obtener una amplia variedad de ERs, o que las mismas se acumulen un poco m\'as, para poder ver tendencias.), obtuvimos 14 expresiones referenciales diferentes para la Figura~\ref{contexto-evaluacion}, el corpus tiene 12 ERs diferentes.
  
-El contexto considerado para la comparaci\'on se muestra en la Figura \ref{contexto-evaluacion}, que es una im\'agen del corpus GRE3D7 que hemos visto anteriormente en la tesis.
-
 \begin{figure}[!ht]
 \centering
 \includegraphics[width=.6\textwidth]{images/3.jpg}\\[0pt]
@@ -27,7 +25,7 @@ El contexto considerado para la comparaci\'on se muestra en la Figura \ref{conte
 
 La \textbf{precisi\'on} es la proporci\'on de coincidencias perfectas entre la salida de algoritmo y las ERs de humanos desde el corpus. 
 La primer comparaci\'on de rankings de ERs se muestra en la Tabla \ref{results-algo-fig3}. Para cada ER, indicamos el n\'umero de veces que aparece en el corpus (\#Cor), la proporci\'on que representa (\%Cor), el n\'umero de veces que se gener\'o por nuestro algoritmo (\#Alg) y la proporci\'on que representa (\%Alg).
-Por \'ultimo, la precisi\'on (\%Acc) compara los ERs en el corpus con las ERs generadas por el algoritmo. 
+Por \'ultimo, la precisi\'on (\%Acc) nos d\'a el porcentaje de aciertos de las ERs generadas por el algoritmo. 
 
 \begin{table}[H]
 \begin{small}
@@ -37,27 +35,27 @@ Por \'ultimo, la precisi\'on (\%Acc) compara los ERs en el corpus con las ERs ge
 \multirow{2}{*}{Expresiones Referenciales} & \multicolumn{2}{|c|}{Corpus} & \multicolumn{2}{|c|}{Algoritmo} & Precici\'on \\ \cline{2-6} 
  & \#Cor & \multicolumn{1}{|c|}{\%Cor} & \multicolumn{1}{|c|}{\#Alg} & \multicolumn{1}{|c|}{\%Alg} & \multicolumn{1}{|c|}{\%Acc} \\
 \hline
-esfera,verde                                    & 91 & 65.00 & 6376 & 63.76 & 63.76 \\
-esfera,verde,peque\~no                              & 23 & 16.43 & 3440 & 34.40 & 16.43 \\
-esfera,verde,peque\~no,arriba-de(azul,cubo,grande)      &  8 &  5.71 &    0 &  0.00 &  0.00\\
-esfera,verde,arriba-de(azul,cubo)                  &  5 &  3.57 &    0 &  0.00 &  0.00\\
-esfera,verde,arriba-de(azul,cubo,grande)            &  5 &  3.57 &    0 &  0.00 &  0.00\\
-esfera,verde,peque\~no,arriba-de(azul,cubo)            &  2 &  1.43 &    0 &  0.00 &  0.00\\
-esfera,arriba-de(cubo)                             &  1 &  0.71 &   27 &  0.27 &  0.27 \\
-esfera,verde,peque\~no,arriba-de(azul,cubo,grande,izquierda) &  1 &  0.71 &    0 &  0.00 &  0.00\\
-esfera,peque\~no,arriba-de(cubo,grande)	              &  1 &  0.71 &    2 &  0.02 &  0.02 \\
-esfera,verde,arriba                                &  1 &  0.71 &    0 &  0.00 &  0.00\\
-esfera,peque\~no,arriba-de(cubo)                       &  1 &  0.71 &    3 &  0.03 &  0.03 \\
-esfera,verde,arriba-de(cubo)                       &  1 &  0.71 &    0 &  0.00 &  0.00\\
-esfera,frontal,verde                              &  0 &  0.00 &   97 &  0.97 &  0.00\\
-esfera,frontal,verde,peque\~no                        &  0 &  0.00 &   13 &  0.13 &  0.00\\
-esfera,frontal,arriba                                &  0 &  0.00 &   12 &  0.12 &  0.00\\
-esfera,verde,izquierda	                              &  0 &  0.00 &   11 &  0.11 &  0.00\\
-esfera,arriba                                      &  0 &  0.00 &   10 &  0.10 &  0.00\\
-esfera,verde,izquierda,peque\~no                         &  0 &  0.00 &    5 &  0.05 &  0.00\\
-esfera,izquierda,arriba                                 &  0 &  0.00 &    2 &  0.02 &  0.00\\
-esfera,peque\~no,arriba                                &  0 &  0.00 &    1 &  0.01 &  0.00\\
-esfera,frontal,arriba-de(cubo,izquierda)                  &  0 &  0.00 &    1 &  0.01 &  0.00\\
+ball, green                                    & 91 & 65.00 & 6376 & 63.76 & 63.76 \\
+ball, green, small                              & 23 & 16.43 & 3440 & 34.40 & 16.43 \\
+ball, green, small, ontop(blue,cubo,grande)      &  8 &  5.71 &    0 &  0.00 &  0.00\\
+ball, green, ontop(blue,cubo)                  &  5 &  3.57 &    0 &  0.00 &  0.00\\
+ball, green, ontop(blue,cubo,grande)            &  5 &  3.57 &    0 &  0.00 &  0.00\\
+ball, green, small, ontop(blue,cubo)            &  2 &  1.43 &    0 &  0.00 &  0.00\\
+ball, ontop(cubo)                             &  1 &  0.71 &   27 &  0.27 &  0.27 \\
+ball, green, small, ontop(blue,cubo,grande,izquierda) &  1 &  0.71 &    0 &  0.00 &  0.00\\
+ball, small, ontop(cubo,grande)	              &  1 &  0.71 &    2 &  0.02 &  0.02 \\
+ball, green,arriba                                &  1 &  0.71 &    0 &  0.00 &  0.00\\
+ball, small, ontop(cubo)                       &  1 &  0.71 &    3 &  0.03 &  0.03 \\
+ball, green, ontop(cubo)                       &  1 &  0.71 &    0 &  0.00 &  0.00\\
+ball, center, green                              &  0 &  0.00 &   97 &  0.97 &  0.00\\
+ball, center, green, small                        &  0 &  0.00 &   13 &  0.13 &  0.00\\
+ball, center,arriba                                &  0 &  0.00 &   12 &  0.12 &  0.00\\
+ball, green,izquierda	                              &  0 &  0.00 &   11 &  0.11 &  0.00\\
+ball,arriba                                      &  0 &  0.00 &   10 &  0.10 &  0.00\\
+ball, green,izquierda, small                         &  0 &  0.00 &    5 &  0.05 &  0.00\\
+ball,izquierda,arriba                                 &  0 &  0.00 &    2 &  0.02 &  0.00\\
+ball, small,arriba                                &  0 &  0.00 &    1 &  0.01 &  0.00\\
+ball, center, ontop(cubo,izquierda)                  &  0 &  0.00 &    1 &  0.01 &  0.00\\
 
 \hline
 Total & 140 & 100.00 & 10000 & 100 & 80.51 \\
@@ -70,7 +68,7 @@ Total & 140 & 100.00 & 10000 & 100 & 80.51 \\
 \end{table}
 
 
-Es interesante ver que con los valores de \puse\ aprendidos desde el corpus el algoritmo genera s\'olo un peque\~no conjunto de ER con una alta probabilidad. De estas 14 ER diferentes, 5 son las ER m\'as frecuentes encontradas en el corpus (el corpus tiene 140 ER para cada escena) de hecho, 98 \% de las expresiones generadas por el algoritmo para esta escena aparece en el corpus. Las 9 ER restantes generadas por el algoritmo, no estan presente en el corpus, pero son muy naturales como se puede observar en la Tabla \ref{results-algo-fig3}. La m\'etrica de precisi\'on ha sido utilizada en trabajos anteriores para comparar la salida de un algoritmo de generaci\'on de ER con las ERs que se encuentran en corpora~\cite{sluis07:eval,viet:gene11} y se considera una m\'etrica muy estricta para esta tarea.
+Es interesante ver que con los valores de \puse\ aprendidos desde el corpus el algoritmo genera s\'olo un peque\~no conjunto de ER con una alta probabilidad. De estas 14 ER diferentes, 5 son las ER m\'as frecuentes encontradas en el corpus (el corpus tiene 140 ER para cada escena) de hecho, 98 \% de las expresiones generadas por el algoritmo para esta escena aparece en el corpus. La presici\'on total es de 80\%. Las 9 ER generadas por el algoritmo, que no estan presente en el corpus, son muy naturales como se puede observar en la Tabla \ref{results-algo-fig3}. La m\'etrica de precisi\'on ha sido utilizada en trabajos anteriores para comparar la salida de un algoritmo de generaci\'on de ER con las ERs que se encuentran en corpora~\cite{sluis07:eval,viet:gene11} y se considera una m\'etrica muy estricta para esta tarea.
 
 \begin{table}[h!]
 \begin{small}
@@ -78,16 +76,16 @@ Es interesante ver que con los valores de \puse\ aprendidos desde el corpus el a
 \begin{tabular}{|l|c|c|}
 \hline
 ER & cantidad & porcentaje\\ \hline
-ball,front,green	&	72 &0,72\% \\
-ball,front,green,small	&	31 &0,31\% \\
-ball,small,top &8 &0,08\% \\
-ball,front,top	&	7 &0,07\% \\
-ball,front,on-top(cube)&	5 &0,05\% \\
-ball,top & 4 &0,04\% \\
-ball,front,on-top(cube,front)	&	1&0,01\% \\
-ball,on-top(blue,cube,front)	&	1&0,01\% \\
-ball,on-top(blue,cube,front),small	&	1&0,01\% \\
-ball,on-top(cube,front),small	&	1&0,01\% \\
+ball, center, green	&	72 &0,72\% \\
+ball, center, green, small	&	31 &0,31\% \\
+ball, small, top &8 &0,08\% \\
+ball, center, top	&	7 &0,07\% \\
+ball, center, ontop(cube)&	5 &0,05\% \\
+ball, top & 4 &0,04\% \\
+ball, center, ontop(cube, center)	&	1&0,01\% \\
+ball, ontop(blue, cube, center)	&	1&0,01\% \\
+ball, small, ontop(blue, cube, center)	&	1&0,01\% \\
+ball, small, ontop(cube, center)	&	1&0,01\% \\
 \hline
 \end{tabular}
 \caption{Expresiones referenciales dadas por el algoritmo, que no estaban en el corpus.}\label{results-algo-fig3}
@@ -96,18 +94,18 @@ ball,on-top(cube,front),small	&	1&0,01\% \\
 \end{table}
 
 
-\section{Comparaci\'on de rankings de expresiones referenciales, varias escenas, varios baselines}
+\section{Comparaci\'on de rankings con varias escenas y varios baselines}
 \label{sec:compara-varias}
 
-Como es habitual cuando hacemos una comparaci\'on con un caso particular, podemos pensar, bueno, el algoritmo tiene un componente de azar, y por eso nos di\'o bastante bien, y por eso son los resultados obtenidos. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes del corpus GRE3D7 parte verde-azul. 
-Para enriquecer esta parte mostraremos otros baselines, los cuales dos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son buenas para acercarnos al ranking de ERs que aparece en el corpus. Los baselines que se presentan tienen que ver con la ejecuci\'on del algoritmo con probabilidades de uso aleatorias, y con probabilidades de uso uniformes. El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
+Como es habitual cuando hacemos una comparaci\'on con un caso particular, podemos pensar, que como el algoritmo tiene un componente de azar, por eso nos di\'o bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
+Para enriquecer esta parte mostraremos otros baselines, los cuales dos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son buenas para acercarnos al ranking de ERs que aparece en corpora. Los baselines que se presentan tienen que ver con la ejecuci\'on del algoritmo con probabilidades de uso aleatorias, y con probabilidades de uso uniformes. El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
 
 \begin{table}[h!]
 \begin{small}
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
 \hline
-         &  \puse de escena & \puse aprendidos & \puse random & \puse uniformes \\ \hline
+         &  \puse\ de escena & \puse\ aprendidas & \puse\ random & \puse\ uniformes \\ \hline
 Escena 1	&	85.75\%	&	84.49\%	&	17.95\%	&	5.37\%	\\
 Escena 3	&	82.81\%	&	80.51\%	&	9.89\%	&	4.40\%	\\
 Escena 6	&	90.11\%	&	83.30\%	&	4.13\%	&	4.16\%	\\
@@ -121,7 +119,7 @@ Promedio	&	87.13\%	&	75.03\%	&	16.34\%	&	5.55\%	\\
 
 \hline
 \end{tabular}
-\caption{Precici\'on entre las ERs del corpus y las generadas usando valores de \puse\ calculados desde la escena, aprendidos autom\'aticamente, aleatorios y uniformes.}\label{results-algo-all}
+\caption{Precisi\'on entre las ERs del corpus y las generadas usando valores de \puse\ calculados desde la escena, aprendidos autom\'aticamente, aleatorios y uniformes.}\label{results-algo-all}
 \end{center}
 \end{small}
 \end{table}
@@ -132,11 +130,11 @@ con los valores de \puse\ obtenidos~\emph{de la propia escena}. Como se puede es
 esta columna tiene el mayor promedio de precisi\'on.
 
 La segunda columna muestra los resultados del algoritmo cuando se ejecuta con \puse\ aprendido de
-corpora como se explica en la Secci\'on~\ref{sec:learning}. En la mayor\'{i}a de los casos la precici\'on
+corpora como se explica en la Secci\'on~\ref{sec:learning}. En la mayor\'{i}a de los casos la precisi\'on
 es m\'as bien alta y la precici\'on promedio sigue siendo alta. La relativamente baja precisi\'on
 obtenida en la escena 13 se explica principalmente las pobres estimaciones del valor de~\puse\ para la palabra \emph{grande}. 
 
-En el corpus, las relaciones \emph{peque\~na} y \emph{grande} se utilizan mucho m\'as cuando el objetivo no puede ser identificado usando taxon\'omicas (\emph{esfera} y \emph{cubo}) y propiedades absolutas (\emph{verde} y \emph{azul}), pero las caracter\'{i}sticas que hemos utilizado para el aprendizaje autom\'atico no capturan dichas dependencias.
+En el corpus, las relaciones \emph{peque\~na} y \emph{grande} se utilizan mucho m\'as cuando el objetivo no puede ser identificado usando propiedades taxon\'omicas (\emph{esfera} y \emph{cubo}) y propiedades absolutas (\emph{verde} y \emph{azul}), pero las caracter\'{i}sticas que hemos utilizado para el aprendizaje autom\'atico no capturan dichas dependencias.
 
 A pesar de esta limitaci\'on, el promedio de la segunda columna es 75\%, lo que indica que los valores de \puse\ aprendidos a partir del corpus son lo suficientemente buenos para ser utilizados para generar REs para nuevas escenas del dominio.
 
@@ -147,8 +145,7 @@ una variaci\'on notable debido al azar. Adem\'as esta ejecuci\'on toma mucho m\'
 Adem\'as de poca precisi\'on, cuando se utilizaron muchas de las ER generadas donde suenan poco natural como \textit{peque\~na sobre
 el cubo azul que est\'a abajo de algo que es peque\~no}. En la \'ultima columna se presenta la precici\'on de una corrida artificial, donde a todas las ERs generadas en cualquiera de las columnas anteriores se les asigno la misma probabilidad.
 
-
-En teor\'ia de la información, la \textbf{entrop\'ia cruzada} entre dos distribuciones de probabilidad mide la media de bits necesarios para identificar un evento de un conjunto de posibilidades, si un esquema de codificaci\'on est\'a basado en una distribuci\'on de probabilidad dada q, m\'as que en la verdadera distribuci\'on p. Vamos a comparar la entrop\'ia cruzada entre la distribuci\'on de probabilidad que se encuentra en el corpus, y la distribuci\'on de ER del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entropy} se muestran los resultados para las ocho escenas que hemos considerado.
+En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distribuciones de probabilidad mide la media de bits necesarios para identificar un evento de un conjunto de posibilidades, si un esquema de codificaci\'on est\'a basado en una distribuci\'on de probabilidad dada q, m\'as que en la verdadera distribuci\'on p. Vamos a comparar la entrop\'ia cruzada entre la distribuci\'on de probabilidad que se encuentra en el corpus, y la distribuci\'on de ER del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entropy} se muestran los resultados para las ocho escenas que hemos considerado.
 
 \begin{figure}[ht]
 \centering
@@ -161,65 +158,17 @@ Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emp
 %En esta secci\'on presentamos dos evaluaciones diferentes que realizamos en nuestro algoritmo. Secci\'on~\ref{sec:automaticevaluation} describe una evaluaci\'on con respecto al estado del arte~\cite{KrahmerGRAPH}. GRAPH fue el de mejor desempe\~no en las dos ediciones de la competencia ASGRE~\cite{gatt-balz-kow:2008:ENLG}. Debido a las limitaciones de los indicadores autom\'aticos, en la Secci\'on~\ref{sec:humanevaluation} realizamos una evaluaci\'on humana en la que pedimos a jueces humanos comparar la salida producida por nuestro algoritmo con las expresiones producidas por los seres humanos (las del corpus).
 
 
-\section{Evaluaci\'on autom\'atica } \label{sec:automaticevaluation}
-
-%In this section we present the comparison of our algorithm to the state of the art algorithm GRAPH introduced above. The GRAPH algorithm is a deterministic algorithm and hence produces the same referring expression when run with the same target and model. Our algorithm is non deterministic, it may give a different referring expression each time it is run. In order to compare them we run our algorithm k times and we make a ranking of the top 20 produced referring expressions ordered by the frequency they were produced. We use the test part of the TUNA corpus to compare algorithm to the GRAPH algorithm whose results on this dataset are described in~\cite{KrahmerGRAPH} and reproduced in the Table~\ref{Tabla_sis_1_20}. 
-
-%The GRAPH algorithm defines the generation of referring expressions as a graph search problem, which outputs the cheapest distinguishing graph (if one exists) given a particular cost function. We compare to this algorithm using the metrics accuracy, Dice and \textsc{masi}. Accuracy is defined as the percentage of exact matches between each ER produced by a human and the ER produced by the system for the same scene. 
-
-%Dice coefficient is a set comparison metric, ranging between 0 and 1, where
-%1 indicates a perfect match between sets. For two
-%attribute sets A and B, Dice is computed as follows:\\
+\section{Evaluaci\'on de nuestro ranking versus la salida de GRAPH } \label{sec:automaticevaluation}
 
 En esta secci\'on se presenta la comparaci\'on de nuestro algoritmo para el estado del arte GRAPH algoritmo introducido anteriormente. El algoritmo GRAPH es un algoritmo deterministico y por lo tanto produce la misma expresi\'on referencial cuando se ejecuta con el mismo target y contexto. 
 
-Nuestro algoritmo es no determinista, puede dar una expresi\'on referencial diferente cada vez que se ejecuta. Con el fin de compararlos corremos nuestro algoritmo k veces y hacemos un ranking de las 20 ERs ordenadas por la frecuencia que se produjeron. Utilizamos la parte de prueba del corpus TUNA para comparar nuestro algoritmo con las salidas del algoritmo GRAPH cuyos resultados se describen en~\cite{KrahmerGRAPH} y se reproducen en la tabla~\ref{Tabla_sis_1_20}.
+Nuestro algoritmo es no determinista, puede dar una expresi\'on referencial diferente cada vez que se ejecuta. Con el fin de compararlos corremos nuestro algoritmo 100 veces y hacemos un ranking de las 20 ERs ordenadas por la frecuencia que se produjeron. Utilizamos la parte de prueba del corpus TUNA (el cual fue introducido en la Secci\'on \ref{sec:corpusTUNA}), para comparar el ranking de ERs dado por nuestro algoritmo con las salidas del algoritmo GRAPH cuyos resultados se describen en~\cite{KrahmerGRAPH} y se reproducen en la Tabla~\ref{Tabla_sis_1_20}.
 
-El algoritmo GRAPH define la generaci\'on de expresiones referenciales como un problema de b\'usqueda en un grafo, devuelve el grafo distintivo de menor costo (si existe) dada una funci\'on de costo particular. Comparamos a este algoritmo usando las m\'etricas precici\'on, Dice y \textsc {masi}. 
+El algoritmo GRAPH define la generaci\'on de expresiones referenciales como un problema de b\'usqueda en un grafo, devuelve el grafo distintivo de menor costo (si existe) dada una funci\'on de costo particular. Comparamos a este algoritmo usando las m\'etricas precisi\'on, Dice y \textsc {masi}, introducidas en la Secci\'on \ref{sec:metricasAutomaticas}. 
 
+Recordemos que el corpus TUNA tiene 2 partes, una parte cuyo dominio son muebles, y otra parte cuyo dominio son personas, ambos ubicados en una grilla y con un lijero desemfoque. Para realizar esta comparaci\'on se us\'o s\'olamenta la parte singular del corpus.
 
-
-
-%La presici\'on se define como el porcentaje de coincidencias exactas entre cada ER producida por un ser humano y el ER producida por el sistema para el mismo target y escena.\\
-%
-%Coeficiente de Dice es una m\'etrica comparaci\'on set, que oscila entre 0 y 1, donde
-%1 indica una combinaci\'on perfecta entre series. Para dos
-%atributo de los conjuntos A y B, dados se calcula como sigue:
-%
-%
-%$Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
-%
-%
-%The \textsc{masi} score \cite{Passonneau06measuringagreement}~is an adaptation of the Jaccard coefficient
-%which biases it in favor of similarity where one set
-%is a subset of the other. Like Dice, it ranges between
-%0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
-%
-%
-%$\textsc{masi}(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
-%
-%
-%where $\delta$ is a monotonicity coefficient defined as follows:
-%
-%
- %\begin{equation}
-     %\delta  = \left\{
-	       %\begin{array}{ll}
-		 %0      & if A \cap B = \emptyset \\
-		 %1 & if A = B  \\
-		 %\frac{2}{3}     & if A \subset B~or~B \subset A\\
-		 %\frac{1}{3}     & otherwise
-	       %\end{array}
-	     %\right.
- %\end{equation}
-%
-%
-%Intuitively, this
-%means that those system-produced descriptions are
-%preferred which do not include attributes that are
-%omitted by a human.  
-
-En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistems con el sistma GRAPH para la primer ER en el ranking y para las primeras 20 REs del ranking. 
+En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistema con el sistma GRAPH para la primer ER en el ranking y para las primeras 20 ERs del ranking.
 
 \begin{table}[h!]
 \begin{center}
@@ -231,11 +180,11 @@ En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos
 sistema GRAPH, Dominio muebles	& 	.80 		&	.59	&	.48		 	\\
 sistema GRAPH, Dominio personas 	& 	.72		&	.48	&	.28			\\
 \hline
-Nuestro sistema , Dominio muebles (top 1)	&	.80		&	.60	&	.47		\\
-Nuestro sistema , Dominio personas (top 1)	&	.65		&	.37	&	.19		\\
+Nuestro sistema, Dominio muebles (top 1)	&	.80		&	.60	&	.47		\\
+Nuestro sistema, Dominio personas (top 1)	&	.65		&	.37	&	.19		\\
 \hline
-Nuestro sistema , Dominio muebles (top 20)&	.87		&	.75  	&	.65		\\
-Nuestro sistema , Dominio personas (top 20)   &	.81		&	.68	&	.60		\\
+Nuestro sistema, Dominio muebles (top 20)&	.87		&	.75  	&	.65		\\
+Nuestro sistema, Dominio personas (top 20)   &	.81		&	.68	&	.60		\\
 \hline
 \end{tabular}
 %\vspace*{.1cm}
@@ -244,17 +193,17 @@ Nuestro sistema , Dominio personas (top 20)   &	.81		&	.68	&	.60		\\
 \label{Tabla_sis_1_20}
 \end{center}
 \end{table}
-\vspace*{-.5cm}
+%\vspace*{-.5cm}
 %Accuracy, Dice and \textsc{masi} assess humanlikeness with respect to a corpus of human referring expressions. In the Figure~\ref{graficoPresicion} the accuracy for our system and the GRAPH system is compared. The left GRAPH corresponds to the furniture domain and the right GRAPH corresponds to the people domain. We can see that taking the top 1 ER our system accuracy is lower than GRAPH performance for the people domain. However, if we consider the top 20 REs that our algorithm is able to produce we can see that the accuracy for both domains gets higher than 60\%. This shows that our algorithm is able to generate REs that are more similar to those produced by humans than the GRAPH algorithm, although these REs are not ranked first. 
 
 %Another result that we can observe is that the people domain accuracy is much lower for the top 1 ER than for the furniture domain (19 vs 47), but the accuracy stabilizes when REs lower in our ranking are considered. This may be explained by the fact that the training set for the people domain is smaller and less balanced and hence, the probabilities of use inferred do not generalize as well as in the furniture domain. 
 
+\hline
+%Precisi\'on, Dice y \textsc{masi}  evaluar humanlikeness con respecto a un corpus de expresiones humanas en referencia.
+En la Figura~\ref{graficoPresicion} se muestra una comparaci\'on entre la precisi\'on de nuestro sistema y el sistema GRAPH. El gr\'afico de la izquierda corresponde al dominio muebles y el gr\'afico de la derecha corresponde al dominio personas. En el dominio muebles estamos obteniendo casi los mismos n\'umeros en las m\'etricas evaluadas.
+Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra precisi\'on es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la precisi\'on de ambos dominios se hace mayor del 60 \%. Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no esten en primer lugar.
 
-Precisi\'on, Dados y \textsc{masi}  evaluar humanlikeness con respecto a un corpus de expresiones humanas en referencia. En la figura~\ref{graficoPresicion} la precisi\'on de nuestro sistema y el sistema GRAPH se compara. El gr\'afico de la izquierda corresponde al dominio muebles y el gr\'afico de la derecha corresponde al dominio personas. Podemos ver que la toma de la parte superior 1 ER nuestra precisi\'on del sistema es menor que el rendimiento gr\'afico para el dominio de las personas. Sin embargo, si tenemos en cuenta los 20 mejores ER que nuestro algoritmo es capaz de producir, podemos ver que la precisi\'on de ambos dominios se hace mayor del 60 \%. Esto demuestra que nuestro algoritmo es capaz de generar REs que son m\'as similares a los producidos por los seres humanos que el algoritmo GRAPH, aunque estos REs no se clasifican primero.
-
-Otro resultado que podemos observar es que la precici\'on de dominio personas es mucho menor para el 1 ER que para el dominio de muebles (19 vs 47), pero la precisi\'on estabiliza cuando se consideran ER inferiores en nuestro ranking. Esto puede explicarse por el hecho de que el conjunto de entrenamiento para el dominio de la gente es m\'as peque\~no y menos equilibrado y por lo tanto, las probabilidades de uso inferido no generalizar, as\'{i} como en el dominio de muebles.
-
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{minipage}{0.50\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/furniturePrec.png}
@@ -267,6 +216,10 @@ Otro resultado que podemos observar es que la precici\'on de dominio personas es
 \end{minipage}
 \caption{Comparaci\'on de la precici\'on del algoritmo GRAPH y nuestro sistema. El eje x indica que la precisi\'on se calcul\'o teniendo en cuenta las x primeras ER en el ranking. El eje y indica la precici\'on. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
 \end{figure}
+
+Otro resultado que podemos observar es que la precici\'on de dominio personas es mucho menor para 1 ER que para el dominio de muebles (19 vs 47), pero la precisi\'on se estabiliza cuando se consideran m\'as ERs de nuestro ranking. Esto puede explicarse por el hecho de que el conjunto de entrenamiento para el dominio de personas es m\'as peque\~no y menos equilibrado y por lo tanto, las probabilidades de uso inferidas no generalizan, as\'{i} como en el dominio de muebles.
+
+Normalmente las m\'etricas autom\'aticas tienen la desventaja de calificar como malas a ERs que son buenas ERs, es decir identifican el target un\'ivocamente, en el contexto considerado, pero las consideran malas por no ser exactamente como las que aparecen en corpora. Otra manera de evaluar que tan buena es una ER es con evaluaciones humanas. Mostraremos una evaluaci\'on humana en la siguiente secci\'on.
 
  
 %\vspace*{-1.0cm}
@@ -285,7 +238,7 @@ Como las ERs que generamos las generamos para el idioma ingl\'es, pedimos a dos 
 
 Los jueces podr\'{i}an entrar en el sistema de evaluaci\'on varias veces, es decir no ten\'ian que terminar la evaluaci\'on en la primera vez, para cada ER pod\'ian resolverla o pod\'ian volver a ella m\'as tarde. 
 
-Durante la evaluaci\'on mostramos a cada juez una escena y dos ER ordenadas al azar. Una ER correspond\'ia a la ER presente en el corpus producida por una persona y la otra ER correspond\'ia al 1 ER producida por nuestro sistema. Solicitamos a los jueces seleccionar la ER que ser\'{i}a m\'as \'util para identificar el target en la escena. Es decir, para seleccionarlo de entre los otros objetos en la imagen.
+Durante la evaluaci\'on mostramos a cada juez una escena y dos ERs ordenadas al azar. Una ER correspond\'ia a la ER presente en el corpus producida por una persona y la otra ER correspond\'ia al 1 ER producida por nuestro sistema. Solicitamos a los jueces seleccionar la ER que ser\'{i}a m\'as \'util para identificar el target en la escena. Es decir, para seleccionarlo de entre los otros objetos en la imagen.
 
 Nuestro objetivo es mostrar que incluso si la ER generada por nuestro algoritmo no coincide con la ER producida por un ser humano del corpus, puede ser juzgada como buena o incluso mejor que las REs generadas por los seres humanos.
 
