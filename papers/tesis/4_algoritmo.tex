@@ -99,6 +99,7 @@ El sistema toma como entrada el contexto representado por el modelo $\+M$, como 
 \label{figura-y-modelo}
 \end{figure}
 
+
 El algoritmo tambi\'en toma como entrada una distribuci\'on de probabilidad de las propiedades y relaciones de la signatura del modelo. Esta lista de probabilidades Rs, es una lista de pares de tuplas (R, R.\puse) que vinculan a cada relaci\'on R a una cierta probabilidad de uso R.\puse\ ordenada de mayor a menor por \puse\ . La distribuci\'on de probabilidad para el modelo del ejemplo se ilustra en la Figura \ref{probabilidades-escena}, hay algunas relaciones que no se nombran por tener probabilidad de uso 0, en la escena considerada. Desde ahora en adelante llamaremos R ya sea a las propiedades o a las relaciones, es decir trataremos de la misma manera a todas, como si fueran relaciones binarias, y para que el algoritmo pueda tratar tanto a las propiedades unarias como a las relaciones binarias de la misma forma, a las unarias las relacionamos con un elemento adicional ficticio agregado al contexto. Por ejemplo, se codifica el hecho de que $e_1$ es \emph{yellow} diciendo que est\'a relacionado con el elemento ficticio por la relaci\'on binaria \emph{yellow}. 
 
 \begin{table}[H]
@@ -829,14 +830,14 @@ ER = \{$\top$, \texttt{ball}\}, se ven los elementos de la f\'ormula \texttt{bal
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{ejecucion/1-ball.jpg}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/ej/1ball.png}}\\[0pt]
 \caption{Elementos que satisfacen la f\'ormula \texttt{ball}.}
 \label{fig-modelo3}
 \end{center}
 \end{figure}
 
 La siguiente propiedad es \texttt{cube}, ER = \{$\top$, \texttt{ball}, \texttt{cube}\}, pero ahora la $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$, 
-$\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, quedando las particiones como se muestra en la Figura~\ref{fig-modelo4}
+$\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ est\'a subsumida, por lo tanto podemos borrarla. Quedando las particiones como se muestra en la Figura~\ref{fig-modelo4}.
 
 %\setlength{\unitlength}{1cm}
 %
@@ -851,19 +852,19 @@ $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$, quedando las particiones co
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{ejecucion/2.jpg}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/ej/2ball-cube.png}}\\[0pt]
 \caption{Cuadros indicando \texttt{ball} y \texttt{cube}.}
 \label{fig-modelo4}
 \end{center}
 \end{figure}
-Ahora podemos borrar $\top$, porque es subsumida (esta cubierta por) las otras dos f\'ormulas. La siguiente propiedad es \texttt{red}, 
+La siguiente propiedad es \texttt{red}, 
 $\interp{\texttt{red}}$ es: $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en ER obtenemos, 
 $\{e_5\}$ y $\{e_2, e_4, e_7\}$, ER = $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red}\}$, 
 las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}.
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{ejecucion/3.jpg}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/ej/3ball-cube-red.png}}\\[0pt]
 \caption{Cuadros indicando \texttt{ball}, \texttt{cube} y \texttt{red}.}
 \label{fig-modelo9}
 \end{center}
@@ -876,8 +877,17 @@ Se muestran particiones resultantes, en Figura~\ref{fig-modelo10}.
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{ejecucion/4.jpg}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/ej/4ball-cube-red-yellow.png}}\\[0pt]
 \caption{Cuadros indicando \texttt{ball}, \texttt{cube}, \texttt{red} y \texttt{yellow}.}
+\label{fig-modelo10}
+\end{center}
+\end{figure}
+
+Borrando subsumidas del modelo tenemos
+\begin{figure}[ht]
+\begin{center}
+\frame{\includegraphics[width=8cm]{images/ej/4b.png}}\\[0pt]
+\caption{Cuadros indicando \texttt{ball}, \texttt{cube}, \texttt{red} y \texttt{yellow}, sin subsumidas.}
 \label{fig-modelo10}
 \end{center}
 \end{figure}
@@ -897,7 +907,7 @@ Haciendo lo mismo con \texttt{small} tenemos ER = $\{\texttt{ball} \wedge \textt
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo11.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/ej/5ball-cube-red-yellow-large-small.png}}\\[0pt]
 \caption{Cuadros indicando \texttt{ball}, \texttt{cube}, \texttt{red}, \texttt{yellow}, \texttt{small} y \texttt{large}.}
 \label{fig-modelo11}
 \end{center}
@@ -913,7 +923,7 @@ debido a que tienen m\'as de un elemento cada una, por lo que entran en el ciclo
 
 \begin{figure}[ht]
 \begin{center}
-\frame{\includegraphics[width=8cm]{images/modelo15.png}}\\[0pt]
+\frame{\includegraphics[width=8cm]{images/ej/5b.png}}\\[0pt]
 \caption{Cuadros indicando ``ball'', ``cube'', ``red'', ``yellow''...}
 \label{fig-modelo15}
 \end{center}
@@ -952,13 +962,13 @@ aqu\'i todos los elementos est\'an en una clase singleton y no se puede hacer ni
 
 Las expresiones referenciales de salida dadas por el algoritmo son:\\
 
-$\texttt{ball} \wedge \texttt{yellow} \wedge \texttt{small}$ representa $e_1$ \\
-$\texttt{cube} \wedge \texttt{yellow} \wedge \texttt{small}$ representa $e_6$ \\
-$\texttt{ball} \wedge \texttt{red}$ representa $e_5$ \\
-$\texttt{cube} \wedge \texttt{red} \wedge \texttt{large}$ representa $e_4$ \\
-$\texttt{cube} \wedge \texttt{red} \wedge \texttt{small}$ representa $\{e_2,e_7\}$  \\
-$\texttt{cube} \wedge \texttt{yellow} \wedge \texttt{small} \wedge \exists \texttt{rightof}. \texttt{cube} \wedge \texttt{red} \wedge \texttt{small}$ representa $e_6$ \\
-$\texttt{small} \wedge \texttt{red} \wedge \texttt{cube} \wedge \exists \texttt{ontop}. \texttt{small} \wedge \texttt{yellow} \wedge \texttt{ball}$ representa $e_2$ \\
+$\texttt{ball} \wedge \texttt{yellow} \wedge \texttt{small}$ representa $e_1$, la cual se puede realizar como \textit{La esfera amarilla peque\~na} \\
+$\texttt{cube} \wedge \texttt{yellow} \wedge \texttt{small}$ representa $e_6$, que puede realizarse como \textit{El peque\~no cubo amarillo} \\
+$\texttt{ball} \wedge \texttt{red}$ representa $e_5$, la cual se puede realizar como \textit{La esfera roja} \\
+$\texttt{cube} \wedge \texttt{red} \wedge \texttt{large}$ representa $e_4$, la cual se puede realizar como \textit{El cubo rojo y grande} \\
+$\texttt{cube} \wedge \texttt{red} \wedge \texttt{small}$ representa $\{e_2,e_7\}$, la cual se puede realizar como \textit{Los cubos rojos peque\~nos}  \\
+$\texttt{cube} \wedge \texttt{yellow} \wedge \texttt{small} \wedge \exists \texttt{rightof}. \texttt{cube} \wedge \texttt{red} \wedge \texttt{small}$ representa $e_6$, la cual se puede realizar como \textit{El peque\~no cubo amarillo que est\'a a la derecha del peque\~no cubo rojo} \\
+$\texttt{small} \wedge \texttt{red} \wedge \texttt{cube} \wedge \exists \texttt{ontop}. \texttt{small} \wedge \texttt{yellow} \wedge \texttt{ball}$ representa $e_2$, la cual se puede realizar como \textit{El cubo peque\~no y rojo que est\'a arriba de la peque\~na bola amarilla}. \\
 
 
 
@@ -1054,4 +1064,5 @@ que no somos capaces de aprender, y tiene un impacto en nuestro desempe\~no, es 
 las propiedades de tama\~no (es decir, small y large) se utilizan mucho
 m\'as cuando el target no puede ser identificado s\'olo con las propiedades taxon\'omicas absolutas 
 (verde y azul) y (ball y cube). En otras palabras, en el corpus \textit{GRE3D7} se utiliza el tama\~no con m\'as frecuencia (90,2 \%)
-cuando la ER resultante no es sobreespecificada y cuando si es sobreespecificada el (34 \%). 
+cuando la ER resultante no es sobreespecificada y cuando si es sobreespecificada el (34 \%). \\
+
