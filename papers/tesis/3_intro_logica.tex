@@ -23,16 +23,93 @@ $\+L$-GER($\+M$, T)=\{$\phi$ en $\+L$ | $\interp{\phi}$ = T \} $\lor \perp$
 \subsection{Los objetos indistinguibles en $\+L$ son \emph{$\+L$-similares}}
 \label{sec:indistinguibles}
 
-Considere la Figura \ref{target_mapa_3ball}, asumamos que el lenguaje en el que podemos generar ERs, es decir, nuestro $\+L$, es $\CL$. $\CL$ es el lenguaje l\'ogico. 
+Considere la Figura \ref{target_mapa_3ball}, asumamos que el lenguaje en el que podemos generar ERs, es decir, nuestro $\+L$, es $\CL$. $\CL$ es el lenguaje l\'ogico
 que s\'olo puede tener conjunciones de propiedades proposicionales, 
 sin negaci\'on, sin relaciones. Sea REL = $\{\nLarge, \nRed, \nBall, \nCube, \nYellow \}$.
-\begin{figure}[H]
-\centering
-\includegraphics[width=.6\textwidth]{images/22paraRelacionalLetras.png}
-\caption{Ejemplo de target.}
-\label{target_mapa_3ball}
-\end{figure}
+%\begin{figure}[H]
+%\begin{subfigure}{.5\textwidth}
+%\centering
+%\includegraphics[width=.6\textwidth]{images/22paraRelacionalLetras.png}
+%\caption{Ejemplo de contexto.}
+%\label{target_mapa_3ball}
+%\end{subfigure}
 
+\begin{figure}[!ht]
+\begin{subfigure}{.5\textwidth}
+
+\centering
+\includegraphics[width=\textwidth]{images/22paraRelacionalLetras.png}\\[0pt]
+%\caption{Ejemplo de contexto.}
+\end{subfigure}
+\hspace*{0cm}
+\begin{subfigure}{.5\textwidth}
+
+%\begin{subfigure}{.5\textwidth}
+  \centering
+\vspace*{1cm}
+\begin{picture}(250,50)
+\put(0,-50){\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
+  ]
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt] 
+      \nRed \\[-3pt] 
+      \nBall\end{array}$}] (a) {$e_1$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}     
+      \nSmall\\[-3pt] 
+      \nRed\\[-3pt] 
+      \nCube\end{array}$}, right of=a] (b) {$e_2$};
+ \node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}     
+      \nLarge\\[-3pt] 
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, above of=b] (c) {$e_3$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt] 
+      \nRed\\[-3pt] 
+      \nCube\end{array}$}, right of=b] (d) {$e_4$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt] 
+      \nRed\\[-3pt] 
+      \nBall\end{array}$}, right of=d] (e) {$e_5$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nSmall\\[-3pt] 
+      \nYellow\\[-3pt] 
+      \nCube\end{array}$}, right of=e] (f) {$e_6$};
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nSmall\\[-3pt]
+      \nRed\\[-3pt] 
+      \nCube\end{array}$},  right of=f] (g) {$e_7$};
+ %\draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
+ %\draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
+ %\draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
+ %\draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
+ %\draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
+ %\draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-3}$\nRightof$} (f);
+ %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
+ \draw[dotted] (-0.5,-1.5) rectangle (8,3);
+ \end{tikzpicture}}
+ \end{picture}
+ %\end{flushleft}
+
+\vspace*{2cm} 
+% \caption{}\label{representacion-modelo}
+
+%\end{subfigure}%
+
+\label{representacion-modelo}
+\end{subfigure}
+\caption{Contexto y modelo s\'olo con propiedades proposicionales.}\label{target_mapa_3ball}
+
+\end{figure}
 Ahora si buscamos una ER para el target T = \{$e_5$\} en la Figura \ref{target_mapa_3ball} usando el lenguaje $\+C$, veremos que no existe una ER en $\+C$ para $e_5$. Observando el modelo de la figura vemos que las f\'ormulas que son ciertas de $e_5$ y sus interpretaciones son las siguientes:
 
 \begin{itemize}
@@ -42,17 +119,19 @@ Ahora si buscamos una ER para el target T = \{$e_5$\} en la Figura \ref{target_m
 \end{itemize}
 
 Conclu\'imos que $e_5$ no puede distinguirse de $e_1$ y $e_3$ usando s\'olo propiedades proposicionales y conjunci\'on. Decimos que $e_5$ es $\+C$-similar a $e_1$ y a $e_3$ y por lo tanto no es posible identificar un\'ivocamente a $e_5$ usando el lenguaje $\+C$.
-\begin{definition}
-\floatname{definition}{Definici\'on}
+%\floatname{definition}{Definici\'on}
+\newtheorem{definicion}{Definici\'on}
+\begin{definicion}
+
 En general, dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
 $\+M$ es {\bf $\+L$-similar} a otro objeto
  $v$ del modelo si para toda f\'ormula en $\+L$ satisfecha por $u$ tambi\'en es satisfecha por $v$. 
-\end{definition}
+\end{definicion}
 
 %Siguiendo la notaci\'on de~\cite{areces08} usamos \emph{$u$ es $\+L$-similar a $v$} para decir que $u$ es $\+L$-similar a $v$.
 
 Formalmente sea $\+M = \tup{\Delta, \interp{\cdot}}$ un modelo relacional con $u$, $v \in \Delta$
-$u \simil{\+L} v$ ($u \+L$-similar $v$) si para toda f\'ormula $\phi$ en $\+L$, $u \in \interp{\phi} \Rightarrow v \in \interp{\phi}$. 
+$u \simil{\+L} v$ ($u~\+L$-similar $v$) si para toda f\'ormula $\phi$ en $\+L$, $u \in \interp{\phi} \Rightarrow v \in \interp{\phi}$. 
 La $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$''. 
 
 %Se cumple que  $e_1 \simil{\+L} e_5$, $e_3 \simil{\+L} e_5$ y $e_1 \simil{\+L} e_3$ ya que para toda f\'omula $\phi$, la {\bf interpretaci\'on de la f\'ormula} ($\interp \phi$) es $\{e_1, e_3, e_5\}$. 
@@ -65,7 +144,7 @@ La $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$'
 %Esto nos dice que con ese lenguaje elegido $\+L$ la tarea GER con target $e_5$ no tiene soluci\'on.
 
 La noci\'on de $\+L$-similaridad entonces, nos permite identificar aquellos elementos del modelo que pueden o no ser referenciados usando un lenguaje dado $\+L$. En 
-la Figura \ref{target_mapa_3ball} s\'olo $e_4$ ({\it El cubo grande}) y $e_6$ ({\it El cubo amarillo}) pueden ser referenciados en $\+C$. Y por lo tanto, nos permitir\'ia identificar qu\'e lenguaje es necesario para poder generar ERs para los elementos de un modelo dado. En nuestro ejemplo tenemos que $e_5 \simil{\+C} e_1$ y $e_5 \simil{\+C} e_3$. Por lo que $\+C$-GER no tiene soluci\'on, para este ejemplo es $\perp$. Si permitimos usar un lenguaje m\'as expresivo como $\EL$ que permite usar relaciones binarias la f\'ormula $\nSmall \land \exists.\nRightof. \nCube$ es una ER para el target del ejemplo. 
+la Figura \ref{target_mapa_3ball} s\'olo $e_4$ ({\it El cubo grande}) y $e_6$ ({\it El cubo amarillo}) pueden ser referenciados en $\+C$. Y por lo tanto, nos permitir\'ia identificar qu\'e lenguaje es necesario para poder generar ERs para los elementos de un modelo dado. En nuestro ejemplo tenemos que $e_5 \simil{\+C} e_1$ y $e_5 \simil{\+C} e_3$. Por lo que $\+C$-GER no tiene soluci\'on, para este ejemplo es $\perp$. Si permitimos usar un lenguaje m\'as expresivo como $\EL$ que permite usar relaciones binarias la f\'ormula $\nBall \land \exists.\nRightof. \nCube$ es una ER para el target del ejemplo. 
 
 Sin embargo, no es posible computar $\EL$-GER para nuestro ejemplo dado que como est\'a planteada, la noci\'on de $\+L$-similaridad requer\'ia computar infinitas f\'ormulas. Las f\'ormulas en $\EL$ que describen al target $e_5$ son infinitas porque hay un ciclo en el modelo.
 
@@ -79,8 +158,8 @@ La relaci\'on entre $\+L$-similaridad y $\+L$-simulaci\'on ha sido ampliamente e
 \newtheorem{teorema}{Teorema}
 %$Una l\'ogica sim\'etrica cumple  $\atomL$ y $\atomR$ como se ve en la Tabla \ref{tab:simuls}. 
 \begin{teorema} \label{thm:simulation}
-Si  $\+M = \tup{\Delta, \interp{\cdot}}$ es un modelo finito, $u$ y $v \in \Delta$, entonces $u \simil{\+L} v$ ($u \+L$-similar $v$) si y s\'olo si 
-$u \simul{\+L} v$ ($u \+L$-simula $v$) (para $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$).
+Si  $\+M = \tup{\Delta, \interp{\cdot}}$ es un modelo finito, $u$ y $v \in \Delta$, entonces $u \simil{\+L} v$ ($u~\+L$-similar $v$) si y s\'olo si 
+$u \simul{\+L} v$ ($u~\+L$-simula $v$) (para $\+L \in \cset{\FOL,\EPFOL,\ALC,\EL,\ELAN}$).
 \end{teorema}
 
 Demostraci\'on tomada de \cite{arec:usin11} p\'agina 34: $\simul{\FOL}$ es isomorfismo en
@@ -89,27 +168,39 @@ noci\'on de bisimulaci\'on~\cite[Def.~2.16]{BRV01}; $\simul{\EL}$ es una
 simulaci\'on definida en~\cite[Def.~2.77]{BRV01}. Los restantes son variaciones simples de estos.
 %\end{proof}
 
-Por lo tanto, en los modelos finitos, las simulaciones capturan exactamente el concepto de similaridad.
+Por lo tanto, en modelos finitos, las simulaciones capturan exactamente el concepto de similaridad.
 El teorema no se mantiene en general sobre modelos infinitos.
 
 El Teorema~\ref{thm:simulation} nos dice que si 2 elementos distintos $u$ y $v$ en $\Delta$ son tales que $u
 \simul{\+L} v$ entonces para toda $\+L$-f\'ormula que es verdadera para $u$ es tambi\'en verdadera para $v$. No hay f\'ormula en $\+L$ que pueda identificar un\'ivocamente a $u$. Desde esta perspectiva, conociendo cuando el modelo contiene un elemento que es $\gL$-similar pero distinto de $u$ es
 equivalente a decidir si hay una expresi\'on referencial en $\+L$ para $u$.
 
-Formalmente, diremos que para un modelo relacional $\tup{\Delta_1, \interp{\cdot}_1}$, diremos que $u \simul{\+L} v$ ($v$ $\+L$-simula $u$) si \textbf{existe} una relaci\'on no vac\'ia $S \subseteq \Delta x \Delta$ que satisface \textbf{todas} las propiedades indicadas para $\+L$ en la Tabla \ref{tab:simuls}. Por ejemplo, para $\EL$, la relaci\'on S debe satisfacer $\atomL$ y $\zig$. A continuaci\'on de definen las propiedades de S.
+Formalmente, para un modelo relacional $\tup{\Delta_1, \interp{\cdot}_1}$, diremos que $u \simul{\+L} v$ ($v$ $\+L$-simula $u$) si \textbf{existe} una relaci\'on no vac\'ia Q $\subseteq \Delta x \Delta$ que satisface \textbf{todas} las propiedades indicadas para $\+L$ en la Tabla \ref{tab:simuls}. Por ejemplo, para $\EL$, la relaci\'on Q debe satisfacer $\atomL$ y $\zig$. A continuaci\'on de definen las propiedades de Q.
 \smallskip 
 
 \newcommand{\simdef}[2]{\noindent\ \ #1\hfill:\ \parbox[t]{.87\textwidth}{#2}\par}
 
-\simdef{$\atomL$}{If $u_1{\sim} u_2$, entonces $u_1 \in \interp{p}_1 \Rightarrow u_2 \in \interp{p}_2$}
-\simdef{$\atomR$}{If $u_1{\sim} u_2$, entonces $u_2 \in \interp{p}_2 \Rightarrow u_1 \in \interp{p}_1$}
-\simdef{$\zig$}{If $u_1{\sim} u_2$ y $(u_1,v_1) \in \interp{r}_1$, entonces $\exists v_2$ tal que\ $v_1{\sim}v_2$
-  y $(u_2,v_2) \in \interp{r}_2$}
-\simdef{$\zag$}{If $u_1{\sim}u_2$ y $(u_2,v_2) \in \interp{r}_2$, entonces $\exists v_1$ tal que\ $u_1{\sim}v_1$ y
- $(u_1,v_1) \in \interp{r}_1$}
-\simdef{$\injL$}{$\sim$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
-\simdef{$\injR$}{$\sim^{-1}$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
+%\simdef{$\atomL$}{If $u_1{\sim} u_2$, entonces $u_1 \in \interp{p}_1 \Rightarrow u_2 \in \interp{p}_2$}
+%\simdef{$\atomR$}{If $u_1{\sim} u_2$, entonces $u_2 \in \interp{p}_2 \Rightarrow u_1 \in \interp{p}_1$}
+%\simdef{$\zig$}{If $u_1{\sim} u_2$ y $(u_1,v_1) \in \interp{r}_1$, entonces $\exists v_2$ tal que\ $v_1{\sim}v_2$
+  %y $(u_2,v_2) \in \interp{r}_2$}
+%\simdef{$\zag$}{If $u_1{\sim}u_2$ y $(u_2,v_2) \in \interp{r}_2$, entonces $\exists v_1$ tal que\ $u_1{\sim}v_1$ y
+ %$(u_1,v_1) \in \interp{r}_1$}
+%\simdef{$\injL$}{$\sim$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
+%\simdef{$\injR$}{$\sim^{-1}$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
+%\smallskip
+
+\simdef{$\atomL$}{Si $u$ Q $v$, entonces $u \in \interp{p} \Rightarrow v \in \interp{p}$}
+\simdef{$\atomR$}{Si $u$ Q $v$, entonces $v \in \interp{p} \Rightarrow u \in \interp{p}$}
+\simdef{$\zig$}{Si $u$ Q $v$ y $(u,w) \in \interp{r}$, entonces $\exists x$ tal que\ $w$ Q $x$
+  y $(v,x) \in \interp{r}$}
+\simdef{$\zag$}{Si $u$ Q $v$ y $(v,x) \in \interp{r}$, entonces $\exists w$ tal que\ $u$ Q $w$ y
+ $(u,w) \in \interp{r}$}
+\simdef{$\injL$}{Q es una funci\'on inyectiva (cuando es restringida a su dominio)}
+\simdef{$\injR$}{Q$^{-1}$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
 \smallskip
+
+
 
 %Diremos que una relaci\'on binaria no vac\'ia $\sim$ es una 
 %{\bf $\+L$-simulaci\'on} cuando satisface las propiedades indicadas
@@ -130,10 +221,10 @@ Formalmente, diremos que para un modelo relacional $\tup{\Delta_1, \interp{\cdot
  
 	$\ELUNEG$ & $\EL$ m\'as disyunci\'on y  & $\times$ & $\times$ &  $\times$ & & & \\ 
 	&negaci\'on proposicional&&&&&&\\ \hline
-  $\ELAN$ & $\EL$ con negaci\'on & $\times$ & $\times$ &  $\times$ & & & \\ 
-	&proposicional&&&&&&\\ \hline
-	$\EL$   & $\ALC$ sin negaci\'on) & $\times$ & &  $\times$ & & & \\ \hline
-	$\P$ & l\'ogica proposicional& $\times$ & $\times$ & & & & \\ 
+  $\ELAN$ & $\EL$ con negaci\'on proposicional & $\times$ & $\times$ &  $\times$ & & & \\ \hline
+	%&proposicional&&&&&&\\ \hline
+	$\EL$   & $\ALC$ sin negaci\'on & $\times$ & &  $\times$ & & & \\ \hline
+	$\PL$ & l\'ogica proposicional& $\times$ & $\times$ & & & & \\ \hline
 	$\CL$ & s\'olo conjunciones& $\times$ &  &  & & & \\ 
 	
 \hline	
@@ -151,7 +242,7 @@ Formalmente, diremos que para un modelo relacional $\tup{\Delta_1, \interp{\cdot
   $\FOL$   &  																		 & NP\\ \hline
   $\EPFOL$ & Algoritmo Graph \cite{Krahmer:2003}   & NP\\ \hline 
   $\ALC$   & Algoritmo DL \cite{arec2:2008:Areces} & P\\ \hline
- 	$\ELUNEG$ & Algoritmo plural \cite{gardent02:_gener_minim_defin_descr} &P\\ 
+ 	$\ELUNEG$ & Algoritmo plural \cite{gardent02:_gener_minim_defin_descr} &P\\ \hline
 	%&negaci\'on proposicional&\\ \hline
   $\ELAN$ & &P\\ \hline
 	%&proposicional&&\\ \hline
@@ -964,7 +1055,7 @@ distinguir a $e$ de los otros nodos.
 
 Para mantener la terminolog\'ia de~\cite{Krahmer2003}, en lo que sigue
 podemos hablar alternativamente de \textbf{grafos etiquetados} en lugar de modelos relacionales, estos son esencialmente el mismo objeto matem\'atico, pero codifican las propiedades proposicionales utilizando
-loops de relaciones binarias (por ejemplo, escriben $\nDog(e,e)$ en vez de $\nDog(e)$ como se ilustra en la Figura \ref{}).
+loops de relaciones binarias (por ejemplo, escriben $\nDog(e,e)$ en vez de $\nDog(e)$).
 
 La idea principal de la implementaci\'on de~\cite{Krahmer2003} de isomorfismos de subgrafos puede resumirse intuitivamente como sigue.
 Dados dos grafos etiquetados $H$ y $G$, y los v\'ertices  $v$ de $H$
@@ -991,11 +1082,11 @@ y $(u,v)\in\interp{r}_{H}$ si y s\'olo si $(f(u),f(v))\in\interp{r}_{G'}$.
 
 \begin{figure}
 \centering
-\begin{tabular}{c@{\hspace{1.0cm}}c@{\hspace{1.0cm}}c@{\hspace{1.0cm}}c}
-\begin{picture}(22,50)
+\begin{tabular}{c@{\hspace{1.0cm}}c@{\hspace{1.0cm}}c@{\hspace{1.0cm}}}
+\begin{picture}(20,50)
 \put(0,0){\begin{tikzpicture}
   [
-    n/.style={circle,fill,draw,inner sep=1.5pt,node distance=1.5cm},
+    n/.style={circle,fill,draw,inner sep=1.7pt,node distance=1.7cm},
     aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
   ]
  \node[n,label=above:$v$,label=below:{\relsize{-1}$\begin{array}{c}\nFlower\\\ \end{array}$}] (a) {};
@@ -1026,7 +1117,7 @@ y $(u,v)\in\interp{r}_{H}$ si y s\'olo si $(f(u),f(v))\in\interp{r}_{G'}$.
  \end{tikzpicture}}
  \end{picture}
 \vspace{-.2cm}\ \\
-(i)&(ii)&(iii)&(iv)
+(i)&(ii)&(iii)
 \end{tabular}
  \caption{Algunos subgrafos conectados $(v,H)$ de la escena $\+S$ de la Figura~\ref{fig:cat-dog-1}.\label{fig:subgraphs}}
  \end{figure}
