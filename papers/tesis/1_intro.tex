@@ -72,7 +72,7 @@ Dado un contexto, un target y una descripci\'on (parcial) del target, los {\bf d
 
 Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos, alg\'un tipo de representaci\'on de un contexto y un target, y d\'a como resultado una (o m\'as) expresi\'on(es) referencial(es) para el target considerado, si puede identificarlo un\'ivocamente en el contexto.
 
-Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos de la Figura \ref{figura-er} y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ involucra encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Como dijimos, esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}. Mirando la tabla \ref{tabla-propiedades} podemos decir que {\it red ball}, {\it large ball} y {\it large red ball} son algunas ERs del objeto $e_5$, cuyas realizaciones en espa\~{n}ol podr\'ian ser: {\it La bola roja}, {\it La esfera grande} y {\it La esfera grande y roja}. {\it La bola roja} y {\it La esfera grande} aparecen entre las ERs dadas por las personas listadas en la Figura \ref{figura-er}.
+Una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales en un contexto determinado, necesitar\'a una representaci\'on de todos los objetos de la Figura \ref{figura-er} y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ involucra encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Como dijimos, esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama {\emph selecci\'on de contenido para la generaci\'on de una expresi\'on referencial}. Mirando la Tabla \ref{tabla-propiedades} podemos decir que {\it red ball}, {\it large ball} y {\it large red ball} son algunas ERs del objeto $e_5$, cuyas realizaciones en espa\~{n}ol podr\'ian ser: {\it La bola roja}, {\it La esfera grande} y {\it La esfera grande y roja}. {\it La bola roja} y {\it La esfera grande} aparecen entre las ERs dadas por las personas listadas en la Figura \ref{figura-er}.
 %Como una primera intuici\'on podemos ver que la Figura \ref{formula-subgrafo} es un subrafo de la Figura \ref{representacion-modelo} que identifica un\'ivocamente al target, representa la cuarta ER mostrada en la Figura \ref{er-figura1}. Y la Figura \ref{formula-subgrafo2} tambi\'en identifica al target un\'ivocamente y representa la segunda ER mostrada en \ref{er-figura1}.
 %que est\'an dadas en la Figura \ref{er-figura1} son muchas m\'as de las que mostramos en las f\'ormulas de la Figura \ref{er-figura1-b}, esto nos lleva a pensar que un algoritmo puede que no consiga la variedad que las personas dan. La representaci\'on ilustrada en la Figura~\ref{representacion-modelo} es equivalente a la mostrada en la Tabla \ref{tabla-propiedades}.
 
@@ -136,14 +136,14 @@ son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce i
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.6\textwidth]{images/corpus/mapa15.png}
+\includegraphics[width=0.8\textwidth]{images/corpus/mapa15.png}
 \caption{Ejemplo de target en mapa}
 \label{target_mapa}
 \end{figure}
 
 Cuando la informaci\'on del contexto proviene de datos de sensores, las entradas del algoritmo de GER son inevitablemente ruidosas. Es decir, 
 contienen informaci\'on no s\'olo incompleta sino tambi\'en posiblemente {\bf incorrecta}. Incluso en contextos tan simples como el de la 
-Figura \ref{figura-er} hay incertidumbre. ?`La Figura \ref{representacion-modelo} representa toda la informaci\'on del 
+Figura \ref{figura-er} hay incertidumbre. ?`La Figura \ref{representacion-modelo1} representa toda la informaci\'on del 
 contexto?. Algunos podemos opinar que s\'i, otros que no. 
 
 \begin{figure}[H]
@@ -204,11 +204,7 @@ contexto?. Algunos podemos opinar que s\'i, otros que no.
  %\end{flushleft}
 
 \vspace*{2cm} 
-% \caption{}\label{representacion-modelo}
-
-%\end{subfigure}%
-\caption{Formalizaci\'on de las propiedades de la Figura \ref{er-figura1} como un grafo etiquetado}
-\label{representacion-modelo}
+\caption{Formalizaci\'on de las propiedades de la Figura \ref{figura-er} como un grafo etiquetado.}\label{representacion-modelo1}
 \end{figure}
 
 
@@ -718,7 +714,7 @@ $$
 \caption{F\'ormulas alternativas para el objeto $e_5$ de la Figura~\protect\ref{grafo-GRE3D7-stimulus_b}, con lenguaje de $\FOL$.}\label{tab:phis}
 \end{figure}
 
-En la Figura \ref{tab:realizaciones-phis}, se muestran algunas realizaciones posibles de las f\'ormulas mostradas en la Figura \ref{tab:phis}, 2 grafos de f\'ormulas se muestran en la Figura \ref{grafos-formulas}, el de la izquierda pertenece a la f\'ormula $\phi_1$ y el de la derecha a la f\'ormula $\phi$.
+En la Figura \ref{tab:realizaciones-phis}, se muestran algunas realizaciones posibles de las f\'ormulas mostradas en la Figura \ref{tab:phis}, grafos de subf\'ormulas se muestran en la Figura \ref{grafos-formulas}, el de la izquierda pertenece a la f\'ormula $\phi_1$ y el de la derecha a la f\'ormula $\phi_4$.
 
  \begin{figure}[!ht]
  %\begin{center}
@@ -751,13 +747,14 @@ En la Figura \ref{tab:realizaciones-phis}, se muestran algunas realizaciones pos
       \nCube\end{array}$}, right of=b] (d) {$e_4$};
  \node[n,label=below:{
     \relsize{-2}$\begin{array}{c}
+      \nLarge\\[-3pt]
       \nRed\\[-3pt] 
       \nBall\end{array}$}, right of=d] (e) {$e_5$};
  \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
  \end{tikzpicture}}
  \end{picture}
 %\end{subfigure}
-\caption{Subgrafos que representan las f\'ormulas $\phi_1$ y $\phi_4$}
+\caption{Subgrafos que representan las f\'ormulas $\phi_1$ y $\phi_4$}\label{grafos-formulas}
 \end{figure}
 
 %\begin{figure}%{.6\textwidth}
