@@ -121,7 +121,7 @@ En \cite{do-speakers} tambi\'en se estudia la sobreespecificaci\'on. En un exper
 Paraboni et al. en su paper \cite{acl-Paraboni15} estudian la sobreespecificaci\'on de las ERs, en particular de las ERs relacionales.
 La hip\'otesis que eval\'uan es la siguiente:
 \begin{it}
-\begin{displayquote}h1: Dado el objetivo de sobre-especificar una descripci\'on relacional usando una propiedad p extra para el landmark, p deber\'ia corresponder a la propiedad m\'as discriminatoria que est\'a disponible en el contexto. \cite{} 
+\begin{displayquote}h1: Dado el objetivo de sobre-especificar una descripci\'on relacional usando una propiedad p extra para el landmark, p deber\'ia corresponder a la propiedad m\'as discriminatoria que est\'a disponible en el contexto. %\cite{acl-Paraboni15} 
 \end{displayquote}
 \end{it}
 
@@ -249,7 +249,7 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \caption{}
 \label{fig-STARS2}
 \end{subfigure}
-\caption{Im\'agenes del corpus Stars (a) y del corpus Stars2 (b)}\label{imagenes-stars-stars2.}
+\caption{Im\'agenes del corpus Stars (a) y del corpus Stars2 (b).}\label{imagenes-stars-stars2}
 \end{figure}
 
 
@@ -317,7 +317,7 @@ Zoom-Espa\~nol							& 19							& 4							& 7.2				& 0.3   \\
 \end{center}
 \end{table}
 
-\section{Generaci\'on \emph{autom\'atica} de expresiones referenciales}
+\section{Generaci\'on \emph{autom\'atica} de expresiones referenciales.}
 \label{sec:tipos_algoritmos}
 
 Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales es un programa que dado un contexto y un target genera una ER para el target.
@@ -405,7 +405,9 @@ si genera negaciones, plurales, si genera sobreespecificaci\'on. Notar que si no
 Full Brevity &Si & No&Si&No&No&No& No \\
 Greedy&Si & No&Si&No&No&No& Si \\
 Incremental&Si & No&Si&No&No&No& No \\
-GRAPH&Si & No&Si&Si&No&Si& Si \\ \hline
+GRAPH&Si & No&Si&Si&No&Si& Si \\ 
+relacional&Si & No&Si&Si&No&No& No \\
+\hline
 %Bisimulaci\'on&Si & No&Si&Si&Si&Si& No \\ \hline
 %Nuestra Propuesta&No & Si&Si&Si&No&Si& Si \\
 
@@ -429,8 +431,7 @@ busca si hay una propiedad del target que no sea propiedad de ning\'un distracto
 de 2 propiedades, si no la hay, busca de a 3 y as\'i sucesivamente. Por ejemplo para la Figura \ref{fig2-1} se fijar\'ia en las propiedades 
 del target {red, ball, large}, como ninguna de ellas aisladamente identifica s\'olo al target, probar\'ia con combinaciones de 2 propiedades {\it red ball} si identifica al target, devuelve {\it red ball} y finaliza.
 
-\paragraph{Heur\'istica Greedy:} El algoritmo de {\bf Heur\'istica Greedy} iterativamente selecciona la propiedad que elimina 
-m\'as distractores, y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado 
+\paragraph{Heur\'istica Greedy:} El algoritmo de {\bf Heur\'istica Greedy} \cite{greedy} iterativamente selecciona la propiedad que elimina m\'as distractores, y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado 
 no siempre genera expresiones referenciales m\'inimas. Por ejemplo para la Figura \ref{GRE3D7-stimulus} se fijar\'a que {\it ball} elimina 2 distractores {$e_{1}$, $e_{3}$}, 
 {\it red} elimina 3 distractores {$e_{2}$, $e_{4}$, $e_{7}$} y {\it large} elimina 1 distractores {$e_{4}$}, entonces elegir\'a {\it red}, 
 pero como no alcanza para ser ER, seguir\'a con {\it ball} que es la que elimina m\'as distractores luego de {\it red}, finalizar\'a porque 
@@ -445,10 +446,10 @@ m\'as importantes del \'area, lo explicamos a continuaci\'on.
 
 \begin{figure}[ht]
 %\centering
-\includegraphics[width=.3\textwidth]{images/algoritmoIncremental.png}
+\includegraphics[width=.4\textwidth]{images/algoritmoIncremental.png}
 %\caption{Algoritmo Incremental}
-\label{algoritmoIncremental}
-\caption{Figura 2 de \protect\cite{survey}}
+\caption{Figura 2 de \protect\cite{survey}.}\label{algoritmoIncremental}
+
 \end{figure}
 
 %\begin{figure}[ht]
@@ -459,7 +460,7 @@ m\'as importantes del \'area, lo explicamos a continuaci\'on.
 %\caption{Figura 2 de \protect\cite{survey}}
 %\end{figure}
 
-El input del {\bf Algoritmo Incremental}, es el target \emph{r}, que queremos identificar, \emph{D} es el contexto, y \emph{Pref} una lista de propiedades ordenada seg\'un la preferencia. El algoritmo se muestra en la Figura \ref{algoritmoIncrementa}.
+El input del {\bf Algoritmo Incremental}, es el target \emph{r}, que queremos identificar, \emph{D} es el contexto, y \emph{Pref} una lista de propiedades ordenada seg\'un la preferencia. El algoritmo se muestra en la Figura \ref{algoritmoIncremental}.
 Vamos a ejemplificar la corrida del algoritmo con el ejemplo de la Figura \ref{fig2-1}, supongamos que el target es $e_{5}$ y la lista 
 ordenada de propiedades es \'esta [tipo, color, tama\~no]. \emph{D} inicialmente es el conjunto de todos los objetos del contexto: 
 \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}.
@@ -526,7 +527,7 @@ El {\bf algoritmo Graph} de \cite{graph} propone tratar la obtenci\'on de expres
 %\caption{Ejemplo de grafo para el contexto de la Figura \ref{figura-survey}}
 \label{grafo-survey}
 \end{subfigure}
-\caption{Ejemplo de contexto y grafo extra\'ido de \protect\cite{survey}}\label{fig2-8}
+\caption{Ejemplo de contexto y grafo extra\'ido de \protect\cite{survey}.}\label{fig2-8}
 
 \end{figure}
 
@@ -537,7 +538,7 @@ Dado un objeto target, conseguir una ER que distinga al objeto de lo dem\'as es 
 \begin{figure}[ht]
 \centering
 \includegraphics[width=0.6\textwidth]{images/ref-exp-graph.png}
-\caption{Subgrafos de la Figura \ref{fig2-8}}
+\caption{Subgrafos de la Figura \ref{fig2-8}.}
 \label{ref-exp-graph}
 \end{figure}
 

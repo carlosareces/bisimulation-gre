@@ -137,7 +137,7 @@ son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce i
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.8\textwidth]{images/corpus/mapa15.png}
-\caption{Ejemplo de target en mapa}
+\caption{Ejemplo de target en el contexto de un mapa del ZOOM corpus.}
 \label{target_mapa}
 \end{figure}
 
@@ -203,7 +203,7 @@ contexto?. Algunos podemos opinar que s\'i, otros que no.
  \end{picture}
  %\end{flushleft}
 
-\vspace*{2cm} 
+%\vspace*{2cm} 
 \caption{Formalizaci\'on de las propiedades de la Figura \ref{figura-er} como un grafo etiquetado.}\label{representacion-modelo1}
 \end{figure}
 
@@ -754,7 +754,7 @@ En la Figura \ref{tab:realizaciones-phis}, se muestran algunas realizaciones pos
  \end{tikzpicture}}
  \end{picture}
 %\end{subfigure}
-\caption{Subgrafos que representan las f\'ormulas $\phi_1$ y $\phi_4$}\label{grafos-formulas}
+\caption{Subgrafos que representan las f\'ormulas $\phi_1$ y $\phi_4$.}\label{grafos-formulas}
 \end{figure}
 
 %\begin{figure}%{.6\textwidth}
@@ -822,7 +822,7 @@ En la Figura \ref{tab:realizaciones-phis}, se muestran algunas realizaciones pos
   %ex 4
 \end{tabular}
 %%$$
-\caption{Posibles realizaciones de las f\'ormulas dadas en la Figura \protect\ref{tab:phis}}\label{tab:realizaciones-phis}
+\caption{Posibles realizaciones de las f\'ormulas dadas en la Figura \protect\ref{tab:phis}.}\label{tab:realizaciones-phis}
 \end{figure}
 
 Notar que $\phi_1$ y $\phi_2$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas que identifique al target.
@@ -858,24 +858,24 @@ En el Cap\'itulo \ref{sec:intro_logica} describimos c\'omo los operadores l\'ogi
 %y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, consideando por ejemplo \ELAN 
 %(\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
 %lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
-
-En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
-\begin{table}[h!]
-\begin{tabular}{l|l}
-  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (LD)\\
-  \hline
-          Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-                Heur\'istica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-  Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-  GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
-                                                                & ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
-  Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
-        & y proposicionales)\\
-  Kelleher and Kruijff (2006)   & $\EL$ \\
-  Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
-\end{tabular}
-\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:algoritmosLogicas}
-\end{table}
+%
+%En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
+%\begin{table}[h!]
+%\begin{tabular}{l|l}
+  %Algoritmo de GER & Variante de L\'ogica de Descripci\'on (LD)\\
+  %\hline
+          %Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+                %Heur\'istica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+  %Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
+  %GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
+                                                                %& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
+  %Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
+        %& y proposicionales)\\
+  %Kelleher and Kruijff (2006)   & $\EL$ \\
+  %Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
+%\end{tabular}
+%\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:algoritmosLogicas}
+%\end{table}
 
 
 \section{Mapa de la tesis}
@@ -948,7 +948,7 @@ veces las ERs generadas por el algoritmo fueron juzgadas por los jueces como mej
  siempre da una ER si existe, en cambio los humanos muchas veces dan expresiones ambiguas que no son referenciales. Notamos que al usar 
 las probabilidades aprendidas desde el corpus el algoritmo d\'a ERs que son las del top ranking de las personas.
 
-\subsection{Cap\'itulo~\ref{sec:corpus}: ``Recolecci\'on y an\'alisis del corpu ZOOM''} Introducimos un nuevo corpus, 
+\subsection{Cap\'itulo~\ref{sec:corpus}: ``Recolecci\'on y an\'alisis del corpus ZOOM''} Introducimos un nuevo corpus, 
 el ZOOM corpus, el cual fue recolectado en un trabajo conjunto con la Universidad de S\H ao Paulo Brasil, 
 para tener un corpus de un dominio m\'as natural de expresiones refenciales ya que el corpus nombrado tiene expresiones referenciales 
 de puntos de interes en mapas. Los mapas son fragmentos de las ciudades de Madrid y Lisboa. Este corpus fue recolectado en 2 idiomas, 
@@ -958,7 +958,7 @@ experimento, se explica la manera en que se anot\'o el corpus y se eval\'ua un c
 como 2 targets. Mostramos como funciona el algoritmo para un caso tan real y natural como son los mapas del ZOOM corpus. 
 
 
-\subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones''} Se resumen lo estudiado y realizado en esta tesis, se explican las cosas 
+\subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones''} Se res\'umen lo estudiado y realizado en esta tesis, se explican las cosas 
 aprendidas, y dan l\'ineas de trabajo futuro. \textcolor{blue}{ACA FALTA!! }
 
 parte trabajo futuro...
