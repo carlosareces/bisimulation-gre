@@ -4,7 +4,7 @@
 En este cap\'itulo presentamos definiciones b\'asicas y un res\'umen del estado del arte del \'area de generaci\'on de expresiones referenciales. Nos enfocamos en el trabajo previo m\'as relevante para esta tesis. 
 En la Secci\'on \ref{generacion-humana} damos definiciones b\'asicas que nos servir\'an a 
 lo largo de la tesis. Primero, explicamos \emph{qu\'e} expresiones referenciales pueden generar las personas. Describimos los diferentes tipos de expresiones referenciales. Las ERs se diferencian seg\'un el tipo de propiedades que 
-contengan, pueden contener propiedades at\'omicas, o relaciones con otros objetos, o ambas. Las ERs tambi\'en se diferencian por la cantidad de informaci\'on que contienen, pudiendo ser minimales o sobreespecificadas. Definimos ER plurales yparciales. %Las ERs minimales contienen s\'olo la informaci\'on indispensable para identificar al target. Las sobreespecificadas contienen m\'as informaci\'on de la m\'inima necesaria para identificar al target, y las subespecificadas, no identifican al target correctamente, sino a un conjunto m\'as grande el cual contiene al target y a otros elementos, porque la informaci\'on que contienen no es suficiente para identificar al target. Las ERs plurales, son expresiones que identifican a un conjunto target que tiene m\'as de un elemento, y las parciales, son las que teniendo un target plural, identifican a un subconjunto estricto del conjunto target. 
+contengan, pueden contener propiedades at\'omicas, o relaciones con otros objetos, o ambas. Las ERs tambi\'en se diferencian por la cantidad de informaci\'on que contienen, pudiendo ser minimales o sobreespecificadas. Definimos ER plurales yparciales. %Las ERs minimales contienen s\'olo la informaci\'on indispensable para identificar al target. Las sobreespecificadas contienen m\'as informaci\'on de la m\'inima necesaria para identificar al target, y las subespecificadas, no identifican al target correctamente, sino a un conjunto m\'as grande el cual contiene al target y a otros elementos, porque la informaci\'on que contienen no es suficiente para identificar al target. Las ERs plurales, son expresiones que identifican a un conjunto target que tiene m\'as de un elemento, y las parciales, son las que teniendo un target plural, identifican a un subconjunto estricto del conjunto targetranking. 
 En segundo lugar describimos trabajo previo que estudia \emph{c\'omo} los humanos usamos el lenguaje para trasmitir intenciones, y c\'omo esas intenciones son interpretadas por los oyentes, describimos trabajos que estudian el rol de la sobreespecificaci\'on y damos ejemplos de uso. Finalmente, introducimos corpora de ERs existente. Luego, en la Secci\'on \ref{sec:tipos_algoritmos} presentamos una clasificaci\'on de los algoritmos del \'area seg\'un los tipos de ERs que pueden generar. Pueden ser determin\'isticos o no-determin\'istico. Generar o no sobreespecificaci\'on, plurales o s\'olo singulares, relacionales o proposicionales.
 % son aquellos algoritmos que dado un input fijo, siempre dan la misma ER. \textbf{No-determin\'isticos} son los que pueden dar distintas ERs en 2 corridas del algoritmo con el mismo input. Que generan \textbf{sobreespecificaci\'on}, que son los que pueden dar ERs con m\'as de la m\'inima cantidad de informaci\'on que se necesita para identificar al target. \textbf{Plurales}, son los que pueden dar ERs para conjuntos de objetos. \textbf{S\'olo singulares}, son los que dan resultado s\'olo para un target singleton. \textbf{Relacionales}, cuando pueden incluir relaciones y descripciones de los objetos relacionados. 
 Adem\'as describimos  los algoritmos m\'as conocidos del \'area como el incremental, graph, relacional, entre otros. 
@@ -161,7 +161,7 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 
 %was the first prominent REG corpus to be made publicly available for research purposes. The corpus was developed in a series of general-purpose controlled experiments, containing 2280 descriptions produced by 60 speakers in two domains (1200 descriptions of furniture items and 1080 descriptions of people's photographs). TUNA does not contain relational descriptions, and it is possibly the only resource of this kind to include situations of reference to sets. The TUNA corpus has been extensively used in a series of shared tasks
 
-{\bf TUNA} \cite{tuna-corpus} fue el primer corpus prominente de ERs disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2.280 descripciones producidas por 60 personas en dos dominios (1.200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una grilla). Se muestran ejemplos de im\'agenes en la Figura \ref{imagenes-tuna}. El corpus TUNA no contiene descripciones relacionales. Este corpus se ha utilizado ampliamente en una serie de desaf\'ios \cite{reg2009}. En el Cap\'itulo \ref{sec:corpus} de esta tesis se usa para evaluar nuestros algoritmos y as\'i comparamos con el desempe\~no de otros algoritmos del \'area que participaron en estos desaf\'ios. El corpus contiene s\'olo una ER por escena, por lo cual no es \'util para comparar con rankings de ERs, y la evaluaci\'on de nuestro algoritmo con respecto a este corpus es limitada.
+{\bf TUNA} \cite{tuna-corpus} fue el primer corpus prominente de ERs disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2.280 descripciones producidas por 60 personas en dos dominios (1.200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una grilla). Se muestran ejemplos de im\'agenes en la Figura \ref{imagenes-tuna}. El corpus TUNA no contiene descripciones relacionales. Este corpus se ha utilizado ampliamente en una serie de desaf\'ios \cite{reg2009}. En el Cap\'itulo \ref{sec:corpus} de esta tesis se usa para evaluar nuestros algoritmos y as\'i comparamos con el desempe\~no de otros algoritmos del \'area que participaron en estos desaf\'ios. El corpus contiene s\'olo una ER por escena, por lo cual no es \'util para comparar con rankings de ERs, y la evaluaci\'on de nuestro algoritmo con respecto a este corpus es limitada.\\
 
 
 %\begin{figure}[H]
@@ -200,7 +200,7 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 
 \label{sec:corpusGRE}
 %were developed in a series of web-based experiments primarily focussed on the study of relational descriptions. GRE3D3 contains 630 descriptions produced by 63 speakers, and GRE3D7 contains 4480 descriptions produced by 287 speakers, making it the largest of its kind to date. The GRE3D domain consists of simple visual scenes containing only two kinds of objects (boxes and spheres) with limited variation in colour and size. In each scene, there is only one possible spatial relation between target and the nearest landmark. Both corpora contain atomic and relational descriptions.
-{\bf GRE3D3} y su extensi\'on {\bf GRE3D7} \cite{gre3d3,gre3d7} se desarrollaron en una serie de experimentos basados en la web, y se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 personas y GRE3D7 contiene 4.480 descripciones producidas por 287 personas, y es el corpus m\'as grande del \'area hasta la fecha. El dominio de estos corpora constan de escenas visuales simples que contienen s\'olo dos tipos de objetos (cubos y esferas) con variaci\'on limitada en color y tama\~no. En cada escena, hay una relaci\'on espacial entre el target y el landmark m\'as cercano. Ambos corpus contienen descripciones proposicionales y relacionales. Ejemplo de im\'agenes del GRE3D3 y GRE3D7 se muestran en la Figura \ref{imagenes-GRE3D3-GRE3D7}. Las escenas del GRE3D3 contienen s\'olo 3 objetos mientras que las escenas del GRE3D7 contienen 7 objetos. El GRE3D7 contiene m\'as de 100 expresiones referenciales por escena. Permitiendo una evaluaci\'on detallada de los rankings que generados por nuestros algoritmos como se describe en el Cap\'itulo \ref{sec:corpus}.
+{\bf GRE3D3} y su extensi\'on {\bf GRE3D7} \cite{gre3d3,gre3d7} se desarrollaron en una serie de experimentos basados en la web, y se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 personas y GRE3D7 contiene 4.480 descripciones producidas por 287 personas, y es el corpus m\'as grande del \'area hasta la fecha. El dominio de estos corpora constan de escenas visuales simples que contienen s\'olo dos tipos de objetos (cubos y esferas) con variaci\'on limitada en color y tama\~no. En cada escena, hay una relaci\'on espacial entre el target y el landmark m\'as cercano. Ambos corpus contienen descripciones proposicionales y relacionales. Ejemplo de im\'agenes del GRE3D3 y GRE3D7 se muestran en la Figura \ref{imagenes-GRE3D3-GRE3D7}. Las escenas del GRE3D3 contienen s\'olo 3 objetos mientras que las escenas del GRE3D7 contienen 7 objetos. El GRE3D7 contiene m\'as de 100 expresiones referenciales por escena. Permitiendo una evaluaci\'on detallada de los rankings generados por nuestros algoritmos como se describe en el Cap\'itulo \ref{sec:corpus}.\\
 %\begin{minipage}[b]{0.45\linewidth}
 
 \begin{figure}[!ht]
@@ -222,11 +222,11 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \caption{Im\'agenes del GRE3D3 corpus (a) y del GRE3D7 corpus (b)}\label{imagenes-GRE3D3-GRE3D7}
 \end{figure}
 
-\vspace*{1cm}
+%\vspace*{1cm}
 
 \label{sec:corpusSTARS}
 %and its extension Stars2 were collected for the study of referential overspecification (particularly in the case of relational descriptions). Stars was developed in a pilot web-based experiment, containing 704 descriptions produced by 64 speakers.  The more comprehensive Stars2 data set was produced in dialogue situations involving subject pairs, and it contains 884 descriptions produced by 56 speakers. Both domains make use of simple visual scenes containing up to four object types (e.g., stars, boxes, cones and spheres) with limited variation in colour and size. Differently from other REG corpora, however, Stars/2 includes a considerable number of complex situations of reference involving up to three objects, as in `the box near the sphere, next to the cone'.http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-002_2014.pdf y http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-001_2015.pdf
-{\bf Stars} \cite{Paraboni2016} y su extensi\'on {\bf Stars2} se recolectaron para el estudio de la sobre-especificaci\'on (particularmente en el caso de las descripciones relacionales). Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen tres tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~no. A diferencia de otros corpus para GER, Stars/2 incluyen un n\'umero considerable de situaciones complejas de referencia en que participan hasta tres objetos, como en {\it el cubo cerca de la esfera, al lado del cono}. Ejemplos de im\'agenes se muestran en la Figura \ref{imagenes-stars-stars2}. Este corpus fue recientemente liberado y planeamos usarlo en trabajo futuro (ver Cap\'itulo \ref{sec:conclusiones}).
+{\bf Stars} \cite{Paraboni2016} y su extensi\'on {\bf Stars2} se recolectaron para el estudio de la sobre-especificaci\'on (particularmente en el caso de las descripciones relacionales). Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen tres tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~no. A diferencia de otros corpus para GER, Stars/2 incluyen un n\'umero considerable de situaciones complejas de referencia en que participan hasta tres objetos, como en {\it el cubo cerca de la esfera, al lado del cono}. Ejemplos de im\'agenes se muestran en la Figura \ref{imagenes-stars-stars2}. Este corpus fue recientemente liberado y planeamos usarlo en trabajo futuro (ver Cap\'itulo \ref{sec:conclusiones}).\\
 
 \begin{figure}[!ht]
 \begin{subfigure}{.5\textwidth}
@@ -251,7 +251,7 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 
 \label{sec:corpusZOOM}
 %were developed in a series of web-based experiments primarily focussed on the study of relational descriptions. GRE3D3 contains 630 descriptions produced by 63 speakers, and GRE3D7 contains 4480 descriptions produced by 287 speakers, making it the largest of its kind to date. The GRE3D domain consists of simple visual scenes containing only two kinds of objects (boxes and spheres) with limited variation in colour and size. In each scene, there is only one possible spatial relation between target and the nearest landmark. Both corpora contain atomic and relational descriptions.
-{\bf ZOOM} \cite{DBLP:conf/acl/AltamiranoFPB15} se desarroll\'o durante nuestra colaboraci\'on con la Universidad de S\~ao Paulo. Contiene ERs para 20 mapas de las ciudades de Lisboa y Madrid, fue realizado en la web, y contiene ERs de targets singulares y plurales, con y sin zoom, en 2 idiomas: espa\~nol y portugu\'es. El corpus portugues contiene 100 ER por mapa, es decir 2000 ER en total, y el espa\~nol 80 por mapa, sumando un total de 1600 ER. El corpus fue recolectado a fin de poder realizar experimentos con situaciones m\'as cercanas a aplicaciones que los corpus existentes hasta el momento. Ejemplos de mapas se muestran en la Figura \ref{imagenes-zoom-corpus}.
+{\bf ZOOM} \cite{DBLP:conf/acl/AltamiranoFPB15} se desarroll\'o durante nuestra colaboraci\'on con la Universidad de S\~ao Paulo. Contiene ERs para 20 mapas de las ciudades de Lisboa y Madrid, fue realizado en la web, y contiene ERs de targets singulares y plurales, con y sin zoom, en 2 idiomas: espa\~nol y portugu\'es. El corpus portugu\'es contiene 100 ER por mapa, es decir 2000 ER en total, y el espa\~nol 80 por mapa, sumando un total de 1600 ER. El corpus fue recolectado a fin de poder realizar experimentos con situaciones m\'as cercanas a aplicaciones del mundo real, que los corpus existentes hasta el momento. Ejemplos de mapas se muestran en la Figura \ref{imagenes-zoom-corpus}.
 
 
 %\begin{figure}[!ht]
@@ -287,13 +287,13 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \caption{Im\'agenes del ZOOM corpus, target plural sin zoom (a) y con zoom (b)}\label{imagenes-zoom-corpus}
 \end{figure}
 
-En la Tabla \ref{tab-comparison-prop} se comparan los diferentes corpus presentados anteriormente\footnote{En el caso del TUNA y el ZOOM se us\'o para la comparaci\'on s\'olo la parte singular.}. El n\'umero de propiedades diferentes que tiene en cuenta cada corpus se muestra en columna Propiedades. El n\'umero de posibles landmarks que la descripci\'on puede incluir se muestra en la columna Landmarks, el largo promedio de la ER, en el sentido de la cantidad de atributos y relaciones, se ve en la columna Largo promedio. Y la proporci\'on de propiedades usadas, se muestra en la columna Uso. Esta es la proporci\'on de propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles propiedades y landmarks. Mayores largos de descripci\'on y menor promedio de uso se ven en situaciones complejas de referencia. Como se puede observar, el corpus ZOOM es m\'as complejo en este sentido y es el que usamos para nuestros casos de estudio en el Cap\'itulo \ref{sec:evaluacion}.
+En la Tabla \ref{tab-comparison-prop} se comparan los diferentes corpus presentados anteriormente\footnote{En el caso del TUNA y el ZOOM se us\'o para la comparaci\'on s\'olo la parte singular.}. El n\'umero de propiedades diferentes que tiene en cuenta cada corpus se muestra en columna Propiedades. El n\'umero de posibles landmarks que la descripci\'on puede incluir se muestra en la columna Landmarks, el largo promedio de la ER, que es la cantidad de atributos y relaciones, se ve en la columna Largo promedio. Y la proporci\'on de propiedades usadas, se muestra en la columna Uso. Esta es la proporci\'on de propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles propiedades y landmarks. Mayores largos de descripci\'on y menor promedio de uso se ven en situaciones complejas de referencia. Como se puede observar, el corpus ZOOM es m\'as complejo en este sentido y es el que usamos para nuestros casos de estudio en el Cap\'itulo \ref{sec:evaluacion}.
   %the average description size (in number of annotated properties), and the proportion of property usage, which is taken to be  the proportion of properties that appear in the description over the total number of possible attributes and landmarks. From a REG perspective, larger description sizes and lower usage rates are likely to represent more complex situations of reference.
 
 \begin{table}[ht]
 \begin{center}
 \footnotesize{
-\caption{Compaci\'on de corpora GER existente}
+
 \label{tab-comparison-prop}
 \begin{tabular} {  l c c c c}
 \hline
@@ -311,12 +311,13 @@ Zoom-Espa\~nol							& 19							& 4							& 7.2				& 0.3   \\
 \end{tabular}
 }
 \end{center}
+\caption{Compaci\'on de corpora GER existente.}
 \end{table}
 
 \section{Generaci\'on \emph{autom\'atica} de expresiones referenciales.}
 \label{sec:tipos_algoritmos}
 
-Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales es un programa que dado un contexto y un target genera una ER para el target.
+Un algoritmo para la generaci\'on autom\'atica de expresiones referenciales es un programa que dado al menos un contexto y un target genera una ER para el target.
 
 Los algoritmos pueden ser de distintos tipos, seg\'un los tipos de ERs que sean capaces de generar. Por ejemplo, un algoritmo puede ser: determin\'{i}stico o no-determin\'{i}stico, relacional o proposicional, incluir negaciones o no, generar plurales, singulares o ambos,
  %usar disyunciones y conjunciones, o s\'olo conjunciones, 
@@ -328,7 +329,7 @@ Por ejemplo, un algoritmo no determin\'istico podr\'ia generar para la Figura \r
 
 %Si el algoritmo es determin\'istico dar\'ia s\'olo una ER. ?`Esa ER que dar\'ia el algoritmo coincidir\'a con alguna de las que dieron las personas?. 
 %Si el algoritmo es no-determin\'istico, ?`podremos conseguir todos los diferentes tipos de ER que dieron las personas?. %Intentaremos responder estas preguntas m\'as adelante en la tesis.\\
-Si el largo de la ER es finito, dado un contexto finito, existen finitas ER a generar, as\'i un algoritmo no-determin\'istico nos permitir\'ia explorar el espacio de ERs posibles para un input dado. Tambi\'en nos permite generar un ranking de ERs como se discute en el Cap\'itulo \ref{sec:intro}.
+Si el largo de la ER es finito, dado un contexto finito, existen finitas ERs a generar, as\'i un algoritmo no-determin\'istico nos permitir\'ia explorar el espacio de ERs posibles para un input dado. Tambi\'en nos permite generar un ranking de ERs como se discute en el Cap\'itulo \ref{sec:intro}.
 
 \begin{table}[h!]
 \begin{center}
@@ -349,26 +350,26 @@ Si el largo de la ER es finito, dado un contexto finito, existen finitas ER a ge
 Total & &140 \\ \hline
 \end{tabular}
 %\vspace*{.1cm}
-\caption{ER dadas por las personas para la Figura \ref{GRE3D7-stimulus} del corpus GRE3D7.} 
+\caption{ER dadas por las personas para la Figura \ref{fig2-1} del corpus GRE3D7.} 
 \label{er-gre3d7-stimulus}
 \vspace*{-.5cm}
 \end{center}
 \end{table}
 
-Un algoritmo es {\bf proposicional}, cuando las ERs que genera contienen s\'olo atributos del target, es decir no contiene relaciones con otros objetos ni propiedades de otros objetos. Por ejemplo, s\'olo podr\'ia generar las ERs 1, 2 y 4 de la Tabla \ref{er-gre3d7-stimulus}. Es decir, genera solamente ERs proposicionales.
+Un algoritmo es {\bf proposicional}, cuando las ERs que genera contienen s\'olo atributos del target, es decir no contiene relaciones con otros objetos ni propiedades de otros objetos. Por ejemplo, para la Figura \ref{fig2-1}, s\'olo podr\'ia generar las ERs 1, 2 y 4 de la Tabla \ref{er-gre3d7-stimulus}. Es decir, genera solamente ERs proposicionales.
 
-Un algoritmo es {\bf relacional} si adem\'as de generar ERs proposicionales genera ERs relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar expresiones para \'el o los objetos relacionados. Un algoritmo relacional podr\'ia generar todas las ERs de la Tabla \ref{er-gre3d7-stimulus}. No todas las descripciones de los objetos involucrados en una ER relacional, son ERs que identifican un\'ivocamente al objeto. Por ejemplo, consideremos la ER 8, {\it La gran esfera roja a la derecha del cubo}. En este caso, {\it el cubo} es una expresi\'on que se tuvo que dar como consecuencia de incluir la relaci\'on {\it a la derecha de}. La expresi\'on {\it el cubo} no es una ER del landmark si se considera aislada porque hay otros cubos en la escena. 
+Un algoritmo es {\bf relacional} si adem\'as de generar ERs proposicionales genera ERs relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar expresiones para \'el o los objetos relacionados. Un algoritmo relacional podr\'ia generar todas las ERs de la Tabla \ref{er-gre3d7-stimulus}. Notar que no todas las descripciones de los objetos involucrados en una ER relacional, son ERs que identifican un\'ivocamente al objeto. Por ejemplo, consideremos la ER 8, que se podr\'ia realizar como {\it La gran esfera roja que est\'a al lado del cubo}. En este caso, {\it el cubo} es una expresi\'on que se tuvo que dar como consecuencia de incluir la relaci\'on {\it al lado de}. La expresi\'on {\it el cubo} no es una ER del landmark si se considera aislada porque hay otros cubos en la escena. 
 
 En algunos contextos, por ejemplo cuando el target es el \'unico que no tiene una propiedad o relaci\'on, ser\'ia \'util un algoritmo que incluya {\bf negaciones}. Por ejemplo, para la Figura \ref{fig2-1}, la ER {\it La esfera que est\'a sola} podr\'ia ser 
 una forma efectiva de referirse al objeto $e_1$ dado que es la \'unica esfera que no est\'a tocado un cubo.
 
-Algunos algoritmos pueden generar ERs para un conjunto de objetos en el contexto considerado. Por ejemplo, para la Figura \ref{fig2-1} la ER {\it Los cubos} se refiere  al conjunto de objetos \{$e_2$, $e_4$, $e_6$, $e_7$\}. Estos algoritmos generan ER {\bf plurales}. En caso de s\'olo poder generar ERs para un target singleton se dice que el algoritmo genera s\'olo {\bf singulares}.
+Algunos algoritmos pueden generar ERs para un conjunto de objetos en el contexto considerado. Por ejemplo, para la Figura \ref{fig2-1} la ER {\it Los cubos} se refiere  al conjunto de objetos \{$e_2$, $e_4$, $e_6$, $e_7$\}. Estos algoritmos generan ERs {\bf plurales}. En caso de s\'olo poder generar ERs para un target singleton se dice que el algoritmo genera s\'olo {\bf singulares}.
 
-Un algoritmo que genera ER {\bf minimales} (introducidas en la Secci\'on \ref{sec:minimales}), es un algoritmo que d\'a ERs que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target. Por ejemplo, en la Tabla \ref{er-gre3d7-stimulus} las ER 2 y 4 son minimales. Normalmente, si el algoritmo es minimal y determin\'istico entonces un orden preferencial de las propiedades tomado como input hace que el algoritmo pueda decidir cu\'al ER dar en caso de tener varias minimales.
+Un algoritmo que genera ER {\bf minimales} (introducidas en la Secci\'on \ref{sec:minimales}), es un algoritmo que d\'a ERs que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target. Por ejemplo, en la Tabla \ref{er-gre3d7-stimulus} las ER 2 y 4 son minimales. Si el algoritmo es minimal y determin\'istico normalmente toma un orden de preferencias de las propiedades como input que hace que el algoritmo pueda decidir cu\'al ER dar en caso de tener varias minimales.
 
-Un algoritmo que haga {\bf sobreespecificaci\'on} tiene la caracter\'istica de poder dar m\'as propiedades o relaciones con otros objetos que las m\'inimas necesarias para identificar al target. Por ejemplo, para la Figura \ref{fig2-1} la ER {\it La esfera roja, grande que esta a la derecha del cubo rojo grande} es una ER sobreespecificada porque (como ya mencionamos en la Secci\'on \ref{er-sobreespecificadas}) podr\'iamos sacarle algunas propiedades o la relaci\'on y seguir\'ia siendo una ER. Sacando {\it roja} de las propiedades del target, la expresi\'on {\it La esfera grande que esta a la derecha del cubo rojo grande} sigue siendo una ER, tambi\'en podr\'iamos sacar la relaci\'on con {\it el cubo rojo grande}, quedando {\it La esfera roja, grande} y sigue siendo una ER. Viendo la Tabla \ref{er-gre3d7-stimulus} podemos notar que la ER de mayor frecuencia, es {\it large red ball} y es una ER sobreespecificada, ya que {\it red ball} o {\it large ball}, son ERs minimales para el target de la Figura \ref{fig2-1}. En la tabla hay 58 ER minimales y 82 sobreespecificadas. Es decir, el 59\% son sobreespecificadas y el 41\% minimales.
+Un algoritmo que {\bf sobreespecifique} tiene la caracter\'istica de poder dar m\'as propiedades o relaciones con otros objetos que las m\'inimas necesarias para identificar al target. Por ejemplo, para la Figura \ref{fig2-1} la ER {\it La esfera roja, grande que esta a la derecha del cubo rojo grande} es una ER sobreespecificada porque (como ya mencionamos en la Secci\'on \ref{er-sobreespecificadas}) podr\'iamos sacarle algunas propiedades o la relaci\'on y seguir\'ia siendo una ER. Sacando {\it roja} de las propiedades del target, la expresi\'on {\it La esfera grande que est\'a a la derecha del cubo rojo grande} sigue siendo una ER, tambi\'en podr\'iamos sacar la relaci\'on con {\it el cubo rojo grande}, quedando {\it La esfera roja, grande} y sigue siendo una ER. Viendo la Tabla \ref{er-gre3d7-stimulus} podemos notar que la ER de mayor frecuencia, es {\it large red ball} y es una ER sobreespecificada, ya que {\it red ball} o {\it large ball}, son ERs minimales para el target de la Figura \ref{fig2-1}. En la tabla hay 58 ER minimales y 82 sobreespecificadas. Es decir, el 59\% son sobreespecificadas y el 41\% minimales.
 
-Hay una forma trivial de que un algoritmo sobreespecifique: agregar todas las propiedades y relaciones del target con otros objetos. Por ejemplo, para la Figura \ref{GRE3D7-stimulus} la ER ser\'ia {\it Large red ball left-of (large red cube right-of large red ball)}. Pero, como vemos en la Tabla \ref{er-gre3d7-stimulus}, esto no es lo que hace la gente. En esta tesis, uno de los temas que investigamos es c\'omo hacer para el que un algoritmo sobreespecifique imitando el comportamiento humano lo m\'as posible. 
+Hay una forma trivial de que un algoritmo sobreespecifique: agregar todas las propiedades y relaciones del target con otros objetos. Por ejemplo, para la Figura \ref{fig2-1} la ER ser\'ia {\it Large red ball left-of (large red cube right-of large red ball)}. Pero, como vemos en la Tabla \ref{er-gre3d7-stimulus}, esto no es lo que hace la gente. En esta tesis, uno de los temas que investigamos es c\'omo hacer para el que un algoritmo sobreespecifique imitando el comportamiento humano lo m\'as posible. 
 
 Los algoritmos no generan expresiones parciales ni subespecificadas, ya que no sirven para identificar al target. La identificaci\'on del target es el objetivo de la GER.
 
@@ -378,42 +379,10 @@ Los algoritmos no generan expresiones parciales ni subespecificadas, ya que no s
 %interesante...
 %https://www.abdn.ac.uk/ncs/departments/computing-science/tunabibl-495.php
 
-
-Ahora vamos a hablar de una selecci\'on de algoritmos de generaci\'on autom\'atica de expresiones referenciales del \'area que son 
-particularmente relevantes para la tesis. Para un estado del arte del \'area m\'as detallado ver \cite{survey}. En la 
-Tabla \ref{clasificacion_algoritmos} se muestra una clasificaci\'on seg\'un los tipos de algoritmos que vimos en la secci\'on anterior, 
-considerando si es determin\'istico o no-determin\'istico, proposicional o relacional, 
-si genera negaciones, plurales, si genera sobreespecificaci\'on. Notar que si no generan sobreespecificaci\'on, generan ERs minimales.
-
 \subsection{Primeros algoritmos}
 
-\label{sec:algoritmos_area}
-
-\begin{table}[b]
-\begin{center}
-\begin{tabular}{|l|c|c|c|c|c|c|c|}
-\hline
-%total scenes in evaluation set &                           80   &             68
- Algoritmos& Deter- & No-Deter & Propo- & Re- & Nega- & Plu- & Sobre- \\
- & min\'istico & min\'istico & sicional & lacional & ciones & rales & especificado \\
- %Algoritmos& Det. & No-Det. & Prop. & Rel. & Neg. & Plur. & Sob. \\
-\hline
-Full Brevity &Si & No&Si&No&No&No& No \\
-Greedy&Si & No&Si&No&No&No& Si \\
-Incremental&Si & No&Si&No&No&No& No \\
-GRAPH&Si & No&Si&Si&No&Si& Si \\ 
-relacional&Si & No&Si&Si&No&No& No \\
-\hline
-%Bisimulaci\'on&Si & No&Si&Si&Si&Si& No \\ \hline
-%Nuestra Propuesta&No & Si&Si&Si&No&Si& Si \\
-
-\end{tabular}
-%\vspace*{.1cm}
-\caption{Clasificaci\'on de algoritmos seg\'un el tipo de ER que generan.} 
-\label{clasificacion_algoritmos}
-\vspace*{-.5cm}
-\end{center}
-\end{table}
+En esta secci\'on vamos a hablar de una selecci\'on de algoritmos de generaci\'on autom\'atica de expresiones referenciales del \'area que son 
+particularmente relevantes para la tesis. Para un estado del arte del \'area m\'as detallado ver \cite{survey}. 
 
 
  
@@ -425,10 +394,10 @@ relacional&Si & No&Si&Si&No&No& No \\
 identifica al target. Es decir, genera ERs minimales. Para hacerlo, 
 busca si hay una propiedad del target que no sea propiedad de ning\'un distractor. Si no hay chequea todas las posibles combinaciones 
 de 2 propiedades, si no la hay, busca de a 3 y as\'i sucesivamente. Por ejemplo para la Figura \ref{fig2-1} se fijar\'ia en las propiedades 
-del target {red, ball, large}, como ninguna de ellas aisladamente identifica s\'olo al target, probar\'ia con combinaciones de 2 propiedades {\it red ball} si identifica al target, devuelve {\it red ball} y finaliza.
+del target {\it red, ball, large}, como ninguna de ellas aisladamente identifica s\'olo al target, probar\'ia con combinaciones de 2 propiedades {\it red ball} si identifica al target, devuelve {\it red ball} y finaliza.
 
 \paragraph{Heur\'istica Greedy:} El algoritmo de {\bf Heur\'istica Greedy} \cite{greedy} iterativamente selecciona la propiedad que elimina m\'as distractores, y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado 
-no siempre genera expresiones referenciales m\'inimas. Por ejemplo para la Figura \ref{GRE3D7-stimulus} se fijar\'a que {\it ball} elimina 2 distractores {$e_{1}$, $e_{3}$}, 
+no siempre genera expresiones referenciales m\'inimas. Por ejemplo para la Figura \ref{fig2-1} se fijar\'a que {\it ball} elimina 2 distractores {$e_{1}$, $e_{3}$}, 
 {\it red} elimina 3 distractores {$e_{2}$, $e_{4}$, $e_{7}$} y {\it large} elimina 1 distractores {$e_{4}$}, entonces elegir\'a {\it red}, 
 pero como no alcanza para ser ER, seguir\'a con {\it ball} que es la que elimina m\'as distractores luego de {\it red}, finalizar\'a porque 
 {\it red ball} identifica al target. Supongamos que hubiera otro objeto con propiedad {\it large}, entonces {\it large} eliminar\'ia tambi\'en  
@@ -444,7 +413,7 @@ m\'as importantes del \'area, lo explicamos a continuaci\'on.
 %\centering
 \includegraphics[width=.4\textwidth]{images/algoritmoIncremental.png}
 %\caption{Algoritmo Incremental}
-\caption{Figura 2 de \protect\cite{survey}.}\label{algoritmoIncremental}
+\caption{Algoritmo Incremental, Figura 2 de \protect\cite{survey}.}\label{algoritmoIncremental}
 
 \end{figure}
 
@@ -461,16 +430,16 @@ Vamos a ejemplificar la corrida del algoritmo con el ejemplo de la Figura \ref{f
 ordenada de propiedades es \'esta [tipo, color, tama\~no]. \emph{D} inicialmente es el conjunto de todos los objetos del contexto: 
 \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}.
 En {\it Paso 2} se asigna a \emph{L} la descripci\'on vac\'{i}a, al finalizar la ejecuci\'on, \emph{L} tendr\'a el conjunto de propiedades 
-con los cuales identificaremos a $e_5$, es decir la ER. Se inicializa \emph{C} con el conjunto de distractores de \emph{r}, y $e_5$ en nuestro ejemplo \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}, en el {\it Paso 3}. 
+con los cuales identificaremos a $e_5$, es decir la ER. En el {\it Paso 3} se inicializa \emph{C} con el conjunto de distractores de \emph{r}, y $e_5$ en nuestro ejemplo \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}. 
 La idea del algoritmo es ir eliminando distractores usando las propiedades $A_{i}$ del target en el orden de preferencia \emph{Pref}, por eso, en el {\it Paso 4} recorre las propiedades $A_{i}$. En {\it Paso 5} 
 le asigna a \emph{V} el valor que tiene la propiedad $A_{i}$ para el target \emph{r}, en nuestro ejemplo $e_5$. $RulesOut(A_{i},V)$ es el 
 conjunto de objetos que tienen 
 diferente valor para la propiedad $A_{i}$ que el que tiene el target, la funci\'on se fija si el valor de esa propiedad elimina distractores. 
 La primer propiedad del target $e_5$ a considerar seg\'un el orden de preferencias \emph{Pref} es el tipo, el valor del target para tipo 
-es {\it esfera}. En el {\it Paso 6}, identifica los objetos en \emph{C} que tengan tipo con valor distinto de esfera, \{$e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, y los elimina de \emph{C}, el cual queda s\'olo con \{$e_{1}$,$e_{3}$\}. En {\it Paso 10} pregunta si \emph{C} 
+es {\it esfera}. En el {\it Paso 6}, identifica los objetos en \emph{C} que tengan tipo con valor distinto de esfera, ellos son \{$e_{2}$,$e_{4}$,$e_{6}$,$e_{7}$\}, y los elimina de \emph{C}, el cual queda s\'olo con \{$e_{1}$,$e_{3}$\}. En {\it Paso 10} pregunta si \emph{C} 
 es vac\'io, es decir si ya se eliminaron todos los distractores, pero no lo es, por lo tanto contin\'ua con la siguiente propiedad, 
 en este caso con el color, el valor de color para el target es {\it rojo}, agrega {\it rojo} a \emph{L}, y actualiza \emph{C} con 
-$\emptyset$ porque tanto $e_{1}$ como $e_{3}$ son amarillos, en {\it Paso 10} pregunta si \emph{C} es vac\'io, y si lo es, 
+$\emptyset$ porque tanto $e_{1}$ como $e_{3}$ son amarillos, es decir no comparten el color con el target, en {\it Paso 10} pregunta si \emph{C} es vac\'io, y si lo es, 
 por lo tanto devuelve \{{\it esfera}, {\it rojo}\}. Lo cual se podr\'ia realizar como {\it La esfera roja}, y ser\'ia una ER para el target considerado.
 
 
@@ -483,10 +452,10 @@ Los algoritmos que describimos hasta ahora son proposicionales. Varios investiga
 \cite{Horacek1997,krahmer,kelleher06:increm}, se basan a menudo
 en el supuesto de que las propiedades relacionales (como ``x est\'a en y'') son menos preferidas que
 los no relacionales (como ``x es blanca''), o sea que los algoritmos s\'olo las generan como \'ultima opci\'on. Si se requiere una relaci\'on para distinguir al target
-x, en el cual se deba nombrar al objeto y, se aplica el algoritmo b\'asico iterativamente a y. Adem\'as, no est\'a claro que las propiedades proposicionales sean siempre preferidas antes que las relacionales. En \cite{viet:gene11} se sugieren que, incluso en escenas simples, donde los objetos pueden f\'acilmente ser distinguidos
+x, en el cual se deba nombrar al objeto y, se aplica el algoritmo b\'asico iterativamente a y, pero como dijimos antes, esto no siempre es lo que las personas hacen, muchas veces la descripci\'on del landmark no es una ER. Adem\'as, no est\'a claro que las propiedades proposicionales sean siempre preferidas antes que las relacionales. En \cite{viet:gene11} se sugieren que, incluso en escenas simples, donde los objetos pueden f\'acilmente ser distinguidos
 sin relaciones, las personas tambi\'en utilizan con frecuencia las relaciones (en aproximadamente un tercio de las ERs que dan).
 
-En caso de generar ER relacionales con esta estrategia hay que asegurarse que el algoritmo termina, es decir que no entra en ciclos infinitos 
+En caso de generar ERs relacionales con esta estrategia hay que asegurarse que el algoritmo termina, es decir que no entra en ciclos infinitos 
 tratando de identificar objetos. \cite{haddock} estudiaron como abordar el problema de regresi\'on infinita, en el cual el algoritmo trata de describir al landmark haciendo referencia al target, y al target haciendo referencia al landmark infinitamente, como en {\it el libro en la mesa la cual soporta un libro en la mesa... }
 
 
@@ -508,28 +477,28 @@ tratando de identificar objetos. \cite{haddock} estudiaron como abordar el probl
 %\end{figure}
 
 
-El {\bf algoritmo Graph} de \cite{graph} propone tratar la obtenci\'on de expresiones referenciales como un problema de grafos, el contexto que incluye al target y los distractores es representado como un grafo, por ejemplo para el contexto de la Figura \ref{figura-survey} el grafo correspondiente ser\'ia el de la Figura \ref{grafo-survey}. Cada objeto de la escena (personas en este caso) se modela como un v\'ertice en el grafo. Las propiedades at\'omicas como jounger-looking, older-looking, wears suit, wears t-shirt, woman, man, se representan como un bucle en el correspondiente nodo. Las relaciones binarias entre objetos, por ejemplo left-of o right-of se modelan como aristas entre los nodos correspondientes.
+El {\bf algoritmo Graph} de \cite{graph} propone tratar la generaci\'on de expresiones referenciales como un problema de grafos, el contexto que incluye al target y los distractores es representado como un grafo, por ejemplo en la Figura \ref{fig2-8} se muestra el contexto y el grafo correspondiente. Cada objeto de la escena (personas en este caso) se modela como un v\'ertice en el grafo. Las propiedades at\'omicas como \texttt{jounger-looking}, \texttt{older-looking}, \texttt{wears suit}, \texttt{wears t-shirt}, \texttt{woman}, \texttt{man}, se representan como un bucle en el correspondiente nodo. Las relaciones binarias entre objetos, por ejemplo \texttt{left-of} o \texttt{right-of} se modelan como aristas entre los nodos correspondientes.
 
 \begin{figure}[!ht]
 \begin{subfigure}{.35\textwidth}\centering
+\centering
 \includegraphics[width=\textwidth]{images/contexto-survey.png}\\[0pt]
 %\caption{}
 \label{figura-survey}
 \vspace*{.1cm}
 \end{subfigure}
 \hspace*{0cm}
-\begin{subfigure}{.55\textwidth}\centering
+\begin{subfigure}{.50\textwidth}\centering
 \includegraphics[width=\textwidth]{images/grafo-survey.png}\\[0pt]
 %\caption{Ejemplo de grafo para el contexto de la Figura \ref{figura-survey}}
 \label{grafo-survey}
 \end{subfigure}
 \caption{Ejemplo de contexto y grafo extra\'ido de \protect\cite{survey}.}\label{fig2-8}
-
 \end{figure}
 
 
 
-Dado un objeto target, conseguir una ER que distinga al objeto de lo dem\'as es equivalente a encontrar un subgrafo del grafo original que unicamente caracterize al target. Intuitivamente este subgrafo se puede poner sobre el target y no sobre ningun otro objeto del dominio considerado.\\
+Dado un objeto target, conseguir una ER que distinga al objeto de los dem\'as objetos del contexto, es equivalente a encontrar un subgrafo del grafo original que \'unicamente caracterize al target. Intuitivamente este subgrafo se puede poner sobre el target y no sobre ning\'un otro objeto del dominio considerado.
 
 \begin{figure}[ht]
 \centering
@@ -539,7 +508,7 @@ Dado un objeto target, conseguir una ER que distinga al objeto de lo dem\'as es 
 \end{figure}
 
 %Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente al cual le llama grafo distintivo.% (distinguishing graph).\\
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hallan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{grafo-survey}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} s\'olamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target.  
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hallan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay distractores, el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{grafo-survey}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} s\'olamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target.  
 
 El algoritmo sigue explorando grafos y siempre se queda con el de menor costo.
 
@@ -583,7 +552,41 @@ La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cu
 
 %Theune y Krahmer propusieron una extensi\'on que permite la generaci\'on de referencia con la subsiguiente ia teniendo en cuenta la prominencia discurso del referente objetivo (Krahmer y Theune, 1998; Theune, 2000; Krahmer y Theune, 2002), y un segundo uno que permite la IA para producir expresiones referenciales que contener relaciones binarias a otros objetos (Theune, 2000; Krahmer y Theune, 2002). Voy a volver a su extensi\'on relacional en la Secci\'on 2.3. Enfoque Theune y de Krahmer funciona asignando una puntuaci\'on de relevancia a todos los objetos de acuerdo con la enfoque / tema distinci\'on por Hajicova (1993) y el centrado Theory (Grosz et al., 1995). Alteran el criterio de \'exito del algoritmo y s\'olo permiten que se detenga cuando aqu\'i hay izquierda distractor que es tan o m\'as relevante que el referente de destino.
 %No todas las propiedades son las mismas. Las Diferencias cualitativas que existen entre diferentes propiedades se discutieron por primera vez en la literatura reg por van Deemter (2000, 2006). Se\~nal\'o que la conveniencia de propiedades orgradable vagos como peque\~nos y grandes depende del contexto en el que se utilizan, mientras que, Por ejemplo, el color de un objeto es absoluta. Considere dos descripciones de un dominio de los animales ... (van Deemter, 2002), van Deemter considera integridad l\'ogica del ia en t\'erminos de los operadores booleanos de negaci\'on y disyunci\'on. \'el la extendi\'o a ser capaz de generar expresiones que se refieren que contienen propiedades, tales como Ejemplo (2.3) negado, y las descripciones de conjuntos de objetos, tales como Ejemplo (2.4), o incluso (2,5), que contiene una disyunci\'on l\'ogica de propiedades. Sus algoritmo procede en etapas, tratando m\'as y disyunciones m\'as largos de propiedades, si las propiedades at\'omicas y disyunciones m\'as cortos no son suficientes para distinguir el conjunto de destino .. que funciona en referencia a conjuntos fue tomada adem\'as por Gatt y van Deemter (2005, 2006), que han presentado los algoritmos m\'as maduros en este espacio para la fecha. Utilizaron un procedimiento similar al de las otras cosas en que sus algoritmos se basan en el procesamiento incremental de un orden de preferencia de las propiedades. Sus algoritmos agregar una gran cantidad de maquinaria compleja para el procedimiento b\'asico para asegurar que las propiedades se eligen de manera que maximiza la coherencia dentro del conjunto de objetos descritos por las expresiones que se refieren. Por ejemplo, su enfoque intentar\'a utilizar propiedades del mismo tipo para todos los referentes de un conjunto. As\'i, ser\'ia producir Ejemplos descripciones tales como (2,6) o (2,7) en lugar de Ejemplo (2.8) o ..
-En lo que sigue veremos como evaluar a los algoritmos de generaci\'on de ER.
+
+En la Tabla \ref{clasificacion_algoritmos} se muestra una clasificaci\'on seg\'un los tipos de algoritmos que vimos en la secci\'on anterior, 
+considerando si es determin\'istico o no-determin\'istico, proposicional o relacional, 
+si genera negaciones, plurales, si genera sobreespecificaci\'on. Notar que si no generan sobreespecificaci\'on, generan ERs minimales.
+\label{sec:algoritmos_area}
+
+\begin{table}[b]
+\begin{center}
+\begin{tabular}{|l|c|c|c|c|c|c|c|}
+\hline
+%total scenes in evaluation set &                           80   &             68
+ Algoritmos& Deter- & No-Deter & Propo- & Re- & Nega- & Plu- & Sobre- \\
+ & min\'istico & min\'istico & sicional & lacional & ciones & rales & especificado \\
+ %Algoritmos& Det. & No-Det. & Prop. & Rel. & Neg. & Plur. & Sob. \\
+\hline
+Full Brevity &Si & No&Si&No&No&No& No \\
+Greedy&Si & No&Si&No&No&No& Si \\
+Incremental&Si & No&Si&No&No&No& No \\
+GRAPH&Si & No&Si&Si&No&Si& Si \\ 
+relacional&Si & No&Si&Si&No&No& No \\
+\hline
+%Bisimulaci\'on&Si & No&Si&Si&Si&Si& No \\ \hline
+%Nuestra Propuesta&No & Si&Si&Si&No&Si& Si \\
+
+\end{tabular}
+%\vspace*{.1cm}
+\caption{Clasificaci\'on de algoritmos seg\'un el tipo de ER que generan.} 
+\label{clasificacion_algoritmos}
+\vspace*{-.5cm}
+\end{center}
+\end{table}
+
+
+
+En lo que sigue veremos como evaluar a los algoritmos de GER.
 
 
 
@@ -597,7 +600,7 @@ En lo que sigue veremos como evaluar a los algoritmos de generaci\'on de ER.
 %en la generaci\'on autom\'atica de expresiones referenciales debe esforzarse por lograr
 %sistemas que den salidas tan similar a la humana como sea posible; y que, para ello, debemos
 %esforzarnos para modelar el comportamiento humano como se puede observar en corpora. Nosotros adherimos a esta postura, en esta tesis se han presentado corpora existente, y vamos a evaluar nuestros resultados por un lado compar\'andolos con las ER que est\'an en los corpus, luego veremos que \'esta manera de evaluar no es del todo justa para los algoritmos, y haremos otras clases de evaluaciones para mostrarlo.
-Esta secci\'on est\'a dividida en 3 partes, en la primera se muestra trabajo previo usando corpora relevante a nuestro estudio, en la segunda se explican algunas m\'etricas autom\'aticas y en la tercera se d\'a una introducci\'on a las m\'etricas manuales.
+Esta secci\'on est\'a dividida en 3 partes, en la primera se muestra trabajo previo usando corpora relevante a nuestro estudio, en la segunda se explican algunas m\'etricas autom\'aticas usadas en el \'area y en la tercera se d\'a una introducci\'on a las m\'etricas manuales.
 
 \subsection{Trabajo previo en evaluaci\'on usando corpora}\label{sec:2_3_1}
 %
@@ -683,19 +686,19 @@ donde $\delta$ es un coheficiente definido como sigue:\\
 		 0      & if A \cap B = \emptyset \\
 		 1 & if A = B  \\
 		 \frac{2}{3}     & if A \subset B ~or~ B \subset A\\
-		 \frac{1}{3}     & otro caso
+		 \frac{1}{3}     & otro ~caso
 	       \end{array}
 	     \right.
  \end{equation}
 
 Intuitivamente significa que se prefieren aquellas descripciones producidas por el sistema las cuales no incluyen atributos que los humanos no incluyeron.
 
-Notar que estas m\'etricas no cumplen con el punto (iii) de la Secci\'on \ref{sec:2_3_1} y no nos permiten compararrankings de ERs, pero igualmente las usamos en el Cap\'itulo \ref{sec:evaluacion} para poder compararnos con trabajo previo.
+Notar que estas m\'etricas no cumplen con el punto (iii) de la Secci\'on \ref{sec:2_3_1} y no nos permiten comparar rankings de ERs, pero igualmente las usamos en el Cap\'itulo \ref{sec:evaluacion} para poder comparar la salida de nuestro algoritmo con trabajo previo.
 
 \subsection{M\'etricas manuales}
 
 Las ERs tambi\'en pueden ser evaluadas por jueces humanos, y de esta manera se pueden evaluar por ejemplo adecuaci\'on, mostr\'andole a un juez humano la misma im\'agen que vi\'o la persona que gener\'o la ER y pregunt\'andole cosas como ?`Que tan clara es la descripci\'on?.
-Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan cual ER les es m\'as natural, se les mostro el contexto, y se les present\'o 2 ER una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar la misma im\'agen pero sin la flecha que se\~nala al target, darle la ER que di\'o alguna persona, y pedirle que se\~nale el objeto al cual la ER refiere. De esta manera se puede evaluar facilidad de encontrar objetivo con la expresi\'on dada.
+Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan entre dos ERs la m\'as natural, se les mostro el contexto, y se les present\'o 2 ER una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar la misma im\'agen pero sin la flecha que se\~nala al target, darle la ER que di\'o alguna persona, y pedirle que se\~nale el objeto al cual la ER refiere. De esta manera se puede evaluar facilidad de encontrar objetivo con la expresi\'on dada.
 La fluidez de una ER se puede evaluar preguntando a juez humano cosas como estas: 
 ?`Considera que es fluida esta descripci\'on?, ¿Es buena y clara en el idioma considerado?. 
 Otra manera de evaluar manualmente es viendo si las ERs son \'utiles para dar instrucciones. Por ejemplo, \cite{BelzGattEvaluation}, mostraron a los participantes una descripci\'on generada para un ensayo. Despu\'es que los participantes le\'ian esta descripci\'on, una escena aparec\'ia y se pidi\'o a los participantes
@@ -706,17 +709,17 @@ el tiempo de lectura, el tiempo de identificaci\'on, y la tasa de error, que se 
 \section{Notas finales y linkeo del cap\'itulo}
 \label{sec:linkeo2}
 
-Este cap\'itulo lo dividimos en 3 secciones, en la primer secci\'on dimos definiciones b\'asicas que usaremos a lo largo de toda la tesis, 
-como son los tipos de ER de acuerdo a las propiedades o relaciones que incluyan, tambi\'en de acuerdo a la cantidad de informaci\'on que 
+Este cap\'itulo lo dividimos en 3 secciones, en la primer secci\'on dimos definiciones b\'asicas que usamos a lo largo de toda la tesis, 
+como son los tipos de ERs de acuerdo a las propiedades o relaciones que incluyan, tambi\'en de acuerdo a la cantidad de informaci\'on que 
 tengan, luego presentamos las premisas en las que se basa la teor\'ia de \cite{clark1992arenas,Clark-Marshall81}, vimos experimentos que muestran que dadas ciertas condiciones las personas no siguen esas premisas, 
 \cite{keysar:Curr98}. Tambi\'en vimos que algo com\'un es que las personas den ERs sobreespecificadas, \cite{arts,do-speakers}, los experimentos 
 indican que por lo menos la tercera parte de las expresiones son sobreespecificadas, y que los oyentes no juzgan estas ERs como peores que 
 la minimales. Otras conclusiones encontradas son que la sobreespecificaci\'on permite la identificaci\'on m\'as r\'apida del target y que la 
 informaci\'on adicional (arriba, abajo) es m\'as \'util que la (izquierda, derecha). \cite{Lu_sasha2015} hicieron un experimento de 
 aprendizaje de palabras en una lengua extranjera, y concluyen que las personas que tuvieron a su disposici\'on ERs sobreespecificadas, 
-aprendieron m\'as que aquellas a las que se les di\'o ERs minimales. Tambi\'en dimos una introducci\'on a corpora existente en el \'area 
-como son el TUNA, el GRE3D3/7, Stars/2 y el ZOOM corpus que fue creado en el desarrollo de esta tesis, por lo cual lo explicaremos con m\'as detalle en el Cap\'itulo \ref{sec:corpus}. En la segunda secci\'on explicamos los diferentes tipos de algoritmos los cuales se 
-diferencian por los tipos de ER que pueden generar, dimos los algoritmos m\'as importantes del \'area como son incremental, graph, relacional, vimos sus diferencias y pudimos compararlos entre ellos. Entre los algoritmos del \'area no inclu\'imos el de 
+aprendieron m\'as que aquellas a las que se les di\'o ERs minimales. Dimos una introducci\'on a corpora existente en el \'area 
+como son el TUNA, el GRE3D3/7, Stars/2 y el ZOOM corpus, \'este \'ultimo fue creado en el desarrollo de esta tesis, por lo cual lo explicaremos con m\'as detalle en el Cap\'itulo \ref{sec:corpus}. En la segunda secci\'on explicamos los diferentes tipos de algoritmos los cuales se 
+diferencian por los tipos de ERs que pueden generar, dimos los algoritmos m\'as importantes del \'area como son incremental, graph, relacional, vimos sus diferencias y pudimos compararlos entre ellos. Entre los algoritmos del \'area no inclu\'imos el de 
 bisimulaci\'on del cual hablaremos en la Secci\'on \ref{sec:bisimulacion} por ser \'este el algoritmo base de los aportes de esta tesis. Y 
 en la tercer secci\'on dimos una introducci\'on a las m\'etricas de evaluci\'on tanto autom\'aticas como manuales, algunas de las cuales usaremos para evaluar nuestro algoritmo.
 
