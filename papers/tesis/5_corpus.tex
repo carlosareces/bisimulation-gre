@@ -1,44 +1,33 @@
 \chapter{Recolecci\'on y an\'alisis del corpus ZOOM}
 \label{sec:corpus}
 
-El corpus ZOOM fue un experimento realizado en un trabajo conjunto con la Universidad de S\~ao Paulo (Brasil). El objetivo del experimento fue crear un corpus de expresiones referenciales de un dominio m\'as complejo y m\'as cercano a las aplicaciones del mundo real, que los corpus existentes hasta el momento. Este corpus contiene referencias a singulares y plurales y hace gran uso de propiedades relacionales. M\'as a\'un las descripciones del ZOOM corpus fueron producidas por hablantes humanos de espa\~nol y portugu\'es, lo cual va a permitir (por primera vez, seg\'un nuestro conocimiento) un estudio comprensivo de la realizaci\'on ling\"u\'istica en estos lenguajes, y permite investigar la variaci\'on entre humanos en GER \cite{trainable-speaker},\cite{romina-coling},\cite{non-det}. 
-En esta tesis se quiere mostrar que el algoritmo de bisimulaci\'on con probabilidades de uso de las palabras a partir de corpus podr\'a generar ER en un dominio que es directamente aplicable a aplicaciones de inteligencia artificial.
-En este Cap\'itulo se describe el dominio y las caracter\'isticas del corpus, luego en Secci\'on~\ref{corpus-voluntarios} se dar\'an estad\'isticas de las personas que completaron el experimento, en la Secci\'on~\ref{corpus-metodo} se explicar\'a en detalle que se le pidi\'o a las personas involucradas en el experimento, en la Secci\'on~\ref{corpus-materiales} se mostrar\'an los materiales usados, y en la Secci\'on~\ref{corpus-anotacion} se hablar\'a de como se anot\'o el corpus, que expresiones se descartaron y porqu\'e. Para finalizar el Cap\'itulo discutiremos la fiabilidad de obtener expresiones con este m\'etodo en la Secci\'on~\ref{corpus-discusion} y luego haremos una evaluaci\'on en Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos. La evaluaci\'on realizada motiv\'o al caso de estudio de la Secci\'on \ref{sec:caso_estudio} en la que mostramos un caso particular.
-
-\textbf{traido del 2}
-
 Hay tres \'areas principales en las que los corpora se puede utilizar en la investigaci\'on sobre generaci\'on de expresiones referenciales:
-evaluaci\'on, la recolecci\'on de corpus y an\'alisis y modelizaci\'on estad\'istica de
-datos de corpus.
-Comenz\'o con el an\'alisis del estado del arte de la investigaci\'on en
-la generaci\'on de descripciones distintivas, trabaj\'o con relaciones espaciales y en el trabajo us\'o datos de corpus. Examin\'o una serie de opciones metodol\'ogicas que tienen que hacerse cuando se trabaja con los corpus de GER. Aqu\'i, explor\'o diferentes opciones para los desaf\'ios de recopilaci\'on de corpus, que se centran en torno al equilibrio que se necesita
+evaluaci\'on, la recolecci\'on de corpus y an\'alisis y modelizaci\'on estad\'istica de datos de corpus.
+El desaf\'io de recopilaci\'on de corpus, se centra en torno al equilibrio que se necesita
 entre el control de los par\'ametros experimentales tanto como sea necesario
-y mantener la configuraci\'on de lo m\'as natural posible. Discuti\'o una serie de conceptos
-que son de importancia para el an\'alisis de corpora de GER, tales como la naturalidad de diferentes
-propiedades de los objetos, y las nociones de minimalidad y cuestiones de sobre-especificaci\'on de expresiones referenciales. Por \'ultimo, analiz\'o diferentes maneras en que la salida de un sistema se puede
+y mantener la configuraci\'on de lo m\'as natural posible. 
+
+Para evaluar la salida de un sistema, se puede 
 comparar con los datos de corpora, bajo la premisa de que el objetivo de la comparaci\'on es
 para evaluar si el sistema podr\'ia tener un modelo adecuado del comportamiento humano para la generaci\'on de expresiones referenciales.
-Realiz\'o una investigaci\'on en las tres \'areas donde se puede emplear corpora en GER: Evaluaci\'on de semejanza humana, recopilaci\'on y an\'alisis de corpus, y modelado de datos de corpus. Realiz\'o un experimento de evaluaci\'on con tres de los algoritmos cl\'asicos, (1989) Algoritmo Greedy de Dale (Greedy), Dale y Haddock (1991b), Algoritmo Relacional (ra) Y Dale y Reiter (1995) Algoritmo Incremental (IA), Se pusieron a prueba en cuanto a su capacidad de
-replicar las expresiones referenciales se encuentran en un grupo relativamente peque\~no de corpus de expresiones referenciales
-en un dominio visual de im\'agenes puestas en una grilla.
-%de rejilla de cajones de armarios ling. 
-En el an\'alisis de este experimento tuvo dos resultados principales: (1) que identic\'o en particular tres 
-fen\'omenos que todav\'ia plantean importantes retos para los algoritmos GER con el objetivo de replicar
-el comportamiento humano, y (2) que proporciona una plataforma para la discusi\'on de una serie de
-dificultades que se presentan para la evaluaci\'on basada en corpus de GER. Esto result\'o en una serie
-de criterios para el dise\~no de los dos corpus que el trabajo en el resto de la tesis.
-Los tres fen\'omenos en las expresiones referenciales producidas por humanos que los
-algoritmos probados no fueron capaces de replicar satisfactoriamente sobre-especificaci\'on,
-relaciones espaciales, y comportamiento de voluntarios espec\'ificos. Ambos
-Greddy y la IA fueron capaces de generar algo de la redundancia que se encontr\'o en el corpus.
- Ni Greedy ni el IA estaban dise\~nados para ser capaz de generar expresiones referenciales que contengan relaciones entre entidades, pero el ra fue dise\~nado para incluirlas. Sorprendentemente, el
-ra no s\'olo fallo en generar cualquiera de las descripciones contenidas en el corpus de evaluaci\'on; sino tambi\'en que las descripciones que se gener\'o parec\'ian m\'as como enigmas cuyo objetivo era confundir a un oyente, m\'as que ayudar en
-los intentos de se\~nalar el objetivo referente. 
 
+
+Viethen en su estudio encontro que: 
+hay tres fen\'omenos en las expresiones referenciales producidas por humanos que los
+algoritmos probados (Greedy, IA-algoritmo incremental, ra-algoritmo relacional ) no fueron capaces de replicar satisfactoriamente son la sobreespecificaci\'on,
+relaciones espaciales, y comportamiento de voluntarios espec\'ificos. Ambos
+Greddy y la IA fueron capaces de generar algo de la sobreespecificaci\'on que se encontr\'o en el corpus.
+ Ni Greedy ni el IA estaban dise\~nados para ser capaz de generar expresiones referenciales que contengan relaciones entre entidades, pero el ra fue dise\~nado para incluirlas. Sorprendentemente, el
+ra no s\'olo fall\'o en generar cualquiera de las descripciones contenidas en el corpus de evaluaci\'on; sino tambi\'en que las descripciones que se gener\'o parec\'ian m\'as como enigmas cuyo objetivo era confundir a un oyente, m\'as que ayudar en
+los intentos de se\~nalar el objetivo referente. 
 Una valoraci\'on te\'orica de otras aproximaciones dise\~nados para manejar las relaciones estableci\'o que ninguno de ellos incluir\'ia una relaci\'on, si no es absolutamente necesaria para distinguir el target.
 La tercera observaci\'on que el experimento dejo a la vista fue que la gente no siempre hace lo mismo en la misma situaci\'on. De hecho, incluso la misma persona podr\'ia describir el mismo target de diferente manera en distintas
 circunstancias. 
 
+
+El corpus ZOOM es una colecci\'on de datos, resultante de un experimento realizado en un trabajo conjunto con la Universidad de S\~ao Paulo (Brasil). El objetivo del experimento fue crear un corpus de expresiones referenciales de un dominio m\'as complejo y m\'as cercano a las aplicaciones del mundo real, que los corpus existentes hasta el momento. Este corpus contiene referencias a targets singulares y plurales y hace gran uso de propiedades relacionales. M\'as a\'un las descripciones del ZOOM corpus fueron producidas por hablantes humanos de espa\~nol y portugu\'es, lo cual va a permitir (por primera vez, seg\'un nuestro conocimiento) un estudio de la realizaci\'on ling\"u\'istica en estos lenguajes, y permite investigar la variaci\'on entre humanos en GER \cite{trainable-speaker},\cite{romina-coling},\cite{non-det}. 
+En esta tesis se quiere mostrar que el algoritmo probabil\'istico presentado en el Cap\'itulo \ref{sec:algoritmo} con las probabilidades de uso de las palabras obtenidas a partir del mismo corpus, podr\'a generar ERs en un dominio que es directamente aplicable a aplicaciones de inteligencia artificial.
+En este Cap\'itulo se describe el dominio y las caracter\'isticas del corpus, luego en Secci\'on~\ref{corpus-voluntarios} se dar\'an estad\'isticas de las personas que completaron el experimento, en la Secci\'on~\ref{corpus-metodo} se explicar\'a en detalle que se le pidi\'o a las personas involucradas en el experimento, en la Secci\'on~\ref{corpus-materiales} se mostrar\'an los materiales usados, y en la Secci\'on~\ref{corpus-anotacion} se hablar\'a de como se anot\'o el corpus, que expresiones se descartaron y porqu\'e. Para finalizar la secci\'on discutiremos la fiabilidad de obtener expresiones con este m\'etodo en la Secci\'on~\ref{corpus-discusion} y luego haremos una evaluaci\'on en la Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos. La evaluaci\'on realizada motiv\'o al caso de estudio de la Secci\'on \ref{sec:caso_estudio} en la que mostramos tres casos particulares de fragmentos de las ciudades de Lisboa y Madrid.
 
 \section{M\'etodo de recolecci\'on del corpus}
 
@@ -57,11 +46,11 @@ Las situaciones de referencia en cuesti\'on hacen uso de mapas con dos grados de
 %.....................................
 \label{corpus-voluntarios}
 
-Las ER fueron hechas por personas voluntarias a las cuales se les envi\'o una invitaci\'on por correo electr\'onico o redes sociales. La parte en portugu\'es del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 hombres (69,4 \%) y 26 mujeres (30,6 \%).
+Las ERs fueron hechas por personas voluntarias a las cuales se les envi\'o una invitaci\'on por correo electr\'onico o redes sociales. La parte en portugu\'es del corpus tuvo 93 participantes, siendo 66 (71,0 \%) hombres y 27 (29,0 \%) mujeres. El corpus espa\~nol tuvo 85 participantes, siendo 59 hombres (69,4 \%) y 26 mujeres (30,6 \%).
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=10cm]{images/corpus/estadisticaFemMasc.png}}\\[0pt]
-\caption{Estad\'istica de mujeres/hombres que completaron el experimento}
+\caption{Estad\'istica de g\'enero de las personas que completaron el experimento.}
 \label{estadistica-mf}
 \end{center}
 \end{figure}
@@ -70,13 +59,13 @@ Las ER fueron hechas por personas voluntarias a las cuales se les envi\'o una in
 %.....................................
 \label{corpus-metodo}
 
-Las personas voluntarias recibieron un link a la interfaz del experimento, como se muestra en la Figura~\ref{fig_pagPrincipal_seleccion_idioma} esa p\'agina conten\'{i}a las instrucciones en 3 idiomas: ingl\'es, portugu\'es y espa\~{n}ol, y un link para completar el experimento en el idioma seleccionado, luego de seleccionar el idioma se mostraba la siguiente p\'agina, que recolectaba informaci\'on demogr\'afica, luego se mostraban los t\'erminos y condiciones \footnote{%
-    ``Acepto de que los datos ingresados en este cuestionario sean usados an\'onimamente para investigaci\'on''
+Las personas voluntarias recibieron un link a la interfaz del experimento, como se muestra en la Figura~\ref{fig_pagPrincipal_seleccion_idioma} esa p\'agina conten\'{i}a las instrucciones en 3 idiomas: ingl\'es, portugu\'es y espa\~{n}ol, y un link para completar el experimento en el idioma seleccionado, luego de seleccionar el idioma se mostraba la siguiente p\'agina, que recolectaba informaci\'on demogr\'afica, luego se mostraban los t\'erminos y condiciones\footnote{%
+    ``Acepto que los datos ingresados en este cuestionario sean usados an\'onimamente para investigaci\'on''
   }. 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=17cm]{images/pagPrincipal.png}\\[0pt]
-\caption{Link del experimento}
+\caption{P\'agina principal del experimento.}
 \label{fig_pagPrincipal_seleccion_idioma}
 \end{center}
 \end{figure}
@@ -110,7 +99,7 @@ Cada mapa mostraba un lugar determinado (por ejemplo, un restaurante, pub, teatr
 %\begin{minipage}[b]{0.5\linewidth}
 %\centering
 %\includegraphics[width=\textwidth]{images/corpus/mapa20.png}%\\[0pt]
-%\caption{Imagen del corpus ZOOM}
+%\caption{Imagen del corpus ZOOM, con target plural.}
 %\label{mapa20}
 %\end{figure}
 
@@ -124,8 +113,8 @@ Las descripciones mal formadas fueron descartadas siguiendo los siguientes crite
 %.....................................
 \label{corpus-materiales}
 
-El origen de los mapas usados es openstreetmaps, de ah\'i obtuvimos fragmentos de las ciudades Lisboa y Madrid. Openstreetmaps.org es una p\'agina que tiene informaci\'on de mapas de todas partes del mundo, es una organizaci\'on en la que muchas personas de distintas partes del mundo colaboran para mantener la informaci\'on actualizada. Esta informaci\'on es de libre uso, es decir uno puede usar los mapas y solo hay que nombrar de donde fueron sacados.
-Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para targets singulares como se ve por ejemplo en Figuras~\ref{fig_interface} y plurales en Figuras~\ref{mapa20}, en los plurales se usaron referencias del mismo tipo (2 restaurantes, 2 iglesias, etc.) y adem\'as se tuvo en cuenta mapas con 2 niveles de zoom, X como se muestra en las (Figuras~\ref{rest-singular} y~\ref{rest-plural}) y 2X como se muestra en las (Figuras~\ref{rest-singular2x} y~\ref{rest-plural2x}). Como se puede ver en las figuras, los mapas con zoom 2X cubren una porci\'on m\'as chica de la ciudad, pero en general hay m\'as detalle.
+Se usaron fragmentos de mapas de las ciudades de Lisboa y Madrid obtenidos desde openstreetmaps.org. Openstreetmaps.org es una p\'agina que tiene informaci\'on de mapas de todas partes del mundo, es una organizaci\'on en la que muchas personas de distintas partes del mundo colaboran para mantener la informaci\'on actualizada. Esta informaci\'on es de libre uso, es decir uno puede usar los mapas y s\'olo hay que nombrar de donde fueron sacados.
+Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ERs para targets singulares como se v\'e por ejemplo en la Figura~\ref{fig_interface} y de target plural en la Figura~\ref{mapa20}, en los plurales se usaron referencias del mismo tipo (2 restaurantes, 2 iglesias, etc.) y adem\'as se tuvo en cuenta mapas con 2 niveles de zoom, X como se muestra en las (Figuras~\ref{rest-singular} y~\ref{rest-plural}) y 2X como se muestra en las (Figuras~\ref{rest-singular2x} y~\ref{rest-plural2x}). Como se puede ver en las figuras, los mapas con zoom 2X cubren una porci\'on m\'as chica de la ciudad, pero en general hay m\'as detalle.
 
 \begin{figure}
 %\begin{minipage}[b]{0.5\linewidth}
@@ -140,7 +129,7 @@ Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para target
 %\centering
 %\includegraphics[width=\textwidth]{figures/rest-plural.png}\\[0pt]
 %\vspace*{.1cm}
-%\caption{Target plural con zoom X}
+%\caption{Target plural con zoom X.}
 %\label{rest-plural}
 %\end{minipage}
 \end{figure}
@@ -149,7 +138,7 @@ Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para target
 \centering
 \includegraphics[width=\textwidth]{figures/rest-plural.png}\\[0pt]
 \vspace*{.1cm}
-\caption{Target plural con zoom X}
+\caption{Target plural con zoom X.}
 \label{rest-plural}
 \end{figure}
 
@@ -157,7 +146,7 @@ Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para target
 %\begin{minipage}[b]{0.5\linewidth}
 \centering
 \includegraphics[width=\textwidth]{figures/rest-singular2x.png}\\[0pt]
-\caption{Target singular con zoom 2X}
+\caption{Target singular con zoom 2X.}
 \label{rest-singular2x}
 \end{figure}
 %\end{minipage}
@@ -166,7 +155,7 @@ Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para target
 \begin{figure}
 \centering
 \includegraphics[width=\textwidth]{figures/rest-plural2x.png}\\[0pt]
-\caption{Target plural con zoom 2X}
+\caption{Target plural con zoom 2X.}
 \label{rest-plural2x}
 %\end{minipage}
 \end{figure}
@@ -175,22 +164,21 @@ Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ER para target
 %El experimento hizo uso de la p\'agina especialmente dise\~nada la cual se muestra en la Figura~\ref{fig-interface}. En esa p\'agina se observa el texto ``Es interesante visitar...'', abajo hay un espacio para que la persona ingrese la expresi\'on referencial, al lado esta el bot\'on ``Siguiente'' que  al presionarlo se guardaban los datos ingresados para el est\'imulo actual y se continuaba con el siguiente est\'imulo, de el lado derecho hab\'ia una barra de estado que mostraba el progreso hasta el momento, cada vez que se presionaba el bot\'on ``Siguiente'' la barra se actualizaba llen\'andose con color verde y mostrando el porcentaje que luego de 22 mapas llegaba al 100\%, debajo del indicador de progreso hab\'ia un link que dec\'ia ``Instrucciones'', el cual al pasar el cursor del mouse desplegaba las instrucciones mostradas al inicio.
 %Del lado derecho del mapa se encontraba la leyenda, que mostraba para un conjunto de \'iconos del mapa que objetos significaban, se mostraron los siguientes (biblioteca, teatro, bar, caf\'e, fast-food, restaurante, farmacia, pub, iglesia, cajero, banco), esto se realiz\'o a fin de evitar confusi\'on a las personas que daban las expresiones referenciales, ya que se not\'o por ejemplo que los \'iconos de cajero y banco podr\'ian llegar a ser identificados como la misma palabra para distintas personas. 
 
-El mapa conten\'ia \'iconos de lugares o cosas, calles, nombres de lugares, por ejemplo podemos ver en el mapa de la Figura~\ref{fig_interface} la Calle Mayor, ah\'i se pueden ver cajeros, restaurantes, fast-foods, cafe, tel\'efonos, correos, farmacias, sem\'aforos. Notar que algunos \'iconos tienen nombre, por ejemplo el fast-food McDonald's. Algunos edificios o plazas tambi\'en tienen nombre como la Real Casa de Correos y la Plaza de Pontejos. En el mapa tambi\'en podemos ver algunos objetos sin nombre.
-Se puede ver en las Figuras~\ref{rest-singular2x} y~\ref{rest-plural2x}  el nombre de la iglesia Parroquia de Santa Cruz, pero en las Figuras~\ref{rest-singular} y~\ref{rest-plural} no se muestra el nombre, se ve solamente el \'icono. Pero para el Ministerio de Asuntos Interiores se ve el nombre en ambos niveles de zoom. Notar que no siempre en el nivel 2X de zoom se ver\'a todo lo que se ve y m\'as que en el nivel X, por ejemplo tenemos el restaurante Medina Mayrit, cuyo nombre se ve en Figura~\ref{rest-singular} pero no se ve en Figura~\ref{rest-singular2x}. 
+Cada mapa conten\'ia \'iconos de lugares o cosas, calles, nombres de lugares, por ejemplo podemos ver en el mapa de la Figura~\ref{fig_interface} la Calle Mayor, ah\'i se pueden ver cajeros, restaurantes, fast-foods, caf\'e, tel\'efonos, correos, farmacias, sem\'aforos. Notar que algunos \'iconos tienen nombre, por ejemplo el fast-food McDonald's. Algunos edificios o plazas tambi\'en tienen nombre como la Real Casa de Correos y la Plaza de Pontejos. En el mapa tambi\'en podemos ver algunos objetos sin nombre.
+Se puede ver en las Figuras~\ref{rest-singular2x} y~\ref{rest-plural2x}  el nombre de la iglesia Parroquia de Santa Cruz, pero en las Figuras~\ref{rest-singular} y~\ref{rest-plural} no se muestra el nombre, se v\'e s\'olamente el \'icono. Pero para el Ministerio de Asuntos Exteriores se v\'e el nombre en ambos niveles de zoom. Notar que no siempre en el nivel 2X de zoom se ver\'a todo lo que se v\'e y m\'as que en el nivel X, por ejemplo tenemos el restaurante Medina Mayrit, cuyo nombre se v\'e en la Figura~\ref{rest-singular} pero no se v\'e en la Figura~\ref{rest-singular2x}. 
 %Suponemos que esto tiene que ver con la superposici\'on de nombres, 
 Los mapas eran fragmentos del centro de la ciudad de Madrid (para la parte espa\~nola del corpus) y de Lisboa (para la parte portuguesa).
-Para cada ciudad, se utilizaron 10 mapas con distintas ubicaciones. Cada ubicaci\'on se muestra con un nivel X y 2X de zoom, haciendo 20 im\'agenes en total. En ambos niveles de zoom el objetivo se\~{n}alado se mantuvo.%, pero en la versi\'on m\'as detallada, por supuesto, se ve un mayor n\'umero de distractores y detalles adicionales en general. %Algunos nombres de las calles y de landmarks podi\'{i}an no aparecer en diferentes niveles de zoom.
-La mitad de las im\'agenes mostraron una sola flecha que apunta a un objeto en el mapa (es decir, requer\'{i}an una sola descripci\'on como por ejemplo en la Figura~\ref{rest-singular} ``el restaurante en la Calle de Atocha, cerca del Ministerio de Asuntos Exteriores''), mientras que en la otra mitad mostr\'o dos flechas que apuntaban a dos lugares diferentes (y por lo tanto requer\'ian una referencia a un conjunto, como en Figura~\ref{rest-plural} ``los dos restaurantes de la Calle de Atocha'' o ``el restaurante cerca del Ministerio de Asuntos Exteriores y el Medina Mayrit'').
+Para cada ciudad, se utilizaron 10 mapas con distintas ubicaciones. Cada ubicaci\'on se muestra con un nivel X y 2X de zoom, haciendo 20 im\'agenes en total. En ambos niveles de zoom el objetivo se\~{n}alado se mantuvo. Algunos nombres de las calles y de landmarks podi\'{i}an no aparecer en diferentes niveles de zoom.
+La mitad de las im\'agenes mostraron una sola flecha que apunta a un objeto en el mapa (es decir, requer\'{i}an una sola descripci\'on como por ejemplo en la Figura~\ref{rest-singular} {\it el restaurante que est\'a en la Calle de Atocha, cerca del Ministerio de Asuntos Exteriores}), mientras que en la otra mitad mostr\'o dos flechas que apuntaban a dos lugares diferentes (y por lo tanto requer\'ian una referencia a un conjunto, como en Figura~\ref{rest-plural} {\it los dos restaurantes de la Calle de Atocha} o {\it el restaurante cerca del Ministerio de Asuntos Exteriores y el Medina Mayrit}).
 
 
 \subsection{Datos recolectados}
 \label{sec:datos_recolectados}
 
-La p\'agina web del experimento se mantuvo en l\'{i}nea hasta que se obtuvieron 100 experimentos completos para el portugu\'es y 85  para el espa\~nol. Luego de la verificaci\'on manual, se descartaron 602 descripciones portuguesas mal formadas y 366 descripciones espa\~nolas. As\'{i}, la parte portuguesa del corpus consta de 1.358 descripciones mientras que la parte espa\~nola contiene 1.234 ER. La p\'agina fue inicialmente pensada para obtener el corpus en 3 idiomas, pero luego se recolect\'o s\'olo en 2: espa\~nol y portugu\'es. La p\'agina sigue en l\'inea, y el c\'odigo de la misma est\'a disponible por si a alguien le interesa recolectar un corpus similar.
-\footnote{http://cs.famaf.unc.edu.ar/~romina/pagina/}
+La p\'agina web del experimento se mantuvo en l\'{i}nea hasta que se obtuvieron 100 experimentos completos para la parte en portugu\'es del corpus y 85  para la parte en espa\~nol. Luego de la verificaci\'on manual, se descartaron 602 descripciones portuguesas mal formadas y 366 descripciones espa\~nolas. As\'{i}, la parte portuguesa del corpus consta de 1.358 descripciones mientras que la parte espa\~nola contiene 1.234 ERs. La p\'agina fue inicialmente pensada para obtener el corpus en 3 idiomas (espa\~nol, portugu\'es e ingl\'es), pero luego se recolect\'o s\'olo en dos idiomas: espa\~nol y portugu\'es. La p\'agina sigue en l\'inea, y el c\'odigo de la misma est\'a disponible por si a alguien le interesa recolectar un corpus similar\footnote{http://cs.famaf.unc.edu.ar/~romina/pagina/}.
 %En la Secci\'on~\ref{sec-problemas} se describen los criterios por los que se consideraron las descripciones mal formada.\textcolor{blue}{de esto ya hable antes...} Tambi\'en se discuten el desaf\'{i}o que supone obtener las ER en lenguaje natural en un experimento basado en la web para un dominio que es significativamente m\'as cerca de aplicaciones del mundo real que los corpus GER existentes.
 En la parte portuguesa de los datos, el 78,6\% de las descripciones incluyen propiedades relacionales. Adem\'as de eso, el 36,4\% eran minimales un 44,3\% eran sobreespecificadas, y el 19,3\% eran subespecificadas. En la parte espa\~nola de los datos, 70\% de las descripciones incluyeron propiedades relacionales. Por otra parte, el 35\% eran minimales, el 40\% eran sobreespecificadas, y el 25\% eran subespecificadas.
-Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como descripciones relacionales no son comunes en corpora GER existente (o por lo menos en tal proporci\'on), esto puede reflejar la complejidad del dominio o limitaciones en el entorno web en el cual se bas\'o la obtenci\'on del corpus.
+Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como descripciones relacionales no son comunes en corpora de GER existente (o por lo menos en tal proporci\'on), esto puede reflejar la complejidad del dominio o limitaciones en el entorno web en el cual se bas\'o la obtenci\'on del corpus.
 
 
 
@@ -200,81 +188,82 @@ Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como desc
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{figures/mapa-con-ids2.png}\\[0pt]
-\caption{Mapa con Id's usado para la anotaci\'on}
+\caption{Mapa con Id's usado para la anotaci\'on.}
 \label{mapa-con-ids}
 \end{figure}
 
 \begin{table}[!t]
 {\footnotesize
 \begin{center}
-\begin{tabular}{|l|r|r|r|}
+\begin{tabular}{|l|l|r|r|r|}
 \hline
 Tipo & Nombre & En & ID\\
 \hline
 
-cafe & & & cafe2 \\
-pub	& & & pub2 \\
-atm	& & str1 & atm4 \\
-drugstore & & str1 & drug1\\
-snailpost & & str1,str2 & snai1\\
-restaurant & el museo del jamon & str1,str2 & rest1\\
-atm	& & str1 & atm2\\
-theater & & str1 & thea2\\
-semaphore & & str1 & sem1\\
-semaphore & & str1 & sem2\\
-semaphore & & str1,str3 & sem3\\
-fast-food & maoz & str1 & fast1\\
-fast-food & mcdonalds & str1,str4 & fast2\\
-fast-food & kfc & str1 & fast3\\
-cafe & & str1 & cafe1\\
-fast-food & burger king & str4 & fast6\\
-atm	& & str1 & atm3\\
-pub	& & str1,str3 & ban3\\
-fast-food & pans and company & str2 & fast5\\
-pub	& & str15 & pub1\\
-hotel & posada del peine & str15,str19 & hot1\\
-bank & banco popular & str15 & ban1\\
-semaphore & & str1,str5 & rest5\\
-fast-food & papizza & str5 & fast4\\
-restaurant	& & str6,str7 & rest5\\
-theater	& & str8 & thea1\\
-semaphore & & str9 & sem5\\
-semaphore & & str9 & sem6\\
-restaurant & & str9 & rest2\\
-church	& & str9,str10 & chur1\\
-restaurant & medina mayrit & str9 & rest3\\
-restaurant & & str9 & rest4\\
-church & & str11 & chur2\\
-bank & bankinter & str15 & ban0\\
-street & calle mayor & & str1 \\
-street & calle de san cristobal & & str2\\
-street & calle del correo & & str3\\
-street & calle de esparteros & & str4\\
-street & calle de carretas & & str5\\
-street & calle de espoz y mina & & str6\\
-street & calle de cadiz & & str7\\
-street & calle de la paz & & str8\\
-street & calle de antocha & & str9\\
-street & calle de santo tomas & & str10\\
-street & calle de la cruz & & str11\\
-street & calle del salvador & & str12\\
-street & calle de la bolsa & & str13\\
-street & calle de zaragoza & & str14\\
-street & calle de las postas & & str15\\
-street & calle botoneras & & str16\\
-street & calle de gerona & & str17\\
-street & calle de la sal & & str18\\
-street & calle del marquez viudo de pontejos & & str19\\
+1&cafe & & & cafe2 \\
+2&pub	& & & pub2 \\
+3&atm	& & str1 & atm4 \\
+4&drugstore & & str1 & drug1\\
+5&snailpost & & str1,str2 & snai1\\
+6&restaurant & el museo del jamon & str1,str2 & rest1\\
+7&atm	& & str1 & atm2\\
+8&theater & & str1 & thea2\\
+9&semaphore & & str1 & sem0\\
+10&semaphore & & str1 & sem1\\
+11&semaphore & & str1 & sem2\\
+12&semaphore & & str1,str3 & sem3\\
+13&fast-food & maoz & str1 & fast1\\
+14&fast-food & mcdonalds & str1,str4 & fast2\\
+15&fast-food & kfc & str1 & fast3\\
+16&cafe & & str1 & cafe1\\
+17&fast-food & burger king & str4 & fast6\\
+18&atm	& & str1 & atm3\\
+19&pub	& & str1,str3 & ban3\\
+20&fast-food & pans and company & str2 & fast5\\
+\textbf{21}&\textbf{pub}	& & \textbf{str15} & \textbf{pub1}\\
+22&hotel & posada del peine & str15,str19 & hot1\\
+23&bank & banco popular & str15 & ban1\\
+24&semaphore & & str1,str5 & rest5\\
+25&fast-food & papizza & str5 & fast4\\
+26&restaurant	& & str6,str7 & rest5\\
+27&theater	& & str8 & thea1\\
+28&semaphore & & str9 & sem5\\
+29&semaphore & & str9 & sem6\\
+30&restaurant & & str9 & rest2\\
+31&church	& & str9,str10 & chur1\\
+32&restaurant & medina mayrit & str9 & rest3\\
+33&restaurant & & str9 & rest4\\
+34&church & & str11 & chur2\\
+35&bank & bankinter & str15 & ban0\\
+36&street & calle mayor & & str1 \\
+37&street & calle de san cristobal & & str2\\
+38&street & calle del correo & & str3\\
+39&street & calle de esparteros & & str4\\
+40&street & calle de carretas & & str5\\
+41&street & calle de espoz y mina & & str6\\
+42&street & calle de cadiz & & str7\\
+43&street & calle de la paz & & str8\\
+44&street & calle de antocha & & str9\\
+45&street & calle de santo tomas & & str10\\
+46&street & calle de la cruz & & str11\\
+47&street & calle del salvador & & str12\\
+48&street & calle de la bolsa & & str13\\
+49&street & calle de zaragoza & & str14\\
+50&street & calle de las postas & & str15\\
+51&street & calle botoneras & & str16\\
+52&street & calle de gerona & & str17\\
+53&street & calle de la sal & & str18\\
+54&street & calle del marquez viudo de pontejos & & str19\\
 \hline
 \end{tabular}
-\caption{Objetos identificados de la Figura~\ref{mapa-con-ids}\label{tabla-ids}}
+\caption{Objetos identificados de la Figura~\ref{mapa-con-ids}.\label{tabla-ids}}
 \vspace*{-.5cm}
 \end{center}
 %\end{small}
 }
 \end{table}
 
-Para cada imagen se construy\'o una tabla con los id's de los objetos que se ven, como por ejemplo para la imagen~\ref{mapa-con-ids} la tabla correspondiente es la Tabla~\ref{tabla-ids} al mapa se le agregaron los id's de algunos objetos del mapa, estos identificadores eran \'unicos. Por ejemplo {\it pub1} es el que esta siendo apuntado por la fecha roja en la Figura~\ref{mapa-con-ids}. A cada calle tambi\'en se le asign\'o un identificador \'unico pero estos se anotaron en una tabla, como se ve en la Tabla~\ref{tabla-ids}. Dicha tabla tiene 4 columnas para cada objeto se puso ``tipo'', ``nombre'', ``en'' y ``id'', el tipo es por ejemplo, restaurante, bar, street (estos nombres de tipos se pusieron en Ingl\'es), ``nombre'', el nombre propio del objeto, si ten\'ia, (se mantuvieron en el idioma original, espa\~nol o portugu\'es), ``en'', conten\'ia la calle en la que estaba situado el objeto, y si era una calle no conten\'ia nada e ``id'' que fue compuesto por 3 o 4 primeras letras del tipo del objeto m\'as un n\'umero para identificarlo un\'ivocamente, por ejemplo para los restaurantes ``rest1'', ``rest2''.
+Para cada imagen se construy\'o una tabla con los id's de los objetos que se ven, como por ejemplo para la imagen de la Figura~\ref{mapa-con-ids} la tabla correspondiente es la Tabla~\ref{tabla-ids}. Al mapa se le agregaron los id's de algunos objetos del mapa, estos identificadores eran \'unicos. Por ejemplo {\it pub1} es el que esta siendo apuntado por la fecha roja en la Figura~\ref{mapa-con-ids}. A cada calle tambi\'en se le asign\'o un identificador \'unico, tambi\'en se v\'e en la Tabla~\ref{tabla-ids} desde la posici\'on  36. Dicha tabla tiene 4 columnas para cada objeto se puso ``tipo'', ``nombre'', ``en'' y ``id'', el tipo es por ejemplo, restaurante, bar, street (estos nombres de tipos se pusieron en Ingl\'es), ``nombre'', el nombre propio del objeto, si ten\'ia, (se mantuvieron en el idioma original, espa\~nol o portugu\'es), ``en'', conten\'ia la calle en la que estaba situado el objeto, pod\'ia estar vac\'io si no estaba en una calle, o la calle no ten\'ia nombre, el ``id'' que fue compuesto por las 3 o 4 primeras letras del tipo del objeto m\'as un n\'umero para identificarlo un\'ivocamente, por ejemplo para los restaurantes ``rest1'', ``rest2''.
 
 %- Los valores de los atributos se anotaron en Ingl\'es (por ejemplo, restaurant, pub, street, etc.), pero los nombres propios (para calles, etc.) se mantuvieron en su forma original, tal cual se v\'e en el mapa (Espa\~{n}ol, Portugu\'es).
 
@@ -283,11 +272,11 @@ Se seleccion\'o un conjunto fijo de atributos para cada objeto, pero dando flexi
 En el caso de las descripciones plurales, el conjunto de atributos se repite para cada objeto, por lo que el anotador pod\'{i}a utilizar hasta 52 atributos.
 
 Los 26 o 52 atributos nombrados anteriormente estan formados por:
-10 atributos que denotan caracter\'isticas del objeto principal (target), o relaciones que pueden tener 1 o 2 par\'ametros como en el caso de en-frente-de, el cual toma como par\'ametro un id de objeto:
+10 atributos que denotan caracter\'isticas del objeto principal (target), o relaciones que pueden tener 1 o 2 par\'ametros como en el caso de en-frente-de, el cual toma como par\'ametro un id de otro objeto:
 \begin{itemize}
   \item tipo (por ejemplo, restaurante)
-  \item nombre (por ejemplo, McDonalds)
-  \item en (calle-id, avenida-id, etc.)
+  \item nombre (por ejemplo, McDonald's)
+  \item en (calle-id, avenida-id, etc. Por ejemplo {\it En Calle Mayor} en str1)
   \item izquierda (obj-id)
   \item derecha (obj-id)
   \item en esquina / entre (Street1, Street2)
@@ -296,19 +285,19 @@ Los 26 o 52 atributos nombrados anteriormente estan formados por:
   \item detr\'as (obj-id)
   \item otro (cualquier otra cosa mencionada en la descripci\'on, pod\'ia ser una propiedad o relaci\'on)
 \end{itemize}
-y 16 atributos que denotan los objetos adicionales (landmarks) que se mencionaron en la descripci\'on, a los cuales llamamos d1..d4. Por ejemplo, en ``El pub que esta al lado de Pans \& Company, en la Calle de las Postas'') tenemos:target = pub, d1 = fast-food (Pans \& Company) y d2 = Street (Calle de las Postas).\\
+y 16 atributos que denotan los objetos adicionales (landmarks) que se mencionaron en la descripci\'on, a los cuales llamamos d1..d4. Por ejemplo, en {\it El pub que est\'a al lado de Pans \& Company, en la Calle de las Postas}) tenemos:target = pub, d1 = fast-food (Pans \& Company) y d2 = Street (Calle de las Postas).
 
-Para cada target se consider\'o un m\'aximo 4 objetos tomados como puntos de referencia (landmarks), ya que con esta cantidad cubr\'iamos las descripciones m\'as largas y se anotaron como d1..d4, para cada landmark se anotaron 4 atributos:
+Para cada target se consider\'o un m\'aximo 4 objetos tomados como puntos de referencia (landmarks), ya que con esta cantidad cubr\'iamos las descripciones m\'as largas, estos landmarks se anotaron como d1..d4, para cada landmark se anotaron 4 atributos:
 \begin{itemize}
   \item Identificaci\'on (Id)
   \item Tipo (un sustantivo, restaurant, pub...)
-  \item Nombre
+  \item Nombre (Posada del Peine)
   \item Otro (alguna otra cosa dicha sobre el objeto)
 \end{itemize}
 
-A su vez cada atributo tiene una lista estricta de los valores permitidos. Por ejemplo, para el objetivo de la Figura~\ref{mapa-con-ids} los valores posibles para el tipo de atributo son s\'olo dos:``pub'' u ``otro''. El valor ``otro'' le da al anotador una oportunidad de dar una respuesta cuando la descripci\'on muestra algo muy inusual.
+A su vez cada atributo tiene una lista estricta de los valores permitidos. Por ejemplo, para el objetivo de la Figura~\ref{mapa-con-ids} los valores posibles para el tipo de atributo son s\'olo dos: ``pub'' u ``otro''. El valor ``otro'' le d\'a al anotador una oportunidad de dar una respuesta cuando la descripci\'on muestra algo muy inusual.
 
-Para los atributos espaciales (izquierda, cerca, etc.) permitimos que los valores que denota la mayor\'{i}a de los objetos en el mapa, a excepci\'on de aquellos que son claramente ilegales. Por ejemplo, en el caso de la ``izquierda'' posibles valores incluyen la mayor\'{i}a de los objetos en la pantalla, a excepci\'on de los de la derecha del objeto target. Por ejemplo, para el objetivo de la Figura~\ref{mapa-con-ids} es posible decir ``el pub que esta a la izquierda de Pans \& Company'', pero no es admitido ``El pub que esta a la izquierda de Posada del Peine''.
+Para los atributos espaciales (izquierda, cerca, etc.) permitimos que los valores que denota la mayor\'{i}a de los objetos en el mapa, a excepci\'on de aquellos que son claramente ilegales. Por ejemplo, en el caso de la ``izquierda'' posibles valores incluyen la mayor\'{i}a de los objetos en la pantalla, a excepci\'on de los de la derecha del objeto target. Por ejemplo, para el objetivo de la Figura~\ref{mapa-con-ids} es posible decir {\it el pub que esta a la izquierda de Pans \& Company}, pero no es admitido {\it El pub que est\'a a la izquierda de Posada del Peine}.
 %MOVER A OTRO LADO ESTA SECCION
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
@@ -379,11 +368,11 @@ Para los atributos espaciales (izquierda, cerca, etc.) permitimos que los valore
 
 %Los valores posibles para los atributos {\em tipo} y {\em nombre} est\'an predefinidos por cada contexto referencial. En el atributo {\em otros} puede asignar cualquier valor de cadena, y se pretende representar cualquier pieza no est\'andar de la informaci\'on transmitida por la ER. Para las relaciones espaciales, los valores posibles son los identificadores de los objetos disponibles en cada escena.
 
-Las descripciones recolectadas fueron totalmente anotadas por dos anotadores independientes. Luego, un tercer anotador asumi\'o el rol de juez y di\'o la anotaci\'on final. Dado que el esquema de anotaci\'on fue bastante sencillo (es decir, en gran parte porque las respuestas no estandares simplemente se asignan al atributo {\em otros}), se midi\'o el acuerdo entre los jueces, con Kappa \cite{kappa}, \'este fue del 84\% en el nivel de atributo.
-Ambos, el contexto y las ER estuvieron representados en formato XML utilizando una versi\'on simplificada del formato XML adoptado en el corpus TUNA \cite{tuna-corpus}. Las descripciones se agruparon en nodos TRIAL que contienen informaci\'on general sobre cada persona (es decir, identificaci\'on, edad y sexo), seguido de su lista de respuestas. Cada respuesta identifica el contexto en que se produjo, y la expresi\'on en referencial que la persona dijo.
+Las descripciones recolectadas fueron totalmente anotadas por dos anotadores independientes. Luego, un tercer anotador asumi\'o el rol de juez y di\'o la anotaci\'on final. Dado que el esquema de anotaci\'on fue bastante sencillo (es decir, en gran parte porque las respuestas no estandares simplemente se asignan al atributo {\em otros}). El acuerdo entre los jueces, se midi\'o con el coheficiente Kappa \cite{kappa}, \'este fue del 84\% en el nivel de atributo.
+Ambos, el contexto y las ERs se representaron en formato XML utilizando una versi\'on simplificada del formato XML adoptado en el corpus TUNA \cite{tuna-corpus}. Las descripciones se agruparon en nodos TRIAL que contienen informaci\'on general sobre cada persona (es decir, identificaci\'on, edad y sexo), seguido de su lista de respuestas. Cada respuesta identifica el contexto en que se produjo, y la expresi\'on referencial que la persona dijo.
 Al igual que en \cite{tuna-corpus}, el contenido de las expresiones referenciales est\'an representadas por nodos que son conjunto de atributos que contienen una lista de nombres de atributos y sus valores. El siguiente ejemplo ilustra un fragmento de esta representaci\'on para una ER. Los objetos en cada contexto de entrada estaban representados de una manera similar.
-Para el target de la Figura~\ref{mapa-con-ids} y la expresi\'on ``El pub que esta al lado de Pans \& Company, en la
-Calle de las Postas'', la anotaci\'on ser\'ia la siguiente.
+Para el target de la Figura~\ref{mapa-con-ids} y la expresi\'on {\it El pub que est\'a al lado de Pans \& Company, en la
+Calle de las Postas}, la anotaci\'on ser\'ia la siguiente.
 %\tiny{
 \begin{verbatim}
 <TRIAL ID="2" SPEAKER="166" AGE="18" GENDER="m">
@@ -406,20 +395,19 @@ Calle de las Postas'', la anotaci\'on ser\'ia la siguiente.
 
 %The set of images, text descriptions and their XML representations constitutes the Zoom corpus of referring expressions, to be made publicly available for research purposes. As a first step in this direction, the following sections present the results of a machine learning approach to GER based on the Portuguese portion of the data.
 
-En cada descripci\'on, el nombre para el primer landmark es el VALUE del ATTRIBUTE con NAME `landmark-name' como en el ejemplo anterior. Los landmarks siguientes fueron etiquetados como ``second-landmark'' y as\'{i} sucesivamente. Esto fue motivado por la necesidad de proporcionar nombres de atributos \'unicos para el beneficio de los algoritmos GER.
-El conjunto de im\'agenes, textos descriptivos y sus representaciones XML constituye el corpus ZOOM de ER, el cual ser\'a p\'ublico para fines de investigaci\'on. Como primer paso en esta direcci\'on, las siguientes secciones se presentan los resultados de un enfoque de aprendizaje autom\'atico para GER, los cuales se basan en la parte portuguesa del corpus.
+En cada TRIAL tenemos la informaci\'on del TRIAL (el id), la de la persona, en speaker, la edad y el g\'enero. En ATTRIBUTE-SET se encuentran los datos de la ER, TARGET y LANDMARKS con sus id's, STRING es la expresi\'on completa tal cual la di\'o la persona, y los atributos del target en este caso aparecen ``type'', ``at' ' (es en que calle) y landmark-name, en este caso hubo 1 s\'olo landmark. Los landmarks siguientes fueron etiquetados como ``second-landmark'' y as\'{i} sucesivamente. Esto fue motivado por la necesidad de proporcionar nombres de atributos \'unicos para el beneficio de los algoritmos de GER.
+El conjunto de im\'agenes, textos descriptivos y sus representaciones XML constituye el corpus ZOOM de ERs, el cual ser\'a p\'ublico para fines de investigaci\'on, vea Cap\'itulo \ref{sec:conclusiones} .  En lo que sigue presentamos una comparaci\'on de este corpus creado con corpora de ERs existente hasta el momento. Luego en las siguientes secciones se presentan los resultados de un enfoque de aprendizaje autom\'atico para GER, los cuales se basan en la parte portuguesa del corpus.
 
 \subsection{Comparaci\'on con trabajo previo}
 \label{sec:comparacion_trabajo_previo}
 
-En la Tabla~\ref{tab-comparison} se presenta una comparaci\'on entre el corpus recolectado y otros corpus de RE existentes nombrados en~\ref{sec:corpus-existente}. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos y el n\'umero de relaciones en cada descripci\'on. La informaci\'on sobre el TUNA-corpus y las descripciones de ZOOM se basan s\'olo en la parte singular de cada corpus. Esto representa el tama\~no medio de la descripci\'on (en n\'umero de propiedades anotadas) y la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia.\textcolor{blue}{reescribir- Desde una perspectiva de GER, las ER de mayor tama\~no y las puntuaciones m\'as bajas de uso es probable que representen las situaciones m\'as complejas de referencia.}
+En la Tabla~\ref{tab-comparison} se presenta una comparaci\'on entre el corpus recolectado y otros corpus de ERs existentes nombrados en la Secci\'on~\ref{sec:corpus2}. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos m\'as el n\'umero de relaciones en cada descripci\'on (columna Atributos). La informaci\'on sobre el TUNA-corpus y las descripciones de ZOOM se basan s\'olo en la parte singular de cada corpus. La cantidad m\'axima de landmarks permitidos (en columna Landmarks). Tambi\'en se representa el tama\~no medio de la descripci\'on, es decir en n\'umero de propiedades anotadas, (en la columna tama\~no promedio). La columna Uso representa la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia. Desde una perspectiva de GER, las ERs de mayor largo y las puntuaciones m\'as bajas de uso es probable que representen las situaciones m\'as complejas de referencia.}
 
 
 \begin{table}[H]
 \begin{center}
 \footnotesize{
-\caption{Comparaci\'on con corpus de GER existente}
-\label{tab-comparison}
+
 \begin{tabular} {  l c c c c}
 \hline
 %\multicolumn{1}{c}{}
@@ -439,6 +427,8 @@ Zoom-Sp											& 19							& 4							& 7.2				& 0.3   \\
 \end{tabular}
 }
 \end{center}
+\caption{Comparaci\'on con corpus de GER existente}
+\label{tab-comparison}
 \end{table}
 
 
@@ -483,10 +473,8 @@ Zoom-Sp											& 19							& 4							& 7.2				& 0.3   \\
 %The proportion of overspecified referring expressions of the Zoom corpus is similar to that found in previous work. However, the proportion of relational descriptions is presently higher. Relational descriptions constitute a challenge for GER algorithms due to the computational complexity associated to their generation~\cite{survey}. A further challenge posed by the Zoom corpus is the fact that it contains two descriptions for every target based on different - but related - models corresponding to the same map location seen with different zoom levels. For instance a map with higher zoom level (2X) is illustrated in Figura~\ref{fig-with-zoom}, and the same map with lower zoom level is shown in Figura~\ref{fig-interface}. 
 
 
-Corpora anterior de expresiones referenciales se han recogido en los dominios de dise\~no especial y muy controladas. 
-
-La recopilaci\'on de corpus de un dominio que es directamente relevante para aplicaciones del mundo real plantea un reto importante no s\'olo para el proceso de recolecci\'on y anotaci\'on en s\'{i}, sino tambi\'en a los algoritmos GER existentes. Esto se hace evidente por la gran proporci\'on de las expresiones referenciales que deben ser desechadas desde nuestra base de datos porque no constituyen una ER para el objeto target. Esta proporci\'on es del 30\% de la parte portuguesa del copus y el 23 \% de la parte espa\~nola del corpus.
-Despu\'es de este proceso de limpieza de la parte portuguesa del corpus contiene todav\'{i}a un 19,3 \% de expresiones referenciales subespecificadas y la parte espa\~nola un 25\%. Un ejemplo de ER subespecificada se muestra en la figura~\ref{fig-interface}.; la ER ``el pub en Cowgate'' es subespecificada porque hay dos bares en la calle Cowgate en el mapa. El porcentaje de ER subespecificadas en el corpus Zoom es mucho mayor que lo reportado en la corpora descrito en el la secci\'on~\ref{sec:corpus2}, que no es mayor que el 5\%. Estudios psicoling\"u\'{i}sticos anteriores~\cite{Clark1986} han encontrado que m\'as del 20\% de las ER en el discurso de origen natural es subespecificada con respecto al contexto establecido. En los dominios suficientemente complejos,~\cite{Clark1986} se encontr\'o que los hablantes a menudo producen una ER subespecificada inicial, y luego agregan m\'as informaci\'on si es necesario en lugar de producir una descripci\'on que identifica de forma un\'{i}voca desde el principio. Como se discuti\'o en el apartado anterior, el dominio del ZOOM corpus es probable que contenga situaciones m\'as complejas de referencia si se compara con los corpus existentes de este tipo, es decir, las descripciones del ZOOM son en promedio m\'as largas, y tienen un uso de atributo medio m\'as bajo. Esto en nuestra opini\'on, puede explicar la alta proporci\'on de subespecificaci\'on en nuestros datos.
+Hay corpora de expresiones referenciales pero de dominios de dise\~no especial y recolectado en experimentos muy controlados. La recopilaci\'on de corpus de un dominio que es directamente relevante para aplicaciones del mundo real plantea un reto importante no s\'olo para el proceso de recolecci\'on y anotaci\'on en s\'{i}, sino tambi\'en a los algoritmos de GER existentes. Esto se hace evidente por la gran proporci\'on de las expresiones referenciales que deben ser desechadas desde nuestra base de datos porque no constituyen una ER para el objeto target. Esta proporci\'on es del 30\% de la parte portuguesa del corpus y el 23 \% de la parte espa\~nola del corpus.
+Despu\'es de este proceso de limpieza de la parte portuguesa del corpus contiene todav\'{i}a un 19,3 \% de expresiones referenciales subespecificadas y la parte espa\~nola un 25\%. El porcentaje de ERs subespecificadas en el corpus Zoom es mucho mayor que lo reportado en la corpora descrito en el la secci\'on~\ref{sec:corpus2}, que no es mayor que el 5\%. Estudios psicoling\"u\'{i}sticos anteriores~\cite{Clark1986} han encontrado que m\'as del 20\% de las ER en el discurso de origen natural es subespecificada con respecto al contexto establecido. En los dominios suficientemente complejos,~\cite{Clark1986} se encontr\'o que los hablantes a menudo producen una ER subespecificada inicial, y luego agregan m\'as informaci\'on si es necesario en lugar de producir una descripci\'on que identifica de forma un\'{i}voca desde el principio. Como se discuti\'o en el apartado anterior, el dominio del ZOOM corpus es probable que contenga situaciones m\'as complejas de referencia si se compara con los corpus existentes de este tipo, es decir, las descripciones del ZOOM son en promedio m\'as largas, y tienen un uso de atributo medio m\'as bajo. Esto en nuestra opini\'on, puede explicar la alta proporci\'on de subespecificaci\'on en nuestros datos.
 La proporci\'on de expresiones referenciales subespecificada del corpus ZOOM es similar a la encontrada en el trabajo anterior. Sin embargo, la proporci\'on de las descripciones relacionales es actualmente superior. Descripciones relacionales constituyen un desaf\'{i}o para los algoritmos GER debido a la complejidad computacional asociada a su generaci\'on~\cite{survey}. Otro desaf\'{i}o que plantea el corpus ZOOM es el hecho de que contiene dos descripciones para cada objeto target bas\'andose en diferente - pero relacionados - modelos correspondientes a la misma ubicaci\'on en el mapa visto con diferentes niveles de zoom. Por ejemplo, un mapa con mayor nivel de zoom (2X) se ilustra en la Figura~\ref{fig-with-zoom}, y el mismo mapa con un menor nivel de zoom se muestra en la Figura~\ref{fig-interface}.
 
 \begin{figure}[ht]
