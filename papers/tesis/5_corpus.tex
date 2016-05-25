@@ -536,9 +536,9 @@ El modelo consta de 12 clasificadores binarios que representan si los atributos 
 
 Dos caracter\'{i}sticas de aprendizaje fueron consideradas por cada clasificador: {\em landmarkCount}, que representa el n\'umero de objetos cercanos al target, y {\em DistractorCount}, que representa el n\'umero de objetos del mismo tipo que el target en el contexto considerado.
 
-A partir de los resultados de los 12 clasificadores binarios, una descripci\'on se construye teniendo en cuenta los atributos de destino at\'omicas en el primer lugar. Por cada predicci\'on positiva, se selecciona el atributo at\'omica correspondiente para su inclusi\'on en la descripci\'on de salida. A continuaci\'on, se consideran las relaciones. Si se prev\'e ninguna relaci\'on, el algoritmo termina devolviendo una descripci\'on at\'omica del objeto target. Si la descripci\'on incluye una relaci\'on, se selecciona el objeto de punto de inter\'es relacionadas, as\'{i}, y el algoritmo se llama de forma recursiva para describir el siguiente objeto.
+A partir de los resultados de los 12 clasificadores binarios, una descripci\'on se construye teniendo en cuenta los atributos at\'omicos del target en primer lugar. Por cada predicci\'on positiva, se selecciona el atributo at\'omico correspondiente para su inclusi\'on en la descripci\'on de salida. A continuaci\'on, se consideran las relaciones. Si no se prev\'e ninguna relaci\'on, el algoritmo termina devolviendo una descripci\'on at\'omica del objeto target. Si la descripci\'on incluye una relaci\'on, se selecciona el objeto landmark relacionad, y el algoritmo se llama de forma recursiva para describir a ese objeto.
 
-Puesto que cada atributo que corresponde a una predicci\'on positiva est\'a siempre seleccionado, el algoritmo no considera singularidad como una condici\'on de parada. Como resultado, la descripci\'on de salida puede transmitir una cierta cantidad de sobrevaloraci\'on.
+Puesto que cada atributo que corresponde a una predicci\'on positiva est\'a siempre seleccionado, el algoritmo no considera singularidad como una condici\'on de parada. Como resultado, la descripci\'on de salida puede transmitir una cierta cantidad de sobreespecificaci\'on.
 
 
 %......................
@@ -546,7 +546,7 @@ Puesto que cada atributo que corresponde a una predicci\'on positiva est\'a siem
 %......................
 
 %Table \ref{tab-reg-results} summarizes the results obtained by the GER algorithm built from SVM classifiers, those obtained by a baseline system representing a relational extension of the Dale \& Reiter Incremental Algorithm, and by a Random selection strategy.  
-Tabla \ref{tab-reg-results} resume los resultados obtenidos por el algoritmo GER construido a partir de SVM clasificadores, los obtenidos mediante un sistema de l\'{i}nea de base que representa una extensi\'on relacional de la \& Reiter Incremental Algoritmo Dale, y por una estrategia de selecci\'on aleatoria.
+Tabla \ref{tab-reg-results} resume los resultados obtenidos por el algoritmo GER construido a partir de clasificadores SVM, los obtenidos mediante un sistema de l\'{i}nea de base que representa una extensi\'on relacional del algoritmo incremental \cite{incremental}, y por una estrategia de selecci\'on aleatoria. Se comparan precision (columna Acc), coeficientes Dice y MASI.
 
 % these results are for SVM.All.VAR-   compared to the AEI- baseline
 \begin{table}[H]
@@ -572,9 +572,9 @@ Random selection       	& 0.03    & 0.45      & 0.15 \\
 %We also assessed the performance of the individual classifiers. Table \ref{tab-svm-results} shows these results as measured by precision (P), recall (R), F1-measure (F1) and area under the ROC curve (AUC). 
 
 
-En lo que sigue se comparan precisi\'on resultados obtenidos por cada par algoritmo mediante la prueba de chi cuadrado, y comparamos {\em dados} puntajes utilizando la prueba de rangos con signo {\em de Wilcoxon}.
+En lo que sigue se comparan los resultados de precisi\'on obtenidos por cada par algoritmos mediante la prueba de chi cuadrado, y comparamos {\em Dice} utilizando la prueba de rangos con signo {\em de Wilcoxon}.
 
-En t\'erminos de precisi\'on global \footnote{Y tambi\'en en cuanto a las puntuaciones MASI, aunque actualmente no se discute m\'as.}, El m\'etodo SVM supera a ambas alternativas. La diferencia con el segundo algoritmo de mejor rendimiento (es decir, el enfoque incremental) es altamente significativo ($\chi^{2}=$ 79,87, df = 1, p$<$ 0,0001). S\'olo en cuanto a las puntuaciones de dice se observa el efecto contrario (T = 137570.5, p$=$0,01413).
+En t\'erminos de precisi\'on global\footnote{Y tambi\'en en cuanto a las puntuaciones MASI.}, el m\'etodo SVM supera a ambas alternativas. La diferencia con el segundo algoritmo de mejor rendimiento (es decir, el enfoque incremental) es altamente significativo ($\chi^{2}=$ 79,87, df = 1, p$<$ 0,0001). S\'olo en cuanto a las puntuaciones de {\it Dice} se observa el efecto contrario (T = 137570.5, p$=$0,01413).
 
 Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \ref{tab-svm-results} muestra estos resultados, medida por la precisi\'on (P), memoria (R), F1-medida (F1) y el \'area bajo la curva ROC (AUC).
 
@@ -585,7 +585,7 @@ Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \
 
 \begin{tabular}{l c c c c }
 \hline
-{{Classifier}}	& {P} & {R} & {$F_{1}$} & {AUC} \\
+{{Clasificador}}	& {P} & {R} & {$F_{1}$} & {AUC} \\
 \hline
 {{tg\_type}} 			& 0.95 & 1.00 & 0.98 & 0.25 \\
 {{tg\_name}}			& 0.09 & 0.05 & 0.07 & 0.41 \\
@@ -601,7 +601,7 @@ Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \
 {{in/on/at}} 			& 0.60 & 0.60 & 0.60 & 0.61 \\                               
 \hline                   
 \end{tabular}
-\caption{Resultados del clasificador}
+\caption{Resultados del clasificador a nivel atributo.}
 \label{tab-svm-results}
 }
 \end{center}
@@ -610,7 +610,7 @@ Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \
 
 %From these results we notice that highly frequent attributes (e.g., type and name) were classified  with high accuracy, whereas others (e.g., multivalue attributes and relations) were not. 
 
-A partir de estos resultados nos damos cuenta de que los atributos muy frecuentes (por ejemplo, el tipo y nombre) se clasificaron con gran precisi\'on, mientras que otros (por ejemplo, los atributos de varios valores y relaciones) no lo eran.
+A partir de estos resultados nos damos cuenta de que los atributos muy frecuentes (por ejemplo, el tipo y nombre) se clasificaron con gran precisi\'on, mientras que otros (por ejemplo, los atributos de varios valores y relaciones) no eran tan frecuentes y no se clasificaron con alta precision.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       >2
 
@@ -622,7 +622,7 @@ A partir de estos resultados nos damos cuenta de que los atributos muy frecuente
 \section{Caso de estudio del ZOOM corpus}
 \label{sec:caso_estudio}
 
-En esta secci\'on presentamos tres casos de estudio particulares, de generaci\'on autom\'atica de ER para mapas del ZOOM corpus. Dividimos el estudio en 3 partes, en la Secci\'on \ref{sec:sinzoom} veremos un mapa sin zoom el cual se muestra en la Figura \ref{mapa-zoom} y cuyo target es singular. En la Secci\'on \ref{sec:conzoom} analizaremos la GER con el mismo target pero ahora con zoom 2X, el mapa usado se muestra en la Figura \ref{mapa-zoom2x}. En la Secci\'on \ref{sec:plural} veremos el mismo mapa de la Secci\'on \ref{sec:sinzoom} pero con target plural, es decir con 2 targets, el mapa se muestra en Figura \ref{mapa-zoom-plural}.
+En esta secci\'on presentamos tres casos de estudio particulares, de generaci\'on autom\'atica de ERs para mapas del ZOOM corpus. En la Secci\'on \ref{sec:sinzoom} veremos un mapa sin zoom el cual se muestra en la Figura \ref{mapa-zoom1} y cuyo target es singular. En la Secci\'on \ref{sec:conzoom} analizaremos la GER con el mismo target pero ahora con zoom 2X, el mapa usado se muestra en la Figura \ref{mapa-zoom2x}. En la Secci\'on \ref{sec:plural} veremos el mismo mapa de la Secci\'on \ref{sec:sinzoom} pero con target plural, es decir con 2 targets, el mapa se muestra en Figura \ref{mapa-zoom-plural}.
 
 %  Veremos las diferencias entre esos mapas a nivel de informaci\'on disponible, obtendremos a partir de cada imagen el modelo subyacente que usar\'a el algoritmo y a partir de las ER's del corpus obtendremos las probabilidades de uso de las palabras, para luego ejecutar el algoritmo. Compararemos las ER's dadas por el algoritmo con las que dieron las personas.
 
@@ -638,19 +638,15 @@ En esta secci\'on presentamos tres casos de estudio particulares, de generaci\'o
 
 
 En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as frecuentes generadas por las personas que participaron 
-en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom}. Se indica el porcentaje de personas que dieron cada tipo de ER, es decir la cantidad de distintas personas que independientemente decidieron usar la misma ER para referirse al target, dividido por la cantidad total de ER del mapa.
-%Se indica la cantidad de veces que aparecieron en el corpus, 
-%que equivale al n\'umero de distintas personas que independientemente decidieron usar la misma ER para referirse al target. 
-Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son 
-ni subespecificadas, ni sobreespecificadas, son minimales.
+en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se indica el porcentaje de personas que dieron cada tipo de ER, es decir la cantidad de distintas personas que independientemente decidieron usar la misma ER para referirse al target, dividido por la cantidad total de ERs del mapa (se d\'a en porcentaje). Estas 10 ERs m\'as frecuentes acumulan el 78.5\% del total de las ERs del corpus para el mapa considerado. Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales.\\
 
 
 %\end{figure}
 \begin{figure}
 \centering
-\includegraphics[width=120mm]{images/corpus/mapa6-prob.png}\\[0pt]
-\caption{Imagen del ZOOM corpus con target singular}
-\label{mapa-zoom}
+\includegraphics[width=150mm]{images/corpus/mapa6-prob.png}\\[0pt]
+\caption{Imagen del ZOOM corpus con target singular.}
+\label{mapa-zoom1}
 \end{figure}
 
 
@@ -704,16 +700,16 @@ ni subespecificadas, ni sobreespecificadas, son minimales.
 9&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha										 &2.5\% 	&  &X \\ \hline
 10&Iglesia cerca del Ministerio de Asuntos Exteriores														 &1.2\% 	&  & \\ \hline
 \end{tabular}
-\caption{10 ER m\'as frecuentes del corpus para el mapa de la Figura \ref{mapa-zoom}.}\label{freq-mapa}
+\caption{Las 10 ER m\'as frecuentes del corpus para el mapa de la Figura \ref{mapa-zoom1}.}\label{freq-mapa}
 \end{center}
 }%\end{tiny}
 \end{table}
 
-
-Para ejecutar el algoritmo necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es. 
+\vspace*{-0.5cm}
+Para ejecutar el algoritmo necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es.\\
 
 %Algunas personas dijeron ``en la esquina de...'', eso fue anotado como ``between'' y luego 2 calles, esta palabra no fue usada para correr el algoritmo porque tiene 2 par\'ametros, en cambio usamos ``in'' para ambas calles, con esa modificaci\'on, no estamos perdiendo informaci\'on ya que si el algoritmo da ambas calles, lo podr\'iamos realizar como ``esquina''. Se muestra el vocabulario y las probabilidades de uso de las palabras del vocabulario, sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom}.
-Para calcular las probabilidades de uso se tuvieron en cuenta las ER que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ER fueron las que cumpl\'ian con esas condiciones. Se cont\'o la cantidad de veces que aparec\'ia la palabra, teniendo en cuenta que si aparec\'ia 2 veces en la misma ER se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63 que fueron la cantidad de ER que eran v\'alidas. Hay palabras que aparecen en el modelo pero no aparecen en la Tabla \ref{prob-vocabulario} por tener probabilidad igual a 0, es decir no aparecieron en las ER del corpus. 
+
 \begin{table}[H]
 \begin{small}
 \begin{center}
@@ -734,6 +730,8 @@ near & 0.048\\
 \end{center}
 \end{small}
 \end{table}
+Para calcular las probabilidades de uso usamos el m\'etodo presentado en el Cap\'itulo \ref{sec:algoritmo}, cuando se tiene un corpus disponible para la escena considerada. Se tuvieron en cuenta las ERs que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ERs fueron las que cumpl\'ian con esas condiciones. Para cada palabra de las que aparec\'ia en el corpus para el contexto seleccionado, las cuales son: \{church, in, front, near, minAsExt, calleSantoTomas, calleAtocha,\} se cont\'o la cantidad de veces que aparec\'ia la palabra en el corpus, teniendo en cuenta que si aparec\'ia 2 veces en la misma ER se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63 que fueron la cantidad de ER que eran v\'alidas. Por ejemplo la palabra {\it church} apareci\'o en 61 ERs, por lo tanto la probabilidad de {\it church}es 61/63 = 0.968. Y as\'i se calcul\'o para las dem\'as palabras del vocabulario. Las probabilidades se muestran la Tabla \ref{prob-vocabulario}
+
 %\begin{table}[H]
 %\begin{small}
 %\begin{center}
@@ -754,7 +752,7 @@ near & 0.048\\
 %\end{center}
 %\end{small}
 %\end{table}
-El modelo que representa el fragmento del mapa de la Figura \ref{mapa-zoom}, al sur de la Calle de Atocha, se muestra en la Figura \ref{modelo-mapa-zoom}
+Otra cosa que es input de nuestro algoritmo es el modelo. Aqu\'i retomamos la discusi\'on de qu\'e representar en el modelo, a fin de poder generar todas las ERs que aparecen en el corpus. Decidimos representar el fragmento del mapa de la Figura \ref{mapa-zoom1}, al sur de la Calle de Atocha, el modelo se muestra en la Figura \ref{modelo-mapa-zoom}. Consideramos que esta decisi\'on fue acertada ya que en las ERs del corpus no figuran objetos ubicados al norte de la Calle de Atocha. Notar que la iglesia distractora tambi\'en se encuentra en esa porci\'on del mapa. La iglesia target es {\it church1}, la iglesia distractora es {\it church2}. La iglesia target se encuentra {\it near} y {\it front} del {\it MinisterioAsuntosExteriores} con identificador {\it min1}. Est\'a {\it in calleAtocha} y {\it in calleSantoTomas}. Se tuvo que agregar el obejto {\it d}, ya que sin ese objeto, el algoritmo pensaba que la iglesia target era la\'unica que estaba {\it front} algo. Se agregaron restaurantes y calles por completitud del modelo, pero no fueron usadas por el algoritmo. Al tener probabilidad de uso 0, el algoritmo no las seleccion\'o para agregar a las ERs. Para sobreespecificar se permiten todas las relaciones unarias, es decir las propiedades at\'omicas.\\
 
 \begin{figure}[ht]
 \centering
@@ -844,11 +842,10 @@ El modelo que representa el fragmento del mapa de la Figura \ref{mapa-zoom}, al 
 %\draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
 
  \end{tikzpicture}
-\caption{Grafo del contexto de la Figura \ref{mapa-zoom}}
+\caption{Grafo del contexto de la Figura \ref{mapa-zoom1}.}
 \label{modelo-mapa-zoom}
 \end{figure}
 
-Se ejecut\'o el algoritmo 1000 veces, con input el modelo mostrado en la Figura \ref{modelo-mapa-zoom} y las probabilidades dadas en la Tabla \ref{prob-vocabulario}, se muestran las 10 f\'ormulas m\'as frecuentes, y la frecuencia dada por el algoritmo en la Tabla \ref{freq-mapa-algoritmo}
 
 \begin{table}[H]
 \begin{center}
@@ -883,12 +880,15 @@ Se ejecut\'o el algoritmo 1000 veces, con input el modelo mostrado en la Figura 
 \end{center}
 \end{table}
 
+Se ejecut\'o el algoritmo 1000 veces, con input el modelo mostrado en la Figura \ref{modelo-mapa-zoom} y las probabilidades dadas en la Tabla \ref{prob-vocabulario}, se muestran las 10 f\'ormulas m\'as frecuentes, y la frecuencia dada por el algoritmo en la Tabla \ref{formulas-mapa-zoom}. 
 Vemos que entre las f\'ormulas de la Figura \ref{formulas-mapa-zoom} hay algunas que tienen como subf\'ormula $\exists \nIn$, lo que significa es que 
 el elemento est\'a en una calle, pero esto es una tautolog\'ia ya que vale para todo elemento del modelo, \'estan cosas se podr\'ian tratar de varias maneras: una de ellas ser\'ia eliminar los $\exists \nIn$ cuando no haya un nombre de la calle del lado derecho del existencial, 
 otra opci\'on ser\'ia agregarle el nombre de la calle en el que se encuentra, tomando esta opci\'on habr\'ia que tener cuidado, 
 y pensar que puede ser una construcci\'on que puede incluir hasta 4 calles, por ejemplo si es la manzana completa. La pregunta que quedar\'ia abierta
 entonces ser\'ia, si tiene m\'as de una calle, cual ponemos?, las ponemos a todas?.
 Otra subf\'ormula rara que vemos es $\exists \nFront .(\exists \nFront .(\exists \nChurch))$, es igual a decir $\exists \nChurch$, pero el algoritmo no se da cuenta de esas cosas, al ser un algoritmo l\'ogico podr\'iamos definir esas cosas y eliminarlas autom\'aticamente.
+
+En la Tabla \ref{freq-mapa-algoritmo} se muestran las realizaciones posibles de las f\'ormulas dadas por el algoritmo. Notar que a la f\'ormula 5 la realizamos de la misma manera que a la 1.
 
 \begin{table}[H]
 \begin{small}
@@ -904,7 +904,8 @@ Otra subf\'ormula rara que vemos es $\exists \nFront .(\exists \nFront .(\exists
 6&Iglesia frente al Ministerio de Asuntos Exteriores                                   & & \\ \hline                                        
 7&Iglesia frente al (Ministerio de Asuntos Exteriores que est\'a en una calle)       & &2.5\%  \\ \hline
 %&Asuntos Exteriores& & & & \\ \hline
-8&Iglesia que est\'a en una calle y que tiene al frente algo que est\'a en la Calle de Santo Tom\'as & & \\ \hline                                
+8&Iglesia que est\'a en una calle y que tiene al frente algo que est\'a en la Calle  & & \\ 
+ &de Santo Tom\'as                                                                   & &\\ \hline                                
 9 &La que est\'a al frente del (Ministerio de Asuntos Exteriores que est\'a en una calle)                          && \\ \hline                               
 10&La que est\'a cerca del (Ministerio de Asuntos Exteriores que est\'a en una calle)                            & & \\ \hline
 %10&                                 & & \\ \hline                                              
