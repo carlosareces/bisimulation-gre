@@ -411,7 +411,7 @@ m\'as importantes del \'area, lo explicamos a continuaci\'on.
 
 \begin{figure}[ht]
 %\centering
-\includegraphics[width=.4\textwidth]{images/algoritmoIncremental.png}
+\includegraphics[width=.5\textwidth]{images/algoritmoIncremental.png}
 %\caption{Algoritmo Incremental}
 \caption{Algoritmo Incremental, Figura 2 de \protect\cite{survey}.}\label{algoritmoIncremental}
 
@@ -508,7 +508,7 @@ Dado un objeto target, conseguir una ER que distinga al objeto de los dem\'as ob
 \end{figure}
 
 %Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente al cual le llama grafo distintivo.% (distinguishing graph).\\
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hallan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay distractores, el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{grafo-survey}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} s\'olamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target.  
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hallan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay distractores, el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{fig2-8}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} s\'olamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target.  
 
 El algoritmo sigue explorando grafos y siempre se queda con el de menor costo.
 
@@ -720,6 +720,5 @@ aprendizaje de palabras en una lengua extranjera, y concluyen que las personas q
 aprendieron m\'as que aquellas a las que se les di\'o ERs minimales. Dimos una introducci\'on a corpora existente en el \'area 
 como son el TUNA, el GRE3D3/7, Stars/2 y el ZOOM corpus, \'este \'ultimo fue creado en el desarrollo de esta tesis, por lo cual lo explicaremos con m\'as detalle en el Cap\'itulo \ref{sec:corpus}. En la segunda secci\'on explicamos los diferentes tipos de algoritmos los cuales se 
 diferencian por los tipos de ERs que pueden generar, dimos los algoritmos m\'as importantes del \'area como son incremental, graph, relacional, vimos sus diferencias y pudimos compararlos entre ellos. Entre los algoritmos del \'area no inclu\'imos el de 
-bisimulaci\'on del cual hablaremos en la Secci\'on \ref{sec:bisimulacion} por ser \'este el algoritmo base de los aportes de esta tesis. Y 
-en la tercer secci\'on dimos una introducci\'on a las m\'etricas de evaluci\'on tanto autom\'aticas como manuales, algunas de las cuales usaremos para evaluar nuestro algoritmo.
+bisimulaci\'on del cual hablaremos en el Cap\'itulo \ref{sec:algoritmo} por ser \'este el algoritmo base de los aportes de esta tesis. En la tercer secci\'on de este cap\'itulo dimos una introducci\'on a las m\'etricas de evaluci\'on tanto autom\'aticas como manuales, algunas de las cuales usaremos para evaluar nuestro algoritmo como se muestra en el Cap\'itulo \ref{sec:evaluacion}.
 

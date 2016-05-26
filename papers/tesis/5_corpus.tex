@@ -169,7 +169,7 @@ Se puede ver en las Figuras~\ref{rest-singular2x} y~\ref{rest-plural2x}  el nomb
 %Suponemos que esto tiene que ver con la superposici\'on de nombres, 
 Los mapas eran fragmentos del centro de la ciudad de Madrid (para la parte espa\~nola del corpus) y de Lisboa (para la parte portuguesa).
 Para cada ciudad, se utilizaron 10 mapas con distintas ubicaciones. Cada ubicaci\'on se muestra con un nivel X y 2X de zoom, haciendo 20 im\'agenes en total. En ambos niveles de zoom el objetivo se\~{n}alado se mantuvo. Algunos nombres de las calles y de landmarks podi\'{i}an no aparecer en diferentes niveles de zoom.
-La mitad de las im\'agenes mostraron una sola flecha que apunta a un objeto en el mapa (es decir, requer\'{i}an una sola descripci\'on como por ejemplo en la Figura~\ref{rest-singular} {\it el restaurante que est\'a en la Calle de Atocha, cerca del Ministerio de Asuntos Exteriores}), mientras que en la otra mitad mostr\'o dos flechas que apuntaban a dos lugares diferentes (y por lo tanto requer\'ian una referencia a un conjunto, como en Figura~\ref{rest-plural} {\it los dos restaurantes de la Calle de Atocha} o {\it el restaurante cerca del Ministerio de Asuntos Exteriores y el Medina Mayrit}).
+La mitad de las im\'agenes mostraron una sola flecha que apunta a un objeto en el mapa (es decir, requer\'{i}an una sola descripci\'on como por ejemplo en la Figura~\ref{rest-singular} {\it el restaurante que est\'a en la calle de Atocha, cerca del Ministerio de Asuntos Exteriores}), mientras que en la otra mitad mostr\'o dos flechas que apuntaban a dos lugares diferentes (y por lo tanto requer\'ian una referencia a un conjunto, como en Figura~\ref{rest-plural} {\it los dos restaurantes de la calle de Atocha} o {\it el restaurante cerca del Ministerio de Asuntos Exteriores y el Medina Mayrit}).
 
 
 \subsection{Datos recolectados}
@@ -285,7 +285,7 @@ Los 26 o 52 atributos nombrados anteriormente estan formados por:
   \item detr\'as (obj-id)
   \item otro (cualquier otra cosa mencionada en la descripci\'on, pod\'ia ser una propiedad o relaci\'on)
 \end{itemize}
-y 16 atributos que denotan los objetos adicionales (landmarks) que se mencionaron en la descripci\'on, a los cuales llamamos d1..d4. Por ejemplo, en {\it El pub que est\'a al lado de Pans \& Company, en la Calle de las Postas}) tenemos:target = pub, d1 = fast-food (Pans \& Company) y d2 = Street (Calle de las Postas).
+y 16 atributos que denotan los objetos adicionales (landmarks) que se mencionaron en la descripci\'on, a los cuales llamamos d1..d4. Por ejemplo, en {\it El pub que est\'a al lado de Pans \& Company, en la calle de las Postas}) tenemos:target = pub, d1 = fast-food (Pans \& Company) y d2 = Street (calle de las Postas).
 
 Para cada target se consider\'o un m\'aximo 4 objetos tomados como puntos de referencia (landmarks), ya que con esta cantidad cubr\'iamos las descripciones m\'as largas, estos landmarks se anotaron como d1..d4, para cada landmark se anotaron 4 atributos:
 \begin{itemize}
@@ -372,14 +372,14 @@ Las descripciones recolectadas fueron totalmente anotadas por dos anotadores ind
 Ambos, el contexto y las ERs se representaron en formato XML utilizando una versi\'on simplificada del formato XML adoptado en el corpus TUNA \cite{tuna-corpus}. Las descripciones se agruparon en nodos TRIAL que contienen informaci\'on general sobre cada persona (es decir, identificaci\'on, edad y sexo), seguido de su lista de respuestas. Cada respuesta identifica el contexto en que se produjo, y la expresi\'on referencial que la persona dijo.
 Al igual que en \cite{tuna-corpus}, el contenido de las expresiones referenciales est\'an representadas por nodos que son conjunto de atributos que contienen una lista de nombres de atributos y sus valores. El siguiente ejemplo ilustra un fragmento de esta representaci\'on para una ER. Los objetos en cada contexto de entrada estaban representados de una manera similar.
 Para el target de la Figura~\ref{mapa-con-ids} y la expresi\'on {\it El pub que est\'a al lado de Pans \& Company, en la
-Calle de las Postas}, la anotaci\'on ser\'ia la siguiente.
+calle de las Postas}, la anotaci\'on ser\'ia la siguiente.
 %\tiny{
 \begin{verbatim}
 <TRIAL ID="2" SPEAKER="166" AGE="18" GENDER="m">
   <CONTEXT ID="3" SEQ="1300">
      <ATTRIBUTE-SET TARGET="pub1" LANDMARK="fast5" 
                     STRING="El pub que esta al lado de Pans & Company, 
-                            en la Calle de las Postas">
+                            en la calle de las Postas">
         <ATTRIBUTE NAME="type" VALUE="pub" />
         <ATTRIBUTE NAME="at" VALUE="str15" />
         <ATTRIBUTE NAME="landmark-name" VALUE="Pans & Company" />
@@ -396,12 +396,12 @@ Calle de las Postas}, la anotaci\'on ser\'ia la siguiente.
 %The set of images, text descriptions and their XML representations constitutes the Zoom corpus of referring expressions, to be made publicly available for research purposes. As a first step in this direction, the following sections present the results of a machine learning approach to GER based on the Portuguese portion of the data.
 
 En cada TRIAL tenemos la informaci\'on del TRIAL (el id), la de la persona, en speaker, la edad y el g\'enero. En ATTRIBUTE-SET se encuentran los datos de la ER, TARGET y LANDMARKS con sus id's, STRING es la expresi\'on completa tal cual la di\'o la persona, y los atributos del target en este caso aparecen ``type'', ``at' ' (es en que calle) y landmark-name, en este caso hubo 1 s\'olo landmark. Los landmarks siguientes fueron etiquetados como ``second-landmark'' y as\'{i} sucesivamente. Esto fue motivado por la necesidad de proporcionar nombres de atributos \'unicos para el beneficio de los algoritmos de GER.
-El conjunto de im\'agenes, textos descriptivos y sus representaciones XML constituye el corpus ZOOM de ERs, el cual ser\'a p\'ublico para fines de investigaci\'on, vea Cap\'itulo \ref{sec:conclusiones} .  En lo que sigue presentamos una comparaci\'on de este corpus creado con corpora de ERs existente hasta el momento. Luego en las siguientes secciones se presentan los resultados de un enfoque de aprendizaje autom\'atico para GER, los cuales se basan en la parte portuguesa del corpus.
+El conjunto de im\'agenes, textos descriptivos y sus representaciones XML constituye el corpus ZOOM de ERs, el cual ser\'a p\'ublico para fines de investigaci\'on, vea Cap\'itulo \ref{sec:conclusiones}.  En lo que sigue presentamos una comparaci\'on de este corpus creado con corpora de ERs existente hasta el momento. Luego en las siguientes secciones se presentan los resultados de un enfoque de aprendizaje autom\'atico para GER, los cuales se basan en la parte portuguesa del corpus.
 
 \subsection{Comparaci\'on con trabajo previo}
 \label{sec:comparacion_trabajo_previo}
 
-En la Tabla~\ref{tab-comparison} se presenta una comparaci\'on entre el corpus recolectado y otros corpus de ERs existentes nombrados en la Secci\'on~\ref{sec:corpus2}. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos m\'as el n\'umero de relaciones en cada descripci\'on (columna Atributos). La informaci\'on sobre el TUNA-corpus y las descripciones de ZOOM se basan s\'olo en la parte singular de cada corpus. La cantidad m\'axima de landmarks permitidos (en columna Landmarks). Tambi\'en se representa el tama\~no medio de la descripci\'on, es decir en n\'umero de propiedades anotadas, (en la columna tama\~no promedio). La columna Uso representa la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia. Desde una perspectiva de GER, las ERs de mayor largo y las puntuaciones m\'as bajas de uso es probable que representen las situaciones m\'as complejas de referencia.}
+En la Tabla~\ref{tab-comparison} se presenta una comparaci\'on entre el corpus recolectado y otros corpus de ERs existentes nombrados en la Secci\'on~\ref{sec:corpus2}. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos m\'as el n\'umero de relaciones en cada descripci\'on (columna Atributos). La informaci\'on sobre el TUNA-corpus y las descripciones de ZOOM se basan s\'olo en la parte singular de cada corpus. La cantidad m\'axima de landmarks permitidos (en columna Landmarks). Tambi\'en se representa el tama\~no medio de la descripci\'on, es decir en n\'umero de propiedades anotadas, (en la columna tama\~no promedio). La columna Uso representa la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia. Desde una perspectiva de GER, las ERs de mayor largo y las puntuaciones m\'as bajas de uso es probable que representen las situaciones m\'as complejas de referencia.
 
 
 \begin{table}[H]
@@ -636,7 +636,7 @@ En esta secci\'on presentamos tres casos de estudio particulares, de generaci\'o
 \subsection{Singular sin zoom}
 \label{sec:sinzoom}
 
-Vamos a considerar el mapa de a Figura \ref{mapa-zoom1}. El target, que es el objeto se\~nalado por la flecha roja, es una iglesia, como se puede ver el significado del s\'imbolo en la leyenda ubicada a la derecha del mapa. En la parte inferior derecha se muestran las probabilidades de uso las cuales fueron aprendidas desde el corpus. Esas probabilidades no estaban en la imagen mostrada a los participantes que completaron el experimento, se agregaron a la imagen a fin de tenerlas conjuntamente con el mapa correspondiente.
+Vamos a considerar el mapa de a Figura \ref{mapa-zoom1}. El target, que es el objeto se\~nalado por la flecha roja, es una iglesia, como se puede ver el significado del s\'imbolo en la leyenda ubicada a la derecha del mapa. En la parte inferior derecha se muestran las probabilidades de uso, las cuales fueron aprendidas desde el corpus. Esas probabilidades no estaban en la imagen mostrada a los participantes que completaron el experimento, se agregaron a la imagen a fin de tenerlas conjuntamente con el mapa correspondiente.
 
 En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as frecuentes generadas por las personas que participaron 
 en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se indica el porcentaje de personas que dieron cada tipo de ER, es decir la cantidad de distintas personas que independientemente decidieron usar la misma ER para referirse al target, dividido por la cantidad total de ERs del mapa (se d\'a en porcentaje). Estas 10 ERs m\'as frecuentes acumulan el 78.5\% del total de las ERs del corpus para el mapa considerado. Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales.\\
@@ -646,7 +646,7 @@ en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se in
 \begin{figure}
 \centering
 \includegraphics[width=150mm]{images/corpus/mapa6-prob.png}\\[0pt]
-\caption{Imagen del ZOOM corpus con target singular.}
+\caption{Imagen del ZOOM corpus con target singular. Se muestran probabilidades de uso de las palabras en la esquina inferior derecha.}
 \label{mapa-zoom1}
 \end{figure}
 
@@ -670,9 +670,9 @@ en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se in
 %%&Asuntos Exteriores& & & & \\ \hline
 %6&Iglesia en la calle de Atocha																									 &2&2.5\%  &  & \\ \hline
 %7&En calle de Santo Tom\'as 																													 &2&2.5\% 	& X & \\ \hline
-%8&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, frente al 									 &2&2.5\%	&  &X \\ 
+%8&Iglesia que est\'a en la calle de Santo Tom\'as y Atocha, frente al 									 &2&2.5\%	&  &X \\ 
 %&Ministerio de Asuntos Exteriores																		 &&&& \\ \hline
-%9&Iglesia que est\'a en la Calle de Santo Tom\'as y Atocha										 &2&2.5\% 	&  &X \\ \hline
+%9&Iglesia que est\'a en la calle de Santo Tom\'as y Atocha										 &2&2.5\% 	&  &X \\ \hline
 %10&Iglesia cerca del Ministerio de Asuntos Exteriores														 &1&1.2\% 	&  & \\ \hline
 %\end{tabular}
 %\caption{10 ER m\'as frecuentes del corpus para el mapa de la Figura \ref{mapa-zoom}.}\label{freq-mapa}
@@ -732,28 +732,7 @@ Para ejecutar el algoritmo necesitamos definir el vocabulario del modelo, es dec
 %\end{small}
 %\end{table}
 Para calcular las probabilidades de uso usamos el m\'etodo presentado en el Cap\'itulo \ref{sec:algoritmo}, cuando se tiene un corpus disponible para la escena considerada. Se tuvieron en cuenta las ERs que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ERs fueron las que cumpl\'ian con esas condiciones. Para cada palabra de las que aparec\'ia en el corpus para el contexto seleccionado, las cuales son: \{church, in, front, near, minAsExt, calleSantoTomas, calleAtocha\} se cont\'o la cantidad de veces que aparec\'ia la palabra en el corpus, teniendo en cuenta que si aparec\'ia 2 veces en la misma ER se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63 que fueron la cantidad de ERs que eran v\'alidas. Por ejemplo la palabra {\it church} apareci\'o en 61 ERs, por lo tanto la probabilidad de {\it church} es 61/63 = 0.968. Y as\'i se calcul\'o para las dem\'as palabras del vocabulario. Las probabilidades de uso de las palabras se muestran en la esquina inferior derecha del mapa de la Figura \ref{mapa-zoom1}.
-
-%\begin{table}[H]
-%\begin{small}
-%\begin{center}
-%\begin{tabular}{|l|}
-%\hline
-%Palabra 					     Probabilidad\\ \hline \hline
-%
-%\textbf{\texttt{church  0.97}}\\
-%\textbf{\texttt{in  0.5}}\\
-%\textbf{\texttt{calleSantoTomas  0.5}}\\
-%\textbf{\texttt{front 0.37}}\\
-%\textbf{\texttt{minAsExt 0.41}}\\
-%\textbf{\texttt{calleAtocha  0.06}}\\
-%\textbf{\texttt{near  0.048}}\\
-%\hline
-%\end{tabular}
-%\caption{Probabilidad de las palabras del dominio.}\label{prob-vocabulario}
-%\end{center}
-%\end{small}
-%\end{table}
-Otra cosa que es input de nuestro algoritmo es el modelo. Aqu\'i retomamos la discusi\'on de qu\'e representar en el modelo, a fin de poder generar todas las ERs que aparecen en el corpus. Decidimos representar el fragmento del mapa de la Figura \ref{mapa-zoom1}, al sur de la Calle de Atocha, el modelo se muestra en la Figura \ref{modelo-mapa-zoom}. Consideramos que esta decisi\'on fue acertada ya que en las ERs del corpus no figuran objetos ubicados al norte de la Calle de Atocha. Notar que la iglesia distractora tambi\'en se encuentra en esa porci\'on del mapa. La iglesia target es {\it church1}, la iglesia distractora es {\it church2}. La iglesia target se encuentra {\it near} y {\it front} del {\it minAsExt} el cual tiene identificador {\it min1}. Est\'a {\it in calleAtocha} e {\it in calleSantoTomas}. Se tuvo que agregar el obejto {\it d}, ya que sin ese objeto, el algoritmo pensaba que la iglesia target era la \'unica que estaba {\it front} algo. Se agregaron restaurantes y calles por completitud del modelo, pero no fueron usadas por el algoritmo. Al tener probabilidad de uso 0, el algoritmo no las seleccion\'o para agregar a las ERs. Para sobreespecificar se permiten todas las relaciones unarias, es decir las propiedades at\'omicas.\\
+Otra cosa que es input de nuestro algoritmo es el modelo. Aqu\'i retomamos la discusi\'on de qu\'e representar en el modelo, a fin de poder generar todas las ERs que aparecen en el corpus. Decidimos representar el fragmento del mapa de la Figura \ref{mapa-zoom1}, al sur de la calle de Atocha, el modelo se muestra en la Figura \ref{modelo-mapa-zoom}. Consideramos que esta decisi\'on fue acertada ya que en las ERs del corpus no figuran objetos ubicados al norte de la calle de Atocha. Notar que la iglesia distractora tambi\'en se encuentra en esa porci\'on del mapa. La iglesia target es {\it church1}, la iglesia distractora es {\it church2}. La iglesia target se encuentra {\it near} y {\it front} del {\it minAsExt} el cual tiene identificador {\it min1}. Est\'a {\it in calleAtocha} e {\it in calleSantoTomas}. Se tuvo que agregar el objeto {\it d}, ya que sin ese objeto, el algoritmo pensaba que la iglesia target era la \'unica que estaba {\it front} algo. Se agregaron restaurantes y calles por completitud del modelo, pero no fueron usadas por el algoritmo. Al tener probabilidad de uso 0, el algoritmo no las seleccion\'o para agregar a las ERs. Para sobreespecificar se permiten todas las relaciones unarias, es decir las propiedades at\'omicas.\\
 
 \begin{figure}[ht]
 \centering
@@ -847,6 +826,8 @@ Otra cosa que es input de nuestro algoritmo es el modelo. Aqu\'i retomamos la di
 \label{modelo-mapa-zoom}
 \end{figure}
 
+Recordemos que el algoritmo es no-determin\'istico, as\'i si lo ejecutamos muchas veces, vamos a conseguir posiblemente diferentes ERs para el mismo input. Teniendo as\'i como resultado un ranking de ERs.
+Ejecutamos el algoritmo 1000 veces, con input el modelo mostrado en la Figura \ref{modelo-mapa-zoom} y las probabilidades dadas en la esquina inferior derecha de la misma figura. Se muestran las 10 f\'ormulas m\'as frecuentes, y la frecuencia dada por el algoritmo en la Tabla \ref{formulas-mapa-zoom}. 
 
 \begin{table}[H]
 \begin{center}
@@ -881,8 +862,6 @@ Otra cosa que es input de nuestro algoritmo es el modelo. Aqu\'i retomamos la di
 \end{center}
 \end{table}
 
-Recordemos que el algoritmo es no-determin\'istico, as\'i si lo ejecutamos muchas veces, vamos a conseguir posiblemente diferentes ERs para el mismo input. Teniendo as\'i como resultado un ranking de ERs.
-Ejecutamos el algoritmo 1000 veces, con input el modelo mostrado en la Figura \ref{modelo-mapa-zoom} y las probabilidades dadas en la esquina inferior derecha de la misma figura. Se muestran las 10 f\'ormulas m\'as frecuentes, y la frecuencia dada por el algoritmo en la Tabla \ref{formulas-mapa-zoom}. 
 Vemos que entre las f\'ormulas de la Figura \ref{formulas-mapa-zoom} hay algunas que tienen como subf\'ormula $\exists \nIn$, lo que significa es que 
 el elemento est\'a en una calle, pero esto es una tautolog\'ia ya que vale para todo elemento del modelo, \'estan cosas se podr\'ian tratar de varias maneras: una de ellas ser\'ia eliminar los $\exists \nIn$ cuando no haya un nombre de la calle del lado derecho del existencial, 
 otra opci\'on ser\'ia agregarle el nombre de la calle en el que se encuentra, tomando esta opci\'on habr\'ia que tener cuidado, 
@@ -912,11 +891,16 @@ En la Tabla \ref{freq-mapa-algoritmo} se muestran las realizaciones posibles de 
 10&La que est\'a cerca del (Ministerio de Asuntos Exteriores que est\'a en una calle)                            &15 &1.5 \\ \hline
 %10&                                 & & \\ \hline                                              
 \end{tabular}
-\caption{Posibles realizaciones de las 10 ER m\'as frecuentes dadas por el algoritmo para el grafo de 
-la Figura \protect\ref{modelo-mapa-zoom}.}\label{freq-mapa-algoritmo}
+\caption{Posibles realizaciones de las 10 ER m\'as frecuentes dadas por el algoritmo para el grafo de la Figura \protect\ref{modelo-mapa-zoom}.}
+\label{freq-mapa-algoritmo}
 \end{center}
 \end{small}
 \end{table}
+
+Notar que de los 10 tipos diferentes de ER que m\'as dieron las personas las cuales se muestran en la Tabla \ref{freq-mapa}, 
+2 son subespecificadas, al ser subespecificadas, el algoritmo no las gener\'o. 
+La segunda m\'as frecuente dada por las personas, que en realidad fue la primer ER m\'as frecuente, 
+tambi\'en fue la m\'as frecuente dada por el algoritmo como se muestra en la Tabla \ref{compara-corpus-alg} y con un porcentaje bastante parecido al dado por las personas. 
 
 \begin{table}[H]
 {\footnotesize
@@ -937,41 +921,37 @@ la Figura \protect\ref{modelo-mapa-zoom}.}\label{freq-mapa-algoritmo}
 10&Iglesia cerca del Ministerio de Asuntos Exteriores				 &1.23\% 	&0.4\%  \\ \hline
 %NO-ERA-ER								 &0.222\%  &\\ \hline \hline
 %Totales& &\\
-\hline
+%\hline
 \end{tabular}
 \caption{Comparaci\'on de las 10 ERs m\'as frecuentes del corpus y las dadas por el algoritmo.}\label{compara-corpus-alg}
 \end{center}
 }
 \end{table}
-\vspace*{-2}
-Notar que de los 10 tipos diferentes de ER que m\'as dieron las personas las cuales se muestran en la Tabla \ref{freq-mapa}, 
-2 son subespecificadas, al ser subespecificadas, el algoritmo no las gener\'o. 
-La segunda m\'as frecuente dada por las personas, que en realidad fue la primer ER m\'as frecuente, 
-tambi\'en fue la m\'as frecuente dada por el algoritmo como se muestra en la Tabla \ref{compara-corpus-alg} y con un porcentaje bastante parecido
-al dado por las personas. 
 
-Consideramos que el algoritmo no gener\'o la ER {\it La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha, frente al Ministerio de Asuntos Exteriores} por ser \'esta una ER larga y compleja, contiene mucha informaci\'on, nuestro algoritmo termina antes, consiguiendo una ER y no sobreespecifica lo suficiente como para dar esta ER (recordemos que sobreespecifica s\'olo en el primer ciclo). Otra ER que el algoritmo no gener\'o es {\it La iglesia que est\'a en la Calle de Santo Tom\'as y Atocha}, a esta particularmente no la gener\'o por tener {\it calleAtocha} una probabilidad de uso muy baja 0.06.
+
+%\vspace*{-4cm}
+
+Consideramos que el algoritmo no gener\'o la ER {\it La iglesia que est\'a en la calle de Santo Tom\'as y Atocha, frente al Ministerio de Asuntos Exteriores} por ser \'esta una ER larga y compleja, contiene mucha informaci\'on, nuestro algoritmo termina antes, consiguiendo una ER y no sobreespecifica lo suficiente como para dar esta ER (recordemos que sobreespecifica s\'olo en el primer ciclo). Otra ER que el algoritmo no gener\'o es {\it La iglesia que est\'a en la calle de Santo Tom\'as y Atocha}, a esta particularmente no la gener\'o por tener {\it calleAtocha} una probabilidad de uso muy baja 0.06.
 
 \textbf{Aca me gustaria agregar alguna discusion mas}
 
 En lo que sigue analizaremos el mismo target pero en un mapa con m\'as detalle.
-
+%\vspace*{-4cm}
 \subsection{Singular con zoom 2x}
 \label{sec:conzoom}
 
-El mapa que analizaremos en esta secci\'on es el que se muestra en la Figura \ref{mapa-zoom2x}, tiene zoom, es una porci\'on m\'as peque\~na que el mapa mostrado en la secci\'on anterior, es decir por un lado, se ven menos objetos, pero por otro lado, lo que se v\'e tiene en general m\'as detalle, por ejemplo, se v\'e el nombre de la iglesia:
- ``Parroquia de Santa Cruz''. Este nombre no se v\'e en el mapa que analizamos en la secci\'on anterior (Figura \ref{mapa-zoom1}). Otra cosa 
-que se puede ver en el mapa con zoom es el nombre de la calle: ``Calle de la Concepci\'on Jer\'onima''.
-En este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores porque este queda cortado en la imagen, el mismo si se ve\'ia en el mapa de la secci\'on anterior (Figura \ref{mapa-zoom1}), por lo tanto lo \'unico que se v\'e en la Calle de Santo Tom\'as es la iglesia target. 
-
-En la Tabla \ref{freq-mapa-zoom2x} se muestran las 12 ERs distintas dadas por los participantes que completaron el experimento en la recolecci\'on del corpus, y la cantidad de ocurrencias en el corpus. Hacen un total de 72 ERs, el corpus contaba con 80 ERs para esa imagen, pero 8 fueron descartadas por no ser ERs.
-
-\begin{figure}
+\begin{figure}[H]
 \centering
-\includegraphics[width=150mm]{images/corpus/mapa16.png}\\[0pt]
-\caption{Imagen con zoom 2X, target singular}
+\includegraphics[width=\textwidth]{images/corpus/mapa16-prob.png}
+\caption{Imagen con zoom 2X, target singular. Se muestran probabilidades de uso de las palabras en la esquina inferior derecha.}
 \label{mapa-zoom2x}
 \end{figure}
+El mapa que analizaremos en esta secci\'on es el que se muestra en la Figura \ref{mapa-zoom2x}, tiene zoom, es una porci\'on m\'as peque\~na que el mapa mostrado en la secci\'on anterior, es decir por un lado, se ven menos objetos, pero por otro lado, lo que se v\'e tiene en general m\'as detalle, por ejemplo, se v\'e el nombre de la iglesia:
+ ``Parroquia de Santa Cruz''. Este nombre no se v\'e en el mapa que analizamos en la secci\'on anterior (Figura \ref{mapa-zoom1}). Otra cosa 
+que se puede ver en el mapa con zoom es el nombre de la calle: ``calle de la Concepci\'on Jer\'onima''.
+En este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores porque este queda cortado en la imagen, el mismo si se ve\'ia en el mapa de la secci\'on anterior (Figura \ref{mapa-zoom1}), por lo tanto lo \'unico que se v\'e en la calle de Santo Tom\'as es la iglesia target. Estas diferencias se van a ver reflejadas en el modelo que toma como input el algoritmo.
+En la Tabla \ref{freq-mapa-zoom2x} se muestran las 12 ERs distintas dadas por los participantes que completaron el experimento en la recolecci\'on del corpus, y la cantidad de ocurrencias en el corpus. El porcentaje que representa, y si es subespecificada (SubE) o sobreespecificada (SobreE). Como dijimos anteriormente las que no son ni subespecificadas ni sobreespecificadas son minimales. Las ERs mostradas suman un total de 72, el corpus contaba con 80 ERs para esa imagen, pero 8 fueron descartadas por estar mal formadas, o no ser verdaderas para el target.
+En la Tabla \ref{freq-mapa-zoom2x} se puede ver que 44 de 80 ERs son {\it Parroquia de Santa Cruz}. De las 12 ERs diferentes dadas por los las personas, 9 contienen ``Parroquia de Santa Cruz'', y acumulan un total de 69 ERs de 80. Las 3 restantes son: {\it Iglesia} con frecuencia 1 de 80, la cual era mucho m\'as frecuente en el mapa sin zoom, en este caso como en el mapa sin zoom, tambi\'en es subespecificada, {\it Iglesia cerca del Ministerio de Asuntos Exteriores}, la cual se di\'o 1 vez en el mapa con zoom, es decir tambi\'en era m\'as frecuente en el mapa sin zoom y {\it En calle de Santo Tom\'as} la cual se di\'o 1 vez en el mapa con zoom, tambi\'en mucho m\'as frecuente en el mapa sin zoom. Esta \'ultima es una ER que identifica al target por ser el \'unico objeto que aparece en esa calle, pero no es lo que normalmente hacen las personas, eso se nota en la baja frecuencia que fue dada, 1 de 80.
 
 \begin{table}[H]
 {\footnotesize
@@ -980,44 +960,31 @@ En la Tabla \ref{freq-mapa-zoom2x} se muestran las 12 ERs distintas dadas por lo
 \hline
 &ER 					      & Cantidad &  Frecuencia & SubE&SobreE \\ \hline \hline
 1&Parroquia de Santa Cruz        												 &		44&	61.1\%  &  & \\ \hline
-2&Parroquia de Santa Cruz en Calle De Santo Tom\'as        &    9 &	12.5\%	& &X\\ \hline
-3&Parroquia de Santa Cruz en Calle De Santo Tom\'as y      &    4 &     5.55\%      & &X\\
+2&Parroquia de Santa Cruz en calle de Santo Tom\'as        &    9 &	12.5\%	& &X\\ \hline
+3&Parroquia de Santa Cruz en calle de Santo Tom\'as y      &    4 &     5.55\%      & &X\\
 &De La Concepci\'on Jer\'onima                             &      &             & & \\ \hline
-4&Parroquia de Santa Cruz en Calle De Santo Tom\'as        &    3 &     4.17\%      &&X\\
+4&Parroquia de Santa Cruz en calle de Santo Tom\'as        &    3 &     4.17\%      &&X\\
 &cerca de Ministerio de Asuntos Exteriores                 &      &             & &\\  \hline
-5&Parroquia de Santa Cruz en Calle De Santo Tom\'as        &	3 &	4.17\%	& &X\\
-&entre Calle De Atocha y De La Concepci\'on Jer\'onima     &	  &			&  &\\  \hline
+5&Parroquia de Santa Cruz en calle de Santo Tom\'as        &	3 &	4.17\%	& &X\\
+&entre calle de Atocha y de La Concepci\'on Jer\'onima     &	  &			&  &\\  \hline
 6&Iglesia de la Parroquia de Santa Cruz			   &	2 &	2.78\%	&&X\\  \hline
 7&Iglesia de la Parroquia de Santa Cruz	en      	   &	2 &	2.78\%	&&X\\  
-&Calle De Santo Tom\'as													 				 &		 &	    &  & \\ \hline
+&calle de Santo Tom\'as													 				 &		 &	    &  & \\ \hline
 8&Iglesia cerca del Ministerio de Asuntos Exteriores       &	1 &	1.39	&&\\  \hline
-9&Calle De Santo Tom\'as                                   &    1 &     1.39\%      &X&\\  \hline
+9&En calle de Santo Tom\'as                                   &    1 &     1.39\%      &X&\\  \hline
 
 10&Parroquia de Santa Cruz  				   &    1 &	1.39\%	&&X\\  
 &cerca de Ministerio de Asuntos Exteriores		   &	  &		&&\\  \hline
-11&Parroquia de Santa Cruz en Calle De Atocha  		   &	1 &	1.39\%	&&X\\  
+11&Parroquia de Santa Cruz en calle de Atocha  		   &	1 &	1.39\%	&&X\\  
 &cerca de Ministerio de Asuntos Exteriores		   &	  &		&&\\  \hline
 12&Iglesia						   &    1 &	1.39\%	&X&\\  \hline
 %NO ERA ER				   		   &	8 &	\%	& &\\  \hline
 %\hline
 \end{tabular}
-\caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom2x}.}\label{freq-mapa-zoom2x}
+\caption{ERs del corpus dadas por las personas para el mapa de la Figura \ref{mapa-zoom2x}.}\label{freq-mapa-zoom2x}
 \end{center}
 }
 \end{table}
-
-
-Cabe notar que algunas personas dijeron ``Ministerio de Asuntos Exteriores'' (exactamente 6 personas), siendo que el nombre del Ministerio no se v\'e en el mapa, la 
-explicaci\'on que damos a esto es que la personas vieron el mapa sin zoom antes de ver este mapa. Como explicamos en la parte \ref{recoleccion-corpus} los mapas se dieron de manera aleatoria, esa aleatoriedad hizo que algunas personas recuerden lo que vieron en otros mapas. Esto es una caracter\'istica del corpus, y no es muy deseada, ya que las personas dijeron cosas que no est\'an en el modelo. D\'a como una sensaci\'on de desigualdad del experimento.
-44/81 ER son {\it Parroquia de Santa Cruz}. De las 12 ER dadas en la Tabla \ref{freq-mapa-zoom2x}, 9 contienen ``Parroquia de Santa Cruz'', y las 3 restantes tambi\'en fueron dadas
-para el mapa de la Figura \ref{mapa-zoom}, las cuales son {\it Iglesia} la cual era mucho m\'as frecuente en el mapa sin zoom, {\it Iglesia cerca del Ministerio de Asuntos Exteriores} la cual se di\'o 1 vez en el mapa con zoom, es decir tambi\'en era m\'as frecuente en el mapa sin zoom y {\it Calle de Santo tom\'as} la cual se di\'o 1 vez en el mapa con zoom.
-Es interesante notar que si bien hubo personas que nombraron el Ministerio de Asuntos exteriores ninguna persona dijo ``frente al ministerio...'', lo que hace que la probabilidad de frente sea 0 en este modelo.
-
-
-
-El vocabulario y las probabilidades de uso sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom2x} se ven en el mismo mapa.
-
-
 
 %\begin{table}[H]
 %\begin{small}
@@ -1040,19 +1007,11 @@ El vocabulario y las probabilidades de uso sacadas del corpus, para el mapa de l
 %\end{small}
 %\end{table}
 
+Algunas personas incluyeron en la descripci\'on a el ``Ministerio de Asuntos Exteriores'' (exactamente 6 personas), siendo que el nombre del Ministerio no se v\'e en el mapa, la explicaci\'on que damos a esto es que la personas vieron el mapa sin zoom antes de ver este mapa. Como explicamos en la Secci\'on \ref{corpus-metodo} los mapas se dieron de manera aleatoria, esa aleatoriedad hizo que algunas personas recuerden lo que vieron en otros mapas. Esto es una caracter\'istica del corpus, y no es muy deseada, ya que las personas dijeron cosas que no est\'an en el modelo. D\'a como una sensaci\'on de desigualdad del experimento.
+Es interesante notar que si bien hubo personas que nombraron el Ministerio de Asuntos exteriores ninguna persona dijo ``frente al ministerio...'', lo que hace que la probabilidad de frente sea 0 en este modelo.
 
-En el modelo de la Figura \ref{modelo-mapa-zoom2x} (con zoom) se ven varias diferencias con respecto al modelo de la Figura \ref{mapa-zoom} 
-(sin zoom) y esto se debe a que al acercar el zoom del mapa, algunas cosas aparecen y otras desaparecen. Se ve que la iglesia target no est\'a
- en la calle ee Atocha como parec\'ia en el mapa mostrado en la Figura \ref{mapa-zoom}. Se agrega el nombre de la Calle De La Concepci\'on 
-Jer\'onima que no se ve\'ia en el mapa anterior. No se ve el nombre del Ministerio de Asuntos Exteriores. Se agrega el nombre Parroquia de Santa Cruz que no se ve\'ia en el otro mapa. Aparece una nueva calle que est\'a en la parte superior de la manzana de la iglesia, 
-de la cual no sabemos el nombre, pero le asignamos el identificador {\texttt str25}. Aparece el nombre de la Calle de Carretas, 
-cuyo identificador
- es {\texttt str15} en la que est\'a el restaurant {\it Medina Mayrit}, pero desaparece el nombre del restaurante. 
-El edificio con identificador {\texttt d}, en este mapa se ve que es un teatro, el Teatro Calder\'on, tambi\'en aparece en el mapa el restaurante {\it La Tagliatela} al lado
- de un restaurante sin nombre, uno de esos restaurantes se pod\'ia ver en el mapa sin zoom. Vamos a suponer que el que se pod\'ia ver en el mapa sin zoom era {\it La Tagliatela} a fin de conservar los mismos identificadores. Notar que dejamos de ver el nombre de la calle 
-en la cual se ubica el teatro y los restaurantes reci\'en nombrados.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centering
 \begin{tikzpicture}
   [
@@ -1158,23 +1117,35 @@ en la cual se ubica el teatro y los restaurantes reci\'en nombrados.
 \label{modelo-mapa-zoom2x}
 \end{figure}
 
-Como dijimos el nombre del Ministerio de Asuntos Exteriores no se ve en el mapa, sin embargo 6 personas lo usaron en sus ERs, 
-esto se debe a que como en la obtenci\'on del corpus los mapas se mostraron aleatoriamente, algunas personas vieron el mapa sin zoom antes, 
-y recordaron que ese edificio que se v\'e en el mapa, es el Ministerio de Asuntos Exteriores. Como no est\'a visible en el mapa, no aparece en el modelo.
+El vocabulario y las probabilidades de uso sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom2x} se ven en el mismo mapa, en la esquina inferior derecha, as\'i como en el mapa sin zoom, las probabilidades no eran parte del mapa que se mostr\'o a los participantes que completaron las ERs del corpus.
+
+En el modelo de la Figura \ref{modelo-mapa-zoom2x} (con zoom) se ven varias diferencias con respecto al modelo de la Figura \ref{mapa-zoom1} 
+(sin zoom) y esto se debe a que al acercar el zoom del mapa, algunas cosas aparecen y otras desaparecen. Se v\'e que la iglesia target no est\'a
+ en la calle de Atocha como parec\'ia en el mapa mostrado en la Figura \ref{mapa-zoom1}. Se agrega el nombre de la calle de La Concepci\'on 
+Jer\'onima que no se ve\'ia en el mapa anterior. No se v\'e el nombre del Ministerio de Asuntos Exteriores. Se agrega el nombre {\it Parroquia de Santa Cruz} que no se ve\'ia en el otro mapa. Aparece una nueva calle que est\'a en la parte superior de la manzana de la iglesia, 
+de la cual no sabemos el nombre, pero le asignamos el identificador {\texttt str25}. Aparece el nombre de la {\it calle de Carretas}, 
+cuyo identificador
+ es {\texttt str15} en la que est\'a el restaurant {\it Medina Mayrit}, pero desaparece el nombre del restaurante. 
+El edificio con identificador {\texttt d}, en este mapa se v\'e que es un teatro, el {\it Teatro Calder\'on}, tambi\'en aparece en el mapa el restaurante {\it La Tagliatela} al lado
+ de un restaurante sin nombre, uno de esos restaurantes se pod\'ia ver en el mapa sin zoom. Vamos a suponer que el que se pod\'ia ver en el mapa sin zoom era {\it La Tagliatela} a fin de conservar los mismos identificadores. Notar que dejamos de ver el nombre de la calle 
+en la cual se ubica el teatro y los restaurantes reci\'en nombrados.
+
+
+%Como dijimos el nombre del Ministerio de Asuntos Exteriores no se ve en el mapa, sin embargo 6 personas lo usaron en sus ERs, 
+%esto se debe a que como en la obtenci\'on del corpus los mapas se mostraron aleatoriamente, algunas personas vieron el mapa sin zoom antes, y recordaron que ese edificio que se v\'e en el mapa, es el Ministerio de Asuntos Exteriores. Como no est\'a visible en el mapa, no aparece en el modelo.
+
 
 
 \subsection{Plural sin zoom}
 \label{sec:plural}
-\begin{figure}
+\begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{images/corpus/mapa10.png}\\[0pt]
 \caption{Imagen sin zoom, target plural}
 \label{mapa-zoom-plural}
 \end{figure}
 
-
 En la Tabla \ref{freq-mapa-zoom-plural} se muestran las ER, la cantidad de ocurrencia en el corpus
-
 
 \begin{table}[H]
 {\footnotesize
@@ -1185,29 +1156,29 @@ ER 					      & Cantidad &  Frecuencia & SubE & SobreE\\ \hline \hline
 Medina Mayrit y el que esta cerca        &	11	&	\% &  &  \\ \hline
 el de la calle Atocha y De La Cruz       &	3  &	\%	&X & \\  \hline
 pr\'oximo a la iglesia 	      &1		&	\%	&X &\\ \hline
-Medina Mayrit y el que esta en Calle De Atocha	      &5		&	\%	&X&\\ \hline
-Calle De Atocha				&	2  &	\%	&X&\\ \hline
-Restaurantes de Calle De Atocha				&	8  &	\%	&X&\\ \hline
-Medina Mayrit en Calle de Atocha y el que esta cerca				& 3  &	\%	&&X\\
+Medina Mayrit y el que esta en calle de Atocha	      &5		&	\%	&X&\\ \hline
+calle de Atocha				&	2  &	\%	&X&\\ \hline
+Restaurantes de calle de Atocha				&	8  &	\%	&X&\\ \hline
+Medina Mayrit en calle de Atocha y el que esta cerca				& 3  &	\%	&&X\\
 cerca de la iglesia				&	  &	\%	&&\\ \hline
 Medina Mayrit			&11		&	\%	&X&\\  \hline
 Medina Mayrit y el que esta cerca				&	1	&	\%  &&X\\
 en la calle Atocha y De La Cruz        &	  &	&&\\ \hline
-El que esta en Calle De Atocha y Carretas, 	      &		&	\%	&&\\
+El que esta en calle de Atocha y Carretas, 	      &		&	\%	&&\\
 y el de Atocha y de la Cruz	      &1		&	&&\\ \hline
-El que esta en Calle De Atocha y Carretas 					&	2  &	\%	&X&\\ \hline
-Medina Mayrit en Calle De Atocha y el que esta cerca  				&  1 &	\%	&&X\\ \hline
+El que esta en calle de Atocha y Carretas 					&	2  &	\%	&X&\\ \hline
+Medina Mayrit en calle de Atocha y el que esta cerca  				&  1 &	\%	&&X\\ \hline
 Medina Mayrit y el que esta cerca				&		3 &	\%  & &X\\
 cercano a la iglesia				&	  &	&&\\ \hline
 Medina Mayrit y el que esta 	&	2	&	\%  &&X\\
 cerca de la iglesia				&	  &	&&\\ \hline
-Medina Mayrit en Calle de Atocha y el que esta cerca			&1  &	\%	&&X\\
-en Calle De La Cruz	&	  &		&&\\ \hline
+Medina Mayrit en calle de Atocha y el que esta cerca			&1  &	\%	&&X\\
+en calle de La Cruz	&	  &		&&\\ \hline
 Medina Mayrit y el que esta cerca			&1  &	\%	&&X\\
-en Calle De Atocha	&	1  &		&&\\ \hline
+en calle de Atocha	&	1  &		&&\\ \hline
 Medina Mayrit y el que esta cerca			&2  &	\%	&&X\\
-en Calle De La Cruz	&	  &		&&\\ \hline
-Calle De Atocha y Calle De La Cruz  					&1  &	\%	&X&\\
+en calle de La Cruz	&	  &		&&\\ \hline
+calle de Atocha y calle de La Cruz  					&1  &	\%	&X&\\
 \hline \hline
 Totales	&	&	100\%	&&\\
 
@@ -1218,19 +1189,38 @@ Totales	&	&	100\%	&&\\
 }
 \end{table}
 
-
-
-
 Para el mapa de la Figura \ref{mapa-zoom-plural} el vocabulario y probabilidades de uso de las palabras es el siguiente:
 
-Restaurante 62/65=0.95\\
-MedinaMayrit 48/65=0.738\\
-ProxA 41/65 = 0.63\\
-CalleDeAtocha  33/65=0.507\\
-Iglesia 17/65=0.261\\
-CalleDeLaCruz 11/65 = 0.169\\
-CalleDeCarretas 4/65=0.061\\
-in = 36/65 =0.554\\
+
+\begin{table}[H]
+\begin{small}
+\begin{center}
+\begin{tabular}{|l|}
+\hline
+Palabra                                             Probabilidad\\ \hline \hline
+\textbf{\texttt{Restaurante 0.95}}\\
+\textbf{\texttt{MedinaMayrit 0.738}}\\
+\textbf{\texttt{ProxA 0.63}}\\
+\textbf{\texttt{in 0.554}}\\
+\textbf{\texttt{CalleAtocha 0.507}}\\
+\textbf{\texttt{Church 0.261}}\\
+\textbf{\texttt{CalleDeLaCruz 0.169}}\\
+\textbf{\texttt{CalleDeCarretas 0.061}}\\
+\hline
+\end{tabular}
+\caption{Probabilidad de las palabras del dominio.}\label{prob-vocabulario-zoom}
+\end{center}
+\end{small}
+\end{table}
+
+Restaurante 0.95\\
+MedinaMayrit 0.738\\
+ProxA 0.63\\
+CalleDeAtocha 0.507\\
+Iglesia 0.261\\
+CalleDeLaCruz 0.169\\
+CalleDeCarretas 0.061\\
+in 0.554\\
 
 
 El modelo coincide con el modelo de la Figura \ref{modelo-mapa-zoom}, ya que es el mismo mapa.
