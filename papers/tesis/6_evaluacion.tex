@@ -240,37 +240,34 @@ Normalmente las m\'etricas autom\'aticas tienen la desventaja de calificar como 
 %judges in 60 \% of the cases and, by at least one judge in 92\% of the cases.
 
 
-En esta secci\'on exlicamos una evaluaci\'on manual que hicimos de las ERs generadas por nuestro algoritmo con las probabilidades de uso aprendidas, para el TUNA corpus.  
+En las secciones anteriores describimos evaluaciones autom\'aticas de nuestro algoritmo. En esta secci\'on explicamos una evaluaci\'on humana que hicimos de las ERs generadas por nuestro algoritmo con las probabilidades de uso aprendidas para el TUNA corpus y descriptas en la secci\'on anterior.  
 
-Como las ERs que generamos las generamos para el idioma ingl\'es, pedimos a dos jueces nativos de Ingl\'es evaluar nuestras expresiones referenciales a trav\'es de un experimento en la web. 
+Como las ERs que generamos las generamos para el idioma ingl\'es, pedimos a dos jueces nativos de Ingl\'es evaluar nuestras expresiones referenciales a trav\'es de un experimento en la web. Los jueces podr\'{i}an entrar en el sistema de evaluaci\'on varias veces, es decir no ten\'ian que terminar la evaluaci\'on en la primera vez, para cada ER pod\'ian resolverla o pod\'ian volver a ella m\'as tarde. 
 
-Los jueces podr\'{i}an entrar en el sistema de evaluaci\'on varias veces, es decir no ten\'ian que terminar la evaluaci\'on en la primera vez, para cada ER pod\'ian resolverla o pod\'ian volver a ella m\'as tarde. 
+Durante la evaluaci\'on mostramos a cada juez una escena y dos ERs ordenadas al azar. Una ER correspond\'ia a la ER presente en el corpus TUNA producida por una persona para la escena y la otra ER correspond\'ia a la ER producida por nuestro sistema. Solicitamos a los jueces seleccionar la ER que ser\'{i}a m\'as \'util para identificar el target en la escena. El juez pod\'ia elegir una ER o indicar que las 2 ER le parec\'ian igualmente buenas.
 
-Durante la evaluaci\'on mostramos a cada juez una escena y dos ERs ordenadas al azar. Una ER correspond\'ia a la ER presente en el corpus producida por una persona y la otra ER correspond\'ia a la ER producida por nuestro sistema con mayor frecuencia. Solicitamos a los jueces seleccionar la ER que ser\'{i}a m\'as \'util para identificar el target en la escena. Es decir, para seleccionarlo de entre los otros objetos en la imagen.
+Nuestro objetivo es mostrar que incluso si la ER generada autom\'aticamente no coincide con la ER producida por un ser humano del corpus, puede ser juzgada como buena o incluso mejor que la ER generada por una persona.
 
-Nuestro objetivo es mostrar que incluso si la ER generada por nuestro algoritmo no coincide con la ER producida por un ser humano del corpus, puede ser juzgada como buena o incluso mejor que las REs generadas por los seres humanos.
-
-En la tabla~\ref{system-versus-human} se muestran los resultados del experimento de evaluaci\'on humana.
-Las ER producidas por el sistema se consideraron igual o mejor tanto por 2
-jueces en 60 \% de los casos y, por un juez en 92 \% de los casos.
+En la Tabla~\ref{system-versus-human} se muestran los resultados del experimento de evaluaci\'on humana.
+Las ERs producidas por el sistema en el top 1 fueron consideradas igual o mejor por los 2 jueces que las generadas por personas en el 75\% de los casos para los muebles y en el 43\% para las personas. Esto contrasta con el 47\% para personas y 19\% para muebles de la Tabla \ref{Tabla_sis_1_20}. Esto muestra que la m\'etrica de precisi\'on es demasiado estricta para la tarea, y las m\'etricas de DICE o masi se acercan m\'as a evaluaciones humanas. Adem\'as al menos 1 juez consider\'o que el 97\% de las ERs del sistema eran tan buenas o mejores que las humanas para los muebles y (87\% para las personas). Esto muestra que la evaluaci\'on de la calidad de las ERs es parcialmente subjetiva. S\'olo en el 8\% de los casos ambos jueces coincidieron que una ER generada autom\'aticamente era peor que la humana.
 
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
 %total scenes in evaluation set &                           80   &             68
- & Dominio muebles & Dominio personas & Media pesada \\
+ & Dominio muebles & Dominio personas & Media ponderada \\
 \hline
-sistema igual al humano  	&	.46	&	.19	&	.33 \\
-sistema mejor por 2 jueces &	.29 	& 	.24 	& 	.27 \\
-sistema mejor por 1 or 2 jueces & .51	&	.68	&	.59 \\
-sistema peor por 2 jueces &	.03	&	.13	&	.08 \\
+%sistema igual al humano  	&	.46	&	.19	&	.33 \\
+%sistema mejor por 2 jueces &	.29 	& 	.24 	& 	.27 \\
+%sistema mejor por 1 or 2 jueces & .51	&	.68	&	.59 \\
 sistema igual o mejor por 2 jueces  &.75  &       .43	&       .60 \\
 sistema igual o mejor por 1 juez  &.97	&	.87	&	.92 \\
+sistema peor por 2 jueces &	.03	&	.13	&	.08 \\
 \hline
 \end{tabular}
 %\vspace*{.1cm}
-\caption{Porcentaje de la selecci\'on ERs del sistema versus humana} 
+\caption{Comparaci\'on de ERs generadas por personas y por nuestro algoritmo para el corpus TUNA.} 
 \label{system-versus-human}
 \vspace*{-.5cm}
 \end{center}
@@ -282,7 +279,7 @@ sistema igual o mejor por 1 juez  &.97	&	.87	&	.92 \\
 
 A continuaci\'on, se ilustra el experimento de evaluaci\'on, mostrando ejemplos de casos en los que la expresi\'on del sistema fue considerada mejor por ambos jueces, por un solo juez o por ninguno de los dos.
 
-Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER subespecificada mientras que el sistema produce un ER que identifica de manera inequ\'{i}voca al target. La ER generada por el sistema para esta figura es {\it peque\~no ventilador azul}, mientras que la ER producida por el ser humano es {\it ventilador azul}. La ER del humano no logra identificar de forma \'unica el target y entonces no es preferida por los jueces humanos. Los seres humanos son conocidos por producir ERs subespecificadas esto puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ERs aprendidas de los seres humanos.
+Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER subespecificada mientras que el sistema produce un ER que identifica de manera inequ\'{i}voca al target. La ER generada por el sistema para esta figura es {\it peque\~no ventilador azul}, mientras que la ER producida por el ser humano es {\it ventilador azul}. La ER del humano no logra identificar de forma \'unica el target y entonces no es preferida por los jueces humanos. Los seres humanos son conocidos por producir ERs subespecificadas, esto puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ERs aprendidas de los seres humanos.
 
 
 
@@ -291,7 +288,7 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER sube
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
-\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{ventilador azul}, y la del sistema \emph{ventilador azul peque\~no}. Los jueces prefirieron la generada por el sistema.}
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{ventilador azul}, y la del sistema \emph{ventilador azul peque\~no}. Los jueces prefirieron la ER generada por el sistema.}
 \label{smallBlueFan}
 \end{minipage}
 \hspace*{.04cm}
@@ -308,7 +305,7 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER sube
 
 %In Figure~\ref{BlueChair} the human ER was ``blue frontal chair'', and the system ER was ``the blue chair in the bottom''; both judges selected the system RE. This case can be explained by the fact that, in this domain, the property ``bottom'' helps more during the identification than the property ``frontal'' because it concentrates the attention of the interpreter in the lower part of the scene. Our system learns this fact by learning a higher value of \puse~for ``bottom'' than for ``frontal'' from the training data. 
 
-En la Figura~\ref{BlueChair} la ER humana era {\it silla frontal azul}, y la ER sistema era {\it la silla azul de abajo}; ambos jueces seleccionaron la ER sistema. Este caso se puede explicar por el hecho de que, en este \'ambito, la propiedad {\it abajo} ayuda a m\'as durante la identificaci\'on de la propiedad {\it frontal} porque concentra la atenci\'on del interlocutor en la parte inferior de la escena. Nuestro sistema aprende este hecho por el aprendizaje de un mayor valor de \puse\ {\it abajo} que para {\it frontal} a partir de los datos de entrenamiento.
+En la Figura~\ref{BlueChair} la ER humana era {\it silla frontal azul}, y la ER sistema era {\it la silla azul de abajo}; ambos jueces seleccionaron la ER sistema. Este caso se puede explicar por el hecho de que, en este \'ambito, la propiedad {\it abajo} ayuda m\'as durante la identificaci\'on de la propiedad {\it frontal} porque concentra la atenci\'on del interlocutor en la parte inferior de la escena. Nuestro sistema aprende este hecho por el aprendizaje de un mayor valor de \puse\ para {\it abajo} que para {\it frontal} a partir de los datos de entrenamiento.
 
 \begin{figure}[h]
 \begin{minipage}{0.48\linewidth}
@@ -332,9 +329,10 @@ En la Figura~\ref{BlueChair} la ER humana era {\it silla frontal azul}, y la ER 
 %Figure~\ref{s307t21}~illustrates a case in which the system ER was more overspecified than the human RE; the system included ``wearing glasses'' while the human did not. In this case one human subject preferred the system ER and the other the human RE. The amount of overspecification is a subjective matter where human themselves disagree. Further evaluation where REs are actually used for a task would be interesting to investigate this issue.  
 
 
-Figura~\ref{s28t25} es un ejemplo para los que ambos jueces prefieren la expresi\'on humana. La ER humana era {\it el hombre con el pelo negro}, y del sistema de {\it el hombre con gafas en la cuarta columna}. Este ejemplo pone de manifiesto el hecho de que, en el dominio de las personas algunas propiedades son m\'as destacadas en algunas im\'agenes que en otros debido a diferentes tonos de colores. Propiedades graduables como estas (en contraste con las propiedades absolutas) son todav\'{i}a un problema abierto para los algoritmos GER.
+Figura~\ref{s28t25} es un ejemplo en el que ambos jueces prefirieron la expresi\'on humana. La ER humana era {\it el hombre con el pelo negro}, y del sistema de {\it el hombre con gafas en la cuarta columna}. Este ejemplo pone de manifiesto el hecho de que, en el dominio de las personas algunas propiedades son m\'as destacadas en algunas im\'agenes que en otrosadebido a diferentes tonos de colores. Propiedades graduables como estas (en contraste con las propiedades absolutas) son todav\'{i}a un problema abierto para los algoritmos de GER.
 
-Figura~\ref{s307t21}~ilustra un caso en el que la ER del sistema era m\'as sobreespecificada que la ER humana; el sistema incluye {\it con gafas}, mientras que el ser humano no lo hizo. En este caso un sujeto humano prefiere la ER del sistema y el otro la ER humano. La cantidad de sobreespecificaci\'on es una cuesti\'on subjetiva, donde los humanos mismos no est\'an de acuerdo. Una evaluaci\'on m\'as profunda donde las ERs se utilicen para resolver una tarea ser\'{i}a interesante para investigar este asunto.
+Figura~\ref{s307t21}~ilustra un caso en el que la ER del sistema era m\'as sobreespecificada que la ER humana; el sistema incluye {\it con gafas}, mientras que el ser humano no lo hizo. En este caso un sujeto humano prefiere la ER del sistema y el otro la ER del humano. La cantidad de sobreespecificaci\'on es una cuesti\'on subjetiva, donde los humanos mismos no est\'an de acuerdo. Una evaluaci\'on donde las ERs se utilicen para resolver una tarea ser\'{i}a interesante para investigar este asunto.
 
+\section{}
 
 
