@@ -880,7 +880,7 @@ no \alc-similar a alg\'un elemento $b$, pero no viceversa.
 Se puede demostrar que, para \ALC, los conjuntos de similaridad de un modelo finito
 coinciden exactamente con las \emph{clases de simulaci\'on} del modelo. Las
 clases de simulaci\'on se han estudiado ampliamente en la literatura
-(por ejemplo,~\cite{blac:moda01}; \cite {Kurt:expr99}), y hay varios
+(por ejemplo,~\cite{BRV01}; \cite {Kurt:expr99}), y hay varios
 algoritmos eficientes para el c\'alculo de las clases \alc-simulaci\'on
 \cite{hopc:algo71,paig:thre87,dovier04:_effic_algor_for_comput_bisim_equiv}.
 Sin embargo, estos algoritmos s\'olo calculan las clases de simulaci\'on. Tiene sentido, ampliar el algoritmo \cite{hopc:algo71} que
@@ -964,12 +964,12 @@ $\RE \leftarrow \{\top\}$
 \end{algorithm}
 Nosotros presentamos dos algoritmos que usan primero para refinar $\RE$ los
 s\'imbolos proposicionales, y luego los s\'imbolos relacionales. Pero, en realidad, los s\'imbolos proposicionales pueden ser codificados
-utilizando nuevos s\'imbolos relacionales (por ejemplo, podr\'iamos representamos que $f_1 $ es una flor en la figura~\ref{fig:dale-haddock} como una relaci\'on etiquetada $ \mathsf {flower} $ de $f_1$ a un adicional elemento ficticio $ d $). De esta manera, no necesitamos distinguir entre proposiciones y
+utilizando nuevos s\'imbolos relacionales (por ejemplo, podr\'iamos representamos que $f_1 $ es una flor en la Figura~\ref{fig:dale-haddock} como una relaci\'on etiquetada $ \mathsf {flower} $ de $f_1$ a un adicional elemento ficticio $ d $). De esta manera, no necesitamos distinguir entre proposiciones y
 las relaciones, y cualquier orden de preferencia arbitraria de propiedades puede ser usado.
 
 Vamos a probar nuestros algoritmos en algunos ejemplos. En primer lugar, corremos el \el \.
-Algoritmo en el modelo que se muestra en la figura~\ref{fig:dale-haddock} a, que es
-tomado de \cite{dale91:_gener_refer_expres_invol_relat}. El
+Algoritmo en el modelo que se muestra en la Figura~\ref{fig:dale-haddock} a, que es
+tomado de \cite{dale91:gener}. El
 algoritmo comienza con $ \RE = \{\top \} $. En el primer bucle, se a\~nade
 las f\'ormulas $\mathsf{floor}$, $\mathsf{bowl}$, $\mathsf{cup}$, y
 $\mathsf{table}$, y luego se quita $\top$ porque est\'a subsumido.
@@ -1026,8 +1026,7 @@ simult\'aneamente genera ERs para todos los elementos a excepci\'on de las dos
 tablas (que son similares entre s\'i).
 
 
-El \el\ algoritmo demora m\'as que el de \alc\ con el ejemplo de la
-La figura~\ref{fig:dale-haddock} \cite{Stone1998a}. A pesar de ello
+El \el\ algoritmo demora m\'as que el de \alc\ con el ejemplo de la Figura~\ref{fig:dale-haddock} \cite{Stone1998a}. A pesar de ello
 identifica correctamente a $r_1$ como \textit{el conejo en el sombrero} y $ f_2$ como
 \textit{La flor en el sombrero}, no es capaz de calcular una ER de $f_1$
 porque $f_1$ es \el-similar a $f_2$. De hecho, el algoritmo
@@ -1252,7 +1251,14 @@ problema de isomorfismo, que es NP-completo). Mientras que en la Secci\'on \ref{
 \section{Notas finales y linkeo del cap\'itulo}
 \label{sec:notasFinales}
 
-En este cap\'itulo dimos definiciones b\'asicas de modelo, 
-interpretaci\'on, f\'ormula, hablamos de la noci\'on de similaridad de 2 elementos $u$ y $v$ del modelo la cual dice que son 
-similares en $\+L$ ($u \simil{\+L} v$ en el lenguaje $+L$), cuando para toda f\'ormula $\phi \in \+L$, tenemos que 
-$\{u,v\} \subseteq \interp{\phi}$, no hay una f\'ormula que satisfaga uno y no el otro, por lo tanto se dice que son indistinguibles en el lenguaje l\'ogico $\+L$. Como las similaridad est\'a definida para infinitas f\'ormulas, tambi\'en vimos un teorema que bajo ciertas condiciones (que el modelo sea finito) acota esa b\'usqueda infinita a una finita, teniendo en cuenta propiedades de las l\'ogicas usadas. Computamos ERs en \FOL, \ALC y \EL. Tambi\'en se mostr\'o una clasificaci\'on de los algoritmos vistos seg\'un la complejidad computacional de los mismos. Explicamos como computamos las ERs para los distintos lenguajes l\'ogicos \FOL, \ALC y \EL. Elegimos para nuestro algoritmo el lenguaje \EL ya que es el lenguaje que restringe la expresividad a la encontrada en corpora.%es decir que no existe otro elemento en el modelo el cual sea 
+En este cap\'itulo dimos definiciones b\'asicas de modelo, interpretaci\'on, f\'ormula y de otros conceptos b\'asicos de l\'ogica y teor\'ia de modelos. Explicamos e ilustramos la noci\'on de similaridad de 2 elementos $u$ y $v$ de un para un lenguaje l\'ogico $\+L$ ($u \simil{\+L} v$ en el lenguaje $\+L$). Cuando para toda f\'ormula $\phi \in \+L$, tenemos que $\{u,v\} \subseteq \interp{\phi}$,  se dice que $u$ y $v$ son indistinguibles en el lenguaje l\'ogico $\+L$. Como las similaridad est\'a definida para infinitas f\'ormulas, tambi\'en vimos un teorema que cuando el modelo sea finito acota esa b\'usqueda
+infinita a una finita, teniendo en cuenta propiedades de las l\'ogicas usadas. Explicamos algoritmos eficientes que computan ERs usando simulaciones en \FOL, \ALC y \EL. Tambi\'en se mostr\'o una clasificaci\'on de los algoritmos vistos seg\'un la complejidad computacional de los mismos. 
+
+En el Cap\'itulo \ref{sec:algoritmo} extenderemos estos algoritmos integrando una distribuci\'on finita de probabilidades que representa la incertidumbre presente en posibles aplicaciones de la generaci\'on de expresiones referenciales que deben referirse al mundo real y tienen que lidiar con datos ruidosos de sensores y modelos incompletos de la realidad. El objetivo es generar un ranking de las expresiones referenciales ordenado por la probabilidad de ser correctamente interpretada en el contexto. En el Cap\'itulo \ref{sec:evaluacion} evaluamos estos algoritmos usando t\'ecnicas autom\'aticas y evaluaciones de jueces humanos sobre datos de benchmarks del \'area. En el Cap\'itulo \ref{sec:corpus} se realiza una evaluaci\'on con respecto a un nuevo corpus de expresiones referenciales de puntos de inter\'es en mapas de ciudades con distintos niveles de zoom. 
+
+
+
+%En este cap\'itulo dimos definiciones b\'asicas de modelo, 
+%interpretaci\'on, f\'ormula, hablamos de la noci\'on de similaridad de 2 elementos $u$ y $v$ del modelo la cual dice que son 
+%similares en $\+L$ ($u \simil{\+L} v$ en el lenguaje $+L$), cuando para toda f\'ormula $\phi \in \+L$, tenemos que 
+%$\{u,v\} \subseteq \interp{\phi}$, no hay una f\'ormula que satisfaga uno y no el otro, por lo tanto se dice que son indistinguibles en el lenguaje l\'ogico $\+L$. Como las similaridad est\'a definida para infinitas f\'ormulas, tambi\'en vimos un teorema que bajo ciertas condiciones (que el modelo sea finito) acota esa b\'usqueda infinita a una finita, teniendo en cuenta propiedades de las l\'ogicas usadas. Computamos ERs en \FOL, \ALC y \EL. Tambi\'en se mostr\'o una clasificaci\'on de los algoritmos vistos seg\'un la complejidad computacional de los mismos. Explicamos como computamos las ERs para los distintos lenguajes l\'ogicos \FOL, \ALC y \EL. Elegimos para nuestro algoritmo el lenguaje \EL ya que es el lenguaje que restringe la expresividad a la encontrada en corpora.%es decir que no existe otro elemento en el modelo el cual sea 
