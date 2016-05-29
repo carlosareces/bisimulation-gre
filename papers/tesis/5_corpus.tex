@@ -198,7 +198,7 @@ Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como desc
 \begin{center}
 \begin{tabular}{|l|l|r|r|r|}
 \hline
-Tipo & Nombre & En & ID\\
+&Tipo & Nombre & En & ID\\
 \hline
 
 1&cafe & & & cafe2 \\
@@ -1202,7 +1202,7 @@ Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Fi
 
 3&Restaurantes de calle de Atocha				&	8  &	13.33\%	&X&\\ \hline
 
-4&Medina Mayrit y el que est\'a en calle de Atocha	      &5		&	8.33\%	&X&\\ \hline
+4&Medina Mayrit y el que est\'a en calle de Atocha	      &5		&	8.33\%	&&\\ \hline
 
 5&el de la calle Atocha y De La Cruz       &	3  &	5\%	&X & \\  \hline
 6&Medina Mayrit y el que est\'a cerca				&		3 &	5\%  & &X\\
@@ -1239,7 +1239,7 @@ Totales	&&60	&	100\%	&&\\
 
 \hline
 \end{tabular}
-\caption{ER del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom-plural}.}\label{freq-mapa-zoom-plural}
+\caption{ERs del corpus dadas por humanos para el mapa de la Figura \ref{mapa-zoom-plural}.}\label{freq-mapa-zoom-plural}
 \end{center}
 }
 \end{table}
@@ -1250,35 +1250,44 @@ Totales	&&60	&	100\%	&&\\
 \hline
 &F\'ormula			      &  \# \\ \hline \hline
 
-1&$\exists \nMedinaMayrit \land \exists \nCerca.(\exists \nMedinaMayrit)$&303 \\ \hline
+1&$rest_3 = \exists \nMedinaMayrit$ &303\\
+ &$rest_4 = \exists \nCerca.(\exists \nMedinaMayrit)$& \\ \hline
 
-2&$\exists \nMedinaMayrit \land \exists \nCerca. (\exists \nCerca.(\exists \nMedinaMayrit)) \land \exists \nCerca.(\exists \nMedinaMayrit)$&285 \\ \hline
+2&$rest_3 = \exists \nMedinaMayrit$ & 285\\  
+ &$rest_4 =  \exists \nCerca. (\exists \nCerca.(\exists \nMedinaMayrit)) \land \exists \nCerca.(\exists \nMedinaMayrit)$& \\ \hline
 
-3&$\exists \nMedinaMayrit \land \exists \nIn.(T) \land \exists \nCerca.(\exists \nMedinaMayrit \land \exists \nIn.(T))$&105 \\ \hline
+3&$rest_3 =\exists \nMedinaMayrit \land \exists \nIn.(T)$ & 105\\ 
+ &$rest_4 =\exists \nCerca.(\exists \nMedinaMayrit \land \exists \nIn.(T))$& \\ \hline
 
-4&$\exists \nMedinaMayrit \land \exists \nIn.(\exists \nCalleAtocha) \land \exists \nCerca.(\exists \nMedinaMayrit  \land$ &83 \\
-&$\exists \nIn.(\exists \nCalleAtocha))$& \\ \hline
+4&$rest_3 =\exists \nMedinaMayrit \land \exists \nIn.(\exists \nCalleAtocha)$ &83 \\ 
+ &$rest_4 =\exists \nCerca.(\exists \nMedinaMayrit  \land \exists \nIn.(\exists \nCalleAtocha))$& \\ \hline
 
-5&$\exists \nMedinaMayrit  \land \exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.(\exists \nMedinaMayrit)) $ &77 \\
-&$\land \exists \nCerca.(\exists \nMedinaMayrit)$& \\ \hline
+5&$rest_3 =\exists \nMedinaMayrit  \land \exists \nIn.(\exists \nCalleAtocha)$&77 \\ 
+ &$\land \exists \nCerca.(\exists \nCerca.(\exists \nMedinaMayrit))$& \\
+&$rest_4 = \exists \nCerca.(\exists \nMedinaMayrit)$& \\ \hline
 
-6&$\exists \nCerca.(\exists \nIn.(\exists \nCalleDeLaCruz))  \land \exists \nIn.(\exists \nCalleDeCarretas) \land $ & 20\\
+6&$rest_3 =\exists \nCerca.(\exists \nIn.(\exists \nCalleDeLaCruz))  \land \exists \nIn.(\exists \nCalleDeCarretas) \land $ & 20\\
 &$\exists \nIn.(\exists \nCalleDeLaCruz)  \land \exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas))$& \\ \hline
 
-7&$\exists \nMedinaMayrit  \land \exists \nCerca.(\exists \nIn.(\exists \nCalleDeLaCruz))  \land \exists \nIn.(\exists \nCalleAtocha)$ & 13\\
-&$ \land \exists \nCerca.(\exists \nMedinaMayrit)$&\\ \hline
+7&$rest_3 =\exists \nMedinaMayrit  $&13 \\ 
+&$\land \exists \nCerca.(\exists \nIn.(\exists \nCalleDeLaCruz))  \land \exists \nIn.(\exists \nCalleAtocha)$ & 13\\
+&$rest_4 = \exists \nCerca.(\exists \nMedinaMayrit)$&\\ \hline
 
-8&$\exists \nIn.(\exists \nCalleDeCarretas)  \land \exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists$ & 9\\
-&$ \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)))))) \land \exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)  $ & \\
-&$\land \exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)))))))$&\\ \hline
+8&$rest_3 =\exists \nIn.(\exists \nCalleDeCarretas)  \land \exists \nCerca.(\exists \nCerca.$&\\
+&$(\exists \nCerca.(\exists \nCerca.(\exists$ &\\
+&$ \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)))))) $&\\
+&$rest_4 = \exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)  $ & \\
+&$\land \exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists \nCerca.$&\\
+&$(\exists \nIn.(\exists \nCalleDeCarretas)))))))$&\\ \hline
 
-9&$\exists \nMedinaMayrit \land \exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha) $ & 9\\
+9&$rest_3 =\exists \nMedinaMayrit \land \exists \nIn.(\exists \nCalleAtocha)$ & 9\\
+&$rest_4 = \exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha) $ & \\
 &$ \land \exists \nCerca.(\exists \nCerca.(\exists \nChurch.(T)  \land \exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha)  $ & \\
 &$\land \exists \nCerca.(\exists \nCerca.(\exists \nChurch.(T)  \land \exists \nIn.(T)))))))$&\\ \hline
 
-10&$\exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha) $ & 9\\
-&$ \land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas))))))  \land \exists \nIn.(\exists \nCalleDeCarretas) $ & \\
-&$\land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.$ & \\
+10&$rest_3 = \exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha) $ & 9\\
+&$ \land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas))))))  \land \exists \nIn.(\exists \nCalleDeCarretas)  $ & \\
+&$rest_4 = \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.$ & \\
 &$(\exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)))))) $ & \\
 &$ \land \exists \nIn.(\exists \nCalleDeCarretas))$&\\ \hline
 
@@ -1288,7 +1297,13 @@ Totales	&&60	&	100\%	&&\\
 \end{center}
 \end{table}
 
-En la Tabla \ref{formulas-mapa-zoom2} podemos ver que la ER con mayor frecuencia que gener\'o el algoritmo fue la misma que la de mayor frecuencia en el corpus. Como mencionamos antes, vemos que hay f\'ormulas que tienen $\exists \nCerca.(\exists \nCerca.(\exists \nMedinaMayrit))$ que denota al mismo objeto. Preveemos sacar estas cosas en trabajo futuro, vea el Cap\'itulo \ref{sec:conclusiones}. Otra cosa ya vista en los otros mapas, es la tautolog\'a $\exists \nIn.(T)$, que es decir que est\'a en una calle, tambi\'en ser\'a estudiada en trabajo futuro.
+
+
+\begin{enumerate}
+\item 
+\end{enumerate}    
+
+En la Tabla \ref{formulas-mapa-zoom2} podemos ver que la ER con mayor frecuencia que gener\'o el algoritmo es parecida a la de mayor frecuencia en el corpus, la realizaci\'on podr\'ia ser {\it El restaurante Medina Mayrit y el que est\'a cerca del restaurante Medina Mayrit}, siendo que la que dijeron las personas en el corpus con m\'as frecuencia fue {\it El restaurante Medina Mayrit y el que est\'a cerca}, alguien podr\'ia decir que le falta un objeto, {\it est\'a cerca} de qu\'e?, y s\'i se refiere al mismo restaurante. Estas cosas son dif\'iciles de generar autom\'aticamente. Como mencionamos antes, vemos que hay f\'ormulas que tienen $\exists \nCerca.(\exists \nCerca.(\exists \nMedinaMayrit))$ que denota al mismo objeto. Preveemos sacar estas cosas en trabajo futuro, vea el Cap\'itulo \ref{sec:conclusiones}. Otra cosa ya vista en los otros mapas, es la tautolog\'a $\exists \nIn.(T)$, que es decir que est\'a en una calle, tambi\'en ser\'a estudiada en trabajo futuro.
 
 
 \section{Notas finales y linkeo del cap\'itulo}
@@ -1298,7 +1313,7 @@ En la Tabla \ref{formulas-mapa-zoom2} podemos ver que la ER con mayor frecuencia
 En este cap\'itulo vimos como se recolect\'o el corpus Zoom, los materiales que se usaron para la recolecci\'on estan en Ap\'endice \ref{corpus-apendice}, la anotaci\'on del corpus, el an\'alisis y evaluaci\'on del mismo. 
 Este corpus se cre\'o viendo la necesidad de existencia de recursos en dominios m\'as naturales. Se recolect\'o mediante un experimento on-line en el que las personas ve\'ian un mapa el cual conten\'ia una o dos flechas indicando el o los targets y completaban una ER dirigida a un amigo en la cual ten\'ian que describir el o los objetos sen\~alados. Cada persona di\'o 20 ER 10 singulares y 10 plurales, de esas 10 singulares o plurales, hab\'ia 5 con alto nivel de zoom y 5 con bajo nivel de zoom.
 El corpus tiene en cuenta un dominio que es significativamente m\'as cerca de aplicaciones del mundo real, y aborda las situaciones m\'as complejas de referencia de los recursos existentes de este tipo nombrados en el Cap\'itulo \ref{sec:corpus2}. En particular, el dominio de zoom hace uso de contextos con diferentes niveles de detalle, y contiene ejemplos de referencia singular y plural producido por un n\'umero relativamente grande de hablantes en ambos idiomas espa\~nol y portugu\'es, siendo el lenguaje seleccionado el lenguaje nativo de la persona.
-En este corpus podemos encontrar distintos tipos de ER como las nombradas en \ref{sec:seleccion}, tenemos varias ER por mapa con lo cual podremos luego calcular las probabilidades de uso de las palabras como se explic\'o en \ref{sec:learning} para ejecutar nuestro algoritmo explicado en el Cap\'itulo \ref{sec:algoritmo}. Dadas las caracter\'isticas de los mapas usados para la recolecci\'on, el corpus tiene ER relacionales, proposicionales, de plurales, sobre-especificadas y hasta under-especificadas.
+En este corpus podemos encontrar distintos tipos de ER como las nombradas en el Cap\'itulo \ref{sec:seleccion}, tenemos varias ER por mapa con lo cual podremos luego calcular las probabilidades de uso de las palabras como se explic\'o en \ref{sec:learning} para ejecutar nuestro algoritmo explicado en el Cap\'itulo \ref{sec:algoritmo}. Dadas las caracter\'isticas de los mapas usados para la recolecci\'on, el corpus tiene ER relacionales, proposicionales, de plurales, sobre-especificadas y hasta under-especificadas.
 El corpus fue anotado por 2 personas y finalmente un juez decidi\'io cual anotaci\'on dejar, la anotaci\'on se hizo teniendo en cuenta atributos para el target tipo, nombre, en (refiri\'endose a donde est\'a, en que calle), relaciones espaciales (izquierda, derecha, en esquina / entre, cerca, en-frente-de, detr\'as) estas relaciones requer\'ian la ER de otros objetos (landmarks), en algunos caso solo uno, y en otros 2, y el \'ultimo atributo disponible fue {\it otro}, para anotar cosas que no se hab\'ian tenido en cuenta en la anotaci\'on nombrada. Para cada uno de los landmarks se tuvieron en cuenta 4 atributos m\'as, con lo que para cada ER tenemos un m\'aximo de 26 atributos o relaciones cuando el target era singular y 52 cuando el target era plural. El atributo {\it otro} nos ayuda en el sentido de que podemos agrupar las ER que solo difieren en este atributo, pero nos juega en contra ya que esas ER que contienen {\it otro} no las podremos generar, es decir perdemos parte de la informaci\'on que la persona di\'o. Se midi\'o el porcentaje de acuerdo (kappa) entre los jueces y fue del 84\%. 
 Se realiz\'o una evaluaci\'on cuyos resultados preliminares de un enfoque basado en SVM a GER - que fueron \'unicamente presentados para la futura evaluaci\'on de algoritmos GER basados en datos Zoom - alusi\'on a la complejidad real de la tarea GER en este dominio.
 En primer lugar, nos damos cuenta de que un enfoque basado en SVM similar en~\cite{thiago-svm} en datos de GRE3D3 y GRE3D7 ha obtenido considerablemente mayor exactitud media (0,46 y 0,64 respectivamente) y una mayor media de las puntuaciones de Dice (0,78 y 0,89 respectivamente). Esto, por supuesto, se explica por el aumento de la complejidad del dominio Zoom (por ejemplo, en el n\'umero de posibles objetos y propiedades at\'omicas y relacionales etc.). 

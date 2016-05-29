@@ -114,7 +114,8 @@ Ahora si buscamos una ER para el target T = \{$e_5$\} en la Figura \ref{target_m
 
 \begin{itemize}
 \item Con 1 proposici\'on: $\interp{\nRed}$= $\Delta$-$e_6$, $\interp{\nLarge}$=\{$e_1$,$e_3$,$e_4$,$e_5$\}, $\interp{\nBall}$=\{$e_1$,$e_3$,$e_5$\}
-\item Con 2 proposiciones: $\interp{\nRed \land \nBall}$=\{$e_1$,$e_3$,$e_5$\}, $\interp{\nBall \land \nLarge}$=\{$e_1$,$e_3$,$e_5$\}, $\interp{\nLarge \land \nRed}$=\{$e_1$,$e_3$,$e_4$,$e_5$\}
+\item Con 2 proposiciones: $\interp{\nRed \land \nBall}$=\{$e_1$,$e_3$,$e_5$\}, $\interp{\nBall \land \nLarge}$=\{$e_1$,$e_3$,$e_5$\} \\
+      $\interp{\nLarge \land \nRed}$=\{$e_1$,$e_3$,$e_4$,$e_5$\}
 \item Con 3 proposiciones: $\interp{\nLarge \land \nRed \land \nBall}$=\{$e_1$,$e_3$,$e_5$\}
 \end{itemize}
 
@@ -1234,7 +1235,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 
 El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\+L$-ER {\em
 f\'ormula para} $v$; \'este \'ultimo nos dice c\'omo extender $H$ en cada paso
-del bucle principal del algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a diferencia de la
+del bucle principal del Algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a diferencia de la
 presentaci\'on de~\cite{graph}, \instFun{makeRE}{\+L} computa
 no s\'olo un grafo $H$, sino tambi\'en una $\+L$-Simulaci\'on de $f$.
 
@@ -1243,7 +1244,7 @@ algoritmo m\'as simple, se analiza el caso siguiente $\+L=\EPFOL$ y $\+L=\EL$.
 
 Como nota final sobre la complejidad, la computaci\'on
 \EPFOL-distractores parece requerir necesariamente una soluci\'on al subgrafo
-problema de isomorfismo, que es NP-completo). Mientras que en la Secci\'on \ref{sec:greViaSimulacion} y \ref{sec:computandoEnEL} presentamos algoritmos que pueden encontrar Ers en tiempo polinomial.
+problema de isomorfismo, que es NP-completo). Mientras que en la Secci\'on \ref{sec:greViaSimulacion} y \ref{sec:computandoEnEL} presentamos algoritmos que pueden encontrar ERs en tiempo polinomial.
 %en ~ \ secta {tama\~no}.
 
 

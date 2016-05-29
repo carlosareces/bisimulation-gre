@@ -233,8 +233,10 @@ Antes de dar la metodolog\'ia para calcular las probabilidades de uso, explicare
   el modelo. Por ejemplo, las ERs de \ref{fig4-4} deben denotar el target se\~nalado en la figura, siendo el modelo 
 $\gM$ considerado el representado en Figura~\ref{fig4-5}.
 %GRE3D7-stimulus-cap2
-\item \textbf{Calcular R.\puse\ }para cada R$\in \REL$ utilizando la f\'ormula mostrada en~(\ref{eq1}) si
-  hay muchas ERs para cada escena (como es el caso del corpus \textit{GRE3D7}) o asignamos 1 a R.\puse \ si R esta en ER, asignamos 0 en caso contrario (como es el caso del corpus TUNA).
+\item \textbf{Calcular R.\puse\ }para cada R$\in \REL$ utilizando la siguiente f\'ormula: Si
+  hay muchas ERs para cada escena (como es el caso del corpus \textit{GRE3D7}) $R.\puse\ = #ERs que tienen R /#ERs en el corpus$
+    
+  o asignamos 1 a R.\puse \ si R esta en ER, asignamos 0 en caso contrario (como es el caso del corpus TUNA).
 \end{enumerate}
 
 En el caso del corpus \textit{GRE3D7} el vocabulario unificado y la signatura del modelo es 
@@ -434,7 +436,7 @@ las propiedades y relaciones de los objetos del contexto considerado.
  %\draw[dotted] (-.65,-1.2) rectangle (7.1,2.1);
 
  \end{tikzpicture}
-\vspace*{-.4cm}\caption{Representaci\'on de las propiedades y relaciones, como un grafo etiquetado, del ontexto de la Figura \ref{fig4-4}.}
+\vspace*{-.4cm}\caption{Representaci\'on de las propiedades y relaciones, como un grafo etiquetado, del contexto de la Figura \ref{fig4-4}.}
 \label{fig4-5}
 \end{figure}
 
@@ -763,7 +765,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento
 y es inicializado por la descripci\'on m\'as general $\top$. Al finalizar contendr\'a las f\'ormulas que representan las ERs de los elementos del modelo.
 
-El algoritmo \ref{algo:bisim-l} realiza los siguientes pasos. Primero, recorre la lista Rs, para cada R (relaciones de la signatura del dominio $REL$), calcula R.\randomuse, un n\'umero aleatorio en [0,1], y R.incuse que ser\'a (1 - R.puse) / MaxIterations, siendo MaxIterations el n\'umero m\'aximo de iteraciones del ciclo principal que queremos permitir. Si R.\randomuse $\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de
+El Algoritmo \ref{algo:bisim-l} realiza los siguientes pasos. Primero, recorre la lista Rs, para cada R (relaciones de la signatura del dominio $REL$), calcula R.\randomuse, un n\'umero aleatorio en [0,1], y R.incuse que ser\'a (1 - R.puse) / MaxIterations, siendo MaxIterations el n\'umero m\'aximo de iteraciones del ciclo principal que queremos permitir. Si R.\randomuse $\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de
 clases. El valor de R.\puse\ se incrementar\'a en $R.\incuse$
 en cada ciclo principal, para asegurar que todas las relaciones son, en alg\'un momento,
 consideradas por el algoritmo. Esto asegura que una expresi\'on referencial
@@ -808,7 +810,7 @@ En el comienzo $RE$=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e
 %\label{GRE3D7-stimulus1-b}
 %\vspace*{1cm}
 \begin{picture}(250,0)
-\put(0,-50){\begin{tikzpicture}
+\put(0,-40){\begin{tikzpicture}
   [
     n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
@@ -868,7 +870,7 @@ En el comienzo $RE$=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e
 \end{figure}
 
 La primer relaci\'on a considerar de acuerdo a las R.\puse\ es \texttt{ball}, recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a $RE$ si su interpretaci\'on 
-tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a sera $\top \cup \exists\ .\texttt{ball}~\top$ Aqu\'i escribimos $\top \cup \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Ambas condiciones se cumplen y $RE$ entonces es \{$\top$, \texttt{ball}\}. Se ven los elementos de la f\'ormula \texttt{ball} en el recuadro de la Figura~\ref{fig-modelo3} que enmarca a $e_1$, $e_3$ y $e_5$.
+tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a sera $\top \cup \exists\ .\texttt{ball}~\top$. Aqu\'i escribimos $\top \cup \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Ambas condiciones se cumplen y $RE$ entonces es \{$\top$, \texttt{ball}\}. Se ven los elementos de la f\'ormula \texttt{ball} en el recuadro de la Figura~\ref{fig-modelo3} que enmarca a $e_1$, $e_3$ y $e_5$.
 
 \begin{figure}[ht]
 \begin{center}

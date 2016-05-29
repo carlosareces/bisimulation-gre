@@ -923,7 +923,7 @@ y no el otro. Veremos un teorema que acota el ``para todo'' antes mencionado, el
 Habiendo ya decidido cu\'ales son los tipos de expresiones referenciales que queremos generar en el Cap\'itulo \ref{sec:seleccion} y ya teniendo
 claro el lenguaje \EL que hemos seleccionado en el Cap\'itulo \ref{sec:intro_logica}, en este cap\'itulo 
 explicamos nuestra propuesta de agregar probabilidades de uso a las palabras de la signatura del modelo, adaptando un algoritmo existente 
-\cite{arec2:2008:Areces} el cual introducimos en el Cap\'itulo \ref{sec:intro_logica}, modificamos el algoritmo permitiendo sobreespecificaci\'on, 
+\cite{areces08} el cual introducimos en el Cap\'itulo \ref{sec:intro_logica}, modificamos el algoritmo permitiendo sobreespecificaci\'on, 
 pero asegurando terminaci\'on y agregamos un componente aleatorio para conseguir no-determinismo. Mostramos en detalle el input que toma el
  nuevo algoritmo. Explicamos como obtener las probabilidades de uso usadas por el algoritmo a partir de corpus cuando hay disponible o una aproximaci\'on usando aprendizaje autom\'atico cuando no hay corpus disponible para la escena y target considerados. Para aprendizaje autom\'atico usamos caracter\'isticas simples y vemos que son buenas, es decir conseguimos probabilidades de uso que hacen que las ejecusiones del algoritmo consigan ERs como las de corpora. 
 Mostramos la salida del algoritmo, explicamos c\'omo conseguimos no-determinismo en las distintas ejecusiones del algoritmo, como aseguramos 
@@ -949,16 +949,15 @@ las probabilidades aprendidas desde el corpus el algoritmo d\'a ERs que son las 
 el ZOOM corpus, el cual fue recolectado en un trabajo conjunto con la Universidad de S\~ao Paulo Brasil, 
 para tener un corpus de un dominio m\'as natural de expresiones refenciales ya que el corpus nombrado tiene expresiones referenciales 
 de puntos de inter\'es en mapas. Los mapas son fragmentos de las ciudades de Madrid y Lisboa. Este corpus fue recolectado en 2 idiomas, 
-espa\~nol y portugu\'es. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el 
-experimento, se explica la manera en que se anot\'o el corpus y se eval\'ua un caso de estudio de 3 mapas del ZOOM corpus, estudiamos un mapa con 1 target sin zoom, el mismo mapa pero zoom 2X, y el mismo mapa pero con target plural.
+espa\~nol y portugu\'es. Contiene todos los tipos de ERs presentados en el Cap\'itulo \ref{sec:intro}. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el 
+experimento, se explica la manera en que se anot\'o el corpus. Se eval\'ua un m\'etodo de aprendiza autom\'atico con SVM ({\it super vector machines}), el cual decide si incluir o no unapropiedad en la ER de salida. Adem\'as se realizaron tres casos de estudio de mapas del ZOOM corpus, estudiamos la ejecuci\'on del algoritmo probabil\'istico presentado en Cap\'itulo \ref{sec:algoritmo} y teniendo como un mapa con 1 target sin zoom, el mismo mapa pero zoom 2X, y el mismo mapa pero con target plural.
 
-\subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones''} Se res\'umen lo estudiado y realizado en esta tesis, se explican las cosas 
-aprendidas, y dan l\'ineas de trabajo futuro. \textcolor{blue}{ACA FALTA!! }
+\subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones''} En este ap\'itulo se d\'a un res\'umen de lo estudiado, se explican los avances realizados en esta tesis, como la incorporaci\'on de no-determinismo a un algoritmo determin\'istico. Muchos algoritmos en el caso de poder generar muchas ERs, para decidir cual ER dar, se guiaban un orden fijo de las propiedades. Reemplazamos esa lista fija por una distribuci\'on finita de probabilidades de las propiedades y relaciones, pero a\'un m\'as esta distribuci\'on de probabilidades la aprendemos desde corpora en el caso de existir o la aprendemos con una funci\'on de regresi\'on lineal, en los casos de no haber corpus para la escena considerada. Agregamos un par\'ametro $N$ que es la cantidad de ejecusiones, al ejecutar el algorimo N veces, d\'a como resultado un ranking de ERs ordenado por frecuencia. Evaluamos el ranking obtenido con una serie de benchmarks del \'area usando m\'etricas autom\'aticas y humanas. Creamos un nuevo corpus de ERs, el ZOOM corpus, que es mucho m\'as cercano a aplicaciones de la vida real que corpora existente, ya que tiene descripciones de ubicaciones en mapas. Este corpus tiene referencias a targets singulares y plurales, y est\'a hecho en dos idiomas. Mostramos tres casos de estudio de la aplicaci\'on del algoritmo probabil\'istico usando imag\'enes de este corpus y vemos que en un entorno tan natural el algoritmo d\'a ERs que son tan buenas como las humanas. Al mismo tiempo vemos que hay ERs en el ranking que tienen algunas deficiencias que pueden ser f\'acilmente resueltas a nivel l\'ogico. Damos una serie de propuestas para trabajo futuro en las que por un lado se resuelven los problemas l\'ogicos encontrados en situaciones complejas, y por otro lado proponemos una evaluaci\'on mucho m\'as exhaustiva de los casos con target plurales que fueron los menos explorados en esta tesis.
 
-parte trabajo futuro...
+%parte trabajo futuro...
 
-Aca agregar trabajo de chico de doctorado de Lu...
-Ejecuci\'on del algoritmo con todos los mapas del corpus ZOOM. Generaci\'on de la distribuci\'on de probabilidades de uso de las palabras
- mediante aprendizaje autom\'atico y evaluaci\'on de las ERs resultantes.
-El ZOOM corpus, se puede ampliar al idioma ingl\'es, habr\'ia que conseguir hablantes nativos para que completen el experimento, 2 anotadores
- y un juez que realice la anotaci\'on final.
+%Aca agregar trabajo de chico de doctorado de Lu...
+%Ejecuci\'on del algoritmo con todos los mapas del corpus ZOOM. Generaci\'on de la distribuci\'on de probabilidades de uso de las palabras
+% mediante aprendizaje autom\'atico y evaluaci\'on de las ERs resultantes.
+%El ZOOM corpus, se puede ampliar al idioma ingl\'es, habr\'ia que conseguir hablantes nativos para que completen el experimento, 2 anotadores
+% y un juez que realice la anotaci\'on final.
