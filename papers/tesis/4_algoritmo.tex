@@ -234,7 +234,7 @@ Antes de dar la metodolog\'ia para calcular las probabilidades de uso, explicare
 $\gM$ considerado el representado en Figura~\ref{fig4-5}.
 %GRE3D7-stimulus-cap2
 \item \textbf{Calcular R.\puse\ }para cada R$\in \REL$ utilizando la siguiente f\'ormula: Si
-  hay muchas ERs para cada escena (como es el caso del corpus \textit{GRE3D7}) $R.\puse\ = #ERs que tienen R /#ERs en el corpus$
+  hay muchas ERs para cada escena (como es el caso del corpus \textit{GRE3D7}) $R.\puse\ = \#ERs que tienen R /\#ERs en el corpus$
     
   o asignamos 1 a R.\puse \ si R esta en ER, asignamos 0 en caso contrario (como es el caso del corpus TUNA).
 \end{enumerate}
@@ -675,9 +675,9 @@ la f\'ormula cubr\'ia. Por ejemplo, $\top$ que es la f\'ormula a la cual todos l
 las f\'ormulas \texttt{ball} y \texttt{cube} ya que todos los elementos de la Figura \ref{figura-y-modelo} son o esferas o cubos, 
 es decir ya tenemos informaci\'on m\'as precisa de los objetos que $\top$. Formalmente $\interp{\top}$ = \{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_6$, $e_7$\}, y los conjuntos \interp{\texttt{ball}}=\{$e_1$,$e_3$,$e_5$\} y la \interp{\texttt{cube}}=\{$e_2$,$e_4$,$e_6$,$e_7$\}. La uni\'on de los conjuntos $\interp{\texttt{ball}}$ y $\interp{\texttt{cube}}$ dan exactamente $\interp{\top}$.
 
-\textbf{Redundante} es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el 
-contexto de la Figura \ref{figura-y-modelo}, si ya tenemos la f\'ormula \texttt{red ball}, la f\'ormula \texttt{large red ball} es redundante, ya 
-que no agrega informaci\'on porque el conjunto de objetos esferas rojas ya ten\'ia solamente 1 objeto $e_5$. Intuitivamente es redundante cuando no divide a ninguna clase.
+%\textbf{Redundante} es una f\'ormula para la cual ya hay otra f\'ormula la cual tenga los mismos objetos del modelo. Por ejemplo para el 
+%contexto de la Figura \ref{figura-y-modelo}, si ya tenemos la f\'ormula \texttt{red ball}, la f\'ormula \texttt{large red ball} es redundante, ya 
+%que no agrega informaci\'on porque el conjunto de objetos esferas rojas ya ten\'ia solamente 1 objeto $e_5$. Intuitivamente es redundante cuando no divide a ninguna clase.
 
 \textbf{Trivial} es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el contexto de la 
 Figura \ref{figura-y-modelo}, \texttt{large yellow ball} es trivial ya que no hay esferas amarillas grandes en el contexto considerado.
@@ -689,7 +689,7 @@ funciones add$_{\mathcal {L}}$(R,$\varphi $, \RE) se pueden utilizar en funci\'o
 
 La interpretaci\'on de la f\'ormula de $\el$  $\psi \sqcap \exists $R.$ \varphi$ es el conjunto de todos los elementos que 
 satisfagan~$\psi$ y que est\'an relacionados por relaci\'on R con alg\'un elemento que satisface $\varphi $.
-Por ejemplo, la interpretaci\'on de la f\'ormula \texttt{ball}$\sqcap$ \texttt{leftof}.\texttt{cube} es el conjunto de todas las esferas 
+Por ejemplo, la interpretaci\'on de la f\'ormula \texttt{ball}$\sqcap$ $\exists$ \texttt{leftof}.\texttt{cube} es el conjunto de todas las esferas 
 que est\'an a la izquierda de alg\'un cubo.
 
 \begin{figure}[!t]
@@ -702,9 +702,9 @@ que est\'an a la izquierda de alg\'un cubo.
 \dontprintsemicolon
 \caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\KwIn{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
+\Input{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
  de relaciones con sus valores de \puse\, odenados por \puse}
-\KwOut{\footnotesize Un conjunto de f\'ormulas \RE tal que
+\Output{\footnotesize Un conjunto de f\'ormulas \RE tal que
 $\{\interp{\varphi} \mid \varphi \in \RE\}$ es el conjunto de clases de
 $\mathcal{L}$-similaridad de $\gM$}
 
@@ -742,15 +742,15 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 \dontprintsemicolon
 \caption{add$_\el$(R, $\varphi$, $\RE$)} \label{algo:bisim-add-el-over}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\KwIn{\footnotesize R, $\varphi$, $\RE$}
-\KwOut{\footnotesize $\RE$}
+\Input{\footnotesize R, $\varphi$, $\RE$}
+\Output{\footnotesize $\RE$}
 
 \If(\tcp*[f]{\footnotesize primera iteraci\'on?}){\em FirstLoop?}{
     Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
 \lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
 \For{\em $\psi \in \RE$ con $\#\interp{\psi} > 1$}{
-  \If{\em $\psi \sqcap \exists$R.$\varphi$ no est\'a subsumida en $\RE$ \ {\bf y} \tcp*[f]{\footnotesize no-subsumida: no puede ser obtenida desde \RE?}\\
-    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf y} \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}\\
+  \If{\em $\psi \sqcap \exists$R.$\varphi$ no est\'a subsumida en $\RE$ \ {\bf and} \tcp*[f]{\footnotesize subsumida: su interpretaci\'on es igual a la uni\'on de las interpretaciones de otras f\'ormulas en \RE?}\\
+    \em \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \emptyset$ {\bf and} \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}\\
      \ \ \  \emph{Informativa}}{
     Agregar $\psi \sqcap \exists \mbox{R}.\varphi$ a $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a la clasificaci\'on} \;\\
 		
@@ -805,12 +805,12 @@ En el comienzo $RE$=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e
 %\hspace*{-0.35cm}
 \begin{subfigure}{.5\textwidth}
   \centering
-%\includegraphics[width=\textwidth]{images/22sinletras.jpg}
+%\includegrahics[width=\textwidth]{images/22sinletras.jpg}
 %%\caption{Ejemplo de contexto}
 %\label{GRE3D7-stimulus1-b}
 %\vspace*{1cm}
 \begin{picture}(250,0)
-\put(0,-40){\begin{tikzpicture}
+\put(0,-80){\begin{tikzpicture}
   [
     n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
