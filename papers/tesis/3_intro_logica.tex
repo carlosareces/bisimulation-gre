@@ -242,7 +242,7 @@ Formalmente, para un modelo relacional $\tup{\Delta_1, \interp{\cdot}_1}$, direm
   DL & Algoritmo  & Complejidad \\  \hline
   $\FOL$   &  																		 & NP\\ \hline
   $\EPFOL$ & Algoritmo Graph \cite{graph}   & NP\\ \hline 
-  $\ALC$   & Algoritmo DL \cite{arec2:2008:Areces} & P\\ \hline
+  $\ALC$   & Algoritmo DL \cite{areces08} & P\\ \hline
  	$\ELUNEG$ & Algoritmo plural \cite{gardent02:_gener_minim_defin_descr} &P\\ \hline
 	%&negaci\'on proposicional&\\ \hline
   $\ELAN$ & &P\\ \hline
@@ -896,7 +896,7 @@ Algoritmo~\ref{algo:bisim-add-alc}. Dado un modelo de $\gM=(\Delta,
 f\'ormulas tal que $ \{\interp {\varphi} \mid \varphi \in \RE \} $ es el
 conjunto de conjuntos \alc-similitud de $\gM$. El algoritmo comienza con $ \RE
 = \{\top \} $ (donde $ \interp {\top} = \Delta $), y sucesivamente refina
-$RE$ haciendo que sus elementos denoten conjuntos m\'as peque\~nos y m\'as peque\~nos. Eso
+$\RE$ haciendo que sus elementos denoten conjuntos m\'as peque\~nos y m\'as peque\~nos. Eso
 mantiene el invariante que, al inicio y al final de cada iteraci\'on,
 $\{\interp{\varphi} \mid \varphi \in \RE\}$ es siempre una partici\'on de
 $ \Delta $. Los algoritmo itera sobre todos los
@@ -919,8 +919,8 @@ RE positivos relacionales, que son generalmente mucho m\'as f\'acil de realizar.
 
 Obtenemos la \el algoritmo mediante la sustituci\'on de la llamada a add$_{\alc} $ en
 Algoritmo~\ref{algo:bisim-l} mediante una llamada a poner add$_{\EL} $, que es
-definido en el algoritmo~\ref{algo:bisim-add-EL}. Como antes, el
-algoritmo mantiene un conjunto$\RE = \{\varphi_1,\ldots,\varphi_n\}$ de
+definido en el algoritmo~\ref{algo:bisim-add-el}. Como antes, el
+algoritmo mantiene un conjunto $\RE = \{\varphi_1,\ldots,\varphi_n\}$ de
 f\'ormulas (esta vez de \el) tal que $\interp{\varphi_1} \cup \ldots
 \cup \interp{\varphi_n} = \Delta$, y que se refina de manera iterativa.
 Sin embargo, donde el algoritmo \alc mantiene el invariante que
@@ -929,7 +929,7 @@ $ \Delta $, se debilita este invariante ya que
 no hay $ m \geq 2 $ por diferentes pares de \'indices de $1 \leq i_1,\ldots,i_m \leq
 n$ tal que $\interp{\varphi_{i_1}} = \interp{\varphi_{i_2}} \cup
 \ldots \cup \interp{\varphi_{i_m}}$. Llamamos a $\varphi_{i_1}$
-\emph{subsumed} si existe tal descomposici\'on.
+\emph{subsumida} si existe tal descomposici\'on.
 
 Debido a que mantiene un invariante m\'as d\'ebil, el conjunto $RE$ puede contener
 m\'as f\'ormulas al mismo tiempo en el \el algoritmo que en el \alc
@@ -1027,7 +1027,7 @@ simult\'aneamente genera ERs para todos los elementos a excepci\'on de las dos
 tablas (que son similares entre s\'i).
 
 
-El \el\ algoritmo demora m\'as que el de \alc\ con el ejemplo de la Figura~\ref{fig:dale-haddock} \cite{Stone1998a}. A pesar de ello
+El \el\ algoritmo demora m\'as que el de \alc\ con el ejemplo de la Figura~\ref{fig:dale-haddock} vea \cite{Stone1998a}. A pesar de ello
 identifica correctamente a $r_1$ como \textit{el conejo en el sombrero} y $ f_2$ como
 \textit{La flor en el sombrero}, no es capaz de calcular una ER de $f_1$
 porque $f_1$ es \el-similar a $f_2$. De hecho, el algoritmo
@@ -1119,15 +1119,15 @@ y $(u,v)\in\interp{r}_{H}$ si y s\'olo si $(f(u),f(v))\in\interp{r}_{G'}$.
 \vspace{-.2cm}\ \\
 (i)&(ii)&(iii)
 \end{tabular}
- \caption{Algunos subgrafos conectados $(v,H)$ de la escena $\+S$ de la Figura~\ref{fig:cat-dog-1}.\label{fig:subgraphs}}
+ \caption{Algunos subgrafos conectados $(v,H)$ de la escena $\+S$ de la Figura~\ref{fig:dale-haddock}.\label{fig:subgraphs}}
  \end{figure}
 
 %
 %
 %
 Como ejemplo, consideremos el modelo relacional que se representa en la
-La Figura~\ref{} como un grafo etiquetado $G$, y consideremos los pares de nodos conectados y subgrafos $(V, H)$ que se muestran en 
-La Figura~\ref{fig:subgraphs}. Est\'a claro que (i) se refiere a la pareja $(w, G)$
+Figura~\ref{fig:dale-haddock} como un grafo etiquetado $G$, y consideremos los pares de nodos conectados y subgrafos $(V, H)$ que se muestran en 
+la Figura~\ref{fig:subgraphs}. Est\'a claro que (i) se refiere a la pareja $(w, G)$
 para cualquier nodo $w\in\{f_1,f_2\}$; (ii) se refiere a $(w, G)$ para nodo $w\in\{h_1,h_2,h_3,h_4\}$
 y (iii) refiere unicamente a $h_4$; Notar
 que (i) -- (iii) pueden realizarse, como  ``{\em una flor}'',
