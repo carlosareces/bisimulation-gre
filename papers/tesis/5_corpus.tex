@@ -240,7 +240,7 @@ Para cada target se consider\'o un m\'aximo 4 objetos tomados como puntos de ref
 
 A su vez cada atributo tiene una lista estricta de los valores permitidos. Por ejemplo, para el atributo tipo los posibles valores son biblioteca, teatro, bar, caf\'e, fast-food, etc. Tambi\'en se permite el valor ``otro'' que le d\'a al anotador una oportunidad de dar una respuesta cuando la descripci\'on muestra algo muy inusual.
 
-Para los atributos espaciales (izquierda, cerca, etc.) permitimos que incluyan la mayor\'{i}a de los objetos en el mapa, a excepci\'on de aquellos que son claramente falsos. Por ejemplo, en el caso del atributo ``izquierda'' sus posibles valores incluyen la mayor\'{i}a de los objetos en el mapa, a excepci\'on de los de la derecha del objeto target. Por ejemplo, para el objetivo de la Figura~\ref{mapa-con-ids} es posible decir {\it el pub que esta a la izquierda de Pans \& Company}, pero no es admitido {\it El pub que est\'a a la izquierda de Posada del Peine}.
+Para los atributos espaciales (izquierda, cerca, etc.) permitimos que incluyan la mayor\'{i}a de los objetos en el mapa, a excepci\'on de aquellos que son claramente falsos. Por ejemplo, en el caso del atributo ``izquierda'' sus posibles valores incluyen la mayor\'{i}a de los objetos en el mapa de la Figura~\ref{mapa-con-ids}, a excepci\'on de los de la derecha del objeto target. Por ejemplo, es posible decir {\it el pub que esta a la izquierda de Pans \& Company}, pero no es admitido {\it el pub que est\'a a la izquierda de Posada del Peine}.
 %MOVER A OTRO LADO ESTA SECCION
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       
@@ -311,11 +311,11 @@ Para los atributos espaciales (izquierda, cerca, etc.) permitimos que incluyan l
 
 %Los valores posibles para los atributos {\em tipo} y {\em nombre} est\'an predefinidos por cada contexto referencial. En el atributo {\em otros} puede asignar cualquier valor de cadena, y se pretende representar cualquier pieza no est\'andar de la informaci\'on transmitida por la ER. Para las relaciones espaciales, los valores posibles son los identificadores de los objetos disponibles en cada escena.
 
-Las descripciones recolectadas fueron totalmente anotadas por dos anotadores independientes. Luego, un tercer anotador asumi\'o el rol de juez y di\'o la anotaci\'on final. Dado que el esquema de anotaci\'on fue bastante sencillo (es decir, en gran parte porque las respuestas no estandares simplemente se asignan al atributo {\em otros}). El acuerdo entre los jueces, se midi\'o con el coheficiente Kappa \cite{kappa}, \'este fue del 84\% en el nivel de atributo.
-Ambos, el contexto y las ERs se representaron en formato XML utilizando una versi\'on simplificada del formato XML adoptado en el corpus TUNA \cite{tuna-corpus}. Las descripciones se agruparon en nodos TRIAL que contienen informaci\'on general sobre cada persona (es decir, identificaci\'on, edad y sexo), seguido de su lista de respuestas. Cada respuesta identifica el contexto en que se produjo, y la expresi\'on referencial que la persona dijo.
-Al igual que en \cite{tuna-corpus}, el contenido de las expresiones referenciales est\'an representadas por nodos que son conjunto de atributos que contienen una lista de nombres de atributos y sus valores. El siguiente ejemplo ilustra un fragmento de esta representaci\'on para una ER. Los objetos en cada contexto de entrada estaban representados de una manera similar.
-Para el target de la Figura~\ref{mapa-con-ids} y la expresi\'on {\it El pub que est\'a al lado de Pans \& Company, en la
-calle de las Postas}, la anotaci\'on ser\'ia la siguiente.
+Las descripciones recolectadas fueron anotadas por dos anotadores independientes. Luego, un tercer anotador asumi\'o el rol de juez y di\'o la anotaci\'on final. El acuerdo entre los jueces, se midi\'o con el coheficiente Kappa \cite{kappa}, \'este fue del 84\% en el nivel de atributo.
+Ambos, el contexto y las ERs se representaron en formato XML utilizando una versi\'on adaptada del formato XML adoptado en el corpus TUNA \cite{tuna-corpus}. Las ERs se agruparon en nodos TRIAL, que como se muestra en la Figura~\ref{xml}, que contienen informaci\'on general sobre cada persona (es decir, identificaci\'on, edad y sexo), seguido de su lista de respuestas. Cada respuesta identifica el contexto en que se produjo, y la ER que la persona dijo.
+Al igual que en \cite{tuna-corpus}, el contenido de las ERs est\'an representadas por nodos que son conjunto de atributos que contienen una lista de nombres de atributos y sus valores. La Figura~\ref{xml} ilustra la representaci\'on para la ER {\it el pub que est\'a al lado de Pans \& Company, en la
+calle de las Postas}.
+\begin{figure}
 %\tiny{
 \begin{verbatim}
 <TRIAL ID="2" SPEAKER="166" AGE="18" GENDER="m">
@@ -324,13 +324,15 @@ calle de las Postas}, la anotaci\'on ser\'ia la siguiente.
                     STRING="El pub que esta al lado de Pans & Company, 
                             en la calle de las Postas">
         <ATTRIBUTE NAME="type" VALUE="pub" />
-        <ATTRIBUTE NAME="at" VALUE="str15" />
+        <ATTRIBUTE NAME="in" VALUE="str15" />
         <ATTRIBUTE NAME="landmark-name" VALUE="Pans & Company" />
      </ATTRIBUTE-SET>
   </CONTEXT>
 </TRIAL>	
 \end{verbatim}
 %}
+\caption{}\label{xml}
+\end{figure}
 %\normalsize
 
 
@@ -338,13 +340,13 @@ calle de las Postas}, la anotaci\'on ser\'ia la siguiente.
 
 %The set of images, text descriptions and their XML representations constitutes the Zoom corpus of referring expressions, to be made publicly available for research purposes. As a first step in this direction, the following sections present the results of a machine learning approach to GER based on the Portuguese portion of the data.
 
-En cada TRIAL tenemos la informaci\'on del TRIAL (el id), la de la persona, en speaker, la edad y el g\'enero. En ATTRIBUTE-SET se encuentran los datos de la ER, TARGET y LANDMARKS con sus id's, STRING es la expresi\'on completa tal cual la di\'o la persona, y los atributos del target en este caso aparecen ``type'', ``at' ' (es en que calle) y landmark-name, en este caso hubo 1 s\'olo landmark. Los landmarks siguientes fueron etiquetados como ``second-landmark'' y as\'{i} sucesivamente. Esto fue motivado por la necesidad de proporcionar nombres de atributos \'unicos para el beneficio de los algoritmos de GER.
-El conjunto de im\'agenes, textos descriptivos y sus representaciones XML constituye el corpus ZOOM de ERs, el cual ser\'a p\'ublico para fines de investigaci\'on, vea Cap\'itulo \ref{sec:conclusiones}.  En lo que sigue presentamos una comparaci\'on de este corpus creado con corpora de ERs existente hasta el momento. Luego en las siguientes secciones se presentan los resultados de un enfoque de aprendizaje autom\'atico para GER, los cuales se basan en la parte portuguesa del corpus.
+En cada TRIAL tenemos la informaci\'on de la identificaci\'on del TRIAL, de la persona, edad y g\'enero. En ATTRIBUTE-SET se encuentran los datos de la ER, TARGET y LANDMARKS con sus id's, STRING es la expresi\'on completa tal cual la di\'o la persona, y los atributos del target que en este ejemplo son su tipo pub, y su ubicaci\'on en la calle str15, en este caso hubo 1 s\'olo landmark. En casos donde hab\'ia m\'as de 1 landmark, los landmarks siguientes fueron etiquetados como ``second-landmark'' y as\'{i} sucesivamente. Esto fue motivado por la necesidad de proporcionar nombres de atributos \'unicos para el beneficio de los algoritmos de GER.
+El conjunto de mapas, textos descriptivos y sus representaciones XML constituye el corpus ZOOM de ERs, el cual es p\'ublico para fines de investigaci\'on.  En lo que sigue presentamos una comparaci\'on de este corpus con corpora de ERs existentes hasta el momento. 
 
 \subsection{Comparaci\'on con trabajo previo}
 \label{sec:comparacion_trabajo_previo}
 
-En la Tabla~\ref{tab-comparison} se presenta una comparaci\'on entre el corpus recolectado y otros corpus de ERs existentes nombrados en la Secci\'on~\ref{sec:corpus2}. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos m\'as el n\'umero de relaciones en cada descripci\'on (columna Atributos). La informaci\'on sobre el TUNA-corpus y las descripciones de ZOOM se basan s\'olo en la parte singular de cada corpus. La cantidad m\'axima de landmarks permitidos (en columna Landmarks). Tambi\'en se representa el tama\~no medio de la descripci\'on, es decir en n\'umero de propiedades anotadas, (en la columna tama\~no promedio). La columna Uso representa la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia. Desde una perspectiva de GER, las ERs de mayor largo y las puntuaciones m\'as bajas de uso es probable que representen las situaciones m\'as complejas de referencia.
+En la Tabla~\ref{tab-comparison} se presenta una comparaci\'on entre el corpus ZOOM y otros corpus de ERs existentes descripto en el Cap\'itulo~\ref{sec:seleccion}. La informaci\'on de dominio representa el n\'umero de posibles atributos at\'omicos m\'as el n\'umero de relaciones en cada descripci\'on (columna Atributos). La informaci\'on sobre el TUNA-corpus y las descripciones de ZOOM se basan s\'olo en la parte singular de cada corpus. La cantidad m\'axima de landmarks permitidos (en columna Landmarks). Tambi\'en se representa el tama\~no medio de la descripci\'on, es decir en n\'umero de propiedades anotadas, (en la columna tama\~no promedio). La columna Uso representa la utilizaci\'on de las propiedades, la cual se toma como la proporci\'on de las propiedades que aparecen en la descripci\'on sobre el n\'umero total de posibles atributos y puntos de referencia. Desde una perspectiva de GER, las ERs de mayor largo y las puntuaciones m\'as bajas de uso representan las situaciones m\'as complejas de referencia. Estas dos caracter\'isticas combinadas muestran que el corpus ZOOM es el m\'as complejo disponible en el \'area.
 
 
 \begin{table}[H]
@@ -370,7 +372,7 @@ Zoom-Sp											& 19							& 4							& 7.2				& 0.3   \\
 \end{tabular}
 }
 \end{center}
-\caption{Comparaci\'on con corpus de GER existente.}
+\caption{Comparaci\'on con corpora de ERs existentes.}
 \label{tab-comparison}
 \end{table}
 
@@ -401,10 +403,10 @@ Zoom-Sp											& 19							& 4							& 7.2				& 0.3   \\
 %
 %
 
-%.....................................
-\subsection{Discusi\'on}
-%.....................................
-\label{corpus-discusion}
+%%.....................................
+%\subsection{Discusi\'on}
+%%.....................................
+%\label{corpus-discusion}
 
 %Previous corpora of referring expressions have been collected in specially designed and highly controlled domains. Collecting corpora from a domain that is directly relevant to real-world applications poses a significant challenge not only to the collection and annotation process itself but also to existing GER algorithms. This is made evident by the large proportion of referring expressions that needed to be manually discarded from our dataset because the did not constitute a referring expression of the intended target. This proportion is 30\% for the Portuguese portion of the dataset and 23\% for the Spanish portion. 
 
@@ -416,11 +418,14 @@ Zoom-Sp											& 19							& 4							& 7.2				& 0.3   \\
 %The proportion of overspecified referring expressions of the Zoom corpus is similar to that found in previous work. However, the proportion of relational descriptions is presently higher. Relational descriptions constitute a challenge for GER algorithms due to the computational complexity associated to their generation~\cite{survey}. A further challenge posed by the Zoom corpus is the fact that it contains two descriptions for every target based on different - but related - models corresponding to the same map location seen with different zoom levels. For instance a map with higher zoom level (2X) is illustrated in Figura~\ref{fig-with-zoom}, and the same map with lower zoom level is shown in Figura~\ref{fig-interface}. 
 
 
-Hay corpora de expresiones referenciales pero de dominios de dise\~no especial y recolectado en experimentos muy controlados. La recopilaci\'on de corpus de un dominio que es directamente relevante para aplicaciones del mundo real plantea un reto importante no s\'olo para el proceso de recolecci\'on y anotaci\'on en s\'{i}, sino tambi\'en a los algoritmos de GER existentes. Esto se hace evidente por la gran proporci\'on de las expresiones referenciales que deben ser desechadas desde nuestra base de datos porque no constituyen una ER para el objeto target. Esta proporci\'on es del 30\% de la parte portuguesa del corpus y el 23 \% de la parte espa\~nola del corpus.
-Despu\'es de este proceso de limpieza de la parte portuguesa del corpus contiene todav\'{i}a un 19,3 \% de expresiones referenciales subespecificadas y la parte espa\~nola un 25\%. El porcentaje de ERs subespecificadas en el corpus ZOOM es mucho mayor que lo reportado en corpora descripto en el la Secci\'on~\ref{sec:corpus2}, que no es mayor que el 5\%. Estudios psicoling\"u\'{i}sticos anteriores~\cite{Clark1986} han encontrado que m\'as del 20\% de las ERs en el discurso de origen natural es subespecificada con respecto al contexto establecido. En los dominios suficientemente complejos,~\cite{Clark1986} se encontr\'o que los hablantes a menudo producen una ER subespecificada inicial, y luego agregan m\'as informaci\'on si es necesario, en lugar de producir una descripci\'on que identifica al target de forma un\'{i}voca desde el principio. El dominio del ZOOM corpus es probable que contenga situaciones m\'as complejas de referencia si se compara con corpora existente de este tipo, es decir, las descripciones del ZOOM son en promedio m\'as largas, y tienen un uso de atributo medio m\'as bajo. Esto en nuestra opini\'on, puede explicar la alta proporci\'on de subespecificaci\'on en nuestros datos. La proporci\'on de descripciones relacionales es m\'as grande que en trabajo anterior. Descripciones relacionales constituyen un desaf\'{i}o para los algoritmos de GER debido a la complejidad computacional asociada a su generaci\'on~\cite{survey}. Otro desaf\'{i}o que plantea el corpus ZOOM es el hecho de que contiene dos descripciones para cada objeto target bas\'andose en diferente - pero relacionados - modelos correspondientes a la misma ubicaci\'on en el mapa visto con diferentes niveles de zoom. 
+Los corpora de expresiones referenciales existentes se caracterizan por su dise\~no y recolecci\'on en experimentos muy controlados. La reco sino tambi\'en para pilaci\'on de corpus de un dominio que es directamente relevante para aplicaciones del mundo real plantea un reto importante no s\'olo para los algoritmos de GER existentesel proceso de recolecci\'on y anotaci\'on en s\'{i}. Esto se hace evidente por la gran proporci\'on de las expresiones referenciales que deben ser desechadas desde nuestra base de datos porque no constituyen una ER para el objeto target. Esta proporci\'on es del 30\% de la parte portuguesa del corpus y el 23\% de la parte espa\~nola del corpus.
+Despu\'es de este proceso de limpieza, la parte portuguesa del corpus contiene todav\'{i}a un 19,3\% de expresiones referenciales subespecificadas y la parte espa\~nola un 25\%. El porcentaje de ERs subespecificadas en el corpus ZOOM es mucho mayor que lo reportado en los corpora de ERs descriptos en el la Secci\'on~\ref{sec:corpus2}, que no es mayor que el 5\%. 
+
+Estudios psicoling\"u\'{i}sticos~\cite{Clark1986} han encontrado que m\'as del 20\% de las ERs son subespecificadas con respecto al contexto establecido. En dominios relativamente complejos, se encontr\'o que los hablantes a menudo producen una ER subespecificada inicial, y luego agregan m\'as informaci\'on si es necesario, en lugar de producir una descripci\'on que identifica al target de forma un\'{i}voca desde el principio. El dominio del ZOOM corpus es probable que contenga situaciones m\'as complejas de referencia que los corpora existentes de este tipo. Es decir, las descripciones del ZOOM son en promedio m\'as largas, y tienen un promedio de uso de atributos dio m\'as bajo. Esto en nuestra opini\'on, puede explicar la alta proporci\'on de subespecificaci\'on en nuestros datos. La proporci\'on de descripciones relacionales tambi\'es es mayor que en el trabajo anterior. Las descripciones relacionales constituyen un desaf\'{i}o para los algoritmos de GER debido a la complejidad computacional asociada a su generaci\'on~\cite{survey}. Otro desaf\'{i}o que plantea el corpus ZOOM es el hecho de que contiene dos descripciones para cada objeto target bas\'andose en diferentes modelos correspondientes a la misma ubicaci\'on en el mapa visto con diferentes niveles de zoom. 
 \begin{figure}[ht]
 \begin{center}
-\includegraphics[width=8.5cm]{images/interface2.png}\\[0pt]
+\includegraphics[width=8.5cm]{images/interface2-b
+.png}\\[0pt]
 \caption{Mapa con nivel de zoom X.}
 \label{interface2}
 \end{center}
@@ -437,31 +442,28 @@ Por ejemplo, un mapa con mayor nivel de zoom (2X) se ilustra en la Figura~\ref{f
 
 %The underlying models for these two maps are different but not unrelated. The map with 2X zoom contains fewer objects but may include more properties due to the added level of detail. The  referring expression for the target in the 1X map may or may not be the same as in the 2X map. For instance, the referring expression  ``the pub at Cowgate'' is underspecified on the 1X map, but it is minimally distinguishing on the 2X map. Changes of this kind are common in interactive applications.  The context of reference during an interaction changes in structure, in the number of objects and referable properties. The challenge for GER algorithms would be to produced an appropriate description for the modified context without starting from scratch. GER algorithms based on local (rather than global) context partitioning (e.g.,~\cite{areces08}) seem to have an advantage in this respect, and in this sense we hope that the Zoom data will help the research in the field to move forward.
 
- Los modelos subyacentes de estos dos mapas son diferentes, pero no sin relaci\'on. El mapa con zoom 2X contiene menos objetos, pero pueden ser m\'as propiedades debido al mayor nivel de detalle. La ER para el target en el mapa 1X puede o no puede ser la misma que en el mapa 2X. Por ejemplo, la expresi\'on referencial ``el pub en Cowgate'' es subespecificada en el mapa 1X, pero es minimal en el mapa 2X. Cambios de este tipo son comunes en aplicaciones interactivas. El contexto de referencia durante una interacci\'on, cambios en la estructura, en el n\'umero de objetos y propiedades a las cuales hay que referirse. El desaf\'{i}o para los algoritmos de GER ser\'{i}a producir una descripci\'on apropiada para el contexto modificado sin empezar desde cero. Algoritmos de GER basados en particiones de  contexto locales (no totales) (por ejemplo,~\cite{areces08}) parecen tener una ventaja en este sentido, esperamos que los datos del corpus ZOOM ayuden a que la investigaci\'on progrese en esta direcci\'on.
+ Los modelos subyacentes de estos dos mapas son diferentes, pero esta\'an relacionados. El mapa con zoom 2X contiene menos elementos, pero con m\'as propiedades debido al mayor nivel de detalle. Una ER para el target en el mapa 1X puede o no ser \'util en el mapa 2X. Por ejemplo, la expresi\'on referencial ``el pub en Cowgate'' es subespecificada en el mapa 1X, pero es minimal en el mapa 2X. Cambios de este tipo son comunes en aplicaciones interactivas: cambios en la estructura del contexto de referencia durante una interacci\'on, en el n\'umero de objetos y en las propiedades a las cuales hay que referirse. El desaf\'{i}o para los algoritmos de GER ser\'{i}a producir una descripci\'on apropiada para el contexto modificado sin empezar desde cero. Estos temas se discuten en mayor detalle en el Cap\'itulo \ref{sec:conclusiones}. Algoritmos de GER basados en particiones de  contexto locales (no totales) (por ejemplo,~\cite{areces08}) parecen tener una ventaja en este sentido, esperamos que los datos del corpus ZOOM ayuden a que la investigaci\'on progrese en esta direcci\'on.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Evaluaci\'on}
+\section{Desempe\~no de otros algoritmos sobre el corpus ZOOM}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \label{corpus-evaluacion}
 %\textcolor{blue}{decidir si esta parte la dejo o no, mas me gustaria poner evaluacion para la parte en espanol}
 
 %In this section we illustrate the use of the Zoom corpus as training and test data for a machine learning approach to GER adapted from \cite{thiago-svm}. The  goal of this evaluation is to provide reference results for future comparison with purpose-built GER algorithms, and not to present a complete GER solution for this or other domains.
-
-Para probar que tan buenas son las ERs se entren\'o un modelo simplificado de aprendizaje 
-
-
-%......................
-\subsection{Procedimiento}
+En esta secci\'on se presentan los resultados del desempe\~no de un algoritmo simb\'olico el algoritmo incremental descripto en la Secci\'on \ref{sec:algo_incremental} y un algoritmo puramente estad\'istico basado en support vector machines (SVM). Estos algoritmos se eval\'uan sobre un fragmento del corpus ZOOM para poner en perspectiva los resultados de nuestro algoritmo presentado en la Secci\'on \ref{sec:caso_estudio}.
+%.....................
+\subsection{Algoritmos y procedimiento}
 %......................
 
 %We used a subset of singular descriptions from the Portuguese portion of the corpus. This comprises  821 descriptions produced in 9 scenes. Evaluation was carried out by comparing the corpus description with the system output to measure overall accuracy (i.e., the number of exact matches between the two descriptions), Dice \cite{dice} and MASI \cite{masi} coefficients (i.e., the degree of overlap between the algorithm output and the corresponding corpus description).
 
 %Following \cite{thiago-svm}, we built a GER model using support vector machines with radial basis function kernel. The classifiers were trained and tested using 6-fold cross validation. Optimal parameters were selected using grid search as follows:for each step in the main cross-fold validation, one fold is reserved for testing, and the remaining $k-1$ folders are subject  to a second cross-validation procedure in which different parameter combinations are attempted. The $C$ parameter is assigned the values 1, 10, 100 and 1000, and $\gamma$ is assigned 1, 0.1, 0.001 and 0.0001. The best-performing parameter set is selected to build a classifier trained from the $k-1$ folders, and tested on the test data. This procedure is repeated for every iteration of the main cross-validation procedure.
 
-Se utiliz\'o un subconjunto de descripciones singulares de la parte portuguesa del corpus. Esto comprende 821 descripciones producidas en 9 escenas. La evaluaci\'on se llev\'o a cabo mediante la comparaci\'on de la descripci\'on corpus con la salida del sistema para medir la exactitud global (es decir, el n\'umero de coincidencias exactas entre las dos descripciones), los coeficientes Dice \cite{dice} y MASI \cite{masi} (es decir, el grado de solapamiento entre la salida del algoritmo y la descripci\'on corpus correspondiente).
+Para esta evaluaci\'on publicada en \cite{altamirano15} se utiliz\'o un subconjunto de descripciones singulares de la parte portuguesa del corpus. Esto comprende 821 descripciones producidas por personas para 9 escenas. La evaluaci\'on se llev\'o a cabo mediante la comparaci\'on de las ERs del corpus con la salida del sistema para medir la exactitud global (es decir, el n\'umero de coincidencias exactas entre las dos descripciones), los coeficientes Dice \cite{dice} y MASI \cite{masi} (es decir, el grado de solapamiento entre la salida del algoritmo y la descripci\'on corpus correspondiente).
 
-Siguiendo \cite{thiago-svm}, construimos un modelo GER usando {\it clasificadores super vector machines} (SVM) con funci\'on de kernel radial kernel de base. Los clasificadores se entrenaron y se hicieron validaciones cruzadas de {\it 6 folders}. Para conseguir los par\'ametros \'optimos se realiz\'o lo siguiente: para cada validaci\'on cruzada, se reserv\'o un conjunto para las pruebas, y los restantes $k-1$ carpetas quedaron sujetas a un segundo procedimiento de validaci\'on cruzada en la que se probaban diferentes combinaciones de par\'ametros. Al par\'ametro $C$ se le asigna los valores de 1, 10, 100 y 1000, y a $\gamma$ se le asign\'o 1, 0,1, 0,001 y 0,0001. El conjunto de par\'ametros de mejor desempe\~no fue seleccionado para construir un clasificador entrenado desde las carpetas $k-1$, y probado en los datos de prueba. Este procedimiento se repiti\'o para cada iteraci\'on del procedimiento principal de validaci\'on cruzada.
+El algoritmo SVM utilizado se basa en un dise\~no propuesto en \cite{thiago-svm}. Es decir se construye un modelo de GER usando {\it clasificadores super vector machines} (SVM) con funci\'on de kernel radial kernel de base. Los clasificadores se entrenaron y se hicieron validaciones cruzadas de {\it 6 folders}. Para conseguir los par\'ametros \'optimos se realiz\'o lo siguiente: para cada validaci\'on cruzada, se reserv\'o un conjunto para las pruebas, y los restantes $k-1$ carpetas quedaron sujetas a un segundo procedimiento de validaci\'on cruzada en la que se probaban diferentes combinaciones de par\'ametros. Al par\'ametro $C$ se le asigna los valores de 1, 10, 100 y 1000, y a $\gamma$ se le asign\'o 1, 0,1, 0,001 y 0,0001. El conjunto de par\'ametros de mejor desempe\~no fue seleccionado para construir un clasificador entrenado desde las carpetas $k-1$, y probado en los datos de prueba. Este procedimiento se repiti\'o para cada iteraci\'on del procedimiento principal de validaci\'on cruzada.
 %................................
 \subsection{Modelo Computacional }
 %................................
