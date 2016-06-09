@@ -442,8 +442,7 @@ Por ejemplo, un mapa con mayor nivel de zoom (2X) se ilustra en la Figura~\ref{f
 
 %The underlying models for these two maps are different but not unrelated. The map with 2X zoom contains fewer objects but may include more properties due to the added level of detail. The  referring expression for the target in the 1X map may or may not be the same as in the 2X map. For instance, the referring expression  ``the pub at Cowgate'' is underspecified on the 1X map, but it is minimally distinguishing on the 2X map. Changes of this kind are common in interactive applications.  The context of reference during an interaction changes in structure, in the number of objects and referable properties. The challenge for GER algorithms would be to produced an appropriate description for the modified context without starting from scratch. GER algorithms based on local (rather than global) context partitioning (e.g.,~\cite{areces08}) seem to have an advantage in this respect, and in this sense we hope that the Zoom data will help the research in the field to move forward.
 
- Los modelos subyacentes de estos dos mapas son diferentes, pero esta\'an relacionados. El mapa con zoom 2X contiene menos elementos, pero con m\'as propiedades debido al mayor nivel de detalle. Una ER para el target en el mapa 1X puede o no ser \'util en el mapa 2X. Por ejemplo, la expresi\'on referencial ``el pub en Cowgate'' es subespecificada en el mapa 1X, pero es minimal en el mapa 2X. Cambios de este tipo son comunes en aplicaciones interactivas: cambios en la estructura del contexto de referencia durante una interacci\'on, en el n\'umero de objetos y en las propiedades a las cuales hay que referirse. El desaf\'{i}o para los algoritmos de GER ser\'{i}a producir una descripci\'on apropiada para el contexto modificado sin empezar desde cero. Estos temas se discuten en mayor detalle en el Cap\'itulo \ref{sec:conclusiones}. Algoritmos de GER basados en particiones de  contexto locales (no totales) (por ejemplo,~\cite{areces08}) parecen tener una ventaja en este sentido, esperamos que los datos del corpus ZOOM ayuden a que la investigaci\'on progrese en esta direcci\'on.
-
+ Los modelos subyacentes de estos dos mapas son diferentes, pero esta\'an relacionados. El mapa con zoom 2X contiene menos elementos, pero con m\'as propiedades debido al mayor nivel de detalle. Una ER para el target en el mapa 1X puede o no ser \'util en el mapa 2X. Por ejemplo, la expresi\'on referencial ``el pub en Cowgate'' es subespecificada en el mapa 1X, pero es minimal en el mapa 2X. Cambios de este tipo son comunes en aplicaciones interactivas: cambios en la estructura del contexto de referencia durante una interacci\'on, en el n\'umero de objetos y en las propiedades a las cuales hay que referirse. El desaf\'{i}o para los algoritmos de GER ser\'{i}a producir una descripci\'on apropiada para el contexto modificado sin empezar desde cero. Estos temas se discuten en mayor detalle en el Cap\'itulo \ref{sec:conclusiones}. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Desempe\~no de otros algoritmos sobre el corpus ZOOM}
@@ -463,9 +462,9 @@ En esta secci\'on se presentan los resultados del desempe\~no de un algoritmo si
 
 Para esta evaluaci\'on publicada en \cite{altamirano15} se utiliz\'o un subconjunto de descripciones singulares de la parte portuguesa del corpus. Esto comprende 821 descripciones producidas por personas para 9 escenas. La evaluaci\'on se llev\'o a cabo mediante la comparaci\'on de las ERs del corpus con la salida del sistema para medir la exactitud global (es decir, el n\'umero de coincidencias exactas entre las dos descripciones), los coeficientes Dice \cite{dice} y MASI \cite{masi} (es decir, el grado de solapamiento entre la salida del algoritmo y la descripci\'on corpus correspondiente).
 
-El algoritmo SVM utilizado se basa en un dise\~no propuesto en \cite{thiago-svm}. Es decir se construye un modelo de GER usando {\it clasificadores super vector machines} (SVM) con funci\'on de kernel radial kernel de base. Los clasificadores se entrenaron y se hicieron validaciones cruzadas de {\it 6 folders}. Para conseguir los par\'ametros \'optimos se realiz\'o lo siguiente: para cada validaci\'on cruzada, se reserv\'o un conjunto para las pruebas, y los restantes $k-1$ carpetas quedaron sujetas a un segundo procedimiento de validaci\'on cruzada en la que se probaban diferentes combinaciones de par\'ametros. Al par\'ametro $C$ se le asigna los valores de 1, 10, 100 y 1000, y a $\gamma$ se le asign\'o 1, 0,1, 0,001 y 0,0001. El conjunto de par\'ametros de mejor desempe\~no fue seleccionado para construir un clasificador entrenado desde las carpetas $k-1$, y probado en los datos de prueba. Este procedimiento se repiti\'o para cada iteraci\'on del procedimiento principal de validaci\'on cruzada.
+El algoritmo SVM utilizado se basa en un dise\~no propuesto en \cite{thiago-svm}. Es decir se construye un modelo de GER usando {\it clasificadores support vector machines} (SVM) con funci\'on de kernel radial kernel de base radial. Los clasificadores se entrenaron y se hicieron validaciones cruzadas con {\it 6 folders}. Para conseguir los par\'ametros \'optimos se realiz\'o lo el procedimiento est\'andar de k-folders. Es decir, para cada validaci\'on cruzada, se reserv\'o un conjunto para las pruebas, y los restantes $k-1$ conjuntos quedaron sujetos a un segundo procedimiento de validaci\'on cruzada en el que se probaban diferentes combinaciones de par\'ametros. Al par\'ametro $C$ se le asignaron los valores 1, 10, 100 y 1000, y a $\gamma$ se le asignaron los valores 1, 0,1, 0,001 y 0,0001. El conjunto de par\'ametros de mejor desempe\~no fue seleccionado para construir un clasificador entrenado on los conjuntos $k-1$, y probado en los datos de prueba. Este procedimiento se repiti\'o para cada iteraci\'on del procedimiento principal de validaci\'on cruzada.
 %................................
-\subsection{Modelo Computacional }
+%\subsection{Modelo Computacional }
 %................................
 
 %The present model consists of 12 binary classifiers representing whether individual referential attributes should be selected for inclusion in an output description. The classifiers correspond to atomic attributes of the target and first landmark object ({\em type}, {\em name} and {\em others}), and relations. Referential attributes of other landmark objects were not modelled due to data sparsity and also to reduce computational costs. For similar reasons, the multivalue {\em between} relation is also presently disregarded, and `corner' relations involving two landmarks (e.g., two streets) will be modelled as two separate classification tasks.
@@ -477,31 +476,31 @@ El algoritmo SVM utilizado se basa en un dise\~no propuesto en \cite{thiago-svm}
 %Since every attribute that corresponds to a positive prediction is always selected, the algorithm does not regard uniqueness as a stop condition. As a result, the output description may convey a certain amount of overspecification.
 
 
-El modelo consta de 12 clasificadores binarios que representan si los atributos individuales deben ser seleccionados para su inclusi\'on en una descripci\'on de salida. Los clasificadores se corresponden con atributos at\'omicos del target y primer landmark ({\em tipo}, {\em nombre } y {\em otros}), y las relaciones. Los atributos de otros landmarks no se modelaron debido a la escasez de datos y tambi\'en para reducir los costos computacionales. Por razones similares, el valor m\'ultiple de la relaci\'on {\em entre} tambi\'en se ignor\'o, y la relaci\'on esquina que implica a dos puntos de referencia (por ejemplo, dos calles) se modelaron como dos tareas de clasificaci\'on independientes.
+El modelo SVM consta de 12 clasificadores binarios que representan si los atributos individuales deben ser seleccionados para su inclusi\'on en la ER de salida. Los clasificadores se corresponden con atributos at\'omicos del target y del primer landmark con los atributos ({\em tipo}, {\em nombre } y {\em otros}), y las relaciones. Los atributos de otros landmarks no se modelaron en este experimento. El valor m\'ultiple de la relaci\'on {\em entre} tambi\'en se ignor\'o, y la relaci\'on esquina que implica a dos puntos de referencia (por ejemplo, dos calles) se modelaron como dos tareas de clasificaci\'on independientes.
 
 Dos caracter\'{i}sticas de aprendizaje fueron consideradas por cada clasificador: {\em landmarkCount}, que representa el n\'umero de objetos cercanos al target, y {\em DistractorCount}, que representa el n\'umero de objetos del mismo tipo que el target en el contexto considerado.
 
-A partir de los resultados de los 12 clasificadores binarios, una descripci\'on se construye teniendo en cuenta los atributos at\'omicos del target en primer lugar. Por cada predicci\'on positiva, se selecciona el atributo at\'omico correspondiente para su inclusi\'on en la descripci\'on de salida. A continuaci\'on, se consideran las relaciones. Si no se prev\'e ninguna relaci\'on, el algoritmo termina devolviendo una descripci\'on at\'omica del objeto target. Si la descripci\'on incluye una relaci\'on, se selecciona el objeto landmark relacionad, y el algoritmo se llama de forma recursiva para describir a ese objeto.
+A partir de los resultados de los 12 clasificadores binarios, una descripci\'on se construy\'o teniendo en cuenta los atributos at\'omicos del target en primer lugar. Por cada predicci\'on positiva, se seleccion\'o el atributo at\'omico correspondiente para su inclusi\'on en la descripci\'on de salida. A continuaci\'on, se consideraron las relaciones. Si no se elije ninguna relaci\'on, el algoritmo termina devolviendo una descripci\'on at\'omica del objeto target. Si la descripci\'on incluye una relaci\'on, se selecciona el objeto landmark relacionado, y el algoritmo se llama de forma recursiva para describir a ese objeto.
 
-Puesto que cada atributo que corresponde a una predicci\'on positiva est\'a siempre seleccionado, el algoritmo no considera singularidad como una condici\'on de parada. Como resultado, la descripci\'on de salida puede transmitir una cierta cantidad de sobreespecificaci\'on.
+Puesto que cada atributo que se corresponde con una predicci\'on positiva ser\'a siempre seleccionado, el algoritmo no considera unicidad como una condici\'on de parada. Como resultado, la descripci\'on de salida puede transmitir una cierta cantidad de sobreespecificaci\'on o bien ser subespecificada.
 
 
 %......................
-\subsection{Resultados de GER }
+\subsection{Resultados de la generaci\'on }
 %......................
 
 %Table \ref{tab-reg-results} summarizes the results obtained by the GER algorithm built from SVM classifiers, those obtained by a baseline system representing a relational extension of the Dale \& Reiter Incremental Algorithm, and by a Random selection strategy.  
-Tabla \ref{tab-reg-results} resume los resultados obtenidos por el algoritmo GER construido a partir de clasificadores SVM, los obtenidos mediante un sistema de l\'{i}nea de base que representa una extensi\'on relacional del algoritmo incremental \cite{incremental}, y por una estrategia de selecci\'on aleatoria. Se comparan precision (columna Acc), coeficientes Dice y MASI.
+Tabla \ref{tab-reg-results} resume los resultados obtenidos por el algoritmo de GER construido a partir de clasificadores SVM, los obtenidos mediante un sistema descripto en el Cap\'itulo \ref{sec:seleccion} que implementa una extensi\'on relacional del algoritmo incremental \cite{incremental}, y por una estrategia de selecci\'on random. Se comparan precisi\'on, coeficientes Dice y MASI.
 
 % these results are for SVM.All.VAR-   compared to the AEI- baseline
 \begin{table}[H]
 \begin{center}
 \begin{tabular} {  l c c c }
 \hline
-{Algorithm}							& {Acc.} 	& { Dice}		& MASI \\ \hline 
+{Algoritmo}							& {Precisi\'on} 	& { Dice}		& MASI \\ \hline 
 SVM											& 0.15		& 0.51			& 0.28 \\
 Incremental							& 0.04		& 0.53			& 0.21 \\
-Selecci\'on Random        	& 0.03    & 0.45      & 0.15 \\
+%Selecci\'on Random        	& 0.03    & 0.45      & 0.15 \\
 \hline
 \end{tabular}
 \end{center}
@@ -517,11 +516,11 @@ Selecci\'on Random        	& 0.03    & 0.45      & 0.15 \\
 %We also assessed the performance of the individual classifiers. Table \ref{tab-svm-results} shows these results as measured by precision (P), recall (R), F1-measure (F1) and area under the ROC curve (AUC). 
 
 
-En lo que sigue se comparan los resultados de exactitud obtenidos por cada par algoritmos mediante la prueba de chi cuadrado, y comparamos {\em Dice} utilizando la prueba de rangos con signo {\em de Wilcoxon}.
+En lo que sigue se comparan los resultados de exactitud obtenidos por cada par algoritmos mediante la prueba de chi cuadrado, y se compara {\em Dice} utilizando la prueba de rangos con signo {\em de Wilcoxon}.
 
-En t\'erminos de exactitud global\footnote{Y tambi\'en en cuanto a las puntuaciones MASI.}, el m\'etodo SVM supera a ambas alternativas. La diferencia con el segundo algoritmo de mejor rendimiento (es decir, el enfoque incremental) es altamente significativo ($\chi^{2}=$ 79,87, df = 1, p$<$ 0,0001). S\'olo en cuanto a las puntuaciones de {\it Dice} se observa el efecto contrario (T = 137570.5, p$=$0,01413).
+En t\'erminos de exactitud global y tambi\'en en cuanto a las puntuaciones MASI, el m\'etodo SVM supera al algoritmo incremental. La diferencia con el segundo algoritmo de mejor rendimiento (es decir, el enfoque incremental) es altamente significativa ($\chi^{2}=$ 79,87, df = 1, p$<$ 0,0001). S\'olo en cuanto a las puntuaciones de {\it Dice} se observa el efecto contrario (T = 137570.5, p$=$0,01413).
 
-Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \ref{tab-svm-results} muestra estos resultados, medida por la exactitud (P), memoria (R), F1-medida (F1) y el \'area bajo la curva ROC (AUC).
+Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. La Tabla \ref{tab-svm-results} muestra estos resultados, medida por la exactitud (P), exhaustividad (R), F1-medida (F1) y el \'area bajo la curva ROC (AUC).
 
 %these are the rsults for the training over the set of ALL speakers 
 \begin{table}[H]
@@ -555,19 +554,16 @@ Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. Tabla \
 
 %From these results we notice that highly frequent attributes (e.g., type and name) were classified  with high accuracy, whereas others (e.g., multivalue attributes and relations) were not. 
 
-A partir de estos resultados nos damos cuenta de que los atributos muy frecuentes (por ejemplo, el tipo y nombre) se clasificaron con gran exactitud, mientras que otros (por ejemplo, los atributos de varios valores y relaciones) no eran tan frecuentes y no se clasificaron con alta precision.
+A partir de estos resultados se ve de que algunos atributos (por ejemplo, el tipo del target y del landmark y el nombre del landmark) se clasificaron con gran exactitud, mientras que otros (por ejemplo, las relaciones) no se clasificaron con alta precisi\'on.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%	       >2
+Cabe destacar que aunque en estas m\'etricas, el algoritmo SVM supera al incremental, el SVM no puede asegurar que su salida sea una ER dado que no usa el modelo para verificar si la descripci\'on identifica un\'ivocamente al target, mientras que el algoritmo incremental s\'i. El algoritmo SVM podr\'ia verse entonces como una posible implementaci\'on de la fase ``generar'' del modelo cognitivo e Keysar \cite{keysar:Curr98} discutido en la Secci\'on \ref{sec:psicolinguistica}, a la que le falta la fase de ``ajustar'' para poder asegurar unicidad. Como tal genera ERs de una forma \textbf{egoc\'entrica} (en terminolog\'ia de Keysar et al) como lo har\'ia un ni\~no. Nuestro algoritmo en cambio, implementa las dos fases del modelo cognitivo de Keysar et al.
 
+A continuaci\'on evaluamos el desempe\~no de nuestro algoritmo sobre mapas del corpus ZOOM.
 
-
-
-
-
-\section{Caso de estudio del ZOOM corpus}
+\section{Desempe\~no de nuestro algoritmo sobre el corpus}
 \label{sec:caso_estudio}
 
-En esta secci\'on presentamos tres casos de estudio particulares, de generaci\'on autom\'atica de ERs para mapas del ZOOM corpus. En la Secci\'on \ref{sec:sinzoom} veremos un mapa sin zoom el cual se muestra en la Figura \ref{mapa-zoom1} y cuyo target es singular. En la Secci\'on \ref{sec:conzoom} analizaremos la GER con el mismo target pero ahora con zoom 2X, el mapa usado se muestra en la Figura \ref{mapa-zoom2x}. En la Secci\'on \ref{sec:plural} veremos el mismo mapa de la Secci\'on \ref{sec:sinzoom} pero con target plural, es decir con 2 targets, el mapa se muestra en Figura \ref{mapa-zoom-plural}.
+En esta secci\'on presentamos tres casos de estudio detallados de evaluaci\'on de las ERs generadas con nuestros algoritmos para mapas del corpus ZOOM. En la Secci\'on \ref{sec:sinzoom} analizaremos la generaci\'on de rankings de ERs singulares en el dominio del corpus ZOOM y compararemos el desempe\~no del algoritmo con datos del corpus. En la Secci\'on \ref{sec:conzoom} analizaremos la generaci\'on de rankings de ERs en un mapa con mayor nivel de zoom que el analizado en la Secci\'on \ref{sec:sinzoom}. En la Secci\'on \ref{sec:plural} analizaremos la generaci\'on de ERs plurales.
 
 %  Veremos las diferencias entre esos mapas a nivel de informaci\'on disponible, obtendremos a partir de cada imagen el modelo subyacente que usar\'a el algoritmo y a partir de las ER's del corpus obtendremos las probabilidades de uso de las palabras, para luego ejecutar el algoritmo. Compararemos las ER's dadas por el algoritmo con las que dieron las personas.
 
@@ -578,20 +574,20 @@ En esta secci\'on presentamos tres casos de estudio particulares, de generaci\'o
 %}
 
 
-\subsection{Singular sin zoom}
+\subsection{Generaci\'on de expresiones refenciales singulares}
 \label{sec:sinzoom}
 
-Vamos a considerar el mapa de a Figura \ref{mapa-zoom1}. El target, que es el objeto se\~nalado por la flecha roja, es una iglesia, como se puede ver el significado del s\'imbolo en la leyenda ubicada a la derecha del mapa. En la parte inferior derecha se muestran las probabilidades de uso, las cuales fueron aprendidas desde el corpus. Esas probabilidades no estaban en la imagen mostrada a los participantes que completaron el experimento, se agregaron a la imagen a fin de tenerlas conjuntamente con el mapa correspondiente.
+Consideremos el mapa de la Figura \ref{mapa-zoom1} que muestra una regi\'on de la ciudad de Madrid. El target, es decir, el objeto se\~nalado por la flecha roja, es una iglesia, como se puede ver en la leyenda ubicada a la derecha del mapa. En la parte inferior derecha de la imagen se muestran las probabilidades de uso, las cuales fueron aprendidas desde el corpus, como se describe en el Cap\'itulo \ref{sec:algoritmo}, estas probabilidades no estaban en la imagen mostrada a los participantes que completaron el experimento de recolecci\'on de corpus, se agregaron a la imagen para ilustrar la discusi\'on de esta secci\'on.
 
 En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as frecuentes generadas por las personas que participaron 
-en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se indica el porcentaje de personas que dieron cada tipo de ER, es decir la cantidad de distintas personas que independientemente decidieron usar la misma ER para referirse al target, dividido por la cantidad total de ERs del mapa (se d\'a en porcentaje). Estas 10 ERs m\'as frecuentes acumulan el 78.5\% del total de las ERs del corpus para el mapa considerado. Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales.\\
+en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se indica el porcentaje de personas que dieron cada tipo de ER, es decir la cantidad de distintas personas que independientemente decidieron usar la misma ER\footnote{Por la misma ER nos referimos a una ER con la misma sem\'antica. Posibles divergencias gramaticales o l\'exicas en la realizaci\'on fueron unificadas.} para referirse al target, dividido por la cantidad total de ERs del mapa (se d\'a en porcentaje). Estas 10 ERs m\'as frecuentes acumulan el 78.5\% del total de las ERs del corpus para el mapa considerado. Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales.\\
 
 
 %\end{figure}
 \begin{figure}
 \begin{center}
-\includegraphics[width=150mm]{images/corpus/mapa6-prob.png}
-\caption{Imagen del ZOOM corpus con target singular. Se muestran probabilidades de uso de las palabras en la esquina inferior derecha.}
+\includegraphics[width=\textwidth]{images/corpus/mapa6-prob.png}
+\caption{Imagen del corpus ZOOM con target singular. Se muestran las probabilidades de uso de las palabras en la esquina inferior derecha.}
 \label{mapa-zoom1}
 \end{center}
 \end{figure}
@@ -633,8 +629,8 @@ Para ejecutar el algoritmo necesitamos definir el vocabulario del modelo, es dec
 \begin{center}
 \begin{tabular}{|l|l|c|c|c|}
 \hline
-&ER 					       &  \% & SubE & SobreE\\ \hline \hline
-1&La iglesia 																																		 &19.7\%  & X & \\ \hline
+&ERs del corpus ZOOM para el target \emph{church1} 					       &  \% & SubE & SobreE\\ \hline \hline
+1&Iglesia 																																		 &19.7\%  & X & \\ \hline
 2&Iglesia en la calle de Santo Tom\'as																									 &18.5\% 	&  & \\ \hline
 3&Iglesia en la calle de Santo Tom\'as frente al Ministerio de Asuntos Exteriores        &13.6\% &  &X \\ \hline
 %&Asuntos Exteriores& &&&\\ \hline
@@ -678,7 +674,7 @@ Para ejecutar el algoritmo necesitamos definir el vocabulario del modelo, es dec
 %\end{small}
 %\end{table}
 Para calcular las probabilidades de uso usamos el m\'etodo presentado en el Cap\'itulo \ref{sec:algoritmo}, cuando se tiene un corpus disponible para la escena considerada. Se tuvieron en cuenta las ERs que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ERs fueron las que cumpl\'ian con esas condiciones. Para cada palabra de las que aparec\'ia en el corpus para el contexto seleccionado, las cuales son: \{church, in, front, near, minAsExt, calleSantoTomas, calleAtocha\} se cont\'o la cantidad de veces que aparec\'ia la palabra en el corpus, teniendo en cuenta que si aparec\'ia 2 veces en la misma ER se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63 que fueron la cantidad de ERs que eran v\'alidas. Por ejemplo la palabra {\it church} apareci\'o en 61 ERs, por lo tanto la probabilidad de {\it church} es 61/63 = 0.968. Y as\'i se calcul\'o para las dem\'as palabras del vocabulario. Las probabilidades de uso de las palabras se muestran en la esquina inferior derecha del mapa de la Figura \ref{mapa-zoom1}.
-Otra cosa que es input de nuestro algoritmo es el modelo.\\
+En la Figura \ref{modelo-mapa-zoom} se muestra el modelo relacional que usamos como input del algoritmo. A fines ilustrativos, el modelo representa s\'olo la parte del mapa que est\'a al sur de la calle Atocha.
 
 \begin{figure}[H]
 \centering
@@ -768,10 +764,10 @@ Otra cosa que es input de nuestro algoritmo es el modelo.\\
 %\draw[dotted] (-0.5,-1.1) rectangle (10.5,3.1);
 
  \end{tikzpicture}
-\caption{Grafo del contexto de la Figura \ref{mapa-zoom1}.}
+\caption{Modelo relacional del mapa de la Figura \ref{mapa-zoom1}.}
 \label{modelo-mapa-zoom}
 \end{figure}
-Aqu\'i retomamos la discusi\'on de qu\'e representar en el modelo, a fin de poder generar todas las ERs que aparecen en el corpus. Decidimos representar el fragmento del mapa de la Figura \ref{mapa-zoom1}, al sur de la calle de Atocha, el modelo se muestra en la Figura \ref{modelo-mapa-zoom}. Consideramos que esta decisi\'on fue acertada ya que en las ERs del corpus no figuran objetos ubicados al norte de la calle de Atocha. Notar que la iglesia distractora tambi\'en se encuentra en esa porci\'on del mapa. La iglesia target es {\it church1}, la iglesia distractora es {\it church2}. La iglesia target se encuentra {\it near} y {\it front} del {\it minAsExt} el cual tiene identificador {\it min1}. Est\'a {\it in calleAtocha} e {\it in calleSantoTomas}. Se tuvo que agregar el objeto {\it d}, ya que sin ese objeto, el algoritmo pensaba que la iglesia target era la \'unica que estaba {\it front} algo. Se agregaron restaurantes y calles por completitud del modelo, pero no fueron usadas por el algoritmo. Al tener probabilidad de uso 0, el algoritmo no las seleccion\'o para agregar a las ERs. Para sobreespecificar se permiten todas las relaciones unarias, es decir las propiedades at\'omicas.\\
+La iglesia target se representa como {\it church1}, la iglesia distractora como {\it church2}. La iglesia target se encuentra {\it near} y {\it front} del {\it minAsExt} el cual tiene identificador {\it min1}. Est\'a {\it in calleAtocha} e {\it in calleSantoTomas}. Se tuvo que agregar el objeto {\it d}, ya que sin ese objeto, el algoritmo pensaba que la iglesia target era la \'unica que estaba {\it front} algo. Se agregaron restaurantes y calles por completitud del modelo, pero no fueron usadas por el algoritmo. Al tener probabilidad de uso 0, el algoritmo no las seleccion\'o para agregar a las ERs. Para sobreespecificar se permiten todas las relaciones unarias, es decir las propiedades at\'omicas.\\
 Recordemos que el algoritmo es no-determin\'istico, as\'i si lo ejecutamos muchas veces, vamos a conseguir posiblemente diferentes ERs para el mismo input. Teniendo as\'i como resultado un ranking de ERs.
 Ejecutamos el algoritmo 1000 veces, con input el modelo mostrado en la Figura \ref{modelo-mapa-zoom} y las probabilidades dadas en la esquina inferior derecha de la misma figura. Se muestran las 10 f\'ormulas m\'as frecuentes, y la frecuencia dada por el algoritmo en la Tabla \ref{formulas-mapa-zoom}. 
 
