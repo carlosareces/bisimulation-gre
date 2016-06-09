@@ -107,28 +107,12 @@ PONER ALGO DE LA SECCION 4.3 DEL SURVEY ACA Y AGREGAR EL CITE \cite{baader03}
 
 \subsection{Interactividad e Incrementalidad}
 
+Estudios previos~\cite{jordan05,gupta05} sugieren que los algoritmos del estado del arte de GER que usan un orden fijo de las propiedades del contexto no se pueden aplicar de forma directa en aplicaciones interactivas. Estos estudios encontraron que en este tipo de aplicaciones los algoritmos del estado del arte se desempeñan peor que estrategias basadas en patrones sencillos y que prestan atenci\'on al historial de la interacci\'on. Un experimento realizado sobre el corpus iMap~\cite{viethendaleguhe11} confirm\'o la importancia de modelar el terreno com\'un de una interacci\'on para producir ERs \'utiles. El trabajo publicado en \cite{stoia06} de GER en entornos de interacci\'on situada en in videojuego hace evidente la necesidad de variar el orden de las propiedades utilizado por los algoritmos dependiendo de caracter\'isticas del contexto que se modifican continuamente (como la distancia a los objetos target y distractores). Nuestro algoritmo, al proveer una distribuci\'on finita de probabilidades asociada a cada propiedad en lugar de requerir un orden fijo, permite un mayor control y dinamismo a la hora de elegir propiedades para una ER en un contexto cambiante. Ser\'ia interesante evaluar sy desempeño en este tipo de aplicaciones interactivas. 
+
 %interactividad
 Como trabajo futuro tambi\'en tenemos la intenci\'on de evaluar nuestro algoritmo de dominios m\'as complejos como los de dominio abiertos proporcionados en Folksonimies~\cite{pacheco-duboue-dominguez:2012:NAACL-HLT}. Los corpus Stars/2 recientemente liberados, ser\'ian interesantes para evaluar el algoritmo, ya que poseen situaciones complejas de referencia que hacen amplio uso de relaciones y expresiones de hasta tres landmarks. Tambi\'en planeamos explorar corpus que se obtienen de la interacci\'on humana, como el GIVE Corpus~\cite{GarGarKolStr10} donde es com\'un observar ERs en varios intentos, es decir dando expresiones parciales en cada intento. Bajo presi\'on de tiempo los hablantes producen primero una expresi\'on under-especificada que incluye las propiedades m\'as destacadas del target (por ejemplo, ``el bot\'on rojo''). Y luego, en un siguiente enunciado, a\~naden propiedades adicionales (por ejemplo, ``a la izquierda de la l\'ampara'') para que la expresi\'on sea una ER adecuada para identificar de manera \'unica al target. Algoritmos para generar este tipo de ERs han sido propuestos en \cite{denis10}. 
 
-Psycholinguistic studies suggest that traditional REG algorithms which rely on
-some predefined ranking of attributes cannot straightforwardly be applied in an interactive
-setting. This is confirmed by the findings of Jordan and Walker (2005) and Gupta
-and Stent (2005), who studied references in dialogue corpora discussed in Section 5.
-They found that in these data sets, traditional algorithms are outperformed by simple
-strategies that pay attention to the referring expressions produced earlier in the dialogue.
-A more recent machine learning experiment on a larger scale, using data from the
-iMap corpus, confirmed the importance of features related to the process of alignment
-(Viethen, Dale, and Guhe 2011). Other researchers have started exploring the generation
-of referring expressions in interactive settings as well. Stoia et al. (2006), for example,
-presented a system that generates references in situated dialogues, taking into account
-both dialogue history and spatial visual context, defined in terms of which distractors
-are in the current field of vision of the speakers and how distant they are from the
-target. Janarthanam and Lemon (2009) present a method which automatically adapts to
-the expertise level of the intended addressee (using the router when communicating
-with an expert user, and the black block with the lights while interacting with a
-novice). This line of research fits in well with another, more general, strand of research
-concentrating on choice optimization during planning based on user data (Walker et al.
-2007; White, Clark, and Moore 2010).
+
 
 
 
