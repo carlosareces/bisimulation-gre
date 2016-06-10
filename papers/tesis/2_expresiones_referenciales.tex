@@ -161,7 +161,7 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 
 %was the first prominent REG corpus to be made publicly available for research purposes. The corpus was developed in a series of general-purpose controlled experiments, containing 2280 descriptions produced by 60 speakers in two domains (1200 descriptions of furniture items and 1080 descriptions of people's photographs). TUNA does not contain relational descriptions, and it is possibly the only resource of this kind to include situations of reference to sets. The TUNA corpus has been extensively used in a series of shared tasks
 
-{\bf TUNA} \cite{tuna-corpus} fue el primer corpus prominente de ERs disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2.280 descripciones producidas por 60 personas en dos dominios (1.200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una grilla). Se muestran ejemplos de im\'agenes en la Figura \ref{imagenes-tuna}. El corpus TUNA no contiene descripciones relacionales. Este corpus se ha utilizado ampliamente en una serie de desaf\'ios \cite{reg2009}. En el Cap\'itulo \ref{sec:corpus} de esta tesis se usa para evaluar nuestros algoritmos y as\'i comparamos con el desempe\~no de otros algoritmos del \'area que participaron en estos desaf\'ios. El corpus contiene s\'olo una ER por escena, por lo cual no es \'util para comparar con rankings de ERs, y la evaluaci\'on de nuestro algoritmo con respecto a este corpus es limitada.\\
+{\bf TUNA} \cite{tuna-corpus} fue el primer corpus prominente de ERs disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2.280 descripciones producidas por 60 personas en dos dominios (1.200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una grilla). Se muestran ejemplos de im\'agenes en la Figura \ref{imagenes-tuna}. El corpus TUNA no contiene descripciones relacionales. Este corpus se ha utilizado ampliamente en una serie de desaf\'ios \cite{gatt09}. En el Cap\'itulo \ref{sec:corpus} de esta tesis se usa para evaluar nuestros algoritmos y as\'i comparamos con el desempe\~no de otros algoritmos del \'area que participaron en estos desaf\'ios. El corpus contiene s\'olo una ER por escena, por lo cual no es \'util para comparar con rankings de ERs, y la evaluaci\'on de nuestro algoritmo con respecto a este corpus es limitada.\\
 
 
 %\begin{figure}[H]
@@ -602,31 +602,7 @@ En lo que sigue veremos como evaluar a los algoritmos de GER.
 Esta secci\'on est\'a dividida en 3 partes, en la primera se muestra trabajo previo usando corpora relevante a nuestro estudio, en la segunda se explican algunas m\'etricas autom\'aticas usadas en el \'area y en la tercera se d\'a una introducci\'on a las m\'etricas manuales.
 
 \subsection{Trabajo previo en evaluaci\'on usando corpora}\label{sec:2_3_1}
-%
-%La adopci\'on de estas premisas sirve para dos fines: en primer lugar, mejora la adecuaci\'on
-%de la salida de algoritmos de GER para el objeto target imitando la capacidad humana
-%de producir referencias adecuadas; y en segundo lugar, el estudio de corpus de datos producidos por humanos
- %y algoritmos en desarrollo que pueden replicar estos datos podr\'ian
-%acercarnos a la comprensi\'on de que es lo que hacen los humanos cuando dan una ER.
 
-%\cite{viethen-phd} dice que el cl\'asico algoritmo de GER y la mayor parte de sus descendientes no se basaron ni evaluaron contra datos producidos por humanos. Ellos se basaron en una visi\'on bastante minimalista de lo que se necesita
-%para que una expresi\'on referencial sea \'optima, concentr\'andose en la eficiencia computacional 
- %y descripciones breves como sus principales preocupaciones.
-%
- %Existe un peque\~no n\'umero de enfoques que 
- %se basaron en observaciones del comportamiento de referencia general humana
-%que obtuvieron a partir de experimentos psicoling\"u\'isticos, pero de nuevo no fueron evaluados
-%contra datos humanos.
-%
-%Los algoritmos que se presentaron a los desaf\'ios de evaluaci\'on \cite{gatt-balz-kow:2008:ENLG} y \cite{reg2009}
-%fueron probados en el TUNA-Corpus, y algunos de ellos
-%tambi\'en tuvieron en cuenta corpus del conjunto del desarrollo. Pero hay una serie de preocupaciones en torno a la pregunta de si el TUNA-Corpus, y la forma de salida de los sistemas que se compar\'o en los desaf\'ios eran ideales para una evaluaci\'on de la adecuaci\'on descriptiva de GER.
-%saque esto porque no se entiende
-%A partir de los desaf\'ios que se describen en m\'as detalle y para evaluarlos en una serie de datos m\'as grande
-%que contiene m\'as de una expresi\'on referencial para cada elemento est\'imulo.
-
-%No se pretend\'ia que ninguno de los algoritmos de la prueba tomara en cuenta las variaciones entre-hablantes, ni del mismo hablante. Hay implementaciones del IA que han comenzado a agregar modelo de preferencias de hablante en alg\'un grado.
-%
 Los temas generales que con la evaluaci\'on basada en corpus de la experiencia de \cite{viet:gene11} quedaron
 al descubierto fueron (1) la interdependencia estrecha entre algoritmos y la
 representaci\'on subyacente de conocimiento que utilizan, (2) el no-determinismo de la generaci\'on del lenguaje natural, 

@@ -657,26 +657,7 @@ $$
 \top \mid p \mid \neg \phi \mid \phi \wedge \phi' \mid  \exists r. \phi
 $$
 donde $p$ es un s\'imbolo proposicional, $r$ es un s\'imbolo relacional binario, y $\phi$, $\phi'$ son f\'ormulas de $\ALC$.
-%corresponde al fragmento sint\'actico de
-%\FOL sin $\not\approx$, como es mostrado por la traducci\'on est\'andar $\st_x$:
-%
-%\begin{center}
-%\begin{tabular}{rcl@{\hspace{1cm}}rcl}
-%$ \st_{x_i}(\top)$ &$=$& $\top$
-%&
-%$\st_{x_i}(\phi_1 \land \phi_2)$ &$=$& $\st_{x_i}(\phi_1) \land \st_{x_i}(\phi_2)$
-%\\
-  %$\st_{x_i}(p)$ &$=$& $p(x_i)$
-%&
-%$\st_{x_i}(\exists r . \phi)$ &$=$& $\exists x_{i+1} . (r(x_i,x_{i+1}) \land \st_{x_{i+1}}(\phi))$
-%\\
- %$\st_{x_i}(\lnot \phi)$ &$=$& $\lnot\st_{x_i}(\phi)$
-%&
-%\end{tabular}
-%\end{center}
-%
-%En efecto, dado un modelo relacional $\+M$, la extensi\'on de una f\'ormula \ALC en $\gM$ coincide exactamente con la extensi\'on de $\st_{x_1}(\varphi)$ (v\'ease, por ejemplo, ~\cite{baad:desc03}). Gracias
-%a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes podemos definir $\interp{\varphi} = \interp{\st_{x_1}(\varphi)}$.
+
  Mediante la restricci\'on a f\'ormulas de $\ALC$ 
 evitar\'iamos f\'ormulas como $\phi_3$ (es decir con desigualdad). Tambi\'en evitar\'iamos f\'omulas como $\phi_4$ que puede realizarse como {\it El perro que es olido por un peque\~no gato} en el cual tenemos que realizar la parte del existencial como una voz pasiva al aparecer la variable cuantificada $x$ en segundo lugar.
 
@@ -828,52 +809,6 @@ La f\'ormula $\phi_1$, $\phi_2$, $\phi_3$ y $\phi_4$ son caracterizadas como f\'
 
 En el Cap\'itulo \ref{sec:intro_logica} describimos c\'omo los operadores l\'ogicos afectan la expresividad y la complejidad computacional de la tarea de GER, as\'i como el ranking de ERs generadas. En el Cap\'itulo \ref{sec:algoritmo} proponemos como dicho ranking puede ser mejorado agregando una distribuci\'on finita de probabilidades asociada a los s\'imbolos de relaci\'on del modelo.
 
-%El hecho de que el lenguaje de representaci\'on utilizado tiene un impacto sobre la determinaci\'on de contenido es obvio, 
-%pero no ha recibido la atenci\'on que merece. 
-%Areces et al. [1] usaron diferentes l\'ogicas de descripci\'on (una familia de lenguajes formales utilizado en 
-%representaci\'on del conocimiento, vea [2]) para clasificar y dar un marco formal para
-%trabajo previo sobre GRE. 
-
-
-%En efecto, dado un modelo relacional $\+M$, la extensi\'on de una f\'ormula \ALC en $\+M$ coincide exactamente con la extensi\'on
- %de $\st_{x_1}(\varphi)$ (v\'ease, por ejemplo, ~\cite{baad:desc03}). Gracias
-%a este resultado, para cualquier f\'ormula $\varphi$ de \ALC y sus sublenguajes podemos definir 
-%$\interp{\varphi} = \interp{\st_{x_1}(\varphi)}$.
-%
-%
-%
-%
- %Volviendo a nuestro ejemplo anterior, mediante la restricci\'on de la generaci\'on de contenido
-%a f\'ormulas de $\ALC$ (o equivalentemente, el fragmento correspondiente de \FOL)
-%evitar\'iamos f\'ormulas como
-%$\phi_5$ (sin igualdad) y
-%
-%$\phi_4$ (aparece cuanti elemento ed
-%siempre en segunda posici\'on de argumento). ESTE EJ NO LO PUSE... ver si consigo alguno interesante
-%
-
-%Generaci\'on se discute en ~\cite{AKS08}, en t\'erminos de diferentes l\'ogicas de descripci\'on como \ALC
-%y \EL (\ALC sin negaci\'on). Vamos a ampliar los resultados en ese papel, consideando por ejemplo \ELAN 
-%(\ALC con la negaci\'on permitida s\'olo frente a relaciones unarias), pero, en general, nosotros tomamos un enfoque modelo te\'orico y argumentamos que la cuesti\'on principal no es si se debe utilizar una u otra (descripci\'on l\'ogica para la generaci\'on de contenido, sino que son el diferencias sem\'antica a tener en cuenta. Esto no solo determina el formalismo l\'ogico requerido sino tambi\'en impacta tanto en la determinaci\'on de contenido como en los problemas de realizaci\'on sint\'actica. Cada
-%lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. La selecci\'on apropiada para una tarea GRE particular, debe depender del contexto actual
-%
-%En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
-%\begin{table}[h!]
-%\begin{tabular}{l|l}
-  %Algoritmo de GER & Variante de L\'ogica de Descripci\'on (LD)\\
-  %\hline
-          %Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-                %Heur\'istica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-  %Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-  %GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
-                                                                %& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
-  %Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
-        %& y proposicionales)\\
-  %Kelleher and Kruijff (2006)   & $\EL$ \\
-  %Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
-%\end{tabular}
-%\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:algoritmosLogicas}
-%\end{table}
 
 
 \section{Mapa de la tesis}
