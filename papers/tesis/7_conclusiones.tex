@@ -82,6 +82,17 @@ Sobre mapas de este corpus se realizaron 3 casos de estudio que se describen en 
 
 En esta secci\'on describimos cuatro l\'ineas de trabajo claras en las que los aportes de esta tesis podr\'ian ser continuados. Algunas de estas \'areas han sido previamente estudiadas pero a\'un plantean muchos desaf\'ios, como la generaci\'on de ERs plurales y generaci\'on de ERs de forma incremental en entornos interactivos. Otros temas como el uso de lenguajes l\'ogicos modales m\'as expresivos y la inclusi\'on de una teor\'ia del dominio son extensiones naturales del enfoque a la GER adoptado en esta tesis que no han sido estudiados previamente. 
 
+\subsection{Interactividad e Incrementalidad}
+
+Estudios previos~\cite{jordan05,gupta05} sugieren que los algoritmos del estado del arte de GER que usan un orden fijo de las propiedades del contexto no se pueden aplicar de forma directa en aplicaciones interactivas. Estos estudios encontraron que en este tipo de aplicaciones los algoritmos del estado del arte se desempeñan peor que estrategias basadas en patrones sencillos y que prestan atenci\'on al historial de la interacci\'on. Un experimento realizado sobre el corpus iMap~\cite{viethendaleguhe11} confirm\'o la importancia de modelar el terreno com\'un de una interacci\'on para producir ERs \'utiles. El trabajo publicado en \cite{stoia06} de GER en entornos de interacci\'on situada en in videojuego hace evidente la necesidad de variar el orden de las propiedades utilizado por los algoritmos dependiendo de caracter\'isticas del contexto que se modifican continuamente (como la distancia a los objetos target y distractores). Nuestro algoritmo, al proveer una distribuci\'on finita de probabilidades asociada a cada propiedad en lugar de requerir un orden fijo, permite un mayor control y dinamismo a la hora de elegir propiedades para una ER en un contexto cambiante. Ser\'ia interesante evaluar sy desempeño en este tipo de aplicaciones interactivas. 
+
+%modelos que cambian
+Modelos que cambian parcialmente como sucede con los mapas con distintos niveles de ZOOM en el corpus son comunes en aplicaciones interactivas donde el usuario está navegando la aplicación. En estos dominios el contexto de referencia puede cambiar en su estructura o en el número de objetos y propiedades, mientras algunas características del contexto se mantienen. El desafío de los algoritmos de GER sería producir ERs sin empezar desde cero cada vez que el modelo cambia. Algoritmos como el nuestro que se basan en particiones locales del contexto podrían tener una ventaja en este sentido, esta es una línea interesante de trabajo futuro. 
+ 
+%interactividad
+Como trabajo futuro tambi\'en tenemos la intenci\'on de evaluar nuestro algoritmo de dominios m\'as complejos como los de dominio abiertos proporcionados en Folksonimies~\cite{pacheco-duboue-dominguez:2012:NAACL-HLT}. Los corpus Stars/2 recientemente liberados, ser\'ian interesantes para evaluar el algoritmo, ya que poseen situaciones complejas de referencia que hacen amplio uso de relaciones y expresiones de hasta tres landmarks. Tambi\'en planeamos explorar corpus que se obtienen de la interacci\'on humana, como el GIVE Corpus~\cite{GarGarKolStr10} donde es com\'un observar ERs en varios intentos, es decir dando expresiones parciales en cada intento. Bajo presi\'on de tiempo los hablantes producen primero una expresi\'on under-especificada que incluye las propiedades m\'as destacadas del target (por ejemplo, ``el bot\'on rojo''). Y luego, en un siguiente enunciado, a\~naden propiedades adicionales (por ejemplo, ``a la izquierda de la l\'ampara'') para que la expresi\'on sea una ER adecuada para identificar de manera \'unica al target. Algoritmos para generar este tipo de ERs han sido propuestos en \cite{denis10}. 
+
+
 \subsection{Plurales: De Targets Singleton a Conjuntos}
 
 %plurales
@@ -101,18 +112,6 @@ En esta tesis la combinaci\'on de l\'ogica y probabilidades se realiza a nivel a
 
 
 PONER ALGO DE LA SECCION 4.3 DEL SURVEY ACA Y AGREGAR EL CITE \cite{baader03}
-
-
-\subsection{Interactividad e Incrementalidad}
-
-Estudios previos~\cite{jordan05,gupta05} sugieren que los algoritmos del estado del arte de GER que usan un orden fijo de las propiedades del contexto no se pueden aplicar de forma directa en aplicaciones interactivas. Estos estudios encontraron que en este tipo de aplicaciones los algoritmos del estado del arte se desempeñan peor que estrategias basadas en patrones sencillos y que prestan atenci\'on al historial de la interacci\'on. Un experimento realizado sobre el corpus iMap~\cite{viethendaleguhe11} confirm\'o la importancia de modelar el terreno com\'un de una interacci\'on para producir ERs \'utiles. El trabajo publicado en \cite{stoia06} de GER en entornos de interacci\'on situada en un videojuego hace evidente la necesidad de variar el orden de las propiedades utilizado por los algoritmos dependiendo de caracter\'isticas del contexto que se modifican continuamente (como la distancia a los objetos target y distractores). Nuestro algoritmo, al proveer una distribuci\'on finita de probabilidades asociada a cada propiedad en lugar de requerir un orden fijo, permite un mayor control y dinamismo a la hora de elegir propiedades para una ER en un contexto cambiante. Ser\'ia interesante evaluar su desempeño en este tipo de aplicaciones interactivas. 
-
-%interactividad
-Como trabajo futuro tambi\'en tenemos la intenci\'on de evaluar nuestro algoritmo en dominios m\'as complejos como los de dominio abiertos proporcionados en Folksonimies~\cite{pacheco-duboue-dominguez:2012:NAACL-HLT}. Los corpus Stars/2 recientemente liberados, ser\'ian interesantes para evaluar el algoritmo, ya que poseen situaciones complejas de referencia que hacen amplio uso de relaciones y expresiones referenciales que incluyen descripciones de hasta tres landmarks. Tambi\'en planeamos explorar corpus que se obtienen de la interacci\'on humana, como el GIVE Corpus~\cite{GarGarKolStr10} donde es com\'un observar ERs en varios intentos, es decir dando expresiones parciales en cada intento. Bajo presi\'on de tiempo los hablantes producen primero una expresi\'on subespecificada que incluye las propiedades m\'as destacadas del target (por ejemplo, ``el bot\'on rojo''). Y luego, en un siguiente enunciado, a\~naden propiedades adicionales (por ejemplo, ``a la izquierda de la l\'ampara'') para que la expresi\'on sea una ER adecuada para identificar de manera \'unica al target. Algoritmos para generar este tipo de ERs han sido propuestos en \cite{denis10}. 
-
-
-
-
 
 
 
