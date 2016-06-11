@@ -637,8 +637,7 @@ belowof & 0 &  0 \\
 El aprendizaje se realiza con el kit de herramientas de aprendizaje autom\'atico
 WEKA~\cite{Hall:WEK09}, entrenando con todas las escenas menos una (para la que estamos aprendiendo) se realiz\'o para el corpus \textit{GRE3D7} y el \textit{TUNA-corpus}. Un ejemplo del contenido de los archivos XML del \textit{TUNA-corpus} se muestra en el Ap\'endice \ref{archivos-xml-tuna}. El corpus cuenta con im\'agenes generadas aleatoriamente, por lo tanto las im\'agenes que se muestran en esta tesis, pueden no ser exactamente como las im\'agenes mostradas a los participantes.
 
-Un ejemplo de archivo de los que toma WEKA como input se d\'a en el Ap\'endice \ref{archivos-arff-blue}. Este archivo corresponde a propiedad {\it blue} 
-de la parte muebles del \textit{TUNA-corpus}. Utilizamos regresi\'on lineal para aprender la funci\'on de
+Utilizamos regresi\'on lineal para aprender la funci\'on de
 \puse\ para cada palabra en la signatura. Para una escena determinada, reemplazamos
 las variables de la funci\'on obtenida por los valores de las caracter\'{i}sticas
 de la escena que queremos describir.
@@ -655,7 +654,7 @@ en~\cite{viet:gene11}. Por \'ultimo, vimos en el
 m\'as frecuentemente de una manera sobreespecificada cuando el
 target y el landmark comparten el tama\~no. El {\it tama\~no} fue utilizado en las ER de manera sobreespecificada en el 49 \% de
 las descripciones de escenas en las que el target y el landmark compart\'ian el tama\~no,
-y el 25 \% cuando target y el landmark no lo compart\'ian. Esto puede explicarse por la observaci\'on de que si landmark y el target comparten una propiedad, esta propiedad es m\'as relevante.
+y el 25 \% cuando target y el landmark no lo compart\'ian. Esto puede explicarse por la observaci\'on de que si el landmark y el target comparten una propiedad, esta propiedad es m\'as relevante.
 
 \section{El algoritmo probabil\'istico}
 \label{sec:algoritmo_probabilistico}
@@ -790,9 +789,32 @@ Con respecto a la informatividad, se permitir\'a
 \section{Ejemplo de ejecuci\'on}
 \label{sec:ejemplo_ejecucion}
 
-En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el modelo de la Figura \ref{fig4-9}, considerando la probabilidades de uso mostradas en la Tabla\ref{}. Mostraremos la ejecuci\'on del algoritmo sin dar un target singleton, es decir el conjunto de todos los elementos del modelo, son el target. Al finalizar esperamos tener una ER para cada elemento del modelo.
-En el comienzo $RE$=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$.
+En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el modelo de la Figura \ref{fig4-9}, considerando la probabilidades de uso mostradas en la Tabla\ref{probabilidades-ejemplo-ejecucion}. Mostraremos la ejecuci\'on del algoritmo sin dar un target espec\'ifico. En este caso el algoritmo obtiene ERs para todos los elementos del modelo. Al finalizar entonces esperamos tener una ER para cada elemento del modelo. Por simplicidad no vamos a nombrar cada vez que tal propiedad pas\'o la probabilidad random del algoritmo, pero s\'i lo nombraremos cuando no la haya pasado. Recordemos que para conseguir no-determinismo, el algoritmo tiene un componente random que hace que si la probabilidad de uso es mayor que el n\'umero random calculado en esa ejecuci\'on. 
+En el comienzo $RE$=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$.\\
+
+\begin{table}[H]
+\begin{center}
+\footnotesize{
+\begin{tabular} {  l c c c c c c c c c }
+\hline
+%\multicolumn{1}{c}{}
+%&\multicolumn{1}{c}{Domain}
+%&\multicolumn{3}{c}{Descriptions}\\
+
+R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   \\
+\hline
+R.\puse	& 1.0			& 1.0		& 0.978	& 0.257 & 0.178 & 0.15   & 0.107 & 0.007& 0 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\vspace*{-.5cm} 
+\caption{Distribuci\'on de probabilidad de las propiedades y relaciones de la figura de ejemplo.}\label{probabilidades-ejemplo-ejecucion}
 \vspace*{1cm}
+\end{table}
+
+
 \begin{figure}[H]
 \begin{subfigure}{0.5\linewidth}
 \centering
@@ -869,18 +891,18 @@ En el comienzo $RE$=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e
 \end{figure}
 
 La primer relaci\'on a considerar de acuerdo a las R.\puse\ es \texttt{ball}, recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a $RE$ si su interpretaci\'on 
-tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a sera $\top \cup \exists\ .\texttt{ball}~\top$. Aqu\'i escribimos $\top \cup \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Ambas condiciones se cumplen y $RE$ entonces es \{$\top$, \texttt{ball}\}. Se ven los elementos de la f\'ormula \texttt{ball} en el recuadro de la Figura~\ref{fig-modelo3} que enmarca a $e_1$, $e_3$ y $e_5$.
+tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a ser\'a $\top \cup \exists\ .\texttt{ball}~\top$. Aqu\'i escribimos $\top \cup \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Ambas condiciones se cumplen y $RE$ entonces es \{$\top$, \texttt{ball}\}. Se ven los elementos de la f\'ormula \texttt{ball} en el recuadro de la Figura~\ref{fig-modelo3} que enmarca a $e_1$, $e_3$ y $e_5$.
 
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/ej/1ball.png}}\\[0pt]
-\caption{Elementos que satisfacen la f\'ormula \texttt{ball}.}
+\caption{El cuadro mayor indica elementos que satisfacen Top. El recuadro m\'as chico elementos que satisfacen la f\'ormula \protect\texttt{ball}.}
 \label{fig-modelo3}
 \end{center}
 \end{figure}
 
 La siguiente propiedad a considerar es \texttt{cube}. Realizando el mismo procedimiento antes mencionado, queda $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
-$\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. $RE$ =\{$\top$, \texttt{ball}, \texttt{cube}\}. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ est\'a subsumida, por lo tanto podemos borrarla. Quedando las particiones como se muestra en la Figura~\ref{fig-modelo4}.
+$\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. $RE$ =\{$\top$, \texttt{ball}, \texttt{cube}\}. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ est\'a subsumida, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
 
 %\setlength{\unitlength}{1cm}
 %
@@ -896,10 +918,35 @@ $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. $RE$ =\{$\top$, \texttt{bal
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/ej/2ball-cube.png}}\\[0pt]
-\caption{Cuadros indicando \texttt{ball} y \texttt{cube}.}
+\caption{Particiones de elementos que satisfacen la f\'ormula \texttt{ball} y otros la f\'ormula \texttt{cube}.}
 \label{fig-modelo4}
 \end{center}
 \end{figure}
+
+Las dem\'as propiedades y no pasaron la probabilidad random del algoritmo, pero a\'un tenemos particiones con m\'as de un elemento, y las probabilidades de uso son menores que 1, por lo tanto se aumentan las probabilidades de uso en 0.2 (siendo ) para cada propiedad quedando:
+
+
+\begin{table}[H]
+\begin{center}
+\footnotesize{
+\begin{tabular} {  l c c c c c c c c c }
+\hline
+%\multicolumn{1}{c}{}
+%&\multicolumn{1}{c}{Domain}
+%&\multicolumn{3}{c}{Descriptions}\\
+
+R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   \\
+\hline
+R.\puse	& 1.0			& 1.0		& 0.9824	& 0.4056 & 0.3424 & 0.32   & 0.2856 & 0.2056& 0.2 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\vspace*{-.5cm} 
+\caption{Probabilidad de las propiedades y relaciones de la figura de ejemplo, incrementadas en R.\incuse.}\label{probabilidades-ejemplo-ejecucion2}
+\vspace*{1cm}
+\end{table}
 La siguiente propiedad es \texttt{red}, donde  
 $\interp{\texttt{red}}$ = $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en $RE$ obtenemos, 
 $\{e_5\}$ y $\{e_2, e_4, e_7\}$. Las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}. El conjunto $RE$ hasta el momento es $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red}\}$.
@@ -907,19 +954,50 @@ $\{e_5\}$ y $\{e_2, e_4, e_7\}$. Las particiones actuales se pueden ver en la Fi
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/ej/3ball-cube-red.png}}\\[0pt]
-\caption{Cuadros indicando \texttt{ball}, \texttt{cube} y \texttt{red}.}
+\caption{Cuadros indicando particiones de elementos que cumplen la f\'ormula \texttt{ball}, la f\'ormula \texttt{cube} y la f\'ormula \texttt{red}.}
 \label{fig-modelo9}
 \end{center}
 \end{figure}
 %
+% 0.0044
+% 0.1486
+% 0.1644
+% 0.17
+% 0.1786
+% 0.1986
+% 0.2
+Otra vez las probabilidades random superan a las de la lista, recalculamos las probabilidades sumando R.\incuse a cada \puse, quedando como muestra la Tabla \ref{probabilidades-ejemplo-ejecucion3}.
+
+\begin{table}[H]
+\begin{center}
+\footnotesize{
+\begin{tabular} {  l c c c c c c c c c }
+\hline
+%\multicolumn{1}{c}{}
+%&\multicolumn{1}{c}{Domain}
+%&\multicolumn{3}{c}{Descriptions}\\
+
+R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   \\
+\hline
+R.\puse	& 1.0			& 1.0		& 0.9868	& 0.5542 & 0.5068 & 0.49   & 0.4642 & 0.4042& 0.4 \\
+\hline
+
+\end{tabular}
+}
+\end{center}
+\vspace*{-.5cm} 
+\caption{Probabilidad de las propiedades y relaciones de la figura de ejemplo, incrementadas en R.\incuse.}\label{probabilidades-ejemplo-ejecucion3}
+\vspace*{1cm}
+\end{table}
+
 Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos $RE$ = $\{\texttt{ball} \wedge \texttt{yellow}, 
 \texttt{cube} \wedge \texttt{yellow}, \texttt{ball} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red}\}$. 
-Note que aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en Figura~\ref{fig-modelo10}.
+Note que aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo10}.
 
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/ej/4ball-cube-red-yellow.png}}\\[0pt]
-\caption{Cuadros indicando \texttt{ball}, \texttt{cube}, \texttt{red} y \texttt{yellow}.}
+\caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas \texttt{ball}, \texttt{cube}, \texttt{red} y \texttt{yellow}.}
 \label{fig-modelo10}
 \end{center}
 \end{figure}
@@ -928,7 +1006,7 @@ Borrando subsumidas del modelo tenemos
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/ej/4b.png}}\\[0pt]
-\caption{Cuadros indicando \texttt{ball}, \texttt{cube}, \texttt{red} y \texttt{yellow}, sin subsumidas.}
+\caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas \texttt{ball}, \texttt{cube}, \texttt{red} y \texttt{yellow}, sin subsumidas.}
 \label{fig-modelo10}
 \end{center}
 \end{figure}
