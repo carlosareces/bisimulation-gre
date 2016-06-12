@@ -704,38 +704,6 @@ La iglesia target se representa como {\it church1} y la iglesia distractora como
 Recordemos que el algoritmo es no-determin\'istico, as\'i si lo ejecutamos muchas veces, vamos a conseguir posiblemente diferentes ERs para el mismo input. Teniendo as\'i como resultado un ranking de ERs.
 Ejecutamos el algoritmo 1000 veces, con input el modelo mostrado en la Figura \ref{modelo-mapa-zoom} y las probabilidades dadas en la esquina inferior derecha de la misma figura. Se muestran las posibles realizaciones de las 10 f\'ormulas m\'as frecuentes generadas, y la frecuencia dada por el algoritmo en la Tabla \ref{freq-mapa-algoritmo}. 
 
-%\begin{table}[H]
-%\begin{center}
-%\begin{tabular}{|l|l|c|}
-%\hline
-%&F\'ormula			      &  \# \\ \hline \hline
-
-%1 & $\exists \nChurchSin \land \exists \nIn .(\exists \nCalleSantoTomas) $&234 \\ \hline
-
-%2 & $\exists \nFront . (\exists \nMinAsExt)$&202 \\ \hline
-
-%3& $\exists \nChurch \land \exists \nIn .(\exists \nCalleAtocha)$&87 \\ \hline
-
-%4& $\exists \nNear .(\exists \nMinAsExt)$&79 \\ \hline
-
-%5& $\exists \nFront .(\exists \nFront .(\exists \nChurch)) \land \exists \nIn .(\exists \nCalleSantoTomas)$&74 \\ \hline
-
-%6& $\exists \nChurch \land \exists \nFront .(\exists \nMinAsExt)$&71 \\ \hline
-
-%7& $\exists \nChurch \land \exists \nFront .(\exists \nMinAsExt \land \exists \nIn)$&65 \\ \hline
-
-%8& $\exists \nFront .(\exists \nIn (\exists \nCalleSantoTomas)) \land \exists \nChurch \land \exists \nIn$&53 \\ \hline
-
-%9& $\exists \nFront .(\exists \nMinAsExt \land \exists \nIn )$&21 \\ \hline
-
-%10&$\exists \nNear .(\exists \nMinAsExt \land \exists \nIn )$&15 \\
-
-%\hline
-%\end{tabular}
-
-%\caption{Las 10 f\'ormulas m\'as frecuentes dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom}.}\label{formulas-mapa-zoom}
-%\end{center}
-%\end{table}
 
 %Vemos que entre las f\'ormulas de la Figura \ref{formulas-mapa-zoom} hay algunas que tienen como subf\'ormula $\exists \nIn$, lo que significa es que 
 %el elemento est\'a en una calle, pero esto es una tautolog\'ia ya que vale para todo elemento del modelo, \'estan cosas se podr\'ian tratar de varias maneras: una de ellas ser\'ia eliminar los $\exists \nIn$ cuando no haya un nombre de la calle del lado derecho del existencial, 
@@ -1176,59 +1144,7 @@ Totales	&&60	&	100\%	&&\\
 }
 \end{table}
 
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{|l|l|c|}
-\hline
-&F\'ormula			      &  \# \\ \hline \hline
-
-1&$rest_3 = \exists \nMedinaMayrit$ &303\\
- &$rest_4 = \exists \nCerca.(\exists \nMedinaMayrit)$& \\ \hline
-
-2&$rest_3 = \exists \nMedinaMayrit$ & 285\\  
- &$rest_4 =  \exists \nCerca. (\exists \nCerca.(\exists \nMedinaMayrit)) \land \exists \nCerca.(\exists \nMedinaMayrit)$& \\ \hline
-
-3&$rest_3 =\exists \nMedinaMayrit \land \exists \nIn.(T)$ & 105\\ 
- &$rest_4 =\exists \nCerca.(\exists \nMedinaMayrit \land \exists \nIn.(T))$& \\ \hline
-
-4&$rest_3 =\exists \nMedinaMayrit \land \exists \nIn.(\exists \nCalleAtocha)$ &83 \\ 
- &$rest_4 =\exists \nCerca.(\exists \nMedinaMayrit  \land \exists \nIn.(\exists \nCalleAtocha))$& \\ \hline
-
-5&$rest_3 =\exists \nMedinaMayrit  \land \exists \nIn.(\exists \nCalleAtocha)$&77 \\ 
- &$\land \exists \nCerca.(\exists \nCerca.(\exists \nMedinaMayrit))$& \\
-&$rest_4 = \exists \nCerca.(\exists \nMedinaMayrit)$& \\ \hline
-
-6&$rest_3 =\exists \nCerca.(\exists \nIn.(\exists \nCalleDeLaCruz))  \land \exists \nIn.(\exists \nCalleDeCarretas) \land $ & 20\\
-&$\exists \nIn.(\exists \nCalleDeLaCruz)  \land \exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas))$& \\ \hline
-
-7&$rest_3 =\exists \nMedinaMayrit  $&13 \\ 
-&$\land \exists \nCerca.(\exists \nIn.(\exists \nCalleDeLaCruz))  \land \exists \nIn.(\exists \nCalleAtocha)$ & 13\\
-&$rest_4 = \exists \nCerca.(\exists \nMedinaMayrit)$&\\ \hline
-
-8&$rest_3 =\exists \nIn.(\exists \nCalleDeCarretas)  \land \exists \nCerca.(\exists \nCerca.$&\\
-&$(\exists \nCerca.(\exists \nCerca.(\exists$ &\\
-&$ \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)))))) $&\\
-&$rest_4 = \exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)  $ & \\
-&$\land \exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists \nCerca.(\exists \nCerca.$&\\
-&$(\exists \nIn.(\exists \nCalleDeCarretas)))))))$&\\ \hline
-
-9&$rest_3 =\exists \nMedinaMayrit \land \exists \nIn.(\exists \nCalleAtocha)$ & 9\\
-&$rest_4 = \exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha) $ & \\
-&$ \land \exists \nCerca.(\exists \nCerca.(\exists \nChurch.(T)  \land \exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha)  $ & \\
-&$\land \exists \nCerca.(\exists \nCerca.(\exists \nChurch.(T)  \land \exists \nIn.(T)))))))$&\\ \hline
-
-10&$rest_3 = \exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha) $ & 9\\
-&$ \land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas))))))  \land \exists \nIn.(\exists \nCalleDeCarretas)  $ & \\
-&$rest_4 = \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.$ & \\
-&$(\exists \nIn.(\exists \nCalleAtocha)  \land \exists \nCerca.(\exists \nCerca.(\exists \nIn.(\exists \nCalleDeCarretas)))))) $ & \\
-&$ \land \exists \nIn.(\exists \nCalleDeCarretas))$&\\ \hline
-
-\end{tabular}
-
-\caption{Las 10 f\'ormulas m\'as frecuentes dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom}. Tomando como target 2 restaurantes.}\label{formulas-mapa-zoom2}
-\end{center}
-\end{table}
-
+En el ap\'endice \ref{formulas-plurales}, se muestran las f\'ormulas generadas por el algoritmo.
 
 
 \begin{enumerate}

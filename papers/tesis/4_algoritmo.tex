@@ -795,25 +795,42 @@ En el comienzo $RE$=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e
 \begin{table}[H]
 \begin{center}
 \footnotesize{
-\begin{tabular} {  l c c c c c c c c c }
+\begin{tabular} {  l c c c c c c c c c c c}
 \hline
 %\multicolumn{1}{c}{}
 %&\multicolumn{1}{c}{Domain}
 %&\multicolumn{3}{c}{Descriptions}\\
 
-R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   \\
-\hline
-R.\puse	& 1.0			& 1.0		& 0.978	& 0.257 & 0.178 & 0.15   & 0.107 & 0.007& 0 \\
-\hline
+R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}& {\it top}& {\it left}   \\
+\hline \hline
+R.\puse	& 1.0			& 1.0		& 0.978	& 0.257      & 0.178     & 0.15       & 0.107    & 0.007    & 0 & 0 &0\\ \hline
+%R.\randomuse & 0.32348895 & 0.5607122 &0.8771196 &0.1256972&0.14249319 &0.039857805 &0.70997673&0.21847993&0.8570516\\
+R.\randomuse & 0.3234 & 0.5607 &0.8771 &0.1256 &0.1424 &0.0398 &0.7099 &0.2184 &0.8570 &0.8166 &0.2026\\ \hline
+R.\incuse & 0&0&0.0044& 0.1486& 0.1644& 0.17& 0.1786& 0.1986& 0.2 & 0.2 & 0.2\\ \hline
 
 \end{tabular}
 }
 \end{center}
 \vspace*{-.5cm} 
-\caption{Distribuci\'on de probabilidad de las propiedades y relaciones de la figura de ejemplo.}\label{probabilidades-ejemplo-ejecucion}
+\caption{Distribuci\'on de probabilidad de las propiedades y relaciones de la figura de ejemplo, en la primer fila. Probabilidades random del algoritmo en la segunda fila. Incremento para cada relaci\'on en la tercer fila.}\label{probabilidades-ejemplo-ejecucion}
 \vspace*{1cm}
 \end{table}
 
+%.large->
+%ball->
+%centre->
+%front->
+%left-of->0.14249319
+%cube->
+%green->
+%blue->
+%small->
+%right-of->0.8166528
+%on-top->0.20261234
+%above-of->0.33460748
+%right>0.40872872
+%left->0.3704843
+%top->0.796795
 
 \begin{figure}[H]
 \begin{subfigure}{0.5\linewidth}
@@ -890,7 +907,7 @@ R.\puse	& 1.0			& 1.0		& 0.978	& 0.257 & 0.178 & 0.15   & 0.107 & 0.007& 0 \\
 \caption{Contexto y modelo del ejemplo de ejecuci\'on.}\label{fig4-9}
 \end{figure}
 
-La primer relaci\'on a considerar de acuerdo a las R.\puse\ es \texttt{ball}, recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a $RE$ si su interpretaci\'on 
+Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on a considerar de acuerdo a las R.\puse\ es \texttt{ball}, pasa la probabilidad del del algoritmo (R.randomuse), recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a $RE$ si su interpretaci\'on 
 tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a ser\'a $\top \cup \exists\ .\texttt{ball}~\top$. Aqu\'i escribimos $\top \cup \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Ambas condiciones se cumplen y $RE$ entonces es \{$\top$, \texttt{ball}\}. Se ven los elementos de la f\'ormula \texttt{ball} en el recuadro de la Figura~\ref{fig-modelo3} que enmarca a $e_1$, $e_3$ y $e_5$.
 
 \begin{figure}[ht]
@@ -901,7 +918,7 @@ tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las
 \end{center}
 \end{figure}
 
-La siguiente propiedad a considerar es \texttt{cube}. Realizando el mismo procedimiento antes mencionado, queda $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
+La siguiente propiedad a considerar es \texttt{cube}, tambi\'en pasa la probabilidad del algoritmo (R.randomuse). Realizando el mismo procedimiento antes mencionado, queda $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
 $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. $RE$ =\{$\top$, \texttt{ball}, \texttt{cube}\}. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ est\'a subsumida, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
 
 %\setlength{\unitlength}{1cm}
@@ -923,31 +940,7 @@ $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. $RE$ =\{$\top$, \texttt{bal
 \end{center}
 \end{figure}
 
-Las dem\'as propiedades y no pasaron la probabilidad random del algoritmo, pero a\'un tenemos particiones con m\'as de un elemento, y las probabilidades de uso son menores que 1, por lo tanto se aumentan las probabilidades de uso en 0.2 (siendo ) para cada propiedad quedando:
-
-
-\begin{table}[H]
-\begin{center}
-\footnotesize{
-\begin{tabular} {  l c c c c c c c c c }
-\hline
-%\multicolumn{1}{c}{}
-%&\multicolumn{1}{c}{Domain}
-%&\multicolumn{3}{c}{Descriptions}\\
-
-R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   \\
-\hline
-R.\puse	& 1.0			& 1.0		& 0.9824	& 0.4056 & 0.3424 & 0.32   & 0.2856 & 0.2056& 0.2 \\
-\hline
-
-\end{tabular}
-}
-\end{center}
-\vspace*{-.5cm} 
-\caption{Probabilidad de las propiedades y relaciones de la figura de ejemplo, incrementadas en R.\incuse.}\label{probabilidades-ejemplo-ejecucion2}
-\vspace*{1cm}
-\end{table}
-La siguiente propiedad es \texttt{red}, donde  
+La siguiente propiedad es \texttt{red}, pasa la probabilida R.randomuse, tenemos,  
 $\interp{\texttt{red}}$ = $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en $RE$ obtenemos, 
 $\{e_5\}$ y $\{e_2, e_4, e_7\}$. Las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}. El conjunto $RE$ hasta el momento es $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red}\}$.
 
@@ -958,41 +951,89 @@ $\{e_5\}$ y $\{e_2, e_4, e_7\}$. Las particiones actuales se pueden ver en la Fi
 \label{fig-modelo9}
 \end{center}
 \end{figure}
-%
-% 0.0044
-% 0.1486
-% 0.1644
-% 0.17
-% 0.1786
-% 0.1986
-% 0.2
-Otra vez las probabilidades random superan a las de la lista, recalculamos las probabilidades sumando R.\incuse a cada \puse, quedando como muestra la Tabla \ref{probabilidades-ejemplo-ejecucion3}.
+
+Ahora es el turno de \texttt{large} que tambi\'en pasa la probabilidad R.randomuse. Tenemos que $\interp{\texttt{large}}$ = $\{e_4, e_5\}$, haciendo la intersecci\'on con las dem\'as f\'ormulas que tenemos hasta el momento nos queda $RE$ de la siguiente manera:
+ $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red} ,\texttt{cube} \wedge \texttt{red} \wedge \texttt{large} \}$. Notar que en este caso se agreg\'o a a las f\'ormulas $\texttt{ball} \wedge \texttt{red}$ y $\texttt{cube} \wedge \texttt{red}$ porque estamos en la primera iteraci\'on, y no chequeamos informatividad. Las particiones siguen quedando iguales, este es un caso en el que se agrega por sobreespecificaci\'on.
+ 
+La siguiente es \texttt{ontop}, la cual pasa la probabilidad R.randomuse. $e_3$ es el \'unico elemento que esta \texttt{ontop} quedando $RE$= $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{ball} \wedge \exists \Ontop.\texttt{cube} \}$. Las particiones resultantes se muestran en la Figura \ref{new}.
+
+
+Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos $RE$= $\{\texttt{ball},\texttt{ball} \wedge \texttt{yellow}, \texttt{cube}, \texttt{cube} \wedge \texttt{yellow}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{yellow} \wedge \texttt{ball} \wedge \exists \Ontop.\texttt{cube} \}$. Note que algunas se agregaron sobreespecificando, ya que todav\'ia estamos en el primer ciclo.
+Note que aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo10}.
+
+Las dem\'as propiedades no pasan la probabilidad R.randomuse, por lo tanto salimos del primer ciclo, e incrementamos las probabilidades con R.incuse, quedando como se muestran en la Tabla \ref{prob-inc1}
+
+%Las dem\'as propiedades y no pasaron la probabilidad random del algoritmo, pero a\'un tenemos particiones con m\'as de un elemento, y las probabilidades de uso son menores que 1, por lo tanto se aumentan las probabilidades de uso en 0.2 (siendo ) para cada propiedad quedando:
+
 
 \begin{table}[H]
 \begin{center}
 \footnotesize{
-\begin{tabular} {  l c c c c c c c c c }
+\begin{tabular} {  l c c c c c c c c c c c }
 \hline
 %\multicolumn{1}{c}{}
 %&\multicolumn{1}{c}{Domain}
 %&\multicolumn{3}{c}{Descriptions}\\
 
-R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   \\
+R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   & {\it top}& {\it left}   \\
 \hline
-R.\puse	& 1.0			& 1.0		& 0.9868	& 0.5542 & 0.5068 & 0.49   & 0.4642 & 0.4042& 0.4 \\
+R.\puse	& 1.0			& 1.0		& 0.9824	& 0.4056 & 0.3424 & 0.32   & 0.2856 & 0.2056& 0.2 &0.2 &0.2  \\
 \hline
 
 \end{tabular}
 }
 \end{center}
 \vspace*{-.5cm} 
-\caption{Probabilidad de las propiedades y relaciones de la figura de ejemplo, incrementadas en R.\incuse.}\label{probabilidades-ejemplo-ejecucion3}
+\caption{Probabilidad de las propiedades y relaciones de la figura de ejemplo, incrementadas en R.\incuse.}\label{prob-inc1}
 \vspace*{1cm}
 \end{table}
 
-Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos $RE$ = $\{\texttt{ball} \wedge \texttt{yellow}, 
-\texttt{cube} \wedge \texttt{yellow}, \texttt{ball} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red}\}$. 
-Note que aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo10}.
+Las interpretaciones hasta el momento son:
+$\interp \texttt{ball} = e_1, e_3, e_5 
+\interp \texttt{ball} \wedge \texttt{yellow} = e_1, e_3
+\interp \texttt{cube} = e_2, e_4, e_6, e_7
+\interp \texttt{cube} \wedge \texttt{yellow} = e_6
+\interp \texttt{ball} \wedge \texttt{red} \wedge \texttt{large} = e_5
+\interp \texttt{cube} \wedge \texttt{red} = e_2, e_4, e_7
+\interp \texttt{cube} \wedge \texttt{red} \wedge \texttt{large} = e_4 
+\interp \texttt{yellow} \wedge \texttt{ball} \wedge \exists \Ontop.\texttt{cube} = e_3 $
+
+\texttt{ball} y \texttt{cube} est\'an subsumidas, se puede eliminar
+
+$\interp \texttt{ball} \wedge \texttt{yellow} = e_1, e_3
+\interp \texttt{cube} \wedge \texttt{yellow} = e_6
+\interp \texttt{ball} \wedge \texttt{red} \wedge \texttt{large} = e_5
+\interp \texttt{cube} \wedge \texttt{red} = e_2, e_4, e_7
+\interp \texttt{cube} \wedge \texttt{red} \wedge \texttt{large} = e_4 
+\interp \texttt{yellow} \wedge \texttt{ball} \wedge \exists \Ontop.\texttt{cube} = e_3 $
+
+De ahora hasta que termine, no se agregar\'an propiedades por sobreespecificaci\'on, notar que tenemos 4 conjuntos singleton, los cuales no cambiaran hasta el final de la ejecuci\'on. El algoritmo contin\'ua porque siguen quedando clases para refinar, las cuales son \texttt{ball} \wedge \texttt{yellow} y \texttt{cube} \wedge \texttt{red}.
+
+
+%Otra vez las probabilidades random superan a las de la lista, recalculamos las probabilidades sumando R.\incuse a cada \puse, quedando como muestra la Tabla \ref{probabilidades-ejemplo-ejecucion3}.
+
+%\begin{table}[H]
+%\begin{center}
+%\footnotesize{
+%\begin{tabular} {  l c c c c c c c c c }
+%\hline
+%%\multicolumn{1}{c}{}
+%%&\multicolumn{1}{c}{Domain}
+%%&\multicolumn{3}{c}{Descriptions}\\
+
+%R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   \\
+%\hline
+%R.\puse	& 1.0			& 1.0		& 0.9868	& 0.5542 & 0.5068 & 0.49   & 0.4642 & 0.4042& 0.4 \\
+%\hline
+
+%\end{tabular}
+%}
+%\end{center}
+%\vspace*{-.5cm} 
+%\caption{Probabilidad de las propiedades y relaciones de la figura de ejemplo, incrementadas en R.\incuse.}\label{probabilidades-ejemplo-ejecucion3}
+%\vspace*{1cm}
+%\end{table}
+
 
 \begin{figure}[ht]
 \begin{center}
