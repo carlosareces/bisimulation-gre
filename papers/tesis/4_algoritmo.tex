@@ -955,10 +955,10 @@ $\{e_5\}$ y $\{e_2, e_4, e_7\}$. Las particiones actuales se pueden ver en la Fi
 Ahora es el turno de \texttt{large} que tambi\'en pasa la probabilidad R.randomuse. Tenemos que $\interp{\texttt{large}}$ = $\{e_4, e_5\}$, haciendo la intersecci\'on con las dem\'as f\'ormulas que tenemos hasta el momento nos queda $RE$ de la siguiente manera:
  $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red} ,\texttt{cube} \wedge \texttt{red} \wedge \texttt{large} \}$. Notar que en este caso se agreg\'o a a las f\'ormulas $\texttt{ball} \wedge \texttt{red}$ y $\texttt{cube} \wedge \texttt{red}$ porque estamos en la primera iteraci\'on, y no chequeamos informatividad. Las particiones siguen quedando iguales, este es un caso en el que se agrega por sobreespecificaci\'on.
  
-La siguiente es \texttt{ontop}, la cual pasa la probabilidad R.randomuse. $e_3$ es el \'unico elemento que esta \texttt{ontop} quedando $RE$= $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{ball} \wedge \exists \Ontop.\texttt{cube} \}$. Las particiones resultantes se muestran en la Figura \ref{new}.
+La siguiente es \texttt{ontop}, la cual pasa la probabilidad R.randomuse. $e_3$ es el \'unico elemento que esta \texttt{ontop} quedando $RE$= $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{ball} \wedge \exists \nOntop.\texttt{cube} \}$. Las particiones resultantes se muestran en la Figura \ref{new}.
 
 
-Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos $RE$= $\{\texttt{ball},\texttt{ball} \wedge \texttt{yellow}, \texttt{cube}, \texttt{cube} \wedge \texttt{yellow}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{yellow} \wedge \texttt{ball} \wedge \exists \Ontop.\texttt{cube} \}$. Note que algunas se agregaron sobreespecificando, ya que todav\'ia estamos en el primer ciclo.
+Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos $RE$= $\{\texttt{ball},\texttt{ball} \wedge \texttt{yellow}, \texttt{cube}, \texttt{cube} \wedge \texttt{yellow}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{yellow} \wedge \texttt{ball} \wedge \exists \nOntop.\texttt{cube} \}$. Note que algunas se agregaron sobreespecificando, ya que todav\'ia estamos en el primer ciclo.
 Note que aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo10}.
 
 Las dem\'as propiedades no pasan la probabilidad R.randomuse, por lo tanto salimos del primer ciclo, e incrementamos las probabilidades con R.incuse, quedando como se muestran en la Tabla \ref{prob-inc1}
@@ -996,7 +996,7 @@ $\interp \texttt{ball} = e_1, e_3, e_5
 \interp \texttt{ball} \wedge \texttt{red} \wedge \texttt{large} = e_5
 \interp \texttt{cube} \wedge \texttt{red} = e_2, e_4, e_7
 \interp \texttt{cube} \wedge \texttt{red} \wedge \texttt{large} = e_4 
-\interp \texttt{yellow} \wedge \texttt{ball} \wedge \exists \Ontop.\texttt{cube} = e_3 $
+\interp \texttt{yellow} \wedge \texttt{ball} \wedge \exists \nOntop.\texttt{cube} = e_3 $
 
 \texttt{ball} y \texttt{cube} est\'an subsumidas, se puede eliminar
 
@@ -1005,9 +1005,9 @@ $\interp \texttt{ball} \wedge \texttt{yellow} = e_1, e_3
 \interp \texttt{ball} \wedge \texttt{red} \wedge \texttt{large} = e_5
 \interp \texttt{cube} \wedge \texttt{red} = e_2, e_4, e_7
 \interp \texttt{cube} \wedge \texttt{red} \wedge \texttt{large} = e_4 
-\interp \texttt{yellow} \wedge \texttt{ball} \wedge \exists \Ontop.\texttt{cube} = e_3 $
+\interp \texttt{yellow} \wedge \texttt{ball} \wedge \exists \nOntop.\texttt{cube} = e_3 $
 
-De ahora hasta que termine, no se agregar\'an propiedades por sobreespecificaci\'on, notar que tenemos 4 conjuntos singleton, los cuales no cambiaran hasta el final de la ejecuci\'on. El algoritmo contin\'ua porque siguen quedando clases para refinar, las cuales son \texttt{ball} \wedge \texttt{yellow} y \texttt{cube} \wedge \texttt{red}.
+De ahora hasta que termine, no se agregar\'an propiedades por sobreespecificaci\'on, notar que tenemos 4 conjuntos singleton, los cuales no cambiaran hasta el final de la ejecuci\'on. El algoritmo contin\'ua porque siguen quedando clases para refinar, las cuales son $\texttt{ball} \wedge \texttt{yellow}$ y $\texttt{cube} \wedge \texttt{red}$.
 
 
 %Otra vez las probabilidades random superan a las de la lista, recalculamos las probabilidades sumando R.\incuse a cada \puse, quedando como muestra la Tabla \ref{probabilidades-ejemplo-ejecucion3}.
