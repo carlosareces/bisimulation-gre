@@ -752,7 +752,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
   }
 }
 \end{algorithm}
-\vspace*{-.5cm}\caption{Algoritmos de refinamiento con probabilidades y sobreespecificaci\'on para el lenguage \el. El lenguaje formal utilizado es independiente del algoritmo principal, y se pueden utilizar diferentes funciones add$_{\mathcal {L}}$(R,$\varphi $, \RE) en funci\'on del lenguaje considerado.}\label{fig:algo3}
+\vspace*{-.5cm}\caption{Algoritmos de refinamiento con probabilidades y sobreespecificaci\'on para el lenguage \el. El lenguaje formal utilizado es independiente del algoritmo principal, y se pueden utilizar diferentes funciones add$_{\mathcal {L}}$(R,$\varphi $,\RE) en funci\'on del lenguaje considerado.}\label{fig:algo3}
 
 \end{figure}
 
@@ -780,12 +780,12 @@ coincidir con la clase original). Si se cumplen todas estas condiciones,
 la nueva descripci\'on se a\~nade a $\RE$, y las descripciones redundantes
 posiblemente creadas por la adici\'on de la nueva descripci\'on son
 eliminadas.
-Con respecto a la informatividad, se permitir\'a 
+Con respecto a la informatividad, se permitir\'a el agregado de f\'ormulas no informativas en la primera iteraci\'on, antes de incrementar las R.\puse.
 
 \section{Ejemplo de ejecuci\'on}
 \label{sec:ejemplo_ejecucion}
 
-En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el modelo de la Figura \ref{fig4-9}, considerando la probabilidades de uso mostradas en la Tabla\ref{probabilidades-ejemplo-ejecucion}. Mostraremos la ejecuci\'on del algoritmo sin dar un target espec\'ifico. En este caso el algoritmo obtiene ERs para todos los elementos del modelo. Al finalizar entonces esperamos tener una ER para cada elemento del modelo. Por simplicidad no vamos a nombrar cada vez que tal propiedad pas\'o la probabilidad random del algoritmo, pero s\'i lo nombraremos cuando no la haya pasado. Recordemos que para conseguir no-determinismo, el algoritmo tiene un componente random que hace que si la probabilidad de uso es mayor que el n\'umero random calculado en esa ejecuci\'on. 
+En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el modelo de la Figura \ref{fig4-9}, considerando la probabilidades de uso mostradas en la Tabla \ref{probabilidades-ejemplo-ejecucion}, en la tabla tambi\'en se muestran las probabilidades random del algoritmo y los incrementos de las probabilidades de uso, teniendo como n\'emero de m\'axima iteraci\'on 5. Mostraremos la ejecuci\'on del algoritmo sin dar un target espec\'ifico. En este caso el algoritmo obtiene ERs para todos los elementos del modelo, si puede. Al finalizar entonces esperamos tener una ER para cada elemento del modelo. Recordemos que para conseguir no-determinismo, el algoritmo tiene un componente random que hace que se considere una relaci\'on, si la probabilidad de uso es mayor que el n\'umero random calculado en esa ejecuci\'on. 
 En el comienzo $RE$=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$.\\
 
 \begin{table}[H]
@@ -903,10 +903,9 @@ R.\incuse & 0&0&0.0044& 0.1486& 0.1644& 0.17& 0.1786& 0.1986& 0.2 & 0.2 & 0.2\\ 
 \caption{Contexto y modelo del ejemplo de ejecuci\'on.}\label{fig4-9}
 \end{figure}
 
-Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on a considerar de acuerdo a las R.\puse\ es \texttt{ball}, pasa la probabilidad del del algoritmo (R.randomuse), recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a $RE$ si su interpretaci\'on 
-tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a ser\'a $\top \cup \exists\ .\texttt{ball}~\top$. Aqu\'i escribimos $\top \cup \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Ambas condiciones se cumplen y $RE$ entonces es \{$\top$, \texttt{ball}\}. Se ven los elementos de la f\'ormula \texttt{ball} en el recuadro de la Figura~\ref{fig-modelo3} que enmarca a $e_1$, $e_3$ y $e_5$.
+Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on a considerar de acuerdo a las R.\puse\ es \texttt{ball}, pasa la probabilidad del algoritmo (R.\randomuse), recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a $RE$ si su interpretaci\'on tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a ser\'a $\top \cup \exists\ \texttt{ball}.\top$. Aqu\'i escribimos $\top \cup \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Ambas condiciones se cumplen y $RE$ entonces es \{$\top$, \texttt{ball}\}. Se ven los elementos de la f\'ormula \texttt{ball} en el recuadro de la Figura~\ref{fig-modelo3} que enmarca a $e_1$, $e_3$ y $e_5$.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/im/1ball.png}}\\[0pt]
 \caption{El cuadro mayor indica elementos que satisfacen Top. El recuadro m\'as chico elementos que satisfacen la f\'ormula \protect\texttt{ball}.}
@@ -914,21 +913,10 @@ tiene al menos un elemento, $\interp{\top \cup \texttt{ball}}$\footnote{Como las
 \end{center}
 \end{figure}
 
-La siguiente propiedad a considerar es \texttt{cube}, tambi\'en pasa la probabilidad del algoritmo (R.randomuse). Realizando el mismo procedimiento antes mencionado, queda $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
+La siguiente propiedad a considerar es \texttt{cube}, tambi\'en pasa la probabilidad del algoritmo (R.\randomuse). Realizando el mismo procedimiento antes mencionado, queda $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
 $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. $RE$ =\{$\top$, \texttt{ball}, \texttt{cube}\}. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ est\'a subsumida, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
 
-%\setlength{\unitlength}{1cm}
-%
-%\newsavebox{\mybox} 
-%\savebox{\mybox}{\includegraphics[scale=0.40]{images/modelo4.png}} 
- %\begin{figure}
-   %\begin{picture}(8,6)
-  %\put(0,0){\usebox{\mybox}} 
-  %%\put(2,2.5){\oval(6,5)}
-   %\end{picture}   
- %\end{figure} 
-
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/im/2ball-cube.png}}\\[0pt]
 \caption{Particiones de elementos que satisfacen la f\'ormula \texttt{ball} y otros la f\'ormula \texttt{cube}.}
@@ -936,22 +924,22 @@ $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. $RE$ =\{$\top$, \texttt{bal
 \end{center}
 \end{figure}
 
-La siguiente propiedad es \texttt{red}, pasa la probabilida R.randomuse, tenemos,  
+La siguiente propiedad es \texttt{red}, pasa la probabilida R.\randomuse, tenemos,  
 $\interp{\texttt{red}}$ = $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en $RE$ obtenemos, 
 $\{e_5\}$ y $\{e_2, e_4, e_7\}$. Las particiones actuales se pueden ver en la Figura~\ref{fig-modelo9}. El conjunto $RE$ hasta el momento es $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red}\}$.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/im/rojo.png}}\\[0pt]
 \caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas: $\texttt{ball}, \texttt{ball} \wedge \texttt{red}, \texttt{cube},\texttt{cube} \wedge \texttt{red}$.}
 \label{fig-modelo9}
 \end{center}
-\end{figure}
+\end{figure}    
 
-Ahora es el turno de \texttt{large} que tambi\'en pasa la probabilidad R.randomuse. Tenemos que $\interp{\texttt{large}}$ = $\{e_4, e_5\}$, haciendo la intersecci\'on con las dem\'as f\'ormulas que tenemos hasta el momento nos queda $RE$ de la siguiente manera:
- $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red} ,\texttt{cube} \wedge \texttt{red} \wedge \texttt{large} \}$. Notar que en este caso se agreg\'o a a las f\'ormulas $\texttt{ball} \wedge \texttt{red}$ y $\texttt{cube} \wedge \texttt{red}$ porque estamos en la primera iteraci\'on, y no chequeamos informatividad. Las particiones se muestran en laFigura \ref{fig-modelo9b} este es un caso en el que se agrega por sobreespecificaci\'on.
+Ahora es el turno de \texttt{large} que tambi\'en pasa la probabilidad R.\randomuse. Tenemos que $\interp{\texttt{large}}$ = $\{e_4, e_5\}$, haciendo la intersecci\'on con las dem\'as f\'ormulas que tenemos hasta el momento nos queda $RE$ de la siguiente manera:
+ $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red} ,\texttt{cube} \wedge \texttt{red} \wedge \texttt{large} \}$. Notar que en este caso se agreg\'o a las f\'ormulas $\texttt{ball} \wedge \texttt{red}$ y $\texttt{cube} \wedge \texttt{red}$ porque estamos en la primera iteraci\'on, y no chequeamos informatividad, en el caso de  $\texttt{ball} \wedge \texttt{red}$ se agreg\'o sobreespecificando, porque no divid\'ia la partici\'on. Las particiones se muestran en la Figura \ref{fig-modelo9b}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/im/large.png}}\\[0pt]
 \caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas: $\texttt{ball}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube},\texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}$.}
@@ -959,9 +947,9 @@ Ahora es el turno de \texttt{large} que tambi\'en pasa la probabilidad R.randomu
 \end{center}
 \end{figure}
 
-La siguiente es \texttt{ontop}, la cual pasa la probabilidad R.randomuse. $e_3$ es el \'unico elemento que esta \texttt{ontop} quedando $RE$= $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{ball} \wedge \exists \nOntop.\texttt{cube} \}$. Las particiones resultantes se muestran en la Figura \ref{fig-modelo9c}.
+La siguiente es \texttt{ontop}, la cual pasa la probabilidad R.\randomuse. $e_3$ es el \'unico elemento que esta \texttt{ontop} quedando $RE$= $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{ball} \wedge \exists \nOntop.(\texttt{cube} \wedge \texttt{red}) \}$. Las particiones resultantes se muestran en la Figura \ref{fig-modelo9c}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/im/ontop.png}}\\[0pt]
 \caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas: $\texttt{ball}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube},\texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large},\texttt{ball} \wedge \exists \nOntop. \texttt{cube} \wedge \texttt{red}$.}
@@ -972,7 +960,7 @@ La siguiente es \texttt{ontop}, la cual pasa la probabilidad R.randomuse. $e_3$ 
 Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos $RE$= $\{\texttt{ball},\texttt{ball} \wedge \texttt{yellow}, \texttt{cube}, \texttt{cube} \wedge \texttt{yellow}, \texttt{ball} \wedge \texttt{red} \wedge \texttt{large}, \texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large}, \texttt{yellow} \wedge \texttt{ball} \wedge \exists \nOntop.\texttt{cube} \wedge \texttt{red} \}$. Note que algunas se agregaron sobreespecificando, ya que todav\'ia estamos en el primer ciclo.
 Note que aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo9d}, luego de haber borrado las f\'ormulas subsumidas.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{center}
 \frame{\includegraphics[width=8cm]{images/im/yellow.png}}\\[0pt]
 \caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas: $\texttt{ball} \wedge \texttt{red} \wedge \texttt{large},\texttt{cube} \wedge \texttt{red}, \texttt{cube} \wedge \texttt{red} \wedge \texttt{large},\texttt{ball} \wedge \exists \nOntop. \texttt{cube} \wedge \texttt{red}$, \texttt{cube} \wedge \texttt{yellow}, \texttt{ball} \wedge \texttt{yellow}.}
@@ -981,7 +969,7 @@ Note que aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, 
 \end{figure}
 
 
-Las dem\'as propiedades no pasan la probabilidad R.randomuse, por lo tanto salimos del primer ciclo, e incrementamos las probabilidades con R.incuse, quedando como se muestran en la Tabla \ref{prob-inc1}
+Las dem\'as propiedades no pasan la probabilidad R.\randomuse, por lo tanto salimos del primer ciclo, e incrementamos las probabilidades con R.incuse, quedando como se muestran en la Tabla \ref{prob-inc1}.
 
 %Las dem\'as propiedades y no pasaron la probabilidad random del algoritmo, pero a\'un tenemos particiones con m\'as de un elemento, y las probabilidades de uso son menores que 1, por lo tanto se aumentan las probabilidades de uso en 0.2 (siendo ) para cada propiedad quedando:
 
@@ -997,8 +985,8 @@ Las dem\'as propiedades no pasan la probabilidad R.randomuse, por lo tanto salim
 
 R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   & {\it top}& {\it left}   \\
 \hline
-R.\puse	& 1.0			& 1.0		& 0.9824	& 0.4056 & 0.3424 & 0.32   & 0.2856 & 0.2056& 0.2 &0.2 &0.2  \\
-R.\randomuse & 0.3234 & 0.5607 &0.8771 &0.1256 &0.1424 &0.0398 &0.7099 &0.2184 &0.8570 &0.8166 &0.2026\\ 
+R.\puse	& 1.0			& 1.0		& 0.9824	& 0.4056 & 0.3424 & 0.32   & 0.2856 & 0.2056& 0.2 &0.2 &0.2  \\ \hline
+R.\randomuse & 0.3234 & 0.5607 &0.8771 &0.1256 &0.1424 &0.0398 &0.7099 &0.2184 &0.8570 &0.8166 &0.2026\\ \hline
 R.\incuse & 0&0&0.0044& 0.1486& 0.1644& 0.17& 0.1786& 0.1986& 0.2 & 0.2 & 0.2\\ \hline
 
 \end{tabular}
