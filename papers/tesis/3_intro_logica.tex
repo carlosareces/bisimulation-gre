@@ -22,7 +22,7 @@ En esta secci\'on veremos dos conceptos importantes, similaridad en $\+L$, y sim
 Considere la Figura \ref{target_mapa_3ball}, asumamos que el lenguaje en el que podemos generar ERs, es decir, nuestro $\+L$, es $\CL$. $\CL$ es el lenguaje l\'ogico
 que s\'olo puede tener conjunciones de propiedades proposicionales, 
 sin negaci\'on, sin relaciones. Sea REL = $\{\nLarge, \nSmall, \nRed, \nBall, \nCube, \nYellow \}$ nuestro vocaulario, es decir, el conjunto de relaciones (unarias) que podemos usar en las ERs.
-%\begin{figure}[H]
+%\begin{figure}[h]
 %\begin{subfigure}{.5\textwidth}
 %\centering
 %\includegraphics[width=.6\textwidth]{images/22paraRelacionalLetras.png}
@@ -997,7 +997,7 @@ $\mathsf{flower}$ en 2 nuevas f\'ormulas $\mathsf{flower} \sqcap
 \exists \mathsf{in}.\mathsf{hat}$ y $\mathsf{flower} \sqcap \neg
 \exists \mathsf{in}.\mathsf{hat}$, generando una ER \'unica para $f_1  $ pero que contiene negaci\'on.
 
-\section{Computando expresiones referenciales en $\FOL$}
+\section{Computando expresiones referenciales en \FOL}
 \label{sec:computandoEnFOL}
 En esta secci\'on comenzaremos explicando trabajo previo en la GER usando $\FOL$. En particular describimos el trabajo de~\cite{graph} que se introdujo brevemente en la Secci\'on \ref{graph}. Luego mostraremos c\'omo la GER en $\FOL$ puede verse bajo la luz de las $\FOL$-simulaciones.
 En~\cite{graph} introducen un algoritmo para GER basado en computaci\'on de \emph{isomorfismos de subgrafos}. Su algoritmo toma como entrada
@@ -1091,13 +1091,13 @@ $v$, y tal que $f(u)=v$ si y s\'olo si $u \simul{\+\EPFOL} v$. Una implementaci\
 %
 %\begin{center}\begin{minipage}[t]{5.1cm}%
 %algoritmo 3
-\begin{algorithm}[H]\floatname{algorithm}{Algoritmo}\small
+
+\begin{algorithm}%[H]
+\floatname{algorithm}{Algoritmo}\small
 \SetKwFunction{makeRE}{makeRE$_\FOL-$}
 \SetKwFunction{findGraph}{find$_\+L$}
 \SetKwFunction{init}{init_$\+L$}
 \SetKwFunction{buildF}{buildF$_\+L$}
-
-\caption{\small \texttt{makeRE}$_\FOL-$($v$)}\label{alg:makeRE}
 
 %$v_H$ := \emph{new node}\;
 
@@ -1128,8 +1128,8 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 \Return{$\exists x_2\ldots \exists x_n . \gamma$}\;
 
 %\Return{\buildF$(H',v)$}\;
+\caption{\small \texttt{makeRE}$_\FOL-$($v$)}\label{alg:makeRE}
 \end{algorithm}
-%  \end{minipage}
 
 
 %fin algoritmo 3
@@ -1137,33 +1137,39 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
  % \begin{minipage}[t]{6.8cm}%
 
 %empieza algoritmo 4
-\begin{algorithm}[H] \floatname{algorithm}{Algoritmo}\small
-\SetKwFunction{findGraph}{find$_\+L$} \SetKwFunction{cost}{cost}
+\begin{algorithm}[H] 
+\floatname{algorithm}{Algoritmo}\small
+\SetKwFunction{findGraph}{find$_\+L$} 
+\SetKwFunction{cost}{cost}
 \SetKwFunction{matchGraph}{match$_\+L$}
 \SetKwFunction{extendGraph}{extend$_\+L$}
 
-
-\caption{\small \texttt{find}$_\+L$($v, \mathit{best},H,f$)}\label{alg:find}
-
 \If{$\mathit{best} \neq \bot \land \cost(\mathit{best}) \leq
-\cost(H)$}{\Return $\mathit{best}$} $\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L} n}$\;
-\If{$\mathit{distractors} = \emptyset$}{\Return $H$}
+  \cost(H)$}{
+  \Return $\mathit{best}$\;} 
+$\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L} n}$\;
+
+\If{$\mathit{distractors} = \emptyset$}{\Return $H$\;}
 
  $A$ := $\cset{H {+} p(u) \mid u \in \Delta_H, u \in \interp{p}_G  \setminus \interp{p}_H}$\;
 
  $B$ := $\cset{H {+} r(u,v) \mid u \in \Delta_H, \{(u,v),(v,u)\}\cap \interp{r}_G \setminus \interp{r}_H\not=\emptyset}$\;
 
- $EXT$ :=$(A \cup B) \times \cset{\mathit{id}}$}\;
+ $EXT$ :=$(A \cup B) \times \cset{\mathit{id}}$\;
 %
 %
 \ForEach{$\tup{H',f'} \in EXT$}{
   $I$ := \findGraph($v,\mathit{best},H', f'$)\;
   \If{$\mathit{best} = \bot \lor \cost(I) \leq \cost(\mathit{best})$}{$\mathit{best} := I$}
-} 
+}
+ 
 \Return{$\mathit{best}$}\;
+
+\caption{\small \texttt{find}$_\+L$($v, \mathit{best},H,f$)}\label{alg:find}
 \end{algorithm}
   %\end{minipage}%
 %\end{center}
+
 
 El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\+L$-ER {\em
 f\'ormula para} $v$; \'este \'ultimo nos dice c\'omo extender $H$ en cada paso

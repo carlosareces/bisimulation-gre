@@ -10,7 +10,7 @@ En esta secci\'on presentamos una evaluaci\'on cuantitativa y autom\'atica de lo
 
 Las probabilidades de uso aprendidas usando regresi\'on lineal como se muestra en el Cap\'itulo~\ref{sec:learning} se muestran en \ref{probabilidades-escena2}, y ejecutando el algoritmo 10000 veces.
 
-\begin{table}[H]
+\begin{table}[h]
 \begin{center}
 \footnotesize{
 \begin{tabular} {  l c c c c c c c c c c}
@@ -33,7 +33,7 @@ R.\puse	& 1.0			& 1.0		& & &  &   &  & & & \\
 
 Obtuvimos 14 expresiones referenciales diferentes para la escena de la Figura~\ref{contexto-evaluacion}, el corpus tiene 12 ERs diferentes generadas por personas para esa escena. Es interesante ver que aunque es posible generar cientos de ERs para esta escena, el algoritmo, gu\'iado por las probabilidades de uso, genera s\'olo 14 ERs en 10000 ejecuciones. Adem\'as, el algoritmo genera, para esta imagen, 2 ERs con alta frecuencia (la bola verde y la bola verde peque\~na representan el 98\% de las ERs generadas autom\'aticamente) y otras ERs con una frecuencia mucho menor (representan el 2\% de las ERs generadas). Estas 2 ERs m\'as frecuentes generadas por el algoritmo coincide con las 2 ERs m\'as frecuentes generadas por las personas (la bola verde y la bola verde peque\~na representan el 81\% de las ERs generadas por humanos para la imagen). 
  
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=.6\textwidth]{images/3.jpg}
 \label{fig-GRE3D7}
@@ -44,7 +44,7 @@ La \textbf{precisi\'on}  es una m\'etrica autom\'atica estricta que se puede usa
 La primer comparaci\'on de rankings de ERs se muestra en la Tabla \ref{results-algo-fig3}. Para cada ER, indicamos el n\'umero de veces que aparece en el corpus (\#Cor), la proporci\'on que representa (\%Cor), el n\'umero de veces que la gener\'o nuestro algoritmo (\#Alg) y la proporci\'on que representa (\%Alg).
 Por \'ultimo, la precisi\'on (\%Acc) nos d\'a el porcentaje de aciertos de las ERs generadas por el algoritmo y se calcula como el m\'inimo entre el \%Cor y \%Alg. 
 
-\begin{table}[H]
+\begin{table}[h]
 \begin{small}
 \begin{center}
 \begin{tabular}{|l|r|r|r|r|r|}
@@ -92,7 +92,7 @@ Total & 140 & 100 & 10000 & 100 & 80.51 \\
 Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar, que como el algoritmo tiene un componente de azar, por eso nos di\'o bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
 Para enriquecer esta parte mostraremos otros baselines, los cuales dos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son \'utiles para aproximar al ranking de ERs que aparece en corpora. Los baselines que se presentan ejecutan el algoritmo con una distribuci\'on aleatoria de probabilidades de uso, y con una distribuci\'on uniforme (en las ERs tomando tanto las generadas por el sistema como las del corpus y las generadas como el modelo aleatorio). El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
 
-\begin{table}[H]
+\begin{table}[h]
 \begin{small}
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|}
@@ -139,7 +139,7 @@ el cubo azul que est\'a abajo de algo que es peque\~no}). En la \'ultima columna
 Para comparar nuestros resultados colos 3 baselines usamos tambi\'en entrop\'ia cruzada.
 En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distribuciones de probabilidad mide la media de bits necesarios para identificar un evento de un conjunto de posibilidades, si un esquema de codificaci\'on est\'a basado en una distribuci\'on de probabilidad dada q, m\'as que en la verdadera distribuci\'on p. Vamos a comparar la entrop\'ia cruzada entre la distribuci\'on de probabilidad que se encuentra en el corpus, y la distribuci\'on de ER del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entropy} se muestran los resultados para las ocho escenas que hemos considerado.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{images/entropy.jpg}
 \caption{Entrop\'ia cruzada entre la distribuci\'on del corpus y diferentes ejecuciones del algoritmo.}\label{Entropy}
@@ -164,7 +164,7 @@ Recordemos que el corpus TUNA tiene 2 partes, una parte cuyo dominio son muebles
 
 En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistema con el sistma GRAPH para la primer ER en el ranking y para las primeras 20 ERs del ranking.
 
-\begin{table}[H]
+\begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -190,7 +190,7 @@ Nuestro sistema, Dominio personas (top 20)   &	81\%		&68\%	&	60\%		\\
 En la Figura~\ref{graficoPresicion} se muestra una comparaci\'on entre la precisi\'on de nuestro sistema y el sistema GRAPH. El gr\'afico de la izquierda corresponde al dominio muebles y el gr\'afico de la derecha corresponde al dominio personas. En el dominio muebles estamos obteniendo casi los mismos n\'umeros en las m\'etricas evaluadas.
 Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra precisi\'on es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la precisi\'on para ambos dominios se hace mayor del 60\% (60\% para personas y 65\% para muebles). Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no esten en primer lugar. Si el algoritmo GRAPH fuera modificado para ser no-determin\'istico es posible que tambi\'en mejorara su precisi\'on en 20 o m\'as ejecuciones. Esta es una l\'inea interesante de trabajo futuro. 
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}{0.50\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/furniturePrec.png}
@@ -224,7 +224,7 @@ Nuestro objetivo es mostrar que incluso si la ER generada autom\'aticamente no c
 En la Tabla~\ref{system-versus-human} se muestran los resultados del experimento de evaluaci\'on humana.
 Las ERs producidas por el sistema en el top 1 fueron consideradas igual o mejor por los 2 jueces que las generadas por personas en el 75\% de los casos para los muebles y en el 43\% para las personas. Esto contrasta con el 47\% para personas y 19\% para muebles de la Tabla \ref{Tabla_sis_1_20}. Esto muestra que la m\'etrica de precisi\'on es demasiado estricta para la tarea, y las m\'etricas de DICE o masi se acercan m\'as a evaluaciones humanas. Adem\'as al menos 1 juez consider\'o que el 97\% de las ERs del sistema eran tan buenas o mejores que las humanas para los muebles y (87\% para las personas). Esto muestra que la evaluaci\'on de la calidad de las ERs es parcialmente subjetiva. S\'olo en el 8\% de los casos ambos jueces coincidieron que una ER generada autom\'aticamente era peor que la humana.
 
-\begin{table}[H]
+\begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -247,7 +247,7 @@ A continuaci\'on, se ilustra el experimento de evaluaci\'on, mostrando ejemplos 
 
 Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER subespecificada mientras que el sistema produce un ER que identifica de manera inequ\'{i}voca al target. La ER generada por el sistema para esta figura es {\it peque\~no ventilador azul}, mientras que la ER producida por el ser humano es {\it ventilador azul}. La ER del humano no logra identificar de forma \'unica el target y entonces no es preferida por los jueces humanos. Los seres humanos son conocidos por producir ERs subespecificadas, esto puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ERs aprendidas de los seres humanos.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
@@ -267,7 +267,7 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER sube
 
 En la Figura~\ref{BlueChair} la ER humana era {\it silla frontal azul}, y la ER sistema era {\it la silla azul de abajo}; ambos jueces seleccionaron la ER sistema. Este caso se puede explicar por el hecho de que, en este \'ambito, la propiedad {\it abajo} ayuda m\'as durante la identificaci\'on de la propiedad {\it frontal} porque concentra la atenci\'on del interlocutor en la parte inferior de la escena. Nuestro sistema aprende este hecho por el aprendizaje de un mayor valor de \puse\ para {\it abajo} que para {\it frontal} a partir de los datos de entrenamiento.
 
-\begin{figure}[H]
+\begin{figure}[h]
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/s59t26.jpg}

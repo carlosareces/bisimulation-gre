@@ -2,7 +2,11 @@
 \documentclass[12pt]{myillcdiss}
 \usepackage{mathtools}
 % Packages used by Carlos
-%\usepackage{floatrow}
+
+\usepackage{float}
+\floatname{algorithm}{Algoritmo}
+\newcommand{\algorithmname}{Algoritmo}
+
 \usepackage{makeidx}
 \usepackage{amssymb}
 \usepackage{wasysym}
@@ -298,8 +302,8 @@ simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 %\DeclareFloatFont{tiny}{\tiny}% "scriptsize" is defined by floatrow, "tiny" not
 %\floatsetup[table]{font=tiny}
 
-\usepackage{algorithm}
-\usepackage{algorithmic}
+\usepackage{algorithm2e}
+%\usepackage{algorithmic}
 
 \newenvironment{mycite}
 {\vspace{-3.5cm}%
