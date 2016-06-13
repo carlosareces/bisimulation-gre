@@ -1,11 +1,13 @@
 \appendix
 
+\chapter{Corpus ZOOM}
 
-
-
-\chapter{P\'aginas para obtenci\'on del corpus}
+\section{Materiales para la obtenci\'on del corpus}
 \label{corpus-apendice}
 
+En este ap\'endice se muestran los materiales que se usaron para la recolecci\'on del corpus ZOOM. Para ver en detalle informaci\'on del corpus y su recoleccion vea \ref{sec:corpus}.
+
+En la Figura \ref{fig-pagPrincipal} se muestra en link que se envi\'o por correo a los participantes que completaron el experimento para la recolecci\'on del corpus ZOOM. En la p\'agina de ven las instrucciones en tres idiomas, la persona ten\'ia que seleccionar el idioma en el que queria completar el experimento. Esta p\'agina conten\'ia las instrucciones en cada uno de los tres idiomas.
 
 %\setlength{\unitlength}{1cm}
 %
@@ -25,6 +27,8 @@
 \label{fig-pagPrincipal}
 \end{center}
 \end{figure}
+
+Una vez seleccionado el idioma del experimento, se solicitaba informaci\'on demogr\'afica de los participantes, como se muestra en la Figura \ref{fig-nacionalidadGenero}. Tambi\'en se solicitaba que se acepten los t\'erminos y condiciones los cuales dec\'ian que los datos ingresados ser\'an usados para investigaci\'on.
 
 %\setlength{\unitlength}{1cm}
 %
@@ -81,6 +85,8 @@
 \end{center}
 \end{figure}
 
+En la Figura \ref{fig-interface} se ve una imagen est\'imulo, un mensaje ``Es interesante visitar...'' que es la oraci\'on que el participantente ten\'ia que completar con una expresi\'on referencial del o los objetos apuntados por las flechas. Tambi\'en se ve\'ia una barra indicadora de progreso, y las instrucciones. 
+
 \begin{figure}[ht]
 \begin{center}
 \frame{\includegraphics[width=15cm]{images/primerImagen.png}}\\[0pt]
@@ -90,10 +96,12 @@
 \end{figure}
 
 
-\chapter{Im\'agenes del corpus ZOOM}
+\section{Im\'agenes est\'imulo del corpus ZOOM}
 %\section{}
 \label{imagenes-zoom}
 %1
+Aqu\'i se muestran las im\'agenes que se mostraron a los participantes que completaron la tarea de recolecci\'on del corpus ZOOM para el espa\~nol. El corpus cuenta con im\'agenes con y sin zoom, para targets singulares y plurales. 
+
 \begin{figure}
 \begin{minipage}[ht]{0.48\linewidth}
 \centering
@@ -286,9 +294,9 @@
 
 \end{figure}
 
-\chapter{F\'ormulas generadas por el algoritmo}
+\chapter{Expresiones referenciales generadas por el algoritmo}
 
-\section{ER dadas por el algoritmo para el modelo de la Figura \ref{modelo-mapa-zoom}, ejecutandolo 1000 veces}
+\section{ER dadas por el algoritmo para corpus ZOOM}
 %\section{}
 \label{er-mapa-zoom}
 
@@ -330,6 +338,9 @@
 
 %\footnotesize{
 %\hspace*{0.6cm}
+
+Las f\'ormulas mostradas en la Tabla \ref{formulas-mapa-zoom-ap}, fueron generadas por el algoritmo en el caso de estudio presentado en la Secci\'on \ref{sec:sinzoom}. Ejecutando el algorirmo 1000 veces.
+
 
 \begin{table}[H]
 \begin{center}
@@ -398,11 +409,43 @@
 
 \end{tabular}
 
-\caption{Las 10 f\'ormulas m\'as frecuentes dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom}.}\label{formulas-mapa-zoom-ap}
+\caption{F\'ormulas dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom}.}\label{formulas-mapa-zoom-ap}
 \end{center}
 \end{table}
 
-\section{F\'ormulas dadas por el algoritmo en 1000 ejecuciones para la Figura \ref{mapa-zoom-plural}}
+
+En la Tabla \ref{formulas-mapa-zoom2x-apendice} se muestran las f\'ormulas generadas por el algoritmo para el caso de estudio mostrado en la Secci\'on \ref{sec:conzoom}.
+
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|l|c|}
+\hline
+&F\'ormula                           &  \# \\ \hline \hline
+1& $\exists \nParroquiaDeSantaCruz$& 570\\ \hline
+
+2& $\exists \nParroquiaDeSantaCruz. \exists \nIn(T)$& 174\\ \hline
+3& $\exists \nParroquiaDeSantaCruz. \exists \nIn(\exists \nCalleSantoTomas)$& 72\\ \hline
+4& $\exists \nParroquiaDeSantaCruz. \land \exists.\nCerca(T)$& 57\\ \hline
+
+5& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz$& 48\\ \hline
+6& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz. \exists \nIn(T)$& 17\\ \hline
+7& $\exists \nParroquiaDeSantaCruz \land \exists. \nIn(\exists \nCalleConJer)$& 13\\ \hline
+8& $\exists \nChurch \land \land \exists. \nIn(\exists \nCalleConJer) $&10\\ \hline
+
+9& $\exists \nIn(\exists \nCalleSantoTomas) \land \exists \nChurch$&9\\ \hline
+
+10& $\exists \nChurch \land \exists \nIn(\exists \nCalleSantoTomas))$&7\\ \hline
+
+\end{tabular}
+
+\caption{F\'ormulas dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom2x}.}\label{formulas-mapa-zoom2x-apendice}
+\end{center}
+\end{table}
+
+
+
+
+En la Tabla \ref{formulas-mapa-zoom2-apendice} se muestran las f\'ormulas dadas por el algoritmo en 1000 ejecuciones para la Figura \ref{mapa-zoom-plural}}, mostrado en la Secci\'on \ref{sec:plural}. 
 
 \label{formulas-plurales}
 \begin{table}[H]
