@@ -197,6 +197,12 @@ Formalmente, para un modelo relacional $\tup{\Delta, \interp{\cdot}}$, diremos q
 \simdef{$\injR$}{Q$^{-1}$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
 \smallskip
 
+Por ejemplo, podemos probar que $e_5 \simul{\+C} e_1$ en el modelo de la 
+Figura~\ref{target_mapa_3ball}, sin tener que generar todas las f\'ormulas $\phi$ en $\+C$ que son ciertas de $e_5$, ya que la relaci\'on Q $= \{(e_5,e_1) \}
+%\cup\{ (x,x) \mid x \in \Delta\}
+$ satisface $\atomL$.
+Usando el Teorema~\ref{thm:simulation} conclu\'imos que no hay
+ \CL-descripci\'on para $e_5$. Como ya dijimos, si se opta por un lenguaje m\'as rico como $\EL$, se puede describir a $e_5$. De nuevo, esto se puede hacer sin tener que verificar infinitas f\'ormulas.
 
 
 %Diremos que una relaci\'on binaria no vac\'ia $\sim$ es una 
@@ -240,12 +246,6 @@ Formalmente, para un modelo relacional $\tup{\Delta, \interp{\cdot}}$, diremos q
 %Las $\+L$-simulaciones nos permiten determinar, de una manera eficaz,
 %cuando un objeto no se puede distinguir de otro en un modelo dado con respecto a $\+L$.
 
-Por ejemplo, podemos probar que $e_5 \simul{\+C} e_1$ en el modelo de la 
-Figura~\ref{target_mapa_3ball}, sin tener que generar todas las f\'ormulas $\phi$ en $\+C$ que son ciertas de $e_5$, ya que la relaci\'on Q $= \{(e_5,e_1) \}
-%\cup\{ (x,x) \mid x \in \Delta\}
-$ satisface $\atomL$.
-Usando el Teorema~\ref{thm:simulation} conclu\'imos que no hay
- \CL-descripci\'on para $e_5$. Como ya dijimos, si se opta por un lenguaje m\'as rico como $\EL$, se puede describir a $e_5$. De nuevo, esto se puede hacer sin tener que verificar infinitas f\'ormulas.
 
 %En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
 %\begin{table}[h!]
