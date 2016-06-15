@@ -17,7 +17,7 @@ Las probabilidades de uso aprendidas usando regresi\'on lineal como se muestra e
 \hline
 R				&{\it ball}			& {\it cube}	& {\it green}	  & {\it blue} & {\it large} & {\it small} & {\it top} & {\it front} & {\it left} & {\it ontop}   \\
 \hline
-R.\puse	& 1.0			& 1.0		& & &  &   &  & & & \\
+R.\puse	& 1.0			& 1.0		& 0.993& 0.124&0.03  &0.346   &0  &0 &0.002 &0.179 \\
 \hline
 
 \end{tabular}
@@ -159,6 +159,95 @@ El algoritmo GRAPH que describimos en el Cap\'itulo \ref{sec:seleccion} es un al
 El algoritmo GRAPH define la generaci\'on de expresiones referenciales como un problema de b\'usqueda en un grafo, devuelve el grafo distintivo de menor costo (si existe) dada una funci\'on de costo particular. Comparamos a este algoritmo usando las m\'etricas precisi\'on, Dice y \textsc {masi}, introducidas en la Secci\'on \ref{sec:metricasAutomaticas}. 
 
 Recordemos que el corpus TUNA tiene 2 partes, una parte cuyo dominio son muebles, y otra parte cuyo dominio son personas, ambos ubicados en una grilla. El corpus tiene una parte con target singular, y otra con targets plurales. Para realizar esta comparaci\'on se us\'o s\'olamente la parte singular del corpus.
+
+
+En la Tabla \ \label{probability-of-use} y label{probability-of-use-people} se mmuestran las probabilidades de uso aprendidas desde el corpus. Se puede ver en la Tabla \label{probability-of-use} por ejemplo que la probabilidad de usar {\it blue} es mucho m\'as alta que la probabilidade de usar {\it facing left} para describir al target. La probabilidad de usar {\it green} no es 0 porque se puede usar para describir a un landmark.
+
+Para aprender las probabilidades de uso se sigui\'o el mecanismo descripto en el Cap\'itulo \ref{sec:algoritmo}, se unific\'o el vocabulario del corpus y se aprendi\'o una funci\'on de regresi\'on lineal por cada propiedad. Se us\'o la parte de entrenamiento del corpus que consist\'ia del 80\% del corpus TUNA.
+
+\begin{table}[h!]
+ \begin{minipage}{0.48\textwidth} 
+%\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Top 10 relations in Figure \ref{Tuna-scene} & learned \puse\\
+\hline
+chair 	&	0.94	\\
+blue 	&	0.89	\\
+y3 	&	0.29	\\
+x5 	&	0.27	\\
+left 	&	0.25	\\
+large 	&	0.21	\\
+green 	&	0.05	\\
+small 	&	0.05	\\
+back 	&	0.02	\\
+y1 	&	0.02	\\
+\hline
+\end{tabular}
+%\vspace*{.09cm}
+\caption{Probabilities of use learned from corpora and instantiated for Figure~\ref{Tuna-scene}} 
+\label{probability-of-use}
+%\end{center}
+\end{minipage}
+\begin{minipage}{0.48\textwidth} 
+%\begin{center}
+\begin{tabular}{|l|c|}
+\hline
+Top 10 relations in Figure \ref{Tuna-people-scene} & learned \puse\\
+\hline
+person 	&	0.79	\\
+hasGlasses 	&	0.71	\\
+y2 	&	0.20	\\
+x5 	&	0.18	\\
+hasHair	&	0.13	\\
+hairDark 	&	0.13	\\
+hairLight 	&	0.11	\\
+ageOld 	&	0.05	\\
+y3 	&	0.03	\\
+x2 	&	0.02	\\
+\hline 
+\end{tabular}
+%\begin{center}
+%\vspace*{.09cm}
+\caption{Probabilities of use learned from corpora and instantiated for Figure~\ref{Tuna-people-scene}} 
+\label{probability-of-use-people}
+%\end{center}
+\end{minipage}
+\vspace*{-.9cm}
+\end{table}
+%
+%\end{table}
+
+\begin{figure}[ht]
+\centering
+\includegraphics[width=\textwidth]{images/tuna.jpg}
+%\vspace*{-.25cm}
+%\vspace*{-.4cm}
+\caption{Escena del TUNA corpus, el target \emph{blue chair facing left}}
+\label{Tuna-scene}
+\end{figure}
+
+\begin{figure}[ht]
+%\begin{minipage}{0.60\linewidth}
+\centering
+\includegraphics[width=0.7\textwidth]{images/tuna-people.jpg}
+%\vspace*{-.4cm}
+\caption{Escena uusada durante la recolecci\'on del TUNA corpus. Para esta escena, la ER del target es \emph{the man with glasses}}. 
+\label{Tuna-people-scene}
+%\end{minipage}
+%\vspace*{-.38cm}
+%\begin{minipage}{0.50\linewidth}
+\centering
+%\vspace*{.2cm}
+%\includegraphics[width=\textwidth]{images/tuna.jpg}
+%\vspace*{-.25cm}
+%\vspace*{-.4cm}
+
+%\caption{TUNA corpus furniture scene}
+%\label{Tuna-furniture-scene}
+%\end{minipage}
+\end{figure} 
+
 
 En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistema con el sistema GRAPH para la primer ER del ranking (es decir, la m\'as frecuente ) y para las primeras 20 ERs del ranking.
 
