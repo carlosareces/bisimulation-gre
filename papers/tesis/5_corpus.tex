@@ -12,7 +12,7 @@ comparar con los datos de corpora, bajo la premisa de que el objetivo de la comp
 para evaluar si el sistema podr\'ia tener un modelo adecuado del comportamiento humano para la generaci\'on de expresiones referenciales.
 
 
-El trabajo descripto en \cite{viethen} se encuadra en el \'area de an\'alisis y modelizaci\'on estad\'istica de datos de corpora. Entre otros resultados, este trabajo mostr\'o que, em lo que respecta a la GER, distintas personas pueden no  hacer lo mismo en la misma situaci\'on. De hecho, incluso la misma persona podr\'ia describir el mismo target de diferentes maneras en distintas ocasiones.
+El trabajo descripto en \cite{viet:gene11} se encuadra en el \'area de an\'alisis y modelizaci\'on estad\'istica de datos de corpora. Entre otros resultados, este trabajo mostr\'o que, em lo que respecta a la GER, distintas personas pueden no  hacer lo mismo en la misma situaci\'on. De hecho, incluso la misma persona podr\'ia describir el mismo target de diferentes maneras en distintas ocasiones.
 Este cap\'itulo se encuadra en las \'areas de dise\~no y metodolog\'ias para la recolecci\'on de corpus y su uso para evaluar sistemas de GER.
 El corpus ZOOM es una colecci\'on de datos, resultante de un experimento realizado en un trabajo conjunto con la Universidad de S\~ao Paulo (Brasil). El objetivo del experimento fue crear un corpus de expresiones referenciales de un dominio m\'as complejo y m\'as cercano a las aplicaciones del mundo real, que los corpus existentes hasta el momento. Este corpus contiene referencias a targets singulares y plurales y hace gran uso de propiedades relacionales. Las descripciones del ZOOM corpus fueron producidas por humanos de espa\~nol y portugu\'es, lo cual permitir\'ia investigar la realizaci\'on ling\"u\'istica en estos lenguajes, que actualmente tiene pocos recursos. La mayor parte de los recursos del \'area est\'an en ingl\'es. Adem\'as permitir\'ia investigar la variaci\'on entre humanos en la GER (\cite{trainable-speaker,romina-coling,non-det}). 
 En este Cap\'itulo se describe el dominio y las caracter\'isticas del corpus, la metodolog\'ia usada su recolecci\'on y anotaci\'on y se lo copara con trabajo previo. Luego haremos una evaluaci\'on en la Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos. La evaluaci\'on realizada motiv\'o al caso de estudio de la Secci\'on \ref{sec:caso_estudio} en la que mostramos tres casos particulares de fragmentos de las ciudades de Lisboa y Madrid.
@@ -53,15 +53,15 @@ Las personas voluntarias recibieron un link a la interfaz del experimento, como 
 \end{figure}
 
 
-\fixme{La imagen aca abajo no esta en el repo.  La comente para
-  compilar.  Agregarla!}
-%\begin{figure}[h]
-%\begin{center}
-%\frame{\includegraphics[width=17cm]{images/primerImagenRecortada.png}}\\[0pt]
-%\caption{Interface del experimento.}
-%\label{fig_interface}
-%\end{center}
-%\end{figure}
+%\fixme{La imagen aca abajo no esta en el repo.  La comente para
+%  compilar.  Agregarla!}
+\begin{figure}[h]
+\begin{center}
+\frame{\includegraphics[width=17cm]{images/primerImagenRecortada.png}}\\[0pt]
+\caption{Interface del experimento.}
+\label{fig_interface}
+\end{center}
+\end{figure}
 
 %Las instrucciones dec\'ian lo siguiente:\\
 %``Su tarea es describir el o los lugares (restaurantes, iglesias, etc) indicados por una o dos flechas rojas en una serie de mapas, completando la frase; ``Es interesante visitar...'' como si estuviera dando indicaciones a un amigo. Intente ser preciso en sus respuestas no escribiendo solamente ``el restaurante'' o ``las iglesias'', pero no se preocupe en dar una descripci\'on demasiado detallada: s\'olo tiene que seguir su primera intuici\'on''
@@ -131,14 +131,12 @@ Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como desc
 \subsection{Anotaci\'on del corpus}
 \label{corpus-anotacion}
 
-\fixme{La imagin que aparece aca no esta en el repo.  La comente para
-  que compilara bien.  Agregarla!}
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=\textwidth]{figures/ids.png}\\[0pt]
-%\caption{Mapa con Id's usado para la anotaci\'on.}
-%\label{mapa-con-ids}
-%\end{figure}
+\begin{figure}[h]
+\centering
+\includegraphics[width=\textwidth]{figures/ids.png}\\[0pt]
+\caption{Mapa con Id's usado para la anotaci\'on.}
+\label{mapa-con-ids}
+\end{figure}
 
 \begin{table}[h]
 {\footnotesize
@@ -1153,7 +1151,13 @@ En el ap\'endice \ref{formulas-plurales}, se muestran las f\'ormulas generadas p
 
 
 \begin{enumerate}
-\item 
+\item El Medina Mayrit y el que est\'a cerca
+\item El Medina Mayrit y el que est\'a cerca en la calle de Atocha
+\item Los restaurantes que est\'an cerca, uno en calle de Carretas y otro en la calle de la Cruz
+\item El Medina Mayrit de la calle de Atocha y el que est\'a cerca en la calle de la Cruz
+\item El que est\'a en la calle de Carretas y el que est\'a cerca 
+\item El Medina Mayrit y el que est\'a cercano a una iglesia
+
 \end{enumerate}    
 
 En la Tabla \ref{formulas-mapa-zoom2} podemos ver que la ER con mayor frecuencia que gener\'o el algoritmo es parecida a la de mayor frecuencia en el corpus, la realizaci\'on podr\'ia ser {\it El restaurante Medina Mayrit y el que est\'a cerca del restaurante Medina Mayrit}, siendo que la que dijeron las personas en el corpus con m\'as frecuencia fue {\it El restaurante Medina Mayrit y el que est\'a cerca}, alguien podr\'ia decir que le falta un objeto, {\it est\'a cerca} de qu\'e?, y s\'i se refiere al mismo restaurante. Estas cosas son dif\'iciles de generar autom\'aticamente. Como mencionamos antes, vemos que hay f\'ormulas que tienen $\exists \nCerca.(\exists \nCerca.(\exists \nMedinaMayrit))$ que denota al mismo objeto. Preveemos sacar estas cosas en trabajo futuro, vea el Cap\'itulo \ref{sec:conclusiones}. Otra cosa ya vista en los otros mapas, es la tautolog\'a $\exists \nIn.(T)$, que es decir que est\'a en una calle, tambi\'en ser\'a estudiada en trabajo futuro.
