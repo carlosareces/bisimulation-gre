@@ -503,7 +503,9 @@ En la Tabla \ref{formulas-mapa-zoom2-apendice} se muestran las f\'ormulas dadas 
 \end{center}
 \end{table}
 
-\section{Ejemplos de f\'ormulas para el GRE3D7}
+\section{GRE3D7}
+
+\subsection{Ejemplos de f\'ormulas para el GRE3D7}
 
 En la Secci\'on \ref{sec:ejemplo_ejecucion} se mostr\'o un ejemplo de ejecuci\'on del algoritmo para la Figura \ref{GRE3D7-stimulus-22-apendice}, aqu\'i mostramos todas las f\'ormulas que di\'o el algoritmo para el target se\~nalado por la flecha, en 10000 ejecuciones.
 
@@ -539,68 +541,17 @@ En la Secci\'on \ref{sec:ejemplo_ejecucion} se mostr\'o un ejemplo de ejecuci\'o
 \end{center}
 \end{table}
 
+\subsection{Im\'agenes verde-azules del corpus GRE3D7}
+\label{imagenesGRE3D7-apendice}
+En la Figura \ref{verde-azul} se muestran las escenas mostradas a los participantes del corpus \textit{GRE3D7} introducido en la Secci\'on \ref{sec:corpusGRE}, esta parte incluye s\'olo las escenas verde y azules. El corpus contiene otra parte similar con colores rojo y amarillo.
 
-\section{Calculo probabilidad-GATT para el archivo anterior}
-
-Toma un modelo y calcula la prob\_disc de GATT 
-
-Algoritmo\\
-\label{algoritmo-GATT}
-\begin{verbatim}
-import sys
-
-f=open(sys.argv[1],"r")
-
-f2=open("GATT-"+sys.argv[1],"w")
-
-d=dict()
-
-for line in f.readlines():
-    if "    <related rel=" in line:
-        pal=line.split('"')[1]
-        if pal in d.keys(): d[pal]=d[pal]+1
-        else: d[pal]=1
-
-for key in d:
-    numero=float(1)/float(d[key])
-    f2.write(key+"->"+repr(numero)+"\n")
-
-f.close()
-f2.close()
-
-Script para ejecutar en todos los archivos
-
-#!/usr/bin/python
-from os import *
-
-l=[1, 3, 6 ,8, 10, 12, 13, 15, 18, 20, 23, 25, 27]
-for i in l:
-    system('python calculaGATT.py modeloFig'+repr(i)+'Gre7-2.xml')
-
-
-\end{verbatim}
-
-
-
-
-\label{probabilidad-GATT}
-
-orientation-left	0.2\\
-x-dimension-1	1.0\\
-colour-green	0.5\\
-size-small	0.3333333333333333\\
-x-dimension-4	1.0\\
-type-fan	0.25\\
-size-large	0.25\\
-x-dimension-3	0.3333333333333333\\
-colour-blue	0.3333333333333333\\
-type-sofa	0.3333333333333333\\
-x-dimension-2	0.5\\
-colour-red	0.5\\
-orientation-back	0.5\\
-y-dimension-1	0.5\\
-y-dimension-2	0.5\\
-y-dimension-3	0.3333333333333333\\
+\begin{figure}[h]
+\centering
+\includegraphics[width=1\textwidth]{images/corpusVerdeAzul.png}
+%\vspace{-0.5}
+\caption{Im\'agenes del \textit{GRE3D7} parte azul y verde.}
+\label{verde-azul}
+\end{figure}
 
 
 
