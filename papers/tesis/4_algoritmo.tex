@@ -583,7 +583,7 @@ las f\'ormulas \texttt{ball} y \texttt{cube} ya que todos los elementos de la fi
 \textbf{Trivial} es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el contexto de la 
 Figura \ref{figura-y-modelo}, \texttt{large yellow ball} es trivial ya que no hay esferas amarillas grandes en el contexto considerado.
 
-En el Algoritmo \ref{} vamos a utilizar f\'ormulas del lenguaje de descripci\'on $\el$~\cite{baader03} para describir clases de refinamiento.
+En el Algoritmo \ref{algo:bisim-add-el-over} vamos a utilizar f\'ormulas del lenguaje de descripci\'on $\el$~\cite{baader03} para describir clases de refinamiento.
 Note, sin embargo, que el lenguaje formal utilizado en particular es independiente del algoritmo principal, y diferentes 
 funciones add$_{\mathcal {L}}$(R,$\varphi $, \RE) se pueden utilizar en funci\'on del lenguaje en cuesti\'on.
 
@@ -616,24 +616,24 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 }
 
 \Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ incrementadas hasta que alcanzan 1}}{
-  FirstLoop $\leftarrow$ TRUE
-  \While(\tcp*[f]{\footnotesize mientras alguna clase tenga al menos 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
-      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize hacer una copia para futura comparaci\'on} \;
+  FirstLoop $\leftarrow$ TRUE \;
+  \While(\tcp*[f]{\footnotesize hay clases con m\'as de 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
+      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize resguardar \RE} \;
       
       \For{\em (R, R.\puse) $\in$ Rs}{
           \If(\tcp*[f]{\footnotesize R ser\'a usada en la expresi\'on}){\em R.\randomuse $\le$ R.\puse}{
               \lFor{\em $\varphi \in$ \RE}{
                   add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine todas las clases usando R}}
                   }\;
-              \If(\tcp*[f]{\footnotesize el conjunto de f\'ormulas cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo for para tratar de nuevo con la m\'as alta R.\puse}}
+              \If(\tcp*[f]{\footnotesize el conjunto de f\'ormulas cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize tratar de nuevo con la m\'as alta R.\puse}}
               }
      \If(\tcp*[f]{\footnotesize el conjunto de f\'ormulas se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse.}}
   }
 %	Bloque con error comentado
+  FirstLoop $\leftarrow$ FALSE \;
   \For{\em (R,R.\puse) $\in$ Rs}{
     R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\puse}
   }
-  FirstLoop $\leftarrow$ FALSE
 }
 \end{algorithm}
 
@@ -643,7 +643,7 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 
 \dontprintsemicolon
 
-\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
+\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}\SetKwInOut{Algorithm}{Algoritmo}
 
 \Input{\footnotesize R, $\varphi$, $\RE$}
 \Output{\footnotesize $\RE$}
@@ -670,11 +670,8 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 \end{algorithm}
 
 
-\fixme{No se pueden poner dos Algoritmos en un Box (i.e., figure)
-  Escribir esto en el texto 
-``Algoritmos de refinamiento con probabilidades y sobreespecificaci\'on para el lenguage \el. El lenguaje formal utilizado es independiente del algoritmo principal, y se pueden utilizar diferentes funciones add$_{\mathcal {L}}$(R,$\varphi $,\RE) en funci\'on del lenguaje considerado.\label{fig:algo3}''}
-
-
+%\fixme{No se pueden poner dos Algoritmos en un Box (i.e., figure)
+% Algoritmos de refinamiento con probabilidades y sobreespecificaci\'on para el lenguage \el. El lenguaje formal utilizado es independiente del algoritmo principal, y se pueden utilizar diferentes funciones add$_{\mathcal {L}}$(R,$\varphi $,\RE) en funci\'on del lenguaje considerado.
 
 El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento
 y es inicializado por la descripci\'on m\'as general $\top$. Al finalizar contendr\'a las f\'ormulas que representan las ERs de los elementos del modelo.
@@ -723,10 +720,10 @@ En el comienzo \RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_
 
 R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}& {\it top}& {\it left}& {\it below}   \\
 \hline \hline
-R.\puse	& 1.0			& 1.0		& 0.978	& 0.257      & 0.178     & 0.15       & 0.107    & 0.007    & 0 & 0 &0 &0\\ \hline
+R.\puse	& 1.0			& 1.0		& 0.97	& 0.25      & 0.18     & 0.15       & 0.11    & 0.007    & 0 & 0 &0 &0\\ \hline
 %R.\randomuse & 0.32348895 & 0.5607122 &0.8771196 &0.1256972&0.14249319 &0.039857805 &0.70997673&0.21847993&0.8570516\\
-R.\randomuse & 0.3234 & 0.5607 &0.8771 &0.1256 &0.1424 &0.0398 &0.7099 &0.2184 &0.8570 &0.8166 &0.2026 &0.13\\ \hline
-R.\incuse & 0&0&0.0044& 0.1486& 0.1644& 0.17& 0.1786& 0.1986& 0.2 & 0.2 & 0.2 &0.2\\ \hline
+R.\randomuse & 0.323 & 0.560 &0.877 &0.125 &0.142 &0.039 &0.709 &0.218 &0.857 &0.816 &0.202 &0.13\\ \hline
+R.\incuse & 0&0&0.004& 0.148& 0.164& 0.17& 0.178& 0.198& 0.2 & 0.2 & 0.2 &0.2\\ \hline
 
 \end{tabular}
 }
@@ -947,17 +944,17 @@ De ahora hasta que termine el algoritmo, no se agregar\'an propiedades por sobre
 \begin{table}[h]
 \begin{center}
 \footnotesize{
-\begin{tabular} {  l c c c c c c c c c c c }
+\begin{tabular} {  l c c c c c c c c c c c c}
 \hline
 %\multicolumn{1}{c}{}
 %&\multicolumn{1}{c}{Domain}
 %&\multicolumn{3}{c}{Descriptions}\\
 
-R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   & {\it top}& {\it left}   \\
+R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   & {\it top}& {\it left}& {\it below}   \\
 \hline
-R.\puse	& 1.0			& 1.0		& 0.9868	& 0.5542 & 0.5068 & 0.49   & 0.4642 & 0.4042& 0.4 &0.4 &0.4  \\ \hline
-R.\randomuse & 0.3234 & 0.5607 &0.8771 &0.1256 &0.1424 &0.0398 &0.7099 &0.2184 &0.8570 &0.8166 &0.2026\\ \hline
-R.\incuse & 0&0&0.0044& 0.1486& 0.1644& 0.17& 0.1786& 0.1986& 0.2 & 0.2 & 0.2\\ \hline
+R.\puse	& 1.0			& 1.0		& 0.9868	& 0.5542 & 0.5068 & 0.49   & 0.4642 & 0.4042& 0.4 &0.4 &0.4  &0.4\\ \hline
+R.\randomuse & 0.323 & 0.560 &0.877 &0.125 &0.142 &0.039 &0.709 &0.218 &0.857 &0.816 &0.202 &0.13\\ \hline
+R.\incuse & 0&0&0.004& 0.148& 0.164& 0.17& 0.178& 0.198& 0.2 & 0.2 & 0.2 &0.2\\ \hline
 
 \end{tabular}
 }

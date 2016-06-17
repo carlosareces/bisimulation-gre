@@ -13,11 +13,11 @@ Las probabilidades de uso aprendidas usando regresi\'on lineal como se muestra e
 \begin{table}[h]
 \begin{center}
 \footnotesize{
-\begin{tabular} {  l c c c c c c c c c c}
+\begin{tabular} {  l c c c c c c c c c c c}
 \hline
-R				&{\it ball}			& {\it cube}	& {\it green}	  & {\it blue} & {\it large} & {\it small} & {\it top} & {\it front} & {\it left} & {\it ontop}   \\
+R				&{\it ball}			& {\it cube}	& {\it green}	  & {\it blue} & {\it large} & {\it small} & {\it ontop}& {\it left}  & {\it top} & {\it front}   &{\it below} \\
 \hline
-R.\puse	& 1.0			& 1.0		& 0.993& 0.124&0.03  &0.346   &0  &0 &0.002 &0.179 \\
+R.\puse	& 1.0			& 1.0		& 0.993& 0.124&0.03  &0.346   &0.179 &0.002 & 0 &0 &0\\
 \hline
 
 \end{tabular}
@@ -161,7 +161,7 @@ El algoritmo GRAPH define la generaci\'on de expresiones referenciales como un p
 Recordemos que el corpus TUNA tiene 2 partes, una parte cuyo dominio son muebles, y otra parte cuyo dominio son personas, ambos ubicados en una grilla. El corpus tiene una parte con target singular, y otra con targets plurales. Para realizar esta comparaci\'on se us\'o s\'olamente la parte singular del corpus.
 
 
-En la Tabla \ref{probability-of-use} y \ref{probability-of-use-people} se muestran las probabilidades de uso aprendidas desde el corpus. Se puede ver en la Tabla \label{probability-of-use} por ejemplo que la probabilidad de usar {\it blue} es mucho m\'as alta que la probabilidade de usar {\it facing left} para describir al target. La probabilidad de usar {\it green} no es 0 porque se puede usar para describir a un landmark.
+En la Tabla \ref{probability-of-use} y \ref{probability-of-use-people} se muestran las probabilidades de uso aprendidas desde el corpus. Se puede ver en la Tabla \ref{probability-of-use} por ejemplo que la probabilidad de usar {\it blue} es mucho m\'as alta que la probabilidad de usar {\it facing left} para describir al target. La probabilidad de usar {\it green} no es 0 porque se puede usar para describir a un landmark.
 
 Para aprender las probabilidades de uso se sigui\'o el mecanismo descripto en el Cap\'itulo \ref{sec:algoritmo}, se unific\'o el vocabulario del corpus y se aprendi\'o una funci\'on de regresi\'on lineal por cada propiedad. Se us\'o la parte de entrenamiento del corpus que consist\'ia del 80\% del corpus TUNA.
 
@@ -170,7 +170,7 @@ Para aprender las probabilidades de uso se sigui\'o el mecanismo descripto en el
 %\begin{center}
 \begin{tabular}{|l|c|}
 \hline
-Top 10 relations in Figure \ref{Tuna-scene} & learned \puse\\
+Relaciones de la Figura \ref{Tuna-scene} & \puse\ Aprendida \\
 \hline
 chair 	&	0.94	\\
 blue 	&	0.89	\\
@@ -185,7 +185,7 @@ y1 	&	0.02	\\
 \hline
 \end{tabular}
 %\vspace*{.09cm}
-\caption{Probabilities of use learned from corpora and instantiated for Figure~\ref{Tuna-scene}} 
+\caption{Probabilidades aprendidas desde el corpus de la Figura~\ref{Tuna-scene}} 
 \label{probability-of-use}
 %\end{center}
 \end{minipage}
@@ -193,7 +193,7 @@ y1 	&	0.02	\\
 %\begin{center}
 \begin{tabular}{|l|c|}
 \hline
-Top 10 relations in Figure \ref{Tuna-people-scene} & learned \puse\\
+Relaciones de la Figura \ref{Tuna-people-scene} & \puse\ Aprendida \\
 \hline
 person 	&	0.79	\\
 hasGlasses 	&	0.71	\\
@@ -209,30 +209,31 @@ x2 	&	0.02	\\
 \end{tabular}
 %\begin{center}
 %\vspace*{.09cm}
-\caption{Probabilities of use learned from corpora and instantiated for Figure~\ref{Tuna-people-scene}} 
+\caption{Probabilidades de uso aprendidas desde el corpus para la Figura~\ref{Tuna-people-scene}} 
 \label{probability-of-use-people}
 %\end{center}
 \end{minipage}
-\vspace*{-.9cm}
+%\vspace*{-.9cm}
 \end{table}
 %
 %\end{table}
 
-\begin{figure}[ht]
+%\vspace*{2cm}
+\begin{figure}[H]
 \centering
-\includegraphics[width=\textwidth]{images/tuna.jpg}
+\includegraphics[width=0.5\textwidth]{images/tuna.jpg}
 %\vspace*{-.25cm}
 %\vspace*{-.4cm}
-\caption{Escena del TUNA corpus, el target \emph{blue chair facing left}}
+\caption{Escena del TUNA corpus, el target \emph{blue chair facing left}.}
 \label{Tuna-scene}
 \end{figure}
 
 \begin{figure}[ht]
 %\begin{minipage}{0.60\linewidth}
 \centering
-\includegraphics[width=0.7\textwidth]{images/tuna-people.jpg}
+\includegraphics[width=0.5\textwidth]{images/tuna-people.jpg}
 %\vspace*{-.4cm}
-\caption{Escena uusada durante la recolecci\'on del TUNA corpus. Para esta escena, la ER del target es \emph{the man with glasses}}. 
+\caption{Escena usada durante la recolecci\'on del TUNA corpus. Para esta escena, la ER del target es \emph{the man with glasses}.} 
 \label{Tuna-people-scene}
 %\end{minipage}
 %\vspace*{-.38cm}
@@ -250,7 +251,7 @@ x2 	&	0.02	\\
 
 
 En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistema con el sistema GRAPH para la primer ER del ranking (es decir, la m\'as frecuente ) y para las primeras 20 ERs del ranking.
-\vspace*{.09cm}
+\vspace*{2cm}
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -277,7 +278,7 @@ Nuestro sistema, Dominio personas (top 20)   &	81\%		&68\%	&	60\%		\\
 En la Figura~\ref{graficoPresicion} se muestra una comparaci\'on entre la precisi\'on de nuestro sistema y el sistema GRAPH. El gr\'afico de la izquierda corresponde al dominio muebles y el gr\'afico de la derecha corresponde al dominio personas. En el dominio muebles estamos obteniendo casi los mismos n\'umeros en las m\'etricas evaluadas.
 Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra precisi\'on es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la precisi\'on para ambos dominios se hace mayor del 60\% (60\% para personas y 65\% para muebles). Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no esten en primer lugar. Si el algoritmo GRAPH fuera modificado para ser no-determin\'istico es posible que tambi\'en mejorara su precisi\'on en 20 o m\'as ejecuciones. Esta es una l\'inea interesante de trabajo futuro. 
 %  \centering
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{subfigure}{.6\textwidth}
   \centering
 \includegraphics[width=\textwidth]{images/furniturePrec.png}
@@ -310,7 +311,7 @@ Nuestro objetivo es mostrar que incluso si la ER generada autom\'aticamente no c
 En la Tabla~\ref{system-versus-human} se muestran los resultados del experimento de evaluaci\'on humana.
 Las ERs producidas por el sistema en el top 1 fueron consideradas igual o mejor por los 2 jueces que las generadas por personas en el 75\% de los casos para los muebles y en el 43\% para las personas. Esto contrasta con el 47\% para muebles y 19\% para personas de la Tabla \ref{Tabla_sis_1_20}. Esto muestra que la m\'etrica de precisi\'on es demasiado estricta para la tarea, y las m\'etricas de DICE o \textsc {masi} se acercan m\'as a evaluaciones humanas. Adem\'as al menos 1 juez consider\'o que el 97\% de las ERs del sistema eran tan buenas o mejores que las humanas para los muebles y (87\% para las personas). Esto muestra que la evaluaci\'on de la calidad de las ERs es parcialmente subjetiva. S\'olo en el 8\% de los casos ambos jueces coincidieron que una ER generada autom\'aticamente era peor que la humana.
 
-\begin{table}[h]
+\begin{table}[H]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
@@ -333,7 +334,7 @@ A continuaci\'on, se ilustra el experimento de evaluaci\'on, mostrando ejemplos 
 
 Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER subespecificada mientras que el sistema produce un ER que identifica de manera un\'{i}voca al target. La ER generada por el sistema para esta figura es {\it small blue fan}, mientras que la ER producida por el ser humano es {\it blue fan}. La ER del humano no logra identificar de forma \'unica el target y entonces no es preferida por los jueces humanos. Los seres humanos son conocidos por producir ERs subespecificadas, esto puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ERs aprendidas de los seres humanos.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
@@ -353,7 +354,7 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER sube
 
 En la Figura~\ref{BlueChair} la ER humana era {\it front blue chair}, y la ER sistema era {\it bottom blue chair}; ambos jueces seleccionaron la ER sistema. Este caso se puede explicar por el hecho de que, en este \'ambito, la propiedad {\it bottom} ayuda m\'as durante la identificaci\'on de la propiedad {\it front} porque concentra la atenci\'on del interlocutor en la parte inferior de la escena. Nuestro sistema aprende este hecho por el aprendizaje de un mayor valor de \puse\ para {\it bottom} que para {\it front} a partir de los datos de entrenamiento.
 
-\begin{figure}[h]
+\begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/s59t26.jpg}
@@ -376,4 +377,4 @@ Figura~\ref{s307t21}~ilustra un caso en el que la ER del sistema era m\'as sobre
 
 \section{Res\'umen y linkeo del cap\'itulo}
 
-En este cap\'itulo se present\'o una evaluaci\'on autom\'atica de los rankings de ERs generados por el algoritmo sobre 2 benchmarks del \'area, uno el corpus GRE3D7 y otro son los resultados de una competencia el TUNA challenge, en este caso nos comparamos con el algoritmo que mejores puntuaciones tuvo en la competencia. Presentamos tambi\'en una evaluaci\'on humana sobre ERs del corpus TUNA y las generada por el algoritmo. Si bien conseguimos buenas puntuaciones en el siguiente cap\'itulo veremos una evaluaci\'on de un caso mucho m\'as natural, en el que consideramos ERs generadas por el algoritmo para puntos de inter\'es en mapas. 
+En este cap\'itulo se present\'o una evaluaci\'on autom\'atica de los rankings de ERs generados por el algoritmo sobre 2 benchmarks del \'area, uno el corpus GRE3D7 y otro son los resultados de una competencia el TUNA challenge, en este caso nos comparamos con el algoritmo que mejores puntuaciones tuvo en la competencia. Presentamos tambi\'en una evaluaci\'on humana sobre ERs del corpus TUNA y las generadas por el algoritmo. Si bien conseguimos buenas puntuaciones en el siguiente cap\'itulo veremos una evaluaci\'on de un caso mucho m\'as natural, en el que consideramos ERs generadas por el algoritmo para puntos de inter\'es en mapas. 

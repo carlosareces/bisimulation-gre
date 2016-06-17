@@ -1151,16 +1151,16 @@ En el ap\'endice \ref{formulas-plurales}, se muestran las f\'ormulas generadas p
 \begin{table}[h]
 {\footnotesize
 \begin{center}
-\begin{tabular}{|l|c|c|c|}
+\begin{tabular}{|l|l|c|c|}
 \hline
 & Expresi\'on referencial generada por el algoritmo & Frecuencia & \%\\
-\hline
-1& El Medina Mayrit y el que est\'a cerca& 303& 30.3\\
-2& El Medina Mayrit y el que est\'a cerca en la calle de Atocha& 83& 8.3\\
-3& Los restaurantes que est\'an cerca, uno en calle de Carretas y otro en la calle de la Cruz&20 & 2 \\
-4& El Medina Mayrit de la calle de Atocha y el que est\'a cerca en la calle de la Cruz&13 &1.3 \\
-5& El que est\'a en la calle de Carretas y el que est\'a cerca & 9& 0.9\\
-6& El Medina Mayrit y el que est\'a cercano a una iglesia & \\
+\hline \hline
+1& El Medina Mayrit y el que est\'a cerca& 303& 30.3\\ \hline
+2& El Medina Mayrit y el que est\'a cerca en la calle de Atocha& 83& 8.3\\\hline
+3& Los restaurantes que est\'an cerca, uno en calle de Carretas y otro en la calle de la Cruz&20 & 2 \\ \hline
+4& El Medina Mayrit de la calle de Atocha y el que est\'a cerca en la calle de la Cruz&13 &1.3 \\ \hline
+5& El que est\'a en la calle de Carretas y el que est\'a cerca & 9& 0.9\\ \hline
+6& El Medina Mayrit en calle de Atocha y el que est\'a cercano a una iglesia &9 &0.9 \\
 
 \hline
 \end{tabular}
@@ -1169,6 +1169,8 @@ En el ap\'endice \ref{formulas-plurales}, se muestran las f\'ormulas generadas p
 }
 \end{table}
 
+La precisi\'on que conseguimos en este caso es de 27.1\%.
+%18.3+ 0.5+8.3
 %En la Tabla \ref{formulas-mapa-zoom2} podemos ver que la ER con mayor frecuencia que gener\'o el algoritmo es parecida a la de mayor frecuencia en el corpus, la realizaci\'on podr\'ia ser {\it El restaurante Medina Mayrit y el que est\'a cerca del restaurante Medina Mayrit}, siendo que la que dijeron las personas en el corpus con m\'as frecuencia fue {\it El restaurante Medina Mayrit y el que est\'a cerca}, alguien podr\'ia decir que le falta un objeto, {\it est\'a cerca} de qu\'e?, y s\'i se refiere al mismo restaurante. Estas cosas son dif\'iciles de generar autom\'aticamente. Como mencionamos antes, vemos que hay f\'ormulas que tienen $\exists \nCerca.(\exists \nCerca.(\exists \nMedinaMayrit))$ que denota al mismo objeto. Preveemos sacar estas cosas en trabajo futuro, vea el Cap\'itulo \ref{sec:conclusiones}. Otra cosa ya vista en los otros mapas, es la tautolog\'a $\exists \nIn.(T)$, que es decir que est\'a en una calle, tambi\'en ser\'a estudiada en trabajo futuro.
 
 
