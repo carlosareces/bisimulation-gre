@@ -592,82 +592,147 @@ satisfagan~$\psi$ y que est\'an relacionados por relaci\'on R con alg\'un elemen
 Por ejemplo, la interpretaci\'on de la f\'ormula \texttt{ball}$\sqcap$ $\exists$ \texttt{leftof}.\texttt{cube} es el conjunto de todas las esferas 
 que est\'an a la izquierda de alg\'un cubo.
 
-
+%%
 \begin{algorithm}[h]
 \floatname{algorithm}{Algoritmo}
-
 %\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
 \caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
- de relaciones con sus valores de \puse\, ordenados}
+de relaciones con sus valores de \puse\, odenados por \puse}
 \Output{\footnotesize Un conjunto de f\'ormulas \RE tal que
 $\{\interp{\varphi} \mid \varphi \in \RE\}$ es el conjunto de clases de
 $\mathcal{L}$-similaridad de $\gM$}
-
 $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\top$ aplica a todos los elementos del contexto.}
-
 %Bloque con error comentado
 \For{\em (R,R.\puse) $\in$ Rs}{
-	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es el componente que introduce no-determinismo} \;
-	
-    R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize permite incrementar R.\puse\ en pasos iguales en cada ciclo}
+R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es la probabilidad de usar R} \;
+R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ incrementadas por R.\incuse en cada ciclo}
 }
-
 \Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ incrementadas hasta que alcanzan 1}}{
-  FirstLoop $\leftarrow$ TRUE \;
-  \While(\tcp*[f]{\footnotesize hay clases con m\'as de 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
-      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize resguardar \RE} \;
-      
-      \For{\em (R, R.\puse) $\in$ Rs}{
-          \If(\tcp*[f]{\footnotesize R ser\'a usada en la expresi\'on}){\em R.\randomuse $\le$ R.\puse}{
-              \lFor{\em $\varphi \in$ \RE}{
-                  add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine todas las clases usando R}}
-                  }\;
-              \If(\tcp*[f]{\footnotesize el conjunto de f\'ormulas cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize tratar de nuevo con la m\'as alta R.\puse}}
-              }
-     \If(\tcp*[f]{\footnotesize el conjunto de f\'ormulas se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse.}}
-  }
-%	Bloque con error comentado
-  FirstLoop $\leftarrow$ FALSE \;
-  \For{\em (R,R.\puse) $\in$ Rs}{
-    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\puse}
-  }
+FirstLoop $\leftarrow$ TRUE \;
+\While(\tcp*[f]{\footnotesize mientras alguna clase tenga al menos 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
+\RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize hacer una copia para futura comparaci\'on} \;
+\For{\em (R, R.\puse) $\in$ Rs}{
+\If(\tcp*[f]{\footnotesize R ser\'a usada en la expresi\'on}){\em R.\randomuse $\le$ R.\puse}{
+\lFor{\em $\varphi \in$ \RE}{
+add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine todas las clases usando R}}
+}\;
+\If(\tcp*[f]{\footnotesize la clasificaci\'on cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo for para tratar de nuevo con la m\'as alta R.\puse}}
+}
+\If(\tcp*[f]{\footnotesize la clasificaci\'on se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse.}}
+}
+FirstLoop $\leftarrow$ FALSE \;
+% Bloque con error comentado
+\For{\em (R,R.\puse) $\in$ Rs}{
+R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\puse}
+}
 }
 \end{algorithm}
-
-
 \begin{algorithm}[h]
 \floatname{algorithm}{Algoritmo}
-
 \dontprintsemicolon
-
-\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}\SetKwInOut{Algorithm}{Algoritmo}
-
+\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\footnotesize R, $\varphi$, $\RE$}
 \Output{\footnotesize $\RE$}
-
 \If(\tcp*[f]{\footnotesize primera iteraci\'on?})
-{\em FirstLoop}{
-    Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
-\lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
+{\em FirstLoop?}{
+Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
+\lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$}
 \For{\em $\psi \in \RE$ con $\#\interp{\psi} > 1$}{
-  \If{\em $\psi \sqcap \exists$R.$\varphi$ no est\'a subsumida en
-    $\RE$ \ 
-    \\\tcp*[f]{\footnotesize subsumida: interp. distinta a uni\'on de inter. de otras f\'ormulas en \RE?}
-    \\\ \ \ \ {\bf and} $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq
-    \emptyset$ 
-    \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}
-    \\\ \ \ \  {\bf and} \emph{Informativa}}{
-    Agregar $\psi \sqcap \exists \mbox{R}.\varphi$ a $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a \RE} \;
-		
-    borrar f\'ormulas subsumidas de $\RE$ \tcp*[f]{\footnotesize borrar clases subsumidas}
-  }
+\If{\em $\psi \sqcap \exists$R.$\varphi$ no est\'a subsumida en
+$\RE$ \ {\bf and}
+\\\tcp*[f]{\footnotesize subsumida: interp. distinta a uni\'on de inter. de otras f\'ormulas en \RE?}
+\\\ \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq
+\emptyset$ {\bf and}
+\tcp*[f]{\footnotesize es no-trivial: tiene elementos?}
+\\\ \ \ \ \emph{Informativa}}{
+Agregar $\psi \sqcap \exists \mbox{R}.\varphi$ a $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a la clasificaci\'on} \;
+borrar f\'ormulas subsumidas de $\RE$ \tcp*[f]{\footnotesize borrar clases subsumidas}
 }
-
+}
 \caption{add$_\el$(R, $\varphi$, $\RE$)} \label{algo:bisim-add-el-over}
 \end{algorithm}
+
+
+%%
+
+%\begin{algorithm}[h]
+%\floatname{algorithm}{Algoritmo}
+
+%%\floatname{algorithm}{Algoritmo}
+%\dontprintsemicolon
+%\caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
+%\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
+%\Input{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
+% de relaciones con sus valores de \puse\, ordenados}
+%\Output{\footnotesize Un conjunto de f\'ormulas \RE tal que
+%$\{\interp{\varphi} \mid \varphi \in \RE\}$ es el conjunto de clases de
+%$\mathcal{L}$-similaridad de $\gM$}
+
+%$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\top$ aplica a todos los elementos del contexto.}
+
+%%Bloque con error comentado
+%\For{\em (R,R.\puse) $\in$ Rs}{
+%	R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es el componente que introduce no-determinismo} \;
+%	
+%    R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize permite incrementar R.\puse\ en pasos iguales en cada ciclo}
+%}
+
+%\Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ incrementadas hasta que alcanzan 1}}{
+%  FirstLoop $\leftarrow$ TRUE \;
+%  \While(\tcp*[f]{\footnotesize hay clases con m\'as de 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
+%      \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize resguardar \RE} \;
+%      
+%      \For{\em (R, R.\puse) $\in$ Rs}{
+%          \If(\tcp*[f]{\footnotesize R ser\'a usada en la expresi\'on}){\em R.\randomuse $\le$ R.\puse}{
+%              \lFor{\em $\varphi \in$ \RE}{
+%                  add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine todas las clases usando R}}
+%                  }\;
+%              \If(\tcp*[f]{\footnotesize el conjunto de f\'ormulas cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize tratar de nuevo con la m\'as alta R.\puse}}
+%              }
+%     \If(\tcp*[f]{\footnotesize el conjunto de f\'ormulas se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse.}}
+%  }
+%%	Bloque con error comentado
+%  FirstLoop $\leftarrow$ FALSE \;
+%  \For{\em (R,R.\puse) $\in$ Rs}{
+%    R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\puse}
+%  }
+%}
+%\end{algorithm}
+
+
+%\begin{algorithm}[h]
+%\floatname{algorithm}{Algoritmo}
+
+%\dontprintsemicolon
+
+%\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}\SetKwInOut{Algorithm}{Algoritmo}
+
+%\Input{\footnotesize R, $\varphi$, $\RE$}
+%\Output{\footnotesize $\RE$}
+
+%\If(\tcp*[f]{\footnotesize primera iteraci\'on?})
+%{\em FirstLoop}{
+%    Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
+%\lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$} 
+%\For{\em $\psi \in \RE$ con $\#\interp{\psi} > 1$}{
+%  \If{\em $\psi \sqcap \exists$R.$\varphi$ no est\'a subsumida en
+%    $\RE$ \ 
+%    \\\tcp*[f]{\footnotesize subsumida: interp. distinta a uni\'on de inter. de otras f\'ormulas en \RE?}
+%    \\\ \ \ \ {\bf and} $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq
+%    \emptyset$ 
+%    \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}
+%    \\\ \ \ \  {\bf and} \emph{Informativa}}{
+%    Agregar $\psi \sqcap \exists \mbox{R}.\varphi$ a $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a \RE} \;
+%		
+%    borrar f\'ormulas subsumidas de $\RE$ \tcp*[f]{\footnotesize borrar clases subsumidas}
+%  }
+%}
+
+%\caption{add$_\el$(R, $\varphi$, $\RE$)} \label{algo:bisim-add-el-over}
+%\end{algorithm}
 
 
 %\fixme{No se pueden poner dos Algoritmos en un Box (i.e., figure)
