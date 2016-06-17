@@ -939,6 +939,8 @@ $\interp {\texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}} = \{e_4\}$  \
 $\interp {\texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube}} = \{e_3\} $
 \end{tabular}
 
+
+
 De ahora hasta que termine el algoritmo, no se agregar\'an propiedades por sobreespecificaci\'on. Notar que ya tenemos 4 conjuntos singleton, los cuales no cambiar\'an hasta el final de la ejecuci\'on. El algoritmo contin\'ua porque siguen quedando clases para refinar, las cuales son $\texttt{ball} \sqcap \texttt{yellow}$ y $\texttt{cube} \sqcap \texttt{red}$.
 
 \begin{table}[h]
@@ -977,7 +979,7 @@ La relaci\'on \texttt{small} no pasa la probabilidad random, pero \texttt{righto
 
 La siguiente que pasa la probabilidad random es \texttt{left}. Se agrega la f\'ormula $\texttt{left} \sqcap \texttt{red} \sqcap \texttt{cube}$, y su correspondiente interpretaci\'on. Se muestran los conjuntos resultantes en la Figura \ref{fig-modelo9f}. $\texttt{cube} \sqcap \texttt{red}$ se elimina porque es redundante.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{center}
 \includegraphics[width=11cm]{images/im/left.png}
 \caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas: $\texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large},\texttt{ball} \sqcap \exists \texttt{ontop}. \texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{yellow}, \texttt{ball} \sqcap \texttt{yellow}, \texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}$, $\texttt{left} \sqcap \texttt{red} \sqcap \texttt{cube}$.}
