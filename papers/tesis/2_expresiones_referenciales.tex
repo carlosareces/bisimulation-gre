@@ -1,14 +1,14 @@
 \chapter{Generaci\'on de expresiones referenciales}
 \label{sec:seleccion}
 
-En este cap\'itulo presentamos definiciones b\'asicas y un res\'umen del estado del arte del \'area de generaci\'on de expresiones referenciales. Nos enfocamos en el trabajo previo m\'as relevante para esta tesis. 
+En este cap\'itulo presentamos definiciones b\'asicas y un resumen del estado del arte del \'area de generaci\'on de expresiones referenciales. Nos enfocamos en el trabajo previo m\'as relevante para esta tesis. 
 En la Secci\'on \ref{generacion-humana} damos definiciones b\'asicas que nos servir\'an a 
 lo largo de la tesis. Primero, explicamos \emph{qu\'e} expresiones referenciales pueden generar las personas. Describimos los diferentes tipos de expresiones referenciales. Las ERs se diferencian seg\'un el tipo de propiedades que 
-contengan, pueden contener propiedades at\'omicas, o relaciones con otros objetos, o ambas. Las ERs tambi\'en se diferencian por la cantidad de informaci\'on que contienen, pudiendo ser minimales o sobreespecificadas. Definimos ER plurales yparciales. %Las ERs minimales contienen s\'olo la informaci\'on indispensable para identificar al target. Las sobreespecificadas contienen m\'as informaci\'on de la m\'inima necesaria para identificar al target, y las subespecificadas, no identifican al target correctamente, sino a un conjunto m\'as grande el cual contiene al target y a otros elementos, porque la informaci\'on que contienen no es suficiente para identificar al target. Las ERs plurales, son expresiones que identifican a un conjunto target que tiene m\'as de un elemento, y las parciales, son las que teniendo un target plural, identifican a un subconjunto estricto del conjunto targetranking. 
-En segundo lugar describimos trabajo previo que estudia \emph{c\'omo} los humanos usamos el lenguaje para trasmitir intenciones, y c\'omo esas intenciones son interpretadas por los oyentes, describimos trabajos que estudian el rol de la sobreespecificaci\'on y damos ejemplos de uso. Finalmente, introducimos corpora de ERs existente. Luego, en la Secci\'on \ref{sec:tipos_algoritmos} presentamos una clasificaci\'on de los algoritmos del \'area seg\'un los tipos de ERs que pueden generar. Pueden ser determin\'isticos o no-determin\'istico. Generar o no sobreespecificaci\'on, plurales o s\'olo singulares, relacionales o proposicionales.
+contengan, pueden contener propiedades at\'omicas, o relaciones con otros objetos, o ambas. Las ERs tambi\'en se diferencian por la cantidad de informaci\'on que contienen, pudiendo ser minimales o sobreespecificadas. Definimos ER plurales y parciales. %Las ERs minimales contienen s\'olo la informaci\'on indispensable para identificar al target. Las sobreespecificadas contienen m\'as informaci\'on de la m\'inima necesaria para identificar al target, y las subespecificadas, no identifican al target correctamente, sino a un conjunto m\'as grande el cual contiene al target y a otros elementos, porque la informaci\'on que contienen no es suficiente para identificar al target. Las ERs plurales, son expresiones que identifican a un conjunto target que tiene m\'as de un elemento, y las parciales, son las que teniendo un target plural, identifican a un subconjunto estricto del conjunto targetranking. 
+En segundo lugar describimos trabajo previo que estudia \emph{c\'omo} los humanos usamos el lenguaje para trasmitir intenciones, y c\'omo esas intenciones son interpretadas por los oyentes, describimos trabajos que estudian el rol de la sobreespecificaci\'on y damos ejemplos de uso. Finalmente, introducimos corpora de ERs existente. Luego, en la Secci\'on \ref{sec:tipos_algoritmos} presentamos una clasificaci\'on de los algoritmos del \'area seg\'un los tipos de ERs que pueden generar. Pueden ser determin\'isticos o no-determin\'isticos. Generar o no sobreespecificaci\'on, plurales o s\'olo singulares, relacionales o proposicionales.
 % son aquellos algoritmos que dado un input fijo, siempre dan la misma ER. \textbf{No-determin\'isticos} son los que pueden dar distintas ERs en 2 corridas del algoritmo con el mismo input. Que generan \textbf{sobreespecificaci\'on}, que son los que pueden dar ERs con m\'as de la m\'inima cantidad de informaci\'on que se necesita para identificar al target. \textbf{Plurales}, son los que pueden dar ERs para conjuntos de objetos. \textbf{S\'olo singulares}, son los que dan resultado s\'olo para un target singleton. \textbf{Relacionales}, cuando pueden incluir relaciones y descripciones de los objetos relacionados. 
 Adem\'as describimos  los algoritmos m\'as conocidos del \'area como el incremental, graph, relacional, entre otros. 
-En la Secci\'on \ref{sec:metricas_evaluacion}, damos una introducci\'on a las m\'etricas de evaluaci\'on en el \'area. Algunas de ellas usan corpus para comparar autom\'aticamente salidas de algoritmos con ERs dadas por personas. Otras necesitan jueces humanos para evaluar la calidad de las ERs generadas por el algoritmo. Para finalizar, en la Secci\'on \ref{sec:linkeo2}, daremos el res\'umen del cap\'itulo y explicaremos su relaci\'on con los dem\'as cap\'itulos.
+En la Secci\'on \ref{sec:metricas_evaluacion}, damos una introducci\'on a las m\'etricas de evaluaci\'on en el \'area. Algunas de ellas usan corpus para comparar autom\'aticamente salidas de algoritmos con ERs dadas por personas. Otras necesitan jueces humanos para evaluar la calidad de las ERs generadas por el algoritmo. Para finalizar, en la Secci\'on \ref{sec:linkeo2}, daremos el resumen del cap\'itulo y explicaremos su relaci\'on con los dem\'as cap\'itulos.
 
 
 \section{Generaci\'on \emph{humana} de expresiones referenciales}
@@ -96,7 +96,7 @@ De acuerdo a las propiedades o relaciones que una ER incluya, se clasifica en di
 
 En la investigaci\'on \cite{keysar:Curr98} se discute que bajo ciertas condiciones los interloculores dejan de usar el principio de dise\~no \'optimo. %Cuando las 
 
-Keysar et al. muestran muestran mediante experimentos cuidadosamente dise\~nados que, al producir expresiones referenciales, las personas no consideran el punto de vista del receptor desde el principio, sino que lo consideran en una etapa de revisi\'on. Es decir, los adultos producen sus ERs egoc\'entricamente, como hacen los ni\~nos, pero las corrijen antes de decirlas para que el receptor sea capaz de identificar el target un\'ivocamente.
+Keysar et al. muestran mediante experimentos cuidadosamente dise\~nados que, al producir expresiones referenciales, las personas no consideran el punto de vista del receptor desde el principio, sino que lo consideran en una etapa de revisi\'on. Es decir, los adultos producen sus ERs egoc\'entricamente, como hacen los ni\~nos, pero las corrijen antes de decirlas para que el receptor sea capaz de identificar el target un\'ivocamente.
 En este trabajo se argumenta que esta primer etapa egoc\'entrica es un proceso heur\'istico que se basa en una representaci\'on de la \emph{saliencia} de las caracter\'isticas del contexto. Keysar et al. discute que una posible raz\'on para este proceso de generaci\'on heur\'istica y posterior ajuste son las limitaciones cognitivas de la mente humana. Estas limitaciones se hacen particularmente evidentes bajo restricciones de tiempo como muestran los experimentos de Keysar et al.
 \emph{C\'omo} se generan las ERs, tiene un impacto en \emph{qu\'e} ERs se generan. Keysar et al. analizan que el modelo propuesto por ellos de generaci\'on-y-ajuste podr\'ia explicar en parte el tipo de sobreespecificaci\'on que se observa en las ERs generadas por personas. Durante el proceso heur\'istico inicial, la persona incluye m\'as propiedades y/o relaciones que las necesarias para identificar al target, guiada por una representaci\'on saliencia en el contexto dado.
 
@@ -310,7 +310,7 @@ Zoom-Espa\~nol							& 19							& 4							& 7.2				& 0.3   \\
 \end{tabular}
 }
 \end{center}
-\caption{Compaci\'on de corpora GER existente.}\label{tab-comparison-prop}
+\caption{Comparaci\'on de corpora GER existente.}\label{tab-comparison-prop}
 \end{table}
 
 \section{Generaci\'on \emph{autom\'atica} de expresiones referenciales.}
@@ -322,7 +322,7 @@ Los algoritmos pueden ser de distintos tipos, seg\'un los tipos de ERs que sean 
  %usar disyunciones y conjunciones, o s\'olo conjunciones, 
 generar ERs sobreespecificadas o minimales. A continuaci\'on se describen cada uno de esos tipos.
 
-Un algoritmo es {\bf determin\'{i}stico} si dado un input (un contexto y un target), d\'a siempre la misma ER de salida. En cambio, un algoritmo es {\bf no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, en este sentido los algoritmos no-determin\'isticos simulan el comportamiento de las personas. 
+Un algoritmo es {\bf determin\'{i}stico} si dado un input (un contexto y un target), da siempre la misma ER de salida. En cambio, un algoritmo es {\bf no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, en este sentido los algoritmos no-determin\'isticos simulan el comportamiento de las personas. 
 
 Por ejemplo, un algoritmo no determin\'istico podr\'ia generar para la Figura \ref{fig2-1}, una vez {\it La esfera roja} y otra vez {\it La esfera grande}. En la Tabla \ref{er-gre3d7-stimulus} se muestran las distintas ERs dadas por las personas para la Figura \ref{fig2-1} del corpus GRE3D7 \cite{gre3d7}. La tabla tambi\'en muestra cu\'antas personas generaron esa ER para el target de la figura. Por ejemplo {\it large red ball} ocurri\'o 71 veces en el corpus, es decir m\'as de la mitad de las personas decidieron incluir el tipo, el tama\~no y el color en su ER, generando as\'i una ER sobreespecificada.
 
@@ -364,7 +364,7 @@ una forma efectiva de referirse al objeto $e_1$ dado que es la \'unica esfera qu
 
 Algunos algoritmos pueden generar ERs para un conjunto de objetos en el contexto considerado. Por ejemplo, para la Figura \ref{fig2-1} la ER {\it Los cubos} se refiere  al conjunto de objetos \{$e_2$, $e_4$, $e_6$, $e_7$\}. Estos algoritmos generan ERs {\bf plurales}. En caso de s\'olo poder generar ERs para un target singleton se dice que el algoritmo genera s\'olo {\bf singulares}.
 
-Un algoritmo que genera ER {\bf minimales} (introducidas en la Secci\'on \ref{sec:minimales}), es un algoritmo que d\'a ERs que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target. Por ejemplo, en la Tabla \ref{er-gre3d7-stimulus} las ER 2 y 4 son minimales. Si el algoritmo es minimal y determin\'istico normalmente toma un orden de preferencias de las propiedades como input que hace que el algoritmo pueda decidir cu\'al ER dar en caso de tener varias minimales.
+Un algoritmo que genera ER {\bf minimales} (introducidas en la Secci\'on \ref{sec:minimales}), es un algoritmo que da ERs que contienen la m\'inima cantidad de propiedades o relaciones que se necesitan para distinguir al target. Por ejemplo, en la Tabla \ref{er-gre3d7-stimulus} las ER 2 y 4 son minimales. Si el algoritmo es minimal y determin\'istico normalmente toma un orden de preferencias de las propiedades como input que hace que el algoritmo pueda decidir cu\'al ER dar en caso de tener varias minimales.
 
 Un algoritmo que {\bf sobreespecifique} tiene la caracter\'istica de poder dar m\'as propiedades o relaciones con otros objetos que las m\'inimas necesarias para identificar al target. Por ejemplo, para la Figura \ref{fig2-1} la ER {\it La esfera roja, grande que esta a la derecha del cubo rojo grande} es una ER sobreespecificada porque (como ya mencionamos en la Secci\'on \ref{er-sobreespecificadas}) podr\'iamos sacarle algunas propiedades o la relaci\'on y seguir\'ia siendo una ER. Sacando {\it roja} de las propiedades del target, la expresi\'on {\it La esfera grande que est\'a a la derecha del cubo rojo grande} sigue siendo una ER, tambi\'en podr\'iamos sacar la relaci\'on con {\it el cubo rojo grande}, quedando {\it La esfera roja, grande} y sigue siendo una ER. Viendo la Tabla \ref{er-gre3d7-stimulus} podemos notar que la ER de mayor frecuencia, es {\it large red ball} y es una ER sobreespecificada, ya que {\it red ball} o {\it large ball}, son ERs minimales para el target de la Figura \ref{fig2-1}. En la tabla hay 58 ER minimales y 82 sobreespecificadas. Es decir, el 59\% son sobreespecificadas y el 41\% minimales.
 
@@ -397,7 +397,7 @@ del target {\it red, ball, large}, como ninguna de ellas aisladamente identifica
 
 \paragraph{Heur\'istica Greedy:} El algoritmo de {\bf Heur\'istica Greedy} \cite{greedy} iterativamente selecciona la propiedad que elimina m\'as distractores, y argumentan que la propiedad seleccionada tiene el m\'as alto poder discriminativo en esa etapa. Como resultado 
 no siempre genera expresiones referenciales m\'inimas. Por ejemplo para la Figura \ref{fig2-1} se fijar\'a que {\it ball} elimina 2 distractores {$e_{1}$, $e_{3}$}, 
-{\it red} elimina 3 distractores {$e_{2}$, $e_{4}$, $e_{7}$} y {\it large} elimina 1 distractores {$e_{4}$}, entonces elegir\'a {\it red}, 
+{\it red} elimina 3 distractores {$e_{2}$, $e_{4}$, $e_{7}$} y {\it large} elimina 1 distractor {$e_{4}$}, entonces elegir\'a {\it red}, 
 pero como no alcanza para ser ER, seguir\'a con {\it ball} que es la que elimina m\'as distractores luego de {\it red}, finalizar\'a porque 
 {\it red ball} identifica al target. Supongamos que hubiera otro objeto con propiedad {\it large}, entonces {\it large} eliminar\'ia tambi\'en  
  2 distractores, entonces el algoritmo devolver\'ia {\it large red ball}, y esa ER no es minimal, es sobreespecificada.
@@ -497,7 +497,7 @@ El {\bf algoritmo Graph} de \cite{graph} propone tratar la generaci\'on de expre
 
 
 
-Dado un objeto target, conseguir una ER que distinga al objeto de los dem\'as objetos del contexto, es equivalente a encontrar un subgrafo del grafo original que \'unicamente caracterize al target. Intuitivamente este subgrafo se puede poner sobre el target y no sobre ning\'un otro objeto del dominio considerado.
+Dado un objeto target, conseguir una ER que distinga al objeto de los dem\'as objetos del contexto, es equivalente a encontrar un subgrafo del grafo original que \'unicamente caracterice al target. Intuitivamente este subgrafo se puede poner sobre el target y no sobre ning\'un otro objeto del dominio considerado.
 
 \begin{figure}[ht]
 \centering
@@ -507,11 +507,11 @@ Dado un objeto target, conseguir una ER que distinga al objeto de los dem\'as ob
 \end{figure}
 
 %Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente al cual le llama grafo distintivo.% (distinguishing graph).\\
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hallan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay distractores, el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{fig2-8}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} s\'olamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target.  
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hayan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay distractores, el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{fig2-8}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} s\'olamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target.  
 
 El algoritmo sigue explorando grafos y siempre se queda con el de menor costo.
 
-La funci\'on de costo esta definida sobre las aristas y v\'ertices del grafo dominio. El costo de un subgrafo se define como la suma sobre todas las aristas y v\'ertices que contiene el grafo.
+La funci\'on de costo est\'a definida sobre las aristas y v\'ertices del grafo dominio. El costo de un subgrafo se define como la suma sobre todas las aristas y v\'ertices que contiene el grafo.
 El algoritmo de b\'usqueda garantiza encontrar el subgrafo de menor costo que representa al target.
 
 La funci\'on de costo es usada para podar las ramas del \'arbol de b\'usqueda cuando estas se hacen m\'as costosas que el grafo de menor costo encontrado hasta el momento. Esta funci\'on hace que se prefieran propiedades sobre otras que tienen mayor costo.
@@ -599,14 +599,14 @@ En lo que sigue veremos como evaluar a los algoritmos de GER.
 %en la generaci\'on autom\'atica de expresiones referenciales debe esforzarse por lograr
 %sistemas que den salidas tan similar a la humana como sea posible; y que, para ello, debemos
 %esforzarnos para modelar el comportamiento humano como se puede observar en corpora. Nosotros adherimos a esta postura, en esta tesis se han presentado corpora existente, y vamos a evaluar nuestros resultados por un lado compar\'andolos con las ER que est\'an en los corpus, luego veremos que \'esta manera de evaluar no es del todo justa para los algoritmos, y haremos otras clases de evaluaciones para mostrarlo.
-Esta secci\'on est\'a dividida en 3 partes, en la primera se muestra trabajo previo usando corpora relevante a nuestro estudio, en la segunda se explican algunas m\'etricas autom\'aticas usadas en el \'area y en la tercera se d\'a una introducci\'on a las m\'etricas manuales.
+Esta secci\'on est\'a dividida en 3 partes, en la primera se muestra trabajo previo usando corpora relevante a nuestro estudio, en la segunda se explican algunas m\'etricas autom\'aticas usadas en el \'area y en la tercera se da una introducci\'on a las m\'etricas manuales.
 
 \subsection{Trabajo previo en evaluaci\'on usando corpora}\label{sec:2_3_1}
 
 Los temas generales que con la evaluaci\'on basada en corpus de la experiencia de \cite{viet:gene11} quedaron
 al descubierto fueron (1) la interdependencia estrecha entre algoritmos y la
 representaci\'on subyacente de conocimiento que utilizan, (2) el no-determinismo de la generaci\'on del lenguaje natural, 
-(3) la cuesti\'on de c\'omo comparar la salida algoritmos con los gold-standar, y (4) la independencia dominio espec\'ifico deseada para los algoritmos de GER.\\
+(3) la cuesti\'on de c\'omo comparar la salida algoritmos con los gold-standar, y (4) la independencia del dominio espec\'ifico deseada para los algoritmos de GER.\\
 La discusi\'on de estos temas ha dado lugar a la siguiente lista de evaluaci\'on en GER basada en corpus:
 
 i. Si el corpora est\'a destinado para ser reutilizado para la evaluaci\'on comparativa de diferentes
@@ -640,11 +640,11 @@ Esta comparaci\'on de ER puede estar dada a distintos niveles, podemos comparar 
 
 La \textbf{exactitud} ({\it accuracy}) se define como el porcentaje de coincidencias exactas entre cada ER producida por un ser humano y la producida por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta.
 
-El coheficiente \textbf{Dice} es una m\'etrica de comparaci\'on de conjuntos, el valor va entre 0 y 1, 1 indica un perfecto matcheo entre los conjuntos. Para dos ERs A y B, Dice se calcula como sigue:\\
+El coeficiente \textbf{Dice} es una m\'etrica de comparaci\'on de conjuntos, el valor va entre 0 y 1, 1 indica un perfecto matcheo entre los conjuntos. Para dos ERs A y B, Dice se calcula como sigue:\\
 
 $Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
 
-\textbf{\textsc{masi}} de \cite{masi}~es un coheficiente que var\'ia en favor de la similaridad cuando un conjunto es un subconjunto de otro, como Dice varia entre 0 y 1, 1 indica matcheo perfecto. Se calcula como sigue:\\
+\textbf{\textsc{masi}} de \cite{masi}~es un coeficiente que var\'ia en favor de la similaridad cuando un conjunto es un subconjunto de otro, como Dice var\'ia entre 0 y 1, 1 indica matcheo perfecto. Se calcula como sigue:\\
 %which biases it in favor of similarity where one set
 %is a subset of the other. Like Dice, it ranges between
 %0 and 1, where 1 indicates a perfect match. It is computed as follows:\\
@@ -652,7 +652,7 @@ $Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
 $\textsc{masi}(A,B) = \delta \times \frac{|A \cap B|}{|A \cup B|}$ \\
 
 
-donde $\delta$ es un coheficiente definido como sigue:\\
+donde $\delta$ es un coeficiente definido como sigue:\\
 
 
  \begin{equation}
@@ -668,14 +668,14 @@ donde $\delta$ es un coheficiente definido como sigue:\\
 
 Intuitivamente significa que se prefieren aquellas descripciones producidas por el sistema las cuales no incluyen atributos que los humanos no incluyeron.
 
-Notar que estas m\'etricas no cumplen con el punto (iii) de la Secci\'on \ref{sec:2_3_1} y no nos permiten comparar rankings de ERs, pero igualmente las usamos en el Cap\'itulo \ref{sec:evaluacion} para poder comparar la salida de nuestro algoritmo con trabajo previo.
+Notar que estas m\'etricas no cumplen con el punto (iii) de la Secci\'on \ref{sec:2_3_1} y no nos permiten comparar rankings de ERs, pero igualmente las usamos en el Cap\'itulo \ref{sec:evaluacion} para comparar la salida de nuestro algoritmo con trabajo previo.
 
 \subsection{M\'etricas manuales}
 
-Las ERs tambi\'en pueden ser evaluadas por jueces humanos, y de esta manera se pueden evaluar por ejemplo adecuaci\'on, mostr\'andole a un juez humano la misma im\'agen que vi\'o la persona que gener\'o la ER y pregunt\'andole cosas como ?`Que tan clara es la descripci\'on?.
-Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan entre dos ERs la m\'as natural, se les mostro el contexto, y se les present\'o 2 ER una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar la misma im\'agen pero sin la flecha que se\~nala al target, darle la ER que di\'o alguna persona, y pedirle que se\~nale el objeto al cual la ER refiere. De esta manera se puede evaluar facilidad de encontrar objetivo con la expresi\'on dada.
+Las ERs tambi\'en pueden ser evaluadas por jueces humanos, y de esta manera se pueden evaluar por ejemplo adecuaci\'on, mostr\'andole a un juez humano la misma imagen que vi\'o la persona que gener\'o la ER y pregunt\'andole cosas como ?`Qu\'e tan clara es la descripci\'on?.
+Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan entre dos ERs la m\'as natural, se les mostr\'o el contexto, y se les present\'o 2 ER una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar la misma imagen pero sin la flecha que se\~nala al target, darle la ER que di\'o alguna persona, y pedirle que se\~nale el objeto al cual la ER refiere. De esta manera se puede evaluar facilidad de encontrar objetivo con la expresi\'on dada.
 La fluidez de una ER se puede evaluar preguntando a juez humano cosas como estas: 
-?`Considera que es fluida esta descripci\'on?, ¿Es buena y clara en el idioma considerado?. 
+?`Considera que es fluida esta descripci\'on?, ?`Es buena y clara en el idioma considerado?. 
 Otra manera de evaluar manualmente es viendo si las ERs son \'utiles para dar instrucciones. Por ejemplo, \cite{BelzGattEvaluation}, mostraron a los participantes una descripci\'on generada para un ensayo. Despu\'es que los participantes le\'ian esta descripci\'on, una escena aparec\'ia y se pidi\'o a los participantes
 hacer clic en el objetivo previsto. Esto les permiti\'o calcular tres m\'etricas de evaluaci\'on: %extr\'inseca
 el tiempo de lectura, el tiempo de identificaci\'on, y la tasa de error, que se definen como el n\'umero de objetivos identificados incorrectamente.
@@ -694,6 +694,6 @@ informaci\'on adicional (arriba, abajo) es m\'as \'util que la (izquierda, derec
 aprendizaje de palabras en una lengua extranjera, y concluyen que las personas que tuvieron a su disposici\'on ERs sobreespecificadas, 
 aprendieron m\'as que aquellas a las que se les di\'o ERs minimales. Dimos una introducci\'on a corpora existente en el \'area 
 como son el TUNA, el GRE3D3/7, Stars/2 y el ZOOM corpus, \'este \'ultimo fue creado en el desarrollo de esta tesis, por lo cual lo explicaremos con m\'as detalle en el Cap\'itulo \ref{sec:corpus}. En la segunda secci\'on explicamos los diferentes tipos de algoritmos los cuales se 
-diferencian por los tipos de ERs que pueden generar, dimos los algoritmos m\'as importantes del \'area como son incremental, graph, relacional, vimos sus diferencias y pudimos compararlos entre ellos. Entre los algoritmos del \'area no inclu\'imos el de 
-bisimulaci\'on del cual hablaremos en el Cap\'itulo \ref{sec:algoritmo} por ser \'este el algoritmo base de los aportes de esta tesis. En la tercer secci\'on de este cap\'itulo dimos una introducci\'on a las m\'etricas de evaluci\'on tanto autom\'aticas como manuales, algunas de las cuales usaremos para evaluar nuestro algoritmo como se muestra en el Cap\'itulo \ref{sec:evaluacion}.
+diferencian por los tipos de ERs que pueden generar, dimos los algoritmos m\'as importantes del \'area como son incremental, graph, relacional, vimos sus diferencias y pudimos compararlos entre ellos. Entre los algoritmos del \'area no incluimos el de 
+bisimulaci\'on del cual hablaremos en el Cap\'itulo \ref{sec:algoritmo} por ser \'este el algoritmo base de los aportes de esta tesis. En la tercer secci\'on de este cap\'itulo dimos una introducci\'on a las m\'etricas de evaluaci\'on tanto autom\'aticas como manuales, algunas de las cuales usaremos para evaluar nuestro algoritmo como se muestra en el Cap\'itulo \ref{sec:evaluacion}.
 

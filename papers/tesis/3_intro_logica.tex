@@ -1,14 +1,14 @@
 \chapter{Usando teor\'ia de modelos}
 \label{sec:intro_logica}
 
-En el Cap\'itulo \ref{sec:intro} (Secci\'on \ref{sec:gre-teoria-modelos}) introdujimos terminiolog\'ia y conceptos b\'asicos de l\'ogica y de teor\'ia de modelos y motivamos su uso para GER.
+En el Cap\'itulo \ref{sec:intro} (Secci\'on \ref{sec:gre-teoria-modelos}) introdujimos terminolog\'ia y conceptos b\'asicos de l\'ogica y de teor\'ia de modelos y motivamos su uso para GER.
 De acuerdo a la complejidad de las estructuras gramaticales que querramos permitir en las ERs, tendremos un lenguaje asociado, 
 el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica c\'omo partiendo de f\'ormulas de primer orden (\FOL) 
 podemos ir restringiendo la l\'ogica y con ello el lenguaje, y as\'i conseguir una menor complejidad computacional. Es interesante evaluar la complejidad dependiendo de la l\'ogica seleccionada, 
 ya que, por ejemplo, sistemas de tiempo real necesitan conseguir ERs r\'apidamente. Daremos la complejidad de las distintas l\'ogicas, 
 y veremos qu\'e l\'ogica aplica a cada algoritmo del estado del arte del \'area introducidos en el Cap\'itulo \ref{sec:seleccion}.
 
-Este cap\'itulo esta dividido en 5 secciones. En la Secci\'on \ref{sec:seleccionandoLenguaje} daremos nociones de similaridad entre objetos del modelo en un lenguaje particular y explicamos como se relacionan con la GER. Pero como la similaridad involucra la verificaci\'on de infinitas f\'ormulas, veremos simulaciones que es un concepto matem\'atico que nos va a ayudar a resolver el problema de GER sin tener que verificar infinitas f\'ormulas. Luego en la Secci\'on \ref{sec:greViaSimulacion} veremos c\'omo computar ERs en \EL usando simulaciones. En la Secci\'on \ref{sec:bisimulacion} veremos c\'omo computar ERs en \ALC, y en la Secci\'on \ref{sec:computandoEnFOL} en \FOL. Para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un res\'umen del cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
+Este cap\'itulo esta dividido en 5 secciones. En la Secci\'on \ref{sec:seleccionandoLenguaje} daremos nociones de similaridad entre objetos del modelo en un lenguaje particular y explicamos como se relacionan con la GER. Pero como la similaridad involucra la verificaci\'on de infinitas f\'ormulas, veremos simulaciones que es un concepto matem\'atico que nos va a ayudar a resolver el problema de GER sin tener que verificar infinitas f\'ormulas. Luego en la Secci\'on \ref{sec:greViaSimulacion} veremos c\'omo computar ERs en \EL usando simulaciones. En la Secci\'on \ref{sec:bisimulacion} veremos c\'omo computar ERs en \ALC, y en la Secci\'on \ref{sec:computandoEnFOL} en \FOL. Para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un resumen del cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
 
 
 \section{Objetos indistinguibles en un lenguaje l\'ogico $\+L$}
@@ -166,7 +166,7 @@ noci\'on de bisimulaci\'on~\cite[Def.~2.16]{BRV01}; $\simul{\EL}$ es una
 simulaci\'on definida en~\cite[Def.~2.77]{BRV01}. Los restantes son variaciones simples de estos.
 %\end{proof}
 
-El Teorema \ref{thm:simulation}, nos dice que, en modelos finitos, las simulaciones capturan exactamente el concepto de similaridad. El teorema no se mantiene en general sobre modelos infinitos.
+El Teorema \ref{thm:simulation} nos dice que, en modelos finitos, las simulaciones capturan exactamente el concepto de similaridad. El teorema no se mantiene en general sobre modelos infinitos.
 
 El Teorema~\ref{thm:simulation} nos dice que si 2 elementos distintos $u$ y $v$ en $\Delta$ son tales que $u
 \simul{\+L} v$ entonces para toda $\+L$-f\'ormula que es verdadera para $u$ es tambi\'en verdadera para $v$. En ese caso no hay f\'ormula en $\+L$ que pueda identificar un\'ivocamente a $u$. Desde esta perspectiva, conociendo cu\'ando el modelo contiene un elemento que es $\gL$-similar pero distinto de $u$ es
@@ -176,16 +176,6 @@ Formalmente, para un modelo relacional $\tup{\Delta, \interp{\cdot}}$, diremos q
 \smallskip 
 
 \newcommand{\simdef}[2]{\noindent\ \ #1\hfill:\ \parbox[t]{.87\textwidth}{#2}\par}
-
-%\simdef{$\atomL$}{If $u_1{\sim} u_2$, entonces $u_1 \in \interp{p}_1 \Rightarrow u_2 \in \interp{p}_2$}
-%\simdef{$\atomR$}{If $u_1{\sim} u_2$, entonces $u_2 \in \interp{p}_2 \Rightarrow u_1 \in \interp{p}_1$}
-%\simdef{$\zig$}{If $u_1{\sim} u_2$ y $(u_1,v_1) \in \interp{r}_1$, entonces $\exists v_2$ tal que\ $v_1{\sim}v_2$
-  %y $(u_2,v_2) \in \interp{r}_2$}
-%\simdef{$\zag$}{If $u_1{\sim}u_2$ y $(u_2,v_2) \in \interp{r}_2$, entonces $\exists v_1$ tal que\ $u_1{\sim}v_1$ y
- %$(u_1,v_1) \in \interp{r}_1$}
-%\simdef{$\injL$}{$\sim$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
-%\simdef{$\injR$}{$\sim^{-1}$ es una funci\'on inyectiva (cuando es restringida a su dominio)}
-%\smallskip
 
 \simdef{$\atomL$}{Si $u$ Q $v$, entonces $u \in \interp{p} \Rightarrow v \in \interp{p}$}
 \simdef{$\atomR$}{Si $u$ Q $v$, entonces $v \in \interp{p} \Rightarrow u \in \interp{p}$}
@@ -199,18 +189,9 @@ Formalmente, para un modelo relacional $\tup{\Delta, \interp{\cdot}}$, diremos q
 
 Por ejemplo, podemos probar que $e_5 \simul{\+C} e_1$ en el modelo de la 
 Figura~\ref{target_mapa_3ball}, sin tener que generar todas las f\'ormulas $\phi$ en $\+C$ que son ciertas de $e_5$, ya que la relaci\'on Q $= \{(e_5,e_1) \}
-%\cup\{ (x,x) \mid x \in \Delta\}
 $ satisface $\atomL$.
 Usando el Teorema~\ref{thm:simulation} conclu\'imos que no hay
  \CL-descripci\'on para $e_5$. Como ya dijimos, si se opta por un lenguaje m\'as rico como $\EL$, se puede describir a $e_5$. De nuevo, esto se puede hacer sin tener que verificar infinitas f\'ormulas.
-
-
-%Diremos que una relaci\'on binaria no vac\'ia $\sim$ es una 
-%{\bf $\+L$-simulaci\'on} cuando satisface las propiedades indicadas
-%en la Tabla~\ref{tab:simuls}. Por ejemplo, una relaci\'on binaria no vac\'ia que satisface $\atomL$, y $\zig$ es una $\EL$-simulaci\'on, 
-%como es indicado en fila~4 de la Tabla~\ref{tab:simuls}. M\'as a\'un, diremos que un objeto
-%{\bf $v$ $\+L$-simula $u$} ($u \simul{\+L} v$) si hay una relaci\'on $\sim$ que satisface la correspondiente propiedad tal que
-%$u \sim v$. El siguiente es un resultado fundamental del modelo te\'orico:%~\cite{ebbi:math96,KR99,BRV01}
 
 \begin{table}[t]
 
@@ -225,7 +206,6 @@ Usando el Teorema~\ref{thm:simulation} conclu\'imos que no hay
 	$\ELUNEG$ & $\EL$ m\'as disyunci\'on y  & $\times$ & $\times$ &  $\times$ & & & \\ 
 	&negaci\'on proposicional&&&&&&\\ \hline
   $\ELAN$ & $\EL$ con negaci\'on proposicional & $\times$ & $\times$ &  $\times$ & & & \\ \hline
-	%&proposicional&&&&&&\\ \hline
 	$\EL$   & $\ALC$ sin negaci\'on & $\times$ & &  $\times$ & & & \\ \hline
 	$\PL$ & l\'ogica proposicional& $\times$ & $\times$ & & & & \\ \hline
 	$\CL$ & s\'olo conjunciones& $\times$ &  &  & & & \\ 
@@ -239,34 +219,7 @@ Usando el Teorema~\ref{thm:simulation} conclu\'imos que no hay
 
 \begin{table}[t]
 
-
-
-%\begin{proof}
-
-%Las $\+L$-simulaciones nos permiten determinar, de una manera eficaz,
-%cuando un objeto no se puede distinguir de otro en un modelo dado con respecto a $\+L$.
-
-
-%En la Tabla \ref{tab:algoritmosLogicas} se muestra un listado de algoritmos del \'area y la l\'ogica que cada uno de ellos usa para generar ER.
-%\begin{table}[h!]
-%\begin{tabular}{l|l}
-%  Algoritmo de GER & Variante de L\'ogica de Descripci\'on (LD)\\
-%  \hline
-%	  Full brevity & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-%		Heur\'istica Greedy & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-%  Incremental - Dale and Reiter (1995) & $\CL$ (proposicionales y conjunciones --- sin negaci\'on) \\
-%  GRAPH - van Deemter (2002) & $\PL$ (f\'ormulas conjuntivas, disjuntivas, negativas prop. \\
-%								& ---l\'ogica proposicional idem $\ALC$ sin existencial)\\
-%  Relacional - Dale and Haddock (1991)   & $\EL$ (Conjunciones de f\'ormulas, existenciales de f\'ormulas, \\
-%	& y proposicionales)\\
-%  Kelleher and Kruijff (2006)   & $\EL$ \\
-%  Gardent (2002) & \ELUNEG ($\EL$ m\'as disyunci\'on y negaci\'on proposicional)\\
-%\end{tabular}
-%\caption{Algoritmos y sus l\'ogicas asociadas.}\label{tab:algoritmosLogicas}
-%\end{table}
-
-
-Como veremos en la siguiente subsecci\'on, la simulaci\'on nos d\'a un
+Como veremos en la siguiente subsecci\'on, la simulaci\'on nos da un
 enfoque eficiente, computacionalmente factible para atacar el problema de $\+L$-GER. Algoritmos para calcular muchos tipos de $\+L$-simulaciones son
 bien conocidos (vea, \cite{hopc:algo71,areces08,HHK95,dovier04:_effic_algor_for_comput_bisim_equiv}), y para muchos
 lenguajes (por ejemplo, \ALC, \ELAN y \EL) se ejecutan en tiempo polinomial. No se conoce algoritmo polinomial 
@@ -280,9 +233,7 @@ complejidad del problema en estos casos est\'a abierta \cite{gare:comp79}.\\
   $\EPFOL$ & Algoritmo Graph \cite{graph}   & NP\\ \hline 
   $\ALC$   & Algoritmo DL \cite{areces08} & P\\ \hline
  	$\ELUNEG$ & Algoritmo plural \cite{gardent02:_gener_minim_defin_descr} &P\\ \hline
-	%&negaci\'on proposicional&\\ \hline
   $\ELAN$ & &P\\ \hline
-	%&proposicional&&\\ \hline
 	$\EL$   & Algoritmo relacional &P\\ \hline
 	$\PL$ &  Extensiones a IA \cite{deemter02:CL}&P\\ \hline
 	$\CL$ & Algoritmo incremental y predecesores \cite{incremental} &P\\ 
@@ -299,23 +250,7 @@ complejidad del problema en estos casos est\'a abierta \cite{gare:comp79}.\\
 
 Las $\+L$-simulaciones nos dan un enfoque eficiente, computacionalmente factible para GER usando un lenguaje $\+L$, como veremos a continuaci\'on. Si tenemos un lenguaje $\+L$ y un modelo $\+M$ y queremos referirnos a un elemento $u$ del modelo $\+M$, podemos computar el {\bf conjunto de simulaci\'on} de $u$ definido como
 $\simset_{\+L}^{\+M}(u) = \cset{v \in \Delta \mid u \simul{\+L} v}$. Si $\simset_{\+L}^{\+M}(u)$ no contiene s\'olo a $u$, quiere decir que el modelo $\+M$ tiene elementos que son indistinguibles de $u$ y no existen ERs para $u$ en ese lenguaje $\+L$.
-Primero explicamos como c\'omo computar $\simset_{\EL}^{\+M}(u)$, es decir, los conjuntos de objetos indistinguibles en \EL y luego usamos este computo para la GER.
-%\iffullversion
-%Es facil de ver que la union de 2 $\+L$-simulaciones 
-%es tambi\'en una $\+L$-simulation. Podemos entonces definir el \emph{maximal
-%auto $\+L$-simulation} (notaci\'on, $\simmax_{\+L}$) sobre un modelo $\+M$ como la union de todos los
-%auto $\+L$-simulations sobre $\+M$. Ya que
-%$\simset_{\+L}(u) = \cset{v \mid u \simmax_{\+L} v}$, un algoritmo
-%para computar $\simmax_{\+L}$ tambi\'en computa $\simset_{\+L}(u)$.
-%\else
-%\fi
-%
-%\iffullversion
-%Si $P$ es reflexiva y transitiva entonces tambi\'en lo es $\simmax_P$. En
-%particular, $\simmax$ es reflexiva y transitiva.
-%%\fixme{Are reflexivity and transitivity important? Check.}
-%\else
-%\fi
+Primero explicamos como computar $\simset_{\EL}^{\+M}(u)$, es decir, los conjuntos de objetos indistinguibles en \EL y luego usamos este c\'omputo para la GER.
 
 \subsection{Computando conjuntos de objetos indistinguibles en $\EL$}
 \label{sec:indistinguiblesEL}
@@ -323,22 +258,14 @@ Primero explicamos como c\'omo computar $\simset_{\EL}^{\+M}(u)$, es decir, los 
 Un algoritmo para computar $\simset_{\ELAN}(v)$ es dado en~\cite{HHK95}. Para todos los
 elementos $v$ de un modelo dado finito
 $\+M=\tup{\Delta,\interp{\cdot}}$
-%\footnote{%
-%  Actually the algorithm proposed in \cite{HHK95} is over labeled graphs, but
-%  it can be adapted to compute $\simset_{\ELAN}$ by
-%  appropriately labeling the model.%
-%}
 computa $\simset_{\ELAN}(v)$ en tiempo $O(\size{\Delta}\times\size{{\interp{\cdot}}})$.
 Intuitivamente, este algoritmo
 define $S(v)$ como un conjunto de candidatos para simular $v$ y
 sucesivamente refina este conjunto borrando aquellos elementos que fallan en simular $v$.
-%Since we never put new vertices into $\simset(v)$, all the deletions
-%from $\simset(v)$ are permanent.
 Al final, $S(v)=\simset_\ELAN(v)$. El algoritmo puede ser adaptado para
 computar $\simset_\+L$ para cualquier otro lenguaje $\+L$. En particular,
 lo podemos usar para computar $\simset_\EL$ en tiempo polinomial y nos dar\'a un l\'imite superior a la
 complejidad del problema \EL-GER. 
-%--esto responder\'ia la pregunta abierta~\cite{areces08}. 
 El c\'odigo es mostrado en el
 Algoritmo~\ref{alg:schematic-gen-sim}, el cual usa la siguiente
 notaci\'on. $\+P$ es un conjunto fijo de s\'imbolos de relaciones unarias, para $v\in
@@ -346,16 +273,11 @@ notaci\'on. $\+P$ es un conjunto fijo de s\'imbolos de relaciones unarias, para 
 $\su{r}{v}=\{u\in\Delta\mid(v,u)\in\interp{r}\}$ para $r$ un s\'imbolo de relaci\'on binaria.\\
 
 
-%\newtheorem{algoritmo}{Algoritmo}
-%%ROMI
-
-
-
-%\floatname{algorithm}{Procedure}
+\floatname{algorithm}{Algoritmo}
 \begin{algorithm}
 \floatname{algorithm}{Algoritmo}
 \small
-\caption{ Computando \EL-similaridad\label{alg:schematic-gen-sim}}
+\caption{ Computando \EL-similaridad.\label{alg:schematic-gen-sim}}
 %\captionsetup[algorithm]{name=Algoritmo}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{un modelo finito $\+M=\tup{\Delta,\interp{\cdot}}$}
@@ -533,7 +455,7 @@ $3$ & $\{3,4\}$ & $p$ & $\{3,4\}$ &$p$\\
 $4$ & $\{4\}$ & $p\wedge q$ & $\{4\}$&$p\wedge q$\\
 \hline
 \end{tabular}
-\caption{Valores iniciales y finales de $F$ y $S$}\label{tab:example}
+\caption{Valores iniciales y finales de $F$ y $S$.}\label{tab:example}
 }
 \end{table}
 
@@ -683,7 +605,7 @@ $S(u):=S(u)\setminus remove$
 $\prevS(v)=S(v)$
 
 } \caption{\small refinado $\EL$-similaridad y
-\posre}\label{alg:refined-GRE}
+\posre.}\label{alg:refined-GRE}
 \end{algorithm}
 \fi
 
@@ -872,7 +794,7 @@ hay un riesgo de que el \el-algoritmo podr\'ia tener peor tiempo de ejecuci\'on,
  
 \begin{algorithm}[H]\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
-\caption{Computando los conjuntos de $\mathcal{L}$-similaridad}
+\caption{Computando los conjuntos de $\mathcal{L}$-similaridad.}
 \label{algo:bisim-3}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \KwIn{Un modelo $\gM = (\Delta, \interp{\cdot})$}
@@ -897,7 +819,7 @@ $\RE \leftarrow \{\top\}$
 \end{algorithm}
 
 \begin{algorithm}[H]\floatname{algorithm}{Algoritmo}
-\caption{add$_\alc(\varphi,\RE)$}
+\caption{add$_\alc(\varphi,\RE)$.}
 \label{algo:bisim-add-alc}
 \For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}{
    \If{$\interp{\psi \sqcap \varphi} \not = \emptyset$ and
@@ -927,7 +849,7 @@ $\mathsf{bowl}$ fue subsumida por $\mathsf{bowl} \sqcap
 %
 \begin{algorithm}[t]\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
-\caption{add$_\el$($\varphi$, $\RE$)}
+\caption{add$_\el$($\varphi$, $\RE$).}
 \label{algo:bisim-add-el}
 \For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}{
   \If{$\psi \sqcap \varphi$ is not subsumed in $\RE$ {\bf and}
@@ -1103,7 +1025,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 \Return{$\exists x_2\ldots \exists x_n . \gamma$}\;
 
 %\Return{\buildF$(H',v)$}\;
-\caption{\small \texttt{makeRE}$_\FOL-$($v$)}\label{alg:makeRE}
+\caption{\small \texttt{makeRE}$_\FOL-$($v$).}\label{alg:makeRE}
 \end{algorithm}
 
 
@@ -1140,7 +1062,7 @@ $\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L}
  
 \Return{$\mathit{best}$}\;
 
-\caption{\small \texttt{find}$_\FOL-$($v, \mathit{best},H,f$)}\label{alg:find}
+\caption{\small \texttt{find}$_\FOL-$($v, \mathit{best},H,f$).}\label{alg:find}
 \end{algorithm}
   %\end{minipage}%
 %\end{center}
