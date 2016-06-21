@@ -73,7 +73,7 @@ Como todo algoritmo de GER, nuestros algoritmos toman como entrada un contexto r
       \nRed\\[-3pt] 
       \nCube\end{array}$},  right of=f] (g) {$e_7$};
  \draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
- \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\texttt{ontop}$} (b);
+ \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
  \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
  \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
  \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
@@ -253,13 +253,13 @@ $\gM$ considerado el representado en Figura~\ref{fig4-4}.
       \nCube\end{array}$}, above of=f] (g) {$e_7$};
 
  \draw [aArrow,bend right=90] (b) to node[auto,swap]{\relsize{-1}$\nBelow$} (c);
- \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\texttt{ontop}$} (b);
+ \draw [aArrow,bend right=90] (c) to node[auto,swap]{\relsize{-1}$\nOntop$} (b);
 
  \draw [aArrow,bend right=30] (d) to node[auto,swap]{\relsize{-1}$\nLeftof$} (e);
  \draw [aArrow,bend right=30] (e) to node[auto,swap]{\relsize{-1}$\nRightof$} (d);
 
  \draw [aArrow,bend right=90] (f) to node[auto,swap]{\relsize{-1}$\nBelow$} (g);
- \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\texttt{ontop}$} (f);
+ \draw [aArrow,bend right=90] (g) to node[auto,swap]{\relsize{-1}$\nOntop$} (f);
 \draw[dotted] (-0.5,-2.4) rectangle (10,4.7);
  %\draw[dotted] (-.65,-1.2) rectangle (7.1,2.1);
 
@@ -566,10 +566,10 @@ Antes de empezar explicando el algoritmo, daremos algunos conceptos de teor\'ia 
 
 Para esta tesis una \textbf{f\'ormula} corresponde a una descripci\'on de uno o m\'as elementos del contexto y puede ser o no una ER dependiendo de 
 si su interpretaci\'on coincide o no con el target. Por ejemplo la interpretaci\'on de la f\'ormula \texttt{ball} son todas las esferas 
-del contexto. En el contexto de la Figura \ref{figura-y-modelo} ser\'ian: $e_1$, $e_3$ y $e_5$. As\'i como $\interp{\texttt{ball} \land \texttt{yellow}}$ es: $e_1$ y $e_3$.
+del contexto. En el contexto de la Figura \ref{figura-y-modelo} ser\'ian: $e_1$, $e_3$ y $e_5$. As\'i como $\interp{\texttt{ball} \sqcap \texttt{yellow}}$ es: $e_1$ y $e_3$.
 Como dijimos anteriormente la \textbf{interpretaci\'on de una f\'ormula} es el conjunto de elementos que satisfacen la f\'ormula. A la interpretaci\'on de una f\'ormula tambi\'en la llamamos \textbf{clase}.
 
-Decimos que una f\'ormula $\exists R. \phi$ es \textbf{informativa} con respecto a otra f\'ormula $\gamma$ cuando la interpretaci\'on de la conjunci\'on de las dos f\'ormulas $\interp {\exists R. \phi \land \gamma}$ contiene menos elementos que la interpretaci\'on de $\gamma$. Por ejemplo si tenemos la f\'ormula \texttt{ball} y 
+Decimos que una f\'ormula $\exists R. \phi$ es \textbf{informativa} con respecto a otra f\'ormula $\gamma$ cuando la interpretaci\'on de la conjunci\'on de las dos f\'ormulas $\interp {\exists R. \phi \sqcap \gamma}$ contiene menos elementos que la interpretaci\'on de $\gamma$. Por ejemplo si tenemos la f\'ormula \texttt{ball} y 
 queremos saber si \texttt{red} es informativa con respecto a \texttt{ball} para el modelo de la Figura \ref{figura-y-modelo} vemos que s\'i lo es, ya que $e_5$ es una esfera roja y existen otras esferas que no son rojas,
  es decir \texttt{red} divide el conjunto de esferas, por lo tanto es informativa. Si un algoritmo permite agregar f\'ormulas no informativas a las expresiones referenciales, entonces podr\'a generar ERs sobreespecificadas.
 Una f\'ormula $\phi$ es \textbf{subsumida} por el conjunto de expresiones referenciales si ya tenemos otras f\'ormulas en \RE cuya uni\'on es igual a la interpretaci\'on de $\phi$. Por ejemplo, para el modelo de la Figura \ref{figura-y-modelo} $\top$ que es la f\'ormula a la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen 
@@ -581,7 +581,7 @@ Note, sin embargo, que el lenguaje formal utilizado en particular es independien
 funciones add$_{\mathcal {L}}$(R,$\varphi $, \RE) se pueden utilizar en funci\'on del lenguaje en cuesti\'on.
 La interpretaci\'on de la f\'ormula de $\el$ $\interp{\psi \sqcap \exists $R.$ \varphi}$ es el conjunto de todos los elementos que 
 satisfagan~$\psi$ y que est\'an relacionados por relaci\'on R con alg\'un elemento que satisface $\varphi $.
-Por ejemplo, la interpretaci\'on de la f\'ormula \texttt{ball}$\sqcap$ $\exists$ \texttt{leftof}.\texttt{cube} es el conjunto de todas las esferas que est\'an a la izquierda de alg\'un cubo.
+Por ejemplo, la interpretaci\'on de la f\'ormula \texttt{ball} $\sqcap$ $\exists$ \texttt{leftof}.\texttt{cube} es el conjunto de todas las esferas que est\'an a la izquierda de alg\'un cubo.
 
 El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento
 y es inicializado por la descripci\'on m\'as general $\top$. Al finalizar contendr\'a las f\'ormulas que representan las ERs de los elementos del modelo.
