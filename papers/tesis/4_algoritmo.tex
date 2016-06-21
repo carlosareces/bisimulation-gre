@@ -1013,6 +1013,9 @@ El fragmento del Algoritmo \ref{algo:bisim-l} definido por el while es un algori
 Nuestro algoritmo permite generar relaciones binarias con otros objetos e incluir descripciones de los dem\'as objetos (en las ERs). No tiene preferencia por las relaciones ni por las propiedades proposicionales (como otros algoritmos descriptos de trabajo previo), en el sentido de que va a incluirlas de acuerdo a la probabilidad de uso que ellas tengan, las cuales fueron calculadas o aprendidas de un corpus. En el ejemplo de ejecuci\'on anterior mostramos que el algoritmo agreg\'o la f\'ormula $\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}$ que incluye la relaci\'on binaria \texttt{rightof}.
 
 \subsection{Generando no-determin\'isticamente sobreespecificaci\'on}
+\label{sec:overspecification}
+
+
 
 Al iniciar el algoritmo calcula para cada R, R.\randomuse que es un n\'umero aleatorio entre 0 y 1, ese n\'umero va a hacer que el algoritmo sea no-determin\'istico, ya que, el algoritmo usar\'a R para refinar las clases solamente si 
 R.\randomuse >= R.\puse. Por lo tanto y considerando que en las siguientes ejecuciones R.\randomuse ser\'an distintos, va a poder generar distintas ERs.
