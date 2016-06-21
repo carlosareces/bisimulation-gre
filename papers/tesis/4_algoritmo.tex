@@ -2,7 +2,7 @@
 \label{sec:algoritmo}
 %\section{Agregando probabilidades a un algoritmo existente}
  Las posibles aplicaciones de la generaci\'on de expresiones referenciales que deben referirse al mundo real sufren de \textbf{incertidumbre} por datos ruidosos de sensores y modelos incompletos de la realidad como discutimos en el Cap\'itulo \ref{sec:intro}.
-En este cap\'itulo se presentan nuevos algoritmos basados en teor\'ia de modelos y $\+L$-simulaciones como los descriptos en el Cap\'itulo \ref{sec:intro_logica}. Pero que a diferencia de estos usan una distribuci\'on de finita de probabilidades que representa esta incertidumbre. Estos algoritmos generan no \textbf{una} ER, sino un \textbf{ranking} de ERs. Este ranking de expresiones referenciales est\'a ordenado por la probabilidad de ser correctamente interpretada en el contexto. 
+En este cap\'itulo se presentan nuevos algoritmos basados en teor\'ia de modelos y $\+L$-simulaciones como los descriptos en el Cap\'itulo \ref{sec:intro_logica}. Pero que a diferencia de estos usan una distribuci\'on finita de probabilidades que representa esta incertidumbre. Estos algoritmos generan no \textbf{una} ER, sino un \textbf{ranking} de ERs. Este ranking de expresiones referenciales est\'a ordenado por la probabilidad de ser correctamente interpretada en el contexto. 
 Conseguimos as\'i tres caracter\'isticas nuevas de estos algoritmos:
 \begin{itemize}
  \item \textbf{No determinismo}: dos ejecuciones del algoritmo con la
@@ -17,7 +17,7 @@ Este cap\'itulo est\'a dividido en cinco secciones. En la primer secci\'on expli
 
 \section{Entrada y salida del algoritmo probabil\'istico}
 \label{input_algo}
-Como todo algoritmo de GER, nuestros algoritmos toman como entrada un contexto representado por un \textbf{modelo} $\+M$. Por ejemplo en la Figura \ref{figura-y-modelo} se muestra el modelo de la escena de la izquierda. Sin embargo a diferencia de otros algoritmos, nuestros algoritmos no toman como entrada el \textbf{target}. Nuestros algoritmos generan rankings de ERs para todos los elementos del modelo paralelamente. En particular, el algoriitmo generar\'a ERs para el conjunto singleton \{$e_5$\}. En la Secci\'on \ref{sec:genera_plural} de este cap\'itulo se muestra una sencilla extensi\'on de los algoritmos que permite generar ERs plurales.
+Como todo algoritmo de GER, nuestros algoritmos toman como entrada un contexto representado por un \textbf{modelo} $\+M$. Por ejemplo en la Figura \ref{figura-y-modelo} se muestra el modelo de la escena de la izquierda. Sin embargo a diferencia de otros algoritmos, nuestros algoritmos no toman como entrada el \textbf{target}. Nuestros algoritmos generan rankings de ERs para todos los elementos del modelo paralelamente. En particular, el algoritmo generar\'a ERs para el conjunto singleton \{$e_5$\}. En la Secci\'on \ref{sec:genera_plural} de este cap\'itulo se muestra una sencilla extensi\'on de los algoritmos que permite generar ERs plurales.
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -93,7 +93,7 @@ Como todo algoritmo de GER, nuestros algoritmos toman como entrada un contexto r
 \end{figure}
 
 
-El sistema tambi\'en toma como entrada una \textbf{distribuci\'on de probabilidad finita} de las propiedades y relaciones de la signatura del modelo\footnote{En lo que sigue nos referiremos a las propiedades y relaciones de un modelo simplemente como relaciones, distinguiendo entre relaciones unarias (propiedades) o relaciones binarias (relaciones) cuando sea necesario.}. Una distribuci\'on de probabilidades Rs, es una lista de pares (R, R.\puse) que vinculan a cada relaci\'on R a una cierta probabilidad de uso R.\puse\ ordenada de mayor a menor por \puse. La distribuci\'on de probabilidad para el modelo del ejemplo se ilustra en la Tabla \ref{probabilidades-escena}.  
+El sistema tambi\'en toma como entrada una \textbf{distribuci\'on de probabilidad finita} de las propiedades y relaciones de la signatura del modelo\footnote{En lo que sigue nos referiremos a las propiedades y relaciones de un modelo simplemente como relaciones, distinguiendo entre relaciones unarias (propiedades) o relaciones binarias (relaciones) cuando sea necesario.}. Una distribuci\'on de probabilidades Rs, es una lista de pares (R, R.\puse) que vincula a cada relaci\'on R a una cierta probabilidad de uso R.\puse\ ordenada de mayor a menor por \puse. La distribuci\'on de probabilidad para el modelo del ejemplo se ilustra en la Tabla \ref{probabilidades-escena}.  
 
 \begin{table}[h]
 \begin{center}
@@ -134,7 +134,7 @@ Sea $\REL$ es el
 conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura} del modelo), entonces podemos decir que Rs $\in (\REL \times [0,1])^*$. En la pr\'oxima secci\'on explicaremos como obtener estas probabilidades que el algoritmo toma como input.
 Los algoritmos descriptos en el Cap\'itulo \ref{sec:seleccion} y en el Cap\'itulo \ref{sec:intro_logica} procesan las relaciones unarias y las relaciones binarias de forma diferente. Adem\'as, en general prefieren usar primero las relaciones unarias y s\'olo recurrir a las binarias en caso de que sea necesario. Como se ha observado previamente en trabajo emp\'irico~\cite{viet:gene11}, hay escenas en las cuales las personas usan relaciones binarias antes que unarias y aunque no sea necesario usarlas. Por lo tanto para uniformizar el tratamiento de todas las relaciones sin importar su aridad nuestro algoritmo modifica el modelo $\gM$ antes de comenzar transformando todas las relaciones a binarias. Esto se hace agregando un elemento extra \emph{dummy} al modelo que no representa ning\'un objeto de la escena y que se relaciona con todos los objetos que ten\'ian relaciones unarias. Por ejemplo, en la Figura \ref{figura-y-modelo} se codifica el hecho de que $e_1$ es amarillo diciendo que est\'a relacionado con el elemento \emph{dummy} por la relaci\'on binaria \emph{yellow}. 
 
-Como explicamos en el Cap\'itulo \ref{sec:intro_logica}, la salida el algoritmo es lo que se llaman las $\mathcal {L}$-clases (clases de la l\'ogica $\mathcal {L}$) de semejanza del modelo de entrada $\gM $. Intuitivamente, si dos elementos en el modelo pertenecen a la misma $\mathcal {L}$-clase de semejanza, entonces el lenguaje~$\mathcal {L}$ no es lo suficientemente expresivo para diferenciarlos (es decir, no hay una f\'ormula en~$\mathcal {L }$ que pueda distinguirlos). Cada  $\mathcal {L}$-clase va acompa\~nada de un conjunto de f\'ormulas cuyas interpretaciones en el modelo de input coinciden con la $\mathcal {L}$-clase. Estas f\'ormulas son las expresiones referenciales que referencian a los elementos de la $\mathcal {L}$-clase. Si las $\mathcal {L}$-clases son conjuntos singleton, el algoritmo lleg\'o a un punto fijo y termina. En otra etapa de postprocesamiento se identifica la f\'ormula cuya extensi\'on es igual al target como una ER del target. Como el algoritmo es no determin\'istico el ranking que ERs de la salida se genera ejecutando el algoritmo un n\'umero n de veces. Cada ER generada tiene asociada una probabilidad calculada como una combinaci\'on de los \puse\ de las relaciones que contiene la ER. El ranking de ERs se genera ordenando las ERs de acuerdo a la frecuencia con la cual el algoritmo la genera, la cual se correlaciona con la probabilidad antes mencionada.
+Como explicamos en el Cap\'itulo \ref{sec:intro_logica}, la salida el algoritmo es lo que se llaman las $\mathcal {L}$-clases (clases de la l\'ogica $\mathcal {L}$) de semejanza del modelo de entrada $\gM $. Intuitivamente, si dos elementos en el modelo pertenecen a la misma $\mathcal {L}$-clase de semejanza, entonces el lenguaje~$\mathcal {L}$ no es lo suficientemente expresivo para diferenciarlos (es decir, no hay una f\'ormula en~$\mathcal {L }$ que pueda distinguirlos). Cada  $\mathcal {L}$-clase va acompa\~nada de un conjunto de f\'ormulas cuyas interpretaciones en el modelo de input coinciden con la $\mathcal {L}$-clase. Estas f\'ormulas son las expresiones referenciales que referencian a los elementos de la $\mathcal {L}$-clase. Si las $\mathcal {L}$-clases son conjuntos singleton, el algoritmo lleg\'o a un punto fijo y termina. En otra etapa de postprocesamiento se identifica la f\'ormula cuya extensi\'on es igual al target como una ER del target. Como el algoritmo es no determin\'istico el ranking que ERs de la salida se genera ejecutando el algoritmo un n\'umero N de veces. Cada ER generada tiene asociada una probabilidad calculada como una combinaci\'on de los \puse\ de las relaciones que contiene la ER. El ranking de ERs se genera ordenando las ERs de acuerdo a la frecuencia con la cual el algoritmo las genera, la cual se correlaciona con la probabilidad antes mencionada.
 
 %La salida del algoritmo es un conjunto de f\'ormulas y sus interpretaciones en el modelo (que ser\'a ER de un target singleton, si la interpretaci\'on de la f\'ormula contiene s\'olo 1 objeto) de los elementos del modelo. Si al terminar el algoritmo la interpretaci\'on de cada f\'ormula tiene un s\'olo elemento, tenemos una ER que identifica al elemento, para cada elemento del modelo. 
 
@@ -282,7 +282,7 @@ para definir el modelo relacional utilizado por el algoritmo. Entonces
 definimos el valor de \puse\ para cada una de las relaciones en el modelo como el
 porcentaje en que aparece la relaci\'on en las ERs. Es decir,
 \begin{equation} \label{eq1}
-R.\puse = \frac {\#\mbox{de ERs en $C$ en el que aparece R}} {\#\mbox{de las ERs en $C$}}.
+R.\puse = \frac {\#\mbox{de ERs en $C$ en el que aparece R}} {\#\mbox{de las ERs en $C$}}
 \end{equation}
 
 Por ejemplo {\it ball} del ejemplo de la Figura \ref{fig4-4}, aparece en todas las ERs del corpus es decir 140, entonces {\it ball}.\puse=1 ya que 140/140=1, en cambio {\it green} aparece en 137 ERs, entonces {\it green}.\puse=0.98 ya que 137/140=0.98.
@@ -297,7 +297,7 @@ que coinciden con las encontradas en corpora.
 Veamos ahora el siguiente ejemplo, el contexto y el modelo se muestra en la Figura \ref{fig4-4}.
 
 
-Las ERs, cantidad de ocurrencias y porcentaje del corpus para de la Figura~\ref{fig4-4} se muestran en la Tabla~\ref{corpus-distribution}. La signatura resultante y su \puse\ asociado se muestran en la Tabla~\ref{probability-of-use1}.\\
+Las ERs, cantidad de ocurrencias y porcentaje del corpus para de la Figura~\ref{fig4-4} se muestran en la Tabla~\ref{corpus-distribution}. La signatura resultante y su \puse\ asociado se muestran en la Tabla~\ref{probability-of-use1}.
 
 El \puse de las relaciones taxon\'omicas fue reemplazado por 1 ignorando el \puse conseguido por el m\'etodo para evitar que el algoritmo genere ERs como {\it la esfera que est\'a sobre algo}.
 
@@ -333,7 +333,7 @@ modelo de $\gM $, y podr\'{i}amos argumentar que se correlacionan con la
  saliencia de R para el target y su modelo. 
  
 Estas probabilidades no ser\'an \'utiles
-para describir los diferentes targets en diferentes escenas poruqe son dependientes de la escena para la que se calcularon. Veremos c\'omo se
+para describir los diferentes targets en diferentes escenas porque son dependientes de la escena para la que se calcularon. Veremos c\'omo se
 pueden obtener valores para otros targets y escenas utilizando un
 enfoque de aprendizaje autom\'atico en la siguiente secci\'on. 
 
@@ -374,7 +374,7 @@ En lo que sigue introduciremos regresi\'on lineal que es la t\'ecnica de aprendi
 \begin{itemize}
     \item $Y_t$: variable dependiente, explicada o regresando.
     \item $X_1$, $X_2$, $\cdots$, $X_p$ : variables explicativas, independientes o regresores.
-    \item $\beta_0$,$\beta_1$,$\beta_2$,$\cdots$,$\beta_p$ : par\'ametros, miden la influencia que las variables explicativas tienen sobre Y. Donde $\beta_0$ es la intersecci\'on o t\'ermino {\it constante}, las $\beta_i$ \ (i > 0) son los par\'ametros respectivos a cada variable independiente, y $p$ es el n\'umero de par\'ametros independientes a tener en cuenta en la regresi\'on.
+    \item $\beta_0$, $\beta_1$, $\beta_2$, $\cdots$, $\beta_p$ : par\'ametros, miden la influencia que las variables explicativas tienen sobre Y. Donde $\beta_0$ es la intersecci\'on o t\'ermino {\it constante}, las $\beta_i$ \ (i > 0) son los par\'ametros respectivos a cada variable independiente, y $p$ es el n\'umero de par\'ametros independientes a tener en cuenta en la regresi\'on.
 \end{itemize}
 Tomaremos la parte azul y verde del corpus \textit{GRE3D7} mostrado en la Figura \ref{verde-azul} del Ap\'endice \ref{imagenesGRE3D7-apendice}, para aprender las probabilidades de uso de cada palabra de las ERs que dieron las personas, y as\'i estimar c\'omo es la distribuci\'on de las probabilidades de uso de las palabras del conjunto $REL$ en el corpus.
 
@@ -593,7 +593,7 @@ consideradas por el algoritmo. Esto asegura que una expresi\'on referencial
 se encontrar\'a si existe; pero dar\'a mayor probabilidad a las expresiones
 que usan las relaciones con R.\puse m\'as alta. 
 
-Mientras que $\RE$ contiene descripciones (f\'ormulas $\varphi$) que pueden ser refinadas,(es decir, clases
+Mientras que $\RE$ contiene descripciones (f\'ormulas $\varphi$) que pueden ser refinadas, (es decir, clases
 con al menos dos elementos) vamos a llamar a la funci\'on de refinamiento
 add$_\mathcal{EL}$(R,$\varphi$,$\RE$) sucesivamente con cada relaci\'on
 de Rs. Un cambio en una de las clases, puede desencadenar cambios en
@@ -807,7 +807,7 @@ Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on 
 \end{center}
 \end{figure}
 
-La siguiente propiedad a considerar es \texttt{cube}, tambi\'en supera la probabilidad \texttt{cube}.\randomuse). Realizando el mismo procedimiento antes mencionado, queda \RE =\{$\top$, \texttt{ball}, \texttt{cube}\} donde $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
+La siguiente propiedad a considerar es \texttt{cube}, tambi\'en supera la probabilidad \texttt{cube}.\randomuse. Realizando el mismo procedimiento antes mencionado, queda \RE =\{$\top$, \texttt{ball}, \texttt{cube}\} donde $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
 $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ est\'a subsumida, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
 
 \begin{figure}[H]
@@ -975,7 +975,7 @@ $\interp{\texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\tex
 $\interp{\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}} = \{e_7\}$
 \end{tabular}
 
-Conclu\'imos que el lenguaje elegido $\el$ no pueden identificar a $e_1$ en el modelo. Si us\'aramos $\alc$, que contiene negaci\'on $e_1$ se podr\'ia distinguir de $e_3$. Los dem\'as elementos s\'i quedan en clases singleton y son expresiones referenciales podr\'ian realizarse como sigue:
+Concluimos que el lenguaje elegido $\el$ no pueden identificar a $e_1$ en el modelo. Si us\'aramos $\alc$, que contiene negaci\'on, $e_1$ se podr\'ia distinguir de $e_3$. Los dem\'as elementos s\'i quedan en clases singleton y son expresiones referenciales podr\'ian realizarse como sigue:
 {\it el cubo amarillo} es $e_6$, {\it la bola grande roja} es $e_5$, {\it el cubo rojo grande} es $e_4$, {\it el cubo rojo que est\'a a la derecha del cubo amarillo} es $e_7$, $e_3$ es {\it la bola amarilla sobre el cubo rojo} y $e_2$ es {\it el cubo rojo de la izquierda}.
  
 %Otra vez las probabilidades random superan a las de la lista, recalculamos las probabilidades sumando R.\incuse a cada \puse, quedando como muestra la Tabla \ref{probabilidades-ejemplo-ejecucion3}.
@@ -1008,7 +1008,7 @@ Conclu\'imos que el lenguaje elegido $\el$ no pueden identificar a $e_1$ en el m
 
 Uno de los problemas que ten\'ian otros algoritmos es que no siempre terminaban como explicamos en el Cap\'itulo \ref{sec:seleccion}. Para asegurar terminaci\'on nosotros incrementamos las probabilidades aleatorias en cada ciclo, hasta que alcancen 1. Definimos MaxIterations como la cantidad m\'axima de iteraciones que vamos a permitir, y calculamos R.\incuse es cuanto vamos a incrementar la probabilidad de R en cada ciclo, R.\incuse = (1 -R.\puse) / MaxIterations, con esto nos aseguramos que en MaxIterations todas lleguen a 1, y en consecuencia el algoritmo termine, ya que en el c\'odigo, se incrementa R.\puse con R.\incuse y sale del ciclo principal si para todas las R, R.\puse son mayores o iguales a 1.
 
-El fragmento del Algoritmo \ref{algo:bisim-l} definido por el while es un algoritmo de punto fijo, se refinan las particiones hasta que en alg\'un momento no se pueden hacer m\'as refinamientos, se dice que el algoritmo llego a un punto fijo, en el que no le es posible progresar. \RE se mantiene sin modificaciones. Los conjuntos se van haciendo m\'as chicos en las sucesivas iteraciones y considerando que la cantidad de elementos del modelo y las relaciones son finitas, se llega al punto fijo en una cantidad finita de pasos y el algoritmo siempre termina.
+El fragmento del Algoritmo \ref{algo:bisim-l} definido por el while es un algoritmo de punto fijo, se refinan las particiones hasta que en alg\'un momento no se pueden hacer m\'as refinamientos, se dice que el algoritmo lleg\'o a un punto fijo, en el que no le es posible progresar. \RE se mantiene sin modificaciones. Los conjuntos se van haciendo m\'as chicos en las sucesivas iteraciones y considerando que la cantidad de elementos del modelo y las relaciones son finitas, se llega al punto fijo en una cantidad finita de pasos y el algoritmo siempre termina.
 
 Nuestro algoritmo permite generar relaciones binarias con otros objetos e incluir descripciones de los dem\'as objetos (en las ERs). No tiene preferencia por las relaciones ni por las propiedades proposicionales (como otros algoritmos descriptos de trabajo previo), en el sentido de que va a incluirlas de acuerdo a la probabilidad de uso que ellas tengan, las cuales fueron calculadas o aprendidas de un corpus. En el ejemplo de ejecuci\'on anterior mostramos que el algoritmo agreg\'o la f\'ormula $\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}$ que incluye la relaci\'on binaria \texttt{rightof}.
 
@@ -1017,7 +1017,7 @@ Nuestro algoritmo permite generar relaciones binarias con otros objetos e inclui
 
 
 
-Al iniciar el algoritmo calcula para cada R, R.\randomuse que es un n\'umero aleatorio entre 0 y 1, ese n\'umero va a hacer que el algoritmo sea no-determin\'istico, ya que, el algoritmo usar\'a R para refinar las clases solamente si 
+Al iniciar, el algoritmo calcula para cada R, R.\randomuse que es un n\'umero aleatorio entre 0 y 1, ese n\'umero va a hacer que el algoritmo sea no-determin\'istico, ya que, el algoritmo usar\'a R para refinar las clases solamente si 
 R.\randomuse >= R.\puse. Por lo tanto y considerando que en las siguientes ejecuciones R.\randomuse ser\'an distintos, va a poder generar distintas ERs.
 
 El algoritmo hace caso omiso de la restricci\'on de informatividad (es decir, que permite la inclusi\'on de nuevas relaciones
