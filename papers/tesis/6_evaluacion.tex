@@ -89,8 +89,8 @@ Total & 140 & 100 & 10000 & 100 & 80.51 \\
 \subsection{Evaluaci\'on emp\'irica sobre el resto del corpus}
 \label{sec:compara-varias}
 
-Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar, que como el algoritmo tiene un componente de azar, por eso nos di\'o bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
-Para enriquecer esta parte mostraremos otros baselines, los cuales dos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son \'utiles para aproximar al ranking de ERs que aparece en corpora. Los baselines que se presentan ejecutan el algoritmo con una distribuci\'on aleatoria de probabilidades de uso, y con una distribuci\'on uniforme (en las ERs tomando tanto las generadas por el sistema como las del corpus y las generadas con el modelo aleatorio). El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
+Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar que como el algoritmo tiene un componente de azar, por eso nos di\'o bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
+Para enriquecer esta parte mostraremos otros baselines, los cuales nos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son \'utiles para aproximar al ranking de ERs que aparece en corpora. Los baselines que se presentan ejecutan el algoritmo con una distribuci\'on aleatoria de probabilidades de uso, y con una distribuci\'on uniforme (en las ERs tomando tanto las generadas por el sistema como las del corpus y las generadas con el modelo aleatorio). El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
 
 \begin{table}[h]
 \begin{small}
@@ -158,7 +158,7 @@ El algoritmo GRAPH que describimos en el Cap\'itulo \ref{sec:seleccion} es un al
 \subsection{Comparaci\'on con el TUNA Challenge}
 El algoritmo GRAPH define la generaci\'on de expresiones referenciales como un problema de b\'usqueda en un grafo, devuelve el grafo distintivo de menor costo (si existe) dada una funci\'on de costo particular. Comparamos a este algoritmo usando las m\'etricas precisi\'on, Dice y \textsc {masi}, introducidas en la Secci\'on \ref{sec:metricasAutomaticas}. 
 
-Recordemos que el corpus TUNA tiene 2 partes, una parte cuyo dominio son muebles, y otra parte cuyo dominio son personas, ambos ubicados en una grilla. El corpus tiene una parte con target singular, y otra con targets plurales. Para realizar esta comparaci\'on se us\'o s\'olamente la parte singular del corpus.
+Recordemos que el corpus TUNA tiene 2 partes, una parte cuyo dominio son muebles, y otra parte cuyo dominio son personas, ambos ubicados en una grilla. El corpus tiene una parte con target singular, y otra con targets plurales. Para realizar esta comparaci\'on se us\'o solamente la parte singular del corpus.
 
 
 En la Tabla \ref{probability-of-use} y \ref{probability-of-use-people} se muestran las probabilidades de uso aprendidas desde el corpus. Se puede ver en la Tabla \ref{probability-of-use} por ejemplo que la probabilidad de usar {\it blue} es mucho m\'as alta que la probabilidad de usar {\it facing left} para describir al target. La probabilidad de usar {\it green} no es 0 porque se puede usar para describir a un landmark.
