@@ -121,7 +121,7 @@ Concluimos que $e_5$ no puede distinguirse de $e_1$ y $e_3$ usando s\'olo propie
 \newtheorem{definicion}{Definici\'on}
 \begin{definicion}
 
-En general, dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
+Dado un lenguaje l\'ogico $\+L$ decimos que un objeto $u$ en un modelo
 $\+M$ es {\bf $\+L$-similar} a otro objeto
  $v$ del modelo si para toda f\'ormula en $\+L$ satisfecha por $u$ tambi\'en es satisfecha por $v$. 
 \end{definicion}
@@ -225,7 +225,7 @@ bien conocidos (vea, \cite{hopc:algo71,areces08,HHK95,dovier04:_effic_algor_for_
 lenguajes (por ejemplo, \ALC, \ELAN y \EL) se ejecutan en tiempo polinomial. No se conoce algoritmo polinomial 
  para simulaci\'on con \FOL o \EPFOL; la complejidad exacta del problema en estos casos est\'a abierta \cite{gare:comp79}.\\
 En la Tabla \ref{tab:algoritmos-complejidad} se muestra una comparaci\'on entre los algoritmos m\'as conocidos del \'area, que l\'ogica usan y la complejidad.
-
+\medskip
 \begin{tabular}{|l|l|l|}
 \hline
   DL & Algoritmo  & Complejidad \\  \hline
@@ -234,8 +234,8 @@ En la Tabla \ref{tab:algoritmos-complejidad} se muestra una comparaci\'on entre 
   $\ALC$   & Algoritmo DL \cite{areces08} & P\\ \hline
  	$\ELUNEG$ & Algoritmo plural \cite{gardent02:_gener_minim_defin_descr} &P\\ \hline
   $\ELAN$ & &P\\ \hline
-	$\EL$   & Algoritmo relacional \cite{Horacek1997}&P\\ \hline
-	$\PL$ &  Extensiones a IA \cite{deemter02:CL}&P\\ \hline
+	$\EL$   & Algoritmo relacional \cite{Horacek1997} entre otros&P\\ \hline
+	$\PL$ &  Extensiones a IA \cite{deemter02:CL} entre otros&P\\ \hline
 	$\CL$ & Algoritmo incremental y predecesores \cite{incremental} &P\\ 
 	
 \hline	
@@ -373,7 +373,7 @@ $S(u):=S(u)-\{w\}$ \label{alg:line:loop-body-begin}
 
 \If{$\diam F(v)$ no es conjunci\'on de $F(u)$}{ $F(u):=F(u)\wedge
 \diam F(v)$ \label{alg:line:loop-body-end-1} }} \caption{\small
-Computando $\EL$-similaridad y \posre}\label{alg:schematic-GRE}
+Computando $\EL$-similaridad y generando ERs para \EL.}\label{alg:schematic-GRE}
 \end{algorithm}
 
 Inicialmente $F(v)$ es la conjunci\'on de todas las relaciones unarias que
@@ -776,27 +776,6 @@ add$_\alc$ ($ \varphi $, $\RE$), que agrega $ \phi $ a toda
 f\'ormula $\psi \in \RE $, 
 si $\interp{\psi \sqcap \varphi} \not = \emptyset$ y $\interp{\psi \sqcap \neg \varphi} \not = \emptyset$.
 
-El algoritmo \alc calcula los conjuntos \alc-similaridad del modelo en
-tiempo $O(n^3)$, donde $ n $ es el n\'umero de individuos en el dominio. 
-Por lo tanto su complejidad computacional es polinomial. En trabajo previo \cite{areces08} se ha mostrado que este algoritmo se ejecuta m\'as r\'apidamente que el algoritmo para \EL (ambos en tiempo polinomial).
-El problema de \alc para la GER es que introducir\'a negaciones libremente en las distinciones de casos, esto
-puede hacer que las f\'ormulas resultantes sean dif\'iciles de entender. 
-Aqu\'i tambi\'en
-presentamos un algoritmo para los conjuntos \el-similitud simplemente sustituyendo de la llamada a add$_{\alc} $ en
-Algoritmo~\ref{algo:bisim-3} por una llamada a add$_{\EL} $, que es
-definido en el Algoritmo~\ref{algo:bisim-add-el}. Como antes, el
-algoritmo mantiene un conjunto $\RE = \{\varphi_1,\ldots,\varphi_n\}$ de
-f\'ormulas (esta vez de \el) tal que $\interp{\varphi_1} \cup \ldots
-\cup \interp{\varphi_n} = \Delta$, y que se refina de manera iterativa.
-El algoritmo add$_{\alc}$ asegura que
-$\interp{\varphi_1},\ldots,\interp{\varphi_n}$ es una partici\'on de
-$ \Delta $, pero add$_{\EL}$ no lo asegura.
-
-Debido a que mantiene un invariante m\'as d\'ebil, el conjunto \RE puede contener
-m\'as f\'ormulas en el \el-algoritmo que en el \alc-algoritmo. Como $ \Delta $ tiene un n\'umero exponencial de subconjuntos,
-hay un riesgo de que el \el-algoritmo podr\'ia tener peor tiempo de ejecuci\'on, como se muestra en trabajo previo \cite{areces08}.\\
-
- 
 \begin{algorithm}[H]\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
 
@@ -823,6 +802,28 @@ $\RE \leftarrow \{\top\}$
       }
 }
 \end{algorithm}
+
+El algoritmo \alc calcula los conjuntos \alc-similaridad del modelo en
+tiempo $O(n^3)$, donde $ n $ es el n\'umero de individuos en el dominio. 
+Por lo tanto su complejidad computacional es polinomial. En trabajo previo \cite{areces08} se ha mostrado que este algoritmo se ejecuta m\'as r\'apidamente que el algoritmo para \EL (ambos en tiempo polinomial).
+El problema de \alc para la GER es que introducir\'a negaciones libremente en las distinciones de casos, esto
+puede hacer que las f\'ormulas resultantes sean dif\'iciles de entender. 
+Aqu\'i tambi\'en
+presentamos un algoritmo para los conjuntos \el-similitud simplemente sustituyendo de la llamada a add$_{\alc} $ en
+Algoritmo~\ref{algo:bisim-3} por una llamada a add$_{\EL} $, que es
+definido en el Algoritmo~\ref{algo:bisim-add-el}. Como antes, el
+algoritmo mantiene un conjunto $\RE = \{\varphi_1,\ldots,\varphi_n\}$ de
+f\'ormulas (esta vez de \el) tal que $\interp{\varphi_1} \cup \ldots
+\cup \interp{\varphi_n} = \Delta$, y que se refina de manera iterativa.
+El algoritmo add$_{\alc}$ asegura que
+$\interp{\varphi_1},\ldots,\interp{\varphi_n}$ es una partici\'on de
+$ \Delta $, pero add$_{\EL}$ no lo asegura.
+
+Debido a que mantiene un invariante m\'as d\'ebil, el conjunto \RE puede contener
+m\'as f\'ormulas en el \el-algoritmo que en el \alc-algoritmo. Como $ \Delta $ tiene un n\'umero exponencial de subconjuntos,
+hay un riesgo de que el \el-algoritmo podr\'ia tener peor tiempo de ejecuci\'on, como se muestra en trabajo previo \cite{areces08}.\\
+
+ 
 
 \begin{algorithm}[H]\floatname{algorithm}{Algoritmo}
 \caption{add$_\alc(\varphi,\RE)$.}
@@ -985,15 +986,12 @@ modelos relacionales finitos, el isomorfismo de subgrafos corresponde a las
 \EPFOL-simulaciones. Dados nodos $u,v$ de
 $G$, existe un subgrafo isomorfo a G a trav\'es de una funci\'on $f$, que contiene $ u $ y
 $v$, y tal que $f(u)=v$ si y s\'olo si $u \simul{\+\EPFOL} v$. Una implementaci\'on usando $\+\EPFOL$-simulaciones se muestra en el Algoritmo \ref{alg:makeRE}.
-%
-%Despu\'es de haber explicitado esta noci\'on de igualdad y, con ella, la de
-%lenguaje l\'ogico asociado a ella, podemos proceder a generalizar el
-%algoritmo para hacer que funcione para otros lenguajes, y adaptarlo para
-%ordenar a la salida de una f\'ormula en lugar de un grafo. Esto se muestra en los
-%Algoritmos~\ref{alg:makeRE} y~\ref{alg:find}.
-%
-%\begin{center}\begin{minipage}[t]{5.1cm}%
-%algoritmo 3
+
+El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\FOL-$-ER {\em
+f\'ormula para} $v$; \'este \'ultimo nos dice c\'omo extender $H$ en cada paso
+del bucle principal del Algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a diferencia de la
+presentaci\'on de~\cite{graph}, \instFun{makeRE}{\FOL} computa
+no s\'olo un grafo $H$, sino tambi\'en una $\+L$-Simulaci\'on de $f$.
 
 \begin{algorithm}%[H]
 \floatname{algorithm}{Algoritmo}\small
@@ -1072,13 +1070,6 @@ $\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L}
 \end{algorithm}
   %\end{minipage}%
 %\end{center}
-
-
-El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\FOL-$-ER {\em
-f\'ormula para} $v$; \'este \'ultimo nos dice c\'omo extender $H$ en cada paso
-del bucle principal del Algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a diferencia de la
-presentaci\'on de~\cite{graph}, \instFun{makeRE}{\FOL} computa
-no s\'olo un grafo $H$, sino tambi\'en una $\+L$-Simulaci\'on de $f$.
 
 Como nota final sobre la complejidad, la computaci\'on
 \EPFOL-distractores parece requerir necesariamente una soluci\'on al problema de isomorfismos de subgrafos, que es NP-completo). Mientras que en la Secci\'on \ref{sec:greViaSimulacion} y \ref{sec:bisimulacion} presentamos algoritmos que pueden encontrar ERs en tiempo polinomial.

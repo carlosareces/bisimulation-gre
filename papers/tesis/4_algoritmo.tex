@@ -13,7 +13,7 @@ el mismo input.
 es posible usar \textbf{aprendizaje autom\'atico} para aproximar una distribuci\'on de probabilidad adecuada para las propiedades y relaciones de una escena no vista antes. Esto hace que el ranking de las ERs generadas para el modelo simule el que se observa en el corpus usado para el aprendizaje autom\'atico.
 \end{itemize}
 \
-Este cap\'itulo est\'a dividido en cinco secciones. En la primer secci\'on explicaremos la entrada y salida del algoritmo. En la Secci\'on \ref{sec:learning} mostraremos como obtener la distribuci\'on de probabilidad finita que toma como entrada el algoritmo, usando aprendizaje autom\'atico cuando hay corpus disponible para el dominio. Luego en la Secci\'on \ref{sec:algoritmo_probabilistico} mostraremos el algoritmo en detalle y definiremos los conceptos y t\'ecnicas de teor\'ia de modelos necesarios para entenderlo. En la Secci\'on \ref{sec:ejemplo_ejecucion} mostraremos un ejemplo de ejecuci\'on paso a paso. Explicaremos c\'omo conseguimos asegurar terminaci\'on, c\'omo se generan las ERs no-determin\'isticamente y c\'omo conseguimos mayor control sobre la sobreespecificaci\'on. Finalmente en la Secci\'on \ref{sec:link-algoritmo} daremos un resumen y comentaremos c\'omo se linkea el cap\'itulo con el resto de la tesis.
+Este cap\'itulo est\'a dividido en cinco secciones. En la primer secci\'on explicaremos la entrada y salida del algoritmo. En la Secci\'on \ref{sec:learning} mostraremos como obtener la distribuci\'on de probabilidad finita que toma como entrada el algoritmo, usando aprendizaje autom\'atico cuando hay corpus disponible para el dominio. Luego en la Secci\'on \ref{sec:algoritmo_probabilistico} mostraremos el algoritmo en detalle y definiremos los conceptos y t\'ecnicas de teor\'ia de modelos necesarios para entenderlo. En la Secci\'on \ref{sec:ejemplo_ejecucion} mostraremos un ejemplo de ejecuci\'on paso a paso. Explicaremos c\'omo conseguimos asegurar terminaci\'on, c\'omo se generan las ERs no-determin\'isticamente y c\'omo conseguimos mayor control sobre la sobreespecificaci\'on. Finalmente en la Secci\'on \ref{sec:link-algoritmo} daremos un resumen y comentaremos c\'omo se linkea el cap\'itulo con el resto de la tesis. Parte de los resultados mostrados en este cap\'itulo fueron publicados en \cite{arec:2012:coling12}.
 
 \section{Entrada y salida del algoritmo probabil\'istico}
 \label{input_algo}
@@ -399,7 +399,7 @@ se escribieron la lista de propiedades nombradas anteriormente, por cada ER de l
 En la Tabla \ref{tabla-linear-regresion-all} se muestra la salida del algoritmo de regresi\'on lineal para las 16 escenas verde y azules del corpus GRE3D7 y sus respectivas ERs. En la primer columna podemos ver la palabra, 
 en la segunda columna est\'a el error promedio dado por regresi\'on lineal, en la tercera columna el error medio 
 y en la cuarta la f\'ormula que la regresi\'on lineal calcul\'o para la probabilidad de uso de la palabra considerada.
-
+\medskip
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|c|c|l|}
@@ -462,7 +462,6 @@ En la tabla tambi\'en podemos ver que relaciones como {\it small} y {\it large} 
 
 Las relaciones {\it ontop}, {\it leftof} y {\it rightof} tienen una \puse\ baja. {\it Ontop} es m\'as probable que {\it leftof} o {\it rightof}, esta observaci\'on fue reportada en (Viethen, 2011). 
 
-
 Para hacer el aprendizaje autom\'atico, separamos 1 contexto al que llamamos testing, y todos los dem\'as los usamos de entrenamiento. Por ejemplo, para aprender las \puse\ del contexto 13 mostrado en la Figura \ref{verde-azul} del Ap\'endice \ref{imagenesGRE3D7-apendice}, se usaron los otros 15 contextos.
 Nuestro conjunto de caracter\'{i}sticas es intencionadamente simplista con el fin de que sea
 independiente de dominio. Como resultado hay algunas relaciones complejas
@@ -479,71 +478,13 @@ Como resultado podemos ver en la Tabla~\ref{probability-of-use}, el valor estima
   dimensi\'on-y, es decir, cuando una persona a\~nade dimensi\'on-x es altamente
   probable que incluya la dimensi\'on-y en su expresi\'on referencial.
 
-
-%\begin{table}[h!]
-%\begin{center}
-%\begin{tabular}{|l|c|c|}
-%\hline
-%%Palabra &  \puse 				 & \puse\ Aprendida 			   & \puse\ & \puse\  Aprendida \\
-%Palabra & \puse\ Figura \ref{fig4-4}   & \puse\ aprendida \ref{fig4-4} \\
-%\hline
-%ball & 1.0 & 1.0 \\
-%cube & 1.0 & 1.0  \\
-%green & 0.978 & 0.993  \\
-%small & 0.257 & 0.346  \\
-%ontop & 0.178 & 0.179 \\ 
-%blue & 0.15 & 0.124  \\
-%large & 0.107 & 0.03  \\
-%left & 0.007 & 0.002  \\
-%top & 0.007 & 0   \\
-%right & 0 & 0.001   \\
-%leftof & 0 & 0  \\
-%rightof & 0 & 0   \\
-%below & 0 & 0  \\
-%\hline
-%\end{tabular}
-%\caption{Probabilidades de uso de las palabras del corpus \textit{GRE3D7} para la Figura \ref{fig4-4}.} 
-%\label{probability-of-use}
-%\end{center}
-%\end{table}
-
-
-
-%\begin{table}[h!]
-%\begin{center}
-%\begin{tabular}{|l|c|}
-%\hline
-%%Palabra &  \puse 				 & \puse\ Aprendida 			   & \puse\ & \puse\  Aprendida \\
-%Palabra &  \puse\ aprendida \ref{fig4-4} \\
-%\hline
-%ball &  1.0 \\
-%cube &  1.0  \\
-%green &  0.993  \\
-%small &  0.346  \\
-%ontop &  0.179 \\ 
-%blue &  0.124   \\
-%large &  0.03  \\
-%left &  0.002   \\
-%top &  0 \\
-%right &  0.001 \\
-%leftof &  0  \\
-%rightof & 0  \\
-%below & 0  \\
-%\hline
-%\end{tabular}
-%\caption{Probabilidades de uso aprendidas usando regresi\'on lineal para la Figura \ref{fig4-4}.} 
-%\label{probability-of-use}
-%\end{center}
-%\end{table}
-
-
+\medskip
 \begin{table}[h!]
 \begin{center}
 \begin{tabular}{ccccccccccccc}
 \hline
 \it{ball} & \it{cube} &  \it{green} & \it{small} &  \it{ontop} &  \it{blue} &  \it{large} &  \it{left} &  \it{top} &\it{right} &  \it{leftof} &    \it{rightof} &\it{below} \\
 \hline
-
 1.0 & 1.0 & 0.993 &0.346 &0.179 & 0.124 &0.03  &0.002  &0 & 0.001 &0&0&0\\
 \hline
 \end{tabular}
@@ -551,7 +492,6 @@ Como resultado podemos ver en la Tabla~\ref{probability-of-use}, el valor estima
 \label{probability-of-use2}
 \end{center}
 \end{table}
-
 
 Utilizamos regresi\'on lineal para aprender la funci\'on de
 \puse\ para cada palabra en la signatura. Para una escena determinada, reemplazamos
@@ -571,9 +511,10 @@ Como dijimos anteriormente la \textbf{interpretaci\'on de una f\'ormula} es el c
 
 Decimos que una f\'ormula $\exists R. \phi$ es \textbf{informativa} con respecto a otra f\'ormula $\gamma$ cuando la interpretaci\'on de la conjunci\'on de las dos f\'ormulas $\interp {\exists R. \phi \sqcap \gamma}$ contiene menos elementos que la interpretaci\'on de $\gamma$. Por ejemplo si tenemos la f\'ormula \texttt{ball} y 
 queremos saber si \texttt{red} es informativa con respecto a \texttt{ball} para el modelo de la Figura \ref{figura-y-modelo} vemos que s\'i lo es, ya que $e_5$ es una esfera roja y existen otras esferas que no son rojas,
- es decir \texttt{red} divide el conjunto de esferas, por lo tanto es informativa. Si un algoritmo permite agregar f\'ormulas no informativas a las expresiones referenciales, entonces podr\'a generar ERs sobreespecificadas.
-Una f\'ormula $\phi$ es \textbf{subsumida} por el conjunto de expresiones referenciales si ya tenemos otras f\'ormulas en \RE cuya uni\'on es igual a la interpretaci\'on de $\phi$. Por ejemplo, para el modelo de la Figura \ref{figura-y-modelo} $\top$ que es la f\'ormula a la cual todos los objetos pertenecen, ser\'a subsumida cuando se agreguen 
-las f\'ormulas \texttt{ball} y \texttt{cube} ya que todos los elementos de la figura son esferas o cubos. Es decir ya tenemos descripciones m\'as precisas de los objetos que $\top$. Formalmente $\interp{\top}$ = \{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_6$,$e_7$\} \interp{\texttt{ball}}=\{$e_1$,$e_3$,$e_5$\} y \interp{\texttt{cube}}=\{$e_2$,$e_4$,$e_6$,$e_7$\}. La uni\'on de los conjuntos $\interp{\texttt{ball}}$ y $\interp{\texttt{cube}}$ dan exactamente $\interp{\top}$.
+ es decir \texttt{red} divide el conjunto de esferas, por lo tanto es informativa. Si un algoritmo permite agregar f\'ormulas no informativas a las expresiones referenciales, entonces podr\'a generar ERs sobreespecificadas.\\
+ 
+Una f\'ormula $\phi$ es \textbf{redundante} por el conjunto de expresiones referenciales si ya tenemos otras f\'ormulas en \RE cuya uni\'on es igual a la interpretaci\'on de $\phi$. Por ejemplo, para el modelo de la Figura \ref{figura-y-modelo}, $\top$ que es la f\'ormula a la cual todos los objetos pertenecen, ser\'a redundante cuando se agreguen 
+las f\'ormulas \texttt{ball} y \texttt{cube} ya que todos los elementos de la figura son esferas o cubos. Es decir ya tenemos descripciones m\'as precisas de los objetos que $\top$. Formalmente $\interp{\top}$ = \{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_6$,$e_7$\} \interp{\texttt{ball}}=\{$e_1$,$e_3$,$e_5$\} y \interp{\texttt{cube}}=\{$e_2$,$e_4$,$e_6$,$e_7$\}. La uni\'on de los conjuntos $\interp{\texttt{ball}}$ y $\interp{\texttt{cube}}$ dan exactamente $\interp{\top}$.\\
 \textbf{Trivial} es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el contexto de la 
 Figura \ref{figura-y-modelo}, \texttt{large yellow ball} es trivial ya que no hay esferas amarillas grandes en el contexto considerado.
 En el Algoritmo \ref{algo:bisim-add-el-over} vamos a utilizar f\'ormulas del lenguaje de descripci\'on $\el$~\cite{baader03} para describir clases de refinamiento.
@@ -586,7 +527,7 @@ Por ejemplo, la interpretaci\'on de la f\'ormula \texttt{ball} $\sqcap$ $\exists
 El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento
 y es inicializado por la descripci\'on m\'as general $\top$. Al finalizar contendr\'a las f\'ormulas que representan las ERs de los elementos del modelo.
 
-El Algoritmo \ref{algo:bisim-l} realiza los siguientes pasos. Primero, recorre la lista Rs, para cada R (relaciones de la signatura del dominio \REL). Luego calcula R.\randomuse, un n\'umero aleatorio en [0,1], y R.\incuse que ser\'a (1 - R.\puse) / MaxIterations, siendo MaxIterations el n\'umero m\'aximo de iteraciones del ciclo principal que queremos permitir. Si R.\randomuse $\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de
+Los Algoritmos \ref{algo:bisim-l} y \ref{algo:bisim-add-el-over} realizan los siguientes pasos. Primero, recorre la lista Rs, para cada R (relaciones de la signatura del dominio \REL). Luego calcula R.\randomuse, un n\'umero aleatorio en [0,1], y R.\incuse que ser\'a (1 - R.\puse) / MaxIterations, siendo MaxIterations el n\'umero m\'aximo de iteraciones del ciclo principal que queremos permitir. Si R.\randomuse $\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de
 clases, si no la propiedad R ser\'a ignorada en esta iteraci\'on. El valor de R.\puse\ se incrementar\'a en $R.\incuse$
 en cada ciclo principal, para asegurar que todas las relaciones son, en alg\'un momento,
 consideradas por el algoritmo. Esto asegura que una expresi\'on referencial
@@ -630,20 +571,20 @@ $\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\to
 
 \For{\em (R,R.\puse) $\in$ Rs}{
 R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es la probabilidad de usar R} \;
-R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ incrementadas por R.\incuse en cada ciclo}
+R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ incrementadas por R.\incuse}
 }
 \Repeat{\em $\forall$((R,R.\puse) $\in$ Rs).(R.\puse $\ge$ 1)\tcp*[f]{\footnotesize R.\puse\ incrementadas hasta que alcanzan 1}}{
 FirstLoop $\leftarrow$ TRUE \;
-\While(\tcp*[f]{\footnotesize mientras alguna clase tenga al menos 2 elementos}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
+\While(\tcp*[f]{\footnotesize clases con m\'as de 2 elementos?}){\em $\exists (\varphi \in$ \RE)$.(\#\interp{\varphi}>1)$}{
 \RE' $\leftarrow$ \RE \tcp*[f]{\footnotesize hacer una copia para futura comparaci\'on} \;
 \For{\em (R, R.\puse) $\in$ Rs}{
 \If(\tcp*[f]{\footnotesize R ser\'a usada en la expresi\'on}){\em R.\randomuse $\le$ R.\puse}{
 \lFor{\em $\varphi \in$ \RE}{
 add$_\mathcal{EL}$(R, $\varphi$, \RE)\tcp*[f]{\footnotesize refine todas las clases usando R}}
 }\;
-\If(\tcp*[f]{\footnotesize la clasificaci\'on cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo for para tratar de nuevo con la m\'as alta R.\puse}}
+\If(\tcp*[f]{\footnotesize la clasificaci\'on cambi\'o}){\em \RE $\not =$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo for}}
 }
-\If(\tcp*[f]{\footnotesize la clasificaci\'on se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse.}}
+\If(\tcp*[f]{\footnotesize la clasificaci\'on se ha estabilizado}){\em \RE $=$ \RE'}{exit\tcp*[f]{\footnotesize salga del ciclo while para incrementar R.\puse}}
 }
 FirstLoop $\leftarrow$ FALSE \;
 % Bloque con error comentado
@@ -652,6 +593,7 @@ R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\
 }
 }
 \end{algorithm}
+\medskip
 \begin{algorithm}[H]
 \floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
@@ -659,19 +601,18 @@ R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\
 \Input{\footnotesize R, $\varphi$, $\RE$}
 \Output{\footnotesize $\RE$}
 \If(\tcp*[f]{\footnotesize primera iteraci\'on?})
-{\em FirstLoop?}{
+{\em FirstLoop}{
 Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
-\lElse(\tcp*[f]{\footnotesize informativa: tiene menos objetos que la original?}) {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$}
+\lElse {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$}
 \For{\em $\psi \in \RE$ con $\#\interp{\psi} > 1$}{
-\If{\em $\psi \sqcap \exists$R.$\varphi$ no est\'a subsumida en
-$\RE$ \ {\bf and}
-\\\tcp*[f]{\footnotesize subsumida: interp. distinta a uni\'on de inter. de otras f\'ormulas en \RE?}
-\\\ \ \ \ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq
-\emptyset$ {\bf and}
+\If{\em $\psi \sqcap \exists$R.$\varphi$ no es redundante en
+$\RE$ \ 
+\\\ \ \ \ {\bf and} $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq
+\emptyset$ 
 \tcp*[f]{\footnotesize es no-trivial: tiene elementos?}
-\\\ \ \ \ \emph{Informativa}}{
+\\\ \ \ \ {\bf and} \emph{Informativa}}{
 Agregar $\psi \sqcap \exists \mbox{R}.\varphi$ a $\RE$ \tcp*[f]{\footnotesize agregar la nueva clase a la clasificaci\'on} \;
-borrar f\'ormulas subsumidas de $\RE$ \tcp*[f]{\footnotesize borrar clases subsumidas}
+borrar f\'ormulas redundantes de $\RE$ \tcp*[f]{\footnotesize borrar clases redundantes}
 }
 }
 \caption{add$_\el$(R, $\varphi$, $\RE$)} \label{algo:bisim-add-el-over}
@@ -809,7 +750,7 @@ Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on 
 \end{figure}
 
 La siguiente propiedad a considerar es \texttt{cube}, tambi\'en supera la probabilidad \texttt{cube}.\randomuse. Realizando el mismo procedimiento antes mencionado, queda \RE =\{$\top$, \texttt{ball}, \texttt{cube}\} donde $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
-$\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ est\'a subsumida, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
+$\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ es redundante, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
 
 \begin{figure}[H]
 \begin{center}
@@ -854,7 +795,7 @@ La siguiente relaci\'on es \texttt{ontop}, la cual supera la probabilidad \textt
 \end{figure}
 
 Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos \RE= $\{\texttt{ball},\texttt{ball} \sqcap \texttt{yellow}, \texttt{cube}, \texttt{cube} \sqcap \texttt{yellow}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube} \sqcap \texttt{red} \}$. Algunas relaciones se agregaron sobreespecificando, ya que todav\'ia estamos en el primer ciclo.
-Aqu\'i ya borramos la f\'ormula \texttt{ball} porque estaba subsumida, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo9d}, luego de haber borrado las f\'ormulas subsumidas.
+Aqu\'i ya borramos la f\'ormula \texttt{ball} porque era redundante, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo9d}, luego de haber borrado las f\'ormulas redundantes.
 
 \begin{figure}[H]
 \begin{center}
@@ -876,34 +817,8 @@ $\texttt{ball} \sqcap \texttt{yellow}$.}
 
 Las dem\'as propiedades no pasan la probabilidad R.\randomuse, por lo tanto salimos del primer ciclo, e incrementamos las probabilidades con R.\incuse, hasta que alguna relaci\'on R es tal que R.\randomuse <= R.\puse, quedando como se muestran en la Tabla \ref{prob-inc2}.
 
-%Las dem\'as propiedades y no pasaron la probabilidad random del algoritmo, pero a\'un tenemos particiones con m\'as de un elemento, y las probabilidades de uso son menores que 1, por lo tanto se aumentan las probabilidades de uso en 0.2 (siendo ) para cada propiedad quedando:
-
-
-%\begin{table}[h]
-%\begin{center}
-%\footnotesize{
-%\begin{tabular} {  l c c c c c c c c c c c }
-%\hline
-%%\multicolumn{1}{c}{}
-%%&\multicolumn{1}{c}{Domain}
-%%&\multicolumn{3}{c}{Descriptions}\\
-
-%R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   & {\it top}& {\it left}   \\
-%\hline
-%R.\puse	& 1.0			& 1.0		& 0.9824	& 0.4056 & 0.3424 & 0.32   & 0.2856 & 0.2056& 0.2 &0.2 &0.2  \\ \hline
-%R.\randomuse & 0.3234 & 0.5607 &0.8771 &0.1256 &0.1424 &0.0398 &0.7099 &0.2184 &0.8570 &0.8166 &0.2026\\ \hline
-%R.\incuse & 0&0&0.0044& 0.1486& 0.1644& 0.17& 0.1786& 0.1986& 0.2 & 0.2 & 0.2\\ \hline
-
-%\end{tabular}
-%}
-%\end{center}
-%\vspace*{-.5cm} 
-%\caption{Probabilidad R.\puse\ de las propiedades y relaciones, incrementadas en R.\incuse luego del primer ciclo de ejecuci\'on.}\label{prob-inc1}
-%\vspace*{1cm}
-%\end{table}
-
 Las interpretaciones de las f\'ormulas hasta el momento e ilustradas gr\'aficamente en la Figura \ref{fig-modelo9d} son:
-
+\medskip
 \begin{tabular}{l}
 $\interp{ \texttt{ball}} = \{e_1, e_3, e_5\}$ \\
 $\interp {\texttt{ball} \sqcap \texttt{yellow}} = \{e_1, e_3\}$\\
@@ -913,11 +828,11 @@ $\interp {\texttt{cube} \sqcap \texttt{red} }= \{e_2, e_4, e_7\}$ \\
 $\interp {\texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}} = \{e_4\}$  \\
 $\interp {\texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube}} = \{e_3\} $
 \end{tabular}
-
-
+\medskip
 
 De ahora hasta que termine el algoritmo, no se agregar\'an propiedades por sobreespecificaci\'on. Notar que ya tenemos 4 conjuntos singleton, los cuales no cambiar\'an hasta el final de la ejecuci\'on. El algoritmo contin\'ua porque siguen quedando clases para refinar, las cuales son $\texttt{ball} \sqcap \texttt{yellow}$ y $\texttt{cube} \sqcap \texttt{red}$.
 
+\medskip
 \begin{table}[h]
 \begin{center}
 \footnotesize{
@@ -942,15 +857,6 @@ R.\incuse & 0&0&0.004& 0.148& 0.164& 0.17& 0.178& 0.198& 0.2 & 0.2 & 0.2 &0.2\\ 
 \end{table}
 
 La relaci\'on \texttt{small} no pasa la probabilidad random, pero \texttt{rightof} s\'i. Continuamos con \texttt{rightof}. Agregamos $\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}$.
-%, quedando las particiones como se muestra en la Figura \ref{fig-modelo9e}.
-
-%\begin{figure}[ht]
-%\begin{center}
-%\includegraphics[width=11cm]{images/im/rightof.png}
-%\caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas: $\texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large},\texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large},\texttt{ball} \sqcap \exists \texttt{ontop}. \texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{yellow}, \texttt{ball} \sqcap \texttt{yellow}, \texttt{cube} \sqcap \texttt{red} \sqcap \exists \nRightof. \texttt{cube} \sqcap \texttt{yellow}$.}
-%\label{fig-modelo9e}
-%\end{center}
-%\end{figure}
 
 La siguiente que pasa la probabilidad random es \texttt{left}. Se agrega la f\'ormula $\texttt{left} \sqcap \texttt{red} \sqcap \texttt{cube}$, y su correspondiente interpretaci\'on. Se muestran los conjuntos resultantes en la Figura \ref{fig-modelo9f}. $\texttt{cube} \sqcap \texttt{red}$ se elimina porque es redundante.
 
@@ -965,6 +871,7 @@ La siguiente que pasa la probabilidad random es \texttt{left}. Se agrega la f\'o
 \texttt{small} no se agrega a $\texttt{ball} \sqcap \texttt{yellow}$ porque no es informativo. 
 Subiendo un par de veces las probabilidades de uso, el algoritmo finaliza por no poder hacer m\'as refinamientos quedando las siguientes clases y sus interpretaciones:
 
+\medskip
 \begin{tabular}{l}
 $\interp{\texttt{ball} \sqcap \texttt{yellow}} = \{e_1, e_3\}$  \\
 $\interp{\texttt{cube} \sqcap \texttt{yellow} }= \{e_6\}$ \\
@@ -975,6 +882,7 @@ $\interp{\texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}} = \{e_4\}$  \\
 $\interp{\texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube} \sqcap \texttt{red}} = \{e_3\}$ \\ 
 $\interp{\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}} = \{e_7\}$
 \end{tabular}
+\medskip
 
 Concluimos que el lenguaje elegido $\el$ no pueden identificar a $e_1$ en el modelo. Si us\'aramos $\alc$, que contiene negaci\'on, $e_1$ se podr\'ia distinguir de $e_3$. Los dem\'as elementos s\'i quedan en clases singleton y son expresiones referenciales podr\'ian realizarse como sigue:
 {\it el cubo amarillo} es $e_6$, {\it la bola grande roja} es $e_5$, {\it el cubo rojo grande} es $e_4$, {\it el cubo rojo que est\'a a la derecha del cubo amarillo} es $e_7$, $e_3$ es {\it la bola amarilla sobre el cubo rojo} y $e_2$ es {\it el cubo rojo de la izquierda}.
@@ -1053,11 +961,9 @@ s\'olo es m\'as preciso, sino que tambi\'en es mucho m\'as r\'apido que cuando s
 %
 \subsection{Generando expresiones plurales}
 \label{sec:genera_plural}
-Como dijimos el algoritmo puede dar ERs para todos los elementos del modelo. Pero tambi\'en le agregamos al input un target, que puede ser singleton o un conjunto de elementos del modelo.
+Como dijimos el algoritmo puede dar ERs para todos los elementos del modelo. 
 
-Para dar las ERs plurales simplemente damos la conjunci\'on de las ERs de los elementos que pertenezcan al conjunto target. El algoritmo en algunas ocasiones particiona por alguna relaci\'on en la que quedan los elementos del target juntos, generando as\'i expresiones referenciales colectivas, pero esto no pasa normalmente. 
-
-En la Secci\'on \ref{sec:plural} se muestra un caso de estudio de ER plurales.
+Para dar las ERs plurales simplemente damos la conjunci\'on de las ERs de los elementos que pertenezcan al conjunto target. El algoritmo en algunas ocasiones particiona por alguna relaci\'on en la que quedan los elementos del target juntos, generando as\'i expresiones referenciales colectivas, pero esto no pasa normalmente. En el Cap\'itulo \ref{sec:corpus} se muestra un caso de estudio de ER plurales.
 
 \section{Notas finales y linkeo del cap\'itulo}
 \label{sec:link-algoritmo}
