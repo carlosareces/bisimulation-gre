@@ -539,7 +539,7 @@ con al menos dos elementos) vamos a llamar a la funci\'on de refinamiento
 add$_\mathcal{EL}$(R,$\varphi$,$\RE$) sucesivamente con cada relaci\'on
 de Rs. Un cambio en una de las clases, puede desencadenar cambios en
 las otras. Por esa raz\'on, si $\RE$ cambia, salimos del ciclo for y volvemos a
-empezar con las relaciones de R.\puse m\'as alta. 
+empezar con las relaciones de R.\puse\ m\'as altas. 
 
 Se refinar\'a cada una de las descripciones
 en $\RE$ utilizando la relaci\'on R y las otras descripciones que ya est\'an en
@@ -555,11 +555,12 @@ eliminadas.
 Con respecto a la informatividad, se permitir\'a el agregado de f\'ormulas no informativas en la primera iteraci\'on, antes de incrementar las R.\puse.
 
 \ \\
-
+%\def\algorithmname{Algoritmo}
 \begin{algorithm}[H]
-\floatname{algorithm}{Algoritmo}
+%\floatname{algorithm}{Algoritmo}
 %\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
+%\floatname{algorithm}{Algoritmo}
 \caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
@@ -615,6 +616,7 @@ Agregar $\psi \sqcap \exists \mbox{R}.\varphi$ a $\RE$ \tcp*[f]{\footnotesize ag
 borrar f\'ormulas redundantes de $\RE$ \tcp*[f]{\footnotesize borrar clases redundantes}
 }
 }
+\floatname{algorithm}{Algoritmo}
 \caption{add$_\el$(R, $\varphi$, $\RE$)} \label{algo:bisim-add-el-over}
 \end{algorithm}
 
