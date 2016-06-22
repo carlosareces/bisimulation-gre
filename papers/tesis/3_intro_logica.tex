@@ -1,14 +1,14 @@
 \chapter{Usando teor\'ia de modelos}
 \label{sec:intro_logica}
 
-En el Cap\'itulo \ref{sec:intro} (Secci\'on \ref{sec:gre-teoria-modelos}) introdujimos terminolog\'ia y conceptos b\'asicos de l\'ogica y de teor\'ia de modelos y motivamos su uso para GER.
+En el Cap\'itulo \ref{sec:intro} (Secci\'on \ref{sec:gre-teoria-modelos}) introdujimos terminolog\'ia y conceptos b\'asicos de l\'ogica y de teor\'ia de modelos y motivamos su uso para la GER.
 De acuerdo a la complejidad de las estructuras gramaticales que querramos permitir en las ERs, tendremos un lenguaje asociado, 
 el cual pertenecer\'a a alguna l\'ogica. En este cap\'itulo se explica c\'omo partiendo de f\'ormulas de primer orden (\FOL) 
 podemos ir restringiendo la l\'ogica y con ello el lenguaje, y as\'i conseguir una menor complejidad computacional. Es interesante evaluar la complejidad dependiendo de la l\'ogica seleccionada, 
 ya que, por ejemplo, sistemas de tiempo real necesitan conseguir ERs r\'apidamente. Daremos la complejidad de las distintas l\'ogicas, 
 y veremos qu\'e l\'ogica aplica a cada algoritmo del estado del arte del \'area introducidos en el Cap\'itulo \ref{sec:seleccion}.
 
-Este cap\'itulo esta dividido en 5 secciones. En la Secci\'on \ref{sec:seleccionandoLenguaje} daremos nociones de similaridad entre objetos del modelo en un lenguaje particular y explicamos como se relacionan con la GER. Pero como la similaridad involucra la verificaci\'on de infinitas f\'ormulas, veremos simulaciones que es un concepto matem\'atico que nos va a ayudar a resolver el problema de GER sin tener que verificar infinitas f\'ormulas. Luego en la Secci\'on \ref{sec:greViaSimulacion} veremos c\'omo computar ERs en \EL usando simulaciones. En la Secci\'on \ref{sec:bisimulacion} veremos c\'omo computar ERs en \ALC, y en la Secci\'on \ref{sec:computandoEnFOL} en \FOL. Para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un resumen del cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
+Este cap\'itulo est\'a dividido en 5 secciones. En la Secci\'on \ref{sec:seleccionandoLenguaje} daremos nociones de similaridad entre objetos del modelo en un lenguaje particular y explicamos como se relacionan con la GER. Pero como la similaridad involucra la verificaci\'on de infinitas f\'ormulas, veremos simulaciones que es un concepto matem\'atico que nos va a ayudar a resolver el problema de GER sin tener que verificar infinitas f\'ormulas. Luego en la Secci\'on \ref{sec:greViaSimulacion} veremos c\'omo computar ERs en \EL usando simulaciones. En la Secci\'on \ref{sec:bisimulacion} veremos c\'omo computar ERs en \ALC, y en la Secci\'on \ref{sec:computandoEnFOL} en \FOL. Para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un resumen del cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
 
 
 \section{Objetos indistinguibles en un lenguaje l\'ogico $\+L$}
@@ -116,7 +116,7 @@ $\interp{\nYellow}$=\{$e_6$\}
 \item Con 3 proposiciones: $\interp{\nLarge \land \nRed \land \nBall}$=\{$e_1$,$e_3$,$e_5$\}
 \end{itemize}
 
-Conclu\'imos que $e_5$ no puede distinguirse de $e_1$ y $e_3$ usando s\'olo propiedades proposicionales y conjunci\'on que es lo que $\+C$ nos permite. Decimos que $e_5$ es $\+C$-similar a $e_1$ y a $e_3$ y por lo tanto no es posible identificar un\'ivocamente a $e_5$ usando el lenguaje $\+C$.
+Concluimos que $e_5$ no puede distinguirse de $e_1$ y $e_3$ usando s\'olo propiedades proposicionales y conjunci\'on que es lo que $\+C$ nos permite. Decimos que $e_5$ es $\+C$-similar a $e_1$ y a $e_3$ y por lo tanto no es posible identificar un\'ivocamente a $e_5$ usando el lenguaje $\+C$.
 %\floatname{definition}{Definici\'on}
 \newtheorem{definicion}{Definici\'on}
 \begin{definicion}
@@ -144,7 +144,7 @@ La $\+L$-similaridad captura la noci\'on de ``capacidad de identificar en $\+L$'
 La noci\'on de $\+L$-similaridad entonces, nos permite identificar aquellos elementos del modelo que pueden o no ser referenciados usando un lenguaje dado $\+L$. En 
 la Figura \ref{target_mapa_3ball} s\'olo $e_4$ ({\it el cubo grande}) y $e_6$ ({\it el cubo amarillo}) pueden ser referenciados en $\+C$. Y por lo tanto, nos permitir\'ia identificar qu\'e lenguaje es necesario para poder generar ERs para los elementos de un modelo dado. En nuestro ejemplo tenemos que $e_5 \simil{\+C} e_1$ y $e_5 \simil{\+C} e_3$. Por lo que $\+C$-GER no tiene soluci\'on, para este ejemplo es $\perp$. Si usamos un lenguaje m\'as expresivo como $\EL$ que permite usar relaciones binarias, la f\'ormula $\nBall \land \exists\nRightof. \nCube$ es una ER para el target del ejemplo. 
 
-Sin embargo, no es posible computar $\EL$-GER para nuestro ejemplo dado que, como est\'a planteada, la noci\'on de $\+L$-similaridad requer\'ia computar infinitas f\'ormulas. Las f\'ormulas en $\EL$ que describen al target $e_5$ son infinitas porque hay un ciclo en el modelo.
+Sin embargo, no es posible computar $\EL$-GER para nuestro ejemplo dado que, como est\'a planteada, la noci\'on de $\+L$-similaridad requiere computar infinitas f\'ormulas. Las f\'ormulas en $\EL$ que describen al target $e_5$ son infinitas porque hay un ciclo en el modelo.
 
 La soluci\'on para no tener que considerar infinitas f\'ormulas es reformular la noci\'on de $\+L$-similaridad de una manera estructural usando la noci\'on de teor\'ia de modelos conocida como {\bf $\+L$-simulaci\'on}. A diferencia de la $\+L$-similaridad que se define sobre infinitas f\'ormulas, las $\+L$-simulaciones se definen sobre el modelo, el cual para la GER, es finito.
 
@@ -190,7 +190,7 @@ Formalmente, para un modelo relacional $\tup{\Delta, \interp{\cdot}}$, diremos q
 Por ejemplo, podemos probar que $e_5 \simul{\+C} e_1$ en el modelo de la 
 Figura~\ref{target_mapa_3ball}, sin tener que generar todas las f\'ormulas $\phi$ en $\+C$ que son ciertas de $e_5$, ya que la relaci\'on Q $= \{(e_5,e_1) \}
 $ satisface $\atomL$.
-Usando el Teorema~\ref{thm:simulation} conclu\'imos que no hay
+Usando el Teorema~\ref{thm:simulation} concluimos que no hay
  \CL-descripci\'on para $e_5$. Como ya dijimos, si se opta por un lenguaje m\'as rico como $\EL$, se puede describir a $e_5$. De nuevo, esto se puede hacer sin tener que verificar infinitas f\'ormulas.
 
 \begin{table}[t]
@@ -223,8 +223,8 @@ Como veremos en la siguiente subsecci\'on, la simulaci\'on nos da un
 enfoque eficiente, computacionalmente factible para atacar el problema de $\+L$-GER. Algoritmos para calcular muchos tipos de $\+L$-simulaciones son
 bien conocidos (vea, \cite{hopc:algo71,areces08,HHK95,dovier04:_effic_algor_for_comput_bisim_equiv}), y para muchos
 lenguajes (por ejemplo, \ALC, \ELAN y \EL) se ejecutan en tiempo polinomial. No se conoce algoritmo polinomial 
- para simulaci\'on con \FOL o \EPFOL; la complejidad exacta 
-complejidad del problema en estos casos est\'a abierta \cite{gare:comp79}.\\
+ para simulaci\'on con \FOL o \EPFOL; la complejidad exacta del problema en estos casos est\'a abierta \cite{gare:comp79}.\\
+En la Tabla \ref{tab:algoritmos-complejidad} se muestra una comparaci\'on entre los algoritmos m\'as conocidos del \'area, que l\'ogica usan y la complejidad.
 
 \begin{tabular}{|l|l|l|}
 \hline
@@ -234,7 +234,7 @@ complejidad del problema en estos casos est\'a abierta \cite{gare:comp79}.\\
   $\ALC$   & Algoritmo DL \cite{areces08} & P\\ \hline
  	$\ELUNEG$ & Algoritmo plural \cite{gardent02:_gener_minim_defin_descr} &P\\ \hline
   $\ELAN$ & &P\\ \hline
-	$\EL$   & Algoritmo relacional &P\\ \hline
+	$\EL$   & Algoritmo relacional \cite{Horacek1997}&P\\ \hline
 	$\PL$ &  Extensiones a IA \cite{deemter02:CL}&P\\ \hline
 	$\CL$ & Algoritmo incremental y predecesores \cite{incremental} &P\\ 
 	
@@ -273,21 +273,26 @@ notaci\'on. $\+P$ es un conjunto fijo de s\'imbolos de relaciones unarias, para 
 $\su{r}{v}=\{u\in\Delta\mid(v,u)\in\interp{r}\}$ para $r$ un s\'imbolo de relaci\'on binaria.\\
 
 
-\floatname{algorithm}{Algoritmo}
+
 \begin{algorithm}
-\floatname{algorithm}{Algoritmo}
 \small
-\caption{ Computando \EL-similaridad.\label{alg:schematic-gen-sim}}
-%\captionsetup[algorithm]{name=Algoritmo}
-\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
+
+\captionsetup[algorithm]{name=Algoritmo}
+\caption{ Computando \EL-similaridad.}\label{alg:schematic-gen-sim}
+
+
+\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}\SetKwInOut{algorithm}{Algoritmo}
 \Input{un modelo finito $\+M=\tup{\Delta,\interp{\cdot}}$}
 \Output{$\forall v\in \Delta$, el conjunto de simulaciones
+\floatname{algorithm}{Algoritmo}
+
 $\simset_\EL^{\+M}(v)=S(v)$} \BlankLine
 
 \ForEach{$v\in \Delta$}{$S(v):=\{u\in \Delta \mid \unary(v)
 \subseteq \unary(u) \}$}
 
 \While{\guard}{$S(u):=S(u)-\{w\}$}
+
 \end{algorithm}
 
 Inicializamos $S(v)$ con
@@ -377,7 +382,7 @@ El algoritmo busca elementos $r,u,v,w$ tales que
 $(u,v)\in\interp{r}$, $w\in S(u)$ y $\su{r}{w}\cap
 S(v)=\emptyset$, actualiza $F(u)$ a $F(u)\wedge\diam F(v)$.
 De nuevo, \'esta nueva f\'ormula $\phi$ est\'a en $\pos$ y se puede mostrar que
-$v\in\interp{\phi}$ y $w\notin\interp{\phi}$, por lo tanto $v\simil{\EL} w$ es falso, $w$ no simula a $u$ y se elimina de $S(u)$
+$v\in\interp{\phi}$ y $w\notin\interp{\phi}$, por lo tanto $v\simil{\EL} w$ es falso, $w$ no simula a $u$ y se elimina de $S(u)$.
 
 %As we will see in Theorem~\ref{thm:correctness-schematic-GRE}, this
 %formula is true in $v$ but false in $w$, hence witnessing that $w$
@@ -522,7 +527,7 @@ es suficiente mostrar
 \item[$I_1'$:] $u \in \interp{\phi_u\wedge\diam \phi_v}$
 \item[$I_2'$:] $\forall v\in N, \interp{\phi_u\wedge\diam \phi_v} \subseteq S_u\setminus\{w\}$
 \end{itemize}
-Para$I_1'$, es claro de $I_1$ que $u \in \interp{\phi_u}$ y $v \in \interp{\phi_v}$. Desde que $u\to v$ conclu\'imos que $u \in \interp{\diam
+Para$I_1'$, es claro de $I_1$ que $u \in \interp{\phi_u}$ y $v \in \interp{\phi_v}$. Desde que $u\to v$ concluimos que $u \in \interp{\diam
 \phi_v}$.
 
 Para $I_2'$ mostramos que para cualquier $v$, si $v\notin S_u\setminus\{w\}$
@@ -718,7 +723,7 @@ $$
 \begin{figure}[t]
 \begin{center}
 \includegraphics[width=8.5cm]{pic-dale-haddock.pdf}
-\caption{}
+\caption{Modelo de ejemplo tomado de \protect\cite{dale91:gener}.}
 \label{fig:dale-haddock}
 \end{center}
 \end{figure}
@@ -735,7 +740,7 @@ En $\EL$ la similaridad no es una relaci\'on sim\'etrica. Por ejemplo, $f_1$ es 
 Figura~\ref{fig:dale-haddock} (si $f_1$ satisface una f\'ormula, entonces tambi\'en la satisface $f_2$), pero $f_2$ no es \el-similar a $f_1$
 ($f_2$ satisface la f\'ormula $\exists \mathsf{in}.\mathsf{hat}$ y $f_1$
 no la satisface). En \alc la similaridad es una relaci\'on sim\'etrica porque
-el languaje contiene negaci\'on. En la figura, $f_1$ no es \alc-similar
+el lenguaje contiene negaci\'on. En la figura, $f_1$ no es \alc-similar
 a $f_2$ porque $f_2$ no satisface $\neg \exists
 \mathsf{in}.\mathsf{hat}$. \alc\ es m\'as expresivo que \el,
 esto es, para alg\'un elemento $a$ es posible ser \el-similar pero
@@ -764,7 +769,7 @@ mantiene el invariante que, al inicio y al final de cada iteraci\'on,
 $\{\interp{\varphi} \mid \varphi \in \RE\}$ es siempre una partici\'on de
 $ \Delta $. Los algoritmos iteran sobre todos los
 s\'imbolos relacionales proposicionales en $ \prop $ y $\rel $ para la construcci\'on de nuevas f\'ormulas
-hasta que todas las f\'ormulas de $RE$ denoten elementos \'unicos (es decir, que
+hasta que todas las f\'ormulas de \RE denoten elementos \'unicos (es decir, que
 s\'olo un individuo las satisfaga), o no se ha hecho ning\'un cambio desde la
  iteraci\'on anterior. En cada iteraci\'on, se llama al procedimiento
 add$_\alc$ ($ \varphi $, $\RE$), que agrega $ \phi $ a toda
@@ -794,11 +799,12 @@ hay un riesgo de que el \el-algoritmo podr\'ia tener peor tiempo de ejecuci\'on,
  
 \begin{algorithm}[H]\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
+
 \caption{Computando los conjuntos de $\mathcal{L}$-similaridad.}
 \label{algo:bisim-3}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
-\KwIn{Un modelo $\gM = (\Delta, \interp{\cdot})$}
-\KwOut{Un conjunto \RE de f\'ormulas tales que
+\Input{Un modelo $\gM = (\Delta, \interp{\cdot})$}
+\Output{Un conjunto \RE de f\'ormulas tales que
 $\{\interp{\varphi} \mid \varphi \in \RE\}$ es el conjunto de
 $\mathcal{L}$-similaridad de $\gM$.}
 
@@ -844,7 +850,7 @@ las relaciones, tenemos  $\RE = \{ \mathsf{floor}, \mathsf{bowl} \sqcap
 \mathsf{on}.\mathsf{table}, \mathsf{cup}, \mathsf{table} \}$. Notar que
 $\mathsf{bowl}$ fue subsumida por $\mathsf{bowl} \sqcap
 \exists \mathsf{on}.\mathsf{floor}$ y $\mathsf{bowl} \sqcap \exists
-\mathsf{on}.\mathsf{table}$, dos f\'ormulas que tienen interpretaciones singleton, es decir que son ERs de $b1$ y $b2$ respectivamente. Pero a\'un quedan sin distinguir $\mathsf{tables}$ y $\mathsf{cups}$.
+\mathsf{on}.\mathsf{table}$, dos f\'ormulas que tienen interpretaciones singleton, es decir que son ERs de $b_1$ y $b_2$ respectivamente. Pero a\'un quedan sin distinguir $\mathsf{tables}$ y $\mathsf{cups}$.
 
 %
 \begin{algorithm}[t]\floatname{algorithm}{Algoritmo}
@@ -899,7 +905,7 @@ $\mathsf{flower}$ en 2 nuevas f\'ormulas $\mathsf{flower} \sqcap
 En esta secci\'on comenzaremos explicando trabajo previo en la GER usando $\FOL$. En particular describimos el trabajo de~\cite{graph} que se introdujo brevemente en la Secci\'on \ref{graph}. Luego mostraremos c\'omo la GER en $\FOL$ puede verse bajo la luz de las $\FOL$-simulaciones.
 En~\cite{graph} introducen un algoritmo para GER basado en computaci\'on de \emph{isomorfismos de subgrafos}. Su algoritmo toma como entrada
 un grafo dirigido etiquetado $G$ y un nodo $e$ (el target) y devuelve, si es posible,
-un subgrafo conectado $H$  de $G$, que contiene $e$ y suficiente informaci\'on conectada para
+un subgrafo conectado $H$ de $G$, que contiene al target $e$ y suficiente informaci\'on conectada para
 distinguir a $e$ de los otros nodos.
 
 Para mantener la terminolog\'ia de~\cite{graph}, en lo que sigue
@@ -966,7 +972,7 @@ El algoritmo propuesto en~\cite{graph} es una
 implementaci\'on directa del algoritmo de {\bf \emph{branch \& bound}} guiado por costo que trata sistem\'aticamente todos los
 subgrafos pertinentes $H$ de $G$ comenzando con el subgrafo
 que contiene s\'olo el v\'ertice target $v$ y ampliando de forma recursiva, tratando de
-agregar arcos de $G$ que son adyacentes al subgrafo $H$ constru\'ido
+agregar arcos de $G$ que son adyacentes al subgrafo $H$ construido
 hasta el momento. En la terminolog\'ia de~\cite{graph} un {\em distractor} es un nodo de $G$ diferente de
 $v$ que tambi\'en es referenciado por $H$.
 El algoritmo asegura que un subgrafo se refiere \'unicamente al target $v$ cuando no hay distractores. Llegado este punto, existe una
@@ -977,7 +983,7 @@ La relaci\'on entre el m\'etodo basado en grafos
 de~\cite{graph} y nuestra perspectiva de teor\'ia de modelos: en
 modelos relacionales finitos, el isomorfismo de subgrafos corresponde a las
 \EPFOL-simulaciones. Dados nodos $u,v$ de
-$G$, existe un subgrafo isomorfo a G a trav\'es de $f$, que contiene $ u $ y
+$G$, existe un subgrafo isomorfo a G a trav\'es de una funci\'on $f$, que contiene $ u $ y
 $v$, y tal que $f(u)=v$ si y s\'olo si $u \simul{\+\EPFOL} v$. Una implementaci\'on usando $\+\EPFOL$-simulaciones se muestra en el Algoritmo \ref{alg:makeRE}.
 %
 %Despu\'es de haber explicitado esta noci\'on de igualdad y, con ella, la de
@@ -1023,7 +1029,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 \BlankLine
 \vspace{2.2pt}
 \Return{$\exists x_2\ldots \exists x_n . \gamma$}\;
-
+\renewcommand{\algorithmname}{Algoritmo}
 %\Return{\buildF$(H',v)$}\;
 \caption{\small \texttt{makeRE}$_\FOL-$($v$).}\label{alg:makeRE}
 \end{algorithm}
@@ -1068,7 +1074,7 @@ $\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L}
 %\end{center}
 
 
-El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\+L$-ER {\em
+El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\FOL-$-ER {\em
 f\'ormula para} $v$; \'este \'ultimo nos dice c\'omo extender $H$ en cada paso
 del bucle principal del Algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a diferencia de la
 presentaci\'on de~\cite{graph}, \instFun{makeRE}{\FOL} computa

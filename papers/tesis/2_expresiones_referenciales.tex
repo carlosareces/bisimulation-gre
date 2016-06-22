@@ -429,7 +429,7 @@ Vamos a ejemplificar la corrida del algoritmo con el ejemplo de la Figura \ref{f
 ordenada de propiedades es \'esta [tipo, color, tama\~no]. \emph{D} inicialmente es el conjunto de todos los objetos del contexto: 
 \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{5}$,$e_{6}$,$e_{7}$\}.
 En {\it Paso 2} se asigna a \emph{L} la descripci\'on vac\'{i}a, al finalizar la ejecuci\'on, \emph{L} tendr\'a el conjunto de propiedades 
-con los cuales identificaremos a $e_5$, es decir la ER. En el {\it Paso 3} se inicializa \emph{C} con el conjunto de distractores de \emph{r}, y $e_5$ en nuestro ejemplo \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}. 
+con los cuales identificaremos a $e_5$, es decir la ER. En el {\it Paso 3} se inicializa \emph{C} con el conjunto de distractores del target \emph{r}, y $e_5$ en nuestro ejemplo \{$e_{1}$,$e_{2}$,$e_{3}$,$e_{4}$,$e_{6}$,$e_{7}$\}. 
 La idea del algoritmo es ir eliminando distractores usando las propiedades $A_{i}$ del target en el orden de preferencia \emph{Pref}, por eso, en el {\it Paso 4} recorre las propiedades $A_{i}$. En {\it Paso 5} 
 le asigna a \emph{V} el valor que tiene la propiedad $A_{i}$ para el target \emph{r}, en nuestro ejemplo $e_5$. $RulesOut(A_{i},V)$ es el 
 conjunto de objetos que tienen 
@@ -443,15 +443,15 @@ por lo tanto devuelve \{{\it esfera}, {\it rojo}\}. Lo cual se podr\'ia realizar
 
 
 Luego se propusieron extensiones del algoritmo Incremental, por ejemplo, una extensi\'on que permite la generaci\'on de referencia teniendo 
-en cuenta la prominencia discurso del target \cite{Krahmer:2010:EMN:1880370,krahmer}; 
+en cuenta la prominencia discurso del target se muestran en \cite{Krahmer:2010:EMN:1880370,krahmer}.
 
 \paragraph{Algoritmos relacionales}
 
 Los algoritmos que describimos hasta ahora son proposicionales. Varios investigadores han intentado ampliar el algoritmo incremental permitiendo descripciones relacionales
 \cite{Horacek1997,krahmer,kelleher06:increm}, se basan a menudo
-en el supuesto de que las propiedades relacionales (como ``x est\'a en y'') son menos preferidas que
-los no relacionales (como ``x es blanca''), o sea que los algoritmos s\'olo las generan como \'ultima opci\'on. Si se requiere una relaci\'on para distinguir al target
-x, en el cual se deba nombrar al objeto y, se aplica el algoritmo b\'asico iterativamente a y, pero como dijimos antes, esto no siempre es lo que las personas hacen, muchas veces la descripci\'on del landmark no es una ER. Adem\'as, no est\'a claro que las propiedades proposicionales sean siempre preferidas antes que las relacionales. En \cite{viet:gene11} se sugieren que, incluso en escenas simples, donde los objetos pueden f\'acilmente ser distinguidos
+en el supuesto de que las propiedades relacionales (como ``$x$ est\'a en $y$'') son menos preferidas que
+las no relacionales (como ``$x$ es blanca''), o sea que los algoritmos s\'olo las generan como \'ultima opci\'on. Si se requiere una relaci\'on para distinguir al target
+$x$, en el cual se deba nombrar al objeto $y$, se aplica el algoritmo b\'asico iterativamente a $y$, pero como dijimos antes, esto no siempre es lo que las personas hacen, muchas veces la descripci\'on del landmark no es una ER. Adem\'as, no est\'a claro que las propiedades proposicionales sean siempre preferidas antes que las relacionales. En \cite{viet:gene11} se sugieren que, incluso en escenas simples, donde los objetos pueden f\'acilmente ser distinguidos
 sin relaciones, las personas tambi\'en utilizan con frecuencia las relaciones (en aproximadamente un tercio de las ERs que dan).
 
 En caso de generar ERs relacionales con esta estrategia hay que asegurarse que el algoritmo termina, es decir que no entra en ciclos infinitos 
@@ -478,9 +478,13 @@ tratando de identificar objetos. \cite{haddock} estudiaron como abordar el probl
 
 El {\bf algoritmo Graph} de \cite{graph} propone tratar la generaci\'on de expresiones referenciales como un problema de grafos, el contexto que incluye al target y los distractores es representado como un grafo, por ejemplo en la Figura \ref{fig2-8} se muestra el contexto y el grafo correspondiente. Cada objeto de la escena (personas en este caso) se modela como un v\'ertice en el grafo. Las propiedades at\'omicas como \texttt{jounger-looking}, \texttt{older-looking}, \texttt{wears suit}, \texttt{wears t-shirt}, \texttt{woman}, \texttt{man}, se representan como un bucle en el correspondiente nodo. Las relaciones binarias entre objetos, por ejemplo \texttt{left-of} o \texttt{right-of} se modelan como aristas entre los nodos correspondientes.
 
+\begin{center}
 \begin{figure}[!ht]
+\hspace*{1cm}
+
 \begin{subfigure}{.35\textwidth}\centering
-\centering
+\hspace*{1cm}
+
 \includegraphics[width=\textwidth]{images/contexto-survey.png}\\[0pt]
 %\caption{}
 \label{figura-survey}
@@ -494,7 +498,7 @@ El {\bf algoritmo Graph} de \cite{graph} propone tratar la generaci\'on de expre
 \end{subfigure}
 \caption{Ejemplo de contexto y grafo extra\'ido de \protect\cite{survey}.}\label{fig2-8}
 \end{figure}
-
+\end{center}
 
 
 Dado un objeto target, conseguir una ER que distinga al objeto de los dem\'as objetos del contexto, es equivalente a encontrar un subgrafo del grafo original que \'unicamente caracterice al target. Intuitivamente este subgrafo se puede poner sobre el target y no sobre ning\'un otro objeto del dominio considerado.
@@ -507,7 +511,7 @@ Dado un objeto target, conseguir una ER que distinga al objeto de los dem\'as ob
 \end{figure}
 
 %Para generar una descripci\'on distintiva, el algoritmo busca un subgrafo del grafo original que identifica al target un\'{i}vocamente al cual le llama grafo distintivo.% (distinguishing graph).\\
-Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hayan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay distractores, el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{fig2-8}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} solamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target.  
+Comenzando con el subgrafo que contiene un solo v\'ertice, que representa al target, seg\'un una heur\'{i}stica basada en costos (costo de incluir propiedades, relaciones) empieza a agregar propiedades o relaciones, del target o nodos que ya hayan sido agregados. Cada vez que agrega algo, chequea si hay alg\'un otro nodo en el cual el grafo pueda distinguir, si lo hay quiere decir que es un distractor, cuando no hay distractores, el grafo distingue al target. Por ejemplo en la Figura \ref{ref-exp-graph} se ve el primer grafo {\it man}, el cual puede ser puesto sobre los nodos 1 y 3 de la Figura \ref{fig2-8}, es decir no identifica s\'olo al target, el segundo grafo {\it man, wears suit} solamente puede ser puesto sobre el nodo 1, por lo tanto es un grafo que distingue al target $d_1$.  
 
 El algoritmo sigue explorando grafos y siempre se queda con el de menor costo.
 
@@ -557,7 +561,7 @@ considerando si es determin\'istico o no-determin\'istico, proposicional o relac
 si genera negaciones, plurales, si genera sobreespecificaci\'on. Notar que si no generan sobreespecificaci\'on, generan ERs minimales.
 \label{sec:algoritmos_area}
 
-\begin{table}[b]
+\begin{table}[H]
 \begin{center}
 \begin{tabular}{|l|c|c|c|c|c|c|c|}
 \hline
@@ -609,7 +613,7 @@ representaci\'on subyacente de conocimiento que utilizan, (2) el no-determinismo
 (3) la cuesti\'on de c\'omo comparar la salida algoritmos con los gold-standar, y (4) la independencia del dominio espec\'ifico deseada para los algoritmos de GER.\\
 La discusi\'on de estos temas ha dado lugar a la siguiente lista de evaluaci\'on en GER basada en corpus:
 
-i. Si el corpora est\'a destinado para ser reutilizado para la evaluaci\'on comparativa de diferentes
+i. Si el corpus est\'a destinado para ser reutilizado para la evaluaci\'on comparativa de diferentes
 algoritmos, una representaci\'on subyacente del dominio, es decir de la sem\'antica, debe ser proporcionada para ser usada por todos los algoritmos.
 
 ii. El corpus debe contener tantos casos como sea posible de tantos diferentes hablantes como sea posible para cada escenario referencial para identificar las potencialidades del contexto. 
@@ -620,9 +624,9 @@ escenario de referencia en virtud de cualquier ajuste de par\'ametro debe ser co
 conjunto de las descripciones contenidas en el corpus para el mismo escenario referencial.
 
 iv. Algoritmos que son juzgados en un dominio espec\'ifico, no se debe asumir como
-f\'acilmente adaptable a otros dominios. Los algoritmos deben ser evaluados en distintos dominios.
+f\'acilmente adaptables a otros dominios. Los algoritmos deben ser evaluados en distintos dominios.
 
-Investigaci\'on GER Pre-2000 di\'o poca o ninguna atenci\'on a la evaluaci\'on emp\'irica de los algoritmos. M\'as 
+Investigaci\'on en GER pre-2000 di\'o poca o ninguna atenci\'on a la evaluaci\'on emp\'irica de los algoritmos. M\'as 
 recientemente, sin embargo, los estudios de evaluaci\'on GER han comenzado a usar corpora para evaluar.
 
 En esta secci\'on, se discuti\'o cu\'ales son los criterios que se deben cumplir
@@ -640,7 +644,7 @@ Esta comparaci\'on de ER puede estar dada a distintos niveles, podemos comparar 
 
 La \textbf{exactitud} ({\it accuracy}) se define como el porcentaje de coincidencias exactas entre cada ER producida por un ser humano y la producida por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta.
 
-El coeficiente \textbf{Dice} es una m\'etrica de comparaci\'on de conjuntos, el valor va entre 0 y 1, 1 indica un perfecto matcheo entre los conjuntos. Para dos ERs A y B, Dice se calcula como sigue:\\
+El coeficiente \textbf{Dice} es una m\'etrica de comparaci\'on de conjuntos, el valor va entre 0 y 1, 1 indica un matcheo perfecto entre los conjuntos. Para dos ERs A y B, Dice se calcula como sigue:\\
 
 $Dice(A,B) = \frac{2\times|A \cap B|}{|A|+|B|}$\\
 
@@ -673,12 +677,12 @@ Notar que estas m\'etricas no cumplen con el punto (iii) de la Secci\'on \ref{se
 \subsection{M\'etricas manuales}
 
 Las ERs tambi\'en pueden ser evaluadas por jueces humanos, y de esta manera se pueden evaluar por ejemplo adecuaci\'on, mostr\'andole a un juez humano la misma imagen que vio la persona que gener\'o la ER y pregunt\'andole cosas como ?`Qu\'e tan clara es la descripci\'on?.
-Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan entre dos ERs la m\'as natural, se les mostr\'o el contexto, y se les present\'o 2 ER una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar la misma imagen pero sin la flecha que se\~nala al target, darle la ER que di\'o alguna persona, y pedirle que se\~nale el objeto al cual la ER refiere. De esta manera se puede evaluar facilidad de encontrar objetivo con la expresi\'on dada.
+Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan entre dos ERs la m\'as natural, se les mostr\'o el contexto, y se les present\'o 2 ERs una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar la misma imagen pero sin la flecha que se\~nala al target, darle la ER que di\'o alguna persona, y pedirle que se\~nale el objeto al cual la ER refiere. De esta manera se puede evaluar facilidad de encontrar objetivo con la expresi\'on dada.
 La fluidez de una ER se puede evaluar preguntando a juez humano cosas como estas: 
 ?`Considera que es fluida esta descripci\'on?, ?`Es buena y clara en el idioma considerado?. 
 Otra manera de evaluar manualmente es viendo si las ERs son \'utiles para dar instrucciones. Por ejemplo, \cite{BelzGattEvaluation}, mostraron a los participantes una descripci\'on generada para un ensayo. Despu\'es que los participantes le\'ian esta descripci\'on, una escena aparec\'ia y se pidi\'o a los participantes
 hacer clic en el objetivo previsto. Esto les permiti\'o calcular tres m\'etricas de evaluaci\'on: %extr\'inseca
-el tiempo de lectura, el tiempo de identificaci\'on, y la tasa de error, que se definen como el n\'umero de objetivos identificados incorrectamente.
+el tiempo de lectura, el tiempo de identificaci\'on, y la tasa de error, que se define como el n\'umero de objetivos identificados incorrectamente.
 
 
 \section{Notas finales y linkeo del cap\'itulo}
@@ -692,8 +696,8 @@ indican que por lo menos la tercera parte de las expresiones son sobreespecifica
 la minimales. Otras conclusiones encontradas son que la sobreespecificaci\'on permite la identificaci\'on m\'as r\'apida del target y que la 
 informaci\'on adicional (arriba, abajo) es m\'as \'util que la (izquierda, derecha). \cite{Lu_sasha2015} hicieron un experimento de 
 aprendizaje de palabras en una lengua extranjera, y concluyen que las personas que tuvieron a su disposici\'on ERs sobreespecificadas, 
-aprendieron m\'as que aquellas a las que se les di\'o ERs minimales. Dimos una introducci\'on a corpora existente en el \'area 
+aprendieron m\'as que aquellas a las que se les dio ERs minimales. Dimos una introducci\'on a corpora existente en el \'area 
 como son el TUNA, el GRE3D3/7, Stars/2 y el ZOOM corpus, \'este \'ultimo fue creado en el desarrollo de esta tesis, por lo cual lo explicaremos con m\'as detalle en el Cap\'itulo \ref{sec:corpus}. En la segunda secci\'on explicamos los diferentes tipos de algoritmos los cuales se 
-diferencian por los tipos de ERs que pueden generar, dimos los algoritmos m\'as importantes del \'area como son incremental, graph, relacional, vimos sus diferencias y pudimos compararlos entre ellos. Entre los algoritmos del \'area no incluimos el de 
+diferencian por los tipos de ERs que pueden generar, dimos los algoritmos m\'as importantes del \'area como son incremental, graph, y relacional entro otros, vimos sus diferencias y pudimos compararlos entre ellos. Entre los algoritmos del \'area no incluimos el de 
 bisimulaci\'on del cual hablaremos en el Cap\'itulo \ref{sec:algoritmo} por ser \'este el algoritmo base de los aportes de esta tesis. En la tercer secci\'on de este cap\'itulo dimos una introducci\'on a las m\'etricas de evaluaci\'on tanto autom\'aticas como manuales, algunas de las cuales usaremos para evaluar nuestro algoritmo como se muestra en el Cap\'itulo \ref{sec:evaluacion}.
 
