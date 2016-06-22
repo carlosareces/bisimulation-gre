@@ -131,8 +131,9 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 
 
 \begin{figure}[ht]
-\centering
+\begin{center}
 \includegraphics[width=0.6\textwidth]{images/7.jpg}
+\end{center}
 \caption{Ejemplo de contexto del corpus GRE3D7 en el que el landmark (el cubo grande), tiene una propiedad altamente discriminatoria: su tama\~no. El landmark es el \'unico objeto grande de la escena.}
 \label{fig-2-2}
 \end{figure}
@@ -447,21 +448,14 @@ tratando de identificar objetos. \cite{haddock} estudiaron como abordar el probl
 El {\bf algoritmo Graph} de \cite{graph} propone tratar la generaci\'on de expresiones referenciales como un problema de grafos, el contexto que incluye al target y los distractores es representado como un grafo, por ejemplo en la Figura \ref{fig2-8} se muestra el contexto y el grafo correspondiente. Cada objeto de la escena (personas en este caso) se modela como un v\'ertice en el grafo. Las propiedades at\'omicas como \texttt{jounger-looking}, \texttt{older-looking}, \texttt{wears suit}, \texttt{wears t-shirt}, \texttt{woman}, \texttt{man}, se representan como un bucle en el correspondiente nodo. Las relaciones binarias entre objetos, por ejemplo \texttt{left-of} o \texttt{right-of} se modelan como aristas entre los nodos correspondientes.
 
 \begin{center}
-\begin{figure}[!ht]
-\hspace*{1cm}
-
-\begin{subfigure}{.35\textwidth}\centering
-\hspace*{1cm}
-
+\begin{figure}[ht]
+\begin{subfigure}{.5\textwidth}\centering
 \includegraphics[width=\textwidth]{images/contexto-survey.png}\\[0pt]
-%\caption{}
 \label{figura-survey}
-\vspace*{.1cm}
 \end{subfigure}
-\hspace*{0cm}
-\begin{subfigure}{.50\textwidth}\centering
+%
+\begin{subfigure}{.5\textwidth}\centering
 \includegraphics[width=\textwidth]{images/grafo-survey.png}\\[0pt]
-%\caption{Ejemplo de grafo para el contexto de la Figura \ref{figura-survey}}
 \label{grafo-survey}
 \end{subfigure}
 \caption{Ejemplo de contexto y grafo extra\'ido de \protect\cite{survey}.}\label{fig2-8}
