@@ -74,37 +74,34 @@ Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos
 
 Por ejemplo, una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales para la Figura \ref{figura-er} necesitar\'a una representaci\'on de todos los objetos de la figura y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ involucra encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Como dijimos, esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama selecci\'on de contenido para la generaci\'on de una expresi\'on referencial. Mirando la Tabla \ref{tabla-propiedades} podemos decir que {\it red ball}, {\it large ball} y {\it large red ball} son algunas ERs del objeto $e_5$, cuyas realizaciones en espa\~{n}ol podr\'ian ser: {\it la bola roja}, {\it la esfera grande} y {\it la esfera grande y roja}. 
 
-\begin{figure}[h]
-\begin{subfigure}{.45\textwidth}
+\begin{figure}[ht]
+%
+\begin{subfigure}{.5\textwidth}
   \centering
-	\vspace*{-.2cm}
 \includegraphics[width=\textwidth]{images/22.jpg}
   \caption{}\label{GRE3D7-stimulus1-ids}
 \end{subfigure}
-\begin{subfigure}{1\textwidth}
-% \centering
-%\begin{centering}
-\hspace*{-16cm}
+%
+\begin{subfigure}{.5\textwidth}
+%\hspace*{-15.5cm}
 \begin{scriptsize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|}
 \hline
 \textbf {id}& 	\textbf {type}		&	\textbf {color}	&	\textbf {size}& \textbf {rigth} & \textbf {left} & \textbf {ontop}	& \textbf {below}	\\
    	   &  	    			&	    		&	     		&  \textbf {of}   		 &  \textbf {of}	    &  	&  \\
 \hline \hline
-$e_1$ & ball & yellow & small & - & - & - & - \\
-$e_2$ & cube & red & small & - & - &- & $e_3$ \\
-$e_3$ & ball & yellow & small & - & - & $e_2$ & -\\
-$e_4$ & cube & red & large & - & $e_5$ & - & -\\
-$e_5$ & ball & red & large & $e_4$ & - & - & -\\
-$e_6$ & cube & yellow & small & - & $e_7$ & - & -\\
+$e_1$ & ball & yellow & small & - & - & - & - \\[.4em]
+$e_2$ & cube & red & small & - & - &- & $e_3$ \\[.4em]
+$e_3$ & ball & yellow & small & - & - & $e_2$ & -\\[.4em]
+$e_4$ & cube & red & large & - & $e_5$ & - & -\\[.4em]
+$e_5$ & ball & red & large & $e_4$ & - & - & -\\[.4em]
+$e_6$ & cube & yellow & small & - & $e_7$ & - & -\\[.4em]
 $e_7$ & cube & red & small & $e_6$ & - & - & -\\
 \hline
-%&&&&&&&\\
-%&&&&&&&\\
 
 \end{tabular}
 \end{scriptsize}
-\vspace*{1cm}
+%\vspace*{1cm}
 %\center
 \centering \hspace*{-8cm} \caption{}\label{tabla-propiedades}
 %\end{centering}
@@ -575,24 +572,23 @@ Cada lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad,
 
 Para el segundo ejemplo, supongamos que queremos identificar al objeto $e_5$ de la Figura \ref{grafo-GRE3D7-stimulus_b}. Algunas f\'ormulas posibles
  que identifican un\'ivocamente a $e_5$ en el modelo se muestran a continuaci\'on.
-
 %\begin{figure}[h]
 $$
 \begin{array}{ll}
- \phi_1: & \aRed(x) \land \nBall(x)\\[3pt]
+ \phi_1: & \aRed(x) \land \nBall(x)\\[2pt]
   %
- \phi_2: & \aLarge(x) \land \nBall(x)\\[3pt]
+ \phi_2: & \aLarge(x) \land \nBall(x)\\[2pt]
   %
- \phi_3: & \nLarge(x) \land \aRed(x) \land \nBall(x)\\[3pt]
+ \phi_3: & \nLarge(x) \land \aRed(x) \land \nBall(x)\\[2pt]
   %
  \phi_4: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
-   \exists y . (\nRightof(x,y) \land \aLarge(y) \land \aRed(y) \land \nCube(y))\\[3pt]
+   \exists y . (\nRightof(x,y) \land \aLarge(y) \land \aRed(y) \land \nCube(y))\\[2pt]
   %ex1
  \phi_5: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
-  \forall y . (\neg \nBall(y) \lor \neg \nRightof(x,y))\\[3pt]
+  \forall y . (\neg \nBall(y) \lor \neg \nRightof(x,y))\\[2pt]
   %ex 2
  \phi_6: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
-  \exists y . (x \not\approx y \land \nCube(y) \land \nRightof(x,y))\\[3pt]
+  \exists y . (x \not\approx y \land \nCube(y) \land \nRightof(x,y))\\[2pt]
   %ex 3
  \phi_7: & \nLarge(x) \land \aRed(x) \land \nBall(x) \land
   \exists y . (\nCube(y) \land \aRed(y) \land \nLeftof(y,x))
@@ -603,7 +599,7 @@ Las f\'ormulas que no contienen negaci\'on se pueden representar como subgrafos 
 
  \begin{figure}[h]
  %\begin{center}
-\hspace*{1.5cm} 
+%\hspace*{1.5cm} 
 \begin{picture}(0,60)
 \put(80,0){\begin{tikzpicture}
   [
@@ -616,7 +612,7 @@ Las f\'ormulas que no contienen negaci\'on se pueden representar como subgrafos 
       \nBall\end{array}$}, right of=d] (e) {$e_5$};
  \end{tikzpicture}}
 \end{picture}
-\begin{picture}(0,100)
+\begin{picture}(0,70)
 %\hspace*{3.5cm} 
 %\vspace*{5.5cm} 
 
@@ -644,6 +640,7 @@ Las f\'ormulas que no contienen negaci\'on se pueden representar como subgrafos 
 
 
 Las f\'ormulas $\phi_1$ a $\phi_7$ pueden realizarse como sigue.
+\smallskip
 
 \begin{tabular}{l}
  $\phi_1$: {\it La esfera roja}\\[1pt]
@@ -663,6 +660,7 @@ Las f\'ormulas $\phi_1$ a $\phi_7$ pueden realizarse como sigue.
   %ex 4
 \end{tabular}
 %%$$
+\smallskip
 
 Notar que $\phi_1$ y $\phi_2$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas que identifique al target.
 Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL que se describe en el Cap\'itulo \ref{sec:intro_logica}. 

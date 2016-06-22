@@ -133,18 +133,30 @@ Esta proporci\'on tan grande de descripciones subespecificadas as\'{i} como desc
 
 Para cada mapa se gener\'o una tabla con los identificadores \'unicos de los objetos visibles. Por ejemplo, para la imagen de la Figura~\ref{mapa-con-ids}, la tabla correspondiente es la Tabla~\ref{tabla-ids}. Los IDs se generaron usando las 3 o 4 primeras letras del tipo y un n\'umero correlativo dentro de ese tipo. Por ejemplo {\it pub1} es el que est\'a siendo apuntado por la fecha roja en la Figura~\ref{mapa-con-ids}, o sea es el target. A cada calle visible en el mapa tambi\'en se le asign\'o un identificador \'unico, como se ve en la Tabla~\ref{tabla-ids} desde la posici\'on  36. Dicha tabla tiene 4 columnas para cada objeto. El tipo es la representaci\'on sem\'antica del sustantivo que describe al objeto, por ejemplo, restaurante, bar, street. El nombre es el nombre propio del objeto, si ten\'ia, (se mantuvieron en el idioma original, espa\~nol o portugu\'es). ``en'', conten\'ia la calle en la que estaba situado el objeto, pod\'ia estar vac\'io si no estaba en una calle. Y el id que  fue compuesto por las 3 o 4 primeras letras del tipo del objeto m\'as un n\'umero para identificarlo un\'ivocamente, por ejemplo para los restaurantes ``rest1'', ``rest2''.
 Se seleccion\'o un conjunto fijo de atributos para cada objeto, pero dando flexibilidad con un atributo llamado ``other'' que permit\'ia anotar otras cosas que hayan aparecido en la expresi\'on dada por la persona, que no estuviera en la lista fija. En esta manera de anotar, cada objeto tiene como m\'aximo 26 posibles atributos.
-
 En el caso de las descripciones plurales, el conjunto de atributos se repite para cada objeto, por lo que el anotador pod\'{i}a utilizar hasta 52 atributos.
 
-Los 26 o 52 atributos nombrados anteriormente estan formados por:
-10 atributos que denotan caracter\'isticas del objeto target, o relaciones del target con otros objetos.
-
-\begin{figure}[H]
+\begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/ids.png}\\[0pt]
+\includegraphics[width=.8\textwidth]{figures/ids.png}\\[0pt]
 \caption{Mapa con Id's usado para la anotaci\'on.}
 \label{mapa-con-ids}
 \end{figure}
+
+
+Los 26 o 52 atributos nombrados anteriormente estan formados por:
+10 atributos que denotan caracter\'isticas del objeto target, o relaciones del target con otros objetos.
+\begin{itemize}
+  \item tipo como por ejemplo, restaurant\\[-2.2em]
+  \item nombre propio como por ejemplo, McDonalds\\[-2.2em]
+  \item en calle como por ejemplo si el target est\'a en la {\it Calle Mayor} esta relaci\'on binaria entre el target y la calle tendr\'ia el identificador str1\\[-2.2em]
+  \item izquierda como por ejemplo en la Figura \ref{mapa-con-ids} pub1 est\'a a la izquierda de de fast5. En este caso, si el target fuera fast5, estar\'ia relacionado con la relaci\'on izquierda con pub1\\[-2.2em]
+  \item derecha como por ejemplo, en la Figura \ref{mapa-con-ids} fast5 est\'a a la derecha de de pub1\\[-2.2em]
+  \item en esquina, esta es una relaci\'on ternaria, es decir entre 3 objetos, el target y 2 calles. Esta clase de relaciones se ha modelado como 2 relaciones binarias\\[-2.2em]    
+  \item cerca como por ejemplo pub1 esta cerca de fast5\\[-2.2em]
+  \item en-frente-de como por ejemplo atm2 est\'a al frente de thea2\\[-2.2em]
+  \item detr\'as como por ejemplo atm2 est\'a detr\'as de ban1\\[-2.2em]
+  \item otro cualquier otra cosa mencionada en la descripci\'on, pod\'ia ser una propiedad o relaci\'on. Por ejemplo un color. El atm2 azul
+\end{itemize}
 
 \begin{table}[H]
 {\footnotesize
@@ -220,25 +232,14 @@ N\'umero&Tipo & Nombre propio & En calle & ID\\
 
 %- Los valores de los atributos se anotaron en Ingl\'es (por ejemplo, restaurant, pub, street, etc.), pero los nombres propios (para calles, etc.) se mantuvieron en su forma original, tal cual se ve en el mapa (Espa\~{n}ol, Portugu\'es).
 
-\begin{itemize}
-  \item tipo como por ejemplo, restaurant
-  \item nombre propio como por ejemplo, McDonalds
-  \item en calle como por ejemplo si el target est\'a en la {\it Calle Mayor} esta relaci\'on binaria entre el target y la calle tendr\'ia el identificador str1
-  \item izquierda como por ejemplo en la Figura \ref{mapa-con-ids} pub1 est\'a a la izquierda de de fast5. En este caso, si el target fuera fast5, estar\'ia relacionado con la relaci\'on izquierda con pub1
-  \item derecha como por ejemplo, en la Figura \ref{mapa-con-ids} fast5 est\'a a la derecha de de pub1
-  \item en esquina, esta es una relaci\'on ternaria, es decir entre 3 objetos, el target y 2 calles. Esta clase de relaciones se ha modelado como 2 relaciones binarias    
-  \item cerca como por ejemplo pub1 esta cerca de fast5
-  \item en-frente-de como por ejemplo atm2 est\'a al frente de thea2
-  \item detr\'as como por ejemplo detr\'as atm2 est\'a detr\'as de ban1
-  \item otro cualquier otra cosa mencionada en la descripci\'on, pod\'ia ser una propiedad o relaci\'on. Por ejemplo un color. El atm2 azul
-\end{itemize}
-y 16 atributos que denotan los objetos adicionales (landmarks) que se mencionaron en la descripci\'on, a los cuales llamamos d1..d4. Por ejemplo, en {\it El pub que est\'a al lado de Pans \& Company, en la calle de las Postas}) tenemos:target = pub, d1 = fast-food (Pans \& Company) y d2 = Street (calle de las Postas).
+\noindent
+Además de  16 atributos que denotan los objetos adicionales (landmarks) que se mencionaron en la descripci\'on, a los cuales llamamos d1..d4. Por ejemplo, en {\it El pub que est\'a al lado de Pans \& Company, en la calle de las Postas}) tenemos:target = pub, d1 = fast-food (Pans \& Company) y d2 = Street (calle de las Postas).
 
 Para cada target se consider\'o un m\'aximo 4 objetos tomados como puntos de referencia (landmarks), ya que con esta cantidad cubr\'iamos las descripciones m\'as largas, estos landmarks se anotaron como d1..d4, para cada landmark se anotaron 4 atributos:
 \begin{itemize}
-  \item Identificaci\'on (Id)
-  \item Tipo (un sustantivo, restaurant, pub...)
-  \item Nombre (Posada del Peine)
+  \item Identificaci\'on (Id)\\[-2em]
+  \item Tipo (un sustantivo, restaurant, pub...)\\[-2em]
+  \item Nombre (Posada del Peine)\\[-2em]
   \item Otro (alguna otra cosa dicha sobre el objeto)
 \end{itemize}
 
