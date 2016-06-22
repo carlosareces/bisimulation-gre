@@ -1,4 +1,4 @@
-\chapter{Conclusiones y Trabajo Futuro}
+\chapter{Conclusiones y trabajo futuro}
 \label{sec:conclusiones}
 
 El concepto te\'orico y filos\'ofico de referencia a un objeto del mundo real ha sido y continúa siendo objetivo de amplio debate~\cite{searle69,abbott16}. Dada su relevancia para el funcionamiento del lenguaje natural, el concepto pr\'actico y aplicado de referencia es uno de los temas m\'as estudiados en el \'area de generaci\'on autom\'atica de lenguaje natural. Esta tesis se enmarca en el \'area de generaci\'on autom\'atica de expresiones referenciales (GER), que es un \'area m\'as reciente que su contraparte filos\'ofica pero también prol\'ifera. \cite[pag.~174]{survey} definen como sigue la tarea en la que se enmarca esta tesis de la siguiente manera. 
@@ -24,7 +24,7 @@ A continuaci\'on resumimos nuestros aportes organizados en 4 temas. En primer lu
 técnicas autom\'aticas y evaluaciones de jueces humanos sobre datos de benchmarks del \'area. Finalmente, explicamos nuestros resultados en el proceso de recolecci\'on y evaluaci\'on de un nuevo corpus de expresiones referenciales de puntos de interés en mapas de ciudades con distintos niveles de zoom, el cual es relevante a aplicaciones sobre mapas del mundo real.
 
 
-\subsection{Extendiendo Algoritmos de Simulaciones con Probabilidades}
+\subsection{Extendiendo algoritmos de simulaciones con probabilidades}
 
 %algoritmo probabilisitico
 Entre las aproximaciones a la GER est\'a la de \cite{areces08}, la cual decidimos tomar como punto de partida por la generalidad que nos da la teor\'ia de modelos permitiéndonos elegir un buen balance entre la expresividad del lenguaje l\'ogico a utilizar y la complejidad computacional de los algoritmos de GER. Siguiendo este trabajo previo usamos teor\'ia de modelos, y lenguajes l\'ogicos para generar ERs, y para representar el modelo usamos estructuras de kripke. 
@@ -37,7 +37,7 @@ El algoritmo original propuesto por \cite{areces08}, al igual que otros algoritm
 El algoritmo va particionando el modelo guiado por la distribuci\'on de probabilidades, y refinando las clases, una vez que no puede refinar m\'as termina dando como resultado ERs para todos los objetos del modelo, si es posible en la expresividad del lenguaje elegido y con el modelo que le hemos dado como input. El algoritmo es muy eficiente y garantiza encontrar una ER para cada elemento si existe, en tiempo polinomial para \EL.
 
 
-\subsection{Probabilidades de Uso y Sobreespecificaci\'on}
+\subsection{Probabilidades de uso y sobreespecificaci\'on}
 
 Un segundo tema que vale la pena discutir es c\'omo nuestro algoritmo con sobreespecificaci\'on funciona. Como describimos en la Secci\'on~\ref{sec:overspecification} la generaci\'on de ERs sobreespecificadas se realiza en dos pasos. En la primera iteraci\'on, la probabilidad de incluir una propiedad en la ER depende s\'olo de su probabilidad de uso. No importa si la propiedad en realidad elimina cualquier distractor. Por lo tanto, la ER resultante puede ser sobreespecificada. Despu\'es de que todas las propiedades tuvieron la oportunidad de ser incluidas de esta manera, si la ER resultante no identifica al target un\'ivocamente, entonces el algoritmo entra en una segunda fase en la que se asegura que la ER identifica al target un\'ivocamente. Este modelo est\'a inspirado en la obra de~\cite{keysar:Curr98} de producci\'on de lenguaje natural y egocentrismo. Keysar~et al argumentan que, al producir el lenguaje, el hecho de tener en cuenta el punto de vista de los oyentes no se hace desde el principio, es m\'as bien un ajuste de \'ultimo momento~\cite{keysar:Curr98}. En su modelo cognitivo de producci\'on del lenguaje los hablantes adultos producen ERs egoc\'entricamente, al igual que hacen los ni\~nos, pero luego ajustan las ERs para que el destinatario sea capaz de identificar al target de forma un\'ivoca. El primer paso es egoc\'entrico, es un proceso heur\'istico basado en un modelo de la \textbf{prominencia} de las propiedades de la escena que contiene el target.
 
@@ -45,7 +45,7 @@ Un segundo tema que vale la pena discutir es c\'omo nuestro algoritmo con sobree
 Nuestra definici\'on de probabilidad de uso \puse\ pretende capturar las \textbf{prominencias}\footnote{Del ingl\'es \emph{saliency}.} de las propiedades de diferentes escenas y objetivos. El \puse\ de una propiedad cambia de acuerdo a la escena como discutimos en la Secci\'on~\ref{sec:learning}. Esto est\'a en contraste con el trabajo anterior, donde el prominencia de una propiedad se asume constante en un dominio. Keysar et al~argumentan que la raz\'on del procedimiento de generar y ajustar puede tener que ver con las limitaciones de procesamiento de informaci\'on de la mente. Si la heur\'istica que gu\'ia la fase egoc\'entrica est\'a bien sintonizada, tiene \'exito en el primer intento, siendo la primer ER adecuada en la mayor\'ia de los casos y rara vez requiere ajustes. Es intesante observar que un comportamiento similar se obtiene con nuestro algoritmo: cuando los valores de \puse\ se aprenden del dominio en que se van a utilizar, el algoritmo es mucho m\'as preciso y mucho m\'as r\'apido.
 
 
-\subsection{Desaf\'ios en la Evaluaci\'on de Sistemas de Generaci\'on}
+\subsection{Desaf\'ios en la evaluaci\'on de sistemas de generaci\'on}
 
 %corpora y evaluaci\'on
 En esta tesis se estudi\'o la generaci\'on autom\'atica de expresiones referenciales teniendo como meta generar expresiones referenciales como las personas lo har\'ian. Para eso se estudi\'o la generaci\'on humana de expresiones referenciales desde una perspectiva psicoling\"u\'istica concluyendo que el no-determinismo y la sobreespecificaci\'on son puntos claves a tener en cuenta. Tambi\'en aprendimos que no siempre las personas incluyen relaciones cuando es estrictamente necesario, es decir cuando no se puede identificar al target s\'olo con propiedades proposicionales. Vimos el rol importante de la existencia de corpora, que nos permite varias cosas: por un lado aprender qu\'e dir\'ian las personas en distintas situaciones, y usar esos datos para intentar imitar al corpus, y por otro nos permite comparar la salida de los algoritmos con ERs de las personas. Mostramos especificaciones de corpora existente, los clasificamos seg\'un el tipo de ERs que contiene, y los comparamos entre ellos.
@@ -70,7 +70,7 @@ GRE3D7 corpus y, por lo tanto, la comparaci\'on es dif\'icil. Los algoritmos de 
 Como el corpus TUNA-AR s\'olo incluye ERs proposicionales, ser\'ia interesante evaluar la performance de estos algoritmos en corpora con ERs relacionales como el GRE3D7.
 
 
-\subsection{Generaci\'on sobre un Contexto del Mundo Real}
+\subsection{Generaci\'on sobre un contexto del mundo real}
 
 %mundo real
 Se cre\'o conjuntamente con la Universidad de S\~ao Paulo, el ZOOM corpus de expresiones referenciales de puntos de inter\'es en mapas. Este corpus est\'a en proceso de revisi\'on y ser\'a liberado para investigaci\'on en los pr\'oximos meses. El proceso de recolecci\'on de este corpus demostr\'o ser complejo, esto se vi\'o por ejemplo ya que muchas de las descripciones recolectadas debieron ser descartadas por no ser expresiones referenciales. Adem\'as el corpus mostr\'o tener un porcentaje de expresiones subespecificadas mucho mayor que corpus anteriores recolectados sobre dominios m\'as simples. 
@@ -78,11 +78,11 @@ Se cre\'o conjuntamente con la Universidad de S\~ao Paulo, el ZOOM corpus de exp
 Sobre mapas de este corpus se realizaron 3 casos de estudio que se describen en el Cap\'itulo \ref{sec:corpus}. Estos casos de estudio, si bien muestran que el algoritmo es capaz de generar ERs en dominios naturales de la vida real, como son los mapas de ciudades, tambi\'en dej\'o al descubierto algunas cuestiones l\'ogicas que podr\'ian ser mejoradas en trabajo futuro. En el caso particular de la GER con target plural, nos muestra que todav\'ia queda mucho por hacer.
 
 
-\section{Trabajo Futuro}
+\section{Trabajo futuro}
 
 En esta secci\'on describimos cuatro l\'ineas de trabajo claras en las que los aportes de esta tesis podr\'ian ser continuados. Algunas de estas \'areas han sido previamente estudiadas pero a\'un plantean muchos desaf\'ios, como la generaci\'on de ERs plurales y generaci\'on de ERs de forma incremental en entornos interactivos. Otros temas como el uso de lenguajes l\'ogicos modales m\'as expresivos y la inclusi\'on de una teor\'ia del dominio son extensiones naturales del enfoque a la GER adoptado en esta tesis que no han sido estudiados previamente. 
 
-\subsection{Interactividad e Incrementalidad}
+\subsection{Interactividad e incrementalidad}
 
 Estudios previos~\cite{jordan05,gupta05} sugieren que los algoritmos del estado del arte de GER que usan un orden fijo de las propiedades del contexto no se pueden aplicar de forma directa en aplicaciones interactivas. Estos estudios encontraron que en este tipo de aplicaciones los algoritmos del estado del arte se desempeñan peor que estrategias basadas en patrones sencillos y que prestan atenci\'on al historial de la interacci\'on. Un experimento realizado sobre el corpus iMap~\cite{viethendaleguhe11} confirm\'o la importancia de modelar el terreno com\'un de una interacci\'on para producir ERs \'utiles. El trabajo publicado en \cite{stoia06} de GER en entornos de interacci\'on situada en in videojuego hace evidente la necesidad de variar el orden de las propiedades utilizado por los algoritmos dependiendo de caracter\'isticas del contexto que se modifican continuamente (como la distancia a los objetos target y distractores). Nuestro algoritmo, al proveer una distribuci\'on finita de probabilidades asociada a cada propiedad en lugar de requerir un orden fijo, permite un mayor control y dinamismo a la hora de elegir propiedades para una ER en un contexto cambiante. Ser\'ia interesante evaluar su desempeño en este tipo de aplicaciones interactivas. 
 
@@ -93,7 +93,7 @@ Modelos que cambian parcialmente como sucede con los mapas con distintos niveles
 Como trabajo futuro tambi\'en tenemos la intenci\'on de evaluar nuestro algoritmo de dominios m\'as complejos como los de dominio abiertos proporcionados en Folksonimies~\cite{pacheco-duboue-dominguez:2012:NAACL-HLT}. Los corpus Stars/2 recientemente liberados, ser\'ian interesantes para evaluar el algoritmo, ya que poseen situaciones complejas de referencia que hacen amplio uso de relaciones y expresiones de hasta tres landmarks. Tambi\'en planeamos explorar corpus que se obtienen de la interacci\'on humana, como el GIVE Corpus~\cite{GarGarKolStr10} donde es com\'un observar ERs en varios intentos, es decir dando expresiones parciales en cada intento. Bajo presi\'on de tiempo los hablantes producen primero una expresi\'on subespecificada que incluye las propiedades m\'as destacadas del target (por ejemplo, ``el bot\'on rojo''). Y luego, en un siguiente enunciado, a\~naden propiedades adicionales (por ejemplo, ``a la izquierda de la l\'ampara'') para que la expresi\'on sea una ER adecuada para identificar de manera \'unica al target. Algoritmos para generar este tipo de ERs han sido propuestos en \cite{denis10}. 
 
 
-\subsection{Plurales: De Targets Singleton a Conjuntos}
+\subsection{Plurales: de targets singleton a conjuntos}
 
 %plurales
 Un potencial interesante de nuestros algoritmos que se basan en dividir el modelo a trav\'es de la sem\'antica, es que, en principio puede dar ERs para un conjunto target que no sea singleton. En el Cap\'itulo~\ref{sec:caso_estudio} se presenta un caso de estudio de la generaci\'on de expresiones referenciales plurales pero a\'un no hemos abordado varias cuestiones relacionadas a este tema señaladas por trabajo previo. 
@@ -101,14 +101,14 @@ Un potencial interesante de nuestros algoritmos que se basan en dividir el model
 En particular, las expresiones referenciales generadas por nuestro algoritmo tienden a ser largas y conjuntivas cuando en realidad existen expresiones plurales colectivas que ser\'ian m\'as efectivas. En trabajo previo se ha sugerido el uso de disyunci\'on en el lenguaje l\'ogico usado para la generaci\'on~\cite{gardent,gatt07,khan08}.   
 
 
-\subsection{Lenguajes m\'as Expresivos: Negaci\'on y Probabilidades}
+\subsection{Lenguajes m\'as expresivos: negaci\'on y probabilidades}
 
 En esta tesis utilizamos principalmente el lenguaje l\'ogico \EL. Es decir sin ning\'un tipo de negaci\'on. Esto mostr\'o ser apropiado para dominios est\'aticos y no agentivos en los que trabajamos. Ser\'ia interesante investigar si para otros dominios ser\'ia \'util tener alg\'un tipo de negaci\'on en el lenguaje. 
 
 En esta tesis la combinaci\'on de l\'ogica y probabilidades se realiza a nivel algor\'itmico. Recientemente se han comenzado a investigar  sem\'antica probabil\'istica para l\'ogica modal~\cite{lando12}. Ser\'ia interesante investigar si incluir probabilidades en la misma sem\'antica de la l\'ogica mejorar\'ia el desempeño de la GER.
 
 
-\subsection{Razonando con una Teor\'ia del Dominio}
+\subsection{Razonando con una teor\'ia del dominio}
 
 
 En el Cap\'itulo~\ref{sec:intro} discutimos que todos los modelos son incompletos, especificarlos y tratar de completarlos todo lo posible es un trabajo muy laborioso. Esto puede hacerse m\'as f\'acil si fuera posible escribir axiomas del dominio que ayuden a extender los modelos autom\'aticamente. Por ejemplo, si sabemos que el objeto \emph{e1} est\'a a la derecha del objeto \emph{e2} y el objeto \emph{e2} est\'a a la derecha del objeto \emph{e3}, se puede especificar un axioma en algún framework de especificaci\'on de conocimiento y razonamiento que autom\'aticamente agregue que \emph{e1} est\'a a la derecha del objeto \emph{e3} simplemente diciendo que la relaci\'on a la derecha de es transitiva. 

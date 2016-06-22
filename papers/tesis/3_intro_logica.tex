@@ -148,7 +148,7 @@ Sin embargo, no es posible computar $\EL$-GER para nuestro ejemplo dado que, com
 
 La soluci\'on para no tener que considerar infinitas f\'ormulas es reformular la noci\'on de $\+L$-similaridad de una manera estructural usando la noci\'on de teor\'ia de modelos conocida como {\bf $\+L$-simulaci\'on}. A diferencia de la $\+L$-similaridad que se define sobre infinitas f\'ormulas, las $\+L$-simulaciones se definen sobre el modelo, el cual para la GER, es finito.
 
-\subsection{Los objetos indistinguibles son \emph{$\+L$-simulables}}
+\subsection{Los objetos indistinguibles en $\+L$ son \emph{$\+L$-simulables}}
 
 La relaci\'on entre $\+L$-similaridad y $\+L$-simulaci\'on ha sido ampliamente estudiada y el siguiente es un resultado fundamental de teor\'ia de modelos:
 
@@ -900,7 +900,7 @@ $\mathsf{flower}$ en 2 nuevas f\'ormulas $\mathsf{flower} \sqcap
 \exists \mathsf{in}.\mathsf{hat}$ y $\mathsf{flower} \sqcap \neg
 \exists \mathsf{in}.\mathsf{hat}$, generando una ER \'unica para $f_1  $ pero que contiene negaci\'on.
 
-\section{Computando expresiones referenciales en \FOL}
+\section{Computando expresiones referenciales en \FOL-}
 \label{sec:computandoEnFOL}
 En esta secci\'on comenzaremos explicando trabajo previo en la GER usando $\FOL$. En particular describimos el trabajo de~\cite{graph} que se introdujo brevemente en la Secci\'on \ref{graph}. Luego mostraremos c\'omo la GER en $\FOL$ puede verse bajo la luz de las $\FOL$-simulaciones.
 En~\cite{graph} introducen un algoritmo para GER basado en computaci\'on de \emph{isomorfismos de subgrafos}. Su algoritmo toma como entrada
@@ -1019,8 +1019,8 @@ $H'$ := \findGraph($v, \bot, H, f$)\;
 
 %\texttt{buildF}$_\EPFOL(H',v)$}\label{alg:build-form-epfol}
 %\textbf{let}
-$H' = \tup{\cset{a_1\ldots a_n}, \interp{\cdot}}$,$v=a_1$\;
-\tcp{let $v=a_1$}
+let $H' = \tup{\cset{a_1\ldots a_n}, \interp{\cdot}}$,$v=a_1$\;
+%let $v=a_1$\;
 $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 \not\approx x_j) \land \bigwedge_{\mathclap{(a_i,a_j) \in
 \interp{r}}} r(x_i,x_j) \land \bigwedge_{\mathclap{a_i \in

@@ -299,7 +299,7 @@ Veamos ahora el siguiente ejemplo, el contexto y el modelo se muestra en la Figu
 
 Las ERs, cantidad de ocurrencias y porcentaje del corpus para de la Figura~\ref{fig4-4} se muestran en la Tabla~\ref{corpus-distribution}. La signatura resultante y su \puse\ asociado se muestran en la Tabla~\ref{probability-of-use1}.
 
-El \puse de las relaciones taxon\'omicas fue reemplazado por 1 ignorando el \puse conseguido por el m\'etodo para evitar que el algoritmo genere ERs como {\it la esfera que est\'a sobre algo}.
+El \puse\ de las relaciones taxon\'omicas fue reemplazado por 1 ignorando el \puse conseguido por el m\'etodo para evitar que el algoritmo genere ERs como {\it la esfera que est\'a sobre algo}.
 
 \begin{table}[h!]
 \begin{center}
@@ -355,7 +355,7 @@ enfoque de aprendizaje autom\'atico en la siguiente secci\'on.
 
 
 
-\subsection{Calculando \puse\ para el target para escenas sin corpus } 
+\subsection{Calculando \puse\ cuando no hay corpus para la escena} 
 \label{subsec:learning}
 
 %If there is no corpora that describes the target we can estimate the
@@ -613,7 +613,8 @@ posiblemente creadas por la adici\'on de la nueva descripci\'on son
 eliminadas.
 Con respecto a la informatividad, se permitir\'a el agregado de f\'ormulas no informativas en la primera iteraci\'on, antes de incrementar las R.\puse.
 
-%%
+\ \\
+
 \begin{algorithm}[H]
 \floatname{algorithm}{Algoritmo}
 %\floatname{algorithm}{Algoritmo}
@@ -625,8 +626,8 @@ de relaciones con sus valores de \puse\, odenados por \puse}
 \Output{\footnotesize Un conjunto de f\'ormulas \RE tal que
 $\{\interp{\varphi} \mid \varphi \in \RE\}$ es el conjunto de clases de
 $\mathcal{L}$-similaridad de $\gM$}
-$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\top$ aplica a todos los elementos del contexto.}
-%Bloque con error comentado
+$\RE \leftarrow \{\top\}$\tcp*[f]{\footnotesize descripci\'on m\'as general $\top$ aplica a todos los elementos}
+
 \For{\em (R,R.\puse) $\in$ Rs}{
 R.\randomuse = Random(0,1)\tcp*[f]{\footnotesize R.\randomuse es la probabilidad de usar R} \;
 R.\incuse = (1 $-$ R.\puse) / MaxIterations\tcp*[f]{\footnotesize R.\puse\ incrementadas por R.\incuse en cada ciclo}
