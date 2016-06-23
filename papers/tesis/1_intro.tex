@@ -310,13 +310,19 @@ La generaci\'on de expresiones referenciales en el mundo real sufre de diversas 
 \section{Expresiones referenciales usando teor\'ia de modelos}
 \label{sec:gre-teoria-modelos}
 
-Los \textbf{modelos relacionales} tambi\'en conocidos como \textbf{modelos de kripke} y \textbf{modelos de primer orden} son muy utilizados para la representaci\'on de situaciones o escenas. 
-Los modelos relacionales son grafos etiquetados y pueden verse tambi\'en como aut\'omatas finitos. Estas estructuras matem\'aticas han sido muy estudiadas y tienen muchas propiedades bien conocidas \cite{arec:hybr05b}. \\
+Los \textbf{modelos relacionales}, tambi\'en conocidos como \textbf{modelos de kripke} y \textbf{modelos de primer orden}, son muy utilizados para la representaci\'on de situaciones o escenas. 
+Los modelos relacionales son grafos etiquetados y pueden verse
+tambi\'en como aut\'omatas finitos. Estas estructuras matem\'aticas
+han sido muy estudiadas y tienen muchas propiedades bien conocidas
+\cite{arec:hybr05b}. 
+
 En esta tesis se adaptan algoritmos cl\'asicos de minimizaci\'on de aut\'omatas aplicados a la caracterizaci\'on de modelos relacionales. Para un \textbf{vocabulario} de s\'imbolos relacionales \emph{r}, un modelo relacional $\+M$ es una tupla $\tup{\Delta,\interp{\cdot}}$ donde:
+
 \begin{itemize}
  \item $\Delta$ es un conjunto no vac\'io de objetos llamado el dominio
  \item $\interp{\cdot}$ es una funci\'on de interpretaci\'on, esto es, $\interp{r} \subseteq \Delta^n$ para todo s\'imbolo de relaci\'on $n$-ario $r$ que est\'a en el vocabulario.  
 \end{itemize}
+
 El \textbf{tama\~no} de un modelo $\+M$ es la suma ($\#\Delta + \#\interp{\cdot}$), donde $\#\Delta$ es la cardinalidad
 de $\Delta$ y $\#\interp{\cdot}$ es la suma de todas las aridades de las relaciones en $\interp{\cdot}$.
 Si asumimos un vocabulario finito de s\'imbolos de relaci\'on $n$-arios, entonces $\+M$ es \emph{finito}. 
@@ -326,8 +332,8 @@ A continuaci\'on vamos a presentar 2 ejemplos de modelos relacionales, uno en el
 El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos representado un contexto agentivo como un modelo relacional. En el modelo, $a$, $b$ y $d$ son perros, mientras que 
 $c$ y $e$ son gatos;  $d$ es un peque\~no beagle; $b$ y $c$ tambi\'en son peque\~nos.
  Leeremos $\aSniffing(d,e)$ como ``{\em $d$ huele a $e$}''. La interpretaci\'on del s\'imbolo relacional $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos perros del contexto. La interpretaci\'on de $\aSniffing$ es el conjunto de pares de elementos que cumplen $\aSniffing$. Por ejemplo ($a,a$) pertenece al conjunto dado que $a$ es un perro que se huele a s\'i mismo en el modelo.
-\medskip
- \begin{figure}[!ht]
+
+ \begin{figure}[t]
  %\begin{center}
  \begin{tabular}{rcl}
 $\Delta$               & = & $\cset{a,b,c,d,e}$\\
@@ -370,7 +376,8 @@ $\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
  \end{figure}
 
 El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} donde damos una posible representaci\'on de la escena de la Figura \ref{figura-er} como un modelo relacional. 
-\begin{figure}[H]
+
+\begin{figure}[t]
 \begin{flushleft}
 \begin{tabular}{rcl}
 $\Delta$              & = & $\cset{e_1,e_2,e_3,e_4,e_5,e_6,e_7}$\\
@@ -569,7 +576,6 @@ evitar\'iamos f\'ormulas como $\phi_3$ (es decir con desigualdad). Tambi\'en evi
 Cada lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. Para la tarea de GER el uso de un lenguaje u otro debe depender del contexto particular considerado y del target a describir.
 
 Para el segundo ejemplo, supongamos que queremos identificar al objeto $e_5$ de la Figura \ref{grafo-GRE3D7-stimulus_b}. Algunas f\'ormulas posibles  que identifican un\'ivocamente a $e_5$ en el modelo se muestran a continuaci\'on.
-
 $$
 \begin{array}{ll}
  \phi_1: & \aRed(x) \land \nBall(x)\\[2pt]
