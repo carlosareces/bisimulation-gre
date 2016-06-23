@@ -1,13 +1,10 @@
-
 \documentclass[12pt]{myillcdiss}
 \usepackage{mathtools}
 % Packages used by Carlos
-
 \usepackage{float}
 \floatname{algorithm}{Algoritmo}
 \newcommand{\algorithmname}{Algoritmo}
 \usepackage{algorithmic}
-%\renewcommand{\algorithm}{Algoritmo}
 \usepackage{makeidx}
 \usepackage{amssymb}
 \usepackage{wasysym}
@@ -23,47 +20,30 @@
 \usepackage{eepic}
 \usepackage{proof}
 \usepackage{color}
-%\usepackage{amsmath} errores
-% Packages used by me
 \usepackage[silent,draft]{fixme}
 \usepackage[silent]{fixme}
 \renewcommand{\fixme}{\fxnote}
-%
 \usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
-%
 \usepackage{lingmacros}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{snakes}
-%\usepackage{bbding} errores
 \usepgflibrary{arrows}
 \usepackage{hyperref}
-%\usepackage{soul} errores
 \usetikzlibrary{trees}
 \usetikzlibrary{shapes}
 \usetikzlibrary{automata}
 \usepackage{wrapfig}
 \usepackage{marvosym}
-%\usepackage{dingbat} errores
-%Lu
-
-
-%\documentclass[a4paper]{book}
-%\usepackage[left=3.81cm, right=2.54cm, top=2.54cm, bottom=3.17cm]{geometry}
 \usepackage[T1]{fontenc} 
-
 \usepackage[latin1]{inputenc} %Letras con acentos, enies.
-
 \usepackage{enumerate}
 \usepackage{epsfig}
 \usepackage{multirow}
-
 \usepackage{csquotes}
 \usepackage{graphicx}
 \usepackage{tikz}
 \usetikzlibrary{arrows}
-%\usepackage[center]{caption}
-%\usetikzlibrary{shapes,arrows,automata,positioning,fit,decorations.markings,arrows.meta}
 \usepackage{relsize}
 \usepackage{wrapfig} 
 \usepackage{url}
@@ -78,8 +58,6 @@
 \usepackage{titling}
 \usepackage{hyperref}
 \usepackage{xkeyval}
-%\usepackage{arrowsnew}
-%%%DE LACL
 \usepackage{algorithm2e}
 \newcommand{\instFun}[2]{\texttt{#1}\ensuremath{_{#2}}\xspace}
 \newcommand{\nDog}{\mathit{dog}\xspace}
@@ -88,7 +66,6 @@
 \newcommand{\nFlower}{\mathit{flower}\xspace}
 \newcommand{\aIn}{\mathit{in}\xspace}
 \newcommand{\nHat}{\mathit{hat}\xspace}
-
 \newcommand{\aSniffing}{\mathit{sniffs}\xspace}
 \newcommand{\nBreed}{\mathit{beagle}\xspace}
 \newcommand{\st}{\mathit{\tau}\xspace}
@@ -96,10 +73,8 @@
 % esto controla la separación de los floats respecto al texto. necesitamos el espacio extra!
 \addtolength{\textfloatsep}{-13pt}
 \addtolength{\intextsep}{-8pt}
-
 % Compiling version
 \newif\iffullversion\fullversionfalse
-
 % for compatibility with older versions of algorithm2e
 \providecommand{\LinesNumbered}{\linesnumbered}
 \providecommand{\dontprintsemicolon}{\DontPrintSemicolon}
@@ -110,7 +85,10 @@
 \su{r}{u},w\in S(u),\su{r}{w}\cap S(v)=\emptyset$}
 \newcommand{\unary}{P}
 
-
+%\let\OLDthebibliography=\thebibliography
+%\def\thebibliography#1{\OLDthebibliography{#1}%
+%\addcontentsline{toc}{section}{\refname}}
+%\renewcommand{\refname}{Bibliogra}
 
 \newcommand{\findcite}{\cite{XXX}\fixme{cite!}\xspace}
 
@@ -122,10 +100,8 @@
 \newcommand{\CL}{\ensuremath{\mathcal{C}}\xspace}
 \newcommand{\PL}{\ensuremath{\mathcal{P}}\xspace}
 \newcommand{\ELUNEG}{\ensuremath{\mathcal{ELU_{(\neg)} }}\xspace}
-%\newcommand{\st}{\mathit{\tau}\xspace}
 
 \newcommand\+[1]{\mathcal{#1}}
-%\newcommand{\sim}{\mathcal{S}}
 \newcommand{\simil}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\raisebox{-.07em}{$\rightsquigarrow$}}}}
 \newcommand{\simul}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\underline{\makebox[.75em][l]{\hspace{-.05em}\raisebox{-.15ex}{$\rightarrow$}}}}}}
 
@@ -154,13 +130,11 @@
 \newcommand{\posre}{$\pos$-RE\xspace}
 \newcommand{\Id}{{\rm Id}}
 \renewcommand{\phi}{\varphi}
-%\newcommand{\phi}[1]{{\varphi}_{#1}}
 
 \newcommand{\simmax}{\sim^m}
 \newcommand{\dom}{{\rm dom}}
 \newcommand{\remove}{{\it remove}}
 \newcommand{\prevS}{{\it prevS}}
-%\newcommand{\form}{{\it form}}
 \newcommand{\simset}{{\it sim}}
 \newcommand{\pred}{{\it pre}}
 \newcommand{\post}{{\it post}}
@@ -176,17 +150,17 @@ simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \newcommand{\pair}[2]{\langle #1,#2\rangle}
 \newcommand{\rg}{{\rm rg}}
 
+
+\newenvironment{megaalgorithm}[1][htb]
+  {\renewcommand{\algorithmcfname}{Algoritmo}% Update algorithm name
+   \begin{algorithm}[#1]%
+  }{\end{algorithm}}
+
 %%% DE LACL
-
-
 \renewcommand{\listtablename}{Indice de Tablas}
 \renewcommand{\tablename}{Tabla}
-%\renewcommand{\tablename}{Tabla}
 %\newalgname{Algoritmo}
 \renewcommand{\algorithmname}{Algoritmo}
-%\renewcommand{\theoremname}{Teorema}
-%\newcommand{\simil}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\raisebox{-.07em}{$\rightsquigarrow$}}}}
-%\newcommand{\simul}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\underline{\makebox[.75em][l]{\hspace{-.05em}\raisebox{-.15ex}{$\rightarrow$}}}}}}
 \hyphenation{a-gre-ga-mos}
 \hyphenation{a-pro-xi-ma-cio-nes}
 \hyphenation{a-rri-ba}
@@ -446,7 +420,7 @@ simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 
 \frontmatter % Numeros de paginas con numeros romanos
 
-\include{portada}
+\include{front}
 %\include{preliminar/evaluadores}
 \newpage
 \mbox{}
@@ -457,6 +431,14 @@ simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 %\usepackage[spanish]{babel}
 %\usepackage[latin1]{inputenc} %Letras con acentos, enies.
 \renewcommand{\contentsname}{Contenidos}
+
+%\usepackage{babelbib}
+\renewcommand{\bibname}{Bibligraf\'ia}
+\renewcommand{\algorithmname}{Algoritmoooo}
+%}
+%\begin{frame}
+%  \frametitle{Bibliograf\'ia}
+%\printbibliography[title = {Bibliograf\'ia}]
 \tableofcontents
 %\include{prefacio} --- Esto es opcional, no es necesario
 %\include{agradecimientos} Esto se hace al final
@@ -470,7 +452,7 @@ simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \renewcommand{\chaptername}{Cap\'itulo}
 \renewcommand{\appendixname}{Ap\'endice}
 \renewcommand{\figurename}{Figura}
-\renewcommand{\bibname}{Bibliograf{\'\i}a}
+%\renewcommand{\bibname}{Bibliograf{\'\i}a}
 %\renewcommand{\algorithmname}{Algoritmo}
 \include{1_intro} %trabajo previo
 \include{2_expresiones_referenciales}% definiciones ER y corpus existentes
@@ -482,9 +464,49 @@ simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
 \include{5_corpus}
 \include{7_conclusiones}
 %\vskip 0.2in
- 
-\bibliographystyle{apalike}
-\bibliography{bibliografia}
+%\settocbibname{References}
+%\addcontentsline{toc}{section}{References} 
+
+%\phantomsection
+%\usepackage{tocbibind}
+%\usepackage[notbib]{tocbibind}
+
+%\section{Referencesssss}
+%\printbibliography[heading=none]
+
+%\addcontentsline{toc}{chapter}{Bibliografia}
+%\printbibliography[heading=none]
+%\renewcommand{\bibname}{Bibliograf{\'\i}a
+
+
+% Add entry to table of contents
+%\addcontentsline{toc}{chapter}{Bibliograf\'{\i}a}
+
+%\printbibliography[heading=subbibintoc,type=article,title={Articles only}]
+%\usepackage[english]{babel}
+%\addto{\captionsenglish}{%
+%\usepackage{babelbib}
+%  \renewcommand{\bibname}{bibliooooo}
+%}
+%\begin{frame}
+%  \frametitle{Bibliograf\'ia}
+%\printbibliography[title = {Bibliograf\'ia}]
+%  \bibliographystyle{apalike}
+%  \bibliography{bibliografia}
+%\end{frame}
+
+
+% Lines below are an example and should be modified according to what style better suits your taste
+%\bibliographystyle{apalike}
+%\bibliography{bibliografia} 
+
+%\renewcommand{\bibname}{Bibliograf{\'\i}a}
+%\renewcommand{\refname}{Bibliograf{\'\i}a} 
+%\bibliographystyle{apalike}
+%\bibliography{bibliografia}
+  \bibliographystyle{apalike}
+  \bibliography{bibliografia}
+
 \include{apendice}
 %http://vivaldi.ll.iac.es/sieinvens/siepedia/pmwiki.php?n=HOWTOs.LatexTesisEspanol
 \end{document}

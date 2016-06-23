@@ -274,17 +274,17 @@ $\su{r}{v}=\{u\in\Delta\mid(v,u)\in\interp{r}\}$ para $r$ un s\'imbolo de relaci
 
 
 
-\begin{algorithm}
+\begin{megaalgorithm}
 \small
 
-\captionsetup[algorithm]{name=Algoritmo}
+%\captionsetup[algorithm]{name=Algoritmo}
 \caption{ Computando \EL-similaridad.}\label{alg:schematic-gen-sim}
 
 
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}\SetKwInOut{algorithm}{Algoritmo}
 \Input{un modelo finito $\+M=\tup{\Delta,\interp{\cdot}}$}
 \Output{$\forall v\in \Delta$, el conjunto de simulaciones
-\floatname{algorithm}{Algoritmo}
+%\floatname{algorithm}{Algoritmo}
 
 $\simset_\EL^{\+M}(v)=S(v)$} \BlankLine
 
@@ -293,7 +293,7 @@ $\simset_\EL^{\+M}(v)=S(v)$} \BlankLine
 
 \While{\guard}{$S(u):=S(u)-\{w\}$}
 
-\end{algorithm}
+\end{megaalgorithm}
 
 Inicializamos $S(v)$ con
 el conjunto de todos los elementos $u\in\Delta$ tal que $\unary(v)\subseteq
@@ -327,36 +327,8 @@ $F(v)$ de \EL. Las f\'ormulas $F(v)$ son actualizadas a trav\'es de la ejecuci\'
 \interp{F(v)}$ y $\interp{F(u)} \subseteq S(u)$ se mantienen para
 $u,v\in\Delta$.\\
 
-%\begin{algorithm}
-%\small
-%%\LinesNumbered
-%\io
-%
-%\ForEach{$v\in \Delta$}
-%{ 
-		%$S(v):=\{u\in \Delta \mid \unary(v) \subseteq \unary(u) \}$ \label{alg:line:init1}
-%
-		%$F(v):=\bigwedge \unary(v)$ \label{alg:line:init2}
-%}
-%
-%\While{\guard}
-%{
- %%$\{\ I: \mbox{\bf assert }(\forall u,v)\ \interp{F(u)} \subseteq S(u)\wedge v \in \interp{F(v)} \ \}$
- %\KwSty{invariant} $\forall u,v: \interp{F(u)} \subseteq S(u)\wedge v \in \interp{F(v)}$\\
-%$S(u):=S(u)\setminus\{w\}$\;\label{alg:line:loop-body-begin}
-%
-%\If{$\diam F(v)$ is not a conjunct of $F(u)$}
-	%{ 
-		%$F(u):=F(u)\wedge \diam F(v)$ \label{alg:line:loop-body-end-1} 
-	%}
-%} \caption{\small Computing $\EL$-similarity and \posre} 
-%\label{alg:schematic-GRE}
-%\end{algorithm}
-
-
-%%ESTE TRADUCIDO!!!
-\begin{algorithm}\small
-\floatname{algorithm}{Algoritmo}
+\begin{megaalgorithm}\small
+%\floatname{algorithm}{Algoritmo}
 %\LinesNumbered
 \io
 
@@ -374,7 +346,7 @@ $S(u):=S(u)-\{w\}$ \label{alg:line:loop-body-begin}
 \If{$\diam F(v)$ no es conjunci\'on de $F(u)$}{ $F(u):=F(u)\wedge
 \diam F(v)$ \label{alg:line:loop-body-end-1} }} \caption{\small
 Computando $\EL$-similaridad y generando ERs para \EL.}\label{alg:schematic-GRE}
-\end{algorithm}
+\end{megaalgorithm}
 
 Inicialmente $F(v)$ es la conjunci\'on de todas las relaciones unarias que
 satisfacen $v$ (si no hay ninguna, entonces $F(v)=\top$).
@@ -383,24 +355,6 @@ $(u,v)\in\interp{r}$, $w\in S(u)$ y $\su{r}{w}\cap
 S(v)=\emptyset$, actualiza $F(u)$ a $F(u)\wedge\diam F(v)$.
 De nuevo, \'esta nueva f\'ormula $\phi$ est\'a en $\pos$ y se puede mostrar que
 $v\in\interp{\phi}$ y $w\notin\interp{\phi}$, por lo tanto $v\simil{\EL} w$ es falso, $w$ no simula a $u$ y se elimina de $S(u)$.
-
-%As we will see in Theorem~\ref{thm:correctness-schematic-GRE}, this
-%formula is true in $v$ but false in $w$, hence witnessing that $w$
-%does not simulate $v$.
-
-
-%It is clear that Algorithm \ref{alg:schematic-GRE} terminates.
-%
-%\iffullversion One wants to know whether a given set $V\subseteq W$
-%has an \posre. How do we interpret the output of Algorithm
-%\ref{alg:schematic-GRE}? Here is the answer: $V\subseteq W$ has an
-%\EL-RE iff there is a node $v\in V$ such that $V=\{u\in W\colon
-%v\in\simset_\subseteq(u) \wedge u\in\simset_\subseteq(v)\}$. In
-%other words, $V$ has an \EL-RE iff $V$ is the set of nodes which are
-%\emph{bisimilar} to some node of $V$. Here we say that $u$ and $v$
-%are \emph{bisimilar} if $u\in\simset_\subseteq(v)$ and
-%$v\in\simset_\subseteq(u)$. In case $V=\{v_1,\dots,v_n\}$ has an
-%\posre, any $F(v_i)$ is a valid \posre, so one can pick any of them.
 
 \iffullversion Uno quiere saber si un determinado conjunto  $V\subseteq W$
 tiene un \posre. ¿C\'omo interpretar la salida del algoritmo
@@ -412,15 +366,6 @@ Es decir, $V$ tiene un \EL-RE si y s\'olo si $V$ es el conjunto de nodos que son
 son \emph{bisimilar} si $u\in\simset_\subseteq(v)$ y
 $v\in\simset_\subseteq(u)$. En caso  $V=\{v_1,\dots,v_n\}$ tiene una
 \posre, ninguna $F(v_i)$ es un \posre v\'alida, por lo que uno puede elegir cualquiera de ellas.
-
-%
-%In particular, $v$ has an \EL-RE if and only if $\simset_\subseteq(v)=\{v\}$
-%and in case $v$ has a \EL-referring expression then $F(v)$ is a
-%valid one. If $v$ does not have an \posre then the algorithm may be
-%used to approximate an \posre. Indeed, since every formula true at
-%$v$ is also true at all nodes in $\simset_\subseteq(v)$ and $F(v)$
-%is true at every node of $\simset_\subseteq(v)$ then $F(v)$ is a
-%reasonable approximation of an \EL-RE for $v$.
 
 En particular, $v$ tiene un \EL-ER si y s\'olo si $\simset_\subseteq(v)=\{v\}$
 y en caso de $v$ tiene una expresi\'on \EL-expresi\'on referencial, $F(v)$ es una v\'alida. Si $v$ no tiene un \posre entonces el algoritmo puede ser
@@ -575,7 +520,7 @@ muchos pasos.
 \fi
 
 \iffullversion
-\begin{algorithm} \floatname{algorithm}{Algoritmo}\small
+\begin{megaalgorithm} %\floatname{algorithm}{Algoritmo}\small
 \io
 
 \ForEach{$v\in \Delta$}{ $\prevS(v):=\Delta$
@@ -611,7 +556,7 @@ $\prevS(v)=S(v)$
 
 } \caption{\small refinado $\EL$-similaridad y
 \posre.}\label{alg:refined-GRE}
-\end{algorithm}
+\end{megaalgorithm}
 \fi
 
 %Algoritmo \ref{alg:schematic-GRE} se puede modificar f\'acilmente para
@@ -628,27 +573,6 @@ El Algoritmo~\ref{alg:schematic-GRE} puede ejecutar en un subconjunto arbitrario
  en $O(\size{\Delta}\times\size{\interp{\cdot}})$ pasos como se muestra en~\cite{HHK95}. Por lo tanto el problema \EL-GER se puede resolver en tiempo polinomial. N\'otese, sin embargo, que este resultado supone una representaci\'on conveniente de
 f\'ormulas como, por ejemplo, grafos ac\'iclicos dirigidos, para asegurar que
 cada paso de la construcci\'on de la f\'ormula puede hacerse en $O(1)$. %En
-%\sect{size} vamos a echar un vistazo m\'as de cerca el tema y su relaci\'on con
-%el tama\~no de los m\'as peque\~nos $\+L$-RE.
-
-%Theorem~\ref{thm:complexity-EL-GRE} shows that there are efficient
-%GRE algorihtms for \EL and \ELAN; languages which are --as discussed
-%in \sect{choosinglanguage}-- generally simple to realize. The
-%methods presented here, together with previous results
-%of~\cite{AKS08} indicate that algorithms for computing
-%$\+L$-simulator sets can, in many cases, be adapted to solve the
-%$\+L$-GRE problem at no extra complexity cost.
-
-%
-%Algorithm~\ref{alg:schematic-GRE} was obtained by adding formula annotations
-%to a standard `\EL-simulation-minimization' algorithm. Given an
-%$\+L$-simulation-minimization, we can typically adapt it in an analogous
-%way to obtain an $\+L$-GRE algorithm.
-%The obtained algorithm computes $\+L$-REs for \emph{every} element of the
-%domain simultaneously.
-%This will make it particularly suitable for applications with
-%static domains requiring references to many objects.
-
 
 El Algoritmo~\ref{alg:schematic-GRE} se obtuvo mediante la adici\'on de anotaciones de f\'ormulas
 al algoritmo est\'andar de `minimizaci\'on de \EL-simulaciones' presentado en la Secci\'on \ref{sec:indistinguiblesEL}. Dada una minimizaci\'on de
@@ -658,41 +582,6 @@ El algoritmo calcula las $\+L$-ERs para \emph{todos} los elementos del
 dominio simult\'aneamente.
 Esto har\'a que sea especialmente adecuado para aplicaciones con
 dominios que requieren referencias a muchos objetos.
-
-% but given its low complexity
-%and the fact that termination is ensured (no risk of infinite regression, see~\cite{dale91:_gener_refer_expres_invol_relat}),
-%it seems suitable for most applications.
- %Moreover, the algorithm can be adapted
-%to dynamic domains by using techniques used to recompute simulations (see~\cite{saha:incre07}),
-%so that only those RE that were affected by a change in the domain need to be
-%recomputed.
-
-%Por otra parte, el algoritmo se puede adaptar
-%a dominios din\'amicos mediante el uso de t\'ecnicas que se utilizan para volver a calcular las simulaciones (vea~\cite{saha:incre07}),
-%de modo que s\'olo las ERs que se vean afectadas por el cambio en el dominio necesitan ser recalculadas.
-%
-%We have not addressed so far other relevant issues of the
-%GRE problem besides computational complexity. In particular,
-%Algorithm~\ref{alg:schematic-GRE} pays no attention to the use of
-%preferences among relations when generating an RE (i.e., preferring
-%the selection of certain attributes over others, when possible).
-%While there is room for improvement (e.g., making a weighted choice
-%instead of the non-deterministic choice when choosing elements
-%in the main loop of the algorithm), support for preferences is not
-%one of the strong points of this family of algorithms.
-%We consider algorithms with strong support for preferences in the following section.
-
-%No hemos abordado hasta el momento otras cuestiones relevantes de la
-%problema GER adem\'as de la complejidad computacional. En particular,
-%Algoritmo~\ref{alg:schematic-GRE} no presta atenci\'on a la utilizaci\'on de
-%preferencias entre las relaciones cuando se genera una ER (es decir, prefiriendo
-%la selecci\'on de ciertos atributos por encima de otros, cuando sea posible).
-%Si bien no hay margen de mejora (por ejemplo, hacer una elecci\'on ponderada
-%en lugar de la elecci\'on no determinista a la hora de elegir los elementos
-%en el bucle principal del algoritmo), el apoyo a las preferencias no es
-%uno de los puntos fuertes de esta familia de algoritmos.
-%Consideramos algoritmos con un fuerte apoyo a las preferencias en la siguiente secci\'on.
-
 
 \section{Computando expresiones referenciales en $\alc$}
 \label{sec:bisimulacion}
@@ -776,7 +665,7 @@ add$_\alc$ ($ \varphi $, $\RE$), que agrega $ \phi $ a toda
 f\'ormula $\psi \in \RE $, 
 si $\interp{\psi \sqcap \varphi} \not = \emptyset$ y $\interp{\psi \sqcap \neg \varphi} \not = \emptyset$.
 
-\begin{algorithm}[H]\floatname{algorithm}{Algoritmo}
+\begin{megaalgorithm}[H]%\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
 
 \caption{Computando los conjuntos de $\mathcal{L}$-similaridad.}
@@ -801,7 +690,7 @@ $\RE \leftarrow \{\top\}$
       exit
       }
 }
-\end{algorithm}
+\end{megaalgorithm}
 
 El algoritmo \alc calcula los conjuntos \alc-similaridad del modelo en
 tiempo $O(n^3)$, donde $ n $ es el n\'umero de individuos en el dominio. 
@@ -825,7 +714,7 @@ hay un riesgo de que el \el-algoritmo podr\'ia tener peor tiempo de ejecuci\'on,
 
  
 
-\begin{algorithm}[H]\floatname{algorithm}{Algoritmo}
+\begin{megaalgorithm}[H]%\floatname{algorithm}{Algoritmo}
 \caption{add$_\alc(\varphi,\RE)$.}
 \label{algo:bisim-add-alc}
 \For{$\psi \in \RE$ with $|\interp{\psi}| > 1$}{
@@ -836,7 +725,7 @@ hay un riesgo de que el \el-algoritmo podr\'ia tener peor tiempo de ejecuci\'on,
          remove $\psi$ from \RE \;
       }
    }
-\end{algorithm}
+\end{megaalgorithm}
 
 Vamos a probar estos algoritmos en algunos ejemplos. En primer lugar, corremos el \el algoritmo en el modelo que se muestra en la Figura~\ref{fig:dale-haddock} (a), que es
 tomado de \cite{dale91:gener}. El
@@ -854,7 +743,7 @@ $\mathsf{bowl}$ fue subsumida por $\mathsf{bowl} \sqcap
 \mathsf{on}.\mathsf{table}$, dos f\'ormulas que tienen interpretaciones singleton, es decir que son ERs de $b_1$ y $b_2$ respectivamente. Pero a\'un quedan sin distinguir $\mathsf{tables}$ y $\mathsf{cups}$.
 
 %
-\begin{algorithm}[t]\floatname{algorithm}{Algoritmo}
+\begin{megaalgorithm}[t]%\floatname{algorithm}{Algoritmo}
 \dontprintsemicolon
 \caption{add$_\el$($\varphi$, $\RE$).}
 \label{algo:bisim-add-el}
@@ -866,7 +755,7 @@ $\mathsf{bowl}$ fue subsumida por $\mathsf{bowl} \sqcap
     borrar f\'ormulas subsumidas de $\RE$\;
   }
 }
-\end{algorithm}
+\end{megaalgorithm}
 Ahora podemos usar la divisi\'on entre los $\mathsf{bowls}$ para distinguir las $\mathsf{cups}$ en
 la segunda iteraci\'on. El resultado de esto es $\RE = \{ \mathsf{floor},
 \mathsf{bowl} \sqcap \exists \mathsf{on}.\mathsf{floor}, \mathsf{bowl}
@@ -993,8 +882,8 @@ del bucle principal del Algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a
 presentaci\'on de~\cite{graph}, \instFun{makeRE}{\FOL} computa
 no s\'olo un grafo $H$, sino tambi\'en una $\+L$-Simulaci\'on de $f$.
 
-\begin{algorithm}%[H]
-\floatname{algorithm}{Algoritmo}\small
+\begin{megaalgorithm}%[H]
+%\floatname{algorithm}{Algoritmo}\small
 \SetKwFunction{makeRE}{makeRE$_\FOL-$}
 \SetKwFunction{findGraph}{find$_\FOL-$}
 \SetKwFunction{init}{init_$\FOL-$}
@@ -1030,7 +919,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 \renewcommand{\algorithmname}{Algoritmo}
 %\Return{\buildF$(H',v)$}\;
 \caption{\small \texttt{makeRE}$_\FOL-$($v$).}\label{alg:makeRE}
-\end{algorithm}
+\end{megaalgorithm}
 
 
 %fin algoritmo 3
@@ -1038,8 +927,8 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
  % \begin{minipage}[t]{6.8cm}%
 
 %empieza algoritmo 4
-\begin{algorithm}[H] 
-\floatname{algorithm}{Algoritmo}\small
+\begin{megaalgorithm}[H] 
+%\floatname{algorithm}{Algoritmo}\small
 \SetKwFunction{findGraph}{find$_\+L$} 
 \SetKwFunction{cost}{cost}
 \SetKwFunction{matchGraph}{match$_\+L$}
@@ -1067,7 +956,7 @@ $\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L}
 \Return{$\mathit{best}$}\;
 
 \caption{\small \texttt{find}$_\FOL-$($v, \mathit{best},H,f$).}\label{alg:find}
-\end{algorithm}
+\end{megaalgorithm}
   %\end{minipage}%
 %\end{center}
 

@@ -555,12 +555,14 @@ eliminadas.
 Con respecto a la informatividad, se permitir\'a el agregado de f\'ormulas no informativas en la primera iteraci\'on, antes de incrementar las R.\puse.
 
 \ \\
-%\def\algorithmname{Algoritmo}
-\begin{algorithm}[H]
-%\floatname{algorithm}{Algoritmo}
-%\floatname{algorithm}{Algoritmo}
+
+
+	
+
+\begin{megaalgorithm}[H]
+
 \dontprintsemicolon
-%\floatname{algorithm}{Algoritmo}
+\medskip
 \caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
@@ -593,10 +595,10 @@ FirstLoop $\leftarrow$ FALSE \;
 R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\puse}
 }
 }
-\end{algorithm}
+\end{megaalgorithm}
 \medskip
-\begin{algorithm}[H]
-\floatname{algorithm}{Algoritmo}
+\begin{megaalgorithm}[H]
+
 \dontprintsemicolon
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\footnotesize R, $\varphi$, $\RE$}
@@ -618,7 +620,7 @@ borrar f\'ormulas redundantes de $\RE$ \tcp*[f]{\footnotesize borrar clases redu
 }
 \floatname{algorithm}{Algoritmo}
 \caption{add$_\el$(R, $\varphi$, $\RE$)} \label{algo:bisim-add-el-over}
-\end{algorithm}
+\end{megaalgorithm}
 
 
 \section{Ejemplo de ejecuci\'on}
