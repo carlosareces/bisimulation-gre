@@ -74,7 +74,7 @@ De acuerdo a las propiedades o relaciones que una ER incluya, se clasifica en di
 
 \item \label{sec:minimales} Se dice que una ER es {\bf minimal} cuando incluye la m\'inima cantidad de propiedades y/o relaciones con otros objetos, con las cuales el target puede ser distinguido en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo, en la Figura \ref{fig2-1}: {\it La esfera roja} es una ER minimal, como as\'i tambi\'en lo es {\it La esfera grande}, y {\it La esfera a la derecha del cubo}. Para verificar que estas ERs son minimales, intentemos sacar alguna propiedad, si de {\it La esfera roja} sacamos {\it esfera}, ya no podemos identificar al target, si sacamos {\it roja}, tampoco. Lo mismo pasa para {\it La esfera grande}. Veamos que pasa con {\it La esfera a la derecha del cubo}, si sacamos {\it esfera} tenemos otro objeto, $e_7$, adem\'as del target que tambi\'en tiene a la izquierda un cubo. Si sacamos {\it a la derecha de} no es posible construir una frase nominal aceptable. 
 
-\item Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguir al target de los dem\'as objetos en el contexto dado, se dice que la ER es {\bf sobreespecificada}. Por ejemplo: {\it La esfera roja grande} en la Figura \ref{fig2-1} es sobreespecificada porque se le puede sacar {\it grande} y sigue siendo una ER correcta, o se le puede sacar {\it roja} y tambi\'en lo sigue siendo. \label{er-sobreespecificadas}
+\item Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguir al target de los dem\'as objetos en el contexto dado, se dice que la ER es {\bf sobreespecificada}. Por ejemplo: {\it La esfera roja grande} en la Figura \ref{fig2-1} es sobreespecificada porque se le puede sacar {\it grande} o {\it roja} y sigue siendo una ER correcta. \label{er-sobreespecificadas}
 
 \item Una expresi\'on\footnote{Estrictamente hablando, una expresi\'on subespecificada no es una ER dado que no identifica un\'ivocamente al target. Sin embargo, en esta tesis hablaremos en ocasiones de ERs subespecificadas para referirnos a \'estas expresiones que no alcanzan a ser referenciales.} es {\bf subespecificada} cuando no puede distinguir al target de los otros objetos en el contexto. Estos otros objetos son llamados \textbf{distractores}. Por ejemplo: {\it La esfera} en la Figura \ref{fig2-1} no alcanza a identificar al objeto $e_5$ apuntado por la flecha, ya que hay otras 2 esferas que son distractores, $e_1$ y $e_3$. Una expresi\'on subespecificada identifica a un conjunto de objetos y ese conjunto incluye otros objetos adem\'as del target.
 
@@ -139,17 +139,6 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \end{figure}
 
 
-
-%En nuestro trabajo para calcular las prob de uso de las palabras en el GRE3D7 , una de las propiedades fue la discriminacion, nosotros no encontramos tal correlación,  quizás por el mismo motivo q el dice (naturaleza del corpus)
-%
-%Me pregunto porque lo acotó a solo 1 propiedad y solo a la descripción del landmark
-%Me gustaría probar q las prob de uso en el Start2, tienen fuerte correlación con la discriminacion.
-%Me hubiera gustado q otro baseline en su trabajo fuera nuestro algoritmo...(me parece q tenia miedo)
-%Nosotros tenemos una probabilidad de uso que nos sirve para agregar sobreespecificacion a la descripción del target y de los landmarks , no tenemos restricción de cantidad, podemos agregar varias.
-%Los n\'umeros no son directamente comparables, ya q el filtro solo las relacionales y uso el total del corpus y nosotros usamos la mitad del corpus (solo verde, azul)
-
-
-
 \subsection{Corpora de expresiones referenciales}
 \label{sec:corpus2}
 \label{sec:corpusTUNA}
@@ -180,7 +169,7 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 
 
 \label{sec:corpusGRE}
-%were developed in a series of web-based experiments primarily focussed on the study of relational descriptions. GRE3D3 contains 630 descriptions produced by 63 speakers, and GRE3D7 contains 4480 descriptions produced by 287 speakers, making it the largest of its kind to date. The GRE3D domain consists of simple visual scenes containing only two kinds of objects (boxes and spheres) with limited variation in colour and size. In each scene, there is only one possible spatial relation between target and the nearest landmark. Both corpora contain atomic and relational descriptions.
+
 {\bf GRE3D3} y su extensi\'on {\bf GRE3D7} \cite{gre3d3,gre3d7} se desarrollaron en una serie de experimentos basados en la web, y se centraron principalmente en el estudio de las descripciones relacionales. GRE3D3 contiene 630 descripciones producidas por 63 personas y GRE3D7 contiene 4.480 descripciones producidas por 287 personas, y es el corpus m\'as grande del \'area hasta la fecha. El dominio de estos corpora constan de escenas visuales simples que contienen s\'olo dos tipos de objetos (cubos y esferas) con variaci\'on limitada en color y tama\~no. En cada escena, hay una relaci\'on espacial entre el target y el landmark m\'as cercano. Ambos corpus contienen descripciones proposicionales y relacionales. Ejemplo de im\'agenes del GRE3D3 y GRE3D7 se muestran en la Figura \ref{imagenes-GRE3D3-GRE3D7}. Las escenas del GRE3D3 contienen s\'olo 3 objetos mientras que las escenas del GRE3D7 contienen 7 objetos. El GRE3D7 contiene m\'as de 100 expresiones referenciales por escena. Permitiendo una evaluaci\'on detallada de los rankings generados por nuestros algoritmos como se describe en el Cap\'itulo \ref{sec:evaluacion}.\\
 %\begin{minipage}[b]{0.45\linewidth}
 
@@ -206,12 +195,11 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 %\vspace*{1cm}
 
 \label{sec:corpusSTARS}
-%and its extension Stars2 were collected for the study of referential overspecification (particularly in the case of relational descriptions). Stars was developed in a pilot web-based experiment, containing 704 descriptions produced by 64 speakers.  The more comprehensive Stars2 data set was produced in dialogue situations involving subject pairs, and it contains 884 descriptions produced by 56 speakers. Both domains make use of simple visual scenes containing up to four object types (e.g., stars, boxes, cones and spheres) with limited variation in colour and size. Differently from other REG corpora, however, Stars/2 includes a considerable number of complex situations of reference involving up to three objects, as in `the box near the sphere, next to the cone'.http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-002_2014.pdf y http://ppgsi.each.usp.br/arquivos/RelTec/PPgSI-001_2015.pdf
-{\bf Stars} \cite{Paraboni2016} y su extensi\'on {\bf Stars2} se recolectaron para el estudio de la sobre-especificaci\'on (particularmente en el caso de las descripciones relacionales). Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen tres tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~no. A diferencia de otros corpus para GER, Stars/2 incluyen un n\'umero considerable de situaciones complejas de referencia en que participan hasta tres objetos, como en {\it el cubo cerca de la esfera, al lado del cono}. Ejemplos de im\'agenes se muestran en la Figura \ref{imagenes-stars-stars2}. Este corpus fue recientemente liberado y planeamos usarlo en trabajo futuro (ver Cap\'itulo \ref{sec:conclusiones}).\\
 
-\begin{figure}[!ht]
+{\bf Stars} \cite{Paraboni2016} y su extensi\'on {\bf Stars2} se recolectaron para el estudio de la sobre-especificaci\'on (particularmente en el caso de las descripciones relacionales). Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen tres tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~no. 
+
+\begin{figure}[H]
 \begin{subfigure}{.5\textwidth}
-
 \centering
 \includegraphics[width=\textwidth]{images/STARS.png}\\[0pt]
 \caption{}
@@ -228,6 +216,8 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \end{subfigure}
 \caption{Im\'agenes del corpus Stars (a) y del corpus Stars2 (b).}\label{imagenes-stars-stars2}
 \end{figure}
+
+A diferencia de otros corpus para GER, Stars/2 incluyen un n\'umero considerable de situaciones complejas de referencia en que participan hasta tres objetos, como en {\it el cubo cerca de la esfera, al lado del cono}. Ejemplos de im\'agenes se muestran en la Figura \ref{imagenes-stars-stars2}. Este corpus fue recientemente liberado y planeamos usarlo en trabajo futuro.
 
 
 \label{sec:corpusZOOM}
