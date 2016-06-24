@@ -799,7 +799,7 @@ un subgrafo conectado $H$ de $G$, que contiene al target $e$ y suficiente inform
 distinguir a $e$ de los otros nodos.
 
 Para mantener la terminolog\'ia de~\cite{graph}, en lo que sigue
-podemos hablar alternativamente de \textbf{grafos etiquetados} en lugar de modelos relacionales, estos son esencialmente el mismo objeto matem\'atico. La diferencia es que los grafos etiquetados de \cite{graph} codifican las propiedades proposicionales utilizando
+podemos hablar alternativamente de \textbf{grafos etiquetados} en lugar de modelos relacionales. La diferencia es que los grafos etiquetados de \cite{graph} codifican las propiedades proposicionales utilizando
 loops de relaciones binarias (por ejemplo, escriben $\nDog(e,e)$ en vez de $\nDog(e)$).
 
 La idea principal de la implementaci\'on de~\cite{graph} de isomorfismos de subgrafos puede resumirse intuitivamente como sigue.
@@ -876,9 +876,9 @@ modelos relacionales finitos, el isomorfismo de subgrafos corresponde a las
 $G$, existe un subgrafo isomorfo a G a trav\'es de una funci\'on $f$, que contiene $ u $ y
 $v$, y tal que $f(u)=v$ si y s\'olo si $u \simul{\+\EPFOL} v$. Una implementaci\'on usando $\+\EPFOL$-simulaciones se muestra en el Algoritmo \ref{alg:makeRE}.
 
-El primero transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\FOL-$-ER {\em
-f\'ormula para} $v$; \'este \'ultimo nos dice c\'omo extender $H$ en cada paso
-del bucle principal del Algoritmo~\ref{alg:find}. Hay que tener en cuenta que, a diferencia de la
+El Algoritmo \ref{alg:makeRE} transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\FOL-$-ER {\em
+f\'ormula para} $v$. El Algoritmo~\ref{alg:find} nos dice c\'omo extender $H$ en cada paso
+del bucle principal. Hay que tener en cuenta que, a diferencia de la
 presentaci\'on de~\cite{graph}, \instFun{makeRE}{\FOL} computa
 no s\'olo un grafo $H$, sino tambi\'en una $\+L$-Simulaci\'on de $f$.
 
@@ -923,7 +923,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 
 
 %fin algoritmo 3
-\hspace{.05cm}
+%\hspace{.05cm}
  % \begin{minipage}[t]{6.8cm}%
 
 %empieza algoritmo 4
