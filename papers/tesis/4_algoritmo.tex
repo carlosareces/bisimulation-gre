@@ -418,8 +418,8 @@ green		 &0.0264	 &0.046	    &0.8722 * target-tiene + 0.0016\\
 \hline
 large		 &0.1762	 &0.2378	  &0.5911 * target-tiene + 0.0354\\
 \hline
-small		 &0.1499	 &0.1755	  &0.3918 * target-tiene + 0.2478 * landmark-tiene -\\
-				 &				 &					&0.0913\\
+small		 &0.1499	 &0.1755	  &0.3918 * target-tiene + 0.2478 * landmark-tiene\\
+				 &				 &					&- 0.0913\\
 \hline
 \hline
 leftof  &0.0041	 &0.0094	  &0.0131 * target-tiene +\\
@@ -432,15 +432,15 @@ rightof &0.0029	 &0.0049	  &0.0153 * target-tiene + 0.001\\
 \hline
 left		 &0.0068	 &0.0101	  &0.0346 * adj-target-tiene - 0.0653\\
 \hline
-right		 &0.0079	 &0.0092	  &-0.0118 * disc + 0.0141\\
+right		 &0.0079	 &0.0092	  &- 0.0118 * disc + 0.0141\\
 \hline
 top    &0.0099 	 &0.0135		& 0.0069\\
 \hline
-center	 &0.0023	 &0.0037	  &0.0047 * target-tiene + 0.0047 * adj-target-tiene +\\
-				 &				 &					&0.0029 * landmark-tiene - 0.009\\
+center	 &0.0023	 &0.0037	  &0.0047 * target-tiene + 0.0047 * adj-target-tiene\\
+				 &				 &					&+ 0.0029 * landmark-tiene - 0.009\\
 \hline
 \end{tabular}
-\caption{F\'ormulas y errores de regresi\'on lineal para la parte del corpus \textit{GRE3D7} que se muestra en la Figura \ref{verde-azul} del Ap\'endice \ref{imagenesGRE3D7-apendice}.}
+\caption{F\'ormulas y errores de regresi\'on lineal para la parte del corpus \textit{GRE3D7} que se muestra en la Figura \ref{verde-azul}.}
 \label{tabla-linear-regresion-all}
 \end{center}
 \end{table}
@@ -822,7 +822,8 @@ $\texttt{ball} \sqcap \texttt{yellow}$.}
 Las dem\'as propiedades no pasan la probabilidad R.\randomuse, por lo tanto salimos del primer ciclo, e incrementamos las probabilidades con R.\incuse, hasta que alguna relaci\'on R es tal que R.\randomuse <= R.\puse, quedando como se muestran en la Tabla \ref{prob-inc2}.
 
 Las interpretaciones de las f\'ormulas hasta el momento e ilustradas gr\'aficamente en la Figura \ref{fig-modelo9d} son:
-\medskip
+
+
 \begin{tabular}{l}
 $\interp{ \texttt{ball}} = \{e_1, e_3, e_5\}$ \\
 $\interp {\texttt{ball} \sqcap \texttt{yellow}} = \{e_1, e_3\}$\\
