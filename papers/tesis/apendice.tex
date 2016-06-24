@@ -1,6 +1,6 @@
 \appendix
 
-\chapter{Materiales para la recolecci\'on del corpus ZOOM}
+\chapter{Materiales para la recolecci\'on del corpus ZOOM}\label{apendiceA}
 
 \section{Instrucciones para la obtenci\'on del corpus}
 \label{corpus-apendice}
@@ -11,8 +11,8 @@ En la Figura \ref{fig-pagPrincipal} se muestra en link que se envi\'o por correo
 
 \begin{figure}[H]
 \begin{center}
-\includegraphics[width=13cm]{images/pagPrincipal.png}\\[0pt]
-\caption{Link del experimento.}
+\includegraphics[width=\textwidth]{images/pagPrincipal.png}
+\caption{Primera p\'agina.}
 \label{fig-pagPrincipal}
 \end{center}
 \end{figure}
@@ -29,9 +29,11 @@ Una vez seleccionado el idioma del experimento, se solicitaba informaci\'on demo
 
 En la Figura \ref{fig-interface} se ve una imagen est\'imulo, un mensaje ``Es interesante visitar...'' que es la oraci\'on que el participantente ten\'ia que completar con una expresi\'on referencial del o los objetos apuntados por las flechas. Tambi\'en se ve\'ia una barra indicadora de progreso, y las instrucciones. 
 
+\bigskip
+
 \begin{figure}[H]
 \begin{center}
-\frame{\includegraphics[width=15cm]{images/primerImagen.png}}\\[0pt]
+\frame{\includegraphics[width=\textwidth]{images/primerImagen.png}}
 \caption{Interface del experimento.}
 \label{fig-interface}
 \end{center}
@@ -41,7 +43,7 @@ En la Figura \ref{fig-interface} se ve una imagen est\'imulo, un mensaje ``Es in
 %\section{}
 \label{imagenes-zoom}
 %1
-Aqu\'i se muestran las im\'agenes que se mostraron a los participantes que completaron la tarea de recolecci\'on del corpus ZOOM para el espa\~nol. El corpus cuenta con im\'agenes con y sin zoom, para targets singulares y plurales. 
+Aqu\'i se muestran las im\'agenes que se mostraron a los participantes que completaron la tarea de recolecci\'on del corpus ZOOM para el espa\~nol. El corpus cuenta con im\'agenes con y sin zoom, para targets singulares y plurales. Las im\'agenes muestran fragmentos de mapas de la ciudad de Madrid.
 
 \subsection{Est\'imulos singulares}
 
@@ -155,10 +157,18 @@ Aqu\'i se muestran las im\'agenes que se mostraron a los participantes que compl
 \caption{}
 \label{mapa14}
 \end{subfigure}
-\caption{Imagen del corpus ZOOM. La imagen de la izquierda muestra un target singleton. La imagen de la derecha muestra el mismo target pero con zoom.}
+\caption{Imagen del corpus ZOOM. La imagen de la izquierda muestra un target singleton. La imagen de la derecha muestra el mismo target pero con zoom.\\}
 \end{figure}
-%7
+%\medskip
+%\newpage
+%\vspace*{2cm}
+
+.
+\pagebreak 
+
+
 \subsection{Est\'imulos plurales}
+
 \begin{figure}
 \begin{subfigure}{.48\textwidth}
 \centering
@@ -218,8 +228,8 @@ Aqu\'i se muestran las im\'agenes que se mostraron a los participantes que compl
 
 \end{figure}
 
-\begin{figure}
-\begin{subfigure}{.55\textwidth}
+\begin{figure}[t]
+\begin{subfigure}{.48\textwidth}
 \centering
 \includegraphics[width=\textwidth]{images/corpus/mapa11.png}
 \caption{}
@@ -237,50 +247,149 @@ Aqu\'i se muestran las im\'agenes que se mostraron a los participantes que compl
 
 \end{figure}
 
-\chapter{Expresiones referenciales generadas por nuestro algoritmo}
+
+
+\begin{figure}[h]
+\centering
+\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=3pt,node distance=4cm},
+    aArrow/.style={->, >=stealth, thick, shorten <= 1pt, shorten >= 1pt},	
+  ]
+	\node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+     \nStreet\end{array}$}] (a) {\relsize{-2}$str17$};		
+	 \node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nBuilding\end{array}$}, above of=a] (f) {\relsize{-2}$min1$};	
+					 
+	\node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}
+		 \nChurch\\[-3pt] 
+     \nParroquiaDeSantaCruz\end{array}$}, above of=f] (g) {\relsize{-2}$church1$};
+	\node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleDeLaConcepcionJeronima\end{array}$}, above of=g] (z) {\relsize{-2}$str22$};
+			
+	\node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\end{array}$}, right of=z] (y) {\relsize{-2}$str25$};	
+				
+	\node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleDeElSalvador\end{array}$}, right of=a] (b) {\relsize{-2}$str12$};
+   
+	\node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\end{array}$}, right of=b] (m) {\relsize{-2}$str16$};		 
+
+  \node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleSantoTomas\end{array}$}, above of=b] (c) {\relsize{-2}$str10$};	
+			
+  \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+     \nChurch\end{array}$}, right of=c] (d) {\relsize{-2}$church2$};
+			
+  \node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\end{array}$}, above of=d] (h) {\relsize{-2}$rest3$};			
+			
+  \node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleAtocha\end{array}$}, above of=c] (e) {\relsize{-2}$str9$};		
+
+  \node[n,label=right:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\\[-3pt] 
+      \nLaTagliatella\end{array}$}, right of=m] (k) {\relsize{-2}$rest4$};
+
+ \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nRestaurante\end{array}$}, below of=k] (w) {\relsize{-2}$rest5$};
+
+  \node[n,label=below:{
+    \relsize{-2}$\begin{array}{c}
+      \nTeatroCalderon\end{array}$}, right of=d] (i) {\relsize{-2}$thea0$};
+		
+  \node[n,label=above:{
+    \relsize{-2}$\begin{array}{c}
+      \nStreet\\[-3pt] 
+      \nCalleDeCarretas\end{array}$}, right of=h] (x) {\relsize{-2}$str15$};	
+
+%\node[n,label=below:$str17\nStreet$,label=above:{
+ %   \relsize{-2}}, below of=k] (n) {};				
+ \draw [aArrow,<->,bend right=40] (g) to node[auto,swap]{\relsize{-2}$\nFrenteCerca$} (f);
+% \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-2}$\nFrenteCerca$} (g);
+
+ \draw [aArrow,bend right=40] (g) to node[auto,swap]{\relsize{-2}$\nIn$} (c);
+ \draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-2}$\nIn$} (z);
+ \draw [aArrow,bend right=20] (g) to node[auto,swap]{\relsize{-2}$\nIn$} (y);
+ \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-2}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=-20] (d) to node[auto,swap]{\relsize{-2}$\nFrenteCerca$} (i);
+ %\draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-2}$\nFrente$} (d);
+ \draw [aArrow,<->,bend right=-20] (k) to node[auto,swap]{\relsize{-2}$\nCerca$} (d);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-2}$\nCerca$} (w);
+ %\draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-2}$\nCerca$} (k);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-2}$\nIn$} (x);
+ \draw [aArrow,bend right=40] (k) to node[auto,swap]{\relsize{-2}$\nIn$} (m);
+ \draw [aArrow,<->,bend right=40] (k) to node[auto,swap]{\relsize{-2}$\nFrenteCerca$} (i);
+% \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-2}$\nFrente$} (k);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-2}$\nIn$} (e);
+ \draw [aArrow,bend right=20] (h) to node[auto,swap]{\relsize{-2}$\nIn$} (j);
+
+ \draw [aArrow,bend right=30] (f) to node[auto,swap]{\relsize{-2}$\nIn$} (c);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-2}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-2}$\nIn$} (a);
+ \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-2}$\nIn$} (b); 
+
+ \draw [aArrow,bend right=5] (i) to node[auto,swap]{\relsize{-2}$\nIn$} (e);
+ \draw [aArrow,bend right=40] (i) to node[auto,swap]{\relsize{-2}$\nIn$} (m);
+
+ \end{tikzpicture}
+\caption{Modelo relacional del mapa de la Figura \ref{mapa-zoom2x}.}
+\label{modelo-mapa-zoom2x}
+\end{figure}
+
+
+\chapter{F\'ormulas generadas por nuestro algoritmo}\label{apendiceB}
 
 \section{ERs dadas por el algoritmo para corpus ZOOM}
 %\section{}
 \label{er-mapa-zoom}
 
-%\begin{table}[h]
-%\begin{center}
-%\begin{tabular}{|l|l|c|}
-%\hline
-%&F\'ormula			      &  \# \\ \hline \hline
+En la Tabla \ref{formulas-mapa-zoom2x-apendice} se muestran las f\'ormulas generadas por el algoritmo para el caso de estudio mostrado en la Secci\'on \ref{sec:conzoom}, ejecutando el algoritmo 1000 veces.
 
-%1 & $\exists \nChurchSin \land \exists \nIn .(\exists \nCalleSantoTomas) $&234 \\ \hline
+\begin{table}[H]
+\begin{center}
+\begin{tabular}{|l|l|c|}
+\hline
+&F\'ormula                           &  \# \\ \hline \hline
+1& $\exists \nParroquiaDeSantaCruz$& 570\\ \hline
 
-%2 & $\exists \nFront . (\exists \nMinAsExt)$&202 \\ \hline
+2& $\exists \nParroquiaDeSantaCruz. \exists \nIn(T)$& 174\\ \hline
+3& $\exists \nParroquiaDeSantaCruz. \exists \nIn(\exists \nCalleSantoTomas)$& 72\\ \hline
+4& $\exists \nParroquiaDeSantaCruz. \land \exists.\nCerca(T)$& 57\\ \hline
 
-%3& $\exists \nChurch \land \exists \nIn .(\exists \nCalleAtocha)$&87 \\ \hline
+5& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz$& 48\\ \hline
+6& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz. \exists \nIn(T)$& 17\\ \hline
+7& $\exists \nParroquiaDeSantaCruz \land \exists. \nIn(\exists \nCalleConJer)$& 13\\ \hline
+8& $\exists \nChurch \land \land \exists. \nIn(\exists \nCalleConJer) $&10\\ \hline
 
-%4& $\exists \nNear .(\exists \nMinAsExt)$&79 \\ \hline
+9& $\exists \nIn(\exists \nCalleSantoTomas) \land \exists \nChurch$&9\\ \hline
 
-%5& $\exists \nFront .(\exists \nFront .(\exists \nChurch)) \land \exists \nIn .(\exists \nCalleSantoTomas)$&74 \\ \hline
+10& $\exists \nChurch \land \exists \nIn(\exists \nCalleSantoTomas))$&7\\ \hline
 
-%6& $\exists \nChurch \land \exists \nFront .(\exists \nMinAsExt)$&71 \\ \hline
+\end{tabular}
 
-%7& $\exists \nChurch \land \exists \nFront .(\exists \nMinAsExt \land \exists \nIn)$&65 \\ \hline
+\caption{F\'ormulas dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom2x}.}\label{formulas-mapa-zoom2x-apendice}
+\end{center}
+\end{table}
 
-%8& $\exists \nFront .(\exists \nIn (\exists \nCalleSantoTomas)) \land \exists \nChurch \land \exists \nIn$&53 \\ \hline
-
-%9& $\exists \nFront .(\exists \nMinAsExt \land \exists \nIn )$&21 \\ \hline
-
-%10&$\exists \nNear .(\exists \nMinAsExt \land \exists \nIn )$&15 \\
-
-%\hline
-%\end{tabular}
-
-%\caption{Las 10 f\'ormulas m\'as frecuentes dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom}.}\label{formulas-mapa-zoom}
-%\end{center}
-%\end{table}
-
-
-
-
-%\footnotesize{
-%\hspace*{0.6cm}
 
 Las f\'ormulas mostradas en la Tabla \ref{formulas-mapa-zoom-ap}, fueron generadas por el algoritmo en el caso de estudio presentado en la Secci\'on \ref{sec:sinzoom}. Ejecutando el algoritmo 1000 veces.
 
@@ -355,33 +464,6 @@ Las f\'ormulas mostradas en la Tabla \ref{formulas-mapa-zoom-ap}, fueron generad
 \end{table}
 
 
-En la Tabla \ref{formulas-mapa-zoom2x-apendice} se muestran las f\'ormulas generadas por el algoritmo para el caso de estudio mostrado en la Secci\'on \ref{sec:conzoom}, ejecutando el algoritmo 1000 veces.
-
-\begin{table}[H]
-\begin{center}
-\begin{tabular}{|l|l|c|}
-\hline
-&F\'ormula                           &  \# \\ \hline \hline
-1& $\exists \nParroquiaDeSantaCruz$& 570\\ \hline
-
-2& $\exists \nParroquiaDeSantaCruz. \exists \nIn(T)$& 174\\ \hline
-3& $\exists \nParroquiaDeSantaCruz. \exists \nIn(\exists \nCalleSantoTomas)$& 72\\ \hline
-4& $\exists \nParroquiaDeSantaCruz. \land \exists.\nCerca(T)$& 57\\ \hline
-
-5& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz$& 48\\ \hline
-6& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz. \exists \nIn(T)$& 17\\ \hline
-7& $\exists \nParroquiaDeSantaCruz \land \exists. \nIn(\exists \nCalleConJer)$& 13\\ \hline
-8& $\exists \nChurch \land \land \exists. \nIn(\exists \nCalleConJer) $&10\\ \hline
-
-9& $\exists \nIn(\exists \nCalleSantoTomas) \land \exists \nChurch$&9\\ \hline
-
-10& $\exists \nChurch \land \exists \nIn(\exists \nCalleSantoTomas))$&7\\ \hline
-
-\end{tabular}
-
-\caption{F\'ormulas dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom2x}.}\label{formulas-mapa-zoom2x-apendice}
-\end{center}
-\end{table}
 
 En la Tabla \ref{formulas-mapa-zoom2-apendice} se muestran las f\'ormulas dadas por el algoritmo en 1000 ejecuciones para la Figura \ref{mapa-zoom-plural}, mostrado en la Secci\'on \ref{sec:plural}, ejecutando el algoritmo 1000 veces. 
 
@@ -444,16 +526,7 @@ En la Tabla \ref{formulas-mapa-zoom2-apendice} se muestran las f\'ormulas dadas 
 \subsection{Ejemplos de f\'ormulas}
 \label{formulas-gre3d7}
 
-En la Secci\'on \ref{sec:ejemplo_ejecucion} se mostr\'o un ejemplo de ejecuci\'on del algoritmo para la Figura \ref{GRE3D7-stimulus-22-apendice}, aqu\'i mostramos todas las f\'ormulas que di\'o el algoritmo para el target se\~nalado por la flecha, en 10000 ejecuciones.
-
-\begin{figure}[h]
-%\begin{subfigure}{0.5\linewidth}
-\centering
-\includegraphics[width=\textwidth]{images/22.jpg}
-%\vspace*{1cm}
-\caption{Escena del corpus GRE3D7.}
-\label{GRE3D7-stimulus-22-apendice}
-\end{figure}
+En la Secci\'on \ref{sec:ejemplo_ejecucion} se mostr\'o un ejemplo de ejecuci\'on del algoritmo para la Figura \ref{GRE3D7-stimulus-22}, aqu\'i mostramos todas las f\'ormulas que di\'o el algoritmo para el target se\~nalado por la flecha, en 10000 ejecuciones.
 
 
 \begin{table}[h]
@@ -489,96 +562,3 @@ En la Figura \ref{verde-azul} se muestran las escenas mostradas a los participan
 \label{verde-azul}
 \end{figure}
 
-
-
-
-%\chapter{Archivo xml del TUNA corpus}
-%\section{Archivo}
-%\label{archivos-xml-tuna}
-%
-%Este es el texto del archivo s57t4.xml del TUNA corpus.
-%\begin{verbatim}
-%<TRIAL CONDITION="-LOC" ID="s57t4">
-  %<DOMAIN>
-    %<ENTITY ID="121" IMAGE="fanLeftBlueSmall.gif" TYPE="target">
-      %<ATTRIBUTE NAME="colour" TYPE="literal" VALUE="blue" />
-      %<ATTRIBUTE NAME="orientation" TYPE="literal" VALUE="left" />
-      %<ATTRIBUTE NAME="type" TYPE="literal" VALUE="fan" />
-      %<ATTRIBUTE NAME="size" TYPE="literal" VALUE="small" />
-      %<ATTRIBUTE NAME="x-dimension" TYPE="gradable" VALUE="1" />
-      %<ATTRIBUTE NAME="y-dimension" TYPE="gradable" VALUE="2" />
-    %</ENTITY>
-    %<ENTITY ID="122" IMAGE="fanLeftGreenSmall.gif"
-    %TYPE="distractor">
-      %<ATTRIBUTE NAME="colour" TYPE="literal" VALUE="green" />
-      %<ATTRIBUTE NAME="orientation" TYPE="literal" VALUE="left" />
-      %<ATTRIBUTE NAME="type" TYPE="literal" VALUE="fan" />
-      %<ATTRIBUTE NAME="size" TYPE="literal" VALUE="small" />
-      %<ATTRIBUTE NAME="x-dimension" TYPE="gradable" VALUE="3" />
-      %<ATTRIBUTE NAME="y-dimension" TYPE="gradable" VALUE="3" />
-    %</ENTITY>
-    %<ENTITY ID="57" IMAGE="fanLeftBlueLarge.gif" TYPE="distractor">
-      %<ATTRIBUTE NAME="colour" TYPE="literal" VALUE="blue" />
-      %<ATTRIBUTE NAME="orientation" TYPE="literal" VALUE="left" />
-      %<ATTRIBUTE NAME="type" TYPE="literal" VALUE="fan" />
-      %<ATTRIBUTE NAME="size" TYPE="literal" VALUE="large" />
-      %<ATTRIBUTE NAME="x-dimension" TYPE="gradable" VALUE="3" />
-      %<ATTRIBUTE NAME="y-dimension" TYPE="gradable" VALUE="2" />
-    %</ENTITY>
-    %<ENTITY ID="52" IMAGE="fanBackRedLarge.gif" TYPE="distractor">
-      %<ATTRIBUTE NAME="colour" TYPE="literal" VALUE="red" />
-      %<ATTRIBUTE NAME="orientation" TYPE="literal" VALUE="back" />
-      %<ATTRIBUTE NAME="type" TYPE="literal" VALUE="fan" />
-      %<ATTRIBUTE NAME="size" TYPE="literal" VALUE="large" />
-      %<ATTRIBUTE NAME="x-dimension" TYPE="gradable" VALUE="2" />
-      %<ATTRIBUTE NAME="y-dimension" TYPE="gradable" VALUE="1" />
-    %</ENTITY>
-    %<ENTITY ID="106" IMAGE="sofaLeftGreenSmall.gif"
-    %TYPE="distractor">
-      %<ATTRIBUTE NAME="colour" TYPE="literal" VALUE="green" />
-      %<ATTRIBUTE NAME="orientation" TYPE="literal" VALUE="left" />
-      %<ATTRIBUTE NAME="type" TYPE="literal" VALUE="sofa" />
-      %<ATTRIBUTE NAME="size" TYPE="literal" VALUE="small" />
-      %<ATTRIBUTE NAME="x-dimension" TYPE="gradable" VALUE="2" />
-      %<ATTRIBUTE NAME="y-dimension" TYPE="gradable" VALUE="3" />
-    %</ENTITY>
-    %<ENTITY ID="41" IMAGE="sofaLeftBlueLarge.gif"
-    %TYPE="distractor">
-      %<ATTRIBUTE NAME="colour" TYPE="literal" VALUE="blue" />
-      %<ATTRIBUTE NAME="orientation" TYPE="literal" VALUE="left" />
-      %<ATTRIBUTE NAME="type" TYPE="literal" VALUE="sofa" />
-      %<ATTRIBUTE NAME="size" TYPE="literal" VALUE="large" />
-      %<ATTRIBUTE NAME="x-dimension" TYPE="gradable" VALUE="3" />
-      %<ATTRIBUTE NAME="y-dimension" TYPE="gradable" VALUE="1" />
-    %</ENTITY>
-    %<ENTITY ID="36" IMAGE="sofaBackRedLarge.gif" TYPE="distractor">
-      %<ATTRIBUTE NAME="colour" TYPE="literal" VALUE="red" />
-      %<ATTRIBUTE NAME="orientation" TYPE="literal" VALUE="back" />
-      %<ATTRIBUTE NAME="type" TYPE="literal" VALUE="sofa" />
-      %<ATTRIBUTE NAME="size" TYPE="literal" VALUE="large" />
-      %<ATTRIBUTE NAME="x-dimension" TYPE="gradable" VALUE="4" />
-      %<ATTRIBUTE NAME="y-dimension" TYPE="gradable" VALUE="3" />
-    %</ENTITY>
-  %</DOMAIN>
-  %<WORD-STRING>blue ventilator center left</WORD-STRING>
-  %<ANNOTATED-WORD-STRING>
-    %<ATTRIBUTE ID="a1" NAME="colour" VALUE="blue">blue</ATTRIBUTE>
-    %<ATTRIBUTE ID="a2" NAME="type" VALUE="fan">
-    %ventilator</ATTRIBUTE>
-    %<META-ATTRIBUTE NAME="location">
-    %<ATTRIBUTE ID="a3" NAME="y-dimension"
-    %VALUE="2" />center</META-ATTRIBUTE>
-    %<META-ATTRIBUTE NAME="location">
-    %<ATTRIBUTE ID="a4" NAME="x-dimension"
-    %VALUE="2" />left</META-ATTRIBUTE>
-  %</ANNOTATED-WORD-STRING>
-  %<ATTRIBUTE-SET>
-    %<ATTRIBUTE ID="a4" NAME="x-dimension" VALUE="2" />
-    %<ATTRIBUTE ID="a3" NAME="y-dimension" VALUE="2" />
-    %<ATTRIBUTE ID="a2" NAME="type" VALUE="fan"></ATTRIBUTE>
-    %<ATTRIBUTE ID="a1" NAME="colour" VALUE="blue"></ATTRIBUTE>
-  %</ATTRIBUTE-SET>
-%</TRIAL>
-%\end{verbatim}
-%
-%
