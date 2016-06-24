@@ -14,7 +14,7 @@ para evaluar si el sistema podr\'ia tener un modelo adecuado del comportamiento 
 
 El trabajo descripto en \cite{viet:gene11} se encuadra en el \'area de an\'alisis y modelizaci\'on estad\'istica de datos de corpora. Entre otros resultados, este trabajo mostr\'o que, en lo que respecta a la GER, distintas personas pueden no  hacer lo mismo en la misma situaci\'on. De hecho, incluso la misma persona podr\'ia describir el mismo target de diferentes maneras en distintas ocasiones.
 Este cap\'itulo se encuadra en las \'areas de dise\~no y metodolog\'ias para la recolecci\'on de corpus y su uso para evaluar sistemas de GER.\\
-El corpus ZOOM es una colecci\'on de datos, resultante de un experimento realizado en un trabajo conjunto con la Universidad de S\~ao Paulo (Brasil). El objetivo del experimento fue crear un corpus de expresiones referenciales de un dominio m\'as complejo y m\'as cercano a las aplicaciones del mundo real, que los corpus existentes hasta el momento. Este corpus contiene referencias a targets singulares y plurales y hace gran uso de propiedades relacionales. Las descripciones del ZOOM corpus fueron producidas por humanos de espa\~nol y portugu\'es, lo cual permitir\'ia investigar la realizaci\'on ling\"u\'istica en estos lenguajes, que actualmente tiene pocos recursos. La mayor parte de los recursos del \'area est\'an en ingl\'es. Adem\'as permitir\'ia investigar la variaci\'on entre humanos en la GER (\cite{trainable-speaker,romina-coling,non-det}). 
+El corpus ZOOM es una colecci\'on de datos, resultante de un experimento realizado en un trabajo conjunto con la Universidad de S\~ao Paulo (Brasil). El objetivo del experimento fue crear un corpus de expresiones referenciales de un dominio m\'as complejo y m\'as cercano a las aplicaciones del mundo real, que los corpus existentes hasta el momento. Este corpus contiene referencias a targets singulares y plurales y hace gran uso de propiedades relacionales. Las descripciones del ZOOM corpus fueron producidas por humanos de espa\~nol y portugu\'es, lo cual permitir\'ia investigar la realizaci\'on ling\"u\'istica en estos lenguajes, que actualmente tiene pocos recursos. La mayor parte de los recursos del \'area est\'an en ingl\'es. Adem\'as permitir\'ia investigar la variaci\'on entre humanos en la GER (\cite{trainable-speaker,arec:2012:coling12,non-det}). 
 En este Cap\'itulo se describe el dominio y las caracter\'isticas del corpus, la metodolog\'ia usada su recolecci\'on y anotaci\'on y se lo compara con trabajo previo. Luego haremos una evaluaci\'on en la Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos. La evaluaci\'on realizada motiv\'o al caso de estudio de la Secci\'on \ref{sec:caso_estudio} en la que mostramos tres casos particulares de fragmentos de las ciudades de Lisboa y Madrid. Parte de lo que se presenta en este cap\'itulo fue publicado en \cite{DBLP:conf/acl/AltamiranoFPB15}.
 
 \section{Un corpus de descripciones de lugares en mapas}
@@ -478,14 +478,9 @@ En esta secci\'on presentamos tres casos de estudio detallados de evaluaci\'on d
 \subsection{Generaci\'on de expresiones refenciales singulares}
 \label{sec:sinzoom}
 
-Consideremos el mapa de la Figura \ref{mapa-zoom1} que muestra una regi\'on de la ciudad de Madrid. El target, es decir, el objeto se\~nalado por la flecha roja, es una iglesia, como se puede ver en la leyenda ubicada a la derecha del mapa. En la parte inferior derecha de la imagen se muestran las probabilidades de uso, las cuales fueron aprendidas desde el corpus, como se describe en el Cap\'itulo \ref{sec:algoritmo}, estas probabilidades no estaban en la imagen mostrada a los participantes que completaron el experimento de recolecci\'on de corpus, se agregaron a la imagen para ilustrar la discusi\'on de esta secci\'on.
+Consideremos el mapa de la Figura \ref{mapa-zoom1} que muestra una regi\'on de la ciudad de Madrid. El target, es decir, el objeto se\~nalado por la flecha roja, es una iglesia, como se puede ver en la leyenda ubicada a la derecha del mapa. 
 
-En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as frecuentes generadas por las personas que participaron 
-en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se indica el porcentaje de personas que dieron cada tipo de ER, es decir la cantidad de distintas personas que independientemente decidieron usar la misma ER\footnote{Por la misma ER nos referimos a una ER con la misma sem\'antica. Posibles divergencias gramaticales o l\'exicas en la realizaci\'on fueron unificadas.} para referirse al target, dividido por la cantidad total de ERs del mapa (se da en porcentaje). Estas 10 ERs m\'as frecuentes acumulan el 78.5\% del total de las ERs del corpus para el mapa considerado. Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales.
-
-
-%\end{figure}
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
 \includegraphics[width=\textwidth]{images/corpus/mapa6-prob.png}
 \caption{Imagen del corpus ZOOM con target singular. Se muestran las probabilidades de uso de las palabras en la esquina inferior derecha.}
@@ -493,7 +488,10 @@ en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se in
 \end{center}
 \end{figure}
 
-Para ejecutar el algoritmo necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es.\\
+En la parte inferior derecha de la imagen se muestran las probabilidades de uso, las cuales fueron aprendidas desde el corpus, como se describe en el Cap\'itulo \ref{sec:algoritmo}, estas probabilidades no estaban en la imagen mostrada a los participantes que completaron el experimento de recolecci\'on de corpus, se agregaron a la imagen para ilustrar la discusi\'on de esta secci\'on.
+
+En la Tabla \ref{freq-mapa} se muestran las 10 expresiones referenciales m\'as frecuentes generadas por las personas que participaron 
+en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se indica el porcentaje de personas que dieron cada tipo de ER, es decir la cantidad de distintas personas que independientemente decidieron usar la misma ER\footnote{Por la misma ER nos referimos a una ER con la misma sem\'antica. Posibles divergencias gramaticales o l\'exicas en la realizaci\'on fueron unificadas.} para referirse al target, dividido por la cantidad total de ERs del mapa (se da en porcentaje). Estas 10 ERs m\'as frecuentes acumulan el 78.5\% del total de las ERs del corpus para el mapa considerado. Tambi\'en se indica sin son subespecificadas (SubE) o sobreespecificadas (SobreE). Notar que las que no son ni subespecificadas, ni sobreespecificadas, son minimales. Para ejecutar el algoritmo necesitamos definir el vocabulario del modelo, es decir las palabras que vamos a usar al correr el algoritmo, la sem\'antica del mismo. Estas palabras fueron sacadas de la anotaci\'on del corpus, el cual est\'a anotado en ingl\'es.
 
 \begin{table}[h]
 {\footnotesize
@@ -755,7 +753,7 @@ en la cual se ubica el teatro y los restaurantes reci\'en nombrados.
 Se ejecut\'o el algoritmo 1000 veces con las probabilidades de uso que se muestran en la esquina inferior derecha del mapa de la Figura \ref{mapa-zoom2x}, con el modelo que se muestra en la Figura \ref{modelo-mapa-zoom2x} y las ERs obtenidas se muestran en la Tabla \ref{formulas-mapa-zoom2x}.
 
 Como resultado podemos ver que el algoritmo gener\'o {\it Parroquia de Santa Cruz} en 80\% de las ejecuciones, y esto es muy cercano al porcentaje que fue generada por las personas en el corpus (61.1\%). La segunda ER m\'as generada por las personas tambi\'en est\'a en la segunda posici\'on del top 10 ranking del algoritmo con una frecuencia del 8.8\%, las personas la generaron un 12.5\%. Varias ERs dadas por las personas en el corpus, son sobreespecificadas y consideramos que justamente por eso el algoritmo no las gener\'o, la sobreespecificaci\'on que permite el algoritmo es limitada, entonces, no agrega tanta informaci\'on redundante. {\it Iglesia de la Parroquia de Santa Cruz} fue generada por las personas en un 2.78\% y por el algoritmo en 6.5\%. Recordemos el {\it Ministerio de Asuntos Exteriores} no pertenec\'ia al modelo, por lo tanto, el algoritmo no pod\'ia generar las ERs que lo incluyeran.
-
+\bigskip
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|l|c|c|}
@@ -817,13 +815,8 @@ Por los resultados obtenidos vemos que las probabilidades de uso, son una buena 
 \subsection{Generaci\'on de expresiones referenciales plurales}
 \label{sec:plural}
 
-%Como dijimos el nombre del Ministerio de Asuntos Exteriores no se ve en el mapa, sin embargo 6 personas lo usaron en sus ERs, 
-%esto se debe a que como en la obtenci\'on del corpus los mapas se mostraron aleatoriamente, algunas personas vieron el mapa sin zoom antes, y recordaron que ese edificio que se ve en el mapa, es el Ministerio de Asuntos Exteriores. Como no est\'a visible en el mapa, no aparece en el modelo.
-
-En esta secci\'on analizamos el desempe\~no de nuestro algoritmo de GER en un mapa con target plural. Como podemos ver en el mapa de la Figura \ref{mapa-zoom-plural} el conjunto target est\'a compuesto por 2 restaurantes, uno que tiene nombre {\it Restaurante Medina Mayrit} y el otro est\'a ubicado cerca (a unos 100 metros), al lado de una iglesia. Las ERs del corpus se muestran en la Tabla \ref{freq-mapa-zoom-plural} se indica la frecuencia de ocurrencia en el corpus, si es parcial, si es sobreespecificada (SobreE) o subespecificada (SubE). 
-Recordemos que en el Cap\'itulo \ref{sec:seleccion} dimos la definici\'on de ER parcial: es aquella que siendo plural, identifica a un subconjunto estricto del target. Es decir, una ER parcial identifica a una parte del target pero no refiere a todos los elementos que forman parte del conjunto target.
-
-
+En esta secci\'on analizamos el desempe\~no de nuestro algoritmo de GER en un mapa con target plural.
+ 
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{images/corpus/mapa10conProb.png}\\[0pt]
@@ -831,10 +824,14 @@ Recordemos que en el Cap\'itulo \ref{sec:seleccion} dimos la definici\'on de ER 
 \label{mapa-zoom-plural}
 \end{figure}
 
+Como podemos ver en el mapa de la Figura \ref{mapa-zoom-plural} el conjunto target est\'a compuesto por 2 restaurantes, uno que tiene nombre {\it Restaurante Medina Mayrit} y el otro est\'a ubicado cerca (a unos 100 metros), al lado de una iglesia. 
+
+Las ERs del corpus se muestran en la Tabla \ref{freq-mapa-zoom-plural} se indica la frecuencia de ocurrencia en el corpus, si es parcial, si es sobreespecificada (SobreE) o subespecificada (SubE). 
+Recordemos que en el Cap\'itulo \ref{sec:seleccion} dimos la definici\'on de ER parcial: es aquella que siendo plural, identifica a un subconjunto estricto del target. Es decir, una ER parcial identifica a una parte del target pero no refiere a todos los elementos que forman parte del conjunto target.
+
 De las ERs del corpus que se ven en la tabla, 55\% son parciales, 25\% son sobreespecificadas. Cabe notar que el algoritmo no va a generar ERs parciales, ni subespecificadas. El algoritmo no podr\'a generar las ERs 1, 6, 7, 9, 10, 12, 13 ,14, 15 y 17. 
 
-Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Figura \ref{modelo-mapa-zoom}. Las probabilidades de uso de las palabras se calcularon como se explica en la Secci\'on \ref{sec:learning-corpus} del Cap\'itulo \ref{sec:algoritmo} y se muestran en la esquina inferior derecha de la Figura \ref{mapa-zoom-plural}. En el Ap\'endice \ref{apendiceB}, se muestran las f\'ormulas generadas por el algoritmo. La exactitud que conseguimos en este caso es de 27.1\%.S
-
+\medskip
 
 \begin{table}[h]
 {\footnotesize
@@ -882,7 +879,7 @@ Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Fi
 
 17&Medina Mayrit en calle de Atocha y el que est\'a cerca  				&  1 &	1.6\%	&&X&\\ 
 &calle de Atocha y calle de La Cruz  					&1  &	1.7\%	&X&&\\ \hline 
-\hline
+%\hline
 %Totales	&&60	&	100\%	&&&\\
 
 %\hline
@@ -892,10 +889,12 @@ Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Fi
 }
 \end{table}
 
+\medskip
+
+Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Figura \ref{modelo-mapa-zoom}. Las probabilidades de uso de las palabras se calcularon como se explica en la Secci\'on \ref{sec:learning-corpus} del Cap\'itulo \ref{sec:algoritmo} y se muestran en la esquina inferior derecha de la Figura \ref{mapa-zoom-plural}. En el Ap\'endice \ref{apendiceB}, se muestran las f\'ormulas generadas por el algoritmo. La exactitud que conseguimos en este caso es de 27.1\%.S
 
 
-
-\begin{table}[h]
+\begin{table}[H]
 {\footnotesize
 \begin{center}
 \begin{tabular}{|l|l|c|c|}
