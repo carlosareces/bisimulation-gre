@@ -124,11 +124,7 @@ En la pr\'oxima secci\'on veremos porqu\'e la tarea de GER es m\'as compleja de 
 \label{sec:gre-incertidumbre}
 
 
-Cuando la generaci\'on de expresiones referenciales ocurre en la vida real, en lugar de ocurrir en un experimento controlado, las fuentes de \textbf{incertidumbre} que afectan al proceso se multiplican. En trabajo 
-reciente en el \'area de GER \cite{turner2009,deemter16} se discute que, al intentar usar algoritmos de GER en dominios grandes 
-y realistas (como por ejemplo la descripci\'on de regiones en mapas) la identificaci\'on \'optima del target es una tarea que puede ser 
-aproximada pero raramente lograda. Los autores argumentan que esto se debe, en parte, a que las representaciones geogr\'aficas 
-son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce incertidumbre. Por ejemplo, el restaurante se\~nalado por la flecha en la Figura \ref{target_mapa}, ?`es realmente el \'unico restaurante de la calle C\'adiz o ?`es el \'unico que aparece en el mapa?.
+Cuando la generaci\'on de expresiones referenciales ocurre en la vida real, en lugar de ocurrir en un experimento controlado, las fuentes de \textbf{incertidumbre} que afectan al proceso se multiplican. En trabajo reciente en el \'area de GER \cite{turner2009,deemter16} se discute que, al intentar usar algoritmos de GER en dominios grandes y realistas (como por ejemplo la descripci\'on de regiones en mapas) la identificaci\'on \'optima del target es una tarea que puede ser aproximada pero raramente lograda. Los autores argumentan que esto se debe, en parte, a que las representaciones geogr\'aficas son necesariamente \textbf{incompletas}. Esta falta de informaci\'on introduce incertidumbre. Por ejemplo, el restaurante se\~nalado por la flecha en la Figura \ref{target_mapa}, ?`es realmente el \'unico restaurante de la calle de C\'adiz o ?`es el \'unico que aparece en el mapa?.
 
 \begin{figure}[h]
 \centering
@@ -149,12 +145,12 @@ de hecho, {\it la cosa que est\'a a la derecha del cubo del medio} no se podr\'i
 \medskip
 
 \begin{figure}[h]
-\begin{subfigure}{.5\textwidth}
-  \centering
+%\begin{subfigure}{.5\textwidth}
+\centering
 \vspace*{1cm}
-
+\begin{tabular}{l@{\hspace{1.0cm}}c@{\hspace{1.0cm}}}
 \begin{picture}(250,50)
-\put(0,-50){\begin{tikzpicture}
+\put(-75,-50){\begin{tikzpicture}
   [
     n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
@@ -203,26 +199,14 @@ de hecho, {\it la cosa que est\'a a la derecha del cubo del medio} no se podr\'i
  %\draw[dotted] (-0.5,-1.3) rectangle (8,3.1);
  \draw[dotted] (-0.5,-1.5) rectangle (8,3);
  \end{tikzpicture}}
-
  \end{picture}
  %\end{flushleft}
 
-\vspace*{.5cm} 
-%\caption{Formalizaci\'on de las propiedades de la Figura \ref{contexto-tabla-propiedades} como un grafo etiquetado.}\label{representacion-modelo1}
-%\caption{}
-\end{subfigure}
-
-\begin{subfigure}{.4\textwidth}
-%\begin{subfigure}{.5\textwidth}
-\centering
-%\includegraphics[width=\textwidth]{images/22sinletras.jpg}
-
-%\label{GRE3D7-stimulus1-b}
-%\vspace*{1cm}
+&
 \begin{picture}(50,50)
-\put(172,15){\begin{tikzpicture}
-  [
-    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+%\put(172,15){\begin{tikzpicture}
+\put(-110,-50){\begin{tikzpicture}
+  [    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
   ]
  \node[n,label=below:{
@@ -282,7 +266,12 @@ de hecho, {\it la cosa que est\'a a la derecha del cubo del medio} no se podr\'i
 
  \end{picture}
 %\caption{}
-\end{subfigure}
+%\end{subfigure}
+\vspace{1.8cm}\ \\
+        \hspace{1.8cm}(a)&(b)
+\end{tabular}
+%\includegraphics[width=0.46\textwidth]{images/corpus/mapa5.png} & \includegraphics[width=0.53\textwidth]{images/corpus/mapa15.png} \\
+%\noindent
 
 \caption{Formalizaci\'on de las propiedades de la Figura \ref{contexto-tabla-propiedades} como un grafo etiquetado en (a) y representaci\'on de contexto m\'as completo en (b).}\label{representacion-modelo-completo}\label{representacion-modelo1}
 \end{figure}
@@ -550,9 +539,7 @@ Cuando la salida no es $\bot$, decimos que $\phi$ es una
 Consideramos s\'olo modelos relacionales con s\'imbolos de relaciones unarias y binarias, usaremos $p$ para las proposiciones (propiedades) y $r$ para los s\'imbolos de relaci\'on binarias.
 Como dijimos anteriormente, dado un modelo $\gM$, podr\'ia haber un n\'umero muy grande de f\'ormulas que de forma un\'ivoca
 describan al target (incluso f\'ormulas que no son l\'ogicamente equivalentes podr\'ian tener
-la misma interpretaci\'on una vez que el modelo este fijo). Por ejemplo, en el modelo $\+M$ de la Figura \ref{grafo-GRE3D7-stimulus_b} las f\'ormulas $\aLarge \land \nBall$ y $\aRed \land \nBall$ no son l\'ogicamente equivalentes pero tienen la misma interpretaci\'on en $\gM$ ya que $\interp{\aLarge \land \nBall}$ = \{$e_5$\} y $\interp{\aRed \land \nBall}$ = \{$e_5$\}.
-Diferentes ERs
-del mismo target podr\'ian ser m\'as o menos apropiadas en el contexto dado. Otra cosa que es importante tener en cuenta, es que la determinaci\'on de contenido usando lenguajes con diferente poder expresivo, puede tener un impacto en la complejidad computacional de la GER y en la etapa posterior de realizaci\'on sint\'actica. Para ilustrar eso, veamos las f\'ormulas que identifican al elemento target $b$ en la Figura \ref{fig:cat-dog-1}.
+la misma interpretaci\'on una vez que el modelo este fijo). Por ejemplo, en el modelo $\+M$ de la Figura \ref{grafo-GRE3D7-stimulus_b} las f\'ormulas $\aLarge \land \nBall$ y $\aRed \land \nBall$ no son l\'ogicamente equivalentes pero tienen la misma interpretaci\'on en $\gM$ ya que $\interp{\aLarge \land \nBall}$ = \{$e_5$\} y $\interp{\aRed \land \nBall}$ = \{$e_5$\}. Diferentes ERs del mismo target podr\'ian ser m\'as o menos apropiadas en el contexto dado. Otra cosa que es importante tener en cuenta, es que la determinaci\'on de contenido usando lenguajes con diferente poder expresivo, puede tener un impacto en la complejidad computacional de la GER y en la etapa posterior de realizaci\'on sint\'actica. Para ilustrar eso, veamos las f\'ormulas que identifican al elemento target $b$ en la Figura \ref{fig:cat-dog-1}.
 \medskip
 $$
 \begin{array}{ll}
@@ -570,7 +557,8 @@ $$
   %
  \end{array}
 $$
-Notar que las f\'ormulas mostradas, hacen uso de diferentes operadores de la l\'ogica \FOL: hay negaci\'on de \'atomos y de relaciones, hay cuantificaci\'on existencial, y universal, conjunci\'on, disyunci\'on y desigualdad. La realizaci\'on sint\'actica de algunas de \'estas f\'ormulas pueden involucrar estructuras gramaticales complejas. Por ejemplo la f\'ormula $\phi_4$ requiere el uso de voz pasiva y podr\'ia realizarse como {\it el perro que es olido por un gato peque\~no}. La f\'ormula $\nDog(x) \land \exists y . (x \not\approx y \land \nDog(y) \land \aSniffing(x,y))$ que representa al target $a$ de la Figura \ref{fig:cat-dog-1} requiere el uso de lexemas como otro y puede realizarse como {\it el perro que huele a otro perro}, negaciones, etc. La f\'ormula $\phi_2$ requiere el uso de negaci\'on del predicado y podr\'ia realizarse como {\it el perro peque\~no que no huele gatos}.
+
+Notar que las f\'ormulas mostradas, hacen uso de diferentes operadores de la l\'ogica \FOL: hay negaci\'on de \'atomos y de relaciones, hay cuantificaci\'on existencial, y universal, conjunci\'on, disyunci\'on y desigualdad. La realizaci\'on sint\'actica de algunas de \'estas f\'ormulas pueden involucrar estructuras gramaticales complejas. Por ejemplo la f\'ormula $\phi_4$ requiere el uso de voz pasiva y podr\'ia realizarse como {\it el perro que es olido por un gato peque\~no}. La f\'ormula $\nDog(x) \land \exists y . (x \not\approx y \land \nDog(y) \land \aSniffing(x,y))$ que representa al target $a$ de la Figura \ref{fig:cat-dog-1} requiere el uso de lexemas como otro y puede realizarse como {\it el perro que huele a otro perro}. La f\'ormula $\phi_2$ requiere el uso de negaci\'on del predicado y podr\'ia realizarse como {\it el perro peque\~no que no huele gatos}.
  
 Como nuestra meta es hacer un ranking de las mejores expresiones referenciales, una manera de acercarnos a esa meta es restringiendo la l\'ogica. Si restringimos a \EPFOL que no tiene negaci\'on, aseguramos que f\'ormulas como $\phi_2$ no se generar\'an. Si sacaramos el operador distinto ($\not\approx$) del lenguaje, $\phi_3$ tambi\'en queda excluida.
 A continuaci\'on presentamos fragmentos de $\FOL$ conocidos como l\'ogicas para la descripci\'on. Por ejemplo, el lenguaje de la l\'ogica para la descripci\'on $\ALC$, se define sint\'acticamente como el conjunto de f\'ormulas que se pueden generar recursivamente como sigue
@@ -613,7 +601,7 @@ Las f\'ormulas que no contienen negaci\'on se pueden representar como subgrafos 
  %\begin{center}
 %\hspace*{1.5cm} 
 \begin{picture}(0,60)
-\put(80,0){\begin{tikzpicture}
+\put(140,0){\begin{tikzpicture}
   [
     n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
@@ -628,7 +616,7 @@ Las f\'ormulas que no contienen negaci\'on se pueden representar como subgrafos 
 %\hspace*{3.5cm} 
 %\vspace*{5.5cm} 
 
-\put(180,0){\begin{tikzpicture}
+\put(250,-8){\begin{tikzpicture}
    [
     n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
@@ -648,6 +636,7 @@ Las f\'ormulas que no contienen negaci\'on se pueden representar como subgrafos 
  \end{picture}
 %\end{subfigure}
 \caption{Subgrafos que representan las f\'ormulas $\phi_1$ y $\phi_4$.}\label{grafos-formulas}
+%\end{center}
 \end{figure}
 
 
@@ -689,12 +678,12 @@ En esta secci\'on contamos como est\'a organizada la tesis. En lo que sigue dare
 \subsection{Cap\'itulo~\ref{sec:intro}: ``Introducci\'on''} 
 Situamos a la generaci\'on autom\'atica de expresiones 
 referenciales dentro de la inteligencia artificial y de la generaci\'on de lenguaje natural. Dijimos que un sistema de 
-generaci\'on de lenguaje natural tiene tres etapas: la determinaci\'on de contenido, la lexicalizaci\'on y la realizaci\'on sint\'actica. La generaci\'on de expresiones referenciales es una sub\'area de la generaci\'on de lenguaje natural y por lo tanto, incluye las mismas tres etapas. La determinaci\'on de contenido, que es la selecci\'on de las propiedades y/o relaciones con otros objetos que vamos a elegir para identificar un\'ivocamente al target es el tema de la tesis. Explicamos conceptos b\'asicos que usaremos a lo largo de la tesis, como ser el de {\it dominio}, {\it contexto}, {\it propiedad}, {\it target}, {\it distractor} y {\it algoritmo}. Explicamos porqu\'e la tarea de GER es compleja, ya que hay incertidumbre al representar el contexto en situaciones de la vida real. Los modelos son indefectiblemente incompletos o incorrectos. Dimos una introducci\'on a la variedad de expresiones referenciales que 
+generaci\'on de lenguaje natural tiene tres etapas: la determinaci\'on de contenido, la lexicalizaci\'on y la realizaci\'on sint\'actica. La generaci\'on de expresiones referenciales es una sub\'area de la generaci\'on de lenguaje natural y por lo tanto, incluye las mismas tres etapas. La determinaci\'on de contenido, que es la selecci\'on de las propiedades y/o relaciones con otros objetos que vamos a elegir para identificar un\'ivocamente al target, es el tema de la tesis. Explicamos conceptos b\'asicos que usaremos a lo largo de la tesis, como ser el de {\it dominio}, {\it contexto}, {\it propiedad}, {\it target}, {\it distractor} y {\it algoritmo}. Explicamos porqu\'e la tarea de GER es compleja, ya que hay incertidumbre al representar el contexto en situaciones de la vida real. Los modelos son indefectiblemente incompletos o incorrectos. Dimos una introducci\'on a la variedad de expresiones referenciales que 
 se puede tener para el mismo objeto target en el mismo contexto. Propusimos dar no una ER sino un ranking de ERs para un input dado.
 Introdujimos el concepto de teor\'ia de modelos, describimos diversos lenguajes formales (i.e, l\'ogicos) y su impacto si se usan para el problema de generaci\'on autom\'atica de expresiones referenciales.  Partimos desde la l\'ogica de primer orden (\FOL), la m\'as expresiva, explicamos el lenguaje asociado, para darnos una idea de cu\'ales son las f\'ormulas que el lenguaje puede generar, vimos una serie de ejemplos y propusimos restricciones al lenguaje que permiten generar estructuras que se ven en corpora.
 
 \subsection{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} 
-Este cap\'itulo est\'a dividido en 4 secciones. En la primer secci\'on definimos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas. Luego comentamos en qu\'e se basan la teor\'ia de \cite{clark1992arenas,clark96,Clark-Marshall81} y c\'omo son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area, varios de los cuales usaremos a lo largo de la tesis, viendo la simplicidad de estos corpora. Por un lado podemos ver la complejidad de la tarea, ya que si para corpora tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, que usa im\'agenes de mapas de ciudades como contexto. Luego dimos una introducci\'on a las m\'etricas de evaluaci\'on. En la segunda secci\'on describimos diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se compararon esos algoritmos en cuanto al tipo de algoritmos y salida que producen. Se explica el algoritmo Graph en m\'as detalle que los dem\'as porque es el m\'as cercano a los tipos de algoritmos que se usan en esta tesis. Luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on de la tarea de GER. Algunas m\'etricas usan corpus para comparar las salidas de los algoritmos con las ERs dadas por humanos. Hay m\'etricas autom\'aticas y otras manuales. Para finalizar el cap\'itulo damos un resumen y explicamos c\'omo se linkea con los dem\'as cap\'itulos.
+Este cap\'itulo est\'a dividido en 4 secciones. En la primer secci\'on definimos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas. Luego comentamos en qu\'e se basan la teor\'ia de \cite{clark1992arenas,clark96,Clark-Marshall81} y c\'omo son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area, varios de los cuales usaremos a lo largo de la tesis. Viendo la simplicidad de estos corpora, por un lado podemos ver la complejidad de la tarea, ya que si para corpora tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, que usa im\'agenes de mapas de ciudades como contexto. En la segunda secci\'on describimos diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se compararon esos algoritmos en cuanto al tipo de algoritmos y salida que producen. Se explica el algoritmo Graph en m\'as detalle que los dem\'as porque es el m\'as cercano a los tipos de algoritmos que se usan en esta tesis. Luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on de la tarea de GER. Algunas m\'etricas usan corpus para comparar las salidas de los algoritmos con las ERs dadas por humanos. Hay m\'etricas autom\'aticas y otras manuales. Para finalizar el cap\'itulo damos un resumen y explicamos c\'omo se linkea con los dem\'as cap\'itulos.
 
 \subsection{Cap\'itulo~\ref{sec:intro_logica}: ``Usando teor\'ia de modelos''} 
 Daremos definiciones b\'asicas de modelo, 
@@ -715,7 +704,7 @@ terminaci\'on. Adem\'as mostramos completitud, es decir que siempre conseguimos 
 En el Cap\'itulo \ref{sec:seleccion} se describieron m\'etricas de evaluaci\'on tanto autom\'aticas como manuales. Evaluamos los algoritmos presentados 
 en el Cap\'itulo \ref{sec:algoritmo}, teniendo en cuenta ambos tipos de m\'etricas. La evaluaci\'on esta dividida en 2 partes. 
 Una parte en la cual comparamos la salida del algoritmo para modelos de 2 corpora descriptos en el Cap\'itulo \ref{sec:seleccion}, con expresiones referenciales dadas por los humanos, tomando probabilidades de uso obtenidas con aprendizaje autom\'atico a partir de cada corpora. Vemos c\'omo las ERs generadas con probabilidades obtenidas del corpus con aprendizaje autom\'atico se acercan 
-mucho m\'as a las humanas, que 2 baselines (random y unifome). En la otra parte de este cap\'itulo presentamos una evaluaci\'on manual en la cual 2 jueces humanos decidieron que ER era mejor entre la del corpus y la generada por el algoritmo. Es interesante notar c\'omo muchas 
+mucho m\'as a las humanas, que 2 baselines (random y unifome). En la otra parte de este cap\'itulo presentamos una evaluaci\'on manual en la cual 2 jueces humanos decidieron qu\'e ER era mejor entre la del corpus y la generada por el algoritmo. Es interesante notar c\'omo muchas 
 veces las ERs generadas por el algoritmo fueron juzgadas por los jueces como mejores que las humanas. El algoritmo tiene la ventaja de que
  siempre da una ER si existe, en cambio los humanos muchas veces dan expresiones ambiguas que no son referenciales. 
 
