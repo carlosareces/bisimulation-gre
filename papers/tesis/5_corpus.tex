@@ -388,14 +388,14 @@ En esta secci\'on se presentan los resultados del desempe\~no de un algoritmo si
 \subsection{Algoritmos y procedimiento}
 %......................
 
-Para esta evaluaci\'on publicada en \cite{DBLP:conf/acl/AltamiranoFPB15} se utiliz\'o un subconjunto de descripciones singulares de la parte portuguesa del corpus. Esto comprende 821 descripciones producidas por personas para 9 escenas. La evaluaci\'on se llev\'o a cabo mediante la comparaci\'on de las ERs del corpus con la salida del sistema para medir la exactitud global (es decir, el n\'umero de coincidencias exactas entre las dos descripciones), los coeficientes Dice \cite{dice} y \textsc{masi} \cite{masi} (es decir, el grado de solapamiento entre la salida del algoritmo y la descripci\'on corpus correspondiente).
+Para esta evaluaci\'on publicada en \cite{DBLP:conf/acl/AltamiranoFPB15} se utiliz\'o un subconjunto de descripciones singulares de la parte portuguesa del corpus. Esto comprende 821 descripciones producidas por personas para 9 escenas. La evaluaci\'on se llev\'o a cabo mediante la comparaci\'on de las ERs del corpus con la salida del sistema para medir la exactitud global (es decir, el n\'umero de coincidencias exactas entre las dos descripciones), los coeficientes Dice \cite{dice} y \textsc{masi} \cite{masi} (es decir, el grado de solapamiento entre la salida del algoritmo y la descripci\'on del corpus correspondiente).
 
-El algoritmo SVM utilizado se basa en un dise\~no propuesto en \cite{thiago-svm}. Es decir se construye un modelo de GER usando {\it clasificadores support vector machines} (SVM) con funci\'on de kernel radial kernel de base radial. Los clasificadores se entrenaron y se hicieron validaciones cruzadas con {\it 6 folders}. Para conseguir los par\'ametros \'optimos se realiz\'o el procedimiento est\'andar de k-folders. Es decir, para cada validaci\'on cruzada, se reserv\'o un conjunto para las pruebas, y los restantes $k-1$ conjuntos quedaron sujetos a un segundo procedimiento de validaci\'on cruzada en el que se probaban diferentes combinaciones de par\'ametros. Al par\'ametro $C$ se le asignaron los valores 1, 10, 100 y 1000, y a $\gamma$ se le asignaron los valores 1, 0,1, 0,001 y 0,0001. El conjunto de par\'ametros de mejor desempe\~no fue seleccionado para construir un clasificador entrenado on los conjuntos $k-1$, y probado en los datos de prueba. Este procedimiento se repiti\'o para cada iteraci\'on del procedimiento principal de validaci\'on cruzada.
+El algoritmo SVM utilizado se basa en un dise\~no propuesto en \cite{thiago-svm}. Es decir se construye un modelo de GER usando {\it clasificadores support vector machines} (SVM) con funci\'on de base kernel radial. Los clasificadores se entrenaron y se hicieron validaciones cruzadas con {\it 6 folders}. Para conseguir los par\'ametros \'optimos se realiz\'o el procedimiento est\'andar de k-folders. Es decir, para cada validaci\'on cruzada, se reserv\'o un conjunto para las pruebas, y los restantes $k-1$ conjuntos quedaron sujetos a un segundo procedimiento de validaci\'on cruzada en el que se probaban diferentes combinaciones de par\'ametros. Al par\'ametro $C$ se le asignaron los valores 1, 10, 100 y 1000, y a $\gamma$ se le asignaron los valores 1, 0.1, 0.001 y 0.0001. El conjunto de par\'ametros de mejor desempe\~no fue seleccionado para construir un clasificador entrenado on los conjuntos $k-1$, y probado en los datos de prueba. Este procedimiento se repiti\'o para cada iteraci\'on del procedimiento principal de validaci\'on cruzada.
 %................................
 %\subsection{Modelo Computacional }
 %................................
 
-El modelo SVM consta de 12 clasificadores binarios que representan si los atributos individuales deben ser seleccionados para su inclusi\'on en la ER de salida. Los clasificadores se corresponden con atributos at\'omicos del target y del primer landmark con los atributos ({\em tipo}, {\em nombre } y {\em otros}), y las relaciones. Los atributos de otros landmarks no se modelaron en este experimento. El valor m\'ultiple de la relaci\'on {\em entre} tambi\'en se ignor\'o, y la relaci\'on esquina que implica a dos puntos de referencia (por ejemplo, dos calles) se modelaron como dos tareas de clasificaci\'on independientes. Dos caracter\'{i}sticas de aprendizaje fueron consideradas por cada clasificador: {\em landmarkCount}, que representa el n\'umero de objetos cercanos al target, y {\em DistractorCount}, que representa el n\'umero de objetos del mismo tipo que el target en el contexto considerado.
+El modelo SVM consta de 12 clasificadores binarios que representan si los atributos individuales deben ser seleccionados para su inclusi\'on en la ER de salida. Los clasificadores se corresponden con atributos at\'omicos del target y del primer landmark con los atributos ({\em tipo}, {\em nombre} y {\em otros}), y las relaciones. Los atributos de otros landmarks no se modelaron en este experimento. El valor m\'ultiple de la relaci\'on {\em entre} tambi\'en se ignor\'o, y la relaci\'on esquina que implica a dos puntos de referencia (por ejemplo, dos calles) se model\'o como dos tareas de clasificaci\'on independientes. Dos caracter\'{i}sticas de aprendizaje fueron consideradas por cada clasificador:{\em landmarkCount}, que representa el n\'umero de objetos cercanos al target, y {\em DistractorCount}, que representa el n\'umero de objetos del mismo tipo que el target en el contexto considerado.
 
 A partir de los resultados de los 12 clasificadores binarios, una descripci\'on se construy\'o teniendo en cuenta los atributos at\'omicos del target en primer lugar. Por cada predicci\'on positiva, se seleccion\'o el atributo at\'omico correspondiente para su inclusi\'on en la descripci\'on de salida. A continuaci\'on, se consideraron las relaciones. Si no se elije ninguna relaci\'on, el algoritmo termina devolviendo una descripci\'on at\'omica del objeto target. Si la descripci\'on incluye una relaci\'on, se selecciona el objeto landmark relacionado, y el algoritmo se llama de forma recursiva para describir a ese objeto.
 
@@ -406,14 +406,14 @@ Puesto que cada atributo que se corresponde con una predicci\'on positiva ser\'a
 \subsection{Resultados de la generaci\'on }
 %......................
 
-Tabla \ref{tab-reg-results} resume los resultados obtenidos por el algoritmo de GER construido a partir de clasificadores SVM, los obtenidos mediante un sistema descripto en el Cap\'itulo \ref{sec:seleccion} que implementa una extensi\'on relacional del algoritmo incremental \cite{incremental}, y por una estrategia de selecci\'on random. Se comparan exactitud, coeficientes Dice y MASI.
+Tabla \ref{tab-reg-results} resume los resultados obtenidos por el algoritmo de GER construido a partir de clasificadores SVM y los obtenidos mediante un sistema descripto en el Cap\'itulo \ref{sec:seleccion} que implementa una extensi\'on relacional del algoritmo incremental \cite{incremental}. Se comparan exactitud, coeficientes Dice y \textsc{masi}.
 \medskip
 % these results are for SVM.All.VAR-   compared to the AEI- baseline
 \begin{table}[h]
 \begin{center}
 \begin{tabular} {  l c c c }
 \hline
-{Algoritmo}							& {Exactitud} 	& { Dice}		& MASI \\ \hline 
+{Algoritmo}							& {Exactitud} 	& { Dice}		& \textsc{masi} \\ \hline 
 SVM											& 0.15		& 0.51			& 0.28 \\
 Incremental							& 0.04		& 0.53			& 0.21 \\
 %Selecci\'on Random        	& 0.03    & 0.45      & 0.15 \\
@@ -424,11 +424,11 @@ Incremental							& 0.04		& 0.53			& 0.21 \\
 \label{tab-reg-results}
 \end{table}
 
-En lo que sigue se comparan los resultados de exactitud obtenidos por cada par algoritmos mediante la prueba de chi cuadrado, y se compara {\em Dice} utilizando la prueba de rangos con signo {\em de Wilcoxon}.
+En lo que sigue se comparan los resultados de exactitud obtenidos por cada par algoritmos mediante la prueba de chi cuadrado, y se compara Dice utilizando la prueba de rangos con signo {\em de Wilcoxon}.
 
-En t\'erminos de exactitud global y tambi\'en en cuanto a las puntuaciones MASI, el m\'etodo SVM supera al algoritmo incremental. La diferencia con el segundo algoritmo de mejor rendimiento (es decir, el enfoque incremental) es altamente significativa ($\chi^{2}=$ 79,87, df = 1, p$<$ 0,0001). S\'olo en cuanto a las puntuaciones de {\it Dice} se observa el efecto contrario (T = 137570.5, p$=$0,01413).
+En t\'erminos de exactitud global y tambi\'en en cuanto a las puntuaciones \textsc{masi}, el m\'etodo SVM supera al algoritmo incremental. La diferencia con el segundo algoritmo de mejor rendimiento (es decir, el enfoque incremental) es altamente significativa ($\chi^{2}=$ 79,87, df = 1, p$<$ 0,0001). S\'olo en cuanto a las puntuaciones de Dice se observa el efecto contrario (T = 137570.5, p$=$0,01413).
 
-Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. La Tabla \ref{tab-svm-results} muestra estos resultados, medida por la exactitud (E), cobertura (R), F1-medida (F1) y el \'area bajo la curva ROC (AUC). F1 es la media arm\'onica entre la exactitud y la cobertura. La curva ROC (AUC) es la representaci\'on de la proporci\'on de verdaderos positivos (VPR = proporci\'on de Verdaderos Positivos) frente a la proporci\'on de falsos positivos (FPR = proporci\'on de Falsos Positivos) tambi\'en seg\'un se var\'ia el umbral de discriminaci\'on (valor a partir del cual decidimos que un caso es un positivo).
+Tambi\'en se evalu\'o el desempe\~no de los clasificadores individuales. La Tabla \ref{tab-svm-results} muestra estos resultados, medidos por la exactitud (E), cobertura (R), F1-medida ($F_{1}$)y el \'area bajo la curva ROC (AUC). F1 es la media arm\'onica entre la exactitud y la cobertura. La curva ROC (AUC) es la representaci\'on de la proporci\'on de verdaderos positivos (VPR = proporci\'on de Verdaderos Positivos) frente a la proporci\'on de falsos positivos (FPR = proporci\'on de Falsos Positivos) tambi\'en seg\'un se var\'ia el umbral de discriminaci\'on (valor a partir del cual decidimos que un caso es un positivo).
 
 %these are the rsults for the training over the set of ALL speakers 
 \begin{table}[h]
@@ -469,7 +469,7 @@ A continuaci\'on evaluamos el desempe\~no de nuestro algoritmo sobre mapas del c
 \section{Desempe\~no de nuestro algoritmo sobre el corpus}
 \label{sec:caso_estudio}
 
-En esta secci\'on presentamos tres casos de estudio detallados de evaluaci\'on de las ERs generadas con nuestros algoritmos para mapas del corpus ZOOM. En la Secci\'on \ref{sec:sinzoom} analizaremos la generaci\'on de rankings de ERs singulares en el dominio del corpus ZOOM y compararemos el desempe\~no del algoritmo con datos del corpus. En la Secci\'on \ref{sec:conzoom} analizaremos la generaci\'on de rankings de ERs en un mapa con mayor nivel de zoom que el analizado en la Secci\'on \ref{sec:sinzoom}. En la Secci\'on \ref{sec:plural} analizaremos la generaci\'on de ERs plurales.
+En esta secci\'on presentamos tres casos de estudio detallados de evaluaci\'on de las ERs generadas con nuestros algoritmos para mapas del corpus ZOOM. En la Secci\'on \ref{sec:sinzoom} analizaremos la generaci\'on de rankings de ERs singulares en el dominio del corpus ZOOM y comparamos el desempe\~no del algoritmo con datos del corpus. En la Secci\'on \ref{sec:conzoom} analizamos la generaci\'on de rankings de ERs en un mapa con mayor nivel de zoom que el analizado en la Secci\'on \ref{sec:sinzoom}. En la Secci\'on \ref{sec:plural} analizamos la generaci\'on de ERs plurales.
 
 \subsection{Generaci\'on de expresiones refenciales singulares}
 \label{sec:sinzoom}
@@ -518,7 +518,7 @@ en la recolecci\'on del corpus para el mapa de la Figura \ref{mapa-zoom1}. Se in
 
 \vspace*{-0.5cm}
 
-Para calcular las probabilidades de uso usamos el m\'etodo presentado en el Cap\'itulo \ref{sec:algoritmo}, cuando se tiene un corpus disponible para la escena considerada. Se tuvieron en cuenta las ERs que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ERs fueron las que cumpl\'ian con esas condiciones. Para cada palabra de las que aparec\'ia en el corpus para el contexto seleccionado, las cuales son: \{church, in, front, near, minAsExt, calleSantoTomas, calleAtocha\} se cont\'o la cantidad de veces que aparec\'ia la palabra en el corpus, teniendo en cuenta que si aparec\'ia 2 veces en la misma ER se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63 que fueron la cantidad de ERs que eran v\'alidas. Por ejemplo la palabra {\it church} apareci\'o en 61 ERs, por lo tanto la probabilidad de {\it church} es 61/63 = 0.968. Y as\'i se calcul\'o para las dem\'as palabras del vocabulario. Las probabilidades de uso de las palabras se muestran en la esquina inferior derecha del mapa de la Figura \ref{mapa-zoom1}.
+Para calcular las probabilidades de uso usamos el m\'etodo presentado en el Cap\'itulo \ref{sec:algoritmo}, cuando se tiene un corpus disponible para la escena considerada. Se tuvieron en cuenta las ERs que dieron las personas, incluso las que eran subespecificadas, pero no las que no eran ciertas, un total de 63 ERs fueron las que cumpl\'ian con esas condiciones. Para cada palabra de las que aparec\'ia en el corpus para el contexto seleccionado, las cuales son: \{church, in, front, near, minAsExt, calleSantoTomas, calleAtocha\} se cont\'o la cantidad de veces que aparec\'ia la palabra en el corpus, teniendo en cuenta que si aparec\'ia 2 veces en la misma ER se contaba s\'olo 1 vez, a fin de tener siempre probabilidades entre 0 y 1, y luego se dividi\'o sobre 63 que fueron la cantidad de ERs que eran v\'alidas. Por ejemplo la palabra {\it church} apareci\'o en 61 ERs, por lo tanto la probabilidad de {\it church} es 61/63 = 0.97. Y as\'i se calcul\'o para las dem\'as palabras del vocabulario. Las probabilidades de uso de las palabras se muestran en la esquina inferior derecha del mapa de la Figura \ref{mapa-zoom1}.
 En la Figura \ref{modelo-mapa-zoom} se muestra el modelo relacional que usamos como input del algoritmo. A fines ilustrativos, el modelo representa s\'olo la parte del mapa que est\'a al sur de la calle Atocha.
 
 \begin{figure}[h]
@@ -614,13 +614,13 @@ En la Figura \ref{modelo-mapa-zoom} se muestra el modelo relacional que usamos c
 \end{figure}
 La iglesia target se representa como {\it church1} y la iglesia distractora como {\it church2}. La iglesia target se encuentra {\it near} y {\it front} a el {\it minAsExt} el cual tiene identificador {\it min1}. Est\'a {\it in calleAtocha} e {\it in calleSantoTomas}. El objeto {\it d}, representa la construcci\'on no identificada en el mapa que est\'a al frente de {\it church2}.
 Recordemos que el algoritmo es no-determin\'istico, as\'i que si lo ejecutamos muchas veces, vamos a conseguir posiblemente diferentes ERs para el mismo input. Teniendo as\'i como resultado un ranking de ERs.
-Ejecutamos el algoritmo 1000 veces, con input el modelo mostrado en la Figura \ref{modelo-mapa-zoom} y las probabilidades dadas en la esquina inferior derecha de la misma figura. Se muestran las posibles realizaciones de las 10 f\'ormulas m\'as frecuentes generadas, y la frecuencia dada por el algoritmo en la Tabla \ref{freq-mapa-algoritmo}. 
+Ejecutamos el algoritmo 1000 veces, con input el modelo mostrado en la Figura \ref{modelo-mapa-zoom} y las probabilidades dadas en la esquina inferior derecha de la misma figura. Se muestran las posibles realizaciones de las 10 f\'ormulas m\'as frecuentes generadas para el target {\it church1}, y la frecuencia dada por el algoritmo en la Tabla \ref{freq-mapa-algoritmo}. 
 
 \begin{table}[H]
 \begin{small}
 \begin{center}
 
-\begin{tabular}{|l|l|c|c|}
+\begin{tabular}{|c|l|c|c|}
 \hline
  &ER generadas por el algoritmo para el target {\it church1}&  \# & \% \\ \hline \hline
 1&Iglesia en la calle de Santo Tom\'as   & 308 & 30.8 \\ \hline
@@ -637,7 +637,7 @@ Ejecutamos el algoritmo 1000 veces, con input el modelo mostrado en la Figura \r
 7 & Iglesia que tiene cerca algo que est\'a en la calle Santo Tom\'as          &13& 1.3 \\ \hline                               
 8 & Iglesia que est\'a al frente de algo que est\'a en la calle Santo Tom\'as          &11& 1.1 \\ \hline  
 9&Iglesia cerca del Ministerio de Asuntos Exteriores                                   &6 &0.6 \\ \hline
-10& En calle de Atocha y que que est\'a al frente del Ministerio de Asuntos Exteriores &1& 0.1\\ \hline
+10& En calle de Atocha y que est\'a al frente del Ministerio de Asuntos Exteriores &1& 0.1\\ \hline
 %10&                                 & & \\ \hline                                              
 \end{tabular}
 \caption{Posibles realizaciones de las 10 ER m\'as frecuentes dadas por el algoritmo para el modelo de la Figura \protect\ref{modelo-mapa-zoom}, para el target {\it church1}.}
@@ -649,7 +649,8 @@ Ejecutamos el algoritmo 1000 veces, con input el modelo mostrado en la Figura \r
 
 Notar que de los 10 tipos diferentes de ERs que m\'as dieron las personas (que se muestran en la Tabla \ref{freq-mapa}), 
 2 son subespecificadas. Al ser subespecificadas, el algoritmo no las gener\'o. 
-La ER que identifica un\'ivocamente m\'as frecuente dada por las personas, tambi\'en fue la m\'as frecuente dada por el algoritmo como se muestra en la Tabla \ref{compara-corpus-alg}. Obteniendo una exactitud (E) total de 34.6\%.
+
+La ER que identifica un\'ivocamente m\'as frecuente dada por las personas, tambi\'en fue la m\'as frecuente dada por el algoritmo como se muestra en la Tabla \ref{compara-corpus-alg}. Obtenemos una exactitud (E) total de 34.6\% como se muestra en la Tabla \ref{compara-corpus-alg}.
 
 \begin{table}[H]
 {\footnotesize
@@ -658,18 +659,18 @@ La ER que identifica un\'ivocamente m\'as frecuente dada por las personas, tambi
 \hline
 &ERs para el target {\it church1} 					      &  Frec. & Frec-Alg &E\\ \hline \hline
 1&Iglesia 								 &19.7\%  &  -&-\\ \hline
-2&Iglesia en la calle de Santo Tom\'as						 &18.5\% 	& 30.8\%  &30.8\\ \hline
-3&Iglesia en calle de Santo Tom\'as frente al Ministerio de Asuntos Exteriores        &13.6\% & 0\%& 0\\ \hline
-4&Iglesia frente al Ministerio de Asuntos Exteriores 			 &13\% & 13.6\% & 13\\ \hline
-5&Iglesia en calle Santo Tom\'as cerca del Ministerio de Asuntos Exteriores        &2.5\% & 0\% & 0\\ \hline
-6&Iglesia en la calle de Atocha							&2.5\%  &8.7\% & 2.5\\ \hline
+2&Iglesia en la calle de Santo Tom\'as						 &18.5\% 	& 30.8\%  &30.8\% \\ \hline
+3&Iglesia en calle de Santo Tom\'as frente al Ministerio de Asuntos Exteriores        &13.6\% & 0\%& 0\% \\ \hline
+4&Iglesia frente al Ministerio de Asuntos Exteriores 			 &13\% & 13.6\% & 13\% \\ \hline
+5&Iglesia en calle Santo Tom\'as cerca del Ministerio de Asuntos Exteriores        &2.5\% & 0\% & 0\% \\ \hline
+6&Iglesia en la calle de Atocha							&2.5\%  &8.7\% & 2.5\% \\ \hline
 7&En calle de Santo Tom\'as 							&2.5\% 	& -  &-\\ \hline
-8&Iglesia que est\'a en la calle de Santo Tom\'as y Atocha, frente al 	 &2.5\%	& 0\% &0\\ 
+8&Iglesia que est\'a en la calle de Santo Tom\'as y Atocha, frente al 	 &2.5\%	& 0\% &0\% \\ 
 &Ministerio de Asuntos Exteriores						 && &\\ \hline
-9&La iglesia que est\'a en la calle de Santo Tom\'as y Atocha			 &2.5\% 	& 0\%&  0\\ \hline
-10&Iglesia cerca del Ministerio de Asuntos Exteriores				 &1.2\% 	&0.6\% & 0.6\\ \hline \hline
+9&La iglesia que est\'a en la calle de Santo Tom\'as y Atocha			 &2.5\% 	& 0\%&  0\% \\ \hline
+10&Iglesia cerca del Ministerio de Asuntos Exteriores				 &1.2\% 	&0.6\% & 0.6\% \\ \hline \hline
 
-&Totales &69.5\%&53.7\%&34.6\\ \hline
+&Totales &69.5\%&53.7\%&34.6\% \\ \hline
 %\hline
 \end{tabular}
 \caption{Comparaci\'on de las 10 ERs m\'as frecuentes del corpus y las dadas por el algoritmo.}\label{compara-corpus-alg}
@@ -682,7 +683,6 @@ La ER que identifica un\'ivocamente m\'as frecuente dada por las personas, tambi
 
 Consideramos que el algoritmo no gener\'o la ER {\it la iglesia que est\'a en la calle de Santo Tom\'as y Atocha, frente al Ministerio de Asuntos Exteriores} por ser \'esta una ER muy sobreespecificada. Nuestro algoritmo termina antes, consiguiendo una ER y no sobreespecifica lo suficiente como para dar esta ER (recordemos que sobreespecifica s\'olo en el primer ciclo). De forma similar, la ER {\it la iglesia en la calle de Santo Tom\'as frente al Ministerio de Asuntos Exteriores} se genera con baja frecuencia porque la probabilidad que tiene el algoritmo de elegir todas esas propiedades a la vez es muy baja.  Otra ER que el algoritmo no gener\'o es {\it la iglesia que est\'a en la calle de Santo Tom\'as y Atocha}. Esta ER no est\'a tan sobreespecificada pero {\it calleAtocha} tiene una probabilidad de uso muy baja de 0.06.
 
-
 %\vspace*{-4cm}
 \subsection{Generaci\'on de expresiones referenciales en mapas con zoom}
 \label{sec:conzoom}
@@ -690,15 +690,18 @@ Consideramos que el algoritmo no gener\'o la ER {\it la iglesia que est\'a en la
 \begin{figure}[H]
 \centering
 \includegraphics[width=\textwidth]{images/corpus/mapa16-prob.png}
-\caption{Imagen del corpus ZOOM con target singular. Este mapa muestra un fragmento de la zona de el mapa de la Figura \ref{mapa-zoom1} pero con mayor nivel de zoom. Se muestran probabilidades de uso de las palabras en la esquina inferior derecha.}
+\caption{Imagen del corpus ZOOM con target singular. Este mapa muestra un fragmento de la zona de el mapa de la Figura \ref{mapa-zoom1} pero con mayor nivel de zoom. Se muestran las probabilidades de uso de las palabras en la esquina inferior derecha.}
 \label{mapa-zoom2x}
 \end{figure}
-El mapa que analizaremos en esta secci\'on es el que se muestra en la Figura \ref{mapa-zoom2x}. Este mapa tiene un mayor nivel de zoom que el de la Figura \ref{mapa-zoom1}, y por lo tanto muestra una porci\'on m\'as peque\~na de la zona. Es decir por un lado, se ven menos objetos, pero por otro lado, lo que se ve tiene en general m\'as detalle, por ejemplo, se ve el nombre de la iglesia:
+
+El mapa que analizamos en esta secci\'on es el que se muestra en la Figura \ref{mapa-zoom2x}. Este mapa tiene un mayor nivel de zoom que el de la Figura \ref{mapa-zoom1}, y por lo tanto muestra una porci\'on m\'as peque\~na de la zona. Es decir por un lado, se ven menos objetos, pero por otro lado, lo que se ve tiene en general m\'as detalle, por ejemplo, se ve el nombre de la iglesia:
  ``Parroquia de Santa Cruz'' que no se ve\'ia en la Figura \ref{mapa-zoom1}. Otra cosa 
 que se puede ver en el mapa con zoom es el nombre de la calle: ``calle de la Concepci\'on Jer\'onima'' que est\'a a la derecha de la Parroquia.
 En este mapa no se puede ver el nombre del Ministerio de Asuntos Exteriores porque queda cortado en la imagen, el mismo s\'i se ve\'ia en el mapa de la Figura \ref{mapa-zoom1}. Lo \'unico que se ve en la calle de Santo Tom\'as es la iglesia target. Estas diferencias se van a ver reflejadas en el modelo que toma como input el algoritmo.
 En la Tabla \ref{freq-mapa-zoom2x} se muestran las 12 ERs distintas dadas por los participantes que completaron el experimento en la recolecci\'on del corpus, y la cantidad de ocurrencias en el corpus. El porcentaje que representa, y si es subespecificada (SubE) o sobreespecificada (SobreE). Como dijimos anteriormente las que no son ni subespecificadas ni sobreespecificadas son minimales. Las ERs mostradas suman un total de 72, el corpus contaba con 80 ERs para esa imagen, pero 8 fueron descartadas por estar mal formadas, o no ser verdaderas para el target.
 En la Tabla \ref{freq-mapa-zoom2x} se puede ver que 44 de 80 ERs son {\it Parroquia de Santa Cruz}. De las 12 ERs diferentes dadas por los las personas, 9 contienen ``Parroquia de Santa Cruz'', y acumulan un total de 69 ERs de 80. Las 3 restantes son: {\it Iglesia} con frecuencia 1 de 80, la cual era mucho m\'as frecuente para el mapa sin zoom. En este caso como en el mapa sin zoom, tambi\'en es subespecificada. {\it Iglesia cerca del Ministerio de Asuntos Exteriores}, la cual se dio 1 vez en el mapa con zoom, es decir tambi\'en era m\'as frecuente en el mapa sin zoom y {\it En calle de Santo Tom\'as} la cual se dio s\'olo 1 vez en el mapa con zoom, tambi\'en mucho m\'as frecuente en el mapa sin zoom. Esta \'ultima es una ER que identifica al target por ser el \'unico objeto que aparece en esa calle.
+
+\medskip
 
 \begin{table}[H]
 {\footnotesize
@@ -735,7 +738,7 @@ En la Tabla \ref{freq-mapa-zoom2x} se puede ver que 44 de 80 ERs son {\it Parroq
 Algunas personas incluyeron en la descripci\'on al ``Ministerio de Asuntos Exteriores'' (exactamente 6 personas), siendo que el nombre del Ministerio no se ve en el mapa, la explicaci\'on que damos a esto es que la personas vieron el mapa sin zoom antes de ver este mapa. Como explicamos en la Secci\'on \ref{corpus-materiales} los mapas se dieron de manera aleatoria, esa aleatoriedad hizo que algunas personas recuerden lo que vieron en otros mapas. Esto es una caracter\'istica de la metodolog\'ia de recolecci\'on del corpus, que hace que las personas digan cosas que no est\'an en el modelo. 
 El vocabulario y las probabilidades de uso sacadas del corpus, para el mapa de la Figura \ref{mapa-zoom2x} se ven en el mismo mapa, en la esquina inferior derecha. As\'i como en el mapa sin zoom, las probabilidades no eran parte del mapa que se mostr\'o a los participantes que completaron las ERs del corpus.
 
-En el modelo de la Figura \ref{apendiceA} (con zoom) se ven varias diferencias con respecto al modelo de la Figura \ref{mapa-zoom1} 
+En el modelo de la figura que se muestra en el Ap\'endice \ref{apendiceA} (con zoom) se ven varias diferencias con respecto al modelo de la Figura \ref{mapa-zoom1} 
 (sin zoom) y esto se debe a que al acercar el zoom del mapa, algunas cosas aparecen y otras desaparecen. Se ve que la iglesia target no est\'a
  en la calle de Atocha como parec\'ia en el mapa mostrado en la Figura \ref{mapa-zoom1}. Se agrega el nombre de la calle de La Concepci\'on 
 Jer\'onima que no se ve\'ia en el mapa anterior. Como ya mencionamos, no se ve el nombre del Ministerio de Asuntos Exteriores. Se agrega el nombre {\it Parroquia de Santa Cruz} que no se ve\'ia en el otro mapa. Aparece una nueva calle que est\'a en la parte superior de la manzana de la iglesia, 
@@ -746,10 +749,10 @@ El edificio con identificador {\texttt d}, en este mapa se ve que es un teatro, 
  de un restaurante sin nombre, uno de esos restaurantes se pod\'ia ver en el mapa sin zoom. Vamos a suponer que el que se pod\'ia ver en el mapa sin zoom era {\it La Tagliatela}. Notar que dejamos de ver el nombre de la calle 
 en la cual se ubica el teatro y los restaurantes reci\'en nombrados.
 
-Se ejecut\'o el algoritmo 1000 veces con las probabilidades de uso que se muestran en la esquina inferior derecha del mapa de la Figura \ref{mapa-zoom2x}, con el modelo que se muestra en la Figura \ref{apendiceA} y las ERs obtenidas se muestran en la Tabla \ref{formulas-mapa-zoom2x}.
+Se ejecut\'o el algoritmo 1000 veces con las probabilidades de uso que se muestran en la esquina inferior derecha del mapa de la Figura \ref{mapa-zoom2x}, con el modelo que se muestra en el Ap\'endice \ref{apendiceA}. Las ERs obtenidas se muestran en la Tabla \ref{formulas-mapa-zoom2x}.
 
 Como resultado podemos ver que el algoritmo gener\'o {\it Parroquia de Santa Cruz} en 80\% de las ejecuciones, y esto es muy cercano al porcentaje que fue generada por las personas en el corpus (61.1\%). La segunda ER m\'as generada por las personas tambi\'en est\'a en la segunda posici\'on del top 10 ranking del algoritmo con una frecuencia del 8.8\%, las personas la generaron un 12.5\%. Varias ERs dadas por las personas en el corpus, son sobreespecificadas y consideramos que justamente por eso el algoritmo no las gener\'o, la sobreespecificaci\'on que permite el algoritmo es limitada, entonces, no agrega tanta informaci\'on redundante. {\it Iglesia de la Parroquia de Santa Cruz} fue generada por las personas en un 2.78\% y por el algoritmo en 6.5\%. Recordemos el {\it Ministerio de Asuntos Exteriores} no pertenec\'ia al modelo, por lo tanto, el algoritmo no pod\'ia generar las ERs que lo incluyeran.
-\bigskip
+%\bigskip
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|l|c|c|}
@@ -773,7 +776,7 @@ Como resultado podemos ver que el algoritmo gener\'o {\it Parroquia de Santa Cru
 \end{center}
 \end{table}
 
-Por los resultados obtenidos vemos que las probabilidades de uso, son una buena gu\'ia para el algoritmo para conseguir un ranking de ERs que se acerca bastante al dado por las personas. Consiguiendo una exactitud total de 72.7\%.
+Por los resultados obtenidos vemos que las probabilidades de uso, son una buena gu\'ia para el algoritmo para conseguir un ranking de ERs que se acerca bastante al dado por las personas. Consiguiendo en este caso una exactitud total de 72.7\% como se ve en la Tabla \ref{compara-mapa-zoom2x}. En la tabla se muestra una comparaci\'on entre el porcentaje de las ERs en el corpus, el porcentaje con lo que la gener\'o el algoritmo. En la columna (E) se muestra la exactitud que es el m\'inimo entre las 2 columnas anteriores.  
 
 \begin{table}[h]
 {\footnotesize
@@ -781,26 +784,26 @@ Por los resultados obtenidos vemos que las probabilidades de uso, son una buena 
 \begin{tabular}{|l|l|c|c|c|}
 \hline
 &ERs para el target {\it church1} 					       &  Frec. & Frec.-Alg &E\\ \hline \hline
-1&Parroquia de Santa Cruz        						   &	61.1\%  &   80.1\% &61.1\\ \hline
-2&Parroquia de Santa Cruz en calle de Santo Tom\'as        &    12.5\%	&  8.8\% &8.8\\ \hline
-3&Parroquia de Santa Cruz en calle de Santo Tom\'as y      &    5.6\%   & 0\% &\\
+1&Parroquia de Santa Cruz        						   &	61.1\%  &   80.1\% &61.1\% \\ \hline
+2&Parroquia de Santa Cruz en calle de Santo Tom\'as        &    12.5\%	&  8.8\% &8.8\% \\ \hline
+3&Parroquia de Santa Cruz en calle de Santo Tom\'as y      &    5.6\%   & 0\% &0\% \\
 &De La Concepci\'on Jer\'onima                             &            &  &\\ \hline
-4&Parroquia de Santa Cruz en calle de Santo Tom\'as        &     4.2\%  & 0\% &\\
+4&Parroquia de Santa Cruz en calle de Santo Tom\'as        &     4.2\%  & 0\% &0\% \\
 &cerca de Ministerio de Asuntos Exteriores                 &            & &\\  \hline
-5&Parroquia de Santa Cruz en calle de Santo Tom\'as        &	3       &	0\%	& \\
-&entre calle de Atocha y de La Concepci\'on Jer\'onima     &	        &	&		 \\  \hline
-6&Iglesia de la Parroquia de Santa Cruz			           &	2.8\%	&6.5\%&2.8 \\  \hline
-7&Iglesia de la Parroquia de Santa Cruz	en      	       &	2.8\%	& 0\% &\\  
+5&Parroquia de Santa Cruz en calle de Santo Tom\'as        &	3       &	0\%	&0\% \\
+&entre calle de Atocha y de La Concepci\'on Jer\'onima     &	        &	&	0\%	 \\  \hline
+6&Iglesia de la Parroquia de Santa Cruz			           &	2.8\%	&6.5\%&2.8\% \\  \hline
+7&Iglesia de la Parroquia de Santa Cruz	en      	       &	2.8\%	& 0\% &0\% \\  
 &calle de Santo Tom\'as									   &	    	&	  &  \\ \hline
-8&Iglesia cerca del Ministerio de Asuntos Exteriores       &	1.5\%	    &0\% &\\  \hline
-9&En calle de Santo Tom\'as                                &   1.4\%    &0\% &\\  \hline
+8&Iglesia cerca del Ministerio de Asuntos Exteriores       &	1.5\%	    &0\% & 0\% \\  \hline
+9&En calle de Santo Tom\'as                                &   1.4\%    &0\% &0\% \\  \hline
 
-10&Parroquia de Santa Cruz  				               &    1.4\%	&0\% &\\  
+10&Parroquia de Santa Cruz  				               &    1.4\%	&0\% &0\% \\  
 &cerca de Ministerio de Asuntos Exteriores		           &	  		&&\\  \hline
-11&Parroquia de Santa Cruz en calle de Atocha  		       &	1.4\%	&0\%& \\  
+11&Parroquia de Santa Cruz en calle de Atocha  		       &	1.4\%	&0\%& 0\% \\  
 &cerca de Ministerio de Asuntos Exteriores		   	       &	    	&&\\  \hline
-12&Iglesia						                           &    1.4\%	& 0\%& \\  \hline \hline
-&Totales&                                                    	100 \%     &95.4\%	 &72.7\\  \hline
+12&Iglesia						                           &    1.4\%	& 0\%& 0\% \\  \hline \hline
+&Totales&                                                    	100 \%     &95.4\%	 &72.7\% \\  \hline
 
 \end{tabular}
 \caption{Comparaci\'on de las ERs del corpus con las generadas por el algoritmo para la Figura \ref{mapa-zoom2x}.}\label{compara-mapa-zoom2x}
@@ -825,7 +828,7 @@ Como podemos ver en el mapa de la Figura \ref{mapa-zoom-plural} el conjunto targ
 Las ERs del corpus se muestran en la Tabla \ref{freq-mapa-zoom-plural} se indica la frecuencia de ocurrencia en el corpus, si es parcial, si es sobreespecificada (SobreE) o subespecificada (SubE). 
 Recordemos que en el Cap\'itulo \ref{sec:seleccion} dimos la definici\'on de ER parcial: es aquella que siendo plural, identifica a un subconjunto estricto del target. Es decir, una ER parcial identifica a una parte del target pero no refiere a todos los elementos que forman parte del conjunto target.
 
-De las ERs del corpus que se ven en la tabla, 55\% son parciales, 25\% son sobreespecificadas. Cabe notar que el algoritmo no va a generar ERs parciales, ni subespecificadas. El algoritmo no podr\'a generar las ERs 1, 6, 7, 9, 10, 12, 13 ,14, 15 y 17. 
+De las ERs del corpus que se ven en la tabla, 55\% son parciales, 25\% son sobreespecificadas. Cabe notar que el algoritmo no va a generar ERs parciales, ni subespecificadas. 
 
 \medskip
 
@@ -887,9 +890,6 @@ De las ERs del corpus que se ven en la tabla, 55\% son parciales, 25\% son sobre
 
 \medskip
 
-Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Figura \ref{modelo-mapa-zoom}. Las probabilidades de uso de las palabras se calcularon como se explica en el Cap\'itulo \ref{sec:algoritmo} y se muestran en la esquina inferior derecha de la Figura \ref{mapa-zoom-plural}. En el Ap\'endice \ref{apendiceB}, se muestran las f\'ormulas generadas por el algoritmo. La exactitud que conseguimos en este caso es de 27.1\%.S
-
-
 \begin{table}[H]
 {\footnotesize
 \begin{center}
@@ -911,6 +911,9 @@ Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Fi
 }
 \end{table}
 
+Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Figura \ref{modelo-mapa-zoom}, ya que coincide con el modelo para el ejemplo singular sin zoom. Las probabilidades de uso de las palabras se calcularon como se explica en el Cap\'itulo \ref{sec:algoritmo} y se muestran en la esquina inferior derecha de la Figura \ref{mapa-zoom-plural}. En el Ap\'endice \ref{apendiceB}, se muestran las f\'ormulas generadas por el algoritmo. La exactitud que conseguimos en este caso es de 27.1\%.
+
+%\medskip
 
 %18.3+ 0.5+8.3
 %En la Tabla \ref{formulas-mapa-zoom2} podemos ver que la ER con mayor frecuencia que gener\'o el algoritmo es parecida a la de mayor frecuencia en el corpus, la realizaci\'on podr\'ia ser {\it El restaurante Medina Mayrit y el que est\'a cerca del restaurante Medina Mayrit}, siendo que la que dijeron las personas en el corpus con m\'as frecuencia fue {\it El restaurante Medina Mayrit y el que est\'a cerca}, alguien podr\'ia decir que le falta un objeto, {\it est\'a cerca} de qu\'e?, y s\'i se refiere al mismo restaurante. Estas cosas son dif\'iciles de generar autom\'aticamente. Como mencionamos antes, vemos que hay f\'ormulas que tienen $\exists \nCerca.(\exists \nCerca.(\exists \nMedinaMayrit))$ que denota al mismo objeto. Preveemos sacar estas cosas en trabajo futuro, vea el Cap\'itulo \ref{sec:conclusiones}. Otra cosa ya vista en los otros mapas, es la tautolog\'a $\exists \nIn.(T)$, que es decir que est\'a en una calle, tambi\'en ser\'a estudiada en trabajo futuro.
@@ -923,8 +926,8 @@ Ejecutamos el algoritmo 1000 veces, con input el modelo que se mostr\'o en la Fi
 En este cap\'itulo explicamos c\'omo se recolect\'o el corpus ZOOM, los materiales que se usaron para la recolecci\'on est\'an en el Ap\'endice \ref{apendiceA}. Discutimos el proceso de anotaci\'on y presentamos una descripci\'on detallada.
 Este corpus se cre\'o viendo la necesidad de existencia de recursos en dominios m\'as naturales. Se recolect\'o mediante un experimento on-line en el que las personas ve\'ian un mapa el cual conten\'ia flechas indicando el target y completaban una ER dirigida a un amigo en la cual ten\'ian que describir los objetos se\~nalados. Cada persona dio 20 ERs, 10 singulares y 10 plurales, de esas 10 singulares o plurales, hab\'ia 5 con alto nivel de zoom y 5 con bajo nivel de zoom.
 El corpus tiene en cuenta un dominio que es cercano a aplicaciones del mundo real, y que aborda situaciones m\'as complejas de referencia que los recursos existentes de este tipo. En particular, el dominio de zoom hace uso de contextos con diferentes niveles de detalle, y contiene ejemplos de referencia singular y plural producido por un n\'umero relativamente grande de hablantes en ambos idiomas espa\~nol y portugu\'es.
-En este corpus podemos encontrar distintos tipos de ERs como las nombradas en el Cap\'itulo \ref{sec:seleccion}, tenemos varias ERs por mapa con lo cual podremos luego calcular las probabilidades de uso de las palabras como se explic\'o en el Cap\'itulo \ref{sec:algoritmo}. Dadas las caracter\'isticas de los mapas usados para la recolecci\'on, el corpus tiene ER relacionales, proposicionales, de plurales, sobreespecificadas y tambi\'en subespecificadas.
-Se present\'o una evaluaci\'on basado en SVM con respecto al corpus ZOOM. Esta evaluaci\'on pone en evidencia la complejidad real de la tarea de GER en este dominio.
+En este corpus podemos encontrar distintos tipos de ERs como las nombradas en el Cap\'itulo \ref{sec:seleccion}, tenemos varias ERs por mapa con lo cual podremos luego calcular las probabilidades de uso de las palabras como se explic\'o en el Cap\'itulo \ref{sec:algoritmo}. Dadas las caracter\'isticas de los mapas usados para la recolecci\'on, el corpus tiene ERs relacionales, proposicionales, plurales, parciales, sobreespecificadas y tambi\'en subespecificadas.
+Se present\'o una evaluaci\'on basada en SVM con respecto al corpus ZOOM. Esta evaluaci\'on pone en evidencia la complejidad real de la tarea de GER en este dominio.
 En primer lugar, nos damos cuenta de que un enfoque basado en SVM similar~\cite{thiago-svm} en datos de GRE3D3 y GRE3D7 ha obtenido considerablemente mayor exactitud media (0,46 y 0,64 respectivamente) que la obtenida en el dominio ZOOM. Esto, en primer lugar, se explica por el aumento de la complejidad del dominio ZOOM (por ejemplo, en el n\'umero de posibles objetos y propiedades at\'omicas y relacionales etc.). 
 En segundo lugar, las descripciones del ZOOM son propensas a transmitir las relaciones entre el target y varios otros objetos del modelo, como en `el restaurante en la calle 5, cerca de la biblioteca'. Aunque es com\'un en el uso del lenguaje, el uso de m\'ultiples propiedades relacionales de esta manera ha sido poco investigado, tal vez debido a que puede dar lugar a descripciones ambiguas, como en `el restaurante cerca de la iglesia en la calle Jackson y el bar en la calle 5' para un restaurante situado cerca del cruce de estas dos calles.
 Se realiz\'o un caso de estudio para 3 mapas del ZOOM corpus, y se vio que el algoritmo es capaz de conseguir ERs que se encuentran en corpora, y a\'un m\'as cuando tenemos entornos con target plural, el algoritmo siempre da una ER, teniendo una ventaja significativa con respecto a las personas, las cuales dieron en m\'as del 50\% ERs parciales o que conten\'ian cosas que no eran ciertas en la imagen considerada. A pesar de las ventajas del algoritmo vemos que hay cosas que todav\'ia quedan por pulir como ser tautolog\'ias encontradas en las f\'ormulas, o propiedades circulares que se podr\'ian sacar, o directamente no permitir.
