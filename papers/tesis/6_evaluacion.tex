@@ -90,6 +90,8 @@ Total & 140 & 100 & 10000 & 100 & 80.51 \\
 Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar que como el algoritmo tiene un componente de azar, por eso nos di\'o bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
 Para enriquecer esta parte mostraremos otros baselines, los cuales nos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son \'utiles para aproximar al ranking de ERs que aparece en corpora. Un baseline que se presenta ejecuta el algoritmo con una distribuci\'on aleatoria de probabilidades de uso. Otro baseline al cual llamamos uniforme es el que a las ERs tanto las generadas por el sistema como las del corpus y las generadas con el modelo aleatorio les dimos la misma probabilidad de ocurrencia, (por ejemplo si eran 10 en total, y ejecutamos el algoritmo 100 veces, cada ER iba a aparecer 10 veces), en este baseline no ejecutamos el algoritmo. El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
 
+\bigskip
+
 \begin{table}[h]
 \begin{small}
 \begin{center}
@@ -134,14 +136,17 @@ el cubo azul que est\'a abajo de algo que es peque\~no}). En la \'ultima columna
 
 En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distribuciones de probabilidad mide la media de bits necesarios para identificar un evento de un conjunto de posibilidades, si un esquema de codificaci\'on est\'a basado en una distribuci\'on de probabilidad dada q, m\'as que en la verdadera distribuci\'on p. Vamos a comparar la entrop\'ia cruzada entre la distribuci\'on de probabilidad que se encuentra en el corpus, y la distribuci\'on de ERs del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entropy} se muestran los resultados para las ocho escenas que hemos considerado.
 
+Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emph{aprendizaje autom\'atico}) son, en general, mucho m\'as cercanas de la entrop\'{i}a del corpus, que las entrop\'ias cruzadas de \emph{random} y \emph{uniforme}. S\'olo en la escena 12 random, por azar se acerca un poco m\'as.
+
 \begin{figure}[h]
 \centering
-\includegraphics[width=0.6\textwidth]{images/entropy.jpg}
-\caption{Entrop\'ia cruzada entre la distribuci\'on del corpus y diferentes ejecuciones del algoritmo.}\label{Entropy}
+\includegraphics[width=0.8\textwidth]{images/entropy.jpg}
+\caption{Entrop\'ia cruzada entre la distribuci\'on del corpus y diferentes baselines.}\label{Entropy}
 \end{figure}
   
-Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emph{aprendizaje autom\'atico}) son, en general, mucho m\'as cercanas de la entrop\'{i}a del corpus, que las entrop\'ias cruzadas de \emph{random} y \emph{uniforme}. S\'olo en la escena 12 random, por azar se acerca un poco m\'as.
-\newpage
+\bigskip
+  
+
 \section{Evaluaci\'on de rankings sobre el corpus TUNA} \label{sec:automaticevaluation}
 
 En esta secci\'on se presenta la comparaci\'on de nuestro algoritmo con el algoritmo que tuvo el mejor desempe\~no en el TUNA Challenge. 
@@ -160,6 +165,8 @@ Recordemos que el corpus TUNA tiene 2 partes, una parte cuyo dominio son muebles
 En la Tabla \ref{probability-of-use} y \ref{probability-of-use-people} se muestran las probabilidades de uso aprendidas desde el corpus. Se puede ver en la Tabla \ref{probability-of-use} por ejemplo que la probabilidad de usar {\it blue} es mucho m\'as alta que la probabilidad de usar {\it facing left} para describir al target. La probabilidad de usar {\it green} no es 0 porque se puede usar para describir a un landmark.
 
 Para aprender las probabilidades de uso se sigui\'o el mecanismo descripto en el Cap\'itulo \ref{sec:algoritmo}, se unific\'o el vocabulario del corpus y se aprendi\'o una funci\'on de regresi\'on lineal por cada propiedad y se reemplazaron las variables por los valores correspondientes a cada escena. Se us\'o la parte de entrenamiento del corpus que consist\'ia del 80\% del corpus TUNA.
+
+\bigskip
 
 \begin{table}[H]
  \begin{minipage}{0.48\textwidth} 
@@ -262,8 +269,6 @@ x2 	&	0.02	\\
 %\end{figure} 
 
 
-En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistema con el sistema GRAPH para la primer ER del ranking (es decir, la m\'as frecuente ) y para las primeras 20 ERs del ranking.
-\vspace*{2cm}
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -286,6 +291,11 @@ Nuestro sistema, Dominio personas (top 20)   &	81\%		&68\%	&	60\%		\\
 \label{Tabla_sis_1_20}
 \end{center}
 \end{table}
+
+
+En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistema con el sistema GRAPH para la primer ER del ranking (es decir, la m\'as frecuente ) y para las primeras 20 ERs del ranking.
+%\vspace*{2cm}
+
 
 En la Figura~\ref{graficoPresicion} se muestra una comparaci\'on entre la exactitud de nuestro sistema y el sistema GRAPH. El gr\'afico de la izquierda corresponde al dominio muebles y el gr\'afico de la derecha corresponde al dominio personas. En el dominio muebles estamos obteniendo casi los mismos n\'umeros en las m\'etricas evaluadas.
 Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra exactitud es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la exactitud para ambos dominios se hace mayor del 60\% (60\% para personas y 65\% para muebles). Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no esten en primer lugar. Si el algoritmo GRAPH fuera modificado para ser no-determin\'istico es posible que tambi\'en mejorara su exactitud en 20 o m\'as ejecuciones. Esta es una l\'inea interesante de trabajo futuro. 
@@ -328,6 +338,7 @@ Otro resultado que podemos observar es que la exactitud  del top 1 en el dominio
 
 Normalmente las m\'etricas autom\'aticas tienen la desventaja de calificar como malas a ERs que son buenas ERs, es decir identifican el target un\'ivocamente, en el contexto considerado, pero las consideran malas por no ser exactamente como las que aparecen en corpora. Otra manera de evaluar qu\'e tan buena es una ER es con evaluaciones manuales. Mostraremos una evaluaci\'on humana en la siguiente secci\'on.
 
+\newpage
  
 \section{Evaluaci\'on humana} \label{sec:humanevaluation}
 

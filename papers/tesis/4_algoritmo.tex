@@ -495,8 +495,15 @@ de la escena que queremos describir. Por ejemplo, para la escena de la Figura \r
 
 En el Cap\'itulo \ref{sec:evaluacion} mostramos c\'omo los m\'etodos para estimar las probabilidades de uso se aplican tambi\'en al corpus TUNA para generar ERs.
 
+En la pr\'oxima secci\'on vemos como agregar esta distribuci\'on finita de probabilidades a los algoritmos presentados en el Cap\'itulo \ref{sec:intro_logica}. 
+
+\newpage
+
 \section{El algoritmo probabil\'istico}
 \label{sec:algoritmo_probabilistico}
+
+Los algoritmos presentados en esta secci\'on extienden los Algoritmos \ref{algo:bisim-3} y \ref{algo:bisim-add-el} del Cap\'itulo \ref{sec:intro_logica} con una distribuci\'on finita de probabilidades. Al igual que el Algoritmo \ref{algo:bisim-3}, el Algoritmo \ref{algo:bisim-l} es param\'etrico en el lenguaje l\'ogico de las ERs generadas. El Algoritmo \ref{algo:bisim-add-el-over} como el Algoritmo \ref{algo:bisim-add-el} usa el lenguaje l\'ogico \EL. De forma similar, se podr\'ian extender algoritmos para los otros lenguajes l\'ogicos presentados en el Cap\'itulo \ref{sec:intro_logica}.  
+
 Antes de empezar explicando el algoritmo, damos algunos conceptos de teor\'ia de modelos necesarios para entenderlo.
 
 Para esta tesis una \textbf{f\'ormula} corresponde a una descripci\'on de uno o m\'as elementos del contexto y puede ser o no una ER, dependiendo de 
@@ -550,15 +557,13 @@ posiblemente creadas por la adici\'on de la nueva descripci\'on son
 eliminadas.
 Con respecto a la informatividad, se permitir\'a el agregado de f\'ormulas no informativas en la primera iteraci\'on, antes de incrementar las R.\puse.
 
-\ \\
-
-
-	
+%\vspace*{-3cm}
 
 \begin{megaalgorithm}[H]
 
 \dontprintsemicolon
 \medskip
+\vspace*{0.5cm}
 \caption{Computando clases de $\mathcal{L}$-similaridad}\label{algo:bisim-l}
 \SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
 \Input{\footnotesize Un modelo $\gM$ y una lista Rs $\in (\REL \times [0,1])^*$
@@ -749,8 +754,6 @@ Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on 
 \end{center}
 \end{figure}
 
-La siguiente propiedad a considerar es \texttt{cube}, tambi\'en supera la probabilidad \texttt{cube}.\randomuse. Realizando el mismo procedimiento antes mencionado, queda \RE = \{$\top$, \texttt{ball}, \texttt{cube}\} donde $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
-$\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ es redundante, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
 
 \begin{figure}[H]
 \begin{center}
@@ -760,6 +763,9 @@ $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. Notar que las particiones d
 \label{fig-modelo4}
 \end{center}
 \end{figure}
+
+La siguiente propiedad a considerar es \texttt{cube}, tambi\'en supera la probabilidad \texttt{cube}.\randomuse. Realizando el mismo procedimiento antes mencionado, queda \RE = \{$\top$, \texttt{ball}, \texttt{cube}\} donde $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
+$\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ es redundante, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
 
 La siguiente propiedad es \texttt{red}, que tambi\'en supera la probabilidad \texttt{red}.\randomuse. Tenemos que  
 $\interp{\texttt{red}}$ = $\{e_2, e_4, e_5, e_7\}$, haciendo la intersecci\'on con la $\interp{.}$ de cada f\'ormula en \RE obtenemos, 
@@ -773,19 +779,6 @@ $\{e_5\}$ y $\{e_2, e_4, e_7\}$. Las interpretaciones de las f\'ormulas en \RE s
 \end{center}
 \end{figure}    
 
-Ahora es el turno de \texttt{large} que tambi\'en supera la probabilidad R.\randomuse. Tenemos que $\interp{\texttt{large}}$ = $\{e_4, e_5\}$, haciendo la intersecci\'on con las dem\'as f\'ormulas que tenemos hasta el momento nos queda \RE de la siguiente manera:
- $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red} ,\texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large} \}$. Notar que como estamos en la primera iteraci\'on, y no chequeamos informatividad, se agreg\'o \texttt{large} a $\texttt{ball} \sqcap \texttt{red}$ se agreg\'o sobreespecificando, porque no divid\'ia el conjunto. %Las particiones se muestran en la Figura \ref{fig-modelo9b}.
-
-%\begin{figure}[h]
-%\begin{center}
-%\includegraphics[width=11cm]{images/im/large.png}
-%\caption{Cuadros indicando particiones de elementos que cumplen las f\'ormulas: $\texttt{ball}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube},\texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}$.}
-%\label{fig-modelo9b}
-%\end{center}
-%\end{figure}
-
-La siguiente relaci\'on es \texttt{ontop}, la cual supera la probabilidad \texttt{ontop}.\randomuse. $e_3$ es el \'unico elemento que est\'a \texttt{ontop} quedando \RE= $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{ball} \sqcap \exists \texttt{ontop}.(\texttt{cube} \sqcap \texttt{red})\}$. Los conjuntos resultantes se muestran en la Figura \ref{fig-modelo9c}.
-
 \begin{figure}[H]
 \begin{center}
 \includegraphics[width=11cm]{images/im/ontop.png}
@@ -793,6 +786,12 @@ La siguiente relaci\'on es \texttt{ontop}, la cual supera la probabilidad \textt
 \label{fig-modelo9c}
 \end{center}
 \end{figure}
+
+Ahora es el turno de \texttt{large} que tambi\'en supera la probabilidad R.\randomuse. Tenemos que $\interp{\texttt{large}}$ = $\{e_4, e_5\}$, haciendo la intersecci\'on con las dem\'as f\'ormulas que tenemos hasta el momento nos queda \RE de la siguiente manera:
+ $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red} ,\texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large} \}$. Notar que como estamos en la primera iteraci\'on, y no chequeamos informatividad, se agreg\'o \texttt{large} a $\texttt{ball} \sqcap \texttt{red}$ se agreg\'o sobreespecificando, porque no divid\'ia el conjunto. 
+
+La siguiente relaci\'on es \texttt{ontop}, la cual supera la probabilidad \texttt{ontop}.\randomuse. $e_3$ es el \'unico elemento que est\'a \texttt{ontop} quedando \RE= $\{\texttt{ball}, \texttt{cube}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{ball} \sqcap \exists \texttt{ontop}.(\texttt{cube} \sqcap \texttt{red})\}$. Los conjuntos resultantes se muestran en la Figura \ref{fig-modelo9c}.
+
 
 Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos \RE= $\{\texttt{ball} \sqcap \texttt{yellow}, \texttt{cube} \sqcap \texttt{yellow}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube} \sqcap \texttt{red} \}$. Algunas relaciones se agregaron sobreespecificando, ya que todav\'ia estamos en el primer ciclo.
 Aqu\'i ya borramos la f\'ormula \texttt{ball} porque era redundante, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo9d}.
@@ -882,9 +881,7 @@ $\interp{\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \tex
 \end{tabular}
 \medskip
 
-Notar que \texttt{small} no se agrega a $\texttt{ball} \sqcap \texttt{yellow}$ porque no es informativo. 
-
-Concluimos que el lenguaje elegido $\el$ no pueden identificar a $e_1$ en el modelo. Si us\'aramos $\alc$, que contiene negaci\'on, $e_1$ se podr\'ia distinguir de $e_3$. Los dem\'as elementos s\'i quedan en clases singleton y son expresiones referenciales, podr\'ian realizarse como sigue:
+Notar que \texttt{small} no se agrega a $\texttt{ball} \sqcap \texttt{yellow}$ porque no es informativo. Concluimos que el lenguaje elegido $\el$ no pueden identificar a $e_1$ en el modelo. Si us\'aramos $\alc$, que contiene negaci\'on, $e_1$ se podr\'ia distinguir de $e_3$. Los dem\'as elementos s\'i quedan en clases singleton y son expresiones referenciales, podr\'ian realizarse como sigue:
 {\it el cubo amarillo} es $e_6$, {\it la bola grande roja} es $e_5$, {\it el cubo rojo grande} es $e_4$, {\it el cubo rojo que est\'a a la derecha del cubo amarillo} es $e_7$, $e_3$ es {\it la bola amarilla sobre el cubo rojo} y $e_2$ es {\it el cubo rojo de la izquierda}.
  
 \subsection{Asegurando terminaci\'on generando expresiones relacionales}

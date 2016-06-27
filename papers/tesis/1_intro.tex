@@ -1,7 +1,7 @@
 \chapter{Introducci\'on}
 \label{sec:intro}
 
-La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso autom\'atico (o semi autom\'atico) de construcci\'on de un texto en lenguaje natural, para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural es \'util para aplicaciones pr\'acticas en las que, por ejemplo, es necesario hacer accesible grandes vol\'umenes de informaci\'on posiblemente t\'ecnica. La GLN se ha usado para generar recomendaciones de restaurantes personalizadas, para resumir informaci\'on m\'edica, etc.~\cite{dale2000}. La generaci\'on de lenguaje natural, est\'a dentro del \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial.
+La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso autom\'atico (o semi autom\'atico) de construcci\'on de un texto en lenguaje natural para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural es \'util para aplicaciones pr\'acticas en las que, por ejemplo, es necesario hacer accesible grandes vol\'umenes de informaci\'on posiblemente t\'ecnica. La GLN se ha usado para generar recomendaciones de restaurantes personalizadas, para resumir informaci\'on m\'edica, para generar pron\'osticos del clima, entre otros.~\cite{dale2000}. La generaci\'on de lenguaje natural, est\'a dentro del \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial.
 
 Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\'ivocamente a un objeto en un contexto y para un interlocutor particular. Si quisi\'eramos referirnos al objeto se\~nalado por la flecha en la Figura~\ref{GRE3D7-stimulus1}, podr\'iamos hacerlo con alguna de las expresiones referenciales que se muestran en la Figura \ref{er-figura1}.
 
@@ -69,16 +69,10 @@ Dado un contexto, un target y una descripci\'on parcial del target (es decir, un
 Un {\bf algoritmo} para GER, es un procedimiento autom\'atico que toma, al menos, alg\'un tipo de representaci\'on de un contexto y un target, y da como resultado una (o m\'as) expresi\'on(es) referencial(es) para el target considerado, si puede identificarlo un\'ivocamente en el contexto.
 
 Por ejemplo, una computadora que se enfrenta a la tarea de generar autom\'aticamente expresiones referenciales para la Figura \ref{figura-er} necesitar\'a una representaci\'on de todos los objetos de la figura y las propiedades de cada uno de ellos. En la Figura~\ref{contexto-tabla-propiedades} se muestra una posible forma de representar los objetos, sus propiedades y relaciones: una base de datos que contiene todas las propiedades relevantes de los objetos de la escena. Entonces, la tarea de GER para el objeto $e_5$ involucra encontrar alguna combinaci\'on de valores de propiedades y relaciones con otros objetos, que aplique \'unicamente a $e_5$, y no a los otros objetos. Como dijimos, esta tarea de encontrar las propiedades y relaciones que aplican a un target y no a los distractores, se llama selecci\'on de contenido para la generaci\'on de una expresi\'on referencial. Mirando la Tabla \ref{tabla-propiedades} podemos decir que {\it red ball}, {\it large ball} y {\it large red ball} son algunas ERs del objeto $e_5$, cuyas realizaciones en espa\~{n}ol podr\'ian ser: {\it la bola roja}, {\it la esfera grande} y {\it la esfera grande y roja}. 
-%<<<<<<< HEAD
-%\medskip
-%\begin{figure}[h]
-%\begin{subfigure}{.45\textwidth}
-%=======
 
 \begin{figure}[ht]
 %
 \begin{subfigure}{.48\textwidth}
-%>>>>>>> 069686651ef73099375faf019b665dd9fc3ced5c
   \centering
 \includegraphics[width=\textwidth]{images/22.jpg}
   \caption{}\label{GRE3D7-stimulus1-ids}
@@ -106,8 +100,6 @@ $e_6$ & cube & yellow & small & - & $e_7$ & - & -\\
 & & & & & & & \\
 $e_7$ & cube & red & small & $e_6$ & - & - & -\\
 \hline
-
-
 \end{tabular}
 \end{scriptsize}
 %\vspace*{1cm}
@@ -325,11 +317,7 @@ Si asumimos un vocabulario finito de s\'imbolos de relaci\'on $n$-arios, entonce
 
 A continuaci\'on vamos a presentar 2 ejemplos de modelos relacionales, uno en el que tenemos entidades \textbf{agentivas} (es decir, agentes animados que pueden realizar acciones) como perros y gatos, y otro en el que las entidades son \textbf{no agentivas}, es decir, son objetos est\'aticos.
 
-El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos representado un contexto agentivo como un modelo relacional. En el modelo, $a$, $b$ y $d$ son perros, mientras que 
-$c$ y $e$ son gatos;  $d$ es un peque\~no beagle; $b$ y $c$ tambi\'en son peque\~nos.
- Leeremos $\aSniffing(d,e)$ como ``{\em $d$ huele a $e$}''. La interpretaci\'on del s\'imbolo relacional $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos perros del contexto. La interpretaci\'on de $\aSniffing$ es el conjunto de pares de elementos que cumplen $\aSniffing$. Por ejemplo ($a,a$) pertenece al conjunto dado que $a$ es un perro que se huele a s\'i mismo en el modelo.
-
- \begin{figure}[t]
+ \begin{figure}[H]
  %\begin{center}
  \begin{tabular}{rcl}
 $\Delta$               & = & $\cset{a,b,c,d,e}$\\
@@ -370,6 +358,10 @@ $\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
  %\end{center}
  \caption{Representaci\'on de un contexto agentivo como un modelo relacional e interpretaci\'on de sus propiedades y relaciones.\label{fig:cat-dog-1}}
  \end{figure}
+
+El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos representado un contexto agentivo como un modelo relacional. En el modelo, $a$, $b$ y $d$ son perros, mientras que 
+$c$ y $e$ son gatos;  $d$ es un peque\~no beagle; $b$ y $c$ tambi\'en son peque\~nos.
+ Leeremos $\aSniffing(d,e)$ como ``{\em $d$ huele a $e$}''. La interpretaci\'on del s\'imbolo relacional $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos perros del contexto. La interpretaci\'on de $\aSniffing$ es el conjunto de pares de elementos que cumplen $\aSniffing$. Por ejemplo ($a,a$) pertenece al conjunto dado que $a$ es un perro que se huele a s\'i mismo en el modelo.
 
 El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} donde damos una posible representaci\'on de la escena de la Figura \ref{figura-er} como un modelo relacional. 
 
@@ -664,7 +656,7 @@ Las f\'ormulas $\phi_1$ a $\phi_7$ pueden realizarse como sigue.
 \smallskip
 
 Notar que $\phi_1$ y $\phi_2$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas que identifique al target.
-Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL que se describe en el Cap\'itulo \ref{sec:intro_logica}. 
+Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL, que se describe en el Cap\'itulo \ref{sec:intro_logica}. 
 
 En el Cap\'itulo \ref{sec:intro_logica} describimos c\'omo los operadores l\'ogicos afectan la expresividad y la complejidad computacional de la tarea de GER, as\'i como las ERs generadas. En el Cap\'itulo \ref{sec:algoritmo} proponemos como generar no una sino un ranking de ERs y agregamos una distribuci\'on finita de probabilidades asociada a los s\'imbolos de relaci\'on del modelo.
 

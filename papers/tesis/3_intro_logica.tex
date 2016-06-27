@@ -8,7 +8,7 @@ podemos ir restringiendo la l\'ogica y con ello el lenguaje, y as\'i conseguir u
 ya que, por ejemplo, sistemas de tiempo real necesitan conseguir ERs r\'apidamente. Daremos la complejidad de las distintas l\'ogicas, 
 y veremos qu\'e l\'ogica aplica a cada algoritmo del estado del arte del \'area introducidos en el Cap\'itulo \ref{sec:seleccion}.
 
-Este cap\'itulo est\'a dividido en 5 secciones. En la Secci\'on \ref{sec:seleccionandoLenguaje} daremos nociones de similaridad entre objetos del modelo en un lenguaje particular y explicamos c\'omo se relacionan con la GER. Pero como la similaridad involucra la verificaci\'on de infinitas f\'ormulas, veremos simulaciones que es un concepto matem\'atico que nos va a ayudar a resolver el problema de GER sin tener que verificar infinitas f\'ormulas. Luego en la Secci\'on \ref{sec:greViaSimulacion} veremos c\'omo computar ERs en \EL usando simulaciones. En la Secci\'on \ref{sec:bisimulacion} veremos c\'omo computar ERs en \ALC, y en la Secci\'on \ref{sec:computandoEnFOL} en \FOL. Para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un resumen del cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos.
+Este cap\'itulo est\'a dividido en 5 secciones. En la Secci\'on \ref{sec:seleccionandoLenguaje} daremos nociones de similaridad entre objetos del modelo en un lenguaje particular y explicamos c\'omo se relacionan con la GER. Pero como la similaridad involucra la verificaci\'on de infinitas f\'ormulas, veremos simulaciones que es un concepto matem\'atico que nos va a ayudar a resolver el problema de GER sin tener que verificar infinitas f\'ormulas. Luego en la Secci\'on \ref{sec:greViaSimulacion} veremos c\'omo computar ERs en \EL usando simulaciones. En la Secci\'on \ref{sec:bisimulacion} veremos c\'omo computar ERs en \ALC, y en la Secci\'on \ref{sec:computandoEnFOL} en \EPFOL. Para finalizar en la Secci\'on \ref{sec:notasFinales} daremos un resumen del cap\'itulo y contaremos como se linkea esta parte de la tesis con los dem\'as cap\'itulos. Parte de los resultados mostrados en este cap\'itulo fueron publicados en \cite{areces08,arec:usin11}.
 
 
 \section{Objetos indistinguibles en un lenguaje l\'ogico $\+L$}
@@ -596,7 +596,7 @@ $$
 \varphi,\varphi' ::= \top \mid p \mid \neg \varphi \mid \varphi \sqcap \varphi'
 \mid \exists R. \varphi
 $$
-donde $p$ es el conjunto de los s\'imbolos proposicionales \prop y $R$ es el de los s\'imbolos relacionales \rel. $\el$ puede definirse como $\alc$ sin negaci\'on. $\alc$ permite negaci\'on tanto at\'omica (e.g. $\neg \mathsf{flower}$) como sobre relaciones (e.g. $\neg \exists \mathsf{in}.\mathsf{hat}$).
+donde $p$ es el conjunto de los s\'imbolos proposicionales \prop y $R$ es el de los s\'imbolos relacionales \rel. $\el$ puede definirse como $\alc$ sin negaci\'on. $\alc$ permite negaci\'on tanto at\'omica (por ejemplo, $\neg \mathsf{flower}$) como sobre relaciones (por ejemplo, $\neg \exists \mathsf{in}.\mathsf{hat}$).
 
 Las f\'ormulas de $\alc$ (como las de $\el$) son interpretadas en modelos relacionales de primer orden $\gM = (\Delta,\interp{\cdot})$ donde
 $\Delta$ es un conjunto no vac\'io y $\interp{\cdot}$ es una funci\'on de interpretaci\'on tal que:
@@ -723,7 +723,7 @@ hay un riesgo de que el \el-algoritmo podr\'ia tener peor tiempo de ejecuci\'on,
        $\interp{\psi \sqcap \neg \varphi} \not = \emptyset$}{
          add $\psi \sqcap \varphi$ and
                $\psi \sqcap \neg \varphi$ to \RE \;
-         remove $\psi$ from \RE \;
+         borrar $\psi$ de \RE \;
       }
    }
 \end{megaalgorithm}
@@ -791,9 +791,9 @@ $\mathsf{flower}$ en 2 nuevas f\'ormulas $\mathsf{flower} \sqcap
 \exists \mathsf{in}.\mathsf{hat}$ y $\mathsf{flower} \sqcap \neg
 \exists \mathsf{in}.\mathsf{hat}$, generando una ER \'unica para $f_1  $ pero que contiene negaci\'on.
 
-\section{Computando expresiones referenciales en \FOL-}
+\section{Computando expresiones referenciales en \EPFOL}
 \label{sec:computandoEnFOL}
-En esta secci\'on comenzaremos explicando trabajo previo en la GER usando $\FOL$. En particular describimos el trabajo de~\cite{graph} que se introdujo brevemente en la Secci\'on \ref{graph}. Luego mostraremos c\'omo la GER en $\FOL$ puede verse bajo la luz de las $\FOL$-simulaciones.
+En esta secci\'on comenzaremos explicando trabajo previo en la GER usando $\EPFOL$. En particular describimos el trabajo de~\cite{graph} que se introdujo brevemente en la Secci\'on \ref{graph}. Luego mostraremos c\'omo la GER en $\EPFOL$ puede verse bajo la luz de las $\EPFOL$-simulaciones.
 En~\cite{graph} introducen un algoritmo para GER basado en computaci\'on de \emph{isomorfismos de subgrafos}. Su algoritmo toma como entrada
 un grafo dirigido etiquetado $G$ y un nodo $e$ (el target) y devuelve, si es posible,
 un subgrafo conectado $H$ de $G$, que contiene al target $e$ y suficiente informaci\'on conectada para
@@ -875,20 +875,20 @@ de~\cite{graph} y nuestra perspectiva de teor\'ia de modelos es: en
 modelos relacionales finitos, el isomorfismo de subgrafos corresponde a las
 \EPFOL-simulaciones. Dados nodos $u,v$ de
 $G$, existe un subgrafo isomorfo a G a trav\'es de una funci\'on $f$, que contiene $ u $ y
-$v$, y tal que $f(u)=v$ si y s\'olo si $u \simul{\+\EPFOL} v$. Una implementaci\'on usando $\+\EPFOL$-simulaciones se muestra en el Algoritmo \ref{alg:makeRE}.
+$v$, y tal que $f(u)=v$ si y s\'olo si $u \simul{\+\EPFOL} v$. Una implementaci\'on usando \EPFOL-simulaciones se muestra en el Algoritmo \ref{alg:makeRE}.
 
-El Algoritmo \ref{alg:makeRE} transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una $\EPFOL-$-ER {\em
+El Algoritmo \ref{alg:makeRE} transforma el {\em grafo} calculado, que se refiere \'unicamente al target $v$ en una \EPFOL-ER {\em
 f\'ormula para} $v$. El Algoritmo~\ref{alg:find} nos dice c\'omo extender $H$ en cada paso
 del bucle principal. Hay que tener en cuenta que, a diferencia de la
-presentaci\'on de~\cite{graph}, \instFun{makeRE}{\FOL} computa
-no s\'olo un grafo $H$, sino tambi\'en una $\+L$-Simulaci\'on de $f$.
+presentaci\'on de~\cite{graph}, \instFun{makeRE}{\EPFOL} computa
+no s\'olo un grafo $H$, sino tambi\'en una $\+L$-simulaci\'on de $f$.
 
 \begin{megaalgorithm}%[H]
 %\floatname{algorithm}{Algoritmo}\small
-\SetKwFunction{makeRE}{makeRE$_\FOL-$}
-\SetKwFunction{findGraph}{find$_\FOL-$}
-\SetKwFunction{init}{init_$\FOL-$}
-\SetKwFunction{buildF}{buildF$_\FOL-$}
+\SetKwFunction{makeRE}{makeRE$_\EPFOL$}
+\SetKwFunction{findGraph}{find$_\EPFOL$}
+\SetKwFunction{init}{init_$\EPFOL$}
+\SetKwFunction{buildF}{buildF$_\EPFOL$}
 
 %$v_H$ := \emph{new node}\;
 
@@ -919,7 +919,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 \Return{$\exists x_2\ldots \exists x_n . \gamma$}\;
 \renewcommand{\algorithmname}{Algoritmo}
 %\Return{\buildF$(H',v)$}\;
-\caption{\small \texttt{makeRE}$_\FOL-$($v$).}\label{alg:makeRE}
+\caption{\small \texttt{makeRE}$_\EPFOL$($v$).}\label{alg:makeRE}
 \end{megaalgorithm}
 
 
@@ -930,7 +930,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 %empieza algoritmo 4
 \begin{megaalgorithm}[H] 
 %\floatname{algorithm}{Algoritmo}\small
-\SetKwFunction{findGraph}{find$_\+L$} 
+\SetKwFunction{findGraph}{find$_\EPFOL$} 
 \SetKwFunction{cost}{cost}
 \SetKwFunction{matchGraph}{match$_\+L$}
 \SetKwFunction{extendGraph}{extend$_\+L$}
@@ -956,7 +956,7 @@ $\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L}
  
 \Return{$\mathit{best}$}\;
 
-\caption{\small \texttt{find}$_\FOL-$($v, \mathit{best},H,f$).}\label{alg:find}
+\caption{\small \texttt{find}$_\EPFOL$($v, \mathit{best},H,f$).}\label{alg:find}
 \end{megaalgorithm}
   %\end{minipage}%
 %\end{center}
@@ -971,13 +971,8 @@ Como nota final sobre la complejidad, la computaci\'on
 \label{sec:notasFinales}
 
 En este cap\'itulo dimos definiciones b\'asicas de modelo, interpretaci\'on, f\'ormula y de otros conceptos b\'asicos de l\'ogica y teor\'ia de modelos. Explicamos e ilustramos la noci\'on de similaridad de 2 elementos $u$ y $v$ de un lenguaje l\'ogico $\+L$ ($u \simil{\+L} v$ en el lenguaje $\+L$). Cuando para toda f\'ormula $\phi \in \+L$, tenemos que $\{u,v\} \subseteq \interp{\phi}$,  se dice que $u$ y $v$ son indistinguibles en el lenguaje l\'ogico $\+L$. Como la similaridad est\'a definida para infinitas f\'ormulas, tambi\'en vimos un teorema que cuando el modelo es finito acota esa b\'usqueda
-infinita a una finita, teniendo en cuenta propiedades de las l\'ogicas usadas. Explicamos algoritmos eficientes que computan ERs usando simulaciones en \FOL, \ALC y \EL. Tambi\'en se mostr\'o una clasificaci\'on de los algoritmos vistos seg\'un la complejidad computacional de los mismos. 
+infinita a una finita, teniendo en cuenta propiedades de las l\'ogicas usadas. Explicamos algoritmos eficientes que computan ERs usando simulaciones en \EPFOL, \ALC y \EL. Tambi\'en se mostr\'o una clasificaci\'on de los algoritmos vistos seg\'un la complejidad computacional de los mismos. 
 
 En el Cap\'itulo \ref{sec:algoritmo} extenderemos estos algoritmos integrando una distribuci\'on finita de probabilidades que representa la incertidumbre presente en posibles aplicaciones de la generaci\'on de expresiones referenciales que deben referirse al mundo real y tienen que lidiar con datos ruidosos de sensores y modelos incompletos de la realidad. El objetivo es generar un ranking de las expresiones referenciales ordenado por la probabilidad de ser correctamente interpretada en el contexto. En el Cap\'itulo \ref{sec:evaluacion} evaluamos estos algoritmos usando t\'ecnicas autom\'aticas y evaluaciones de jueces humanos sobre datos de benchmarks del \'area. En el Cap\'itulo \ref{sec:corpus} se realiza una evaluaci\'on con respecto a un nuevo corpus de expresiones referenciales de puntos de inter\'es en mapas de ciudades con distintos niveles de zoom. 
 
 
-
-%En este cap\'itulo dimos definiciones b\'asicas de modelo, 
-%interpretaci\'on, f\'ormula, hablamos de la noci\'on de similaridad de 2 elementos $u$ y $v$ del modelo la cual dice que son 
-%similares en $\+L$ ($u \simil{\+L} v$ en el lenguaje $+L$), cuando para toda f\'ormula $\phi \in \+L$, tenemos que 
-%$\{u,v\} \subseteq \interp{\phi}$, no hay una f\'ormula que satisfaga uno y no el otro, por lo tanto se dice que son indistinguibles en el lenguaje l\'ogico $\+L$. Como las similaridad est\'a definida para infinitas f\'ormulas, tambi\'en vimos un teorema que bajo ciertas condiciones (que el modelo sea finito) acota esa b\'usqueda infinita a una finita, teniendo en cuenta propiedades de las l\'ogicas usadas. Computamos ERs en \FOL, \ALC y \EL. Tambi\'en se mostr\'o una clasificaci\'on de los algoritmos vistos seg\'un la complejidad computacional de los mismos. Explicamos como computamos las ERs para los distintos lenguajes l\'ogicos \FOL, \ALC y \EL. Elegimos para nuestro algoritmo el lenguaje \EL ya que es el lenguaje que restringe la expresividad a la encontrada en corpora.%es decir que no existe otro elemento en el modelo el cual sea 
