@@ -141,7 +141,7 @@ En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distri
 \end{figure}
   
 Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emph{aprendizaje autom\'atico}) son, en general, mucho m\'as cercanas de la entrop\'{i}a del corpus, que las entrop\'ias cruzadas de \emph{random} y \emph{uniforme}. S\'olo en la escena 12 random, por azar se acerca un poco m\'as.
-
+\newpage
 \section{Evaluaci\'on de rankings en el TUNA Challenge} \label{sec:automaticevaluation}
 
 En esta secci\'on se presenta la comparaci\'on de nuestro algoritmo con el algoritmo que tuvo el mejor desempe\~no en el TUNA Challenge. 
@@ -162,7 +162,7 @@ En la Tabla \ref{probability-of-use} y \ref{probability-of-use-people} se muestr
 
 Para aprender las probabilidades de uso se sigui\'o el mecanismo descripto en el Cap\'itulo \ref{sec:algoritmo}, se unific\'o el vocabulario del corpus y se aprendi\'o una funci\'on de regresi\'on lineal por cada propiedad y se reemplazaron las variables por los valores correspondientes a cada escena. Se us\'o la parte de entrenamiento del corpus que consist\'ia del 80\% del corpus TUNA.
 
-\begin{table}[h!]
+\begin{table}[H]
  \begin{minipage}{0.48\textwidth} 
 %\begin{center}
 \begin{tabular}{|l|c|}
@@ -364,6 +364,8 @@ sistema peor por 2 jueces &	.03	&	.13	&	.08 \\
 
 A continuaci\'on, se ilustra el experimento de evaluaci\'on, mostrando ejemplos de casos en los que la expresi\'on del sistema fue considerada mejor por ambos jueces, por un solo juez o por ninguno de los dos.
 
+Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER subespecificada mientras que el sistema produce un ER que identifica de manera un\'{i}voca al target. La ER generada por el sistema para esta figura es {\it small blue fan}, mientras que la ER producida por el ser humano es {\it blue fan}. La ER del humano no logra identificar de forma \'unica el target y entonces no es preferida por los jueces humanos. Los seres humanos son conocidos por producir ERs subespecificadas, esto puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ERs aprendidas de los seres humanos.
+
 \begin{figure}[H]
 \begin{minipage}{0.48\linewidth}
 \centering
@@ -381,9 +383,6 @@ A continuaci\'on, se ilustra el experimento de evaluaci\'on, mostrando ejemplos 
 \label{BlueChair}
 \end{minipage}
 \end{figure}
-
-Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER subespecificada mientras que el sistema produce un ER que identifica de manera un\'{i}voca al target. La ER generada por el sistema para esta figura es {\it small blue fan}, mientras que la ER producida por el ser humano es {\it blue fan}. La ER del humano no logra identificar de forma \'unica el target y entonces no es preferida por los jueces humanos. Los seres humanos son conocidos por producir ERs subespecificadas, esto puede ser debido a las limitaciones cognitivas por no ser capaz de considerar todo el contexto referencial al mismo tiempo. Nuestro algoritmo es capaz de considerar todo el contexto referencial y combinar esta capacidad con la probabilidad de uso de las ERs aprendidas de los seres humanos.
-
 
 En la Figura~\ref{BlueChair} la ER humana era {\it front blue chair}, y la ER sistema era {\it bottom blue chair}; ambos jueces seleccionaron la ER sistema. Este caso se puede explicar por el hecho de que, en este \'ambito, la propiedad {\it bottom} ayuda m\'as durante la identificaci\'on de la propiedad {\it front} porque concentra la atenci\'on del interlocutor en la parte inferior de la escena. Nuestro sistema aprende este hecho por el aprendizaje de un mayor valor de \puse\ para {\it bottom} que para {\it front} a partir de los datos de entrenamiento.
 
@@ -408,6 +407,6 @@ Figura~\ref{s28t25} es un ejemplo en el que ambos jueces prefirieron la expresi\
 
 Figura~\ref{s307t21}~ilustra un caso en el que la ER del sistema era m\'as sobreespecificada que la ER humana; el sistema incluye {\it wearing glasses}, mientras que el ser humano no lo hizo. En este caso un sujeto humano prefiere la ER del sistema y el otro la ER del humano. La cantidad de sobreespecificaci\'on es una cuesti\'on subjetiva, donde los humanos mismos no est\'an de acuerdo. Una evaluaci\'on donde las ERs se utilicen para resolver una tarea ser\'{i}a interesante para investigar este asunto.
 
-\section{Notas finales y linkeo del cap\'itulo}{sec:notas5}
+\section{Notas finales y linkeo del cap\'itulo}\label{sec:notas5}
 
 En este cap\'itulo se present\'o una evaluaci\'on autom\'atica de los rankings de ERs generados por el algoritmo sobre 2 benchmarks del \'area, uno el corpus GRE3D7 y otro son los resultados de una competencia el TUNA challenge, en este caso nos comparamos con el algoritmo que mejores puntuaciones tuvo en la competencia. Presentamos tambi\'en una evaluaci\'on humana sobre ERs del corpus TUNA y las generadas por el algoritmo. Si bien conseguimos buenas puntuaciones en el siguiente cap\'itulo veremos una evaluaci\'on de un caso mucho m\'as natural, en el que consideramos ERs generadas por el algoritmo para puntos de inter\'es en mapas. 
