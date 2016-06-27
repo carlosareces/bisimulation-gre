@@ -8,7 +8,7 @@ Este cap\'itulo esta dividido en 4 secciones, en la Secci\'on \ref{sec:compara} 
 \section{Evaluaci\'on de rankings sobre el corpus GRE3D7}
 \label{sec:compara}
 En esta secci\'on presentamos una evaluaci\'on cuantitativa y autom\'atica de los algoritmos en el dominio del corpus GRE3D7~\cite{gre3d7} introducido en la Secci\'on~\ref{sec:corpusGRE} del Cap\'itulo~\ref{sec:seleccion}. Mostraremos una comparaci\'on con el ranking de ERs dadas por el algoritmo con las probabilidades de uso calculadas como se describe en la Secci\'on~\ref{sec:learning}, es decir con aprendizaje autom\'atico a partir de las dem\'as im\'agenes del corpus y ejecutando nuestro algoritmo 10000 veces. El algoritmo probabil\'istico con sobreespecificaci\'on es capaz de generar una distribuci\'on de ERs similar a la que se observa en el corpus. Describimos primero en detalle los experimentos que realizamos para la escena que se muestra en la Figura~\ref{contexto-evaluacion}, en la Secci\'on \ref{sec:caso_estudio_gre3d7}. Luego, en la Secci\'on \ref{sec:compara-varias}, resumimos los resultados obtenidos en evaluaciones similares para otras 7 escenas del corpus. 
-\subsection{Caso de estudio de una escena del corpus GRE3D7}
+\subsection{Caso de estudio de una escena del corpus}
 \label{sec:caso_estudio_gre3d7}
 Las probabilidades de uso aprendidas usando regresi\'on lineal como se muestra en la Secci\'on~\ref{sec:learning} se muestran en la Tabla \ref{probabilidades-escena2}.
 
@@ -84,7 +84,7 @@ Total & 140 & 100 & 10000 & 100 & 80.51 \\
 
  La exactitud del algoritmo con respecto al corpus GRE3D7 para esta escena es del 80\%. De las 14 ERs diferentes generadas por el algoritmo, 5 se encuentran en el corpus y las otras 9 no. Estas 9 expresiones referenciales incluyen propiedades de ubicaci\'on del target no con respecto a un landmark sino a su posici\'on en la escena 3D. Por ejemplo \emph{la esfera verde que est\'a a la izquierda} se refiere a que la esfera verde est\'a a la izquierda de la escena.  La probabilidad de uso de este tipo de propiedades es menor al 1\%, en particular la de left es 0,007, pero, como esa probabilidad no es cero, dichas propiedades aparecen en ERs (siempre con menos de un 1\% de frecuencia).  La m\'etrica de exactitud ha sido utilizada en trabajos anteriores para comparar la salida de un algoritmo de generaci\'on de ERs con las ERs que se encuentran en corpora~\cite{sluis07:eval,viet:gene11} y se considera una m\'etrica muy estricta para esta tarea.
 
-\subsection{Evaluaci\'on emp\'irica sobre el resto del corpus}
+\subsection{Evaluaci\'on autom\'atica sobre el corpus}
 \label{sec:compara-varias}
 
 Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar que como el algoritmo tiene un componente de azar, por eso nos di\'o bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
@@ -142,7 +142,7 @@ En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distri
   
 Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emph{aprendizaje autom\'atico}) son, en general, mucho m\'as cercanas de la entrop\'{i}a del corpus, que las entrop\'ias cruzadas de \emph{random} y \emph{uniforme}. S\'olo en la escena 12 random, por azar se acerca un poco m\'as.
 \newpage
-\section{Evaluaci\'on de rankings en el TUNA Challenge} \label{sec:automaticevaluation}
+\section{Evaluaci\'on de rankings sobre el corpus TUNA} \label{sec:automaticevaluation}
 
 En esta secci\'on se presenta la comparaci\'on de nuestro algoritmo con el algoritmo que tuvo el mejor desempe\~no en el TUNA Challenge. 
 
@@ -152,7 +152,6 @@ Se daba parte del corpus TUNA como entrenamiento, y un software de evaluaci\'on 
 El algoritmo GRAPH que describimos en el Cap\'itulo \ref{sec:seleccion} es un algoritmo determin\'istico y por lo tanto produce la misma expresi\'on referencial cuando se ejecuta con el mismo target y contexto. Nuestro algoritmo es no-determin\'istico, puede dar una expresi\'on referencial diferente cada vez que se ejecuta. Con el fin de compararlos corremos nuestro algoritmo 100 veces y hacemos un ranking de las 20 ERs m\'as frecuentes generadas por el algoritmo. Utilizamos la parte de prueba del corpus TUNA (el cual fue introducido en la Secci\'on \ref{sec:corpusTUNA}), para comparar el ranking de ERs dado por nuestro algoritmo con las salidas del algoritmo GRAPH cuyos resultados se describen en~\cite{KrahmerGRAPH} y se reproducen en la Tabla~\ref{Tabla_sis_1_20}.
 
 
-\subsection{Comparaci\'on con el TUNA Challenge}
 El algoritmo GRAPH define la generaci\'on de expresiones referenciales como un problema de b\'usqueda en un grafo, devuelve el grafo distintivo de menor costo (si existe) dada una funci\'on de costo particular. Comparamos a este algoritmo usando las m\'etricas exactitud, Dice y \textsc {masi}, introducidas en la Secci\'on \ref{sec:metricasAutomaticas}. 
 
 Recordemos que el corpus TUNA tiene 2 partes, una parte cuyo dominio son muebles, y otra parte cuyo dominio son personas, ambos ubicados en una grilla. El corpus tiene una parte con target singular, y otra con targets plurales. Para realizar esta comparaci\'on se us\'o solamente la parte singular del corpus.
