@@ -12,12 +12,12 @@ el mismo input.
  \item Dado un corpus de ERs para un dominio determinado,
 es posible usar \textbf{aprendizaje autom\'atico} para aproximar una distribuci\'on de probabilidad adecuada para las propiedades y relaciones de una escena no vista antes. Esto hace que el ranking de las ERs generadas para el modelo simule el que se observa en el corpus usado para el aprendizaje autom\'atico.
 \end{itemize}
-\
-Este cap\'itulo est\'a dividido en cinco secciones. En la primer secci\'on explicaremos la entrada y salida del algoritmo. En la Secci\'on \ref{sec:learning} mostraremos como obtener la distribuci\'on de probabilidad finita que toma como entrada el algoritmo, usando aprendizaje autom\'atico cuando hay corpus disponible para el dominio. Luego en la Secci\'on \ref{sec:algoritmo_probabilistico} mostraremos el algoritmo en detalle y definiremos los conceptos y t\'ecnicas de teor\'ia de modelos necesarios para entenderlo. En la Secci\'on \ref{sec:ejemplo_ejecucion} mostraremos un ejemplo de ejecuci\'on paso a paso. Explicaremos c\'omo conseguimos asegurar terminaci\'on, c\'omo se generan las ERs no-determin\'isticamente y c\'omo conseguimos mayor control sobre la sobreespecificaci\'on. Finalmente en la Secci\'on \ref{sec:link-algoritmo} daremos un resumen y comentaremos c\'omo se linkea el cap\'itulo con el resto de la tesis. Parte de los resultados mostrados en este cap\'itulo fueron publicados en \cite{arec:2012:coling12}.
+
+Este cap\'itulo est\'a dividido en cinco secciones. En la primer secci\'on explicamos la entrada y salida del algoritmo. En la Secci\'on \ref{sec:learning} mostramos como obtener la distribuci\'on de probabilidad finita que toma como entrada el algoritmo, usando aprendizaje autom\'atico cuando hay corpus disponible para el dominio. Luego en la Secci\'on \ref{sec:algoritmo_probabilistico} mostramos el algoritmo en detalle y definimos los conceptos y t\'ecnicas de teor\'ia de modelos necesarios para entenderlo. En la Secci\'on \ref{sec:ejemplo_ejecucion} mostramos un ejemplo de ejecuci\'on paso a paso. Explicamos c\'omo conseguimos asegurar terminaci\'on, c\'omo se generan las ERs no-determin\'isticamente y c\'omo conseguimos mayor control sobre la sobreespecificaci\'on. Finalmente en la Secci\'on \ref{sec:link-algoritmo} damos un resumen y comentamos c\'omo se linkea el cap\'itulo con el resto de la tesis. Parte de los resultados mostrados en este cap\'itulo fueron publicados en \cite{arec:2012:coling12}.
 
 \section{Entrada y salida del algoritmo probabil\'istico}
 \label{input_algo}
-Como todo algoritmo de GER, nuestros algoritmos toman como entrada un contexto representado por un \textbf{modelo} $\+M$. Por ejemplo en la Figura \ref{figura-y-modelo} se muestra el modelo de la escena de la izquierda. Sin embargo a diferencia de otros algoritmos, nuestros algoritmos no toman como entrada el \textbf{target}. Nuestros algoritmos generan rankings de ERs para todos los elementos del modelo paralelamente. En particular, el algoritmo generar\'a ERs para el conjunto singleton \{$e_5$\}. En la Secci\'on \ref{sec:genera_plural} de este cap\'itulo se muestra una sencilla extensi\'on de los algoritmos que permite generar ERs plurales.
+Como todo algoritmo de GER, nuestros algoritmos toman como entrada un contexto representado por un \textbf{modelo} $\+M$. Por ejemplo en la Figura \ref{figura-y-modelo} a la derecha se muestra el modelo de la escena de la izquierda. Sin embargo a diferencia de otros algoritmos, nuestros algoritmos no toman como entrada el \textbf{target}. Nuestros algoritmos generan rankings de ERs para todos los elementos del modelo paralelamente. En particular, el algoritmo generar\'a ERs para el conjunto singleton \{$e_5$\}. En la Secci\'on \ref{sec:genera_plural} de este cap\'itulo se muestra una sencilla extensi\'on de los algoritmos que permite generar ERs plurales.
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
   \centering
@@ -93,7 +93,7 @@ Como todo algoritmo de GER, nuestros algoritmos toman como entrada un contexto r
 \end{figure}
 
 
-El sistema tambi\'en toma como entrada una \textbf{distribuci\'on de probabilidad finita} de las propiedades y relaciones de la signatura del modelo\footnote{En lo que sigue nos referiremos a las propiedades y relaciones de un modelo simplemente como relaciones, distinguiendo entre relaciones unarias (propiedades) o relaciones binarias (relaciones) cuando sea necesario.}. Una distribuci\'on de probabilidades Rs, es una lista de pares (R, R.\puse) que vincula a cada relaci\'on R a una cierta probabilidad de uso R.\puse\ ordenada de mayor a menor por \puse. La distribuci\'on de probabilidad para el modelo del ejemplo se ilustra en la Tabla \ref{probabilidades-escena}.  
+El sistema tambi\'en toma como entrada una \textbf{distribuci\'on de probabilidad finita} de las propiedades y relaciones de la signatura del modelo\footnote{En lo que sigue nos referiremos a las propiedades y relaciones de un modelo simplemente como relaciones, distinguiendo entre relaciones unarias (propiedades) o binarias (relaciones) cuando sea necesario.}. Una distribuci\'on de probabilidades Rs, es una lista de pares (R, R.\puse) que vincula a cada relaci\'on R a una cierta probabilidad de uso R.\puse\ ordenada de mayor a menor por \puse. La distribuci\'on de probabilidad para el modelo del ejemplo se ilustra en la Tabla \ref{probabilidades-escena}.  
 
 \begin{table}[h]
 \begin{center}
@@ -130,18 +130,16 @@ R.\puse	& 1.0			& 1.0		& 0.978	& 0.257 & 0.178 & 0.15   & 0.107 & 0.007& 0 &0\\
 %a-la-der-de 0, \\
 %belowof 0\\
 
-Sea $\REL$ es el
-conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura} del modelo), entonces podemos decir que Rs $\in (\REL \times [0,1])^*$. En la pr\'oxima secci\'on explicaremos como obtener estas probabilidades que el algoritmo toma como input.
-Los algoritmos descriptos en el Cap\'itulo \ref{sec:seleccion} y en el Cap\'itulo \ref{sec:intro_logica} procesan las relaciones unarias y las relaciones binarias de forma diferente. Adem\'as, en general prefieren usar primero las relaciones unarias y s\'olo recurrir a las binarias en caso de que sea necesario. Como se ha observado previamente en trabajo emp\'irico~\cite{viet:gene11}, hay escenas en las cuales las personas usan relaciones binarias antes que unarias y aunque no sea necesario usarlas. Por lo tanto para uniformizar el tratamiento de todas las relaciones sin importar su aridad nuestro algoritmo modifica el modelo $\gM$ antes de comenzar transformando todas las relaciones a binarias. Esto se hace agregando un elemento extra \emph{dummy} al modelo que no representa ning\'un objeto de la escena y que se relaciona con todos los objetos que ten\'ian relaciones unarias. Por ejemplo, en la Figura \ref{figura-y-modelo} se codifica el hecho de que $e_1$ es amarillo diciendo que est\'a relacionado con el elemento \emph{dummy} por la relaci\'on binaria \emph{yellow}. 
+Sea $\REL$ el conjunto de todos los s\'imbolos de relaci\'on en el modelo (es decir, la~\emph{signatura} del modelo), entonces podemos decir que Rs $\in (\REL \times [0,1])^*$. En la pr\'oxima secci\'on explicamos como obtener estas probabilidades que el algoritmo toma como input. Los algoritmos descriptos en el Cap\'itulo \ref{sec:seleccion} y en el Cap\'itulo \ref{sec:intro_logica} procesan las relaciones unarias y las relaciones binarias de forma diferente. Adem\'as, en general prefieren usar primero las relaciones unarias y s\'olo recurrir a las binarias en caso de que sea necesario. Como se ha observado previamente en trabajo emp\'irico~\cite{viet:gene11}, hay escenas en las cuales las personas usan relaciones binarias antes que unarias y aunque no sea necesario usarlas. Por lo tanto para uniformizar el tratamiento de todas las relaciones sin importar su aridad nuestro algoritmo modifica el modelo $\gM$ antes de comenzar transformando todas las relaciones a binarias. Esto se hace agregando un elemento extra \emph{dummy} al modelo que no representa ning\'un objeto de la escena y que se relaciona con todos los objetos que ten\'ian relaciones unarias. Por ejemplo, en la Figura \ref{figura-y-modelo} se codifica el hecho de que $e_1$ es amarillo diciendo que est\'a relacionado con el elemento \emph{dummy} por la relaci\'on binaria \emph{yellow}. 
 
-Como explicamos en el Cap\'itulo \ref{sec:intro_logica}, la salida el algoritmo es lo que se llaman las $\mathcal {L}$-clases (clases de la l\'ogica $\mathcal {L}$) de semejanza del modelo de entrada $\gM $. Intuitivamente, si dos elementos en el modelo pertenecen a la misma $\mathcal {L}$-clase de semejanza, entonces el lenguaje~$\mathcal {L}$ no es lo suficientemente expresivo para diferenciarlos (es decir, no hay una f\'ormula en~$\mathcal {L }$ que pueda distinguirlos). Cada  $\mathcal {L}$-clase va acompa\~nada de un conjunto de f\'ormulas cuyas interpretaciones en el modelo de input coinciden con la $\mathcal {L}$-clase. Estas f\'ormulas son las expresiones referenciales que referencian a los elementos de la $\mathcal {L}$-clase. Si las $\mathcal {L}$-clases son conjuntos singleton, el algoritmo lleg\'o a un punto fijo y termina. En otra etapa de postprocesamiento se identifica la f\'ormula cuya extensi\'on es igual al target como una ER del target. Como el algoritmo es no determin\'istico el ranking que ERs de la salida se genera ejecutando el algoritmo un n\'umero N de veces. Cada ER generada tiene asociada una probabilidad calculada como una combinaci\'on de los \puse\ de las relaciones que contiene la ER. El ranking de ERs se genera ordenando las ERs de acuerdo a la frecuencia con la cual el algoritmo las genera, la cual se correlaciona con la probabilidad antes mencionada.
+Como explicamos en el Cap\'itulo \ref{sec:intro_logica}, la salida el algoritmo es lo que se llaman las $\mathcal {L}$-clases (clases de la l\'ogica $\mathcal {L}$) de semejanza del modelo de entrada $\gM $. Intuitivamente, si dos elementos en el modelo pertenecen a la misma $\mathcal {L}$-clase de semejanza, entonces el lenguaje~$\mathcal {L}$ no es lo suficientemente expresivo para diferenciarlos (es decir, no hay una f\'ormula en~$\mathcal {L }$ que pueda distinguirlos). Cada  $\mathcal {L}$-clase va acompa\~nada de un conjunto de f\'ormulas cuyas interpretaciones en el modelo de input coinciden con la $\mathcal {L}$-clase. Estas f\'ormulas son las expresiones referenciales que referencian a los elementos de la $\mathcal {L}$-clase. Si las $\mathcal {L}$-clases son conjuntos singleton, el algoritmo lleg\'o a un punto fijo y termina. En otra etapa de postprocesamiento se identifica la f\'ormula cuya extensi\'on es igual al target como una ER del target. Como el algoritmo es no determin\'istico el ranking que ERs de la salida se genera ejecutando el algoritmo un n\'umero N de veces. Cada ER generada tiene asociada una probabilidad calculada como una combinaci\'on de los \puse\ de las relaciones que contiene la ER. El ranking de ERs se genera ordenando las ERs de acuerdo a la frecuencia con la cual el algoritmo las gener\'o, la cual se correlaciona con la probabilidad antes mencionada.
 
 %La salida del algoritmo es un conjunto de f\'ormulas y sus interpretaciones en el modelo (que ser\'a ER de un target singleton, si la interpretaci\'on de la f\'ormula contiene s\'olo 1 objeto) de los elementos del modelo. Si al terminar el algoritmo la interpretaci\'on de cada f\'ormula tiene un s\'olo elemento, tenemos una ER que identifica al elemento, para cada elemento del modelo. 
 
 \section{Probabilidades de uso}
 \label{sec:learning}
 
-En la secci\'on anterior dijimos que el algoritmo asume que para cada relaci\'on R del modelo se tiene una probabilidad de uso R.\puse. Como dijimos, nuestro algoritmo es no-determinista: en 2 ejecuciones podr\'ia dar ERs diferentes para el mismo target y la misma lista de probabilidades de uso. Las probabilidades de uso son el motor que gu\'ia este no-determinismo. Como explicaremos en la Secci\'on \ref{sec:algoritmo_probabilistico}. En esta secci\'on describimos c\'omo obtener la distribuci\'on finita de probabilidades de las relaciones de la signatura del modelo de entrada. Primero explicamos c\'omo calcularlas en el caso de tener corpus disponible para la escena. Luego generalizamos nuestro enfoque al caso de tener que generar ERs para una escena no vista antes usando t\'ecnicas de aprendizaje autom\'atico.  
+En la secci\'on anterior dijimos que el algoritmo asume que para cada relaci\'on R del modelo se tiene una probabilidad de uso R.\puse. Como dijimos, nuestro algoritmo es no-determinista: en 2 ejecuciones podr\'ia dar ERs diferentes para el mismo target y la misma lista de probabilidades de uso. Las probabilidades de uso son el motor que gu\'ia este no-determinismo. Como explicamos en la Secci\'on \ref{sec:algoritmo_probabilistico}. En esta secci\'on describimos c\'omo obtener la distribuci\'on finita de probabilidades de las relaciones de la signatura del modelo de entrada. Primero explicamos c\'omo calcularlas en el caso de tener corpus disponible para la escena. Luego generalizamos nuestro enfoque al caso de tener que generar ERs para una escena no vista antes usando t\'ecnicas de aprendizaje autom\'atico.  
 
 %\begin{figure}[h]
 %\centering
@@ -163,7 +161,7 @@ en esa escena.
 %El corpus tiene para cada imagen 140 ERs dadas por personas. La Figura \ref{fig4-4} muestra una escena y las distintas ERs que aparecieron en el corpus.
 %Las ERs dadas en Figura \ref{fig4-4} son las ERs diferentes que est\'an en el corpus para el contexto mostrado en la misma figura. Viendo esas ERs, uno podr\'ia imaginarse que no son las del corpus mismo, ya que diferentes personas normalmente usan distintas palabras para nombrar al mismo objeto, distintas frases, distinto orden de las palabras, s\'i es verdad, este corpus ya ha sido procesado para filtrar todas esas cosas, dejando un vocabulario com\'un a todas las ERs, si bien es verdad que con eso perdemos informaci\'on por ejemplo de la realizaci\'on particular que hizo una persona, pero ganamos en poder agrupar las ERs por la informaci\'on que la persona incluy\'o, en la etapa de selecci\'on de contenido de la ER. Si quisi\'eramos partir de un corpus con las ERs tal cual dieron las personas, tendr\'iamos que realizar los siguientes pasos a fin de unificar el vocabulario:
 
-Antes de dar la metodolog\'ia para calcular las probabilidades de uso, explicaremos qu\'e hacer con un corpus de ERs para tener unificado el vocabulario, y poder as\'i definir el conjunto de relaciones a usar en las ERs. A continuaci\'on describimos los pasos:
+Antes de dar la metodolog\'ia para calcular las probabilidades de uso, explicamos qu\'e hacer con un corpus de ERs para tener unificado el vocabulario, y poder as\'i definir el conjunto de relaciones a usar en las ERs. A continuaci\'on describimos los pasos:
 
 \begin{enumerate}
 \item \textbf{Tokenizar} las expresiones referenciales y llamar al conjunto de palabras distintas
@@ -182,9 +180,9 @@ Antes de dar la metodolog\'ia para calcular las probabilidades de uso, explicare
 \item \textbf{Definir $\gM$} para cada escena, tal que la interpretaci\'on
  $\interp {\cdot}$ asegure de que todas las ERs encontradas en el corpus sean ERs en
   el modelo. Por ejemplo, las ERs de la Figura \ref{fig4-4} deben denotar el target se\~nalado en la figura, siendo el modelo 
-$\gM$ considerado el representado en Figura~\ref{fig4-4}.
+$\gM$ considerado el representado en la parte derecha de la Figura~\ref{fig4-4}.
 %GRE3D7-stimulus-cap2
-\item \textbf{Calcular R.\puse\ }para cada R$\in \REL$ utilizando la siguiente f\'ormula: Si
+\item \textbf{Calcular R.\puse\ }para cada R $\in \REL$ utilizando la siguiente f\'ormula: Si
   hay muchas ERs para cada escena (como es el caso del corpus \textit{GRE3D7}) $R.\puse\ = \#ERs$ que tienen R $/\#ERs$ en el corpus o asignamos 1 a R.\puse \ si R est\'a en la ER, asignamos 0 en caso contrario (como es el caso del corpus TUNA).
 \end{enumerate}
 
@@ -294,12 +292,12 @@ del target. Pero es intuitiva y no requiere parsear las ERs para distinguir entr
 en el Cap\'itulo~\ref{sec:evaluacion} produce ERs naturales
 que coinciden con las encontradas en corpora.
 
-Veamos ahora el siguiente ejemplo, el contexto y el modelo se muestra en la Figura \ref{fig4-4}.
+Veamos ahora el siguiente ejemplo, el contexto y el modelo se muestran en la Figura \ref{fig4-4}.
 
 
 Las ERs, cantidad de ocurrencias y porcentaje del corpus para de la Figura~\ref{fig4-4} se muestran en la Tabla~\ref{corpus-distribution}. La signatura resultante y su \puse\ asociado se muestran en la Tabla~\ref{probability-of-use1}.
 
-El \puse\ de las relaciones taxon\'omicas fue reemplazado por 1 ignorando el \puse conseguido por el m\'etodo para evitar que el algoritmo genere ERs como {\it la esfera que est\'a sobre algo}.
+El \puse\ de las relaciones taxon\'omicas fue reemplazado por 1 ignorando el \puse\ conseguido por el m\'etodo para evitar que el algoritmo genere ERs como {\it la esfera que est\'a sobre algo}.
 
 \begin{table}[h!]
 \begin{center}
@@ -328,8 +326,8 @@ green ball on-top cube & 1 & 0.71\% \\
 \end{table}
 
 Observe que los valores R.\puse\ obtenidos de esta manera deben ser
-interpretados como la probabilidad de utilizar R para describir el target en
-modelo de $\gM $, y podr\'{i}amos argumentar que se correlacionan con la
+interpretados como la probabilidad de utilizar R para describir al target en el
+modelo $\gM $, y podr\'{i}amos argumentar que se correlacionan con la
  saliencia de R para el target y su modelo. 
  
 Estas probabilidades no ser\'an \'utiles
@@ -368,28 +366,31 @@ enfoque de aprendizaje autom\'atico en la siguiente secci\'on.
 Si no hay corpus de expresiones referenciales para la escena, se puede estimar las \puse~a partir de corpus de
 diferentes escenas en el mismo dominio.
 
-En lo que sigue introduciremos regresi\'on lineal que es la t\'ecnica de aprendizaje autom\'atico que usaremos para estimar las probabilidades de uso \puse\ de las palabras que le daremos al algoritmo, y luego daremos un ejemplo de c\'omo calculamos las probabilidades de uso para una figura particular del \textit{GRE3D7}. La \textbf{regresi\'on lineal} es un modelo matem\'atico usado para aproximar la relaci\'on de dependencia entre una variable dependiente Y, las variables independientes $X_i$ y un t\'ermino aleatorio $\varepsilon$. Este modelo puede ser expresado como:
+En lo que sigue introduciremos regresi\'on lineal que es la t\'ecnica de aprendizaje autom\'atico que usamos para estimar las probabilidades de uso \puse\ de las palabras que le damos al algoritmo, y luego damos un ejemplo de c\'omo calculamos las probabilidades de uso para una figura particular del \textit{GRE3D7}. 
+
+La \textbf{regresi\'on lineal} es un modelo matem\'atico usado para aproximar la relaci\'on de dependencia entre una variable dependiente Y, las variables independientes $X_i$ y un t\'ermino aleatorio $\varepsilon$. Este modelo puede ser expresado como:
 
     $Y_t = \beta_0 + \beta_1 X_1 + \beta_2 X_2 + \cdots +\beta_p X_p + \varepsilon$ donde:
 \begin{itemize}
     \item $Y_t$: variable dependiente, explicada o regresando.
     \item $X_1$, $X_2$, $\cdots$, $X_p$ : variables explicativas, independientes o regresores.
-    \item $\beta_0$, $\beta_1$, $\beta_2$, $\cdots$, $\beta_p$ : par\'ametros, miden la influencia que las variables explicativas tienen sobre Y. Donde $\beta_0$ es la intersecci\'on o t\'ermino {\it constante}, las $\beta_i$ \ (i > 0) son los par\'ametros respectivos a cada variable independiente, y $p$ es el n\'umero de par\'ametros independientes a tener en cuenta en la regresi\'on.
+    \item $\beta_0$, $\beta_1$, $\beta_2$, $\cdots$, $\beta_p$ : son par\'ametros, miden la influencia que las variables explicativas tienen sobre Y. Donde $\beta_0$ es la intersecci\'on o t\'ermino {\it constante}, las $\beta_i$ \ (i > 0) son los par\'ametros respectivos a cada variable independiente, y $p$ es el n\'umero de par\'ametros independientes a tener en cuenta en la regresi\'on.
 \end{itemize}
-Tomaremos la parte azul y verde del corpus \textit{GRE3D7} mostrado en la Figura \ref{verde-azul} del Ap\'endice \ref{imagenesGRE3D7-apendice}, para aprender las probabilidades de uso de cada palabra de las ERs que dieron las personas, y as\'i estimar c\'omo es la distribuci\'on de las probabilidades de uso de las palabras del conjunto $REL$ en el corpus.
 
-Para la tarea de aprendizaje autom\'atico definimos un conjunto de caracter\'isticas de las ERs. Estas caracter\'isticas son las variables $X_i$ que le daremos al m\'etodo de regresi\'on lineal para calcular la dependencia o independencia de la probabilidad de uso \puse\ de cada palabra con respecto a ellas.
+Tomamos la parte azul y verde del corpus \textit{GRE3D7} mostrado en el Ap\'endice \ref{verde-azul}, para aprender las probabilidades de uso de cada palabra de las ERs que dieron las personas, y as\'i estimar c\'omo es la distribuci\'on de las probabilidades de uso de las palabras del conjunto \REL en el corpus.
+
+Para la tarea de aprendizaje autom\'atico definimos un conjunto de caracter\'isticas de las ERs. Estas caracter\'isticas son las variables $X_i$ que le damos al m\'etodo de regresi\'on lineal para calcular la dependencia o independencia de la probabilidad de uso \puse\ de cada palabra con respecto a ellas.
 
 Las caracter\'isticas que seleccionamos son:
 
 \begin{itemize}
-\item target-tiene 1 cuando el elemento target tiene la propiedad. 
-\item \#rel-prop  n\'umero de propiedades y relaciones que el target tiene.
-\item \#rel  n\'umero de relaciones binarias que el target tiene. 
-\item landmark-tiene 1 cuando un landmark del target tiene la propiedad. Un objeto es un landmark si tiene una relaci\'on directa en el modelo, con el target.
-\item location-has 1 cuando la ER puede usar la ubicaci\'on del target en la figura\footnote{Esto se hizo porque el TUNA corpus tiene algunas ERs donde se le dijo a la gente que pod\'ian usar la localizaci\'on del objeto y otras que no.}.
-\item disc 1 sobre el n\'umero de objetos en el modelo que tienen la propiedad.  
-adj-target-tiene n\'umero de adjetivos que la ER contiene.
+\item target-tiene es 1 cuando el elemento target tiene la propiedad. 
+\item \#rel-prop es el n\'umero de propiedades y relaciones que el target tiene.
+\item \#rel es el n\'umero de relaciones binarias que el target tiene. 
+\item landmark-tiene es 1 cuando un landmark del target tiene la propiedad. Un objeto es un landmark si tiene una relaci\'on directa en el modelo, con el target.
+\item location-has es 1 cuando la ER puede usar la ubicaci\'on del target en la figura\footnote{Para el TUNA corpus ya que tiene algunas ERs donde se le dijo a las personas que pod\'ian usar la localizaci\'on del objeto y otras que no.}.
+\item disc es 1 sobre el n\'umero de objetos en el modelo que tienen la propiedad.  
+\item adj-target-tiene es el n\'umero de adjetivos que la ER contiene.
 \end{itemize}
 
 El procedimiento entonces fue el siguiente:
@@ -440,29 +441,23 @@ center	 &0.0023	 &0.0037	  &0.0047 * target-tiene + 0.0047 * adj-target-tiene\\
 				 &				 &					&+ 0.0029 * landmark-tiene - 0.009\\
 \hline
 \end{tabular}
-\caption{F\'ormulas y errores de regresi\'on lineal para la parte del corpus \textit{GRE3D7} que se muestra en la Figura \ref{verde-azul}.}
+\caption{F\'ormulas y errores de regresi\'on lineal para la parte del corpus \textit{GRE3D7} que se muestra en la figura del Ap\'endice \ref{verde-azul}.}
 \label{tabla-linear-regresion-all}
 \end{center}
 \end{table}
 
-Las palabras {\it red} y {\it yellow} no aparecen en la Tabla \ref{tabla-linear-regresion-all} porque no aparec\'ian en las ERs del corpus de las im\'agenes consideradas (las que conten\'ian colores verdes y azules).
+Las palabras {\it red} y {\it yellow} no aparecen en la Tabla \ref{tabla-linear-regresion-all} porque no aparec\'ian en las ERs del corpus de las im\'agenes consideradas (s\'olo conten\'ian colores verde y azul).
 
-%\textbf{A ESTA TABLA LE FALTAN 3... DEBERIA AGREGARLAS!}
-
-%En la Tabla \ref{tabla-linear-regresion-all} se muestran 4 columnas: en la primer columna podemos ver la palabra, 
-%en la segunda columna est\'a el error promedio dado por regresi\'on lineal, en la tercera columna el error medio 
-%y en la cuarta la f\'ormula que regresi\'on lineal calcul\'o para la probabilidad de uso de la palabra considerada. 
-
-Podemos ver por ejemplo que {\it ball} tiene una \puse\ alta, es natural ya que en el corpus GRE3D7 todos los targets son {\it ball}. En cambio se puede ver que en {\it cube} no es tan alto y la \puse depende m\'as de la discernibilidad (disc). La \puse\ de {\it cube} representa en este dominio la probabilidad de usar {\it cube} en la descripci\'on del landmark. 
+Podemos ver por ejemplo que {\it ball} tiene una \puse\ alta, es natural ya que en el corpus GRE3D7 todos los targets son {\it ball}. En cambio se puede ver que en {\it cube} no es tan alto y la \puse\ depende m\'as de la discernibilidad (disc). La \puse\ de {\it cube} representa en este dominio la probabilidad de usar {\it cube} en la descripci\'on del landmark. 
 
 En los casos de {\it blue} y {\it green} el valor de \puse\ depende de si el target es {\it blue} o {\it green}, entonces si el target es {\it blue}, le da un valor alto a {\it blue} y bajo a {\it green} y viceversa, no depende del valor de discernibilidad de la relaci\'on en el modelo. 
 
 En la tabla tambi\'en podemos ver que relaciones como {\it small} y {\it large} tienen un error mucho m\'as alto que el resto de las relaciones, esto probablemente se debe a que ellas son propiedades vagas. Este tipo de propiedades no son absolutas y dependen del contexto considerado. Una caracter\'istica interesante que vemos y que no fue mencionada en trabajo previo es que tama\~no es m\'as frecuente usado para sobreespecificaci\'on cuando el target y el landmark tienen el mismo tama\~no 
-(es usado en ERs sobreespecificadas el 49\% cuando el target y el landmark comparten el tama\~no, y s\'olo el 25\% cuando no lo comparten). Esto es aprendido por el modelo de regresi\'on lineal, vemos que {\it small} le da un peso considerable a la caracter\'istica landmark-tiene.
+(es usado en ERs sobreespecificadas el 49\% cuando el target y el landmark comparten el tama\~no, y s\'olo el 25\% cuando no lo comparten). Esto es aprendido por el modelo de regresi\'on lineal, tambi\'en vemos que {\it small} le da un peso considerable a la caracter\'istica landmark-tiene.
 
 Las relaciones {\it ontop}, {\it leftof} y {\it rightof} tienen una \puse\ baja. {\it Ontop} es m\'as probable que {\it leftof} o {\it rightof}, esta observaci\'on fue reportada en (Viethen, 2011). 
 
-Para hacer el aprendizaje autom\'atico, separamos 1 contexto al que llamamos testing, y todos los dem\'as los usamos de entrenamiento. Por ejemplo, para aprender las \puse\ del contexto 13 mostrado en la Figura \ref{verde-azul} del Ap\'endice \ref{imagenesGRE3D7-apendice}, se usaron los otros 15 contextos.
+Para hacer el aprendizaje autom\'atico, separamos 1 contexto al que llamamos testing, y todos los dem\'as los usamos de entrenamiento. Por ejemplo, para aprender las \puse\ del contexto 13 mostrado en la figura del Ap\'endice \ref{verde-azul}, se usaron los otros 15 contextos.
 Nuestro conjunto de caracter\'{i}sticas es intencionadamente simplista con el fin de que sea
 independiente de dominio. Como resultado hay algunas relaciones complejas
 entre las caracter\'{i}sticas de las escenas que no es capaz de
@@ -470,9 +465,9 @@ capturar. La caracter\'{i}stica m\'as importante del dominio \textit{GRE3D7}
 que no somos capaces de aprender, y tiene un impacto en nuestro desempe\~no, es que
 las propiedades de tama\~no (es decir, small y large) se utilizan mucho
 m\'as cuando el target no puede ser identificado s\'olo con las propiedades taxon\'omicas absolutas 
-(verde y azul) y (ball y cube). En otras palabras, en el corpus \textit{GRE3D7} se utiliza el tama\~no con m\'as frecuencia (90,2\%)
+(green y blue) y (ball y cube). En otras palabras, en el corpus \textit{GRE3D7} se utiliza el tama\~no con m\'as frecuencia (90,2\%)
 cuando la ER resultante no es sobreespecificada que cuando s\'i es sobreespecificada (34\%). 
-Como resultado podemos ver en la Tabla~\ref{probability-of-use}, el valor estimado para 
+Como resultado podemos ver en la Tabla~\ref{tabla-linear-regresion-all}, el valor estimado para 
 \emph{large} tiene un error considerable. En el caso del TUNA-corpus
   mostramos que no podemos aprender la dependencia de la dimensi\'on-x y
   dimensi\'on-y, es decir, cuando una persona a\~nade dimensi\'on-x es altamente
@@ -502,19 +497,20 @@ En el Cap\'itulo \ref{sec:evaluacion} mostramos c\'omo los m\'etodos para estima
 
 \section{El algoritmo probabil\'istico}
 \label{sec:algoritmo_probabilistico}
-Antes de empezar explicando el algoritmo, daremos algunos conceptos de teor\'ia de modelos necesarios para entenderlo.
+Antes de empezar explicando el algoritmo, damos algunos conceptos de teor\'ia de modelos necesarios para entenderlo.
 
-Para esta tesis una \textbf{f\'ormula} corresponde a una descripci\'on de uno o m\'as elementos del contexto y puede ser o no una ER dependiendo de 
+Para esta tesis una \textbf{f\'ormula} corresponde a una descripci\'on de uno o m\'as elementos del contexto y puede ser o no una ER, dependiendo de 
 si su interpretaci\'on coincide o no con el target. Por ejemplo la interpretaci\'on de la f\'ormula \texttt{ball} son todas las esferas 
 del contexto. En el contexto de la Figura \ref{figura-y-modelo} ser\'ian: $e_1$, $e_3$ y $e_5$. As\'i como $\interp{\texttt{ball} \sqcap \texttt{yellow}}$ es: $e_1$ y $e_3$.
 Como dijimos anteriormente la \textbf{interpretaci\'on de una f\'ormula} es el conjunto de elementos que satisfacen la f\'ormula. A la interpretaci\'on de una f\'ormula tambi\'en la llamamos \textbf{clase}.
 
 Decimos que una f\'ormula $\exists R. \phi$ es \textbf{informativa} con respecto a otra f\'ormula $\gamma$ cuando la interpretaci\'on de la conjunci\'on de las dos f\'ormulas $\interp {\exists R. \phi \sqcap \gamma}$ contiene menos elementos que la interpretaci\'on de $\gamma$. Por ejemplo si tenemos la f\'ormula \texttt{ball} y 
 queremos saber si \texttt{red} es informativa con respecto a \texttt{ball} para el modelo de la Figura \ref{figura-y-modelo} vemos que s\'i lo es, ya que $e_5$ es una esfera roja y existen otras esferas que no son rojas,
- es decir \texttt{red} divide el conjunto de esferas, por lo tanto es informativa. Si un algoritmo permite agregar f\'ormulas no informativas a las expresiones referenciales, entonces podr\'a generar ERs sobreespecificadas.\\
+ es decir \texttt{red} divide el conjunto de esferas, por lo tanto es informativa. Si un algoritmo permite agregar f\'ormulas no informativas a las expresiones referenciales, entonces podr\'a generar ERs sobreespecificadas.
  
 Una f\'ormula $\phi$ es \textbf{redundante} por el conjunto de expresiones referenciales si ya tenemos otras f\'ormulas en \RE cuya uni\'on es igual a la interpretaci\'on de $\phi$. Por ejemplo, para el modelo de la Figura \ref{figura-y-modelo}, $\top$ que es la f\'ormula a la cual todos los objetos pertenecen, ser\'a redundante cuando se agreguen 
-las f\'ormulas \texttt{ball} y \texttt{cube} ya que todos los elementos de la figura son esferas o cubos. Es decir ya tenemos descripciones m\'as precisas de los objetos que $\top$. Formalmente $\interp{\top}$ = \{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_6$,$e_7$\} \interp{\texttt{ball}}=\{$e_1$,$e_3$,$e_5$\} y \interp{\texttt{cube}}=\{$e_2$,$e_4$,$e_6$,$e_7$\}. La uni\'on de los conjuntos $\interp{\texttt{ball}}$ y $\interp{\texttt{cube}}$ dan exactamente $\interp{\top}$.\\
+las f\'ormulas \texttt{ball} y \texttt{cube} ya que todos los elementos de la figura son esferas o cubos. Es decir ya tenemos descripciones m\'as precisas de los objetos que $\top$. Formalmente $\interp{\top}$ = \{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_6$,$e_7$\} \interp{\texttt{ball}}=\{$e_1$,$e_3$,$e_5$\} y \interp{\texttt{cube}}=\{$e_2$,$e_4$,$e_6$,$e_7$\}. La uni\'on de los conjuntos $\interp{\texttt{ball}}$ y $\interp{\texttt{cube}}$ dan exactamente $\interp{\top}$.
+
 \textbf{Trivial} es una f\'ormula para la cual no hay objetos que la satisfagan en el modelo considerado, por ejemplo en el contexto de la 
 Figura \ref{figura-y-modelo}, \texttt{large yellow ball} es trivial ya que no hay esferas amarillas grandes en el contexto considerado.
 En el Algoritmo \ref{algo:bisim-add-el-over} vamos a utilizar f\'ormulas del lenguaje de descripci\'on $\el$~\cite{baader03} para describir clases de refinamiento.
@@ -522,17 +518,17 @@ Note, sin embargo, que el lenguaje formal utilizado en particular es independien
 funciones add$_{\mathcal {L}}$(R,$\varphi $, \RE) se pueden utilizar en funci\'on del lenguaje en cuesti\'on.
 La interpretaci\'on de la f\'ormula de $\el$ $\interp{\psi \sqcap \exists $R.$ \varphi}$ es el conjunto de todos los elementos que 
 satisfagan~$\psi$ y que est\'an relacionados por relaci\'on R con alg\'un elemento que satisface $\varphi $.
-Por ejemplo, la interpretaci\'on de la f\'ormula \texttt{ball} $\sqcap$ $\exists$ \texttt{leftof}.\texttt{cube} es el conjunto de todas las esferas que est\'an a la izquierda de alg\'un cubo.
+Por ejemplo, la interpretaci\'on de la f\'ormula \texttt{ball} $\sqcap$ $\exists$\texttt{leftof}.\texttt{cube} es el conjunto de todas las esferas que est\'an a la izquierda de alg\'un cubo.
 
 El conjunto $\RE$ contendr\'a la descripci\'on formal de las clases de refinamiento
 y es inicializado por la descripci\'on m\'as general $\top$. Al finalizar contendr\'a las f\'ormulas que representan las ERs de los elementos del modelo.
 
 Los Algoritmos \ref{algo:bisim-l} y \ref{algo:bisim-add-el-over} realizan los siguientes pasos. Primero, recorre la lista Rs, para cada R (relaciones de la signatura del dominio \REL). Luego calcula R.\randomuse, un n\'umero aleatorio en [0,1], y R.\incuse que ser\'a (1 - R.\puse) / MaxIterations, siendo MaxIterations el n\'umero m\'aximo de iteraciones del ciclo principal que queremos permitir. Si R.\randomuse $\le$ R.\puse\ entonces vamos a utilizar R para refinar el conjunto de
-clases, si no la propiedad R ser\'a ignorada en esta iteraci\'on. El valor de R.\puse\ se incrementar\'a en $R.\incuse$
+clases, si no la propiedad R ser\'a ignorada en esta iteraci\'on. El valor de R.\puse\ se incrementar\'a en R.$\incuse$
 en cada ciclo principal, para asegurar que todas las relaciones son, en alg\'un momento,
 consideradas por el algoritmo. Esto asegura que una expresi\'on referencial
 se encontrar\'a si existe; pero dar\'a mayor probabilidad a las expresiones
-que usan las relaciones con R.\puse m\'as alta. 
+que usan las relaciones con R.\puse\ m\'as alta. 
 
 Mientras que $\RE$ contiene descripciones (f\'ormulas $\varphi$) que pueden ser refinadas, (es decir, clases
 con al menos dos elementos) vamos a llamar a la funci\'on de refinamiento
@@ -626,7 +622,7 @@ borrar f\'ormulas redundantes de $\RE$ \tcp*[f]{\footnotesize borrar clases redu
 \section{Ejemplo de ejecuci\'on}
 \label{sec:ejemplo_ejecucion}
 
-En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el modelo de la Figura \ref{fig4-9}, considerando la probabilidades de uso mostradas en la Tabla \ref{probabilidades-ejemplo-ejecucion}, en la tabla tambi\'en se muestran las probabilidades random del algoritmo y los incrementos de las probabilidades de uso, teniendo como n\'umero de m\'axima iteraci\'on 5. Mostraremos la ejecuci\'on del algoritmo sin dar un target espec\'ifico. En este caso el algoritmo obtiene ERs para todos los elementos del modelo, si puede. Al finalizar entonces esperamos tener una ER para cada elemento del modelo. Recordemos que para conseguir no-determinismo, el algoritmo tiene un componente random que hace que se considere agregar una relaci\'on s\'olo si la probabilidad de uso es mayor que el n\'umero random calculado en esa ejecuci\'on. 
+En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el modelo de la Figura \ref{fig4-9}, considerando las probabilidades de uso mostradas en la Tabla \ref{probabilidades-ejemplo-ejecucion}, en la tabla tambi\'en se muestran las probabilidades random del algoritmo y los incrementos de las probabilidades de uso, teniendo como n\'umero de m\'axima iteraci\'on 5. Mostraremos la ejecuci\'on del algoritmo sin dar un target espec\'ifico. En este caso el algoritmo obtiene ERs para todos los elementos del modelo, si puede. Al finalizar entonces esperamos tener una ER para cada elemento del modelo. Recordemos que para conseguir no-determinismo, el algoritmo tiene un componente random que hace que se considere agregar una relaci\'on s\'olo si la probabilidad de uso es mayor que el n\'umero random calculado en esa ejecuci\'on. 
 En el comienzo \RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$.\\
 
 \begin{table}[h]
@@ -684,7 +680,7 @@ R.\incuse & 0&0&0.004& 0.148& 0.164& 0.17& 0.178& 0.198& 0.2 & 0.2 & 0.2 &0.2\\ 
 %\label{GRE3D7-stimulus1-b}
 %\vspace*{1cm}
 \begin{picture}(250,0)
-\put(0,-80){\begin{tikzpicture}
+\put(-10,-74){\begin{tikzpicture}
   [
     n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
 		 aArrow/.style={->, >=stealth, semithick, shorten <= 1pt, shorten >= 1pt},
@@ -743,7 +739,7 @@ R.\incuse & 0&0&0.004& 0.148& 0.164& 0.17& 0.178& 0.198& 0.2 & 0.2 & 0.2 &0.2\\ 
 \caption{Contexto y modelo del ejemplo de ejecuci\'on.}\label{fig4-9}
 \end{figure}
 
-Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on a considerar por su R.\puse\ es \texttt{ball}. \texttt{ball}.\puse\ es mayor que \texttt{ball}.\randomuse, recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a \RE si su interpretaci\'on tiene al menos un elemento, $\interp{\top \sqcap \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a ser\'a $\top \sqcap \exists\ \texttt{ball}.\top$. Aqu\'i escribimos $\top \sqcap \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Las tres condiciones se cumplen y \RE entonces es \{$\top$, \texttt{ball}\}. Se ven los elementos de $\interp{\texttt{ball}}$ enmarcados en la Figura~\ref{fig-modelo3} ($e_1$, $e_3$, $e_5$). El conjunto $\interp{\top}$ tambi\'en est\'a enmarcado e incluye todos los elementos del modelo.
+Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on a considerar por su R.\puse\ es \texttt{ball}. \texttt{ball}.\puse\ es mayor que \texttt{ball}.\randomuse, recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a \RE si su interpretaci\'on tiene al menos un elemento, $\interp{\top \sqcap \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a ser\'a $\top \sqcap \exists\ \texttt{ball}.\top$. Aqu\'i escribimos $\top \sqcap \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Las tres condiciones se cumplen (aunque informatividad no es necesaria ya que estamos en la primer iteraci\'on) entonces se agrega la f\'ormula y \RE es \{$\top$, \texttt{ball}\}. Se ven los elementos de $\interp{\texttt{ball}}$ enmarcados en la Figura~\ref{fig-modelo3} ($e_1$, $e_3$, $e_5$). El conjunto $\interp{\top}$ tambi\'en est\'a enmarcado e incluye todos los elementos del modelo.
 
 \begin{figure}[H]
 \begin{center}
@@ -753,7 +749,7 @@ Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on 
 \end{center}
 \end{figure}
 
-La siguiente propiedad a considerar es \texttt{cube}, tambi\'en supera la probabilidad \texttt{cube}.\randomuse. Realizando el mismo procedimiento antes mencionado, queda \RE =\{$\top$, \texttt{ball}, \texttt{cube}\} donde $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
+La siguiente propiedad a considerar es \texttt{cube}, tambi\'en supera la probabilidad \texttt{cube}.\randomuse. Realizando el mismo procedimiento antes mencionado, queda \RE = \{$\top$, \texttt{ball}, \texttt{cube}\} donde $\interp{\texttt{ball}}$ = $\{e_1,e_3,e_5\}$ y
 $\interp{\texttt{cube}}$ = $\{e_2, e_4, e_6, e_7\}$. Notar que las particiones de  \texttt{ball} y \texttt{cube} hacen que $\top$ no agregue informaci\'on es decir $\top$ es redundante, por lo tanto podemos borrarla. Quedando las particiones como se muestran en la Figura~\ref{fig-modelo4}.
 
 \begin{figure}[H]
@@ -798,8 +794,8 @@ La siguiente relaci\'on es \texttt{ontop}, la cual supera la probabilidad \textt
 \end{center}
 \end{figure}
 
-Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos \RE= $\{\texttt{ball},\texttt{ball} \sqcap \texttt{yellow}, \texttt{cube}, \texttt{cube} \sqcap \texttt{yellow}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube} \sqcap \texttt{red} \}$. Algunas relaciones se agregaron sobreespecificando, ya que todav\'ia estamos en el primer ciclo.
-Aqu\'i ya borramos la f\'ormula \texttt{ball} porque era redundante, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo9d}, luego de haber borrado las f\'ormulas redundantes.
+Siguiendo con \texttt{yellow}, tenemos que $\interp{\texttt{yellow}}$ = $\{e_1, e_3, e_6\}$ y obtenemos \RE= $\{\texttt{ball} \sqcap \texttt{yellow}, \texttt{cube} \sqcap \texttt{yellow}, \texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{cube} \sqcap \texttt{red}, \texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}, \texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube} \sqcap \texttt{red} \}$. Algunas relaciones se agregaron sobreespecificando, ya que todav\'ia estamos en el primer ciclo.
+Aqu\'i ya borramos la f\'ormula \texttt{ball} porque era redundante, y la f\'ormula \texttt{cube} tambi\'en. Se muestran las particiones resultantes en la Figura~\ref{fig-modelo9d}.
 
 \begin{figure}[H]
 \begin{center}
@@ -819,13 +815,11 @@ $\texttt{ball} \sqcap \texttt{yellow}$.}
 \end{figure}
 
 
-Las dem\'as propiedades no pasan la probabilidad R.\randomuse, por lo tanto salimos del primer ciclo, e incrementamos las probabilidades con R.\incuse, hasta que alguna relaci\'on R es tal que R.\randomuse <= R.\puse, quedando como se muestran en la Tabla \ref{prob-inc2}.
+Las dem\'as propiedades no pasan la probabilidad R.\randomuse, por lo tanto salimos del primer ciclo, e incrementamos las probabilidades con R.\incuse, hasta que alguna relaci\'on R es tal que R.\randomuse $\leq$ R.\puse, quedando como se muestran en la Tabla \ref{prob-inc2}.
 
 Las interpretaciones de las f\'ormulas hasta el momento e ilustradas gr\'aficamente en la Figura \ref{fig-modelo9d} son:
 
-
 \begin{tabular}{l}
-$\interp{ \texttt{ball}} = \{e_1, e_3, e_5\}$ \\
 $\interp {\texttt{ball} \sqcap \texttt{yellow}} = \{e_1, e_3\}$\\
 $\interp {\texttt{cube} \sqcap \texttt{yellow} }= \{e_6\}$ \\
 $\interp {\texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}} = \{e_5\}$ \\
@@ -873,7 +867,6 @@ La siguiente que pasa la probabilidad random es \texttt{left}. Se agrega la f\'o
 \end{center}
 \end{figure}
 
-\texttt{small} no se agrega a $\texttt{ball} \sqcap \texttt{yellow}$ porque no es informativo. 
 Subiendo un par de veces las probabilidades de uso, el algoritmo finaliza por no poder hacer m\'as refinamientos quedando las siguientes clases y sus interpretaciones:
 
 \medskip
@@ -889,50 +882,24 @@ $\interp{\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \tex
 \end{tabular}
 \medskip
 
-Concluimos que el lenguaje elegido $\el$ no pueden identificar a $e_1$ en el modelo. Si us\'aramos $\alc$, que contiene negaci\'on, $e_1$ se podr\'ia distinguir de $e_3$. Los dem\'as elementos s\'i quedan en clases singleton y son expresiones referenciales podr\'ian realizarse como sigue:
+Notar que \texttt{small} no se agrega a $\texttt{ball} \sqcap \texttt{yellow}$ porque no es informativo. 
+
+Concluimos que el lenguaje elegido $\el$ no pueden identificar a $e_1$ en el modelo. Si us\'aramos $\alc$, que contiene negaci\'on, $e_1$ se podr\'ia distinguir de $e_3$. Los dem\'as elementos s\'i quedan en clases singleton y son expresiones referenciales, podr\'ian realizarse como sigue:
 {\it el cubo amarillo} es $e_6$, {\it la bola grande roja} es $e_5$, {\it el cubo rojo grande} es $e_4$, {\it el cubo rojo que est\'a a la derecha del cubo amarillo} es $e_7$, $e_3$ es {\it la bola amarilla sobre el cubo rojo} y $e_2$ es {\it el cubo rojo de la izquierda}.
  
-%Otra vez las probabilidades random superan a las de la lista, recalculamos las probabilidades sumando R.\incuse a cada \puse, quedando como muestra la Tabla \ref{probabilidades-ejemplo-ejecucion3}.
-
-%\begin{table}[h]
-%\begin{center}
-%\footnotesize{
-%\begin{tabular} {  l c c c c c c c c c }
-%\hline
-%%\multicolumn{1}{c}{}
-%%&\multicolumn{1}{c}{Domain}
-%%&\multicolumn{3}{c}{Descriptions}\\
-
-%R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}   \\
-%\hline
-%R.\puse	& 1.0			& 1.0		& 0.9868	& 0.5542 & 0.5068 & 0.49   & 0.4642 & 0.4042& 0.4 \\
-%\hline
-
-%\end{tabular}
-%}
-%\end{center}
-%\vspace*{-.5cm} 
-%\caption{Probabilidad de las propiedades y relaciones de la figura de ejemplo, incrementadas en R.\incuse.}\label{probabilidades-ejemplo-ejecucion3}
-%\vspace*{1cm}
-%\end{table}
-
-
-
 \subsection{Asegurando terminaci\'on generando expresiones relacionales}
 
-Uno de los problemas que ten\'ian otros algoritmos es que no siempre terminaban como explicamos en el Cap\'itulo \ref{sec:seleccion}. Para asegurar terminaci\'on nosotros incrementamos las probabilidades aleatorias en cada ciclo, hasta que alcancen 1. Definimos MaxIterations como la cantidad m\'axima de iteraciones que vamos a permitir, y calculamos R.\incuse es cuanto vamos a incrementar la probabilidad de R en cada ciclo, R.\incuse = (1 -R.\puse) / MaxIterations, con esto nos aseguramos que en MaxIterations todas lleguen a 1, y en consecuencia el algoritmo termine, ya que en el c\'odigo, se incrementa R.\puse con R.\incuse y sale del ciclo principal si para todas las R, R.\puse son mayores o iguales a 1.
+Uno de los problemas que ten\'ian otros algoritmos es que no siempre terminaban como explicamos en el Cap\'itulo \ref{sec:seleccion}. Para asegurar terminaci\'on nosotros incrementamos las probabilidades \puse\ en cada ciclo, hasta que alcancen 1. Definimos MaxIterations como la cantidad m\'axima de iteraciones que vamos a permitir, y calculamos R.\incuse es cuanto vamos a incrementar la probabilidad de R en cada ciclo, R.\incuse = (1 - R.\puse) / MaxIterations, con esto nos aseguramos que en MaxIterations todas lleguen a 1, y en consecuencia el algoritmo termine, ya que en el c\'odigo, se incrementa R.\puse\ con R.\incuse y sale del ciclo principal si para todas las R, R.\puse\ son mayores o iguales a 1.
 
-El fragmento del Algoritmo \ref{algo:bisim-l} definido por el while es un algoritmo de punto fijo, se refinan las particiones hasta que en alg\'un momento no se pueden hacer m\'as refinamientos, se dice que el algoritmo lleg\'o a un punto fijo, en el que no le es posible progresar. \RE se mantiene sin modificaciones. Los conjuntos se van haciendo m\'as chicos en las sucesivas iteraciones y considerando que la cantidad de elementos del modelo y las relaciones son finitas, se llega al punto fijo en una cantidad finita de pasos y el algoritmo siempre termina.
+El fragmento del Algoritmo \ref{algo:bisim-l} definido por el while, es un algoritmo de punto fijo, se refinan las particiones hasta que en alg\'un momento no se pueden hacer m\'as refinamientos, se dice que el algoritmo lleg\'o a un punto fijo, en el que no le es posible progresar. \RE se mantiene sin modificaciones. Los conjuntos se van haciendo m\'as chicos en las sucesivas iteraciones y considerando que la cantidad de elementos del modelo y las relaciones son finitas, se llega al punto fijo en una cantidad finita de pasos y el algoritmo siempre termina.
 
-Nuestro algoritmo permite generar relaciones binarias con otros objetos e incluir descripciones de los dem\'as objetos (en las ERs). No tiene preferencia por las relaciones ni por las propiedades proposicionales (como otros algoritmos descriptos de trabajo previo), en el sentido de que va a incluirlas de acuerdo a la probabilidad de uso que ellas tengan, las cuales fueron calculadas o aprendidas de un corpus. En el ejemplo de ejecuci\'on anterior mostramos que el algoritmo agreg\'o la f\'ormula $\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}$ que incluye la relaci\'on binaria \texttt{rightof}.
+Nuestro algoritmo permite generar relaciones binarias con otros objetos e incluir descripciones de los dem\'as objetos (en las ERs). No tiene preferencia por las relaciones ni por las propiedades proposicionales (como otros algoritmos descriptos de trabajo previo), en el sentido de que va a incluirlas de acuerdo a la probabilidad de uso que ellas tengan, las cuales fueron calculadas o aprendidas de un corpus. En el ejemplo de ejecuci\'on anterior mostramos que el algoritmo agreg\'o la f\'ormula $\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}$ que incluye la relaci\'on binaria \texttt{rightof} y por ejemplo no se incluy\'o {\it small}.
 
 \subsection{Generando no-determin\'isticamente sobreespecificaci\'on}
 \label{sec:overspecification}
 
-
-
 Al iniciar, el algoritmo calcula para cada R, R.\randomuse que es un n\'umero aleatorio entre 0 y 1, ese n\'umero va a hacer que el algoritmo sea no-determin\'istico, ya que, el algoritmo usar\'a R para refinar las clases solamente si 
-R.\randomuse >= R.\puse. Por lo tanto y considerando que en las siguientes ejecuciones R.\randomuse ser\'an distintos, va a poder generar distintas ERs.
+R.\randomuse $\leq$ R.\puse. Por lo tanto y considerando que en las siguientes ejecuciones R.\randomuse ser\'an distintos, va a poder generar distintas ERs.
 
 El algoritmo hace caso omiso de la restricci\'on de informatividad (es decir, que permite la inclusi\'on de nuevas relaciones
 en la descripci\'on, incluso si no refinan la clase asociada) \emph{pero s\'olo durante el
@@ -953,22 +920,11 @@ con nuestro algoritmo: cuando los valores de \puse\ son
 aprendidos del dominio, el algoritmo no es
 s\'olo es m\'as preciso, sino que tambi\'en es mucho m\'as r\'apido que cuando se utilizan valores de \puse\ aleatorios.  
 
-
-%\subsection{Generando ER para plurales}
-%
-%Este algoritmo devuelve ER para todos los elementos del contexto, 
-%esto implica que podr\'iamos dar expressiones referenciales de un conjunto de elementos.
-%
-%Por ejemplo queremos identificar a $e_1$ y $e_5$ 
-%siendo resultados dados por el algoritmo que $e_1$
-%ball, yellow, small
-%y $e_5$ ball, red
-%
 \subsection{Generando expresiones plurales}
 \label{sec:genera_plural}
 Como dijimos el algoritmo puede dar ERs para todos los elementos del modelo. 
 
-Para dar las ERs plurales simplemente damos la conjunci\'on de las ERs de los elementos que pertenezcan al conjunto target. El algoritmo en algunas ocasiones particiona por alguna relaci\'on en la que quedan los elementos del target juntos, generando as\'i expresiones referenciales colectivas, pero esto no pasa normalmente. En el Cap\'itulo \ref{sec:corpus} se muestra un caso de estudio de ER plurales.
+Para dar las ERs plurales simplemente damos la conjunci\'on de las ERs de los elementos que pertenecen al conjunto target. El algoritmo en algunas ocasiones particiona por alguna relaci\'on en la que quedan los elementos del target juntos, generando as\'i expresiones referenciales colectivas, pero esto no pasa normalmente. En el Cap\'itulo \ref{sec:corpus} se muestra un caso de estudio de ER plurales.
 
 \section{Notas finales y linkeo del cap\'itulo}
 \label{sec:link-algoritmo}
@@ -979,14 +935,4 @@ El algoritmo presentado en este cap\'itulo introduce una familia de algoritmos q
 Como se discuti\'o en el Cap\'itulo \ref{sec:intro}, los dominios realistas de posibles aplicaciones de la GER contienen incertidumbre. En este cap\'itulo modelamos esa incertidumbre como las probabilidades de usar una caracter\'istica en una ER. 
 Los algoritmos presentados en este cap\'itulo pueden tambi\'en ser usados con probabilidades provenientes de confidence scores de sensores, por ejemplo, para modelar otros tipos de incertidumbre.
 En el Cap\'itulo \ref{sec:corpus} evaluamos estos algoritmos sobre un corpus de descripciones de mapas, el corpus ZOOM.
-% generar ER para plurales.
-%
-%En el c\'alculo de probabilidades de uso de las palabras con nuestra versi\'on simplista, podemos ver cosas interesantes como por ejemplo que {\it ball} tiene una \puse\ alta, ya que en el corpus considerado todos los targets son {\it ball}, en cambio la probabilidad de {\it cube} no es tan alta y depende de la discernibilidad, si aparece, aparece en la descripci\'on del landmark. Para {\it blue} y {\it green} el valor de \puse\ depende de si el target es {\it blue} o {\it green}, entonces si el target es {\it blue}, le da un valor alto a {\it blue} y bajo a {\it green} y viceversa. Las relaciones {\it ontop}, {\it leftof} y {\it rightof} dependen fuertemente si el target tiene o no esa relaci\'on y en caso de tenerla igualmente la \puse\ no es muy alta, esto indica que en un porcentaje del 30\% por ejemplo se usa {\it ontop} y en menos del 3\% {\it leftof} o {\it rightof}, ya reportado en trabajo previo. Vimos que el tama\~no es m\'as frecuente usado para sobreespecificaci\'on cuando el target y el landmark tienen el mismo tama\~no (es usado en ERs sobreespecificadas el 49\% cuando el target y el landmark comparten el tama\~no, y s\'olo el 25\% cuando no lo comparten).
-%Hay algunas relaciones complejas entre las caracter\'{i}sticas de las escenas que no somos capaces de
-%capturar. La caracter\'{i}stica m\'as importante del dominio \textit{GRE3D7}
-%que no somos capaces de aprender, y tiene un impacto en nuestro desempe\~no, es que
-%las propiedades de tama\~no (es decir, small y large) se utilizan mucho
-%m\'as cuando el target no puede ser identificado s\'olo con las propiedades taxon\'omicas absolutas 
-%(verde y azul) y (ball y cube). En otras palabras, en el corpus \textit{GRE3D7} se utiliza el tama\~no con m\'as frecuencia (90,2 \%)
-%cuando la ER resultante no es sobreespecificada y cuando si es sobreespecificada el (34 \%). \\
 
