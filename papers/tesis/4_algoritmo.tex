@@ -607,7 +607,7 @@ R.\puse $\leftarrow$ R.\puse $+$ R.\incuse\tcp*[f]{\footnotesize incrementar R.\
 \If(\tcp*[f]{\footnotesize primera iteraci\'on?})
 {\em FirstLoop}{
 Informativa $\leftarrow$ TRUE \tcp*[f]{\footnotesize permitir sobreespecificaci\'on}}
-\lElse {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$}
+\lElse {Informativa $\leftarrow$ $\interp{\psi \sqcap \exists \mbox{\em R}.\varphi} \neq \interp{\psi}$}\\
 \For{\em $\psi \in \RE$ con $\#\interp{\psi} > 1$}{
 \If{\em $\psi \sqcap \exists$R.$\varphi$ no es redundante en
 $\RE$ \ 
@@ -630,29 +630,6 @@ borrar f\'ormulas redundantes de $\RE$ \tcp*[f]{\footnotesize borrar clases redu
 En esta secci\'on vamos a mostrar un ejemplo de ejecuci\'on para el modelo de la Figura \ref{fig4-9}, considerando las probabilidades de uso mostradas en la Tabla \ref{probabilidades-ejemplo-ejecucion}, en la tabla tambi\'en se muestran las probabilidades random del algoritmo y los incrementos de las probabilidades de uso, teniendo como n\'umero de m\'axima iteraci\'on 5. Mostraremos la ejecuci\'on del algoritmo sin dar un target espec\'ifico. En este caso el algoritmo obtiene ERs para todos los elementos del modelo, si puede. Al finalizar entonces esperamos tener una ER para cada elemento del modelo. Recordemos que para conseguir no-determinismo, el algoritmo tiene un componente random que hace que se considere agregar una relaci\'on s\'olo si la probabilidad de uso es mayor que el n\'umero random calculado en esa ejecuci\'on. 
 En el comienzo \RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_6, e_7\}$.\\
 
-\begin{table}[h]
-\begin{center}
-\footnotesize{
-\begin{tabular} {  l c c c c c c c c c c c c}
-\hline
-%\multicolumn{1}{c}{}
-%&\multicolumn{1}{c}{Domain}
-%&\multicolumn{3}{c}{Descriptions}\\
-
-R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}& {\it top}& {\it left}& {\it below}   \\
-\hline \hline
-R.\puse	& 1.0			& 1.0		& 0.97	& 0.25      & 0.18     & 0.15       & 0.11    & 0.007    & 0 & 0 &0 &0\\ \hline
-%R.\randomuse & 0.32348895 & 0.5607122 &0.8771196 &0.1256972&0.14249319 &0.039857805 &0.70997673&0.21847993&0.8570516\\
-R.\randomuse & 0.323 & 0.560 &0.877 &0.125 &0.142 &0.039 &0.709 &0.218 &0.857 &0.816 &0.202 &0.13\\ \hline
-R.\incuse & 0&0&0.004& 0.148& 0.164& 0.17& 0.178& 0.198& 0.2 & 0.2 & 0.2 &0.2\\ \hline
-
-\end{tabular}
-}
-\end{center}
-\vspace*{-.5cm} 
-\caption{Distribuci\'on de probabilidad de las propiedades y relaciones de la Figura \ref{fig4-9}. Ejemplo de probabilidades random del algoritmo. Incremento para cada relaci\'on dadas las probabilidades de uso y las probabilidades random anteriores con {\it MaxIterations} 5.}\label{probabilidades-ejemplo-ejecucion}
-\vspace*{1cm}
-\end{table}
  
 %ball->
 %centre->
@@ -743,6 +720,31 @@ R.\incuse & 0&0&0.004& 0.148& 0.164& 0.17& 0.178& 0.198& 0.2 & 0.2 & 0.2 &0.2\\ 
 \end{subfigure}
 \caption{Contexto y modelo del ejemplo de ejecuci\'on.}\label{fig4-9}
 \end{figure}
+
+\begin{table}[h]
+\begin{center}
+\footnotesize{
+\begin{tabular} {  l c c c c c c c c c c c c}
+\hline
+%\multicolumn{1}{c}{}
+%&\multicolumn{1}{c}{Domain}
+%&\multicolumn{3}{c}{Descriptions}\\
+
+R				&{\it ball}			& {\it cube}	& {\it red}	  & {\it large} & {\it ontop} & {\it yellow} & {\it small} & {\it rightof} & {\it leftof}& {\it top}& {\it left}& {\it below}   \\
+\hline \hline
+R.\puse	& 1.0			& 1.0		& 0.97	& 0.25      & 0.18     & 0.15       & 0.11    & 0.007    & 0 & 0 &0 &0\\ \hline
+%R.\randomuse & 0.32348895 & 0.5607122 &0.8771196 &0.1256972&0.14249319 &0.039857805 &0.70997673&0.21847993&0.8570516\\
+R.\randomuse & 0.323 & 0.560 &0.877 &0.125 &0.142 &0.039 &0.709 &0.218 &0.857 &0.816 &0.202 &0.13\\ \hline
+R.\incuse & 0&0&0.004& 0.148& 0.164& 0.17& 0.178& 0.198& 0.2 & 0.2 & 0.2 &0.2\\ \hline
+
+\end{tabular}
+}
+\end{center}
+\vspace*{-.5cm} 
+\caption{Distribuci\'on de probabilidad de las propiedades y relaciones de la Figura \ref{fig4-9}. Ejemplo de probabilidades random del algoritmo. Incremento para cada relaci\'on dadas las probabilidades de uso y las probabilidades random anteriores con {\it MaxIterations} 5.}\label{probabilidades-ejemplo-ejecucion}
+\vspace*{1cm}
+\end{table}
+
 
 Empezamos, estamos en la primer iteraci\'on del algoritmo. La primer relaci\'on a considerar por su R.\puse\ es \texttt{ball}. \texttt{ball}.\puse\ es mayor que \texttt{ball}.\randomuse, recordemos que la relaci\'on \texttt{ball} se a\~nadir\'a a \RE si su interpretaci\'on tiene al menos un elemento, $\interp{\top \sqcap \texttt{ball}}$\footnote{Como las relaciones unarias se transformaron en binarias, la f\'ormula que el algoritmo agregar\'a ser\'a $\top \sqcap \exists\ \texttt{ball}.\top$. Aqu\'i escribimos $\top \sqcap \texttt{ball}$ por simplicidad.} no tiene que ser vac\'io, y su interpretaci\'on tiene que ser distinta de $\interp{\top}$. Las tres condiciones se cumplen (aunque informatividad no es necesaria ya que estamos en la primer iteraci\'on) entonces se agrega la f\'ormula y \RE es \{$\top$, \texttt{ball}\}. Se ven los elementos de $\interp{\texttt{ball}}$ enmarcados en la Figura~\ref{fig-modelo3} ($e_1$, $e_3$, $e_5$). El conjunto $\interp{\top}$ tambi\'en est\'a enmarcado e incluye todos los elementos del modelo.
 
