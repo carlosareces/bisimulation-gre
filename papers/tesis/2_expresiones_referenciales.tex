@@ -111,7 +111,7 @@ En \cite{Engelhardt_Bailey_Ferreira_2006} tambi\'en se estudia la sobreespecific
 Paraboni et al. en su paper \cite{acl-Paraboni15} estudian la sobreespecificaci\'on de las ERs, en particular de las ERs relacionales.
 La hip\'otesis que eval\'uan es la siguiente:
 \begin{it}
-\begin{displayquote}h1: Dado el objetivo de sobre-especificar una descripci\'on relacional usando una propiedad p extra para el landmark, p deber\'ia corresponder a la propiedad m\'as discriminatoria que est\'a disponible en el contexto. %\cite{acl-Paraboni15} 
+\begin{displayquote}h1: Dado el objetivo de sobreespecificar una descripci\'on relacional usando una propiedad p extra para el landmark, p deber\'ia corresponder a la propiedad m\'as discriminatoria que est\'a disponible en el contexto. %\cite{acl-Paraboni15} 
 \end{displayquote}
 \end{it}
 
@@ -292,7 +292,7 @@ Los algoritmos pueden ser de distintos tipos, seg\'un los tipos de ERs que sean 
 
 Un algoritmo es {\bf determin\'{i}stico} si dado un input (un contexto y un target), da siempre la misma ER de salida. En cambio, un algoritmo es {\bf no-determin\'{i}stico} si es posible que d\'e distintas salidas para el mismo input, en distintas ejecuciones. En general las personas generan expresiones referenciales de forma no determin\'istica, en este sentido los algoritmos no-determin\'isticos simulan el comportamiento de las personas. 
 
-Por ejemplo, un algoritmo no determin\'istico podr\'ia generar para la Figura \ref{fig2-1}, una vez {\it La esfera roja} y otra vez {\it La esfera grande}. En la Tabla \ref{er-gre3d7-stimulus} se muestran las distintas ERs dadas por las personas para la Figura \ref{fig2-1} del corpus GRE3D7 \cite{gre3d7}. La tabla tambi\'en muestra cu\'antas personas generaron cada ER para el target de la figura. Por ejemplo {\it large red ball} ocurri\'o 71 veces en el corpus, es decir m\'as de la mitad de las personas decidieron incluir el tipo, el tama\~no y el color en su ER, generando as\'i una ER sobreespecificada.
+Por ejemplo, un algoritmo no-determin\'istico podr\'ia generar para la Figura \ref{fig2-1}, una vez {\it La esfera roja} y otra vez {\it La esfera grande}. En la Tabla \ref{er-gre3d7-stimulus} se muestran las distintas ERs dadas por las personas para la Figura \ref{fig2-1} del corpus GRE3D7 \cite{gre3d7}. La tabla tambi\'en muestra cu\'antas personas generaron cada ER para el target de la figura. Por ejemplo {\it large red ball} ocurri\'o 71 veces en el corpus, es decir m\'as de la mitad de las personas decidieron incluir el tipo, el tama\~no y el color en su ER, generando as\'i una ER sobreespecificada.
 
 Si el largo de la ER es finito, dado un contexto finito, existen finitas ERs a generar, as\'i un algoritmo no-determin\'istico nos permitir\'ia explorar el espacio de ERs posibles para un input dado. Tambi\'en nos permite generar un ranking de ERs como se discute en el Cap\'itulo \ref{sec:intro}.
 \medskip
@@ -320,7 +320,7 @@ Total & &140 \\ \hline
 \end{center}
 \end{table}
 
-Un algoritmo es {\bf proposicional}, cuando las ERs que genera contienen s\'olo atributos del target, es decir no contiene relaciones con otros objetos ni propiedades de otros objetos. Por ejemplo, para la Figura \ref{fig2-1}, s\'olo podr\'ia generar las ERs 1, 2 y 4 de la Tabla \ref{er-gre3d7-stimulus}. Es decir, genera solamente ERs proposicionales.
+Un algoritmo es {\bf proposicional}, cuando las ERs que genera contienen s\'olo atributos del target, es decir no contienen relaciones con otros objetos ni propiedades de otros objetos. Por ejemplo, para la Figura \ref{fig2-1}, s\'olo podr\'ia generar las ERs 1, 2 y 4 de la Tabla \ref{er-gre3d7-stimulus}. Es decir, genera solamente ERs proposicionales.
 
 Un algoritmo es {\bf relacional} si adem\'as de generar ERs proposicionales genera ERs relacionales, en cuyo caso adem\'as de generar las relaciones correspondientes deber\'a generar expresiones para el o los objetos relacionados. Un algoritmo relacional podr\'ia generar todas las ERs de la Tabla \ref{er-gre3d7-stimulus}. Notar que no todas las descripciones de los objetos involucrados en una ER relacional, son ERs que identifican un\'ivocamente al objeto. Por ejemplo, consideremos la ER 8, que se podr\'ia realizar como {\it La gran esfera roja que est\'a al lado del cubo}. En este caso, {\it el cubo} es una expresi\'on que se tuvo que dar como consecuencia de incluir la relaci\'on {\it al lado de}. La expresi\'on {\it el cubo} no es una ER del landmark si se considera aislada porque hay otros cubos en la escena. 
 
