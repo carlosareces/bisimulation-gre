@@ -129,7 +129,7 @@ obtenida en la escena 13 se explica principalmente por las pobres estimaciones d
 En el corpus, las relaciones \emph{large} y \emph{small} se utilizan mucho m\'as cuando el target no puede ser identificado usando s\'olo propiedades taxon\'omicas (\emph{ball} y \emph{cube}) y propiedades absolutas (\emph{green} y \emph{blue}), pero las caracter\'{i}sticas que hemos utilizado para el aprendizaje autom\'atico no capturan dichas dependencias como se discute en la Secci\'on \ref{sec:learning-corpus} del Cap\'itulo \ref{sec:algoritmo}.
 A pesar de esta limitaci\'on, el promedio de la segunda columna es 75\%. Para una m\'etrica como la de exactitud que es considerada demasiado estricta, estos resultados son buenos. Adem\'as, el 25\% no cubierto por el algoritmo puede contener ERs igualmente buenas como vamos a mostrar en la Secci\'on \ref{sec:humanevaluation}. Uno podr\'ia argumentar entonces que los valores de \puse\ aprendidos a partir del corpus son lo suficientemente buenos para ser utilizados para generar ERs para nuevas escenas del dominio.
 Las dos \'ultimas columnas pueden ser consideradas como baselines. En la primera generamos
-valores aleatorios para \puse\ y luego ejecutamos el algoritmo con esos valores de \puse.~La exactitud obtenida es en la mayor\'{i}a de los casos es pobre, pero con
+valores aleatorios para \puse\ y luego ejecutamos el algoritmo con esos valores de \puse.~La exactitud obtenida es en la mayor\'{i}a de los casos pobre, pero con
 una variaci\'on notable debido al azar. Adem\'as estas ejecuciones toman mucho m\'as tiempo en finalizar, lo que indica que se est\'an realizando demasiadas particiones sin conseguir llegar a la meta. Esta observaci\'on de performance es consistente con los resultados de los experimentos de generaci\'on humana realizados por \cite{keysar:Curr98} y discutidos en la Secci\'on \ref{sec:psicolinguistica} del Cap\'itulo \ref{sec:seleccion}. Keysar argumenta que, las personas usan la prominencia de las propiedades en el dominio como heur\'istica para guiar la generaci\'on de ERs de forma de disminuir la carga cognitiva de tener que probar con todas las propiedades del dominio. Si la heur\'istica es buena, en muchos casos no es necesario ``revisar'' la ER para que identifique un\'ivocamente al target. Como efecto colateral de este proceso heur\'istico la ER resultante puede estar sobreespecificada, pero se genera r\'apidamente.  
 Adem\'as de poca exactitud, cuando se utilizaron probabilidades random,  muchas de las ERs generadas suenan poco naturales y son dif\'iciles de realizar sin introducir ambig\"uedades como, por ejemplo, (\textit{peque\~na cosa sobre
 el cubo azul que est\'a abajo de algo que es peque\~no}). En la \'ultima columna se presenta la exactitud de una corrida artificial, le llamamos uniforme, uniforme tomando todas las ERs de las dem\'as columnas y asign\'andoles la misma probabilidad. La uniforme consigue los peores resultados, ya que acumula ERs que no son del corpus, y las del corpus las tienen baja probabilidad. Para comparar nuestros resultados con los 3 baselines usamos tambi\'en la entrop\'ia cruzada.
@@ -189,9 +189,10 @@ back 	&	0.02	\\
 y1 	&	0.02	\\
 \hline
 \end{tabular}
-%\vspace*{.09cm}
+%\hspace*{-.5cm}
 \caption{Probabilidades aprendidas desde el corpus de la Figura~\ref{Tuna-scene}} 
 \label{probability-of-use}
+
 %\end{center}
 \end{minipage}
 \begin{minipage}{0.48\textwidth} 
@@ -276,7 +277,7 @@ x2 	&	0.02	\\
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
 \hline
-	 	& 	Dice		&	\textsc{masi}	&	exactitud		\\
+	 	& 	Dice		&	\textsc{masi}	&	Exactitud		\\
 \hline
 sistema GRAPH, Dominio muebles	& 	80\% 		&	59\%	&	48\%		 	\\
 sistema GRAPH, Dominio personas 	& 	72\%		&	48\%	&	28\%			\\
@@ -349,7 +350,7 @@ En las secciones anteriores describimos evaluaciones autom\'aticas de nuestro al
 
 Como las ERs que generamos las generamos para el idioma ingl\'es, pedimos a dos jueces nativos de idioma ingl\'es evaluar nuestras expresiones referenciales a trav\'es de un experimento en la web. Los jueces podr\'{i}an entrar en el sistema de evaluaci\'on varias veces, es decir no ten\'ian que terminar la evaluaci\'on en la primera vez, para cada ER pod\'ian resolverla o pod\'ian volver a ella m\'as tarde. 
 
-Durante la evaluaci\'on mostramos a cada juez una escena y dos ERs ordenadas al azar. Una ER correspond\'ia a la ER presente en el corpus TUNA producida por una persona para la escena y la otra ER correspond\'ia a la ER producida por nuestro sistema. Solicitamos a los jueces seleccionar la ER que ser\'{i}a m\'as \'util para identificar el target en la escena. El juez pod\'ia elegir una ER o indicar que las 2 ERs le parec\'ian igualmente buenas.
+Durante la evaluaci\'on mostramos a cada juez una escena y dos ERs ordenadas al azar. Una ER correspond\'ia a la ER presente en el corpus TUNA producida por una persona para la escena y la otra ER correspond\'ia a la ER producida por nuestro sistema para la misma escena. Solicitamos a los jueces seleccionar la ER que ser\'{i}a m\'as \'util para identificar el target en la escena. El juez pod\'ia elegir una ER o indicar que las 2 ERs le parec\'ian igualmente buenas.
 
 Nuestro objetivo es mostrar que incluso si la ER generada autom\'aticamente no coincide con la ER producida por un ser humano del corpus, puede ser juzgada como buena o incluso mejor que la ER generada por una persona.
 
@@ -369,7 +370,7 @@ sistema peor por 2 jueces &	.03	&	.13	&	.08 \\
 \hline
 \end{tabular}
 %\vspace*{.1cm}
-\caption{Comparaci\'on de ERs generadas por personas y por nuestro algoritmo para el corpus TUNA (parte singular).} 
+\caption{Evaluaci\'on humana de las ERs del corpus con las generadas para escenas del corpus TUNA (parte singular).} 
 \label{system-versus-human}
 \vspace*{-.5cm}
 \end{center}
