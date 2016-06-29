@@ -183,7 +183,7 @@ Antes de dar la metodolog\'ia para calcular las probabilidades de uso, explicamo
 $\gM$ considerado el representado en la parte derecha de la Figura~\ref{fig4-4}.
 %GRE3D7-stimulus-cap2
 \item \textbf{Calcular R.\puse\ }para cada R $\in \REL$ utilizando la siguiente f\'ormula: Si
-  hay muchas ERs para cada escena (como es el caso del corpus \textit{GRE3D7}) $R.\puse\ = \#ERs$ que tienen R $/\#ERs$ en el corpus o asignamos 1 a R.\puse \ si R est\'a en la ER, asignamos 0 en caso contrario (como es el caso del corpus TUNA).
+  hay muchas ERs para cada escena (como es el caso del corpus GRE3D7) $R.\puse\ = \#ERs$ que tienen R $/\#ERs$ en el corpus o asignamos 1 a R.\puse \ si R est\'a en la ER, asignamos 0 en caso contrario (como es el caso del corpus TUNA).
 \end{enumerate}
 
 \begin{figure}[h]
@@ -270,7 +270,7 @@ $\gM$ considerado el representado en la parte derecha de la Figura~\ref{fig4-4}.
 \caption{Contexto y modelo.}\label{fig4-4}
 \end{figure}
 
-En el caso del corpus \textit{GRE3D7} el vocabulario unificado es 
+En el caso del corpus GRE3D7 el vocabulario unificado es 
 $\REL = \{ball, cube, large, small,$\\
 $green, red, yellow, blue, right, left, top, center, rightof, leftof, ontop,
 below\} $.
@@ -346,7 +346,7 @@ enfoque de aprendizaje autom\'atico en la siguiente secci\'on.
 1.0 & 1.0 & 0.978 &0.257 &0.178 & 0.125 &0.107  &0.007  &0.007 & 0 &0&0&0\\
 \hline
 \end{tabular}
-\caption{Probabilidades de uso de las palabras del corpus \textit{GRE3D7} obtenidas usando la F\'ormula \ref{eq1} para la Figura \ref{fig4-4}.}  
+\caption{Probabilidades de uso de las palabras del corpus GRE3D7 obtenidas usando la F\'ormula \ref{eq1} para la Figura \ref{fig4-4}.}  
 \label{probability-of-use1}
 \end{center}
 \end{table}
@@ -366,7 +366,7 @@ enfoque de aprendizaje autom\'atico en la siguiente secci\'on.
 Si no hay corpus de expresiones referenciales para la escena, se puede estimar las \puse~a partir de corpus de
 diferentes escenas en el mismo dominio.
 
-En lo que sigue introduciremos regresi\'on lineal que es la t\'ecnica de aprendizaje autom\'atico que usamos para estimar las probabilidades de uso \puse\ de las palabras que le damos al algoritmo, y luego damos un ejemplo de c\'omo calculamos las probabilidades de uso para una figura particular del \textit{GRE3D7}. 
+En lo que sigue introduciremos regresi\'on lineal que es la t\'ecnica de aprendizaje autom\'atico que usamos para estimar las probabilidades de uso \puse\ de las palabras que le damos al algoritmo, y luego damos un ejemplo de c\'omo calculamos las probabilidades de uso para una figura particular del GRE3D7.
 
 La \textbf{regresi\'on lineal} es un modelo matem\'atico usado para aproximar la relaci\'on de dependencia entre una variable dependiente Y, las variables independientes $X_i$ y un t\'ermino aleatorio $\varepsilon$. Este modelo puede ser expresado como:
 
@@ -377,7 +377,7 @@ La \textbf{regresi\'on lineal} es un modelo matem\'atico usado para aproximar la
     \item $\beta_0$, $\beta_1$, $\beta_2$, $\cdots$, $\beta_p$ : son par\'ametros, miden la influencia que las variables explicativas tienen sobre Y. Donde $\beta_0$ es la intersecci\'on o t\'ermino {\it constante}, las $\beta_i$ \ (i > 0) son los par\'ametros respectivos a cada variable independiente, y $p$ es el n\'umero de par\'ametros independientes a tener en cuenta en la regresi\'on.
 \end{itemize}
 
-Tomamos la parte azul y verde del corpus \textit{GRE3D7} mostrado en el Ap\'endice \ref{verde-azul}, para aprender las probabilidades de uso de cada palabra de las ERs que dieron las personas, y as\'i estimar c\'omo es la distribuci\'on de las probabilidades de uso de las palabras del conjunto \REL en el corpus.
+Tomamos la parte azul y verde del corpus GRE3D7 mostrado en el Ap\'endice \ref{verde-azul}, para aprender las probabilidades de uso de cada palabra de las ERs que dieron las personas, y as\'i estimar c\'omo es la distribuci\'on de las probabilidades de uso de las palabras del conjunto \REL en el corpus.
 
 Para la tarea de aprendizaje autom\'atico definimos un conjunto de caracter\'isticas de las ERs. Estas caracter\'isticas son las variables $X_i$ que le damos al m\'etodo de regresi\'on lineal para calcular la dependencia o independencia de la probabilidad de uso \puse\ de cada palabra con respecto a ellas.
 
@@ -441,7 +441,7 @@ center	 &0.0023	 &0.0037	  &0.0047 * target-tiene + 0.0047 * adj-target-tiene\\
 				 &				 &					&+ 0.0029 * landmark-tiene - 0.009\\
 \hline
 \end{tabular}
-\caption{F\'ormulas y errores de regresi\'on lineal para la parte del corpus \textit{GRE3D7} que se muestra en la figura del Ap\'endice \ref{verde-azul}.}
+\caption{F\'ormulas y errores de regresi\'on lineal para la parte del corpus GRE3D7 que se muestra en la figura del Ap\'endice \ref{verde-azul}.}
 \label{tabla-linear-regresion-all}
 \end{center}
 \end{table}
@@ -461,11 +461,11 @@ Para hacer el aprendizaje autom\'atico, separamos 1 contexto al que llamamos tes
 Nuestro conjunto de caracter\'{i}sticas es intencionadamente simplista con el fin de que sea
 independiente de dominio. Como resultado hay algunas relaciones complejas
 entre las caracter\'{i}sticas de las escenas que no es capaz de
-capturar. La caracter\'{i}stica m\'as importante del dominio \textit{GRE3D7}
+capturar. La caracter\'{i}stica m\'as importante del dominio GRE3D7
 que no somos capaces de aprender, y tiene un impacto en nuestro desempe\~no, es que
 las propiedades de tama\~no (es decir, small y large) se utilizan mucho
 m\'as cuando el target no puede ser identificado s\'olo con las propiedades taxon\'omicas absolutas 
-(green y blue) y (ball y cube). En otras palabras, en el corpus \textit{GRE3D7} se utiliza el tama\~no con m\'as frecuencia (90,2\%)
+(green y blue) y (ball y cube). En otras palabras, en el corpus GRE3D7 se utiliza el tama\~no con m\'as frecuencia (90,2\%)
 cuando la ER resultante no es sobreespecificada que cuando s\'i es sobreespecificada (34\%). 
 Como resultado podemos ver en la Tabla~\ref{tabla-linear-regresion-all}, el valor estimado para 
 \emph{large} tiene un error considerable. En el caso del TUNA-corpus
