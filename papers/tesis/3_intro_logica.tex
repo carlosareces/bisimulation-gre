@@ -304,7 +304,7 @@ En cada paso, si hay tres elementos $u$, $v$ y $w$ tales que
 por alguna relaci\'on $r$, $(u,v) \in \interp{r}$, $w\in S(u)$
 (Es decir, $w$ es un candidato para simular $u$) pero $\su{r}{w}\cap S(v) = \emptyset$
 (No hay ning\'un elemento $w'\in S(v)$) tal que $(w, w') \in \interp{r}$
-y $w'\in S(v)$) entonces es claro que la condici\'on $\zig$ no se cumple $S$ es `demasiado grande' porque
+y $w'\in S(v)$) entonces es claro que la condici\'on $\zig$ no se cumple $S(u)$ es `demasiado grande' porque
 $w$ no puede simular $u$. Por lo tanto $w$ se borra de $S(u)$.
 
 
@@ -938,7 +938,7 @@ $\gamma$ := $\displaystyle \bigwedge_{\mathclap{a_i \neq a_j}} (x_i
 \If{$\mathit{best} \neq \bot \land \cost(\mathit{best}) \leq
   \cost(H)$}{
   \Return $\mathit{best}$\;} 
-$\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\+L} n}$\;
+$\mathit{distractors}$ := $\cset{n \mid n \in \Delta_G, n \neq v , v \simul{\EPFOL} n}$\;
 
 \If{$\mathit{distractors} = \emptyset$}{\Return $H$\;}
 
