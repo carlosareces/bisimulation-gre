@@ -134,19 +134,11 @@ Sea $\REL$ el conjunto de todos los s\'imbolos de relaci\'on en el modelo (es de
 
 Como explicamos en el Cap\'itulo \ref{sec:intro_logica}, la salida el algoritmo es lo que se llaman las $\mathcal {L}$-clases (clases de la l\'ogica $\mathcal {L}$) de semejanza del modelo de entrada $\gM $. Intuitivamente, si dos elementos en el modelo pertenecen a la misma $\mathcal {L}$-clase de semejanza, entonces el lenguaje~$\mathcal {L}$ no es lo suficientemente expresivo para diferenciarlos (es decir, no hay una f\'ormula en~$\mathcal {L }$ que pueda distinguirlos). Cada  $\mathcal {L}$-clase va acompa\~nada de un conjunto de f\'ormulas cuyas interpretaciones en el modelo de input coinciden con la $\mathcal {L}$-clase. Estas f\'ormulas son las expresiones referenciales que referencian a los elementos de la $\mathcal {L}$-clase. Si las $\mathcal {L}$-clases son conjuntos singleton, el algoritmo lleg\'o a un punto fijo y termina. En otra etapa de postprocesamiento se identifica la f\'ormula cuya extensi\'on es igual al target como una ER del target. Como el algoritmo es no determin\'istico el ranking que ERs de la salida se genera ejecutando el algoritmo un n\'umero N de veces. Cada ER generada tiene asociada una probabilidad calculada como una combinaci\'on de los \puse\ de las relaciones que contiene la ER. El ranking de ERs se genera ordenando las ERs de acuerdo a la frecuencia con la cual el algoritmo las gener\'o, la cual se correlaciona con la probabilidad antes mencionada.
 
-%La salida del algoritmo es un conjunto de f\'ormulas y sus interpretaciones en el modelo (que ser\'a ER de un target singleton, si la interpretaci\'on de la f\'ormula contiene s\'olo 1 objeto) de los elementos del modelo. Si al terminar el algoritmo la interpretaci\'on de cada f\'ormula tiene un s\'olo elemento, tenemos una ER que identifica al elemento, para cada elemento del modelo. 
-
 \section{Probabilidades de uso}
 \label{sec:learning}
 
 En la secci\'on anterior dijimos que el algoritmo asume que para cada relaci\'on R del modelo se tiene una probabilidad de uso R.\puse. Como dijimos, nuestro algoritmo es no-determinista: en 2 ejecuciones podr\'ia dar ERs diferentes para el mismo target y la misma lista de probabilidades de uso. Las probabilidades de uso son el motor que gu\'ia este no-determinismo. Como explicamos en la Secci\'on \ref{sec:algoritmo_probabilistico}. En esta secci\'on describimos c\'omo obtener la distribuci\'on finita de probabilidades de las relaciones de la signatura del modelo de entrada. Primero explicamos c\'omo calcularlas en el caso de tener corpus disponible para la escena. Luego generalizamos nuestro enfoque al caso de tener que generar ERs para una escena no vista antes usando t\'ecnicas de aprendizaje autom\'atico.  
 
-%\begin{figure}[h]
-%\centering
-%\includegraphics[width=1\textwidth]{images/rojo-amarillo.png}
-%\caption{Im\'agenes del \textit{GRE3D7} parte rojo y amarillo}
-%\label{rojo-amarillo}
-%\end{figure}
 
 \subsection{Calculando \puse\ cuando hay disponible un corpus para la escena}
 \label{sec:learning-corpus}
@@ -155,18 +147,11 @@ Supongamos que queremos generar autom\'aticamente una ER para el target $t$ en u
 determinada escena, y que tenemos disponible un corpus $C$ de ERs de $t$
 en esa escena.
 
-%En la Figura \ref{verde-azul} se muestran las escenas mostradas a los participantes del corpus \textit{GRE3D7} introducido en la Secci\'on \ref{sec:corpusGRE}, esta parte incluye s\'olo las escenas verde y azules. El corpus contiene otra parte similar con colores rojo y amarillo.
-
-
-%El corpus tiene para cada imagen 140 ERs dadas por personas. La Figura \ref{fig4-4} muestra una escena y las distintas ERs que aparecieron en el corpus.
-%Las ERs dadas en Figura \ref{fig4-4} son las ERs diferentes que est\'an en el corpus para el contexto mostrado en la misma figura. Viendo esas ERs, uno podr\'ia imaginarse que no son las del corpus mismo, ya que diferentes personas normalmente usan distintas palabras para nombrar al mismo objeto, distintas frases, distinto orden de las palabras, s\'i es verdad, este corpus ya ha sido procesado para filtrar todas esas cosas, dejando un vocabulario com\'un a todas las ERs, si bien es verdad que con eso perdemos informaci\'on por ejemplo de la realizaci\'on particular que hizo una persona, pero ganamos en poder agrupar las ERs por la informaci\'on que la persona incluy\'o, en la etapa de selecci\'on de contenido de la ER. Si quisi\'eramos partir de un corpus con las ERs tal cual dieron las personas, tendr\'iamos que realizar los siguientes pasos a fin de unificar el vocabulario:
-
 Antes de dar la metodolog\'ia para calcular las probabilidades de uso, explicamos qu\'e hacer con un corpus de ERs para tener unificado el vocabulario, y poder as\'i definir el conjunto de relaciones a usar en las ERs. A continuaci\'on describimos los pasos:
 
 \begin{enumerate}
 \item \textbf{Tokenizar} las expresiones referenciales y llamar al conjunto de palabras distintas
- $Pal$. %En particular, las expresiones de varias palabras como {\it arriba de}, {\it encima de}
-  %deben ser igualadas a una \'unica palabra que signifique lo mismo, digamos \emph{ontop}.
+ $Pal$. 
 
 \item \textbf{Eliminar hiper\'onimos} de $Pal$. Por ejemplo, si ambos \emph{cubo} y
   \emph{cosa} aparecen en $Pal$ para nombrar lo mismo, eliminar \emph{cosa}, ya que \emph{cubo} es m\'as espec\'ifico.
@@ -280,7 +265,7 @@ para definir el modelo relacional utilizado por el algoritmo. Entonces
 definimos el valor de \puse\ para cada una de las relaciones en el modelo como el
 porcentaje en que aparece la relaci\'on en las ERs. Es decir,
 \begin{equation} \label{eq1}
-R.\puse = \frac {\#\mbox{de ERs en $C$ en el que aparece R}} {\#\mbox{de las ERs en $C$}}
+R.\puse = \frac {\#\mbox{de ERs en $C$ en las que aparece R}} {\#\mbox{de las ERs en $C$}}
 \end{equation}
 
 Por ejemplo {\it ball} del ejemplo de la Figura \ref{fig4-4}, aparece en todas las ERs del corpus es decir 140, entonces {\it ball}.\puse=1 ya que 140/140=1, en cambio {\it green} aparece en 137 ERs, entonces {\it green}.\puse=0.98 ya que 137/140=0.98.

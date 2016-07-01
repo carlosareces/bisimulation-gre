@@ -39,7 +39,7 @@ En la Figura \ref{fig-interface} se ve una imagen est\'imulo, un mensaje ``Es in
 
 \section{Im\'agenes est\'imulo del corpus}\label{imagenes-zoom}
 
-Aqu\'i se muestran las im\'agenes que se mostraron a los participantes que completaron la tarea de recolecci\'on del corpus ZOOM para el espa\~nol. El corpus cuenta con im\'agenes sin y con zoom, para targets singulares y plurales.%\footnote{Las im\'agenes muestran fragmentos de mapas de la ciudad de Madrid.}
+Aqu\'i se muestran las im\'agenes que se mostraron a los participantes que completaron la tarea de recolecci\'on del corpus ZOOM para el espa\~nol. El corpus cuenta con im\'agenes con y sin zoom, para targets singulares y plurales.%\footnote{Las im\'agenes muestran fragmentos de mapas de la ciudad de Madrid.}
 
 \subsection{Est\'imulos singulares}
 
@@ -112,7 +112,7 @@ Se muestran mapas con targets plurales. Las im\'agenes (a) muestran targets con 
 \clearpage
 \section{Modelo relacional que representa un mapa del corpus}
 
-Este modelo relacional representa los casos de estudios de las secciones \ref{sec:conzoom} y \ref{sec:plural} y representan el mapa de la Figura \ref{mapa-zoom2x}.
+Este modelo relacional representa los casos de estudios de las secciones \ref{sec:conzoom} y \ref{sec:plural} y representa el mapa de la Figura \ref{mapa-zoom2x}.
 
 \vspace*{2cm}
 \begin{figure}[h]
@@ -228,10 +228,10 @@ En este ap\'endice mostramos f\'ormulas que representan expresiones referenciale
 
 \section{Generaci\'on sobre el corpus GRE3D7}
 
-En esta secci\'on mostramos f\'ormulas que representan expresiones referenciales para los est\'imulos del corpus GRE3D7 generadas usando el algoritmo presentado en el Cap\'itulo \ref{sec:algoritmo}. Tambie\'en mostramos las im\'agenes est\'imulo del corpus que usamos en esta tesis para la evaluaci\'on presentada en el Cap\'itulo \ref{sec:evaluacion}. 
+En esta secci\'on mostramos f\'ormulas que representan expresiones referenciales para los est\'imulos del corpus GRE3D7 generadas usando el algoritmo presentado en el Cap\'itulo \ref{sec:algoritmo}. Tambi\'en mostramos las im\'agenes est\'imulo del corpus que usamos en esta tesis para la evaluaci\'on presentada en el Cap\'itulo \ref{sec:evaluacion}. 
 
 \subsection{Ejemplos de f\'ormulas}
-\label{formulas-gre3d7}
+\label{formulas-fmo}
 
 En la Secci\'on \ref{sec:ejemplo_ejecucion} se mostr\'o un ejemplo de ejecuci\'on del algoritmo para la Figura \ref{GRE3D7-stimulus1-ids}, aqu\'i mostramos todas las f\'ormulas que di\'o el algoritmo para el target se\~nalado por la flecha, en 10000 ejecuciones.
 
@@ -259,12 +259,12 @@ En la Secci\'on \ref{sec:ejemplo_ejecucion} se mostr\'o un ejemplo de ejecuci\'o
 
 \subsection{Im\'agenes verde-azules del corpus}
 \label{imagenesGRE3D7-apendice}
-En la Figura \ref{verde-azul} se muestran las escenas mostradas a los participantes del corpus \textit{GRE3D7} introducido en la Secci\'on \ref{sec:corpusGRE}, esta parte incluye s\'olo las escenas verde y azules. El corpus contiene otra parte similar con colores rojo y amarillo.
+En la Figura \ref{verde-azul} se muestran las escenas mostradas a los participantes que completaron el experimento para la recolecci\'on del corpus GRE3D7 introducido en la Secci\'on \ref{sec:corpusGRE}, esta parte incluye s\'olo las escenas verde y azules. El corpus contiene otra parte similar con colores rojo y amarillo.
 
 \begin{figure}[h]
 \centering
 \includegraphics[width=1\textwidth]{images/corpusVerdeAzul.png}
-\caption{Im\'agenes del \textit{GRE3D7} parte azul y verde.}
+\caption{Im\'agenes del GRE3D7 parte azul y verde.}
 \label{verde-azul}
 \end{figure}
 
@@ -280,18 +280,18 @@ En la Tabla \ref{formulas-mapa-zoom2x-apendice} se muestran las f\'ormulas gener
 &F\'ormula                           &  \# \\ \hline \hline
 1& $\exists \nParroquiaDeSantaCruz$& 570\\ \hline
 
-2& $\exists \nParroquiaDeSantaCruz. \exists \nIn(T)$& 174\\ \hline
-3& $\exists \nParroquiaDeSantaCruz. \exists \nIn(\exists \nCalleSantoTomas)$& 72\\ \hline
-4& $\exists \nParroquiaDeSantaCruz. \land \exists.\nCerca(T)$& 57\\ \hline
+2& $\exists \nParroquiaDeSantaCruz. \exists \nIn.(T)$& 174\\ \hline
+3& $\exists \nParroquiaDeSantaCruz. \exists \nIn.(\exists \nCalleSantoTomas)$& 72\\ \hline
+4& $\exists \nParroquiaDeSantaCruz \land \exists\nCerca.(T)$& 57\\ \hline
 
 5& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz$& 48\\ \hline
-6& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz. \exists \nIn(T)$& 17\\ \hline
+6& $\exists \nChurch \land \exists \nParroquiaDeSantaCruz. \exists \nIn.(T)$& 17\\ \hline
 7& $\exists \nParroquiaDeSantaCruz \land \exists. \nIn(\exists \nCalleConJer)$& 13\\ \hline
-8& $\exists \nChurch \land \land \exists. \nIn(\exists \nCalleConJer) $&10\\ \hline
+8& $\exists \nChurch \land \land \exists \nIn.(\exists\nCalleConJer) $&10\\ \hline
 
-9& $\exists \nIn(\exists \nCalleSantoTomas) \land \exists \nChurch$&9\\ \hline
+9& $\exists \nIn.(\exists \nCalleSantoTomas) \land \exists \nChurch$&9\\ \hline
 
-10& $\exists \nChurch \land \exists \nIn(\exists \nCalleSantoTomas))$&7\\ \hline
+10& $\exists \nChurch \land \exists \nIn.(\exists \nCalleSantoTomas))$&7\\ \hline
 
 
 \end{tabular}
@@ -375,7 +375,7 @@ Las f\'ormulas mostradas en la Tabla \ref{formulas-mapa-zoom-ap}, fueron generad
 
 
 
-En la Tabla \ref{formulas-mapa-zoom2-apendice} se muestran las f\'ormulas dadas por el algoritmo en 1000 ejecuciones para la Figura \ref{mapa-zoom-plural}, mostrado en la Secci\'on \ref{sec:plural}, ejecutando el algoritmo 1000 veces. 
+En la Tabla \ref{formulas-mapa-zoom2-apendice} se muestran las f\'ormulas dadas por el algoritmo en 1000 ejecuciones para la Figura \ref{mapa-zoom-plural}, mostrado en la Secci\'on \ref{sec:plural}. 
 
 \label{formulas-plurales}
 \begin{table}[h]
