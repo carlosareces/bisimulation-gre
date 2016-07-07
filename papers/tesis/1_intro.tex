@@ -317,53 +317,8 @@ Si asumimos un vocabulario finito de s\'imbolos de relaci\'on $n$-arios, entonce
 
 A continuaci\'on vamos a presentar 2 ejemplos de modelos relacionales, uno en el que tenemos entidades \textbf{agentivas} (es decir, agentes animados que pueden realizar acciones) como perros y gatos, y otro en el que las entidades son \textbf{no agentivas}, es decir, son objetos est\'aticos.
 
- \begin{figure}[H]
- %\begin{center}
- \begin{tabular}{rcl}
-$\Delta$               & = & $\cset{a,b,c,d,e}$\\
-$\interp{\nDog}$      & = & $\cset{a,b,d}$\\
-$\interp{\nCat}$      & = & $\cset{c,e}$\\
-$\interp{\nBreed}$    & = & $\cset{d}$\\
-$\interp{\aSmall}$    & = & $\cset{b,c,d}$\\
-$\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
- \end{tabular}
-\begin{picture}(90,30)
-\put(0,-40){\begin{tikzpicture}
-  [
-    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
-    aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
-  ]
- \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}] (a) {$a$};
 
- \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \aSmall \end{array}$}, right of=a] (b) {$b$};
-
- \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nCat\\ \aSmall\end{array}$}, right of=b] (c) {$c$};
-
- \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \nBreed\\  \aSmall \end{array}$}, right of=c] (d) {$d$};
-
- \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nCat\end{array}$},right of=d] (e) {$e$};
-
- \draw [aSniffing,loop left] (a) to node[above,xshift=-5pt]{\relsize{-1}$\aSniffing$} (a);
-
- \draw [aSniffing,bend right=40] (b) to node[auto,swap]{\relsize{-1}$\aSniffing$} (a);
-
- \draw [aSniffing,bend right=40] (c) to node[auto,swap]{\relsize{-1}$\aSniffing$} (b);
-
- \draw[aSniffing, bend left=40] (d) to node[auto]{\relsize{-1}$\aSniffing$} (e);
- \draw[aSniffing, bend left=40] (e) to node[auto,swap]{\relsize{-1}$\aSniffing$} (d);
-
- \end{tikzpicture}}
- \end{picture}
-
- %\end{center}
- \caption{Representaci\'on de un contexto agentivo como un modelo relacional e interpretaci\'on de sus propiedades y relaciones.\label{fig:cat-dog-1}}
- \end{figure}
-
-El primer ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos representado un contexto agentivo como un modelo relacional. En el modelo, $a$, $b$ y $d$ son perros, mientras que 
-$c$ y $e$ son gatos;  $d$ es un peque\~no beagle; $b$ y $c$ tambi\'en son peque\~nos.
- Leeremos $\aSniffing(d,e)$ como ``{\em $d$ huele a $e$}''. La interpretaci\'on del s\'imbolo relacional $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos perros del contexto. La interpretaci\'on de $\aSniffing$ es el conjunto de pares de elementos que cumplen $\aSniffing$. Por ejemplo ($a,a$) pertenece al conjunto dado que $a$ es un perro que se huele a s\'i mismo en el modelo.
-
-El segundo ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} donde damos una posible representaci\'on de la escena de la Figura \ref{figura-er} como un modelo relacional. 
+El primer ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} donde damos una posible representaci\'on de la escena de la Figura \ref{figura-er} como un modelo relacional. 
 
 \begin{figure}[t]
 \begin{flushleft}
@@ -449,11 +404,59 @@ $\interp{\nBelow}$     & = & $\cset{(e_2,e_3)}$\\
  \caption{Representaci\'on de la escena de la Figura \ref{figura-er} como un modelo relacional e interpretaci\'on de sus propiedades y relaciones. Ejemplo con entidades no agentivas.}
  \label{grafo-GRE3D7-stimulus_b}
  \end{figure}
-El dominio es $\Delta$  = $\cset{e_1,e_2,e_3,e_4,e_5,e_6,e_7}$. La interpretaci\'on de $\nBall$ es $e_1$, $e_3$ y $e_5$, ya que estos objetos son esferas, la de $\nCube$ es $\interp{\nCube}$ =$\cset{e_2, e_4, e_6, e_7}$, ya que esos objetos son cubos. Tenemos las relaciones $\nRightof$, $\nLeftof$, $\nBelow$ y $\nOntop$, cuyas interpretaciones se muestran en la figura. Como discutimos en la secci\'on anterior, se puede argumentar que este modelo est\'a incompleto, pero es suficiente para los objetivos ilustrativos de esta secci\'on.
+El dominio es $\Delta$  = $\cset{e_1,e_2,e_3,e_4,e_5,e_6,e_7}$. La interpretaci\'on de $\nBall$ es $e_1$, $e_3$ y $e_5$, ya que estos objetos son esferas, la de $\nCube$ es $\interp{\nCube}$ = $\cset{e_2, e_4, e_6, e_7}$, ya que esos objetos son cubos. Tenemos las relaciones $\nRightof$, $\nLeftof$, $\nBelow$ y $\nOntop$, cuyas interpretaciones se muestran en la figura. Como discutimos en la secci\'on anterior, se puede argumentar que este modelo est\'a incompleto, pero es suficiente para los objetivos ilustrativos de esta secci\'on.
 
 Ahora nos enfocaremos en conseguir ERs para identificar a targets dados usando los modelos que acabamos de describir. Veremos lenguajes de distintas l\'ogicas y c\'omo las f\'ormulas l\'ogicas pueden representar a las ERs.
 A continuaci\'on definimos el lenguaje cl\'asico de la l\'ogica de primer orden (con desigualdad), \FOL. Dicho lenguaje se define inductivamente como sigue. \\
 Una f\'ormula $\phi$ es una f\'ormula de \FOL si es de alguna de las siguientes formas:
+
+ \begin{figure}[H]
+ %\begin{center}
+ \begin{tabular}{rcl}
+$\Delta$               & = & $\cset{a,b,c,d,e}$\\
+$\interp{\nDog}$      & = & $\cset{a,b,d}$\\
+$\interp{\nCat}$      & = & $\cset{c,e}$\\
+$\interp{\nBreed}$    & = & $\cset{d}$\\
+$\interp{\aSmall}$    & = & $\cset{b,c,d}$\\
+$\interp{\aSniffing}$ & = & $\cset{(a,a),(b,a),(c,b),(d,e),(e,d)}$
+ \end{tabular}
+\begin{picture}(90,30)
+\put(0,-40){\begin{tikzpicture}
+  [
+    n/.style={circle,draw,inner sep=1.5pt,node distance=1.5cm},
+    aSniffing/.style={->, >=stealth, semithick, shorten <= 3pt, shorten >= 3pt},
+  ]
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\end{array}$}] (a) {$a$};
+
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \aSmall \end{array}$}, right of=a] (b) {$b$};
+
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nCat\\ \aSmall\end{array}$}, right of=b] (c) {$c$};
+
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nDog\\ \nBreed\\  \aSmall \end{array}$}, right of=c] (d) {$d$};
+
+ \node[n,label=below:{\relsize{-1}$\begin{array}{c}\nCat\end{array}$},right of=d] (e) {$e$};
+
+ \draw [aSniffing,loop left] (a) to node[above,xshift=-5pt]{\relsize{-1}$\aSniffing$} (a);
+
+ \draw [aSniffing,bend right=40] (b) to node[auto,swap]{\relsize{-1}$\aSniffing$} (a);
+
+ \draw [aSniffing,bend right=40] (c) to node[auto,swap]{\relsize{-1}$\aSniffing$} (b);
+
+ \draw[aSniffing, bend left=40] (d) to node[auto]{\relsize{-1}$\aSniffing$} (e);
+ \draw[aSniffing, bend left=40] (e) to node[auto,swap]{\relsize{-1}$\aSniffing$} (d);
+
+ \end{tikzpicture}}
+ \end{picture}
+
+ %\end{center}
+ \caption{Representaci\'on de un contexto agentivo como un modelo relacional e interpretaci\'on de sus propiedades y relaciones.\label{fig:cat-dog-1}}
+ \end{figure}
+
+El segundo ejemplo se muestra en la Figura~\ref{fig:cat-dog-1} en la cual hemos representado un contexto agentivo como un modelo relacional. En el modelo, $a$, $b$ y $d$ son perros, mientras que 
+$c$ y $e$ son gatos;  $d$ es un peque\~no beagle; $b$ y $c$ tambi\'en son peque\~nos.
+ Leeremos $\aSniffing(d,e)$ como ``{\em $d$ huele a $e$}''. La interpretaci\'on del s\'imbolo relacional $\nDog$ es $\interp{\nDog}$  =  $\cset{a,b,d}$ ya que $a$, $b$ y $d$ son los \'unicos perros del contexto. La interpretaci\'on de $\aSniffing$ es el conjunto de pares de elementos que cumplen $\aSniffing$. Por ejemplo ($a,a$) pertenece al conjunto dado que $a$ es un perro que se huele a s\'i mismo en el modelo.
+
+
 
 \medskip
 
@@ -656,7 +659,7 @@ Las f\'ormulas $\phi_1$ a $\phi_7$ pueden realizarse como sigue.
 \smallskip
 
 Notar que $\phi_1$ y $\phi_2$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas que identifique al target.
-Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones y cuantificadores existenciales), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL, que se describe en el Cap\'itulo \ref{sec:intro_logica}. 
+Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones, cuantificadores existenciales y desigualdad), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en, podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL, que se describe en el Cap\'itulo \ref{sec:intro_logica}. 
 
 En el Cap\'itulo \ref{sec:intro_logica} describimos c\'omo los operadores l\'ogicos afectan la expresividad y la complejidad computacional de la tarea de GER, as\'i como las ERs generadas. En el Cap\'itulo \ref{sec:algoritmo} proponemos como generar no una sino un ranking de ERs y agregamos una distribuci\'on finita de probabilidades asociada a los s\'imbolos de relaci\'on del modelo.
 
@@ -670,32 +673,32 @@ En esta secci\'on contamos como est\'a organizada la tesis. En lo que sigue dare
 \subsection{Cap\'itulo~\ref{sec:intro}: ``Introducci\'on''} 
 Situamos a la generaci\'on autom\'atica de expresiones 
 referenciales dentro de la inteligencia artificial y de la generaci\'on de lenguaje natural. Dijimos que un sistema de 
-generaci\'on de lenguaje natural tiene tres etapas: la determinaci\'on de contenido, la lexicalizaci\'on y la realizaci\'on sint\'actica. La generaci\'on de expresiones referenciales es una sub\'area de la generaci\'on de lenguaje natural y por lo tanto, incluye las mismas tres etapas. La determinaci\'on de contenido, que es la selecci\'on de las propiedades y/o relaciones con otros objetos que vamos a elegir para identificar un\'ivocamente al target, es el tema de la tesis. Explicamos conceptos b\'asicos que usaremos a lo largo de la tesis, como ser el de {\it dominio}, {\it contexto}, {\it propiedad}, {\it target}, {\it distractor} y {\it algoritmo}. Explicamos porqu\'e la tarea de GER es compleja, ya que hay incertidumbre al representar el contexto en situaciones de la vida real. Los modelos son indefectiblemente incompletos o incorrectos. Dimos una introducci\'on a la variedad de expresiones referenciales que 
+generaci\'on de lenguaje natural tiene tres etapas: la determinaci\'on de contenido, la lexicalizaci\'on y la realizaci\'on sint\'actica. La generaci\'on de expresiones referenciales es una sub\'area de la generaci\'on de lenguaje natural y por lo tanto, incluye las mismas tres etapas. La determinaci\'on de contenido, que es la selecci\'on de las propiedades y/o relaciones con otros objetos que vamos a elegir para identificar un\'ivocamente al target, es el tema de la tesis. Explicamos conceptos b\'asicos que usamos a lo largo de la tesis, como ser el de {\it dominio}, {\it contexto}, {\it propiedad}, {\it target}, {\it distractor} y {\it algoritmo}. Explicamos porqu\'e la tarea de GER es compleja, ya que hay incertidumbre al representar el contexto en situaciones de la vida real. Los modelos son indefectiblemente incompletos o incorrectos. Dimos una introducci\'on a la variedad de expresiones referenciales que 
 se puede tener para el mismo objeto target en el mismo contexto. Propusimos dar no una ER sino un ranking de ERs para un input dado.
 Introdujimos el concepto de teor\'ia de modelos, describimos diversos lenguajes formales (i.e, l\'ogicos) y su impacto si se usan para el problema de generaci\'on autom\'atica de expresiones referenciales.  Partimos desde la l\'ogica de primer orden (\FOL), la m\'as expresiva, explicamos el lenguaje asociado, para darnos una idea de cu\'ales son las f\'ormulas que el lenguaje puede generar, vimos una serie de ejemplos y propusimos restricciones al lenguaje que permiten generar estructuras que se ven en corpora.
 
 \subsection{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} 
-Este cap\'itulo est\'a dividido en 4 secciones. En la primer secci\'on definimos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas. Luego comentamos en qu\'e se basan la teor\'ia de \cite{clark1992arenas,clark96,Clark-Marshall81} y c\'omo son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area, varios de los cuales usaremos a lo largo de la tesis. Viendo la simplicidad de estos corpora, por un lado podemos ver la complejidad de la tarea, ya que si para corpora tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describiremos en el Cap\'itulo \ref{sec:corpus}, que usa im\'agenes de mapas de ciudades como contexto. En la segunda secci\'on describimos diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se compararon esos algoritmos en cuanto al tipo de algoritmos y salida que producen. Se explica el algoritmo Graph en m\'as detalle que los dem\'as porque es el m\'as cercano a los tipos de algoritmos que se usan en esta tesis. Luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on de la tarea de GER. Algunas m\'etricas usan corpus para comparar las salidas de los algoritmos con las ERs dadas por humanos. Hay m\'etricas autom\'aticas y otras manuales. Para finalizar el cap\'itulo damos un resumen y explicamos c\'omo se linkea con los dem\'as cap\'itulos.
+Este cap\'itulo est\'a dividido en 4 secciones. En la primer secci\'on definimos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas. Luego comentamos en qu\'e se basan la teor\'ia de \cite{clark1992arenas,clark96,Clark-Marshall81} y c\'omo son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area, varios de los cuales usaremos a lo largo de la tesis. Viendo la simplicidad de estos corpora, por un lado podemos ver la complejidad de la tarea, ya que si para corpora tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describimos en el Cap\'itulo \ref{sec:corpus}, que usa im\'agenes de mapas de ciudades como contextos. En la segunda secci\'on describimos diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se compararon esos algoritmos en cuanto al tipo de algoritmo y salida que producen. Se explica el algoritmo Graph en m\'as detalle que los dem\'as porque es el m\'as cercano a los tipos de algoritmos que se extienden en esta tesis. Luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on de la tarea de GER. Algunas m\'etricas usan corpus para comparar las salidas de los algoritmos con las ERs dadas por humanos. Hay m\'etricas autom\'aticas y otras manuales. Para finalizar el cap\'itulo damos un resumen y explicamos c\'omo se linkea con los dem\'as cap\'itulos.
 
 \subsection{Cap\'itulo~\ref{sec:intro_logica}: ``Usando teor\'ia de modelos''} 
 Daremos definiciones b\'asicas de modelo, 
 interpretaci\'on, f\'ormula, hablaremos de la noci\'on de similaridad de 2 elementos $u$ y $v$ del modelo la cual dice que son 
 similares en $\+L$, cuando para toda f\'ormula $\phi \in \+L$, tenemos que 
 $\{u,v\} \subseteq \interp{\phi}$, se dice que son indistinguibles en el lenguaje l\'ogico $\+L$, ya que no hay una f\'ormula que satisfaga uno 
-y no el otro. El concepto de \emph{similaridad} puede ser usado para definir la tarea GER pero implica generar posiblemente infinitas f\'ormulas. Veremos que para modelos finitos la $\+L$-similaridad puede definirse en terminos de $\+L$-simulaciones lo cual nos permitir\'a saber si hay una ER para el target. Se adaptan algoritmos conocidos de simulaci\'on para varias l\'ogicas \ALC, \EL entre otras para la GER. Explicamos c\'omo computamos las ERs para los distintos lenguajes l\'ogicos \EPFOL, \ALC y \EL. Clasificamos los algoritmos vistos seg\'un la complejidad computacional de los mismos. 
+y no el otro. El concepto de \emph{similaridad} puede ser usado para definir la tarea GER pero implica generar posiblemente infinitas f\'ormulas. Veremos que para modelos finitos la $\+L$-similaridad puede definirse en t\'erminos de $\+L$-simulaciones lo cual nos permitir\'a saber si hay una ER para el target sin checkear infinitas f\'ormulas. Se adaptan algoritmos conocidos de simulaci\'on para varias l\'ogicas \ALC, \EL entre otras para la GER. Explicamos c\'omo computamos las ERs para los distintos lenguajes l\'ogicos \EPFOL, \ALC y \EL. Clasificamos los algoritmos vistos seg\'un la complejidad computacional de los mismos. 
 
 \subsection{Cap\'itulo~\ref{sec:algoritmo}: ``Modelando la incertidumbre''} 
 En este cap\'itulo 
 explicamos nuestra propuesta de agregar probabilidades de uso a las palabras de la signatura del modelo para representar la incertidumbre del contexto, adaptando algoritmos introducidos en el Cap\'itulo \ref{sec:intro_logica}. Mostramos que los algoritmos permiten sobreespecificaci\'on, 
 pero aseguran terminaci\'on y agregamos un componente aleatorio para conseguir no-determinismo y as\'i generar un ranking de ERs. Mostramos en detalle el input que toma el
- nuevo algoritmo. Explicamos c\'omo obtener las probabilidades de uso usadas por el algoritmo a partir de corpus usando aprendizaje autom\'atico. Para la tarea de aprendizaje autom\'atico usamos caracter\'isticas independientes del dominio. 
-Mostramos la salida del algoritmo, explicamos c\'omo conseguimos no-determinismo en las distintas ejecuciones del algoritmo, c\'omo aseguramos 
+ nuevo algoritmo. Explicamos c\'omo obtener las probabilidades de uso que toma como input el algoritmo a partir de corpus usando aprendizaje autom\'atico. Para la tarea de aprendizaje autom\'atico usamos caracter\'isticas independientes del dominio. 
+Mostramos la salida del algoritmo, explicamos c\'omo conseguimos no-determinismo en las distintas ejecuciones del algoritmo y c\'omo aseguramos 
 terminaci\'on. Adem\'as mostramos completitud, es decir que siempre conseguimos una expresi\'on referencial si existe. Explicamos c\'omo agregamos sobreespecificaci\'on a las expresiones referenciales. Finalmente mostramos un ejemplo de ejecuci\'on. 
 
 \subsection{Cap\'itulo~\ref{sec:evaluacion}: ``Evaluaci\'on de rankings sobre benchmarks''} 
 En el Cap\'itulo \ref{sec:seleccion} se describieron m\'etricas de evaluaci\'on tanto autom\'aticas como manuales. Evaluamos los algoritmos presentados 
 en el Cap\'itulo \ref{sec:algoritmo}, teniendo en cuenta ambos tipos de m\'etricas. La evaluaci\'on esta dividida en 2 partes. 
-Una parte en la cual comparamos la salida del algoritmo para modelos de 2 corpora descriptos en el Cap\'itulo \ref{sec:seleccion}, con expresiones referenciales dadas por los humanos, tomando probabilidades de uso obtenidas con aprendizaje autom\'atico a partir de cada corpora. Vemos c\'omo las ERs generadas con probabilidades obtenidas del corpus con aprendizaje autom\'atico se acercan 
+Una parte en la cual comparamos la salida del algoritmo para modelos de 2 corpora descriptos en el Cap\'itulo \ref{sec:seleccion}, con expresiones referenciales dadas por los humanos, tomando como input probabilidades de uso obtenidas con aprendizaje autom\'atico a partir de cada corpora. Vemos c\'omo las ERs generadas con probabilidades obtenidas del corpus con aprendizaje autom\'atico se acercan 
 mucho m\'as a las humanas, que 2 baselines (random y uniforme). En la otra parte de este cap\'itulo presentamos una evaluaci\'on manual en la cual 2 jueces humanos decidieron qu\'e ER era mejor entre la del corpus y la generada por el algoritmo. Es interesante notar c\'omo muchas 
 veces las ERs generadas por el algoritmo fueron juzgadas por los jueces como mejores que las humanas. El algoritmo tiene la ventaja de que
  siempre da una ER si existe, en cambio los humanos muchas veces dan expresiones ambiguas que no son referenciales. 
@@ -704,10 +707,10 @@ veces las ERs generadas por el algoritmo fueron juzgadas por los jueces como mej
 el ZOOM corpus, el cual fue recolectado en un trabajo conjunto con la Universidad de S\~ao Paulo (Brasil), 
 para tener un corpus de un dominio m\'as natural de expresiones refenciales. El corpus ZOOM contiene expresiones referenciales 
 de puntos de inter\'es en mapas. Los mapas son fragmentos de las ciudades de Madrid y Lisboa. Este corpus fue recolectado en 2 idiomas, 
-espa\~nol y portugu\'es. Contiene todos los tipos de ERs presentados en el Cap\'itulo \ref{sec:intro}. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el 
-experimento, se explica la manera en que se anot\'o el corpus. Se describe brevemente y se eval\'ua sobre este corpus un m\'etodo p\'uramente basado en aprendizaje autom\'atico que usa {\it support vector machines}, para decidir si incluir o no una propiedad en la ER de salida. Adem\'as se eval\'ua el desempe\~no de nuestros algoritmos sobre un fragmento del ZOOM corpus.
+espa\~nol y portugu\'es. Contiene todos los tipos de ERs presentados en el Cap\'itulo \ref{sec:seleccion}. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el 
+experimento y se explica la manera en que se anot\'o el corpus. Se describe brevemente y se eval\'ua sobre este corpus un m\'etodo p\'uramente basado en aprendizaje autom\'atico que usa {\it support vector machines}, para decidir si incluir o no una propiedad en la ER de salida. Adem\'as se eval\'ua el desempe\~no de nuestros algoritmos sobre un fragmento del corpus ZOOM.
 
-\subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones y trabajo futuro''} En este cap\'itulo se da un resumen de lo estudiado, se explican los avances realizados en esta tesis, como la incorporaci\'on de distribuciones finitas de probabilidades a algoritmos determin\'isticos que usan simulaciones para la GER. Esta distribuci\'on de probabilidades la aprendemos desde corpora con funciones de regresi\'on lineal. Los algoritmos est\'an inspirados en el modelo psicoling\"u\'istico de GER que determina la forma de sobreespecificar. Evaluamos el ranking obtenido con una serie de benchmarks del \'area usando m\'etricas autom\'aticas y humanas. Creamos un nuevo corpus de ERs, el ZOOM corpus, que es m\'as complejo y cercano a aplicaciones de la vida real que corpora existente. Damos una serie de propuestas para trabajo futuro en las que se aprovechan las potencialidades de los algoritmos basados en l\'ogicas formales y teor\'ia de modelos para dominios complejos. Por otro lado proponemos extensiones a los algoritmos para tratar casos con target plurales que fueron los menos explorados en esta tesis.
+\subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones y trabajo futuro''} En este cap\'itulo se da un resumen de lo estudiado, se explican los avances realizados en esta tesis, como la incorporaci\'on de distribuciones finitas de probabilidades a algoritmos determin\'isticos que usan simulaciones para la GER. Esta distribuci\'on de probabilidades la aprendemos desde corpora con funciones de regresi\'on lineal. Los algoritmos est\'an inspirados en el modelo psicoling\"u\'istico de GER que determina la forma de sobreespecificar. Evaluamos los rankings obtenidos con una serie de benchmarks del \'area usando m\'etricas autom\'aticas y humanas. Creamos un nuevo corpus de ERs, el ZOOM corpus, que es m\'as complejo y cercano a aplicaciones de la vida real que corpora existente. Damos una serie de propuestas para trabajo futuro en las que se aprovechan las potencialidades de los algoritmos basados en l\'ogicas formales y teor\'ia de modelos para dominios complejos. Por otro lado proponemos extensiones a los algoritmos para tratar casos con target plurales que fueron los menos explorados en esta tesis.
 
 %parte trabajo futuro...
 
