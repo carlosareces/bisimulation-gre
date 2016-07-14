@@ -1,0 +1,517 @@
+\documentclass[12pt]{myillcdiss}
+\usepackage{mathtools}
+% Packages used by Carlos
+\usepackage{float}
+\floatname{algorithm}{Algoritmo}
+\newcommand{\algorithmname}{Algoritmo}
+%\usepackage{algorithmic}
+\usepackage{makeidx}
+\usepackage{amssymb}
+\usepackage{wasysym}
+\usepackage{latexsym}
+\usepackage{xspace}
+\usepackage{mdwtab}
+\usepackage{mathenv}
+\usepackage{named}
+\usepackage{subcaption}
+\usepackage{stmaryrd}
+\usepackage{url}
+\usepackage{longtable}
+\usepackage{eepic}
+\usepackage{proof}
+\usepackage{color}
+\usepackage[silent,draft]{fixme}
+\usepackage[silent]{fixme}
+\renewcommand{\fixme}{\fxnote}
+\usepackage[a4paper,left=2cm,right=2cm,top=2cm,bottom=2cm]{geometry}
+\usepackage{lingmacros}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{snakes}
+\usepgflibrary{arrows}
+\usepackage{hyperref}
+\usetikzlibrary{trees}
+\usetikzlibrary{shapes}
+\usetikzlibrary{automata}
+\usepackage{wrapfig}
+\usepackage{marvosym}
+\usepackage[T1]{fontenc} 
+\usepackage[latin1]{inputenc} %Letras con acentos, enies.
+\usepackage{enumerate}
+\usepackage{epsfig}
+\usepackage{multirow}
+\usepackage{csquotes}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{arrows}
+\usepackage{relsize}
+\usepackage{wrapfig} 
+\usepackage{url}
+\usepackage{verbatim}
+\usepackage{array}
+\usepackage{todonotes}
+\usepackage{fixme}
+\usepackage{xspace}
+\usepackage{ifthen}
+\usepackage{pdfpages}
+\usepackage{caption}
+\usepackage{titling}
+\usepackage{hyperref}
+\usepackage{xkeyval}
+\usepackage{algorithm2e}
+\newcommand{\instFun}[2]{\texttt{#1}\ensuremath{_{#2}}\xspace}
+\newcommand{\nDog}{\mathit{dog}\xspace}
+\newcommand{\nCat}{\mathit{cat}\xspace}
+\newcommand{\aSmall}{\mathit{small}\xspace}
+\newcommand{\nFlower}{\mathit{flower}\xspace}
+\newcommand{\aIn}{\mathit{in}\xspace}
+\newcommand{\nHat}{\mathit{hat}\xspace}
+\newcommand{\aSniffing}{\mathit{sniffs}\xspace}
+\newcommand{\nBreed}{\mathit{beagle}\xspace}
+\newcommand{\st}{\mathit{\tau}\xspace}
+\newcommand{\cset}[1]{\{#1\}}
+% esto controla la separación de los floats respecto al texto. necesitamos el espacio extra!
+\addtolength{\textfloatsep}{-13pt}
+\addtolength{\intextsep}{-8pt}
+% Compiling version
+\newif\iffullversion\fullversionfalse
+% for compatibility with older versions of algorithm2e
+\providecommand{\LinesNumbered}{\linesnumbered}
+\providecommand{\dontprintsemicolon}{\DontPrintSemicolon}
+
+\newcommand{\pr}[2]{{\it pre}_{#1}(#2)}
+\newcommand{\su}[2]{{\it suc}_{#1}(#2)}
+\newcommand{\guard}{$\exists r,u,v,w:v \in
+\su{r}{u},w\in S(u),\su{r}{w}\cap S(v)=\emptyset$}
+\newcommand{\unary}{P}
+
+%\let\OLDthebibliography=\thebibliography
+%\def\thebibliography#1{\OLDthebibliography{#1}%
+%\addcontentsline{toc}{section}{\refname}}
+%\renewcommand{\refname}{Bibliogra}
+
+\newcommand{\findcite}{\cite{XXX}\fixme{cite!}\xspace}
+
+\newcommand{\FOL}{\ensuremath{\mathcal{FO}}\xspace}
+\newcommand{\EPFOL}{\ensuremath{{\FOL^-}}\xspace}
+\newcommand{\ALC}{\ensuremath{\mathcal{ALC}}\xspace}
+\newcommand{\EL}{\ensuremath{\mathcal{EL}}\xspace}
+\newcommand{\ELAN}{\ensuremath{{\mathcal{EL}^+}}\xspace}
+\newcommand{\CL}{\ensuremath{\mathcal{C}}\xspace}
+\newcommand{\PL}{\ensuremath{\mathcal{P}}\xspace}
+\newcommand{\ELUNEG}{\ensuremath{\mathcal{ELU_{(\neg)} }}\xspace}
+
+\newcommand\+[1]{\mathcal{#1}}
+\newcommand{\simil}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\raisebox{-.07em}{$\rightsquigarrow$}}}}
+\newcommand{\simul}[1]{\mathrel{\stackrel{\mathsmaller{#1}}{\underline{\makebox[.75em][l]{\hspace{-.05em}\raisebox{-.15ex}{$\rightarrow$}}}}}}
+
+\newcommand{\ext}[1]{\|#1\|}
+\newcommand{\size}[1]{\# #1}
+\newcommand{\leqs}{\leq_s}
+
+\newcommand{\atomL}{\textsc{atom}_L\xspace}
+\newcommand{\atomR}{\textsc{atom}_R\xspace}
+\newcommand{\atomLR}{\textsc{atom}_{L/R}\xspace}
+
+\newcommand{\zig}{\textsc{rel}_L\xspace}
+\newcommand{\zag}{\textsc{rel}_R\xspace}
+\newcommand{\zigzag}{\textsc{rel}_{L/R}\xspace}
+
+\newcommand{\injL}{\textsc{inj}_L\space}
+\newcommand{\injR}{\textsc{inj}_R\space}
+\newcommand{\injLR}{\textsc{inj}_{L/R}\space}
+
+\newcommand{\diam}{\exists r.}
+\newcommand{\NN}{\mathbb{N}}
+\newcommand{\QQ}{\mathbb{Q}}
+\newcommand{\RR}{\mathbb{R}}
+
+\newcommand{\pos}{\EL}
+\newcommand{\posre}{$\pos$-RE\xspace}
+\newcommand{\Id}{{\rm Id}}
+\renewcommand{\phi}{\varphi}
+
+\newcommand{\simmax}{\sim^m}
+\newcommand{\dom}{{\rm dom}}
+\newcommand{\remove}{{\it remove}}
+\newcommand{\prevS}{{\it prevS}}
+\newcommand{\simset}{{\it sim}}
+\newcommand{\pred}{{\it pre}}
+\newcommand{\post}{{\it post}}
+
+\newcommand{\io}{
+\SetKwInOut{Input}{Entrada}\SetKwInOut{Output}{Salida}
+\Input{un modelo finito $\gM=\tup{\Delta,\interp{\cdot}}$}
+\Output{$\forall v\in \Delta$, una f\'ormula $F(v) \in \EL$, y el conjunto de 
+simulaciones de $S(v)$ tal que $\interp{F(v)}=S(v)=\simset_\EL(v)$}
+\BlankLine}
+
+
+\newcommand{\pair}[2]{\langle #1,#2\rangle}
+\newcommand{\rg}{{\rm rg}}
+
+
+\newenvironment{megaalgorithm}[1][htb]
+  {\renewcommand{\algorithmcfname}{Algoritmo}% Update algorithm name
+   \begin{algorithm}[#1]%
+  }{\end{algorithm}}
+
+%%% DE LACL
+\renewcommand{\listtablename}{Indice de Tablas}
+\renewcommand{\tablename}{Tabla}
+%\newalgname{Algoritmo}
+\renewcommand{\algorithmname}{Algoritmo}
+\hyphenation{a-gre-ga-mos}
+\hyphenation{a-pro-xi-ma-cio-nes}
+\hyphenation{a-rri-ba}
+\hyphenation{a-tri-bu-to}
+\hyphenation{a-tri-bu-tos}
+\hyphenation{ca-rac-te-r\'is-ti-cas}
+\hyphenation{cons-tru-ir}
+\hyphenation{con-ti-nuan-do}
+\hyphenation{con-si-de-re-mos}
+\hyphenation{con-si-de-ra-do}
+\hyphenation{con-si-de-ra-dos}
+\hyphenation{con-si-de-ra-da}
+\hyphenation{co-rrec-to}
+\hyphenation{co-rrer}
+\hyphenation{co-rres-pon-de}
+\hyphenation{co-rres-pon-d\'ia}
+\hyphenation{co-rres-pon-dien-te}
+\hyphenation{de-pen-dien-do}
+\hyphenation{des-cri-ban}
+\hyphenation{des-cri-bir}
+\hyphenation{des-cri-bi-mos}
+\hyphenation{des-crip-ci\'on}
+\hyphenation{des-crip-cio-nes}
+\hyphenation{di-fe-ren-tes}
+\hyphenation{di-fe-ren-cia}
+\hyphenation{di-fe-ren-cian}
+\hyphenation{do-mi-nios}
+\hyphenation{e-le-men-to}
+\hyphenation{e-qui-va-len-te}
+\hyphenation{e-va-lua-ci\'on}
+\hyphenation{e-va-lua-cio-nes}
+\hyphenation{e-va-lua-mos}
+\hyphenation{exac-ti-tud}
+\hyphenation{exis-ten-te}
+\hyphenation{exis-ten-tes}
+\hyphenation{exac-ta-men-te}
+\hyphenation{ex-pe-ri-men-to}
+\hyphenation{Fi-gu-ra}
+\hyphenation{Fi-gu-ras}
+\hyphenation{fi-gu-ra}
+\hyphenation{fi-gu-ras}
+\hyphenation{ge-ne-ra}
+\hyphenation{ge-ne-ran-do}
+\hyphenation{ge-ne-ra-da}
+\hyphenation{ge-ne-ra-das}
+\hyphenation{ge-ne-rar-las}
+\hyphenation{ge-ne-ra-ci\'on}
+\hyphenation{i-ma-gen}
+\hyphenation{i-dio-mas}
+\hyphenation{in-co-rrec-tos}
+\hyphenation{i-ni-cia-li-za-do}
+\hyphenation{in-de-pen-dien-tes}
+\hyphenation{in-de-pen-dien-te}
+\hyphenation{ins-pi-ra-do}
+\hyphenation{i-te-ra-ci\'on}
+\hyphenation{landmark-}
+\hyphenation{le-xi-ca-li-za-ci\'on}
+\hyphenation{li-te-ra-tu-ra}
+\hyphenation{m\'a-xi-ma}
+
+\hyphenation{ma-yo-r\'ia} 
+\hyphenation{me-dian-te}
+\hyphenation{mi-ni-ma-les}
+\hyphenation{m\'i-ni-ma}
+\hyphenation{mi-ni-mi-za-ci\'on}
+\hyphenation{mo-de-lo}
+\hyphenation{mo-de-los}
+\hyphenation{mo-de-li-za-ci\'on}
+\hyphenation{na-tu-ral} 
+\hyphenation{nues-tro} 
+\hyphenation{pa-la-bras} 
+\hyphenation{par-ti-cu-lar} 
+\hyphenation{pro-ba-bi-li-da-des} 
+\hyphenation{pro-ba-bi-li-dad} 
+\hyphenation{pro-ble-ma}
+\hyphenation{pro-ce-di-mien-to}  
+\hyphenation{rea-li-za}
+\hyphenation{psi-co-lin-g\"u\'is-ti-co}
+\hyphenation{rea-li-za-dos}
+\hyphenation{re-co-rrer}
+\hyphenation{rea-li-za-ci\'on}
+\hyphenation{rea-li-za-bi-li-dad}
+\hyphenation{re-fe-ren-cial}
+\hyphenation{re-fe-ren-cia}
+\hyphenation{re-fe-ren-cias}
+\hyphenation{re-fe-ren-cia-les}
+\hyphenation{ren-di-mien-to}
+\hyphenation{res-pec-ti-va-men-te}
+\hyphenation{res-trin-gi-re-mos}
+\hyphenation{re-pre-sen-ta-ci\'on}
+\hyphenation{re-pre-sen-ta-das}
+\hyphenation{sa-li-da}
+\hyphenation{sa-li-das}
+\hyphenation{sa-tis-fa-ce}
+\hyphenation{second-landmark}
+\hyphenation{se-\~na-la-do}
+\hyphenation{si-guien-te}
+\hyphenation{si-guien-tes} 
+\hyphenation{si-mu-lan-do} 
+\hyphenation{so-bre-es-pe-ci-fi-ca-ci\'on}
+\hyphenation{so-bre-es-pe-ci-fi-ca-da}
+\hyphenation{so-bre-es-pe-ci-fi-can-do}
+\hyphenation{sub-es-pe-ci-fi-ca-da}
+\hyphenation{sub-es-pe-ci-fi-ca-das}
+\hyphenation{sub-su-mi-da}
+\hyphenation{su-pon-ga-mos}
+\hyphenation{su-pe-ra-do}
+\hyphenation{u-na-rias}
+\hyphenation{u-san-do}
+\hyphenation{u-sa-do}
+\hyphenation{u-sa-mos}
+\hyphenation{u-sa-re-mos}
+% Sin sangria
+%\parindent=0mm  
+
+% Espacio entre parrafos
+%\parskip=4mm
+
+% Dialogue template
+\newenvironment{dialogue}%
+   {\begin{it}%
+    \begin{list}{}%
+         {\setlength{\leftmargin}{.3cm}}%
+         \item[]}%
+   {\end{list}%
+    \end{it}}
+
+%\usetikzlibrary{automata}
+%\usepackage{floatrow}
+%\DeclareFloatFont{tiny}{\tiny}% "scriptsize" is defined by floatrow, "tiny" not
+%\floatsetup[table]{font=tiny}
+
+\usepackage{algorithm2e}
+%\usepackage{algorithmic}
+
+\newenvironment{mycite}
+{\vspace{-3.5cm}%
+\begin{small}%
+\begin{flushright}%
+\it}
+{\end{flushright}%
+\end{small}%
+\vspace{.5cm}
+}
+\newcommand{\form}{\mathsf{form}\xspace}
+\newcommand{\prop}{\ensuremath{\mathsf{prop}}\xspace}
+\newcommand{\simm}{\textsf{sim}}
+\newcommand{\rel}{\ensuremath{\mathsf{rel}}\xspace}
+\newcommand{\propm}{\ensuremath{\mathsf{prop}^\gM\xspace}}
+
+
+\newcommand{\tup}[1]{\langle #1 \rangle}
+\newcommand{\puse}{\ensuremath{\textsf{p}_\textit{use}}}
+\newcommand{\randomuse}{\ensuremath{\textsf{rnd}_\emph{use}}\xspace}
+\newcommand{\incuse}{\ensuremath{\textsf{inc}_\emph{use}}\xspace}
+\newcommand{\RE}{\textsf{RE}\xspace}
+\newcommand{\REL}{\textsf{REL}\xspace}
+\newcommand{\IR}{\textrm{I}\!\textrm{R}}
+%\newcommand{\gM}{\mathcal{M}}
+%\newcommand{\el}{\ensuremath{\mathcal{EL}}\xspace}
+%\newcommand{\interp}[1]{|\!|#1|\!|}
+
+
+\newcommand{\nBlue}{\mathit{blue}\xspace}
+\newcommand{\nGreen}{\mathit{green}\xspace}
+\newcommand{\nSmall}{\mathit{small}\xspace}
+\newcommand{\nBig}{\mathit{large}\xspace}
+\newcommand{\nLarge}{\mathit{large}\xspace}
+\newcommand{\nRed}{\mathit{red}\xspace}
+\newcommand{\nYellow}{\mathit{yellow}\xspace}
+\newcommand{\nBall}{\mathit{ball}\xspace}
+\newcommand{\nCube}{\mathit{cube}\xspace}
+\newcommand{\nOntop}{\mathit{ontop}\xspace}
+\newcommand{\nBelowof}{\mathit{below}\xspace}
+\newcommand{\nTop}{\mathit{top}\xspace}
+\newcommand{\nBelow}{\mathit{below}\xspace}
+\newcommand{\nRightof}{\mathit{rightof}\xspace}
+\newcommand{\nLeftof}{\mathit{leftof}\xspace}
+\newcommand{\nLeft}{\mathit{left}\xspace}
+\newcommand{\nRight}{\mathit{right}\xspace}
+\newcommand{\aLarge}{\mathit{large}\xspace}
+%\newcommand{\nLeftOf}{\mathit{leftof}\xspace}
+\newcommand{\aRed}{\mathit{red}\xspace}
+\newcommand{\aYellow}{\mathit{yellow}\xspace}
+\newcommand{\nChurch}{\mathit{church}\xspace}
+\newcommand{\nChurchSin}{\mathit{church}}
+\newcommand{\nMinAsExt}{minAsExt\xspace}
+\newcommand{\nMinisterio}{\mathit{ministerio}\xspace}
+\newcommand{\nAsuntos}{\mathit{Asuntos}\xspace}
+\newcommand{\nExteriores}{\mathit{Exteriores}\xspace}
+\newcommand{\nMedina}{\mathit{medina}\xspace}
+\newcommand{\nMayrit}{\mathit{Mayrit}\xspace}
+\newcommand{\nMedinaMayrit}{medinaMayrit\xspace}
+\newcommand{\nIn}{\mathit{In}\xspace}
+\newcommand{\nFrenteCerca}{\mathit{Front, Near}\xspace}
+\newcommand{\nFrente}{\mathit{Front}\xspace}
+\newcommand{\nCerca}{\mathit{Near}\xspace}
+\newcommand{\nFront}{\mathit{front}\xspace}
+\newcommand{\nNear}{\mathit{near}\xspace}
+\newcommand{\nRestaurante}{\mathit{restaurante}\xspace}
+\newcommand{\nNearTo}{\mathit{Near to}\xspace}
+\newcommand{\nBuilding}{\mathit{building}\xspace}
+\newcommand{\nCalleAtocha}{\mathit{calleAtocha}\xspace}
+\newcommand{\nDe}{\mathit{de}\xspace}
+\newcommand{\nEl}{\mathit{el}\xspace}
+\newcommand{\nAtocha}{\mathit{Atocha}\xspace}
+\newcommand{\nCalleDeElSalvador}{\mathit{calleDeElSalvador}\xspace}
+\newcommand{\nStreet}{\mathit{street}\xspace}
+\newcommand{\nCalleSantoTomas}{\mathit{calleSantoTomas}\xspace}
+\newcommand{\nCalleDeCarretas}{\mathit{calleDeCarretas}\xspace}
+\newcommand{\nCalleDeLaCruz}{\mathit{calleDeLaCruz}\xspace}
+\newcommand{\nCalleDeLaConcepcionJeronima}{\mathit{calleDeLaConJer}\xspace}
+\newcommand{\nTomas}{\mathit{Tomas}\xspace}
+\newcommand{\nParroquia}{\mathit{parroquia}\xspace}
+\newcommand{\nParroquiaDeSantaCruz}{\mathit{parroquiaStaCruz}\xspace}
+
+\newcommand{\nSanta}{\mathit{Santa}\xspace}
+\newcommand{\nCruz}{\mathit{Cruz}\xspace}
+\newcommand{\nTeatro}{\mathit{Teatro}\xspace}
+\newcommand{\nCalderon}{\mathit{Calderon}\xspace}
+\newcommand{\nTeatroCalderon}{\mathit{teatroCalderon}\xspace}
+\newcommand{\nTheater}{\mathit{theater}\xspace}
+\newcommand{\nLa}{\mathit{La}\xspace}
+\newcommand{\nLaTagliatella}{\mathit{laTagliatella}\xspace}
+\newcommand{\nConJer}{Calle de la concepcion jeronima}\xspace
+\newcommand{\nCalleConJer}{calleDeLaConJer}\xspace
+\newcommand{\nStreetConComa}{\mathit{street,}\xspace}
+%\usepackage[algoruled, linesnumbered,noend]{algorithm2e}
+%\usepackage[document]{ragged2e}
+%\usepackage{amsmath, amssymb, xspace, enumerate}
+%\newcommand{\nAlgorithm}{Algoritmo}
+
+\newcommand{\gM}{\ensuremath{\mathcal{M}}}
+\newcommand{\gL}{\ensuremath{\mathcal{L}}}
+
+%\newcommand{\C}{\ensuremath{\mathcal{C}}\xspace}
+\newcommand{\M}{\ensuremath{\mathcal{M}}\xspace}
+%\newcommand{\RE}{\ensuremath{\mathit{RE}}\xspace}
+
+%\newtheorem{definition}{Definic\'on}[section]
+%\newtheorem{theorem}{Teorema}[section]
+
+%\newcommand{\todo}[1]{\textbf{(#1)}}
+\newcommand{\ignore}[1]{}
+
+\newcommand{\el}{\ensuremath{\mathcal{EL}}\xspace}
+\newcommand{\alc}{\ensuremath{\mathcal{ALC}}\xspace}
+%\newcommand{\form}{\mathsf{form}\xspace}
+%\newcommand{\prop}{\ensuremath{\mathsf{prop}}\xspace}
+%\newcommand{\simm}{\textsf{sim}}
+%\newcommand{\rel}{\ensuremath{\mathsf{rel}}\xspace}
+%\newcommand{\propm}{\ensuremath{\mathsf{prop}^\gM\xspace}}
+%\newcommand{\interp}[2]{|\!|#1_#2|\!|}
+%\newcommand{\RE}{\ensuremath{\mathit{RE}}\xspace}
+\newcommand{\interp}[1]{|\!|#1|\!|}
+
+
+\begin{document}
+\date{\today}
+% PARTE PRELIMINAR
+%\input{preliminar/preliminar}
+
+\frontmatter % Numeros de paginas con numeros romanos
+
+\include{front}
+%\include{preliminar/evaluadores}
+\newpage
+\mbox{}
+\include{dedicatoria}
+\newpage
+\mbox{}
+\include{resumen}
+%\usepackage[spanish]{babel}
+%\usepackage[latin1]{inputenc} %Letras con acentos, enies.
+\renewcommand{\contentsname}{Contenidos}
+
+%\usepackage{babelbib}
+\renewcommand{\bibname}{Bibliograf\'ia}
+\renewcommand{\algorithmname}{Algoritmo}
+%}
+%\begin{frame}
+%  \frametitle{Bibliograf\'ia}
+%\printbibliography[title = {Bibliograf\'ia}]
+\tableofcontents
+%\include{prefacio} --- Esto es opcional, no es necesario
+%\include{agradecimientos} Esto se hace al final
+%\include{resumen} Esto se hace al final
+
+% PARTE PRINCIPAL
+
+\mainmatter % Comienza la numeracion de paginas con numeros arabicos
+
+%\begin{comment}
+\renewcommand{\chaptername}{Cap\'itulo}
+\renewcommand{\appendixname}{Ap\'endice}
+\renewcommand{\figurename}{Figura}
+%\renewcommand{\bibname}{Bibliograf{\'\i}a}
+%\renewcommand{\algorithmname}{Algoritmo}
+\include{1_intro} %trabajo previo
+\include{2_expresiones_referenciales}% definiciones ER y corpus existentes
+\include{3_intro_logica}
+%
+\include{4_algoritmo}
+%
+\include{8_evaluacion}
+\include{9_corpus}
+\include{7_conclusiones}
+%\vskip 0.2in
+%\settocbibname{References}
+%\addcontentsline{toc}{section}{References} 
+
+%\phantomsection
+%\usepackage{tocbibind}
+%\usepackage[notbib]{tocbibind}
+
+%\section{Referencesssss}
+%\printbibliography[heading=none]
+
+%\addcontentsline{toc}{chapter}{Bibliografia}
+%\printbibliography[heading=none]
+%\renewcommand{\bibname}{Bibliograf{\'\i}a
+
+
+% Add entry to table of contents
+%\addcontentsline{toc}{chapter}{Bibliograf\'{\i}a}
+
+%\printbibliography[heading=subbibintoc,type=article,title={Articles only}]
+%\usepackage[english]{babel}
+%\addto{\captionsenglish}{%
+%\usepackage{babelbib}
+%  \renewcommand{\bibname}{bibliooooo}
+%}
+%\begin{frame}
+%  \frametitle{Bibliograf\'ia}
+%\printbibliography[title = {Bibliograf\'ia}]
+%  \bibliographystyle{apalike}
+%  \bibliography{bibliografia}
+%\end{frame}
+
+
+% Lines below are an example and should be modified according to what style better suits your taste
+%\bibliographystyle{apalike}
+%\bibliography{bibliografia} 
+
+%\renewcommand{\bibname}{Bibliograf{\'\i}a}
+%\renewcommand{\refname}{Bibliograf{\'\i}a} 
+%\bibliographystyle{apalike}
+%\bibliography{bibliografia}
+  \bibliographystyle{apalike}
+  \bibliography{bibliografia}
+
+\include{apendice}
+%http://vivaldi.ll.iac.es/sieinvens/siepedia/pmwiki.php?n=HOWTOs.LatexTesisEspanol
+\end{document}
