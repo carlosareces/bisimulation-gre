@@ -3,7 +3,7 @@
 
 La {\bf generaci\'on de lenguaje natural (GLN)} es el proceso autom\'atico (o semi autom\'atico) de construcci\'on de un texto en lenguaje natural para la comunicaci\'on con fines espec\'ificos. Este proceso que convierte informaci\'on a texto en lenguaje natural es \'util para aplicaciones pr\'acticas en las que, por ejemplo, es necesario hacer accesible grandes vol\'umenes de informaci\'on posiblemente t\'ecnica. La GLN se ha usado para generar recomendaciones de restaurantes personalizadas, para resumir informaci\'on m\'edica, para generar pron\'osticos del clima, entre otros.~\cite{dale2000}. La generaci\'on de lenguaje natural, est\'a dentro del \'area de procesamiento del lenguaje natural, que es una rama principal de la inteligencia artificial.
 
-Una {\bf expresi\'on referencial (ER)} es un sintagna nominal que identifica un\'ivocamente a un objeto en un contexto y para un interlocutor particular. Si quisi\'eramos referirnos al objeto se\~nalado por la flecha en la Figura~\ref{GRE3D7-stimulus1}, podr\'iamos hacerlo con alguna de las expresiones referenciales que se muestran en la Figura \ref{er-figura1}.
+Una {\bf expresi\'on referencial (ER)} es un sintagma nominal que identifica un\'ivocamente a un objeto en un contexto y para un interlocutor particular. Si quisi\'eramos referirnos al objeto se\~nalado por la flecha en la Figura~\ref{GRE3D7-stimulus1}, podr\'iamos hacerlo con alguna de las expresiones referenciales que se muestran en la Figura \ref{er-figura1}.
 
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
@@ -290,7 +290,7 @@ Para producir un ranking de las mejores ERs para un target, el no determinismo d
 
 Hay diferentes \textbf{tipos de propiedades}, por ejemplo taxon\'omicas (las intr\'insecas al objeto target, como \emph{esfera}, o \emph{roja}), relacionales (las que necesitan describir a otro objeto, por ejemplo {\it estar al lado de}), vagas (por ejemplo, \emph{chico}, \emph{grande}, necesitan ser interpretadas con respecto a un contexto, ?`con respecto a qu\'e algo es chico o grande?). Ciertos valores de propiedades pueden ser m\'as f\'aciles de identificar que otros, por ejemplo cierto color verde podr\'{i}a ser m\'as complicado de identificar que el tama\~no grande de un objeto. Notar que cuando decimos el tama\~no, tenemos como marco de referencia a los objetos de la escena, en ese contexto un objeto es {\it grande}.
 
-La selecci\'on de la ER m\'as apropiada tambi\'en debe tener en cuenta al \textbf {interlocutor}, es natural que los humanos demos distintas ERs a distintos interlocutores.
+La selecci\'on de la ER m\'as apropiada tambi\'en debe tener en cuenta al \textbf {interlocutor}, ya que es natural que los humanos demos distintas ERs a distintos interlocutores.
 La selecci\'on de qu\'e propiedades y/o relaciones con otros objetos incluir en una expresi\'on referencial depender\'a del prop\'osito que tengamos para dicha expresi\'on referencial. Una expresi\'on referencial ser\'a muy distinta si nuestro objetivo es dar la m\'inima informaci\'on que distinga al objeto, que si nuestro objetivo es ayudar al interlocutor a que identifique el objeto.
 
 La generaci\'on de expresiones referenciales en el mundo real sufre de diversas fuentes de incertidumbre. En esta tesis proponemos formas para modelar esta incertidumbre partiendo de t\'ecnicas de representaci\'on de conocimiento basadas en teor\'ia de modelos y proponiendo como extenderlas usando distribuciones finitas de probabilidades.
@@ -325,14 +325,14 @@ El primer ejemplo se muestra en la Figura~\ref{grafo-GRE3D7-stimulus_b} donde da
 $\Delta$              & = & $\cset{e_1,e_2,e_3,e_4,e_5,e_6,e_7}$\\
 $\interp{\aRed}$      & = & $\cset{e_2,e_4,e_5,e_7}$\\
 $\interp{\aYellow}$   & = & $\cset{e_1,e_3,e_6}$\\
-$\interp{\nBall}$     & = & $\cset{e_1,e_3,e_6}$\\
+$\interp{\nBall}$     & = & $\cset{e_1,e_3,e_5}$\\
 $\interp{\nCube}$     & = & $\cset{e_2,e_4,e_6,e_7}$\\
 
 $\interp{\aSmall}$    & = & $\cset{e_1,e_2,e_3,e_6,e_7}$\\
 $\interp{\aLarge}$    & = & $\cset{e_4,e_5}$\\
 
-$\interp{\nRightof}$   & = & $\cset{(e_4,e_5),(e_6,e_7)}$\\
-$\interp{\nLeftof}$    & = & $\cset{(e_5,e_4),(e_7,e_6)}$\\
+$\interp{\nLeftof}$   & = & $\cset{(e_4,e_5),(e_6,e_7)}$\\
+$\interp{\nRightof}$    & = & $\cset{(e_5,e_4),(e_7,e_6)}$\\
 $\interp{\nOntop}$     & = & $\cset{(e_3,e_2)}$\\
 $\interp{\nBelow}$     & = & $\cset{(e_2,e_3)}$\\
 
@@ -473,7 +473,7 @@ $r$ es un s\'imbolo de relaci\'on $n$-aria y $\bar x$ es una tupla de $n$ variab
 Como es usual, $\gamma \lor \gamma'$ y $\forall x . \gamma$ son las versiones cortas de
 $\lnot(\lnot\gamma \land \lnot\gamma')$ y $\lnot\exists x . \lnot\gamma$, respectivamente.
 F\'ormulas de la forma $\top$, $x_i \not\approx x_j$ y $r(\bar
-x)$ son llamados \emph{\'atomos}.%
+x)$ son llamadas \emph{\'atomos}.%
 
 Dado un modelo relacional $\+M = \tup{\Delta,\interp{\cdot}}$ y una
 f\'ormula $\gamma$ con variables libres%
@@ -552,7 +552,7 @@ $$
  \end{array}
 $$
 
-Notar que las f\'ormulas mostradas, hacen uso de diferentes operadores de la l\'ogica \FOL: hay negaci\'on de \'atomos y de relaciones, hay cuantificaci\'on existencial, y universal, conjunci\'on, disyunci\'on y desigualdad. La realizaci\'on sint\'actica de algunas de \'estas f\'ormulas pueden involucrar estructuras gramaticales complejas. Por ejemplo la f\'ormula $\phi_4$ requiere el uso de voz pasiva y podr\'ia realizarse como {\it el perro que es olido por un gato peque\~no}. La f\'ormula $\nDog(x) \land \exists y . (x \not\approx y \land \nDog(y) \land \aSniffing(x,y))$ que representa al target $a$ de la Figura \ref{fig:cat-dog-1} requiere el uso de lexemas como otro y puede realizarse como {\it el perro que huele a otro perro}. La f\'ormula $\phi_2$ requiere el uso de negaci\'on del predicado y podr\'ia realizarse como {\it el perro peque\~no que no huele gatos}.
+Notar que las f\'ormulas mostradas, hacen uso de diferentes operadores de la l\'ogica \FOL: hay negaci\'on de \'atomos y de relaciones, hay cuantificaci\'on existencial, y universal, conjunci\'on, disyunci\'on y desigualdad. La realizaci\'on sint\'actica de algunas de \'estas f\'ormulas pueden involucrar estructuras gramaticales complejas. Por ejemplo la f\'ormula $\phi_4$ requiere el uso de voz pasiva y podr\'ia realizarse como {\it el perro que es olido por un gato peque\~no}. La f\'ormula $\nDog(x) \land \exists y . (x \not\approx y \land \nDog(y) \land \aSniffing(x,y))$ que representa al target $b$ de la Figura \ref{fig:cat-dog-1} requiere el uso de lexemas como otro y puede realizarse como {\it el perro que huele a otro perro}. La f\'ormula $\phi_2$ requiere el uso de negaci\'on del predicado y podr\'ia realizarse como {\it el perro peque\~no que no huele gatos}.
  
 Como nuestra meta es hacer un ranking de las mejores expresiones referenciales, una manera de acercarnos a esa meta es restringiendo la l\'ogica. Si restringimos a \EPFOL que no tiene negaci\'on, aseguramos que f\'ormulas como $\phi_2$ no se generar\'an. Si sacaramos el operador distinto ($\not\approx$) del lenguaje, $\phi_3$ tambi\'en queda excluida.
 A continuaci\'on presentamos fragmentos de $\FOL$ conocidos como l\'ogicas para la descripci\'on. Por ejemplo, el lenguaje de la l\'ogica para la descripci\'on $\ALC$, se define sint\'acticamente como el conjunto de f\'ormulas que se pueden generar recursivamente como sigue
@@ -672,9 +672,9 @@ En esta secci\'on contamos como est\'a organizada la tesis. En lo que sigue dare
 \subsection{Cap\'itulo~\ref{sec:intro}: ``Introducci\'on''} 
 Situamos a la generaci\'on autom\'atica de expresiones 
 referenciales dentro de la inteligencia artificial y de la generaci\'on de lenguaje natural. Dijimos que un sistema de 
-generaci\'on de lenguaje natural tiene tres etapas: la determinaci\'on de contenido, la lexicalizaci\'on y la realizaci\'on sint\'actica. La generaci\'on de expresiones referenciales es una sub\'area de la generaci\'on de lenguaje natural y por lo tanto, incluye las mismas tres etapas. La determinaci\'on de contenido, que es la selecci\'on de las propiedades y/o relaciones con otros objetos que vamos a elegir para identificar un\'ivocamente al target, es el tema de la tesis. Explicamos conceptos b\'asicos que usamos a lo largo de la tesis, como ser el de {\it dominio}, {\it contexto}, {\it propiedad}, {\it target}, {\it distractor} y {\it algoritmo}. Explicamos porqu\'e la tarea de GER es compleja, ya que hay incertidumbre al representar el contexto en situaciones de la vida real. Los modelos son indefectiblemente incompletos o incorrectos. Dimos una introducci\'on a la variedad de expresiones referenciales que 
+generaci\'on de lenguaje natural tiene tres etapas: la determinaci\'on de contenido, la lexicalizaci\'on y la realizaci\'on sint\'actica. La generaci\'on de expresiones referenciales es una sub\'area de la generaci\'on de lenguaje natural y por lo tanto, incluye las mismas tres etapas. La determinaci\'on de contenido, que es la selecci\'on de las propiedades y/o relaciones con otros objetos que vamos a elegir para identificar un\'ivocamente al target, es el tema de la tesis. Explicamos conceptos b\'asicos que usamos a lo largo de la tesis, como {\it dominio}, {\it contexto}, {\it propiedad}, {\it target}, {\it distractor} y {\it algoritmo}. Explicamos porqu\'e la tarea de GER es compleja, ya que hay incertidumbre al representar el contexto en situaciones de la vida real. Los modelos son indefectiblemente incompletos o incorrectos. Dimos una introducci\'on a la variedad de expresiones referenciales que 
 se puede tener para el mismo objeto target en el mismo contexto. Propusimos dar no una ER sino un ranking de ERs para un input dado.
-Introdujimos el concepto de teor\'ia de modelos, describimos diversos lenguajes formales (i.e, l\'ogicos) y su impacto si se usan para el problema de generaci\'on autom\'atica de expresiones referenciales.  Partimos desde la l\'ogica de primer orden (\FOL), la m\'as expresiva, explicamos el lenguaje asociado, para darnos una idea de cu\'ales son las f\'ormulas que el lenguaje puede generar, vimos una serie de ejemplos y propusimos restricciones al lenguaje que permiten generar estructuras que se ven en corpora.
+Introdujimos el concepto de teor\'ia de modelos, describimos diversos lenguajes formales (es decir, l\'ogicos) y su impacto al ser usados en el problema de generaci\'on autom\'atica de expresiones referenciales.  Partimos desde la l\'ogica de primer orden (\FOL), la m\'as expresiva, explicamos el lenguaje asociado, para darnos una idea de cu\'ales son las f\'ormulas que el lenguaje puede generar, vimos una serie de ejemplos y propusimos restricciones al lenguaje que permiten generar estructuras que se ven en corpora.
 
 \subsection{Cap\'itulo~\ref{sec:seleccion}: ``Generaci\'on de expresiones referenciales''} 
 Este cap\'itulo est\'a dividido en 4 secciones. En la primer secci\'on definimos los diferentes tipos de expresiones referenciales: proposicionales, relacionales, minimales, sobreespecificadas, subespecificadas. Luego comentamos en qu\'e se basan la teor\'ia de \cite{clark1992arenas,clark96,Clark-Marshall81} y c\'omo son refutadas por algunas investigaciones. Mostramos informaci\'on b\'asica de corpora existente en el \'area, varios de los cuales usaremos a lo largo de la tesis. Viendo la simplicidad de estos corpora, por un lado podemos ver la complejidad de la tarea, ya que si para corpora tan simples, es tan dif\'icil conseguir algoritmos que hagan lo que hacen los humanos, podr\'iamos imaginarnos que es realmente una tarea mucho m\'as dif\'icil en contextos que la gente usa en la vida diaria, y por otro lado, motivamos la obtenci\'on de un nuevo  corpus, el cual describimos en el Cap\'itulo \ref{sec:corpus}, que usa im\'agenes de mapas de ciudades como contextos. En la segunda secci\'on describimos diferentes tipos de algoritmos para la tarea de generaci\'on autom\'atica de expresiones referenciales: determin\'isticos, no-determin\'isticos, que generan sobreespecificaci\'on, plurales, s\'olo singulares, relacionales o proposicionales. Se estudi\'o el avance en el \'area de la generaci\'on autom\'atica de expresiones referenciales, los algoritmos existentes, se compararon esos algoritmos en cuanto al tipo de algoritmo y salida que producen. Se explica el algoritmo Graph en m\'as detalle que los dem\'as porque es el m\'as cercano a los tipos de algoritmos que se extienden en esta tesis. Luego en la tercer secci\'on damos una introducci\'on a las m\'etricas de evaluaci\'on de la tarea de GER. Algunas m\'etricas usan corpus para comparar las salidas de los algoritmos con las ERs dadas por humanos. Hay m\'etricas autom\'aticas y otras manuales. Para finalizar el cap\'itulo damos un resumen y explicamos c\'omo se linkea con los dem\'as cap\'itulos.
@@ -684,7 +684,7 @@ Daremos definiciones b\'asicas de modelo,
 interpretaci\'on, f\'ormula, hablaremos de la noci\'on de similaridad de 2 elementos $u$ y $v$ del modelo la cual dice que son 
 similares en $\+L$, cuando para toda f\'ormula $\phi \in \+L$, tenemos que 
 $\{u,v\} \subseteq \interp{\phi}$, se dice que son indistinguibles en el lenguaje l\'ogico $\+L$, ya que no hay una f\'ormula que satisfaga uno 
-y no el otro. El concepto de \emph{similaridad} puede ser usado para definir la tarea GER pero implica generar posiblemente infinitas f\'ormulas. Veremos que para modelos finitos la $\+L$-similaridad puede definirse en t\'erminos de $\+L$-simulaciones lo cual nos permitir\'a saber si hay una ER para el target sin checkear infinitas f\'ormulas. Se adaptan algoritmos conocidos de simulaci\'on para varias l\'ogicas \ALC, \EL entre otras para la GER. Explicamos c\'omo computamos las ERs para los distintos lenguajes l\'ogicos \EPFOL, \ALC y \EL. Clasificamos los algoritmos vistos seg\'un la complejidad computacional de los mismos. 
+y no el otro. El concepto de \emph{similaridad} puede ser usado para definir la tarea GER pero implica generar posiblemente infinitas f\'ormulas. Veremos que para modelos finitos la $\+L$-similaridad puede definirse en t\'erminos de $\+L$-simulaciones lo cual nos permitir\'a saber si hay una ER para el target sin checkear infinitas f\'ormulas. Se adaptan algoritmos conocidos de simulaci\'on para varias l\'ogicas tales como \ALC y \EL entre otras para la GER. Explicamos c\'omo computamos las ERs para los distintos lenguajes l\'ogicos \EPFOL, \ALC y \EL. Clasificamos los algoritmos vistos seg\'un la complejidad computacional de los mismos. 
 
 \subsection{Cap\'itulo~\ref{sec:algoritmo}: ``Modelando la incertidumbre''} 
 En este cap\'itulo 

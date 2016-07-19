@@ -692,7 +692,7 @@ En el comienzo \RE=$\{\top\}$ y $\interp{\top}$ = $\{e_1, e_2, e_3, e_4, e_5, e_
       \nRed\\[-3pt] 
       \nCube\end{array}$},  right of=f] (g) {$e_7$};
  \draw [aArrow,bend right=40] (b) to node[auto,swap]{\relsize{-3}$\nBelow$} (c);
- \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\texttt{ontop}$} (b);
+ \draw [aArrow,bend right=40] (c) to node[auto,swap]{\relsize{-3}$\nOntop$} (b);
  \draw [aArrow,bend right=40] (d) to node[auto,swap]{\relsize{-3}$\nLeftof$} (e);
  \draw [aArrow,bend right=40] (e) to node[auto,swap]{\relsize{-3}$\nRightof$} (d);
  \draw [aArrow,bend right=40] (f) to node[auto,swap]{\relsize{-3}$\nLeftof$} (g);
@@ -858,12 +858,12 @@ Subiendo un par de veces las probabilidades de uso, el algoritmo finaliza por no
 \medskip
 \begin{tabular}{l}
 $\interp{\texttt{ball} \sqcap \texttt{yellow}} = \{e_1, e_3\}$  \\
-$\interp{\texttt{cube} \sqcap \texttt{yellow} }= \{e_6\}$ \\
-$\interp{\texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}} = \{e_5\}$ \\
-%$\interp{\texttt{cube} \sqcap \texttt{red}} = \{e_2, e_4, e_7\}$ \\
 $\interp{\texttt{left} \sqcap \texttt{cube} \sqcap \texttt{red}} = \{e_2\}$ \\
+$\interp{\texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube} \sqcap \texttt{red}} = \{e_3\}$ \\
 $\interp{\texttt{cube} \sqcap \texttt{red} \sqcap \texttt{large}} = \{e_4\}$  \\
-$\interp{\texttt{yellow} \sqcap \texttt{ball} \sqcap \exists \texttt{ontop}.\texttt{cube} \sqcap \texttt{red}} = \{e_3\}$ \\ 
+$\interp{\texttt{ball} \sqcap \texttt{red} \sqcap \texttt{large}} = \{e_5\}$ \\
+$\interp{\texttt{cube} \sqcap \texttt{yellow} }= \{e_6\}$ \\
+%$\interp{\texttt{cube} \sqcap \texttt{red}} = \{e_2, e_4, e_7\}$ \\
 $\interp{\texttt{cube} \sqcap \texttt{red} \sqcap \exists \texttt{rightof}. \texttt{cube} \sqcap \texttt{yellow}} = \{e_7\}$
 \end{tabular}
 \medskip
