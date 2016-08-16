@@ -106,12 +106,11 @@ sin negaci\'on y sin relaciones. Sea REL = $\{\nLarge, \nSmall, \nRed, \nBall, \
 \caption{Contexto y modelo s\'olo con propiedades proposicionales.}\label{target_mapa_3ball}
 
 \end{figure}
-Ahora si buscamos una ER para el target T = \{$e_5$\} en la Figura \ref{target_mapa_3ball} usando el lenguaje $\+C$, veremos que no existe una ER en $\+C$ para $e_5$. Observando el modelo de la figura vemos que las f\'ormulas que son ciertas de $\+C$ y sus interpretaciones son las siguientes:
+Ahora si buscamos una ER para el target T = \{$e_5$\} en la Figura \ref{target_mapa_3ball} usando el lenguaje $\+C$, veremos que no existe una ER en $\+C$ para $e_5$. Observando el modelo de la figura vemos que las f\'ormulas que son ciertas para $e_5$ de $\+C$ y sus interpretaciones son las siguientes:
 
 \begin{itemize}
-\item Con 1 proposici\'on: $\interp{\nRed}$=\{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_7$\}, $\interp{\nLarge}$=\{$e_1$,$e_3$,$e_4$,$e_5$\}, $\interp{\nBall}$=\{$e_1$,$e_3$,$e_5$\},\\
-$\interp{\nYellow}$=\{$e_6$\}
-\item Con 2 proposiciones: $\interp{\nRed \land \nBall}$=\{$e_1$,$e_3$,$e_5$\}, $\interp{\nBall \land \nLarge}$=\{$e_1$,$e_3$,$e_5$\}, $\interp{\nYellow \land \nCube}$=\{$e_6$\}  \\
+\item Con 1 proposici\'on: $\interp{\nRed}$=\{$e_1$,$e_2$,$e_3$,$e_4$,$e_5$,$e_7$\}, $\interp{\nLarge}$=\{$e_1$,$e_3$,$e_4$,$e_5$\}, $\interp{\nBall}$=\{$e_1$,$e_3$,$e_5$\}
+\item Con 2 proposiciones: $\interp{\nRed \land \nBall}$=\{$e_1$,$e_3$,$e_5$\}, $\interp{\nBall \land \nLarge}$=\{$e_1$,$e_3$,$e_5$\}, 
       $\interp{\nLarge \land \nRed}$=\{$e_1$,$e_3$,$e_4$,$e_5$\}
 \item Con 3 proposiciones: $\interp{\nLarge \land \nRed \land \nBall}$=\{$e_1$,$e_3$,$e_5$\}
 \end{itemize}
@@ -218,10 +217,10 @@ Usando el Teorema~\ref{thm:simulation} concluimos que no hay
 
 Como veremos en la siguiente subsecci\'on, la simulaci\'on nos da un
 enfoque eficiente, computacionalmente factible para atacar el problema de $\+L$-GER. Algoritmos para calcular muchos tipos de $\+L$-simulaciones son
-bien conocidos (vea, \cite{hopc:algo71,areces08,HHK95,dovier04:_effic_algor_for_comput_bisim_equiv}), y para muchos
+bien conocidos (vea, \cite{hopc:algo71,HHK95,dovier04:_effic_algor_for_comput_bisim_equiv,areces08}), y para muchos
 lenguajes (por ejemplo, \ALC, \ELAN y \EL) se ejecutan en tiempo polinomial. No se conoce algoritmo polinomial 
  para simulaci\'on con \FOL o \EPFOL; la complejidad exacta del problema en estos casos est\'a abierta \cite{gare:comp79}.
-En la Tabla \ref{tab:algoritmos-complejidad} se muestra una comparaci\'on entre los algoritmos m\'as conocidos del \'area, que l\'ogica para la descripci\'on (DL) usan y la complejidad.
+En la Tabla \ref{tab:algoritmos-complejidad} se muestra una comparaci\'on entre los algoritmos m\'as conocidos del \'area, que l\'ogica de descripci\'on (DL) usan y la complejidad.
 
 
 \begin{table}[t]
@@ -244,6 +243,8 @@ En la Tabla \ref{tab:algoritmos-complejidad} se muestra una comparaci\'on entre 
 \caption{Complejidad de los algoritmos seg\'un la l\'ogica que usan.}\label{tab:algoritmos-complejidad}
 \end{center}
 \end{table}
+
+
 
 
 %Para slides
@@ -276,16 +277,16 @@ Primero explicamos como computar $\simset_{\EL}^{\+M}(u)$, es decir, los conjunt
 \subsection{Computando conjuntos de objetos indistinguibles en $\EL$}
 \label{sec:indistinguiblesEL}
 
-Un algoritmo para computar $\simset_{\ELAN}(v)$ es dado en~\cite{HHK95}. Para todos los
+Un algoritmo para computar $\simset_{\ELAN}^{\+M}(v)$ es dado en~\cite{HHK95}. Para todos los
 elementos $v$ de un modelo dado finito
 $\+M=\tup{\Delta,\interp{\cdot}}$
-computa $\simset_{\ELAN}(v)$ en tiempo $O(\size{\Delta}\times\size{{\interp{\cdot}}})$.
+computa $\simset_{\ELAN}^{\+M}(v)$ en tiempo $O(\size{\Delta}\times\size{{\interp{\cdot}}})$.
 Intuitivamente, este algoritmo
 define $S(v)$ como un conjunto de candidatos para simular $v$ y
 sucesivamente refina este conjunto borrando aquellos elementos que fallan en simular $v$.
-Al final, $S(v)=\simset_\ELAN(v)$. El algoritmo puede ser adaptado para
+Al final, $S(v)=\simset_\ELAN^{\+M}(v)$. El algoritmo puede ser adaptado para
 computar $\simset_\+L$ para cualquier otro lenguaje $\+L$. En particular,
-lo podemos usar para computar $\simset_\EL$ en tiempo polinomial y nos dar\'a un l\'imite superior a la
+lo podemos usar para computar $\simset_\EL^{\+M}$ en tiempo polinomial y nos dar\'a un l\'imite superior a la
 complejidad del problema \EL-GER. 
 El c\'odigo es mostrado en el
 Algoritmo~\ref{alg:schematic-gen-sim}, el cual usa la siguiente
@@ -590,7 +591,7 @@ $\prevS(v)=S(v)$
 
 %Una implementaci\'on ingenua del Algoritmo~\ref{alg:schematic-GRE}
 
-El Algoritmo~\ref{alg:schematic-GRE} puede ejecutar en un subconjunto arbitrario del dominio de $\tup{\Delta,\interp{\cdot}}$
+El Algoritmo~\ref{alg:schematic-GRE} se puede ejecutar en un subconjunto arbitrario del dominio de $\tup{\Delta,\interp{\cdot}}$
  en $O(\size{\Delta}\times\size{\interp{\cdot}})$ pasos como se muestra en~\cite{HHK95}. Por lo tanto el problema \EL-GER se puede resolver en tiempo polinomial. N\'otese, sin embargo, que este resultado supone una representaci\'on conveniente de
 f\'ormulas como, por ejemplo, grafos ac\'iclicos dirigidos, para asegurar que
 cada paso de la construcci\'on de la f\'ormula puede hacerse en $O(1)$. %En
@@ -611,12 +612,12 @@ dominios que requieren referencias a muchos objetos.
 %
 %La idea es transformar el problema de GER al problema de computar una f\'ormula de l\'ogica para la descripci\'on (DL) cuyos elementos que satisfagan la f\'ormula sea el conjunto target.% (o los elementos targets, en el caso de querer dar una ER para plurales aprovechando que una f\'ormula describe un conjunto que puede contener m\'as de un elemento).\\
 
-A continuaci\'on daremos una introducci\'on a la l\'ogica para la descripci\'on \alc y la comparamos con \el. Las f\'ormulas $\varphi$ de $\alc$ son generadas por la siguiente gram\'atica:
+A continuaci\'on daremos una introducci\'on a la l\'ogica de descripci\'on \alc y la comparamos con \el. Las f\'ormulas $\varphi$ de $\alc$ son generadas por la siguiente gram\'atica:
 $$
 \varphi,\varphi' ::= \top \mid p \mid \neg \varphi \mid \varphi \sqcap \varphi'
 \mid \exists R. \varphi
 $$
-donde $p$ es el conjunto de los s\'imbolos proposicionales \prop y $R$ es el de los s\'imbolos relacionales \rel. $\el$ puede definirse como $\alc$ sin negaci\'on. $\alc$ permite negaci\'on tanto at\'omica (por ejemplo, $\neg \mathsf{flower}$) como sobre relaciones (por ejemplo, $\neg \exists \mathsf{in}.\mathsf{hat}$).
+donde $p \in \prop$, es decir, es el conjunto de los s\'imbolos proposicionales y $R \in \rel$ es el conjunto de los s\'imbolos relacionales. $\el$ puede definirse como $\alc$ sin negaci\'on. $\alc$ permite negaci\'on tanto at\'omica (por ejemplo, $\neg \mathsf{flower}$) como sobre relaciones (por ejemplo, $\neg \exists \mathsf{in}.\mathsf{hat}$).
 
 Las f\'ormulas de $\alc$ (como las de $\el$) son interpretadas en modelos relacionales de primer orden $\gM = (\Delta,\interp{\cdot})$ donde
 $\Delta$ es un conjunto no vac\'io y $\interp{\cdot}$ es una funci\'on de interpretaci\'on tal que:
@@ -731,7 +732,7 @@ $ \Delta $, pero add$_{\EL}$ no lo asegura.
 
 Debido a que mantiene un invariante m\'as d\'ebil, el conjunto \RE puede contener
 m\'as f\'ormulas en el \el-algoritmo que en el \alc-algoritmo. Como $ \Delta $ tiene un n\'umero exponencial de subconjuntos,
-hay un riesgo de que el \el-algoritmo podr\'ia tener peor tiempo de ejecuci\'on, como se muestra en trabajo previo \cite{areces08}.\\
+hay un riesgo de que el \el-algoritmo tenga peor tiempo de ejecuci\'on, como se muestra en \cite{areces08}.\\
 
  
 
@@ -801,7 +802,7 @@ identifica correctamente a $r_1$ como \textit{el conejo en el sombrero} y a $ f_
 porque $f_1$ es \el-similar a $f_2$. De hecho, el algoritmo
 termina con $ \RE $ que contiene tanto a $\mathsf{flower}$ como a
 $\mathsf{flower} \sqcap \exists \mathsf{in}.\mathsf{hat}$. Esto es un
-patr\'on t\'ipico de los casos asim\'etricos de similitud en \EL: Si hay
+patr\'on t\'ipico de los casos asim\'etricos de similitud en \EL: si hay
 dos f\'ormulas $ \varphi_1 $ y $ \varphi_2$ en el conjunto de salida con
 $\interp{\varphi_1} \subset \interp{\varphi_2}$, entonces hay
 en general, un elemento $b \in \interp{\varphi_2} -
@@ -820,7 +821,7 @@ un subgrafo conectado $H$ de $G$, que contiene al target $e$ y suficiente inform
 distinguir a $e$ de los otros nodos.
 
 Para mantener la terminolog\'ia de~\cite{graph}, en lo que sigue
-hablaremos alternativamente de \textbf{grafos etiquetados} en lugar de modelos relacionales. La diferencia es que los grafos etiquetados de \cite{graph} codifican las propiedades proposicionales utilizando
+hablaremos alternativamente de \textbf{grafos etiquetawdos} en lugar de modelos relacionales. La diferencia es que los grafos etiquetados de \cite{graph} codifican las propiedades proposicionales utilizando
 loops de relaciones binarias (por ejemplo, escriben $\nDog(e,e)$ en vez de $\nDog(e)$).
 
 La idea principal de la implementaci\'on de~\cite{graph} de isomorfismos de subgrafos puede resumirse intuitivamente como sigue.
