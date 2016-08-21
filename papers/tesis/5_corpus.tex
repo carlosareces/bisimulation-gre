@@ -16,7 +16,7 @@ El trabajo descripto en \cite{viet:gene11} se encuadra en el \'area de an\'alisi
 Este cap\'itulo se encuadra en las \'areas de dise\~no y metodolog\'ias para la recolecci\'on de corpus y su uso para evaluar sistemas de GER.
 
 El corpus ZOOM es una colecci\'on de datos, resultante de un experimento realizado en un trabajo conjunto con la Universidad de S\~ao Paulo (Brasil). El objetivo del experimento fue crear un corpus de expresiones referenciales de un dominio m\'as complejo y m\'as cercano a las aplicaciones del mundo real, que los corpus existentes hasta el momento. Este corpus contiene referencias a targets singulares y plurales y hace gran uso de propiedades relacionales. Las descripciones del ZOOM corpus fueron producidas por humanos de espa\~nol y portugu\'es, lo cual permitir\'ia investigar la realizaci\'on ling\"u\'istica en estos lenguajes, que actualmente tiene pocos recursos. La mayor parte de los recursos del \'area est\'an en ingl\'es. Adem\'as permitir\'ia investigar la variaci\'on entre humanos en la GER (\cite{trainable-speaker,arec:2012:coling12,non-det}). 
-En este Cap\'itulo se describe el dominio y las caracter\'isticas del corpus, la metodolog\'ia usada su recolecci\'on y anotaci\'on y se lo compara con trabajo previo. Luego haremos una evaluaci\'on en la Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos. La evaluaci\'on realizada motiv\'o al caso de estudio de la Secci\'on \ref{sec:caso_estudio} en la que mostramos tres casos particulares de fragmentos de las ciudades de Lisboa y Madrid. Parte de lo que se presenta en este cap\'itulo fue publicado en \cite{DBLP:conf/acl/AltamiranoFPB15}, adem\'as comparamos nuestra aproximaci\'on con trabajo previo sobre el corpus publicada en \cite{thiago-svm}.
+En este Cap\'itulo se describe el dominio y las caracter\'isticas del corpus, la metodolog\'ia usada su recolecci\'on y anotaci\'on y se lo compara con trabajo previo. Luego haremos una evaluaci\'on en la Secci\'on~\ref{corpus-evaluacion} de los datos obtenidos. La evaluaci\'on realizada motiv\'o al caso de estudio de la Secci\'on \ref{sec:caso_estudio} en la que mostramos tres casos particulares de fragmentos de las ciudades de Lisboa y Madrid. Parte de lo que se presenta en este cap\'itulo fue publicado en \cite{DBLP:conf/acl/AltamiranoFPB15}, adem\'as comparamos nuestra aproximaci\'on con trabajo previo sobre el corpus publicado en \cite{thiago-svm}.
 
 \section{Un corpus de descripciones de lugares en mapas}
 
@@ -44,7 +44,7 @@ Las ERs fueron hechas por personas voluntarias a las cuales se les envi\'o una i
 \end{center}
 \end{figure}
 
-Las personas voluntarias recibieron un link a la interfaz del experimento, como se muestra en la Figura~\ref{fig_pagPrincipal_seleccion_idioma}. Esa p\'agina conten\'{i}a las instrucciones para el experimento en 3 idiomas: ingl\'es, portugu\'es y espa\~{n}ol, y un link para completar el experimento en el idioma seleccionado. Las intrucciones solicitaban uma ER que permitiera a ``un amigo'' identificar puntos de inter\'es en mapas de ciudades. La idea es que la persona imaginara que estaba dando sugerencias a un amigo que posiblemente visitara dicha ciudad proximamente. 
+Las personas voluntarias recibieron un link a la interfaz del experimento, como se muestra en la Figura~\ref{fig_pagPrincipal_seleccion_idioma}. Esa p\'agina conten\'{i}a las instrucciones para el experimento en 3 idiomas: ingl\'es, portugu\'es y espa\~{n}ol, y un link para completar el experimento en el idioma seleccionado. Las instrucciones solicitaban una ER que permitiera a ``un amigo'' identificar puntos de inter\'es en mapas de ciudades. La idea es que la persona imaginara que estaba dando sugerencias a un amigo que posiblemente visitara dicha ciudad pr\'oximamente. 
 \begin{figure}[ht]
 \begin{center}
 \includegraphics[width=17cm]{images/pagPrincipal.png}\\[0pt]
@@ -59,7 +59,7 @@ Las personas voluntarias recibieron un link a la interfaz del experimento, como 
 \begin{figure}[h]
 \begin{center}
 \frame{\includegraphics[width=17cm]{images/primerImagenRecortada.png}}\\[0pt]
-\caption{Interface del experimento.}
+\caption{Interfaz del experimento.}
 \label{fig_interface}
 \end{center}
 \end{figure}
@@ -103,8 +103,8 @@ Cada mapa mostraba un lugar determinado a ser descripto (por ejemplo, un restaur
 Para la recolecci\'on se usaron fragmentos de mapas de las ciudades de Lisboa y Madrid obtenidos desde \url{openstreetmaps.org}. Openstreetmaps.org es una p\'agina que tiene informaci\'on de mapas de todas partes del mundo, es una organizaci\'on en la que muchas personas de distintas partes del mundo colaboran para mantener la informaci\'on actualizada. Esta informaci\'on es de libre uso, es decir uno puede usar los mapas y s\'olo hay que nombrar de donde fueron sacados.
 Se consideraron 2 idiomas: espa\~nol y portugu\'es. Se obtuvieron ERs para targets singulares como se ve por ejemplo en la Figura~\ref{fig_interface} y para targets plurales como se ve en la Figura~\ref{mapa20-5}. En los est\'imulos plurales se usaron referencias del mismo tipo (2 restaurantes, 2 iglesias, etc.) y adem\'as se tuvo en cuenta mapas con 2 niveles de zoom. El mapa de la Figura \ref{mapa20-5} muestra un fragmento del mapa de la Figura \ref{fig_interface} con un mayor nivel de zoom. Como se puede ver en las figuras, los mapas con mayor zoom (a los que describimos como zoom 2X) cubren una porci\'on m\'as chica de la ciudad pero, en general hay m\'as detalle.
 
-Cada mapa conten\'ia \'iconos de lugares o cosas, calles, nombres de lugares, por ejemplo podemos ver en el mapa de la Figura~\ref{fig_interface} la Calle Mayor, se pueden ver cajeros, restaurantes, fast-foods, caf\'e, tel\'efonos, correos, farmacias, sem\'aforos. Notar que algunos \'iconos tienen nombre, por ejemplo el fast-food McDonald's. Algunos edificios o plazas tambi\'en tienen nombre como la Real Casa de Correos y la Plaza de Pontejos. En el mapa tambi\'en podemos ver algunos objetos sin nombre.
-Se puede ver en la Figura~\ref{fig_interface} el nombre del restaurante Medina Mayrit, pero en la Figura~\ref{mapa20-5} no se muestra el nombre, se ve solamente el \'icono. Para el Teatro Alveniz se ve el nombre en ambos niveles de zoom. Notar que no siempre en el nivel 2X de zoom se ver\'a todo lo que se ve y m\'as que en el nivel X, como es el caso del restaurante Medina Mayrit, cuyo nombre se ve en la Figura~\ref{fig_interface} pero no se ve en la Figura~\ref{mapa20-5}.
+Cada mapa conten\'ia iconos de lugares o cosas, calles, nombres de lugares, por ejemplo podemos ver en el mapa de la Figura~\ref{fig_interface} la Calle Mayor, se pueden ver cajeros, restaurantes, fast-foods, caf\'e, tel\'efonos, correos, farmacias, sem\'aforos. Notar que algunos iconos tienen nombre, por ejemplo el fast-food McDonald's. Algunos edificios o plazas tambi\'en tienen nombre como la Real Casa de Correos y la Plaza de Pontejos. En el mapa tambi\'en podemos ver algunos objetos sin nombre.
+Se puede ver en la Figura~\ref{fig_interface} el nombre del restaurante Medina Mayrit, pero en la Figura~\ref{mapa20-5} no se muestra el nombre, se ve solamente el icono. Para el Teatro Alveniz se ve el nombre en ambos niveles de zoom. Notar que no siempre en el nivel 2X de zoom se ver\'a todo lo que se ve y m\'as que en el nivel X, como es el caso del restaurante Medina Mayrit, cuyo nombre se ve en la Figura~\ref{fig_interface} pero no se ve en la Figura~\ref{mapa20-5}.
 
 Los mapas eran fragmentos del centro de la ciudad de Madrid (para la parte espa\~nola del corpus) y de Lisboa (para la parte portuguesa).
 Para cada ciudad, se utilizaron 10 mapas con distintas ubicaciones. Cada ubicaci\'on se muestra con un nivel X y 2X de zoom, haciendo 20 im\'agenes en total. 
@@ -142,7 +142,7 @@ En el caso de las descripciones plurales, el conjunto de atributos se repite par
 \end{figure}
 
 
-Los 26 o 52 atributos nombrados anteriormente estan formados por:
+Los 26 o 52 atributos nombrados anteriormente est\'an formados por:
 10 atributos que denotan caracter\'isticas del objeto target, o relaciones del target con otros objetos y se detallan a continuaci\'on:
 \begin{itemize}
   \item tipo como por ejemplo, restaurant\\[-2.2em]
@@ -471,7 +471,7 @@ A continuaci\'on evaluamos el desempe\~no de nuestro algoritmo sobre mapas del c
 
 En esta secci\'on presentamos tres casos de estudio detallados de evaluaci\'on de las ERs generadas con nuestros algoritmos para mapas del corpus ZOOM. En la Secci\'on \ref{sec:sinzoom} analizaremos la generaci\'on de rankings de ERs singulares en el dominio del corpus ZOOM y comparamos el desempe\~no del algoritmo con datos del corpus. En la Secci\'on \ref{sec:conzoom} analizamos la generaci\'on de rankings de ERs en un mapa con mayor nivel de zoom que el analizado en la Secci\'on \ref{sec:sinzoom}. En la Secci\'on \ref{sec:plural} analizamos la generaci\'on de ERs plurales.
 
-\subsection{Generaci\'on de expresiones refenciales singulares}
+\subsection{Generaci\'on de expresiones referenciales singulares}
 \label{sec:sinzoom}
 
 Consideremos el mapa de la Figura \ref{mapa-zoom1} que muestra una regi\'on de la ciudad de Madrid. El target, es decir, el objeto se\~nalado por la flecha roja, es una iglesia, como se puede ver en la leyenda ubicada a la derecha del mapa. 

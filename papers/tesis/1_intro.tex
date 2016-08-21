@@ -85,7 +85,7 @@ Por ejemplo, una computadora que se enfrenta a la tarea de generar autom\'aticam
 \begin{scriptsize}
 \begin{tabular}{|l|c|c|c|c|c|c|c|}
 \hline
-\textbf {id}& 	\textbf {type}		&	\textbf {color}	&	\textbf {size}& \textbf {rigth} & \textbf {left} & \textbf {ontop}	& \textbf {below}	\\
+\textbf {id}& 	\textbf {type}		&	\textbf {color}	&	\textbf {size}& \textbf {right} & \textbf {left} & \textbf {ontop}	& \textbf {below}	\\
    	   &  	    			&	    		&	     		&  \textbf {of}   		 &  \textbf {of}	    &  	&  \\
 \hline \hline
 $e_1$ & ball & yellow & small & - & - & - & - \\
@@ -136,7 +136,7 @@ que no tiene nada a la derecha}.
 La tabla puede completarse para que sea posible
 generar la expresi\'on referencial. La Figura \ref{representacion-modelo-completo} ilustra una posible forma de completar la informaci\'on de la tabla representada en (a) como un grafo, en el grafo (b). Sin embargo, este nuevo grafo tampoco es completo, 
 de hecho, {\it la cosa que est\'a a la derecha del cubo del medio} no se podr\'ia generar con este grafo. Toda representaci\'on de un contexto ser\'a necesariamente incompleta.
-\medskip
+%\medskip
 
 \begin{figure}[h]
 %\begin{subfigure}{.5\textwidth}
@@ -280,8 +280,9 @@ El largo de una ER afecta su calidad. Se podr\'{i}a pensar, por ejemplo, que las
 no es lo que las personas hacen ni lo que es m\'as \'util para los oyentes, como se muestra en trabajo previo \cite{Lu_sasha2015,paraboni2007}. Y ni siquiera nos resuelve completamente el problema de elegir una ER: {\it la bola grande} y {\it la esfera roja} son dos ERs de la Figura \ref{figura-er} y tienen 
 exactamente la misma longitud.
 
-Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede hacer es que un algoritmo de GER devuelva un \textbf{ranking}
- de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cu\'an buena es esa ER para el input dado.
+Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede hacer para ayudar a los sistemas interactivos de GLN es que 
+un algoritmo de GER devuelva un \textbf{ranking}
+ de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cu\'an buena es esa ER para el input dado. Si un sistema interactivo tiene varias ERs para un objeto, puede dar la siguiente frase simplemente seleccionando otra ER, cuando el usuario le indica que no ha entiende la frase. 
 
 ?`Como podemos generar un ranking de ERs?.
 Un algoritmo simplista generar\'ia primero todas las ERs posibles y luego las ordenar\'ia con alg\'un criterio. Esto es posible porque la cantidad de ERs es finita dado un modelo finito, pero esta cantidad puede ser muy grande, exponencial en el tama\~{n}o del modelo y la gran mayor\'ia de estas ERs no se llegar\'ian a usar en una aplicaci\'on real. Una aplicaci\'on s\'olo usar\'a las mejores ERs de un target considerado.
@@ -561,7 +562,7 @@ $$
 
 Notar que las f\'ormulas mostradas, hacen uso de diferentes operadores de la l\'ogica \FOL: hay negaci\'on de \'atomos y de relaciones, hay cuantificaci\'on existencial, y universal, conjunci\'on, disyunci\'on y desigualdad. La realizaci\'on sint\'actica de algunas de \'estas f\'ormulas pueden involucrar estructuras gramaticales complejas. Por ejemplo la f\'ormula $\phi_4$ requiere el uso de voz pasiva y podr\'ia realizarse como {\it el perro que es olido por un gato peque\~no}. La f\'ormula $\nDog(x) \land \exists y . (x \not\approx y \land \nDog(y) \land \aSniffing(x,y))$ que representa al target $b$ de la Figura \ref{fig:cat-dog-1} requiere el uso de lexemas como otro y puede realizarse como {\it el perro que huele a otro perro}. La f\'ormula $\phi_2$ requiere el uso de negaci\'on del predicado y podr\'ia realizarse como {\it el perro peque\~no que no huele gatos}.
  
-Como nuestra meta es hacer un ranking de las mejores expresiones referenciales, una manera de acercarnos a esa meta es restringiendo la l\'ogica. Si restringimos a \EPFOL que no tiene negaci\'on, aseguramos que f\'ormulas como $\phi_2$ no se generar\'an. Si sacaramos el operador distinto ($\not\approx$) del lenguaje, $\phi_3$ tambi\'en queda excluida.
+Como nuestra meta es hacer un ranking de las mejores expresiones referenciales, una manera de acercarnos a esa meta es restringiendo la l\'ogica. Si restringimos a \EPFOL que no tiene negaci\'on, aseguramos que f\'ormulas como $\phi_2$ no se generar\'an. Si sac\'aramos el operador distinto ($\not\approx$) del lenguaje, $\phi_3$ tambi\'en queda excluida.
 A continuaci\'on presentamos fragmentos de $\FOL$ conocidos como l\'ogicas de descripci\'on. Por ejemplo, el lenguaje de la l\'ogica de descripci\'on $\ALC$ de \cite{arec:hybr05b}, se define sint\'acticamente como el conjunto de f\'ormulas que se pueden generar recursivamente como sigue
 $$
 \top \mid p \mid \neg \phi \mid \phi \wedge \phi' \mid  \exists r. \phi
@@ -569,7 +570,7 @@ $$
 donde $p$ es un s\'imbolo proposicional, $r$ es un s\'imbolo relacional binario, y $\phi$, $\phi'$ son f\'ormulas de $\ALC$.
 
  Mediante la restricci\'on a f\'ormulas de $\ALC$ 
-evitar\'iamos f\'ormulas como $\phi_3$ (es decir con desigualdad). Tambi\'en evitar\'iamos f\'omulas como $\phi_4$ ({\it el perro que es olido por un peque\~no gato}) en la cual tenemos que realizar la parte del existencial como una voz pasiva al aparecer la variable $x$ en segundo lugar.
+evitar\'iamos f\'ormulas como $\phi_3$ (es decir con desigualdad). Tambi\'en evitar\'iamos f\'ormulas como $\phi_4$ ({\it el perro que es olido por un peque\~no gato}) en la cual tenemos que realizar la parte del existencial como una voz pasiva al aparecer la variable $x$ en segundo lugar.
 
 Cada lenguaje l\'ogico puede ser visto como un compromiso entre la expresividad, realizabilidad y complejidad computacional. Para la tarea de GER el uso de un lenguaje u otro debe depender del contexto particular considerado y del target a describir.
 
@@ -665,7 +666,12 @@ Las f\'ormulas $\phi_1$ a $\phi_7$ pueden realizarse como sigue.
 \smallskip
 
 Notar que $\phi_1$ y $\phi_2$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas que identifique al target.
-Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones, cuantificadores existenciales y desigualdad), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en, podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL, que se describe en el Cap\'itulo \ref{sec:intro_logica}. 
+Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones, cuantificadores existenciales y desigualdad), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en, podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL, es cual esta dado por:
+$$
+\top \mid p \mid \gamma \wedge \gamma' \mid  \exists r. \gamma
+$$
+donde $p$ es un s\'imbolo proposicional, $r$ un s\'imbolo de relaci\'on binaria, y $\gamma,\gamma' \in \EL$, es decir son f\'ormulas de $\EL$. $\EL$ se corresponde con el fragmento
+ de \ALC sin negaci\'on.
 
 En el Cap\'itulo \ref{sec:intro_logica} describimos c\'omo los operadores l\'ogicos afectan la expresividad y la complejidad computacional de la tarea de GER, as\'i como las ERs generadas. En el Cap\'itulo \ref{sec:algoritmo} proponemos como generar no una sino un ranking de ERs y agregamos una distribuci\'on finita de probabilidades asociada a los s\'imbolos de relaci\'on del modelo.
 
@@ -708,10 +714,10 @@ veces las ERs generadas por el algoritmo fueron juzgadas por los jueces como mej
 
 \subsection{Cap\'itulo~\ref{sec:corpus}: ``Recolecci\'on y an\'alisis del corpus ZOOM''} Introducimos un nuevo corpus, 
 el ZOOM corpus, el cual fue recolectado en un trabajo conjunto con la Universidad de S\~ao Paulo (Brasil), 
-para tener un corpus de un dominio m\'as natural de expresiones refenciales. El corpus ZOOM contiene expresiones referenciales 
+para tener un corpus de un dominio m\'as natural de expresiones referenciales. El corpus ZOOM contiene expresiones referenciales 
 de puntos de inter\'es en mapas. Los mapas son fragmentos de las ciudades de Madrid y Lisboa. Este corpus fue recolectado en 2 idiomas, 
 espa\~nol y portugu\'es. Contiene todos los tipos de ERs presentados en el Cap\'itulo \ref{sec:seleccion}. Se explica el m\'etodo de recolecci\'on del corpus, se dan estad\'isticas de las personas que completaron el 
-experimento y se explica la manera en que se anot\'o el corpus. Se describe brevemente y se eval\'ua sobre este corpus un m\'etodo p\'uramente basado en aprendizaje autom\'atico que usa {\it support vector machines}, para decidir si incluir o no una propiedad en la ER de salida. Adem\'as se eval\'ua el desempe\~no de nuestros algoritmos sobre un fragmento del corpus ZOOM.
+experimento y se explica la manera en que se anot\'o el corpus. Se describe brevemente y se eval\'ua sobre este corpus un m\'etodo puramente basado en aprendizaje autom\'atico que usa {\it support vector machines}, para decidir si incluir o no una propiedad en la ER de salida. Adem\'as se eval\'ua el desempe\~no de nuestros algoritmos sobre un fragmento del corpus ZOOM.
 
 \subsection{Cap\'itulo~\ref{sec:conclusiones}: ``Conclusiones y trabajo futuro''} En este cap\'itulo se da un resumen de lo estudiado, se explican los avances realizados en esta tesis, como la incorporaci\'on de distribuciones finitas de probabilidades a algoritmos determin\'isticos que usan simulaciones para la GER. Esta distribuci\'on de probabilidades la aprendemos desde corpora con funciones de regresi\'on lineal. Los algoritmos est\'an inspirados en el modelo psicoling\"u\'istico de GER que determina la forma de sobreespecificar. Evaluamos los rankings obtenidos con una serie de benchmarks del \'area usando m\'etricas autom\'aticas y humanas. Creamos un nuevo corpus de ERs, el ZOOM corpus, que es m\'as complejo y cercano a aplicaciones de la vida real que corpora existente. Damos una serie de propuestas para trabajo futuro en las que se aprovechan las potencialidades de los algoritmos basados en l\'ogicas formales y teor\'ia de modelos para dominios complejos. Por otro lado proponemos extensiones a los algoritmos para tratar casos con target plurales que fueron los menos explorados en esta tesis.
 

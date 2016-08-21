@@ -87,7 +87,7 @@ Total & 140 & 100 & 10000 & 100 & 80.51 \\
 \subsection{Evaluaci\'on autom\'atica sobre el corpus}
 \label{sec:compara-varias}
 
-Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar que como el algoritmo tiene un componente de azar, por eso nos di\'o bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
+Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar que como el algoritmo tiene un componente de azar, por eso nos dio bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
 Para enriquecer esta parte mostraremos otros baselines, los cuales nos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son \'utiles para aproximar al ranking de ERs que aparece en corpora. Un baseline que se presenta ejecuta el algoritmo con una distribuci\'on aleatoria de probabilidades de uso. Llamamos uniforme a otro baseline, en el cual tomamos las ERs generadas por el sistema, las del corpus y las generadas con el modelo aleatorio les dimos la misma probabilidad de ocurrencia. Por ejemplo si eran 10 en total, y ejecutamos el algoritmo 100 veces, cada ER iba a aparecer 10 veces. En este baseline no ejecutamos el algoritmo. El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
 
 \bigskip
@@ -273,6 +273,10 @@ x2 	&	0.02	\\
 %\end{figure} 
 
 
+Recordemos las m\'etricas autom\'aticas nombradas en la Secci\'on \ref{sec:metricasAutomaticas}, 
+la \textbf{exactitud} se define como el porcentaje de coincidencias exactas entre cada ER producida por un ser humano y la producida por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta. 
+El coeficiente \textbf{Dice} es una m\'etrica de comparaci\'on de conjuntos al igual que \textbf{\textsc{masi}}, el valor va entre 0 y 1, 1 indica un matcheo perfecto entre los conjuntos. La diferencia entre ellas es que \textbf{\textsc{masi}} var\'ia en favor de la similaridad cuando un conjunto es un subconjunto de otro. Las dos son m\'etricas que no son tan estrictas como la exactitud por ejemplo con respecto al orden las palabras y justamente es lo que necesitamos ya que no estamos en la parte de realizaci\'on sint\'actica.
+
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -302,7 +306,7 @@ En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos
 
 
 En la Figura~\ref{graficoPresicion} se muestra una comparaci\'on entre la exactitud de nuestro sistema y el sistema GRAPH. El gr\'afico de la izquierda corresponde al dominio muebles y el gr\'afico de la derecha corresponde al dominio personas. En el dominio muebles estamos obteniendo casi los mismos n\'umeros en las m\'etricas evaluadas.
-Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra exactitud es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la exactitud para ambos dominios se hace mayor del 60\% (60\% para personas y 65\% para muebles). Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no esten en primer lugar. Si el algoritmo GRAPH fuera modificado para ser no-determin\'istico es posible que tambi\'en mejorara su exactitud en 20 o m\'as ejecuciones. Esta es una l\'inea interesante de trabajo futuro. 
+Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra exactitud es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la exactitud para ambos dominios se hace mayor del 60\% (60\% para personas y 65\% para muebles). Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no est\'en en primer lugar. Si el algoritmo GRAPH fuera modificado para ser no-determin\'istico es posible que tambi\'en mejorara su exactitud en 20 o m\'as ejecuciones. Esta es una l\'inea interesante de trabajo futuro. 
 %  \centering
 
 \begin{figure}[h]
