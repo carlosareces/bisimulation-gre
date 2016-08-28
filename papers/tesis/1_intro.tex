@@ -284,7 +284,7 @@ Dado que la incertidumbre es inherente a la tarea de GER, lo mejor que se puede 
 un algoritmo de GER devuelva un \textbf{ranking}
  de ERs, o lo que es lo mismo, un conjunto de ERs en el que cada ER tiene un valor asociado que intenta reflejar cu\'an buena es esa ER para el input dado. Si un sistema interactivo tiene varias ERs para un objeto, puede dar la siguiente frase simplemente seleccionando otra ER, cuando el usuario le indica que no ha entiende la frase. 
 
-?`Como podemos generar un ranking de ERs?.
+?`C\'omo podemos generar un ranking de ERs?.
 Un algoritmo simplista generar\'ia primero todas las ERs posibles y luego las ordenar\'ia con alg\'un criterio. Esto es posible porque la cantidad de ERs es finita dado un modelo finito, pero esta cantidad puede ser muy grande, exponencial en el tama\~{n}o del modelo y la gran mayor\'ia de estas ERs no se llegar\'ian a usar en una aplicaci\'on real. Una aplicaci\'on s\'olo usar\'a las mejores ERs de un target considerado.
 Una forma m\'as eficiente de generar un ranking de ERs es dise\~{n}ar un algoritmo no determin\'istico que intente generar primero las mejores ERs.
 
@@ -305,7 +305,7 @@ Los \textbf{modelos relacionales}, tambi\'en conocidos como \textbf{modelos de K
 Los modelos relacionales son grafos etiquetados y pueden verse
 tambi\'en como aut\'omatas finitos. Estas estructuras matem\'aticas
 han sido muy estudiadas y tienen muchas propiedades bien conocidas
-\cite{arec:hybr05b,arec:hybr05b}. 
+\cite{arec:hybr05b}. 
 
 En esta tesis se adaptan algoritmos cl\'asicos de minimizaci\'on de aut\'omatas aplicados a la caracterizaci\'on de modelos relacionales. Particularmente extendimos t\'ecnicas y algoritmos de teor\'ia de modelos y simulaciones integrando
 una distribuci\'on finita de probabilidades que representa esta incertidumbre. Nuestro objetivo
@@ -511,7 +511,7 @@ $x_1\ldots x_n$, inductivamente definimos la \textbf{extensi\'on} o
 
 donde $1 \le i,j, i_1, \ldots, i_k \le n$, $\bar{a} = (a_1\ldots
 a_n)$, $\bar{a}e = (a_1\ldots a_n,e)$ y $\delta'$ son
-obtenidos reeplazando todas las ocurrencias de $x_l$ en $\delta$ por
+obtenidos reemplazando todas las ocurrencias de $x_l$ en $\delta$ por
 $x_{n+1}$. 
 %Cuando la cardinalidad de las tuplas involucradas en el contexto es conocida 
 %escribiremos $\interp{\phi}$ en lugar de
@@ -666,7 +666,7 @@ Las f\'ormulas $\phi_1$ a $\phi_7$ pueden realizarse como sigue.
 \smallskip
 
 Notar que $\phi_1$ y $\phi_2$ son m\'inimas, es decir no se puede dar una f\'ormula m\'as corta que esas que identifique al target.
-Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones, cuantificadores existenciales y desigualdad), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en, podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL, es cual esta dado por:
+Las f\'ormulas $\phi_1$, $\phi_2$, $\phi_3$, $\phi_4$ y $\phi_6$ son caracterizadas como f\'ormulas positivas, conjuntivas y existenciales (no contienen negaci\'on y s\'olo tienen conjunciones, cuantificadores existenciales y desigualdad), este tipo de f\'ormulas son las que m\'as se encuentran en corpora de ERs~\cite{viethen06:_algor_for_gener_refer_expres,deemter06:_build_seman_trans_corpus_for,gre3d3}. Luego como dijimos reci\'en, podemos elegir otra l\'ogica cuyo lenguaje est\'e restringido a las ERs que queremos generar. Restringiendo la determinaci\'on de contenido a \EPFOL, aseguramos que f\'ormulas como  $\phi_5$ no se generar\'an. Si prohibimos el distinto del lenguaje, $\phi_6$ tambi\'en queda excluida. La l\'ogica de menor complejidad computacional que se corresponde con todas esas restricciones es \EL, la cual est\'a dada por:
 $$
 \top \mid p \mid \gamma \wedge \gamma' \mid  \exists r. \gamma
 $$
@@ -706,7 +706,7 @@ terminaci\'on. Adem\'as mostramos completitud, es decir que siempre conseguimos 
 
 \subsection{Cap\'itulo~\ref{sec:evaluacion}: ``Evaluaci\'on de rankings sobre benchmarks''} 
 En el Cap\'itulo \ref{sec:seleccion} se describieron m\'etricas de evaluaci\'on tanto autom\'aticas como manuales. Evaluamos los algoritmos presentados 
-en el Cap\'itulo \ref{sec:algoritmo}, teniendo en cuenta ambos tipos de m\'etricas. La evaluaci\'on esta dividida en 2 partes. 
+en el Cap\'itulo \ref{sec:algoritmo}, teniendo en cuenta ambos tipos de m\'etricas. La evaluaci\'on est\'a dividida en 2 partes. 
 Una parte en la cual comparamos la salida del algoritmo para modelos de 2 corpora descriptos en el Cap\'itulo \ref{sec:seleccion}, con expresiones referenciales dadas por los humanos, tomando como input probabilidades de uso obtenidas con aprendizaje autom\'atico a partir de cada corpora. Vemos c\'omo las ERs generadas con probabilidades obtenidas del corpus con aprendizaje autom\'atico se acercan 
 mucho m\'as a las humanas, que 2 baselines (random y uniforme). En la otra parte de este cap\'itulo presentamos una evaluaci\'on manual en la cual 2 jueces humanos decidieron qu\'e ER era mejor entre la del corpus y la generada por el algoritmo. Es interesante notar c\'omo muchas 
 veces las ERs generadas por el algoritmo fueron juzgadas por los jueces como mejores que las humanas. El algoritmo tiene la ventaja de que

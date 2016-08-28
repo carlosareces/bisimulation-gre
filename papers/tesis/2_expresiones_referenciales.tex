@@ -71,13 +71,13 @@ De acuerdo a las propiedades o relaciones que una ER incluya, se clasifica en di
 
 \item Una ER es {\bf relacional}, cuando contiene relaciones con otros objetos. En este caso la ER incluye descripciones de los otros objetos. Por ejemplo, en la Figura \ref{fig2-1}: {\it La esfera que est\'a a la derecha del cubo}. {\it A la derecha de} lexicaliza una relaci\'on que necesita describir otro objeto adem\'as del target, en este caso un {\it cubo}.
 
-\item \label{sec:minimales} Se dice que una ER es {\bf minimal} cuando incluye la m\'inima cantidad de propiedades y/o relaciones con otros objetos, con las cuales el target puede ser distinguido en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo, en la Figura \ref{fig2-1}: {\it La esfera roja} es una ER minimal, como as\'i tambi\'en lo es {\it La esfera grande}, y {\it La esfera a la derecha del cubo}. Para verificar que estas ERs son minimales, intentemos sacar alguna propiedad, si de {\it La esfera roja} sacamos {\it esfera}, ya no podemos identificar al target, si sacamos {\it roja}, tampoco. Lo mismo pasa para {\it La esfera grande}. Veamos que pasa con {\it La esfera a la derecha del cubo}, si sacamos {\it esfera} tenemos otro objeto, $e_7$, adem\'as del target que tambi\'en tiene a la izquierda un cubo. Si sacamos {\it a la derecha de} no es posible construir una frase nominal aceptable. 
+\item \label{sec:minimales} Se dice que una ER es {\bf minimal} cuando incluye la m\'inima cantidad de propiedades y/o relaciones con otros objetos, con las cuales el target puede ser distinguido en el contexto dado. Notar que puede haber muchas expresiones minimales. Por ejemplo, en la Figura \ref{fig2-1}: {\it La esfera roja} es una ER minimal, como as\'i tambi\'en lo es {\it La esfera grande}, y {\it La esfera a la derecha del cubo}. Para verificar que estas ERs son minimales, intentemos sacar alguna propiedad, si de {\it La esfera roja} sacamos {\it esfera}, ya no podemos identificar al target, si sacamos {\it roja}, tampoco. Lo mismo pasa para {\it La esfera grande}. Veamos qu\'e pasa con {\it La esfera a la derecha del cubo}, si sacamos {\it esfera} tenemos otro objeto, $e_7$, adem\'as del target que tambi\'en tiene a la izquierda un cubo. Si sacamos {\it a la derecha de} no es posible construir una frase nominal aceptable. 
 
 \item Cuando la ER contiene m\'as informaci\'on de la m\'inima necesaria para distinguir al target de los dem\'as objetos en el contexto dado, se dice que la ER es {\bf sobreespecificada}. Por ejemplo: {\it La esfera roja grande} en la Figura \ref{fig2-1} es sobreespecificada porque se le puede sacar {\it grande} o {\it roja} y sigue siendo una ER correcta. \label{er-sobreespecificadas}
 
 \item Una expresi\'on es {\bf subespecificada}\footnote{Estrictamente hablando, una expresi\'on subespecificada no es una ER dado que no identifica un\'ivocamente al target. Sin embargo, en esta tesis hablaremos en ocasiones de ERs subespecificadas para referirnos a \'estas expresiones que no alcanzan a ser referenciales.} cuando no puede distinguir al target de los otros objetos en el contexto. Estos otros objetos son llamados \textbf{distractores}. Por ejemplo: {\it La esfera} en la Figura \ref{fig2-1} no alcanza a identificar al objeto $e_5$ apuntado por la flecha, ya que hay otras 2 esferas que son distractores, $e_1$ y $e_3$. Una expresi\'on subespecificada identifica a un conjunto de objetos y ese conjunto incluye otros objetos adem\'as del target.
 
-\item Una ER es {\bf plural} cuando el target es un conjunto no singleton. Por ejemplo {\it Las esferas} es una ER para las 3 esferas de la Figura \ref{fig2-1}. {\it Las esferas} es una ER \textbf{colectiva} que con una sola propiedad describe 3 objetos. Otra ER para el mismo target podr\'ia ser {\it La esfera que est\'a sola, y la que esta arriba del cubo y la que est\'a al lado del cubo rojo}, la cual es una expresi\'on \textbf{distributiva}.
+\item Una ER es {\bf plural} cuando el target es un conjunto no singleton. Por ejemplo {\it Las esferas} es una ER para las 3 esferas de la Figura \ref{fig2-1}. {\it Las esferas} es una ER \textbf{colectiva} que con una sola propiedad describe 3 objetos. Otra ER para el mismo target podr\'ia ser {\it La esfera que est\'a sola, y la que est\'a arriba del cubo y la que est\'a al lado del cubo rojo}, la cual es una expresi\'on \textbf{distributiva}.
 
 \item Una ER es {\bf singular} cuando el target es singleton, es decir es un s\'olo objeto. Las ERs de la Figura \ref{fig2-1} son todos ejemplos de ERs singulares ya que el target (el objeto apuntado por la flecha) es uno solo. 
 
@@ -416,7 +416,7 @@ $x$, en el cual se deba nombrar al objeto $y$, se aplica el algoritmo b\'asico i
 sin relaciones, las personas tambi\'en utilizan con frecuencia las relaciones (en aproximadamente un tercio de las ERs que dan).
 
 En caso de generar ERs relacionales con esta estrategia hay que asegurarse que el algoritmo termina, es decir que no entra en ciclos infinitos 
-tratando de identificar objetos. En \cite{haddock} se estudia como abordar el problema de regresi\'on infinita, en el cual el algoritmo trata de describir al landmark haciendo referencia al target, y al target haciendo referencia al landmark infinitamente, como en {\it el libro en la mesa la cual soporta un libro en la mesa... }
+tratando de identificar objetos. En \cite{haddock} se estudia c\'omo abordar el problema de regresi\'on infinita, en el cual el algoritmo trata de describir al landmark haciendo referencia al target, y al target haciendo referencia al landmark infinitamente, como en {\it el libro en la mesa la cual soporta un libro en la mesa... }
 
 
 \subsection{Algoritmo de b\'usqueda en grafos}
@@ -437,10 +437,10 @@ tratando de identificar objetos. En \cite{haddock} se estudia como abordar el pr
 %\end{figure}
 
 
-El {\bf Algoritmo Graph} de \cite{graph} propone tratar la generaci\'on de expresiones referenciales como un problema de grafos. El contexto que incluye al target y los distractores es representado como un grafo, por ejemplo en la Figura \ref{fig2-8} se muestra el contexto y el grafo correspondiente. Cada objeto de la escena (personas en este caso) se modela como un v\'ertice en el grafo. Las propiedades at\'omicas como \texttt{younger-looking}, \texttt{older-looking}, \texttt{wears suit}, \texttt{wears t-shirt}, \texttt{woman}, \texttt{man}, se representan como un bucle en el correspondiente nodo. Las relaciones binarias entre objetos, por ejemplo \texttt{left-of} o \texttt{right-of} se modelan como aristas entre los nodos correspondientes.
+El {\bf Algoritmo Graph} de \cite{graph} propone tratar la generaci\'on de expresiones referenciales como un problema de grafos.
 
 \begin{center}
-\begin{figure}[ht]
+\begin{figure}[H]
 \begin{subfigure}{.5\textwidth}\centering
 \includegraphics[width=\textwidth]{images/contexto-survey.png}\\[0pt]
 \label{figura-survey}
@@ -453,11 +453,10 @@ El {\bf Algoritmo Graph} de \cite{graph} propone tratar la generaci\'on de expre
 \caption{Ejemplo de contexto y grafo extra\'ido de \protect\cite{survey}.}\label{fig2-8}
 \end{figure}
 \end{center}
-
-
+ El contexto que incluye al target y los distractores es representado como un grafo, por ejemplo en la Figura \ref{fig2-8} se muestra el contexto y el grafo correspondiente. Cada objeto de la escena (personas en este caso) se modela como un v\'ertice en el grafo. Las propiedades at\'omicas como \texttt{younger-looking}, \texttt{older-looking}, \texttt{wears suit}, \texttt{wears t-shirt}, \texttt{woman}, \texttt{man}, se representan como un bucle en el correspondiente nodo. Las relaciones binarias entre objetos, por ejemplo \texttt{left-of} o \texttt{right-of} se modelan como aristas entre los nodos correspondientes.
 Dado un objeto target, conseguir una ER que distinga al objeto target de los dem\'as objetos del contexto, es equivalente a encontrar un subgrafo del grafo original que \'unicamente caracterice al target. Intuitivamente este subgrafo se puede poner sobre el target y no sobre ning\'un otro objeto del dominio considerado.
 
-\begin{figure}[ht]
+\begin{figure}[h]
 \centering
 \includegraphics[width=0.6\textwidth]{images/ref-exp-graph.png}
 \caption{Subgrafos del grafo de la Figura \ref{fig2-8}.}
@@ -543,7 +542,7 @@ relacional&Si & No&Si&Si&No&No& No \\
 
 
 
-En lo que sigue veremos como evaluar a los algoritmos de GER.
+En lo que sigue veremos c\'omo evaluar a los algoritmos de GER.
 
 
 
@@ -564,7 +563,7 @@ Esta secci\'on est\'a dividida en 3 partes, en la primera se muestra trabajo pre
 Los temas generales que con la evaluaci\'on basada en corpus de la experiencia de \cite{viet:gene11} quedaron
 al descubierto fueron (1) la interdependencia estrecha entre algoritmos y la
 representaci\'on subyacente de conocimiento que utilizan, (2) el no-determinismo de la generaci\'on del lenguaje natural, 
-(3) la cuesti\'on de c\'omo comparar la salida de los algoritmos con los gold-standar, y (4) la independencia del dominio espec\'ifico deseada para los algoritmos de GER.
+(3) la cuesti\'on de c\'omo comparar la salida de los algoritmos con los gold-standard, y (4) la independencia del dominio espec\'ifico deseada para los algoritmos de GER.
 
 La discusi\'on de estos temas ha dado lugar a la siguiente lista de evaluaci\'on de GER basada en corpus:
 \begin{itemize}
@@ -595,7 +594,7 @@ Para medir la performance de los algoritmos podemos usar m\'etricas autom\'atica
 \label{sec:metricasAutomaticas}
 
 Una de las formas m\'as usadas de evaluaci\'on son las siguientes m\'etricas que se pueden calcular autom\'aticamente con respecto a corpora.
-Una m\'etrica autom\'atica de evaluaci\'on implica comparar la ER dada por el sistema para un target en un contexto dado con la ER (gold standar) dada por una persona para el mismo target y contexto.
+Una m\'etrica autom\'atica de evaluaci\'on implica comparar la ER dada por el sistema para un target en un contexto dado con la ER (gold-standard) dada por una persona para el mismo target y contexto.
 Esta comparaci\'on de ER puede estar dada a distintos niveles, podemos comparar si son iguales, si s\'olo difieren en el orden de las palabras, si difieren en las palabras pero no en la cantidad de palabras que contienen, etc. En lo que sigue nombramos las m\'etricas de evaluaci\'on autom\'atica m\'as usadas.
 
 La \textbf{exactitud} ({\it accuracy}) se define como el porcentaje de coincidencias exactas entre cada ER producida por un ser humano y la producida por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta.
@@ -650,7 +649,7 @@ hacer clic en el objetivo previsto. Esto les permiti\'o calcular tres m\'etricas
 \item Tasa de error (que se define como el n\'umero de objetivos identificados incorrectamente).
 \end{itemize}
 
-Eye-traking otra forma de evaluar los items mencionados anteriormente, viendo la cantidad de movimientos que relizan los ojos antes de encontrar el objetivo.
+Eye-tracking otra forma de evaluar los \'items mencionados anteriormente, viendo la cantidad de movimientos que realizan los ojos antes de encontrar el objetivo.
 
 Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan entre dos ERs la m\'as natural, se les mostr\'o el contexto, 
 y se les present\'o 2 ERs una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar 
