@@ -110,12 +110,12 @@ En \cite{Lu_sasha2015} se investig\'o el rol que la cantidad de informaci\'on ju
 Paraboni et al. en su paper \cite{acl-Paraboni15} estudian la sobreespecificaci\'on de las ERs, en particular de las ERs relacionales.
 La hip\'otesis que eval\'uan es la siguiente:
 \begin{it}
-\begin{displayquote}h1: Dado el objetivo de sobreespecificar una descripci\'on relacional usando una propiedad p extra para el landmark, p deber\'ia corresponder a la propiedad m\'as discriminatoria que est\'a disponible en el contexto. %\cite{acl-Paraboni15} 
+\begin{displayquote}h1: Dado el objetivo de sobreespecificar una descripci\'on relacional usando una propiedad p extra para el landmark, p deber\'ia corresponder a la propiedad m\'as sobre-saliente que est\'a disponible en el contexto. %\cite{acl-Paraboni15} 
 \end{displayquote}
 \end{it}
 
 Un \textbf{landmark} de un target en un contexto dado, es un objeto del contexto que est\'a relacionado con el target a trav\'es de una relaci\'on particularmente saliente. Por ejemplo en la Figura \ref{fig-2-2} el cubo rojo grande que est\'a abajo del target, es el landmark.
-Una propiedad o relaci\'on es m\'as \textbf{discriminatoria} que otra cuando, al ser agregada a una ER, elimina m\'as distractores. Por ejemplo, en la Figura \ref{fig-2-2}, el tama\~no del landmark es m\'as discriminatoria que su color: agregar \emph{grande} a la expresi\'on \emph{cubo} elimina 3 distractores, mientras que agregar \emph{rojo} s\'olo elimina 2.
+A fin de verificar la hip\'otesis, en las im\'agenes hay propiedades sobre-salientes que tienen una alta discriminatoriedad. Una propiedad o relaci\'on es m\'as \textbf{discriminatoria} que otra cuando, al ser agregada a una ER, elimina m\'as distractores. Por ejemplo, en la Figura \ref{fig-2-2}, el tama\~no del landmark es m\'as discriminatoria que su color: agregar \emph{grande} a la expresi\'on \emph{cubo} elimina 3 distractores, mientras que agregar \emph{rojo} s\'olo elimina 2.
 
 De acuerdo a los resultados de trabajo previo (ver \cite{Pechmann1989}) se asume que se prefiere incluir el color en una ER antes de incluir el tama\~no de un objeto. 
 Adem\'as, siguiendo el principio de dise\~no \'optimo de \cite{clark1992arenas} se supone que propiedades unarias como color o tama\~no se preferir\'an frente a relaciones que resultan en descripciones m\'as complejas. En \cite{acl-Paraboni15} se argumenta en contra de este trabajo previo mostrando que dependiendo solamente de su poder discriminativo, se puede preferir tama\~no antes que color y se pueden preferir expresiones relacionales largas en vez de expresiones proposicionales m\'as cortas.
@@ -141,7 +141,10 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \label{sec:corpus2}
 \label{sec:corpusTUNA}
 
-{\bf TUNA} \cite{tuna-corpus} fue el primer corpus prominente de ERs disponible p\'ublicamente con fines de investigaci\'on. El corpus fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2280 descripciones producidas por 60 personas en dos dominios (1200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas situadas en una grilla). Se muestran ejemplos de im\'agenes en la Figura \ref{imagenes-tuna}. El corpus TUNA no contiene descripciones relacionales. Este corpus se ha utilizado ampliamente en una serie de desaf\'ios \cite{gatt09}. En el Cap\'itulo \ref{sec:corpus} de esta tesis se usa para evaluar nuestros algoritmos y as\'i comparamos con el desempe\~no de otros algoritmos del \'area que participaron en estos desaf\'ios. El corpus contiene s\'olo una ER por escena, por lo cual no es \'util para comparar con rankings de ERs, y la evaluaci\'on de nuestro algoritmo con respecto a este corpus es limitada.\\
+{\bf TUNA} \cite{tuna-corpus} fue el primer corpus prominente de ERs disponible p\'ublicamente con fines de investigaci\'on. El corpus 
+fue desarrollado en una serie de experimentos controlados de prop\'osito general, contiene 2280 descripciones producidas por 60 personas 
+en dos dominios (1200 expresiones referenciales de im\'agenes de muebles y 1080 expresiones referenciales de fotograf\'ias de personas 
+situadas en una grilla). Se muestran ejemplos de im\'agenes en la Figura \ref{imagenes-tuna}. 
 
 \begin{figure}[!ht]
 \begin{subfigure}{.5\textwidth}
@@ -165,6 +168,7 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \caption{Im\'agenes del TUNA corpus.}\label{imagenes-tuna}
 \end{figure}
 
+El corpus TUNA no contiene descripciones relacionales. Este corpus se ha utilizado ampliamente en una serie de desaf\'ios \cite{gatt09}. En el Cap\'itulo \ref{sec:corpus} de esta tesis se usa para evaluar nuestros algoritmos y as\'i comparamos con el desempe\~no de otros algoritmos del \'area que participaron en estos desaf\'ios. El corpus contiene s\'olo una ER por escena, por lo cual no es \'util para comparar con rankings de ERs, y la evaluaci\'on de nuestro algoritmo con respecto a este corpus es limitada.\\
 
 \label{sec:corpusGRE}
 
@@ -190,11 +194,9 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \caption{Im\'agenes del GRE3D3 corpus (a) y del GRE3D7 corpus (b).}\label{imagenes-GRE3D3-GRE3D7}
 \end{figure}
 
-%\vspace*{1cm}
-
 \label{sec:corpusSTARS}
 
-{\bf Stars} y su extensi\'on {\bf Stars2} \cite{Paraboni2016} se recolectaron para el estudio de la sobreespecificaci\'on (particularmente en el caso de las descripciones relacionales). Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen tres tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~no. 
+{\bf Stars} y su extensi\'on {\bf Stars2} \cite{Paraboni2016} se recolectaron para el estudio de la sobreespecificaci\'on (particularmente en el caso de las descripciones relacionales). 
 
 \begin{figure}[H]
 \begin{subfigure}{.5\textwidth}
@@ -215,6 +217,7 @@ La discriminaci\'on de una propiedad juega un rol central en la tarea de desambi
 \caption{Im\'agenes del corpus Stars (a) y del corpus Stars2 (b).}\label{imagenes-stars-stars2}
 \end{figure}
 
+Stars se desarroll\'o en un experimento piloto basado en la web, contiene 704 descripciones producidas por 64 personas. El conjunto de datos Stars2 se obtuvo de situaciones de di\'alogo que implicaban a dos personas, contiene 884 descripciones producidas por 56 participantes. Ambos dominios hacen uso de escenas visuales simples que contienen tres tipos de objetos (por ejemplo para Stars, estrellas, cuadrados y c\'irculos y para Stars2 cubos, conos y esferas) con variaci\'on limitada en color y tama\~no. 
 A diferencia de otros corpus para GER, Stars/2 incluyen un n\'umero considerable de situaciones complejas de referencia en que participan hasta tres objetos, como en {\it el cubo cerca de la esfera, al lado del cono}. Ejemplos de im\'agenes se muestran en la Figura \ref{imagenes-stars-stars2}. Este corpus fue recientemente liberado y planeamos usarlo en trabajo futuro.
 
 
@@ -629,14 +632,30 @@ Notar que estas m\'etricas no cumplen con el punto (iii) de la Secci\'on \ref{se
 
 \subsection{M\'etricas manuales}
 
-Las ERs tambi\'en pueden ser evaluadas por jueces humanos, y de esta manera se pueden evaluar por ejemplo adecuaci\'on, mostr\'andole a un juez humano la misma imagen que vio la persona que gener\'o la ER y pregunt\'andole cosas como ?`Qu\'e tan clara es la descripci\'on?.
-Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan entre dos ERs la m\'as natural, se les mostr\'o el contexto, y se les present\'o 2 ERs una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar la misma imagen pero sin la flecha que se\~nala al target, darle la ER que dio alguna persona, y pedirle que se\~nale el objeto al cual la ER refiere. De esta manera se puede evaluar facilidad de encontrar objetivo con la expresi\'on dada.
-La fluidez de una ER se puede evaluar preguntando a juez humano cosas como estas: 
-?`Considera que es fluida esta descripci\'on?, ?`Es buena y clara en el idioma considerado?. 
-Otra manera de evaluar manualmente es viendo si las ERs son \'utiles para dar instrucciones. Por ejemplo, \cite{BelzGattEvaluation}, mostraron a los participantes una descripci\'on generada para un ensayo. Despu\'es que los participantes le\'ian esta descripci\'on, una escena aparec\'ia y se pidi\'o a los participantes
-hacer clic en el objetivo previsto. Esto les permiti\'o calcular tres m\'etricas de evaluaci\'on: %extr\'inseca
-el tiempo de lectura, el tiempo de identificaci\'on, y la tasa de error, que se define como el n\'umero de objetivos identificados incorrectamente.
+Las personas pueden actuar como jueces humanos, a los cuales les podemos hacer preguntas para evaluar distintas cosas, por ejemplo:
+\begin{itemize}
+\item Adecuaci\'on - mostr\'andole a un juez humano la misma imagen que vio la persona que gener\'o la ER y pregunt\'andole cosas como ?`Qu\'e tan clara es la descripci\'on?.
+\item Fluidez - Preguntando ?`Considera que es fluida esta descripci\'on?.
+\item Claridad - Preguntando ?`Es buena y clara en el idioma considerado?.
+\end{itemize}
 
+Otra manera de evaluar manualmente es viendo si las ERs son \'utiles para dar instrucciones. Por ejemplo, \cite{BelzGattEvaluation}, 
+mostraron a los participantes una descripci\'on generada para un ensayo. Despu\'es que los participantes le\'ian esta descripci\'on, 
+una escena aparec\'ia y se pidi\'o a los participantes
+hacer clic en el objetivo previsto. Esto les permiti\'o calcular tres m\'etricas de evaluaci\'on: %extr\'inseca
+
+\begin{itemize}
+\item Tiempo de lectura.
+\item Tiempo de identificaci\'on.
+\item Tasa de error (que se define como el n\'umero de objetivos identificados incorrectamente).
+\end{itemize}
+
+Eye-traking otra forma de evaluar los items mencionados anteriormente, viendo la cantidad de movimientos que relizan los ojos antes de encontrar el objetivo.
+
+Hicimos una evaluaci\'on manual en la que pedimos a 2 jueces que elijan entre dos ERs la m\'as natural, se les mostr\'o el contexto, 
+y se les present\'o 2 ERs una dada por el sistema y otra proveniente del corpus dada por un humano. Tambi\'en se le podr\'ia mostrar 
+la misma imagen pero sin la flecha que se\~nala al target, darle la ER que dio alguna persona, y pedirle que se\~nale el objeto al cual 
+la ER refiere. De esta manera se puede evaluar facilidad de encontrar objetivo con la expresi\'on dada.
 
 \section{Notas finales y linkeo del cap\'itulo}
 \label{sec:linkeo2}

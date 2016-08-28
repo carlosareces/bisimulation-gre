@@ -134,7 +134,7 @@ una variaci\'on notable debido al azar. Adem\'as estas ejecuciones toman mucho m
 Adem\'as de poca exactitud, cuando se utilizaron probabilidades random,  muchas de las ERs generadas suenan poco naturales y son dif\'iciles de realizar sin introducir ambig\"uedades como, por ejemplo, (\textit{peque\~na cosa sobre
 el cubo azul que est\'a abajo de algo que es peque\~no}). En la \'ultima columna se presenta la exactitud de una corrida artificial, le llamamos uniforme, uniforme tomando todas las ERs de las dem\'as columnas y asign\'andoles la misma probabilidad. La uniforme consigue los peores resultados, ya que acumula ERs que no son del corpus, y las del corpus las tienen baja probabilidad. Para comparar nuestros resultados con los 3 baselines usamos tambi\'en la entrop\'ia cruzada.
 
-En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distribuciones de probabilidad mide la media de bits necesarios para identificar un evento de un conjunto de posibilidades, si un esquema de codificaci\'on est\'a basado en una distribuci\'on de probabilidad dada q, m\'as que en la verdadera distribuci\'on p. Vamos a comparar la entrop\'ia cruzada entre la distribuci\'on de probabilidad que se encuentra en el corpus, y la distribuci\'on de ERs del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entropy} se muestran los resultados para las ocho escenas que hemos considerado.
+En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distribuciones de probabilidad mide la media de bits necesarios para identificar un evento de un conjunto de posibilidades, si un esquema de codificaci\'on est\'a basado en una distribuci\'on de probabilidad dada q, m\'as que en la verdadera distribuci\'on p. Vamos a comparar la entrop\'ia cruzada entre la distribuci\'on de probabilidad que se encuentra en el corpus, y la distribuci\'on de ERs del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entrwopy} se muestran los resultados para las ocho escenas que hemos considerado.
 
 Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emph{aprendizaje autom\'atico}) son, en general, mucho m\'as cercanas de la entrop\'{i}a del corpus, que las entrop\'ias cruzadas de \emph{random} y \emph{uniforme}. S\'olo en la escena 12 random, por azar se acerca un poco m\'as.
 
@@ -300,14 +300,10 @@ Nuestro sistema, Dominio personas (top 20)   &	81\%		&68\%	&	60\%		\\
 \end{center}
 \end{table}
 
-
 En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistema con el sistema GRAPH para la primer ER del ranking (es decir, la m\'as frecuente) y para las primeras 20 ERs del ranking.
-%\vspace*{2cm}
-
-
+%\vspace*{-.5cm}
 En la Figura~\ref{graficoPresicion} se muestra una comparaci\'on entre la exactitud de nuestro sistema y el sistema GRAPH. El gr\'afico de la izquierda corresponde al dominio muebles y el gr\'afico de la derecha corresponde al dominio personas. En el dominio muebles estamos obteniendo casi los mismos n\'umeros en las m\'etricas evaluadas.
 Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra exactitud es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la exactitud para ambos dominios se hace mayor del 60\% (60\% para personas y 65\% para muebles). Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no est\'en en primer lugar. Si el algoritmo GRAPH fuera modificado para ser no-determin\'istico es posible que tambi\'en mejorara su exactitud en 20 o m\'as ejecuciones. Esta es una l\'inea interesante de trabajo futuro. 
-%  \centering
 
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
@@ -323,7 +319,7 @@ Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'a
 \includegraphics[width=\textwidth]{images/precP.png}
 \caption{Personas.}
 \end{subfigure}
-\caption{Comparaci\'on de la exactitud  del algoritmo GRAPH y nuestro sistema. El eje x indica que la exactitud se calcul\'o teniendo en cuenta las x primeras ERs en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
+\caption{Comparaci\'on de la exactitud  del algoritmo GRAPH y nuestro sistema. El eje x indica las x primeras ERs en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
 
 \end{figure}
 
@@ -342,11 +338,11 @@ Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'a
 %\caption{Comparaci\'on de la exactitud  del algoritmo GRAPH y nuestro sistema. El eje x indica que la exactitud se calcul\'o teniendo en cuenta las x primeras ERs en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
 %\end{figure}
 
-Otro resultado que podemos observar es que la exactitud  del top 1 en el dominio personas es mucho menor (19\%) que para el dominio de muebles (47\%), pero la exactitud se estabiliza cuando se consideran m\'as ERs de nuestro ranking. Esto puede explicarse por el hecho de que el conjunto de el dominio de personas contiene muchas m\'as propiedades que se pueden elegir para describir a las personas que las que contiene el dominio de muebles.
+Otro resultado que podemos observar es que la exactitud  del top 1 en el dominio personas es mucho menor (19\%) que para el dominio de muebles (47\%), pero la exactitud se estabiliza cuando se consideran m\'as ERs de nuestro ranking. Esto puede explicarse por el hecho de que el conjunto del dominio de personas contiene muchas m\'as propiedades que se pueden elegir para describir a las personas que las que contiene el dominio de muebles.
 
 Normalmente las m\'etricas autom\'aticas tienen la desventaja de calificar como malas a ERs que son buenas ERs, es decir identifican el target un\'ivocamente, en el contexto considerado, pero las consideran malas por no ser exactamente como las que aparecen en corpora. Otra manera de evaluar qu\'e tan buena es una ER es con evaluaciones manuales. Mostraremos una evaluaci\'on humana en la siguiente secci\'on.
 
-\newpage
+%\newpage
  
 \section{Evaluaci\'on humana} \label{sec:humanevaluation}
 
