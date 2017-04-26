@@ -3,7 +3,7 @@
 
 En este cap\'itulo se presentan diversas formas de evaluar a los algoritmos propuestos en el cap\'itulo anterior. En particular, se muestra que el algoritmo de refinamiento probabil\'{i}stico con sobreespecificaci\'on es capaz de generar un ranking de ERs que es similar a la distribuci\'on de frecuencias de las ERs observadas en corpora usando m\'etricas autom\'aticas y que tambi\'en tiene un buen desempe\~no cuando se usan m\'etricas manuales. Parte de esta evaluaci\'on fue presentada en el paper \cite{context2013}. 
 
-Este cap\'itulo est\'a dividido en 4 secciones, en la Secci\'on \ref{sec:compara} se muestra una evaluaci\'on autom\'atica con respecto al GRE3D7. En la Secci\'on \ref{sec:automaticevaluation} se presenta una evaluaci\'on autom\'atica con respecto a resultados de una competencia sobre el corpus TUNA. Luego en la Secci\'on \ref{sec:humanevaluation} se presenta una evaluaci\'on de jueces humanos con respecto al corpus TUNA. Para finalizar en la Secci\'on \ref{sec:notas5} se describe el resumen y linkeo del cap\'itulo.
+Este cap\'itulo esta dividido en 4 secciones, en la Secci\'on \ref{sec:compara} se muestra una evaluaci\'on autom\'atica con respecto al GRE3D7. En la Secci\'on \ref{sec:automaticevaluation} se presenta una evaluaci\'on autom\'atica con respecto a resultados de una competencia sobre el corpus TUNA. Luego en la Secci\'on \ref{sec:humanevaluation} se presenta una evaluaci\'on de jueces humanos con respecto al corpus TUNA. Para finalizar en la Secci\'on \ref{sec:notas5} se describe el resumen y linkeo del cap\'itulo.
 
 \section{Evaluaci\'on de rankings sobre el corpus GRE3D7}
 \label{sec:compara}
@@ -87,8 +87,8 @@ Total & 140 & 100 & 10000 & 100 & 80.51 \\
 \subsection{Evaluaci\'on autom\'atica sobre el corpus}
 \label{sec:compara-varias}
 
-Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar que como el algoritmo tiene un componente de azar, por eso nos dio bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
-Para enriquecer esta parte mostraremos otros baselines, los cuales nos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son \'utiles para aproximar al ranking de ERs que aparece en corpora. Un baseline que se presenta ejecuta el algoritmo con una distribuci\'on aleatoria de probabilidades de uso. Llamamos uniforme a otro baseline, en el cual tomamos las ERs generadas por el sistema, las del corpus y las generadas con el modelo aleatorio les dimos la misma probabilidad de ocurrencia. Por ejemplo si eran 10 en total, y ejecutamos el algoritmo 100 veces, cada ER iba a aparecer 10 veces. En este baseline no ejecutamos el algoritmo. El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
+Como es habitual cuando hacemos una evaluaci\'on con un caso particular, podemos pensar que como el algoritmo tiene un componente de azar, por eso nos di\'o bastante bien, para esa ejecuci\'on particular. Por eso aqu\'i se muestra la misma comparaci\'on realizada en la secci\'on anterior pero con todas las im\'agenes verde-azules del corpus GRE3D7. 
+Para enriquecer esta parte mostraremos otros baselines, los cuales nos dar\'an pistas de que las probabilidades de uso aprendidas con el m\'etodo que presentamos en esta tesis son \'utiles para aproximar al ranking de ERs que aparece en corpora. Un baseline que se presenta ejecuta el algoritmo con una distribuci\'on aleatoria de probabilidades de uso. Otro baseline al cual llamamos uniforme es el que a las ERs tanto las generadas por el sistema como las del corpus y las generadas con el modelo aleatorio les dimos la misma probabilidad de ocurrencia, (por ejemplo si eran 10 en total, y ejecutamos el algoritmo 100 veces, cada ER iba a aparecer 10 veces), en este baseline no ejecutamos el algoritmo. El Top baseline, es en el que el algoritmo us\'o las probabilidades de uso sacadas del corpus mismo. 
 
 \bigskip
 
@@ -134,7 +134,7 @@ una variaci\'on notable debido al azar. Adem\'as estas ejecuciones toman mucho m
 Adem\'as de poca exactitud, cuando se utilizaron probabilidades random,  muchas de las ERs generadas suenan poco naturales y son dif\'iciles de realizar sin introducir ambig\"uedades como, por ejemplo, (\textit{peque\~na cosa sobre
 el cubo azul que est\'a abajo de algo que es peque\~no}). En la \'ultima columna se presenta la exactitud de una corrida artificial, le llamamos uniforme, uniforme tomando todas las ERs de las dem\'as columnas y asign\'andoles la misma probabilidad. La uniforme consigue los peores resultados, ya que acumula ERs que no son del corpus, y las del corpus las tienen baja probabilidad. Para comparar nuestros resultados con los 3 baselines usamos tambi\'en la entrop\'ia cruzada.
 
-En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distribuciones de probabilidad mide la media de bits necesarios para identificar un evento de un conjunto de posibilidades, si un esquema de codificaci\'on est\'a basado en una distribuci\'on de probabilidad dada q, m\'as que en la verdadera distribuci\'on p. Vamos a comparar la entrop\'ia cruzada entre la distribuci\'on de probabilidad que se encuentra en el corpus, y la distribuci\'on de ERs del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entrwopy} se muestran los resultados para las ocho escenas que hemos considerado.
+En teor\'ia de la informaci\'on, la \textbf{entrop\'ia cruzada} entre dos distribuciones de probabilidad mide la media de bits necesarios para identificar un evento de un conjunto de posibilidades, si un esquema de codificaci\'on est\'a basado en una distribuci\'on de probabilidad dada q, m\'as que en la verdadera distribuci\'on p. Vamos a comparar la entrop\'ia cruzada entre la distribuci\'on de probabilidad que se encuentra en el corpus, y la distribuci\'on de ERs del corpus y las de ejecuciones del algoritmo con las probabilidades que acabamos de describir~(ver~\cite{juraksky:spee08} para obtener detalles sobre evaluaci\'on de entrop\'{i}a cruzada). En la Figura~\ref{Entropy} se muestran los resultados para las ocho escenas que hemos considerado.
 
 Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emph{aprendizaje autom\'atico}) son, en general, mucho m\'as cercanas de la entrop\'{i}a del corpus, que las entrop\'ias cruzadas de \emph{random} y \emph{uniforme}. S\'olo en la escena 12 random, por azar se acerca un poco m\'as.
 
@@ -152,7 +152,7 @@ Las entrop\'{i}as cruzadas de las dos primeras ejecuciones (\emph{escena} y \emp
 En esta secci\'on se presenta la comparaci\'on de nuestro algoritmo con el algoritmo que tuvo el mejor desempe\~no en el TUNA Challenge. 
 
 \subsection{El TUNA Challenge}
-El TUNA Challenge, fue una serie de 2 desaf\'ios organizados en el 2008 y 2009 en el que se ped\'ia a los participantes desarrollar programas para generaci\'on de expresiones referenciales, donde pod\'ian generar s\'olo la selecci\'on de contenido o dar la realizaci\'on sint\'actica tambi\'en.
+El TUNA Challenge, fue una serie de 2 desaf\'ios organizados en el 2008 y 2009 en el que se ped\'ia a los participantes desarrollar programas para generaci\'on de expresiones referenciales, pod\'ian generar s\'olo la selecci\'on de contenido o dar la realizaci\'on sint\'actica tambi\'en.
 Se daba parte del corpus TUNA como entrenamiento, y un software de evaluaci\'on autom\'atica, el cual comparaba la salida del algoritmo con la ER humana del corpus TUNA. El algoritmo GRAPH fue el que mejores puntuaciones sac\'o en la competencia.
 El algoritmo GRAPH que describimos en el Cap\'itulo \ref{sec:seleccion} es un algoritmo determin\'istico y por lo tanto produce la misma expresi\'on referencial cuando se ejecuta con el mismo target y contexto. Nuestro algoritmo es no-determin\'istico, puede dar una expresi\'on referencial diferente cada vez que se ejecuta. Con el fin de compararlos corremos nuestro algoritmo 100 veces y hacemos un ranking de las 20 ERs m\'as frecuentes generadas por el algoritmo. Utilizamos la parte de prueba del corpus TUNA (el cual fue introducido en la Secci\'on \ref{sec:corpusTUNA}), para comparar el ranking de ERs dado por nuestro algoritmo con las salidas del algoritmo GRAPH cuyos resultados se describen en~\cite{KrahmerGRAPH} y se reproducen en la Tabla~\ref{Tabla_sis_1_20}.
 
@@ -273,10 +273,6 @@ x2 	&	0.02	\\
 %\end{figure} 
 
 
-Recordemos las m\'etricas autom\'aticas nombradas en la Secci\'on \ref{sec:metricasAutomaticas}, 
-la \textbf{exactitud} se define como el porcentaje de coincidencias exactas entre cada ER producida por un ser humano y la producida por el sistema para la misma escena y target. Se considera que es una m\'etrica demasiado estricta. 
-El coeficiente \textbf{Dice} es una m\'etrica de comparaci\'on de conjuntos al igual que \textbf{\textsc{masi}}, el valor va entre 0 y 1, 1 indica un matcheo perfecto entre los conjuntos. La diferencia entre ellas es que \textbf{\textsc{masi}} var\'ia en favor de la similaridad cuando un conjunto es un subconjunto de otro. Las dos son m\'etricas que no son tan estrictas como la exactitud por ejemplo con respecto al orden las palabras y justamente es lo que necesitamos ya que no estamos en la parte de realizaci\'on sint\'actica.
-
 \begin{table}[h]
 \begin{center}
 \begin{tabular}{|l|c|c|c|}
@@ -300,10 +296,14 @@ Nuestro sistema, Dominio personas (top 20)   &	81\%		&68\%	&	60\%		\\
 \end{center}
 \end{table}
 
+
 En la Tabla~\ref{Tabla_sis_1_20} mostramos m\'etricas autom\'aticas y comparamos la performance de nuestro sistema con el sistema GRAPH para la primer ER del ranking (es decir, la m\'as frecuente) y para las primeras 20 ERs del ranking.
-%\vspace*{-.5cm}
+%\vspace*{2cm}
+
+
 En la Figura~\ref{graficoPresicion} se muestra una comparaci\'on entre la exactitud de nuestro sistema y el sistema GRAPH. El gr\'afico de la izquierda corresponde al dominio muebles y el gr\'afico de la derecha corresponde al dominio personas. En el dominio muebles estamos obteniendo casi los mismos n\'umeros en las m\'etricas evaluadas.
-Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra exactitud es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la exactitud para ambos dominios se hace mayor del 60\% (60\% para personas y 65\% para muebles). Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no est\'en en primer lugar. Si el algoritmo GRAPH fuera modificado para ser no-determin\'istico es posible que tambi\'en mejorara su exactitud en 20 o m\'as ejecuciones. Esta es una l\'inea interesante de trabajo futuro. 
+Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'as probable), nuestra exactitud es menor que de GRAPH para el dominio de las personas. Sin embargo, si tenemos en cuenta las 20 mejores ERs que nuestro algoritmo es capaz de producir, podemos ver que la exactitud para ambos dominios se hace mayor del 60\% (60\% para personas y 65\% para muebles). Esto demuestra que nuestro algoritmo es capaz de generar ERs que son m\'as similares a las producidas por los seres humanos que el algoritmo GRAPH, aunque estas ERs no esten en primer lugar. Si el algoritmo GRAPH fuera modificado para ser no-determin\'istico es posible que tambi\'en mejorara su exactitud en 20 o m\'as ejecuciones. Esta es una l\'inea interesante de trabajo futuro. 
+%  \centering
 
 \begin{figure}[h]
 \begin{subfigure}{.5\textwidth}
@@ -319,7 +319,7 @@ Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'a
 \includegraphics[width=\textwidth]{images/precP.png}
 \caption{Personas.}
 \end{subfigure}
-\caption{Comparaci\'on de la exactitud  del algoritmo GRAPH y nuestro sistema. El eje x indica las x primeras ERs en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
+\caption{Comparaci\'on de la exactitud  del algoritmo GRAPH y nuestro sistema. El eje x indica que la exactitud se calcul\'o teniendo en cuenta las x primeras ERs en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
 
 \end{figure}
 
@@ -338,11 +338,11 @@ Podemos ver que si tomamos la parte superior, es decir 1 ER (la primera, la m\'a
 %\caption{Comparaci\'on de la exactitud  del algoritmo GRAPH y nuestro sistema. El eje x indica que la exactitud se calcul\'o teniendo en cuenta las x primeras ERs en el ranking. El eje y indica la exactitud. Nuestro sistema es representado como una l\'inea de puntos y GRAPH como una l\'inea continua.\label{graficoPresicion}}
 %\end{figure}
 
-Otro resultado que podemos observar es que la exactitud  del top 1 en el dominio personas es mucho menor (19\%) que para el dominio de muebles (47\%), pero la exactitud se estabiliza cuando se consideran m\'as ERs de nuestro ranking. Esto puede explicarse por el hecho de que el conjunto del dominio de personas contiene muchas m\'as propiedades que se pueden elegir para describir a las personas que las que contiene el dominio de muebles.
+Otro resultado que podemos observar es que la exactitud  del top 1 en el dominio personas es mucho menor (19\%) que para el dominio de muebles (47\%), pero la exactitud se estabiliza cuando se consideran m\'as ERs de nuestro ranking. Esto puede explicarse por el hecho de que el conjunto de el dominio de personas contiene muchas m\'as propiedades que se pueden elegir para describir a las personas que las que contiene el dominio de muebles.
 
 Normalmente las m\'etricas autom\'aticas tienen la desventaja de calificar como malas a ERs que son buenas ERs, es decir identifican el target un\'ivocamente, en el contexto considerado, pero las consideran malas por no ser exactamente como las que aparecen en corpora. Otra manera de evaluar qu\'e tan buena es una ER es con evaluaciones manuales. Mostraremos una evaluaci\'on humana en la siguiente secci\'on.
 
-%\newpage
+\newpage
  
 \section{Evaluaci\'on humana} \label{sec:humanevaluation}
 
@@ -362,7 +362,7 @@ Las ERs producidas por el sistema en el top 1 fueron consideradas igual o mejor 
 \begin{tabular}{|l|c|c|c|}
 \hline
 
- & Dominio muebles & Dominio personas & Media ponderada \\
+ & Muebles & Personas & Media ponderada \\
 \hline
 sistema igual o mejor por 2 jueces  &.75  &       .43	&       .60 \\
 sistema igual o mejor por 1 juez  &.97	&	.87	&	.92 \\
@@ -384,7 +384,7 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER sube
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/smallBlueFan.jpg}
-\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{blue fan}, y la del sistema \emph{small blue fan}. Los jueces prefirieron la ER generada por el sistema.}
+\caption{ER humana \emph{blue fan}, y la del sistema \emph{small blue fan}. Los jueces prefirieron la ER generada por el sistema.}
 \label{smallBlueFan}
 \end{minipage}
 \hspace*{.04cm}
@@ -393,7 +393,7 @@ Figura~\ref{smallBlueFan} ilustra un caso en el que el humano genera una ER sube
 \vspace*{.4cm}
 \includegraphics[width=\textwidth]{images/tuna.jpg} 
 \vspace*{-.4cm}
-\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{front blue chair}, y la del sistema \emph{bottom blue chair}. Ambos jueces humanos prefirieron la generada por el sistema.}
+\caption{ER humana \emph{front blue chair}, y la del sistema \emph{bottom blue chair}. Ambos jueces humanos prefirieron la generada por el sistema.}
 \label{BlueChair}
 \end{minipage}
 \end{figure}
@@ -404,7 +404,7 @@ En la Figura~\ref{BlueChair} la ER humana era {\it front blue chair}, y la ER si
 \begin{minipage}{0.48\linewidth}
 \centering
 \includegraphics[width=\textwidth]{images/s59t26.jpg}
-\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{the man with black hair}, y la del sistema \emph{the man wearing glasses in the fourth column}. Los jueces prefirieron la ER humana.}
+\caption{La ER humana \emph{the man with black hair}, y la del sistema \emph{the man wearing glasses in the fourth column}. Los jueces prefirieron la ER humana.}
 \label{s28t25}
 \end{minipage}
 \hspace*{.04cm}
@@ -412,7 +412,7 @@ En la Figura~\ref{BlueChair} la ER humana era {\it front blue chair}, y la ER si
 \centering
 \includegraphics[width=\textwidth]{images/s315t21.jpg}
 \vspace*{-.3cm}
-\caption{Escena usada durante la recolecci\'on del TUNA corpus. La ER humana \emph{man with a beard},  y la del sistema \emph{man with a beard wearing glasses}. Los jueces no estuvieron de acuerdo en su preferencia.}
+\caption{La ER humana \emph{man with a beard},  y la del sistema \emph{man with a beard wearing glasses}. Los jueces no estuvieron de acuerdo en su preferencia.}
 \label{s307t21}
 \end{minipage}
 \end{figure}

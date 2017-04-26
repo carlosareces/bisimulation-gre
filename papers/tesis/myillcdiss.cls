@@ -296,7 +296,7 @@
 \renewenvironment{thebibliography}[1]{%
    \chapter*{\bibname
       \@mkboth{\bibname}{\bibname}}%                Headings not uppercased
-   \addcontentsline{toc}{chapter}{Bibliography}%    Add to
+   \addcontentsline{toc}{chapter}{Bibliograf\'ia}%    Add to
                                                %    table-of-contents
    \begin{mycite}
 %    The numbers in parenthesis after each bibliographic entry\\
