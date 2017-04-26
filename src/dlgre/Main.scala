@@ -17,7 +17,14 @@ import util.StringUtils.join
 import scala.util.Random;
 import com.sun.org.apache.xalan.internal.xsltc.compiler.ForEach
 
+
 object Main {//1
+  def covers(clase1 : String, clase2 : String, targets : String) : Boolean = {
+	  var answer = true;
+	  targets.split(" ").foreach( x => if (!(clase1 + clase2).contains(x)) {answer = false;})
+	  (clase1 + clase2).split(" ").foreach( x =>  if ( !targets.contains(x)) {answer = false;})
+	  answer
+  }
   def main(args : Array[String]) : Unit = {//2
 	//args.foreach(r => {
 	//	println(r);
@@ -32,6 +39,7 @@ object Main {//1
    	
    	var targetAll:Boolean=(args(3) =="all");
    	val targets:HashSet[String]= new HashSet[String];
+   	val collectiveMode = (args(7) == "collective");
 
    	if( !targetAll){
 	    var sp_target = target.split(",");
@@ -40,9 +48,7 @@ object Main {//1
 	    	//println (tar);
 	    })
    	}
-   	//println (targets.toString());
-   	//exit();
-   	
+  	
    	
    	
    	
@@ -135,7 +141,7 @@ object Main {//1
       }
       catch { case e: Exception => println("Fail disc_probabilities file\n") ; }//no hace nada en caso de leer lineas vacias o con otro formato
     })//fin 4*/
-    
+    //print(graph)
     
     if( positiveMode ) {//5
       //println("Positive mode");
@@ -152,7 +158,14 @@ object Main {//1
         	})
         }
         val debugPrint = false;
-        val result = new PositiveClassComputer(args(6),iteration, graph, rolesToProbUse, /*rolesToProbDisc,*/ rolesOrdenados, categorias, categoriasAdmitidas, targets, targetAll, debugPrint).compute;
+        val result = new PositiveClassComputer(args(6),iteration, graph, rolesToProbUse, /*rolesToProbDisc,*/ rolesOrdenados, categorias, categoriasAdmitidas, targets, targetAll, debugPrint, collectiveMode).compute;
+        var toptop = ""
+	    result.foreach { 
+			entry2 => entry2.e2.foreach {
+				entry => if (util.StringUtils.join(entry.extension.asScalaCollection, " ").length > toptop.length) {toptop = util.StringUtils.join(entry.extension.asScalaCollection, " ")}
+			}
+	    }
+        
         //println("\n-----------------------------------------------------------------------------"+iteration+"\n");
         //println(" done, " + (System.currentTimeMillis - start) + " ms.");
         //println("\nBisimulation classes with their concepts (positive mode):");
@@ -176,9 +189,19 @@ object Main {//1
                        
         } else {
             //Aca imprimo solo para el target
+        	  var found = false;
+        	  val aux = result;
               result.foreach { 
             	entry2 => entry2.e2.foreach {
             		entry =>
+            		  aux.foreach {
+            		    x => x.e2.foreach {
+            		      val clase2 = util.StringUtils.join(entry.extension.asScalaCollection, " ")
+            		      val tars = targets.mkString(" ")
+            		      y => val clase1 = util.StringUtils.join(y.extension.asScalaCollection, " "); if (covers(clase1,clase2,tars) && clase1 != toptop && clase2 != toptop) {found = true;}  //tenemos que chequear entre todas las clases si puedo generar el target 
+            		    		  // como la union de clases, para cada par (y,entry), tengo que ver si cubren el target
+            		    }
+            		  }
             			//if (entry.extension.asScalaCollection.contains(target)){
 		                  //println(entry.formula.removeConjunctionsWithTop.prettyprint + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");
 		                  println(entry.formula.removeConjunctionsWithTop.toString + ": " + util.StringUtils.join(entry.extension.asScalaCollection,",")+"\n");

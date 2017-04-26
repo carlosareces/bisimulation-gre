@@ -90,6 +90,26 @@ def doprint(x: Any): Unit =	{
 	if (debugPrint)
 		println(x);
 }
+def hasTar(formula : String, targets : HashSet[String]) : Boolean = {
+  var ans : Boolean = false;
+  var values = targets.toList;
+  //println("Targets = " + values);
+  //println("formula = " + formula);
+  values.foreach{ tar => if (formula.contains(tar)) {ans = true;}}
+  //println("hasTar devuelve + " + ans);
+  ans
+}
+
+def isTar(formula : String, targets : HashSet[String]) : Boolean = {
+  var ans : Boolean = true;
+  var values = targets.toList;
+  //println("Targets = " + values);
+  //println("formula = " + formula);
+  values.foreach{ tar => if (formula.contains(tar)) {ans = true && ans;} else {ans = false;}}
+  //println("hasTar devuelve + " + ans);
+  ans
+}
+
 
 // Da la extension (conjunto de elementos o nombres propios) de una formula. 
 private def getExtension(fmla: Formula): BitSetSet[String] = {
@@ -115,10 +135,23 @@ def isAllSingletons = {
 
 def isTarget(targets:HashSet[String])= {
 		var esta: Boolean = false;
-		//var found: Boolean = false;
+		//println("Imprimimos cada clase: ");
+		//getClasses.foreach {cl => println(cl.e1.extension.toString)};
 		getClasses.foreach { cl => if (cl.e1.extension == targets){esta=true;} }; //Solamente me fijo en formulas fi_O
 		esta
 //classesGraph.getAllNodes.foreach { node => if (node.e1.equals(newEntry1)) { found = true; } };
+}
+
+// Devuelve verdadero si alguna clase contiene algun elemento del target
+def hasTarget(targets:HashSet[String]) = {
+	var hastar: Boolean = false;
+	var ans = targets.toList.mkString(" ");
+	//println("Tenemos que targets es: " + targets.toList.mkString(" "));
+	//getClasses.foreach {cl => cl.e1.extension.toString.split(" ").foreach{word => println("Vemos si ans = " + ans + " contiene a word = " + word.stripPrefix(",").stripSuffix(",").stripPrefix("[").stripSuffix("]"))}}
+	getClasses.foreach {cl => cl.e1.extension.toString.split(" ").foreach{word => if (ans.contains(word.stripPrefix(",").stripSuffix(",").stripPrefix("[").stripSuffix("]"))) {hastar = true;}}}
+	//getClasses.foreach {cl => if (ans.contains(cl.e1.extension.toString)) {hastar = true;}};
+	//getClasses.foreach {cl => cl.e1.extension.toString};
+	hastar
 }
 
 // Devuelve true, si se agrega nueva formula. Para esto se fija si la formula
@@ -219,7 +252,7 @@ def addAmbos(f1: Formula, set2: Set[Formula]) = {
 
 
 //-------------------------------------
-def addUna(f1: Formula, overspec: Boolean, admitida: Boolean) = {
+def addUna(f1: Formula, overspec: Boolean, admitida: Boolean, targets: HashSet[String]) = {
 	val extension1 = getExtension(f1);
 
 	val knownClasses = getClasses; // Es una lista de Entry2.
@@ -235,23 +268,32 @@ def addUna(f1: Formula, overspec: Boolean, admitida: Boolean) = {
 			doprint("Overspecification: agregando  " + conjunction1.prettyprint);
 		
 		// Es para q no agregue Ex-green.(T) & Ex-green.(T)
-		val categoriasDistintas: Boolean = other.e1.formula.categorias.intersect(f1.categorias).isEmpty;
+		val categoriasDistintas: Boolean = true;
 		var agregar = true;
 		
 		if (categoriasDistintas) {
+			//val hassome : Boolean = hasTar(newExtension1.toString, targets);
+		  	//val hasall : Boolean = isTar(newExtension1.toString, targets);
+		  	//if (hassome && !hasall) agregar = false;
 			if (isNontrivial(newExtension1)) { // Si respresenta algun elemento
-				val informative: Boolean = isInformative1(newExtension1);
+				//val informative: Boolean = isInformative1(newExtension1, targets.mkString(" "));
+				val informative: Boolean = true;
 				if (overspec || informative) { // La formula es informativa o se hace overspecification.
+					//println(newExtension1)
 					if (overspec && admitida && !informative) { // Este if es para eliminar la formula vieja.
 						// Si estamos overspecificando con relacion admitida, eliminamos la formula vieja.
 						if ( Math.abs(new Random().nextFloat())>0) {
 							getClasses.foreach { cl =>
+							  	//println()
+								//println("Tenemos que hasTar es: " + doit + "con formula: ");
+								//println(cl.e1.formula);
+								//println("Tenemos que f1 es: " + f1); 
 								if (cl.e1.extension == newExtension1) {
 									if (cl.e1.formula.cantidadExiste < conjunction1.cantidadExiste) {
 										doprint("Overspecification: eliminamos " + cl.e1.formula.prettyprint);
 										classesGraph.removeNode(cl);
 									}
-									else {
+  									else {
 										agregar = false;
 										doprint("Overspecification: no eliminamos " + cl.e1.formula.prettyprint);
 									}
@@ -262,7 +304,9 @@ def addUna(f1: Formula, overspec: Boolean, admitida: Boolean) = {
 						else
 						  agregar = false;
 					}
-					
+					//val hassome : Boolean = hasTar(f1.toString(), targets);
+				  	//val hasall : Boolean = isTar(f1.toString(), targets);
+				  	//if (!hassome || hasall) agregar = false;
 					memoizedExtensions += conjunction1 -> newExtension1;
 					if (agregar) {
 						val entry: Entry = Entry(newExtension1, conjunction1);
@@ -383,10 +427,21 @@ private def removeUninformativeSubsets() = {
 	ret;
 }
 
+def covers(clase1 : String, clase2 : String, targets : String) : Boolean = {
+	var answer = true;
+	//println("Tenemos que una clase cubre a: " + clase1)
+	//println("Tenemos que otra clase cubre a: " + clase2)
+	//println("Y tenemos que el target es: " + targets)
+	targets.split(" ").foreach( x => if (!(clase1 + clase2).contains(x)) {answer = false;})
+	(clase1 + clase2).split(" ").foreach( x =>  if ( !targets.contains(x)) {answer = false;})
+	answer
+}
+
 // Devuelve true si la extension no existe en las clases y no es "subsumed" sobre las mismas.
 // _should_ be deprecated, but right now this is faster than
 // computing the children and then checking informativity only over those.
-private def isInformative1(set: BitSetSet[String]) = {
+private def isInformative1(set: BitSetSet[String], targets : String) = {
+	var informative = false;
 	val unionOverSubsets = graph.getNodeSet;
 
 	getClasses.foreach { cl =>
@@ -394,10 +449,21 @@ private def isInformative1(set: BitSetSet[String]) = {
 			unionOverSubsets.addAll(cl.e1.extension);
 		}
 	}
-
 	set != unionOverSubsets
 }
-
+/*	informative = (set != unionOverSubsets)
+	var hastarget = false
+	getClasses.foreach { cl =>
+	  println("Tenemos la clase " + cl.e1.extension.toString)
+	  println("Y tenemos la clase " + set.toString)
+	  println("Los targets son: " + targets)
+	  if (covers(cl.e1.extension.toString.stripPrefix("[").stripSuffix("]").replace(","," "), set.toString.stripPrefix("[").stripSuffix("]").replace(","," "), targets)) {hastarget = true}
+	  println("Hastarget es = " + hastarget)
+	}
+	
+	informative || hastarget
+}
+*/
 
 // Devuelve true si la extension no existe en las clases y no es "subsumed" sobre las mismas.
 // _should_ be deprecated, but right now this is faster than

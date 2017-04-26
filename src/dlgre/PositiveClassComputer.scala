@@ -22,7 +22,8 @@ class PositiveClassComputer(carpeta: String,iteration:Int, graph: GraphT[String,
 		categoriasAdmitidas: Set[String],
 		targets: HashSet[String],
 		targetAll: Boolean,
-		debugPrint: Boolean) {
+		debugPrint: Boolean,
+		collectiveMode: Boolean) {
 	val classes = new ClassContainer(graph, debugPrint);
 
 
@@ -30,6 +31,27 @@ class PositiveClassComputer(carpeta: String,iteration:Int, graph: GraphT[String,
 		if (debugPrint)
 			println(x);
 	}
+
+	def hasTar(formula : String, targets : HashSet[String]) : Boolean = {
+	  var ans : Boolean = false;
+	  var values = targets.toList;
+	  //println("Targets = " + values);
+	  //println("formula = " + formula);
+	  values.foreach{ tar => if (formula.contains(tar)) {ans = true;}}
+	  //println("hasTar devuelve + " + ans);
+	  ans
+	}
+
+	def isTar(formula : String, targets : HashSet[String]) : Boolean = {
+	  var ans : Boolean = true;
+	  var values = targets.toList;
+	  //println("Targets = " + values);
+	  //println("formula = " + formula);
+	  values.foreach{ tar => if (formula.contains(tar)) {ans = true && ans;} else {ans = false;}}
+	  //println("isTar devuelve + " + ans);
+	  ans
+	}
+
 
 	def compute = {
 		//esta parte no se ejecuta ya que son todas relaciones
@@ -79,18 +101,18 @@ class PositiveClassComputer(carpeta: String,iteration:Int, graph: GraphT[String,
 			try {
 				rolesOrdenados.foreach { r =>
 
-				var categoria: String = r;//"otra";
+				var categoria: String = r;
 				try {
 					categoria = categorias(r);
 				}
 				catch {
-					case e:Exception => ;//doprint(r + " " + e.toString());
+					case e:Exception => ;
 				}
 				
 				var p_use: Float = 0;//si no esta en archivo le pongo 0, tiene menos que todas las que si estan!
 				//var p_disc: Float = 1;
 				try { p_use = rolesToProbUse(r); }
-				catch { case e: Exception => ;}//doprint("!!!!!!!!!!!!!!!!!!!!!!!!!!rol no estaba: "+r+" uso 0"); }
+				catch { case e: Exception => ;}
 				/*try { p_disc = rolesToProbDisc(r); }
         		catch { case e: Exception => ; }*/
 				if (rolesToRandUse(r) <= p_use) {
@@ -100,20 +122,43 @@ class PositiveClassComputer(carpeta: String,iteration:Int, graph: GraphT[String,
 					classes.getClasses.foreach {
 						cl => {
 							var f1: Formula = new Existential(r, cl.e1.formula);
+							
+							if (collectiveMode) {
 
-							var set2: HashSet[Formula] = new HashSet();
-							cl.e2.foreach { 
-								entry => { 
-									val f2: Formula = new Existential(r, entry.formula);
-									set2 += f2;
+								val hassome : Boolean = hasTar(f1.extension(graph).toString, targets);
+								
+								// Veamos ahora si es el target mismo
+								val hasall : Boolean = isTar(f1.extension(graph).toString, targets);
+								
+								var condition : Boolean = !hassome || hasall;
+								//val condition : Boolean = true;
+								if (condition) {
+									var set2: HashSet[Formula] = new HashSet();
+									cl.e2.foreach { 
+										entry => { 
+											val f2: Formula = new Existential(r, entry.formula);
+											set2 += f2;
+										}
+									}
+									
+									val admitido: Boolean = categoriasAdmitidas contains r;
+									
+									
+									agregoAlgo = classes.addUna(f1, over, admitido, targets) || agregoAlgo;
+								} 
+							} else {
+								var set2: HashSet[Formula] = new HashSet();
+								cl.e2.foreach { 
+									entry => { 
+										val f2: Formula = new Existential(r, entry.formula);
+										set2 += f2;
+									}
 								}
+	
+								val admitido: Boolean = categoriasAdmitidas contains r;
+								agregoAlgo = classes.addUna(f1, over, admitido, targets) || agregoAlgo;
 							}
-							//if (rolesToRandDisc(r) <= p_disc) {
-							//print("\t\tDiscernible: (" + new Existential(r, cl.e1.formula).prettyprint);
-							//print(", " + new Existential(r, entry.formula).prettyprint + ")\n");
-
-							val admitido: Boolean = categoriasAdmitidas contains r;
-							agregoAlgo = classes.addUna(f1, over, admitido) || agregoAlgo;
+							
 						}
 					}
 					
