@@ -39,7 +39,7 @@ object Main {//1
    	
    	var targetAll:Boolean=(args(3) =="all");
    	val targets:HashSet[String]= new HashSet[String];
-   	val collectiveMode = (args(7) == "collective");
+   	val collectiveMode = (args(7) == "plural");
 
    	if( !targetAll){
 	    var sp_target = target.split(",");
